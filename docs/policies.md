@@ -23,7 +23,7 @@ For repeatable automation, save a JSON policy:
 }
 ```
 
-These are illustrative thresholds, not recommended defaults. The cost limit applies **per eligible system**, rather than to the combined experiment. Choose thresholds from the intended workload, operational budget, and consequences of failure.
+These are illustrative thresholds, not recommended defaults. The cost limit applies **per eligible system**, rather than to the combined experiment. Choose thresholds from the intended workload, operational budget, and consequences of failure. See [cost and latency analysis](cost-latency.md) for measurement boundaries and a worked comparison.
 
 ```sh
 uv run everval policies save ./release-policy.json

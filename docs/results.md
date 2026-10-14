@@ -16,9 +16,11 @@ These intervals describe the recorded sample and method. They do not establish t
 
 ## Costs and time
 
-A missing cost is not zero. Reports distinguish complete cost accounting from partial or unavailable accounting. Cost per successful task has no finite value when no tasks succeed.
+Read pass rate alongside total cost, cost per passing attempt, median duration, and p95 duration. Cost per pass includes spending on unsuccessful attempts; it is unavailable when accounting is incomplete or no attempts pass. Missing costs remain unknown, and reported known costs are a lower bound.
 
-Imported evidence preserves supplied system duration separately from local grading time. Model latency, task time, and verifier time should not be treated as interchangeable performance measurements.
+Live duration includes model calls, tool work, and grading. Imported evidence preserves the external harness's supplied duration separately from local replay-and-grading time. Recorded percentiles include all timed attempts, including errors.
+
+See [Cost and latency analysis](cost-latency.md) for exact field definitions, accounting limits, spending controls, and an illustrative policy decision.
 
 ## Replay and rerun
 

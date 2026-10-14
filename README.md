@@ -32,7 +32,7 @@ Everval is an independent implementation of this approach. It extends the reposi
 | **Local terminal operations** | Work in a tmux TUI, CLI, or API; keep workspace records locally and let durable queued work continue after the terminal closes. |
 | **Benchmark history** | Inspect a persistent candidate and rejection ledger, review issue statements, repeat validation, and freeze versioned development/holdout releases with release diffs. |
 | **Tasks beyond code** | Author or import document, structured-data, and workflow-simulation collections into the same evaluation engine. These tasks are curated separately from repository mining. |
-| **Comparison with context** | Compare compatible frozen cohorts, inspect uncertainty and individual attempts, and retain cost, latency, errors, and missing accounting alongside task success. |
+| **[Cost, latency, and quality](docs/cost-latency.md)** | Compare compatible frozen cohorts, inspect uncertainty and individual attempts, and retain cost, latency, errors, and missing accounting alongside task success. |
 | **Explicit decision policies** | Set quality, completion, error, cost, latency, and regression gates; version policies and retain their decisions with the supporting evidence. |
 | **Ongoing evaluation** | Schedule frozen runs, append human reviews, verify the local audit chain, and export evidence for review. |
 
@@ -82,6 +82,14 @@ Python has two validation paths: constrained literal function cases and a prepar
 
 One trusted local workspace is the supported deployment. These are workflow responsibilities, not authenticated application roles. SSO, RBAC, tenant isolation, distributed workers, and compliance certification are not provided.
 
+## Cost and latency in practice
+
+Compare **pass rate, cost per passing attempt, median duration, and p95 duration** on the same frozen workload. Spending on unsuccessful attempts stays in cost per pass. Missing accounting remains unknown.
+
+Live duration covers the complete attempt, including model calls, tools, and grading. Use quality, spending, and duration gates together to identify systems that meet the workload's requirements. The experiment budget controls combined run admission; a cost gate evaluates each system's recorded spend.
+
+[See the metric definitions and a worked decision example](docs/cost-latency.md).
+
 ## Installation controls
 
 The four original starter collections contain 19 scenarios. Their reference and incomplete controls verify installation; their results are **not model performance measurements**. No paid model calls are needed for the test suite.
@@ -95,7 +103,7 @@ The four original starter collections contain 19 scenarios. Their reference and 
 | Configure a model or tool harness | [Providers](docs/providers.md) |
 | Evaluate an existing agent | [Recorded submissions](docs/submissions.md) |
 | Author document, data, or workflow tasks | [Scenarios](docs/scenarios.md) |
-| Interpret evidence and set a gate | [Results](docs/results.md), [quality policies](docs/policies.md) |
+| Interpret evidence and set a gate | [Results](docs/results.md), [cost and latency](docs/cost-latency.md), [quality policies](docs/policies.md) |
 | Operate and recover a local workspace | [Operations](docs/operations.md) |
 | Understand implementation and scope | [Architecture](docs/ARCHITECTURE.md), [interfaces](docs/INTERFACES.md), [delivery status](docs/PLAN.md) |
 | Develop or contribute | [Contributing](CONTRIBUTING.md) |
