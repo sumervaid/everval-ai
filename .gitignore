@@ -1,0 +1,40 @@
+# Local machine information and project state
+.local/
+.state/
+data/
+datasets/
+artifacts/
+runs/
+logs/
+cache/
+exports/
+private/
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+secrets*.json
+
+# Tool environments and generated output
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+node_modules/
+dist/
+build/
+*.egg-info/
+.DS_Store
