@@ -6,6 +6,38 @@ Everval AI is a local evaluation workbench with a keyboard-first terminal interf
 
 Source is maintained in this **private repository**. Workspaces, repository mirrors, hidden graders, model traces, and credentials stay outside Git.
 
+## Workflow at a glance
+
+```mermaid
+flowchart LR
+    A[Connect] --> B[Review]
+    B --> C[Validate]
+    C --> D[Freeze]
+    D --> E[Compare]
+    E --> F[Decide]
+```
+
+An **engineering owner** connects a GitHub or local repository and reviews tasks from real changes. An **evaluation engineer** validates the tasks and freezes a benchmark. A **platform owner** compares systems; a **decision owner** reviews quality, cost, and latency evidence, applies a policy, and schedules follow-up runs.
+
+[Follow the terminal workflow](docs/terminal.md) · [See the validation contract](docs/benchmarks.md)
+
+## How Everval builds on Vals Smith
+
+[Vals Smith's published methodology](https://www.vals.ai/vals-smith) turns merged pull requests into reproducible tasks, checks that hidden tests fail before the historical fix and pass afterward, and evaluates models without revealing the fix. Passing also requires preserving existing behavior. That is the shared foundation.
+
+Everval is an independent implementation of this approach. It extends the repository-benchmark workflow into a local workbench for curating tasks, comparing systems, making decisions, and retaining the evidence behind them.
+
+| Extension in Everval | What it lets you do |
+| --- | --- |
+| **Local terminal operations** | Work in a tmux TUI, CLI, or API; keep workspace records locally and let durable queued work continue after the terminal closes. |
+| **Benchmark history** | Inspect a persistent candidate and rejection ledger, review issue statements, repeat validation, and freeze versioned development/holdout releases with release diffs. |
+| **Tasks beyond code** | Author or import document, structured-data, and workflow-simulation collections into the same evaluation engine. These tasks are curated separately from repository mining. |
+| **Comparison with context** | Compare compatible frozen cohorts, inspect uncertainty and individual attempts, and retain cost, latency, errors, and missing accounting alongside task success. |
+| **Explicit decision policies** | Set quality, completion, error, cost, latency, and regression gates; version policies and retain their decisions with the supporting evidence. |
+| **Ongoing evaluation** | Schedule frozen runs, append human reviews, verify the local audit chain, and export evidence for review. |
+
+The table describes capabilities implemented in Everval; feature availability beyond Vals' public description is unverified. Everval currently supports Python repository validation and one trusted local workspace. See [delivery status and deployment boundaries](docs/PLAN.md).
+
 ![Everval AI terminal workbench with the original starter workspace](docs/assets/terminal.png)
 
 ## Start in the terminal
@@ -36,17 +68,6 @@ The workbench provides eight views: **Overview · Projects · Releases · Experi
 6. **Release.** Freeze accepted tasks into versioned development and holdout collections. Choose the partition explicitly; old releases retain their original evidence.
 7. **Evaluate.** Select a model or harness, declare prices and budget, and inspect every attempt. Compare compatible cohorts, apply quality gates, add human reviews, and export results.
 
-```mermaid
-flowchart LR
-    A[GitHub or local history] --> B[Candidate ledger]
-    B --> C[Reviewed statement]
-    C --> D[Repeated isolated validation]
-    D --> E[Immutable release]
-    E --> F[Public task → solver]
-    F --> G[Separate private grader]
-    G --> H[Evidence · comparison · gates]
-```
-
 Python has two validation paths: constrained literal function cases and a prepared full-repository pytest profile. Arbitrary builds, private package registries, native source builds, and other language runners are not supported by this release. See the [benchmark contract](docs/benchmarks.md) and [environment guide](docs/environments.md).
 
 ## Built for different responsibilities
@@ -61,14 +82,7 @@ Python has two validation paths: constrained literal function cases and a prepar
 
 One trusted local workspace is the supported deployment. These are workflow responsibilities, not authenticated application roles. SSO, RBAC, tenant isolation, distributed workers, and compliance certification are not provided.
 
-## Beyond a repository score
-
-- **General task collections:** code, document evidence, structured data, and workflow-state simulations share one scenario/submission/evaluator contract.
-- **Two model harnesses:** a structured single-turn adapter and a bounded tool loop for public source inspection, editing, and isolated Python checks. Existing agents can submit recorded results.
-- **Durable evidence:** immutable experiment snapshots, recovery leases, cancellation, explicit missing costs, and no automatic retry of ambiguous paid calls.
-- **Living benchmark curation:** persistent candidate history, repeated validation, immutable releases, release diffs, and stable development/holdout partitioning.
-- **Decision support:** compatible-cohort comparisons, confidence intervals, completion/error/cost/latency/regression gates, and versioned policy decisions.
-- **Local operations:** recurring frozen evaluations, append-only human judgments, audit-chain verification, backups, and JSON/CSV/HTML exports.
+## Installation controls
 
 The four original starter collections contain 19 scenarios. Their reference and incomplete controls verify installation; their results are **not model performance measurements**. No paid model calls are needed for the test suite.
 
