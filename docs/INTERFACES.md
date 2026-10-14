@@ -52,7 +52,7 @@ A reference output supplies one accepted answer for validation and the reference
 
 ```text
 id, name
-kind: equals | contains | numeric | json_schema | citation | forbidden | python_tests
+kind: equals | contains | numeric | json_schema | citation | forbidden | python_tests | repository_tests
 path: string                       default ""; whole output
 expected: any JSON value
 weight: number                     > 0, default 1
@@ -92,6 +92,10 @@ Each negative-control record contains its index, rejection result, and checks or
 id, name
 kind: reference | incomplete | http | replay
 model, base_url, api_key_env
+harness: single-turn | tools | external-agent
+adapter_revision: string            required for external-agent
+adapter_input_token_limit: integer
+adapter_output_token_limit: integer
 temperature: number | null         null omits the parameter
 max_tokens: integer                1–32,768
 input_cost_per_million: number | null
@@ -108,7 +112,7 @@ provenance: object
 
 - `reference` replays a scenario's reference output. The installed name is **Reference fixture · control**.
 - `incomplete` submits an empty output. The installed name is **Empty submission · control**.
-- `http` sends one chat-completions request and expects a JSON-object response.
+- `http` uses the selected single-turn, tools, or versioned external-agent harness.
 - `replay` grades outputs supplied by an external harness and preserves their declared metadata.
 
 HTTP base URLs cannot include embedded credentials, query parameters, or fragments. Both token prices must be explicit, including zero for a free local endpoint. A priced endpoint requires a positive budget. A remote endpoint additionally requires service opt-in, HTTPS, a public destination, and at least one nonzero token price.
@@ -207,7 +211,7 @@ Creation accepts:
 
 Intervals range from 5 to 525,600 minutes. There are at most 100 schedules per workspace. A schedule returns its ID, name, source experiment, interval, enabled state, next/last-run timestamps, last experiment ID, last error, and snapshot policy.
 
-`PATCH /api/schedules/{id}` accepts `{enabled: boolean}`. A schedule reruns the original frozen configuration, with the original budget applied separately to each occurrence. There is no cumulative schedule budget. Recorded-submission replay systems are not eligible. A failed admission or uncertain prior billing disables the schedule and records the reason.
+`PATCH /api/schedules/{id}` accepts `{enabled: boolean}`. A schedule reruns the original frozen configuration, with the original budget applied separately to each occurrence. A cumulative lifetime cap additionally reserves each occurrence’s full budget. Recorded-submission replay systems are not eligible. A failed admission or uncertain prior billing disables the schedule and records the reason.
 
 ## HTTP routes
 
@@ -279,3 +283,22 @@ Authenticated API routes include:
 - `POST /api/experiments/{id}/gates` to record a decision; `GET` on that path reads decision history.
 
 The existing host/origin, token, upload-size, and response-header boundaries cover these endpoints. These are trusted-owner workspace APIs, not multi-tenant endpoints.
+
+
+## Team and product workflows
+
+Optional team mode replaces the shared token with individual identities and server-enforced capabilities. Administrator/operator routes can inspect private workspace evidence; assigned reviewers use a separate blind projection; viewers read summaries. Unknown API paths fail closed in team mode. See [team access](team-review.md).
+
+| Interface | Purpose |
+| --- | --- |
+| GET /api/experiments/{id}/triage | Failure classification and next actions |
+| GET /api/experiments/{id}/trials/{trial}/diagnostics | Recorded attempt, bounded file differences, regrades |
+| POST /api/experiments/{id}/trials/{trial}/regrade | Separate local verification record; no provider call |
+| GET /api/experiments/{id}/economics | Stage coverage and observed quality/cost/latency tradeoffs |
+| GET /api/experiments/{id}/brief | Summary without task inputs, outputs, or hidden checks |
+| GET /api/spending-limits | Cumulative caps and committed usage |
+| PUT /api/spending-limits | Administrator replacement of a scope's daily/monthly/lifetime caps |
+| /api/team, /api/review-queues, /api/review-inbox | Identities, assignments, frozen rubrics, blinded judgments |
+| /api/case-imports, /api/production-cases | Redacted staging, explicit approval, validated publication |
+
+Guided onboarding, benchmark health, change admission, and recurring digests are also available through the TUI and CLI. Run `everval guides --help`, `everval changes --help`, and `everval recurring --help`. Runtime preparation accepts language, runner, and imported artifact fingerprints; see [JavaScript/TypeScript](javascript-typescript.md). Existing live agents use the separate [adapter protocol](agent-adapters.md).

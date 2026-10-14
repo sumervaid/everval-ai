@@ -24,6 +24,7 @@ export function ScheduleForm({
 }) {
   const [name, setName] = useState(`${experiment.name} · recurring`);
   const [minutes, setMinutes] = useState('60');
+  const [lifetimeBudget, setLifetimeBudget] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [saved, setSaved] = useState(false);
@@ -54,6 +55,7 @@ export function ScheduleForm({
                   experiment_id: experiment.id,
                   interval_minutes: Number(minutes),
                   enabled: true,
+                  ...(lifetimeBudget === '' ? {} : { lifetime_budget_usd: Number(lifetimeBudget) }),
                 });
                 setSaved(true);
               } catch (err) {
@@ -89,6 +91,19 @@ export function ScheduleForm({
                 />
               </Field>
             </div>
+            <Field
+              label="Cumulative schedule budget · USD"
+              hint="Optional cap across all occurrences. Leaving this empty permits repeated spending up to each run's budget."
+            >
+              <input
+                type="number"
+                min={0}
+                max={1000000}
+                step="any"
+                value={lifetimeBudget}
+                onChange={(event) => setLifetimeBudget(event.target.value)}
+              />
+            </Field>
             <Button type="submit" busy={busy}>
               <Plus size={15} />
               Create recurring schedule

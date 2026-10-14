@@ -125,6 +125,9 @@ def doctor(
     except (ValueError, OSError) as exc:
         issues.append(str(exc))
         free = 0
+    from cvals.identity import IdentityStore
+
+    team_enabled = IdentityStore(settings).enabled() if not issues else False
     state = {
         "version": __version__,
         "python": platform.python_version(),
@@ -133,7 +136,8 @@ def doctor(
         "storage_free_bytes": free,
         "docker_available": docker_available(settings),
         "remote_providers_enabled": settings.allow_remote_providers,
-        "auth_enabled": bool(settings.token),
+        "auth_enabled": bool(settings.token) or team_enabled,
+        "auth_mode": "team" if team_enabled else "workspace-token" if settings.token else "local",
         "issues": issues,
     }
     if json_output:
@@ -154,7 +158,7 @@ def doctor(
 @app.command()
 def serve(
     host: Annotated[
-        str, typer.Option(help="Listen address; non-loopback requires a token.")
+        str, typer.Option(help="Listen address; non-loopback requires authentication.")
     ] = "127.0.0.1",
     port: Annotated[int, typer.Option(min=1, max=65535)] = 8765,
     worker: Annotated[bool, typer.Option("--worker/--no-worker")] = True,
@@ -163,7 +167,11 @@ def serve(
     from cvals.api import create_app
 
     settings = Settings.from_env()
-    if host not in {"127.0.0.1", "localhost", "::1"} and not settings.token:
+    from cvals.identity import IdentityStore
+
+    if host not in {"127.0.0.1", "localhost", "::1"} and not (
+        settings.token or IdentityStore(settings).enabled()
+    ):
         fail(ValueError("Set EVERVAL_TOKEN before exposing the workspace beyond loopback."))
     uvicorn.run(
         create_app(settings, start_worker=worker),
@@ -470,14 +478,17 @@ def create_schedule(
     name: Annotated[str, typer.Option()],
     interval_minutes: Annotated[int, typer.Option(min=5, max=525600)] = 1440,
     enabled: Annotated[bool, typer.Option("--enabled/--paused")] = True,
+    lifetime_budget: Annotated[float | None, typer.Option(min=0)] = None,
 ) -> None:
-    """Repeat a frozen experiment with its original per-run spending limit."""
+    """Repeat a frozen experiment within per-run and cumulative spending limits."""
     from cvals.schedules import ScheduleStore
 
     try:
         settings, store = workspace()
         output(
-            ScheduleStore(settings, store).create(name, experiment_id, interval_minutes, enabled)
+            ScheduleStore(settings, store).create(
+                name, experiment_id, interval_minutes, enabled, lifetime_budget_usd=lifetime_budget
+            )
         )
     except (ValueError, KeyError) as exc:
         fail(exc)
@@ -578,11 +589,6 @@ def _write_new(path: Path, content: str) -> None:
         fail(ValueError(f"Destination already exists: {path}"))
 
 
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
-    app()
-
-
 @collections_app.command("list")
 def list_collections() -> None:
     """List collections and their immutable current versions."""
@@ -632,3 +638,15 @@ def validate_collection_command(collection_id: str) -> None:
 
 # Registration follows the shared command helpers to avoid circular initialization.
 from cvals import terminal_cli as _terminal_cli  # noqa: E402,F401
+from cvals.experience_cli import register as _register_experience  # noqa: E402
+from cvals.growth_cli import register as _register_growth  # noqa: E402
+from cvals.team_cli import register_team_cli  # noqa: E402
+
+_register_experience(app, systems_app)
+_register_growth(app)
+register_team_cli(app)
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+    app()

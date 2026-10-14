@@ -70,7 +70,7 @@ def ensure_worker(settings: Settings) -> dict[str, object]:
     environment["CVALS_ALLOW_REMOTE_PROVIDERS"] = str(settings.allow_remote_providers).lower()
     environment["EVERVAL_ALLOW_REMOTE_PROVIDERS"] = str(settings.allow_remote_providers).lower()
     with os.fdopen(descriptor, "a") as stream:
-        subprocess.Popen(
+        process = subprocess.Popen(
             [sys.executable, "-m", "cvals", "worker"],
             stdin=subprocess.DEVNULL,
             stdout=stream,
@@ -79,9 +79,12 @@ def ensure_worker(settings: Settings) -> dict[str, object]:
             close_fds=True,
             env=environment,
         )
-    for _ in range(50):
+    deadline = time.monotonic() + 30
+    while time.monotonic() < deadline:
         if worker_running(settings):
             return {"running": True, "started": True, "log": str(log)}
+        if process.poll() is not None:
+            break
         time.sleep(0.1)
     raise ValueError(f"Worker did not start; inspect {log}")
 

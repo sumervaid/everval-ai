@@ -187,11 +187,9 @@ class PlanDialog(ModalScreen[bool]):
                 yield Button("Prepare runtime", id="plan-prepare", variant="primary")
 
     def on_mount(self) -> None:
-        from cvals.tui.presentation import record_text
+        from cvals.tui.presentation import human_text
 
-        self.query_one("#plan-log", RichLog).write(
-            Syntax(record_text(self.plan), "json", theme="ansi_dark", word_wrap=True)
-        )
+        self.query_one("#plan-log", RichLog).write(Text(human_text(self.plan)))
         self.query_one("#plan-log").focus()
 
     @on(Button.Pressed, "#plan-cancel")

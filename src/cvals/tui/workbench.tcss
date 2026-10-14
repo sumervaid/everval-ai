@@ -12,7 +12,7 @@ Screen { background: $ev-ink; color: $ev-paper; }
 #brand { width: 1fr; text-style: bold; }
 #local-badge { width: auto; color: $ev-muted; }
 #body { height: 1fr; }
-#rail { width: 23; background: $ev-panel; border-right: solid $ev-line; padding: 1; }
+#rail { overflow-y: auto; width: 23; background: $ev-panel; border-right: solid $ev-line; padding: 1; }
 .rail-label { color: $ev-muted; height: 2; padding: 0 1; }
 .nav-button { width: 100%; height: 3; border: none; background: transparent; color: $ev-muted; text-align: left; padding: 0 1; margin-bottom: 0; }
 .nav-button:hover { background: #203748; color: $ev-paper; }

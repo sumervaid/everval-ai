@@ -8,13 +8,24 @@ intervals coalesce into one run and each schedule allows one outstanding run.
 from __future__ import annotations
 
 import builtins
+import json
+import math
+import sqlite3
 import time
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from typing import TYPE_CHECKING, Any
 
 from pydantic import Field, field_validator
 
-from cvals.models import ExperimentCreate, Manifest, System, new_id, utc_now
+from cvals.models import (
+    ExperimentCreate,
+    Manifest,
+    System,
+    canonical_json,
+    content_hash,
+    new_id,
+    utc_now,
+)
 from cvals.providers import validate_provider
 
 if TYPE_CHECKING:
@@ -71,7 +82,25 @@ class ScheduleStore:
                 );
                 CREATE INDEX IF NOT EXISTS schedule_occurrences_pending
                     ON schedule_occurrences(schedule_id, experiment_id);
+                CREATE TABLE IF NOT EXISTS schedule_budget_reservations (
+                    schedule_id TEXT NOT NULL REFERENCES evaluation_schedules(id),
+                    experiment_id TEXT NOT NULL REFERENCES experiments(id),
+                    reserved_usd REAL NOT NULL, charged_usd REAL NOT NULL,
+                    status TEXT NOT NULL, PRIMARY KEY(schedule_id,experiment_id)
+                );
+                CREATE TABLE IF NOT EXISTS schedule_digests (
+                    id TEXT PRIMARY KEY, schedule_id TEXT NOT NULL REFERENCES evaluation_schedules(id),
+                    data TEXT NOT NULL, hash TEXT NOT NULL
+                );
             """)
+        with self.store._connect(write=True) as connection:
+            columns = {
+                row["name"] for row in connection.execute("PRAGMA table_info(evaluation_schedules)")
+            }
+            if "lifetime_budget_usd" not in columns:
+                connection.execute(
+                    "ALTER TABLE evaluation_schedules ADD COLUMN lifetime_budget_usd REAL"
+                )
 
     @staticmethod
     def _public(row: Any) -> dict[str, Any]:
@@ -104,11 +133,26 @@ class ScheduleStore:
             ]
 
     def create(
-        self, name: str, experiment_id: str, interval_minutes: int, enabled: bool = True
+        self,
+        name: str,
+        experiment_id: str,
+        interval_minutes: int,
+        enabled: bool = True,
+        lifetime_budget_usd: float | None = None,
     ) -> dict[str, Any]:
         validated = _ScheduleInput(name=name, interval_minutes=interval_minutes, enabled=enabled)
         with self.store._connect(write=True) as connection:
             snapshot, state = self.store._read_experiment(connection, experiment_id)
+            cap = state["budget_usd"] if lifetime_budget_usd is None else lifetime_budget_usd
+            if (
+                isinstance(cap, bool)
+                or not isinstance(cap, (int, float))
+                or not math.isfinite(cap)
+                or cap < 0
+            ):
+                raise ValueError("Lifetime budget must be a finite nonnegative USD amount")
+            if cap < state["budget_usd"]:
+                raise ValueError("Lifetime budget must cover at least one full per-run budget")
             if any(system["kind"] == "replay" for system in snapshot["systems"]):
                 raise ValueError(
                     "Recorded submissions cannot produce new evidence on a recurring schedule"
@@ -119,7 +163,7 @@ class ScheduleStore:
                 raise ValueError("The workspace supports at most 100 schedules")
             id = new_id()
             connection.execute(
-                "INSERT INTO evaluation_schedules VALUES(?,?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO evaluation_schedules VALUES(?,?,?,?,?,?,?,?,?,?,?)",
                 (
                     id,
                     validated.name,
@@ -131,6 +175,7 @@ class ScheduleStore:
                     None,
                     None,
                     None,
+                    cap,
                 ),
             )
             self.store._event(
@@ -143,6 +188,7 @@ class ScheduleStore:
                     "interval_minutes": validated.interval_minutes,
                     "enabled": validated.enabled,
                     "source_snapshot_hash": state["snapshot_hash"],
+                    "lifetime_budget_usd": cap,
                 },
             )
             row = connection.execute(
@@ -166,6 +212,14 @@ class ScheduleStore:
                     connection, row["source_experiment_id"]
                 )
                 self._admit(snapshot, state)
+                charged = self._budget_usage(connection, id)
+                if (
+                    row["lifetime_budget_usd"] is None
+                    or charged + state["budget_usd"] > row["lifetime_budget_usd"] + 1e-9
+                ):
+                    raise ValueError(
+                        "Set a lifetime budget sufficient to reserve the next full run before enabling"
+                    )
             # Resuming starts a new interval instead of immediately draining missed work.
             connection.execute(
                 "UPDATE evaluation_schedules SET enabled=?,next_run_epoch=?,last_error=NULL WHERE id=?",
@@ -239,6 +293,16 @@ class ScheduleStore:
                             raise ValueError(
                                 "Previous scheduled run has uncertain billing; schedule disabled"
                             )
+                    charged = self._budget_usage(connection, schedule_id)
+                    cap = schedule["lifetime_budget_usd"]
+                    if cap is None:
+                        raise ValueError(
+                            "Legacy schedule requires an explicit lifetime budget before another admission"
+                        )
+                    if charged + state["budget_usd"] > cap + 1e-9:
+                        raise ValueError(
+                            "Lifetime schedule budget cannot reserve another full run; increase the cap before enabling"
+                        )
                     request = ExperimentCreate(
                         name=schedule["name"][:180] + " · scheduled",
                         collection_id=state["collection_id"],
@@ -252,6 +316,16 @@ class ScheduleStore:
                         snapshot["collection"],
                         snapshot["systems"],
                         schedule["source_experiment_id"],
+                    )
+                    connection.execute(
+                        "INSERT INTO schedule_budget_reservations VALUES(?,?,?,?,?)",
+                        (
+                            schedule_id,
+                            experiment_id,
+                            state["budget_usd"],
+                            state["budget_usd"],
+                            "reserved",
+                        ),
                     )
                 except (ValueError, KeyError) as exc:
                     connection.execute("ROLLBACK TO scheduled_run")
@@ -298,3 +372,272 @@ class ScheduleStore:
                 )
                 created.append(experiment_id)
         return created
+
+    def _budget_usage(self, connection: sqlite3.Connection, schedule_id: str) -> float:
+        total = 0.0
+        rows = connection.execute(
+            "SELECT r.*,e.state FROM schedule_budget_reservations r "
+            "JOIN experiments e ON e.id=r.experiment_id WHERE r.schedule_id=?",
+            (schedule_id,),
+        ).fetchall()
+        for row in rows:
+            state = json.loads(row["state"])
+            finalized = state["status"] not in {"queued", "running"}
+            uncertain = bool(state.get("budget_uncertain"))
+            committed = float(state.get("budget_committed_usd", 0))
+            charged = (
+                max(row["reserved_usd"], committed) if not finalized or uncertain else committed
+            )
+            status = "uncertain" if uncertain else "settled" if finalized else "reserved"
+            connection.execute(
+                "UPDATE schedule_budget_reservations SET charged_usd=?,status=? "
+                "WHERE schedule_id=? AND experiment_id=?",
+                (charged, status, schedule_id, row["experiment_id"]),
+            )
+            total += charged
+        # Migrations must account for occurrences admitted before reservations existed.
+        for row in connection.execute(
+            "SELECT e.id,e.state FROM experiments e JOIN schedule_occurrences o ON e.id=o.experiment_id "
+            "WHERE o.schedule_id=? AND NOT EXISTS (SELECT 1 FROM schedule_budget_reservations r "
+            "WHERE r.schedule_id=? AND r.experiment_id=e.id)",
+            (schedule_id, schedule_id),
+        ).fetchall():
+            state = json.loads(row["state"])
+            uncertain = bool(state.get("budget_uncertain"))
+            finalized = state["status"] not in {"queued", "running"}
+            reserved = float(state["budget_usd"])
+            committed = float(state.get("budget_committed_usd", 0))
+            charged = max(reserved, committed) if uncertain or not finalized else committed
+            connection.execute(
+                "INSERT INTO schedule_budget_reservations VALUES(?,?,?,?,?)",
+                (
+                    schedule_id,
+                    row["id"],
+                    reserved,
+                    charged,
+                    "uncertain" if uncertain else "settled" if finalized else "reserved",
+                ),
+            )
+            total += charged
+        return total
+
+    def budget(self, identifier: str) -> dict[str, Any]:
+        with self.store._connect(write=True) as connection:
+            row = connection.execute(
+                "SELECT * FROM evaluation_schedules WHERE id=?", (identifier,)
+            ).fetchone()
+            if row is None:
+                raise KeyError(identifier)
+            charged = self._budget_usage(connection, identifier)
+            cap = row["lifetime_budget_usd"]
+            reservations = [
+                dict(value)
+                for value in connection.execute(
+                    "SELECT experiment_id,reserved_usd,charged_usd,status FROM schedule_budget_reservations WHERE schedule_id=?",
+                    (identifier,),
+                )
+            ]
+        return {
+            "schedule_id": identifier,
+            "lifetime_budget_usd": cap,
+            "committed_usd": charged,
+            "remaining_usd": max(0.0, cap - charged) if cap is not None else None,
+            "reservations": reservations,
+            "scope": "Occurrences only; original source run is outside this cap. Uncertain billing retains the full reservation.",
+        }
+
+    def set_budget(self, identifier: str, lifetime_budget_usd: float) -> dict[str, Any]:
+        if (
+            isinstance(lifetime_budget_usd, bool)
+            or not isinstance(lifetime_budget_usd, (int, float))
+            or not math.isfinite(lifetime_budget_usd)
+            or lifetime_budget_usd < 0
+        ):
+            raise ValueError("Lifetime budget must be finite and nonnegative")
+        with self.store._connect(write=True) as connection:
+            row = connection.execute(
+                "SELECT * FROM evaluation_schedules WHERE id=?", (identifier,)
+            ).fetchone()
+            if row is None:
+                raise KeyError(identifier)
+            charged = self._budget_usage(connection, identifier)
+            if lifetime_budget_usd + 1e-9 < charged:
+                raise ValueError("Lifetime budget cannot be less than charged and reserved spend")
+            connection.execute(
+                "UPDATE evaluation_schedules SET lifetime_budget_usd=? WHERE id=?",
+                (lifetime_budget_usd, identifier),
+            )
+            self.store._event(
+                connection,
+                row["source_experiment_id"],
+                "schedule.budget_changed",
+                {
+                    "schedule_id": identifier,
+                    "previous_cap_usd": row["lifetime_budget_usd"],
+                    "lifetime_budget_usd": lifetime_budget_usd,
+                    "committed_usd": charged,
+                },
+            )
+        return self.budget(identifier)
+
+    def digests(self, identifier: str) -> builtins.list[dict[str, Any]]:
+        with self.store._connect() as connection:
+            result = []
+            for row in connection.execute(
+                "SELECT data,hash FROM schedule_digests WHERE schedule_id=? ORDER BY rowid DESC",
+                (identifier,),
+            ):
+                value = json.loads(row["data"])
+                if content_hash(value) != row["hash"]:
+                    raise ValueError("Schedule digest integrity check failed")
+                result.append(value)
+            return result
+
+    def digest(self, identifier: str, days: int = 7) -> dict[str, Any]:
+        """Freeze the current window, with task transitions and accounting coverage."""
+        if type(days) is not int or not 1 <= days <= 366:
+            raise ValueError("Digest window must be 1–366 days")
+        now = datetime.now(UTC)
+        cutoff = now - timedelta(days=days)
+        with self.store._connect(write=True) as connection:
+            schedule = connection.execute(
+                "SELECT * FROM evaluation_schedules WHERE id=?", (identifier,)
+            ).fetchone()
+            if schedule is None:
+                raise KeyError(identifier)
+            occurrences = connection.execute(
+                "SELECT experiment_id,created_at FROM schedule_occurrences "
+                "WHERE schedule_id=? AND experiment_id IS NOT NULL ORDER BY scheduled_for DESC LIMIT 502",
+                (identifier,),
+            ).fetchall()
+            occurrences = list(reversed(occurrences))
+            selected = [
+                row
+                for row in occurrences
+                if datetime.fromisoformat(row["created_at"].replace("Z", "+00:00")) >= cutoff
+            ]
+            if len(selected) > 500:
+                raise ValueError("Digest window contains more than 500 runs; choose fewer days")
+            before = [
+                row
+                for row in occurrences
+                if datetime.fromisoformat(row["created_at"].replace("Z", "+00:00")) < cutoff
+            ]
+            baseline_id = (
+                before[-1]["experiment_id"] if before else schedule["source_experiment_id"]
+            )
+
+            def read(experiment_id: str) -> dict[str, Any]:
+                snapshot, state = self.store._read_experiment(connection, experiment_id)
+                trials = [
+                    json.loads(row[0])
+                    for row in connection.execute(
+                        "SELECT data FROM trials WHERE experiment_id=? ORDER BY position",
+                        (experiment_id,),
+                    )
+                ]
+                return {**state, "trials": trials, "snapshot": snapshot}
+
+            baseline = read(baseline_id)
+            runs = [read(row["experiment_id"]) for row in selected]
+
+            def outcomes(run: dict[str, Any]) -> dict[str, str]:
+                grouped: dict[str, builtins.list[dict[str, Any]]] = {}
+                for trial in run["trials"]:
+                    grouped.setdefault(trial["system_id"] + "/" + trial["scenario_id"], []).append(
+                        trial
+                    )
+                return {
+                    key: "incomplete"
+                    if any(trial["status"] != "completed" for trial in trials)
+                    else "passed"
+                    if all(trial.get("passed") is True for trial in trials)
+                    else "failed"
+                    for key, trials in grouped.items()
+                }
+
+            previous = outcomes(baseline)
+            transitions = []
+            costs = []
+            for run in runs:
+                current = outcomes(run)
+                comparable = run["collection_hash"] == baseline["collection_hash"]
+                newly_failing = sorted(
+                    key
+                    for key in current
+                    if comparable and previous.get(key) == "passed" and current[key] == "failed"
+                )
+                newly_passing = sorted(
+                    key
+                    for key in current
+                    if comparable and previous.get(key) == "failed" and current[key] == "passed"
+                )
+                transitions.append(
+                    {
+                        "experiment_id": run["id"],
+                        "status": run["status"],
+                        "snapshot_hash": run["snapshot_hash"],
+                        "newly_failing": newly_failing,
+                        "newly_passing": newly_passing,
+                        "incomplete": sorted(
+                            key for key, value in current.items() if value == "incomplete"
+                        ),
+                        "evidence_command": "everval experiments show " + run["id"],
+                    }
+                )
+                known = sum(
+                    float(trial["cost_usd"])
+                    if trial.get("cost_usd") is not None
+                    else float((trial.get("provider_metadata") or {}).get("known_cost_usd", 0) or 0)
+                    for trial in run["trials"]
+                )
+                complete = bool(run["trials"]) and all(
+                    trial.get("cost_usd") is not None for trial in run["trials"]
+                )
+                costs.append(
+                    {
+                        "experiment_id": run["id"],
+                        "known_cost_usd": known,
+                        "cost_usd": known if complete else None,
+                        "cost_complete": complete,
+                        "budget_uncertain": run.get("budget_uncertain", False),
+                    }
+                )
+                # Incomplete observations do not erase the last valid pass/fail state.
+                previous.update(
+                    {key: result for key, result in current.items() if result != "incomplete"}
+                )
+            charged = self._budget_usage(connection, identifier)
+            value = {
+                "id": new_id(),
+                "schedule_id": identifier,
+                "name": schedule["name"],
+                "created_at": now.isoformat(),
+                "window_start": cutoff.isoformat(),
+                "window_days": days,
+                "baseline_experiment_id": baseline_id,
+                "baseline_snapshot_hash": baseline["snapshot_hash"],
+                "occurrences": transitions,
+                "costs": costs,
+                "run_count": len(runs),
+                "known_cost_usd": sum(value["known_cost_usd"] for value in costs),
+                "cost_complete": bool(costs) and all(value["cost_complete"] for value in costs),
+                "lifetime_budget_usd": schedule["lifetime_budget_usd"],
+                "committed_usd": charged,
+                "interpretation": "Transitions compare graded task outcomes, not causal attribution. Incomplete runs stay visible; repeat outcomes are grouped per task and system. Frozen at creation; later completions do not rewrite this digest.",
+            }
+            connection.execute(
+                "INSERT INTO schedule_digests VALUES(?,?,?,?)",
+                (value["id"], identifier, canonical_json(value), content_hash(value)),
+            )
+            self.store._event(
+                connection,
+                schedule["source_experiment_id"],
+                "schedule.digest_created",
+                {
+                    "schedule_id": identifier,
+                    "digest_id": value["id"],
+                    "hash": content_hash(value),
+                },
+            )
+        return value

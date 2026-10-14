@@ -16,13 +16,23 @@ import {
 import { ApiError, request, setToken } from './api';
 import { errorMessage } from './format';
 import type { Workspace } from './types';
+import type { Session } from './team-types';
 import { Button, Field, Loading, Notice } from './components';
 import { Dashboard, SettingsPage } from './pages/Workspace';
 import { CollectionsPage, CollectionDetail, NewCollection } from './pages/Collections';
 import { ExperimentsPage, NewExperiment, ExperimentDetail } from './pages/Experiments';
 import { SystemsPage } from './pages/Systems';
+import {
+  ReviewInbox,
+  ReviewTask,
+  ReviewQueueList,
+  CreateReviewQueue,
+  QueueBrief,
+} from './pages/ReviewWorkbench';
+import { ProductionImports, ProductionBatch } from './pages/ProductionCases';
+import { TeamAccess } from './pages/TeamAccess';
 
-const nav = [
+const workspaceNav = [
   { path: '/', name: 'Overview', icon: LayoutDashboard },
   { path: '/collections', name: 'Collections', icon: FolderClosed },
   { path: '/experiments', name: 'Experiments', icon: FlaskConical },
@@ -58,6 +68,7 @@ export default function App() {
 }
 function Workbench() {
   const [path, setPath] = useState(currentPath);
+  const [session, setSession] = useState<Session | null>(null);
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [error, setError] = useState('');
   const [authRequired, setAuthRequired] = useState(false);
@@ -68,6 +79,14 @@ function Workbench() {
   const [connected, setConnected] = useState(false);
   const refresh = useCallback(async () => {
     try {
+      const identity = await request<Session>('/session');
+      setSession(identity);
+      if (!identity.capabilities.includes('workspace.read')) {
+        setWorkspace(null);
+        setError('');
+        setConnected(true);
+        return;
+      }
       const [overview, collections, systems, experiments, settings] = await Promise.all([
         request<Workspace['overview']>('/overview'),
         request<Workspace['collections']>('/collections'),
@@ -80,6 +99,10 @@ function Workbench() {
       setConnected(true);
     } catch (err) {
       setConnected(false);
+      if (err instanceof ApiError && err.status === 401) {
+        setWorkspace(null);
+        setSession(null);
+      }
       if (!(err instanceof ApiError && err.status === 401)) setError(errorMessage(err));
     }
   }, []);
@@ -89,7 +112,11 @@ function Workbench() {
       setMobileNav(false);
       window.scrollTo({ top: 0 });
     };
-    const requireAuth = () => setAuthRequired(true);
+    const requireAuth = () => {
+      setAuthRequired(true);
+      setWorkspace(null);
+      setSession(null);
+    };
     window.addEventListener('hashchange', navigate);
     window.addEventListener('workspace:auth-required', requireAuth);
     void refresh();
@@ -105,7 +132,7 @@ function Workbench() {
     return () => clearInterval(interval);
   }, [refresh]);
   useEffect(() => {
-    document.title = `${path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
+    document.title = `${path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/reviews') ? 'Review desk' : path.startsWith('/cases') ? 'Production examples' : path.startsWith('/team') ? 'Team access' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
   }, [path]);
   useEffect(() => {
     if (!authRequired) return;
@@ -144,8 +171,23 @@ function Workbench() {
       if (previousFocus?.isConnected) previousFocus.focus();
     };
   }, [authRequired]);
+  const canManage = session?.capabilities.includes('workspace.write') ?? false;
+  const canReview = session?.capabilities.includes('reviews.assigned') ?? false;
+  const canSummarize = session?.capabilities.includes('summary.read') ?? false;
+  const nav = [
+    ...(canManage ? workspaceNav : []),
+    ...(canReview ? [{ path: '/reviews', name: 'Review desk', icon: ShieldCheck }] : []),
+    ...(!canReview && canSummarize
+      ? [{ path: '/reviews/queues', name: 'Decision briefs', icon: ShieldCheck }]
+      : []),
+    ...(canManage ? [{ path: '/cases', name: 'Production examples', icon: FolderClosed }] : []),
+    ...(session?.capabilities.includes('team.admin')
+      ? [{ path: '/team', name: 'Team access', icon: Settings2 }]
+      : []),
+  ];
   const route = path.split('?')[0];
-  const selectedNav = nav.find((item) => item.path !== '/' && path.startsWith(item.path)) ?? nav[0];
+  const selectedNav = nav.find((item) => item.path !== '/' && path.startsWith(item.path)) ??
+    nav[0] ?? { path: '/', name: 'Workspace', icon: LayoutDashboard };
   let content: ReactNode = <Loading />;
   if (workspace) {
     if (route === '/') content = <Dashboard workspace={workspace} refresh={refresh} />;
@@ -182,6 +224,46 @@ function Workbench() {
         </Notice>
       );
   }
+  if (session) {
+    if ((route === '/reviews' || (route === '/' && !canManage)) && canReview)
+      content = <ReviewInbox key={session.id} session={session} />;
+    else if ((route === '/reviews/queues' || (route === '/' && !canManage)) && canSummarize)
+      content = <ReviewQueueList canManage={canManage} />;
+    else if (route === '/reviews/queues/new' && workspace && canManage)
+      content = <CreateReviewQueue workspace={workspace} session={session} />;
+    else if (route.startsWith('/reviews/queues/') && canSummarize)
+      content = (
+        <QueueBrief
+          key={path}
+          id={decodeURIComponent(route.slice('/reviews/queues/'.length))}
+          canManage={canManage}
+        />
+      );
+    else if (route.startsWith('/reviews/items/') && canReview)
+      content = (
+        <ReviewTask
+          key={path + session.id}
+          id={decodeURIComponent(route.slice('/reviews/items/'.length))}
+        />
+      );
+    else if (route === '/cases' && canManage) content = <ProductionImports />;
+    else if (route.startsWith('/cases/') && canManage)
+      content = (
+        <ProductionBatch
+          key={path}
+          id={decodeURIComponent(route.slice('/cases/'.length))}
+          refresh={refresh}
+        />
+      );
+    else if (route === '/team' && session.capabilities.includes('team.admin'))
+      content = <TeamAccess session={session} />;
+    else if (!canManage)
+      content = (
+        <Notice>
+          This page is unavailable for your role. <a href="#/">Open your workspace.</a>
+        </Notice>
+      );
+  }
   return (
     <div className="app-shell">
       <a
@@ -213,8 +295,12 @@ function Workbench() {
         <div className="workspace-switch">
           <div className="workspace-avatar">W</div>
           <div>
-            <strong>Local workspace</strong>
-            <span>Your evidence, on your terms</span>
+            <strong>{session?.name ?? 'Local workspace'}</strong>
+            <span>
+              {session?.mode === 'team'
+                ? session.role + ' · personal access'
+                : 'Your evidence, on your terms'}
+            </span>
           </div>
         </div>
         <div className="nav-caption">WORKSPACE</div>
@@ -237,15 +323,13 @@ function Workbench() {
           ))}
         </nav>
         <div className="sidebar-bottom">
-          <a href="#/settings" className={path === '/settings' ? 'active' : ''}>
-            <Settings2 size={17} />
-            Settings & setup
-          </a>
-          <a
-            href="https://github.com/sumervaid/everval-ai"
-            target="_blank"
-            rel="noreferrer"
-          >
+          {canManage && (
+            <a href="#/settings" className={path === '/settings' ? 'active' : ''}>
+              <Settings2 size={17} />
+              Settings & setup
+            </a>
+          )}
+          <a href="https://github.com/sumervaid/everval-ai" target="_blank" rel="noreferrer">
             <BookOpen size={17} />
             Documentation
             <ArrowUpRight size={13} className="end-icon" />
@@ -274,6 +358,20 @@ function Workbench() {
             <strong>{path === '/settings' ? 'Settings' : selectedNav.name}</strong>
           </div>
           <div className="connection">
+            {session?.mode !== 'local' && session && (
+              <button
+                className="inline-button"
+                onClick={() => {
+                  setToken('');
+                  updateToken('');
+                  setWorkspace(null);
+                  setSession(null);
+                  setAuthRequired(true);
+                }}
+              >
+                Sign out
+              </button>
+            )}
             <span className={`connection-dot ${connected ? 'connected' : ''}`} />
             {connected ? 'Local service connected' : 'Connecting to local service'}
             <span className="version">
@@ -292,7 +390,7 @@ function Workbench() {
               </Notice>
             </div>
           )}
-          {content}
+          <div key={session?.id ?? 'signed-out'}>{content}</div>
         </main>
         <footer className="app-footer">
           <span>Everval AI</span>
@@ -312,7 +410,10 @@ function Workbench() {
               <ShieldCheck size={24} />
             </div>
             <h2 id="auth-title">Unlock your workspace</h2>
-            <p>This service requires a workspace token. It stays in this browser session.</p>
+            <p>
+              Enter your personal access token, or the workspace token for a legacy service. It
+              stays in this browser session.
+            </p>
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
@@ -320,7 +421,7 @@ function Workbench() {
                 setAuthError('');
                 try {
                   setToken(token);
-                  await request('/settings');
+                  await request('/session');
                   updateToken('');
                   setAuthRequired(false);
                   await refresh();
@@ -332,7 +433,7 @@ function Workbench() {
                 }
               }}
             >
-              <Field label="Workspace token">
+              <Field label="Access token">
                 <input
                   autoFocus
                   type="password"

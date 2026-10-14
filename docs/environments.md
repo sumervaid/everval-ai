@@ -28,7 +28,8 @@ package list. Group inclusion directives are not expanded.
 
 Named PEP 508 requirements support versions, extras, and environment markers.
 Direct URLs, VCS dependencies, local paths, editable installs, pip options,
-private indexes, and source builds are rejected. A package must have a wheel
+direct private-index access, and source builds are rejected. Private wheels can be
+[imported as offline artifacts](javascript-typescript.md#import-private-python-wheels). A package must have a wheel
 compatible with the selected Python image.
 
 A dependency-free project receives `pytest==8.4.2`. The same default is added
@@ -112,7 +113,7 @@ failures remove the containers.
 
 The preparer does not execute a repository Dockerfile, build system, package
 installation, or setup script. Projects requiring compiled extensions without
-wheels, operating-system packages, services, private indexes, or custom builds
+wheels, operating-system packages, services, or custom builds
 need a separately prepared and reviewed image.
 
 The wheel-only policy uses pip's documented
@@ -130,7 +131,8 @@ Every preparation retains:
 - Wheel filenames, byte sizes, SHA-256 hashes, and a wheel-manifest hash.
 - The resulting image digest, resource policy, timestamps, and audit record.
 
-The cache key includes the base image digest, normalized requirements, and
+The cache key includes the base image digest, normalized requirements, selected
+offline artifact records when present, and
 preparation revision. Reusing that key retains the original resolved
 environment. `refresh=True` explicitly resolves again and records the new
 image. Unpinned requirements can resolve differently after a refresh.
@@ -153,3 +155,6 @@ retaining a digest alone does not retain its image layers.
 - **Image missing:** load the approved base image into the configured runtime.
 - **Existing preparation in progress:** wait for that operation; duplicate preparations are locked.
 - **Source installation needed:** use a reviewed image or adapt the test profile. There is no host execution fallback.
+
+For npm lockfiles, Node/Jest/Vitest profiles, and private npm artifacts, see
+[JavaScript, TypeScript, and private dependencies](javascript-typescript.md).

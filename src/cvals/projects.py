@@ -43,7 +43,13 @@ def _identifier(value: str) -> str:
 
 def _is_test(name: str) -> bool:
     path = PurePosixPath(name)
-    return path.name.startswith("test_") or any(part in {"tests", "test"} for part in path.parts)
+    from cvals.node_runtime import is_test
+
+    return (
+        is_test(str(path))
+        or path.name.startswith("test_")
+        or any(part in {"tests", "test"} for part in path.parts)
+    )
 
 
 def _safe_path(name: str) -> bool:
@@ -396,7 +402,12 @@ class Projects:
         extensions = {
             ".py": "Python",
             ".js": "JavaScript",
+            ".mjs": "JavaScript",
+            ".cjs": "JavaScript",
+            ".jsx": "JavaScript",
             ".ts": "TypeScript",
+            ".mts": "TypeScript",
+            ".cts": "TypeScript",
             ".tsx": "TypeScript",
             ".go": "Go",
             ".rs": "Rust",
@@ -434,7 +445,7 @@ class Projects:
             name
             for name in configs
             if PurePosixPath(name).name
-            in {"pyproject.toml", "setup.cfg", "requirements.txt", "tox.ini"}
+            in {"pyproject.toml", "setup.cfg", "requirements.txt", "tox.ini", "package.json"}
         ] + tests[:5]
         for name in previews[:10]:
             spec = f"{revision}:{name}"
@@ -443,6 +454,18 @@ class Projects:
             text = git_command(
                 repository, "cat-file", "blob", spec, limit_bytes=65536 + 1024
             ).decode("utf-8", "replace")
+            if PurePosixPath(name).name == "package.json":
+                try:
+                    package = json.loads(text)
+                except ValueError:
+                    package = {}
+                if isinstance(package, dict):
+                    for section in ("dependencies", "devDependencies"):
+                        dependencies = package.get(section, {})
+                        if isinstance(dependencies, dict):
+                            runners.update(set(dependencies) & {"jest", "vitest"})
+            if "node:test" in text:
+                runners.add("node-test")
             if "pytest" in text:
                 runners.add("pytest")
             if "import unittest" in text or "from unittest import" in text:
@@ -454,6 +477,7 @@ class Projects:
             "environment": {
                 "configuration_files": configs[:100],
                 "detected_python": "Python" in languages,
+                "detected_node": bool(set(languages) & {"JavaScript", "TypeScript"}),
                 "test_runner": sorted(runners) or ["requires_review"],
                 "dependency_installation": "not_performed",
                 "notice": "File-based environment detection; no repository setup, tests, or builds executed",
@@ -747,6 +771,9 @@ class Projects:
                     "limit": limit,
                     "cursor": cursor,
                     "next_cursor": next_cursor,
+                    "available_merged_pull_requests": available,
+                    "has_more": has_more,
+                    "source_kind": project["source_kind"],
                     **counts,
                 }
                 connection.execute(

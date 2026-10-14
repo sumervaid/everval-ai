@@ -59,7 +59,9 @@ def append_audit(
         raise ValueError("Audit append requires an active write transaction")
     if not action or len(action) > 200 or len(resource) > 1000:
         raise ValueError("Audit action/resource exceeds its bounds")
-    actor = actor or getpass.getuser()
+    from cvals.identity import audit_actor
+
+    actor = actor or audit_actor() or getpass.getuser()
     if len(actor) > 200:
         raise ValueError("Audit actor exceeds 200 characters")
     safe = canonical_json(_redact(details))

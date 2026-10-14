@@ -135,6 +135,10 @@ def payload_for(scenario: Scenario, system: System) -> dict[str, Any]:
 def reserve_cost(scenario: Scenario, system: System) -> float:
     if system.kind != "http":
         return 0.0
+    if system.harness == "external-agent":
+        from cvals.external_agent import reservation as external_reservation
+
+        return external_reservation(system)
     if system.harness == "tools":
         from cvals.agent_runner import reservation
 
@@ -170,7 +174,9 @@ def _usage(raw: Any, system: System) -> tuple[int | None, int | None, float | No
     )
 
 
-def submit(scenario: Scenario, system: System, settings: Settings, budget_usd: float) -> Submission:
+def _submit(
+    scenario: Scenario, system: System, settings: Settings, budget_usd: float
+) -> Submission:
     if system.kind == "replay":
         recorded = system.submissions.get(scenario.id)
         if recorded is None:
@@ -206,6 +212,10 @@ def submit(scenario: Scenario, system: System, settings: Settings, budget_usd: f
     if system.kind == "incomplete":
         return Submission({}, cost_usd=0, metadata={"fixture_control": True})
     validate_provider(system, settings, budget_usd)
+    if system.harness == "external-agent":
+        from cvals.external_agent import submit_external
+
+        return submit_external(scenario, system)
     if system.harness == "tools":
         from cvals.agent_runner import submit_agent
 
@@ -289,3 +299,14 @@ def submit(scenario: Scenario, system: System, settings: Settings, budget_usd: f
         return Submission(None, error="Provider transport failed; billing may be unknown")
     except (ValueError, TypeError, KeyError, RecursionError):
         return Submission(None, error="Provider returned an invalid response envelope")
+
+
+def submit(scenario: Scenario, system: System, settings: Settings, budget_usd: float) -> Submission:
+    """Capture submission-stage timing without replacing provider accounting."""
+    started = time.perf_counter()
+    result = _submit(scenario, system, settings, budget_usd)
+    if system.kind == "http" and system.harness == "single-turn":
+        result.metadata["timing"] = {
+            "provider_ms": round((time.perf_counter() - started) * 1000, 3)
+        }
+    return result

@@ -9,7 +9,7 @@ Metrics are grouped by system within a frozen experiment.
 | Metric | Meaning |
 | --- | --- |
 | Pass rate | Passing attempts divided by all scheduled attempts. Failed, incomplete, cancelled, and errored work stays in the denominator. |
-| Known cost (`known_cost_usd`) | Sum of non-null trial costs. When accounting is incomplete, this is a lower bound. |
+| Known cost (`known_cost_usd`) | Sum of non-null trial costs plus known partial subtotals from otherwise unknown trials. When accounting is incomplete, this is a lower bound. |
 | Total cost (`cost_usd`) | Sum of trial costs, available only when every scheduled trial has a recorded cost. `cost_complete` identifies that coverage. |
 | Cost per pass (`cost_per_pass`) | Complete total cost divided by passing attempts. Spending on unsuccessful attempts is included. With no passes or incomplete accounting, the value is unavailable. |
 | Median duration | Middle recorded attempt duration: useful for describing a typical attempt. |
@@ -29,7 +29,7 @@ attempt cost in USD =
 
 The tools harness accumulates usage across its model calls. A longer agent loop can spend more even when it uses the same model and produces the same final answer.
 
-Missing usage stays unknown. If a later call in a tool loop has uncertain billing, the trial total is unknown; earlier known spending remains in `provider_metadata.known_cost_usd` and the step trace. The report's aggregate known cost currently sums fully costed trial records and does not add these partial within-trial subtotals. Inspect detailed JSON evidence when reconciling an interrupted loop.
+Missing usage stays unknown. If a later call in a tool loop has uncertain billing, the trial total is unknown; earlier known spending remains in `provider_metadata.known_cost_usd` and the step trace. The report includes those partial subtotals in its aggregate known-cost lower bound without counting them twice.
 
 The two-rate model does not separately price cached-token discounts, pricing tiers, provider tool fees, local GPU usage, environment preparation, grading infrastructure, or human review. A locally hosted endpoint with zero configured prices therefore reports zero provider-token cost, not zero operating cost. Recorded submissions retain the external harness's supplied cost and provenance.
 
@@ -88,7 +88,18 @@ A **cost gate** evaluates recorded spend after execution, per eligible system. I
 
 Uncertain provider billing blocks further HTTP calls in that experiment. Ambiguous paid calls are not automatically retried, and cancellation does not reverse charges already incurred. Reservations are local controls based on configured prices and usage bounds; provider billing remains authoritative.
 
-A recurring schedule can spend the frozen experiment's full budget on each occurrence. There is no cumulative schedule spending cap.
+Recurring schedules reserve each occurrence's full per-run budget against a cumulative lifetime cap. The default cap funds one occurrence; set a larger explicit cap for longer operation. Uncertain charges retain the full reservation, and legacy schedules without a cap stop until one is configured. The source experiment is excluded from the schedule's lifetime total.
+
+Workspace limits govern all live HTTP attempts across experiments. Repository limits additionally govern tasks admitted through that repository’s frozen benchmark releases; separately curated general collections remain in workspace scope. Reservations and admission happen in the same SQLite write transaction. Daily and monthly boundaries use UTC attempt admission time. Known past spending is backfilled when a limit is configured. Changing a limit does not cancel work already admitted.
+
+```sh
+everval spending set --daily 25 --monthly 200 --lifetime 1000
+everval spending set --scope project:PROJECT_ID --monthly 75
+everval spending list
+everval recurring budget SCHEDULE_ID --cap 50
+```
+
+These are example budgets, not recommended spending levels. Setting a scope replaces its caps; omitted periods become unlimited.
 
 ## A repeatable review workflow
 
@@ -98,6 +109,12 @@ A recurring schedule can spend the frozen experiment's full budget on each occur
 4. Use **Check gates** to retain the policy and per-system outcome. Review completion, errors, and missing accounting before accepting a low cost or short duration.
 5. Compare future runs against compatible frozen evidence. Cross-run total-cost differences are not normalized for different repetition counts; equalize the workload before treating a change in total spend as an efficiency improvement.
 
-The implementation does not yet separate provider-only latency, time to first token, tool-stage timings, or queue time in its report. It does not perform throughput/load testing, hardware normalization, invoice reconciliation, automatic routing, or confidence intervals for cost and latency. Reported confidence intervals concern task success.
+## Stage analysis and observed tradeoffs
+
+New attempts record submission, provider, tool, grading, and total timing when those stages ran. Every stage reports its own recorded/scheduled coverage, median, p95, and aggregate time. Old attempts do not gain invented measurements. Submission includes provider and tool execution; do not add overlapping stages together. An external agent's provider stage covers its entire HTTP service request.
+
+`everval economics EXPERIMENT_ID` reports cost per scheduled attempt, known spend on nonpassing attempts, expensive attempts, tool-call counts, and a descriptive frontier across pass rate, cost per pass, and p95. A system is dominated when another is at least as good on all three observed metrics and strictly better on one. Fixtures, replays, unfinished or invalid evidence, incomplete costs, and missing durations are excluded.
+
+This frontier is not a confidence statement or an automatic model-routing policy. Apply declared gates and inspect uncertainty before adopting a system. The implementation does not measure time to first token or queue time, perform load testing or hardware normalization, reconcile invoices, or estimate confidence intervals for cost and latency. Reported confidence intervals concern task success.
 
 [Reading results](results.md) · [Decision policies](policies.md) · [Provider configuration](providers.md)

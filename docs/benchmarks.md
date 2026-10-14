@@ -11,17 +11,21 @@ configure an environment when needed, and validate. GitHub discovery retains
 merge evidence and quarantines ambiguous histories. Local commits remain labeled
 as local history.
 
-## Two grading paths
+## Grading paths
 
 | Path | Suitable work | Grading boundary |
 | --- | --- | --- |
 | Function cases | Small Python repairs with direct function calls and literal JSON assertions | Expected answers and comparisons stay outside the candidate container |
 | Prepared pytest repository | Python repositories using fixtures, parametrization, installed dependencies, or multiple modules | Agent inputs exclude private tests and reference source; grading tests share an interpreter with candidate code |
+| Prepared Node repository | JavaScript/TypeScript projects using Node test, Jest, or Vitest with frozen npm dependencies | Frozen test-file selections and independent exit reconciliation; same-process integrity boundary |
 
 Function compilation requires supported assertions in both snapshots. New or
 changed expected behavior becomes a historical control. Unchanged assertions for
 the same function become separate regression controls. Unsupported test semantics
 reject the candidate instead of silently reducing its checks.
+
+For Node runner preparation, test-file selection, and offline private package
+imports, see [JavaScript and TypeScript](javascript-typescript.md).
 
 For pytest, register a prepared local image through **Projects → Environment**.
 The image must contain Python, pytest, and the repository's runtime and test
@@ -121,7 +125,7 @@ Treat that export as evaluator material, not an agent input.
 The function grader compares returned values on the host; a candidate cannot
 declare its own passing score. Expected answers are absent from its container.
 
-Repository pytest provides container isolation with weaker grading integrity:
+Repository pytest and Node runners provide container isolation with weaker grading integrity:
 tests and candidate code share one interpreter. Reconciliation detects missing,
 inconsistent, or malformed evidence, but deliberately hostile candidate code
 can attack the test process. This mode is not tamper-resistant attestation.

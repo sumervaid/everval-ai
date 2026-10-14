@@ -52,3 +52,30 @@ def system_label(system: dict[str, Any]) -> str:
     if system.get("kind") == "replay":
         return name + " · imported evidence"
     return name
+
+
+def human_text(value: Any, *, depth: int = 0) -> str:
+    """Render navigable evidence without requiring readers to interpret JSON."""
+    if depth > 8:
+        return "  " * depth + "Further detail is available in Full record."
+    indent = "  " * depth
+    if isinstance(value, dict):
+        lines = []
+        for key, item in value.items():
+            label = plain(key).replace("_", " ").capitalize()
+            if isinstance(item, (dict, list)):
+                lines.append(indent + label)
+                lines.append(human_text(item, depth=depth + 1))
+            elif isinstance(item, str) and "\n" in item:
+                lines.append(indent + label)
+                lines.extend(indent + "  " + plain(line, "") for line in item.splitlines())
+            else:
+                lines.append(indent + label + ": " + plain(item, "unknown"))
+        return "\n".join(lines)
+    if isinstance(value, list):
+        if not value:
+            return indent + "None recorded"
+        return "\n\n".join(human_text(item, depth=depth) for item in value)
+    if isinstance(value, str) and "\n" in value:
+        return "\n".join(indent + plain(line, "") for line in value.splitlines())
+    return indent + plain(value, "unknown")

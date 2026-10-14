@@ -114,8 +114,15 @@ class Engine:
                     "error": None,
                 }
                 source_duration_ms = None
+                timing: dict[str, float | None] = {"submission_ms": None, "grading_ms": None}
                 try:
-                    submission = submit(scenario, system, self.settings, snapshot["budget_usd"])
+                    submission_started = time.perf_counter()
+                    try:
+                        submission = submit(scenario, system, self.settings, snapshot["budget_usd"])
+                    finally:
+                        timing["submission_ms"] = round(
+                            (time.perf_counter() - submission_started) * 1000, 3
+                        )
                     source_duration_ms = submission.source_duration_ms
                     result.update(
                         output=submission.output,
@@ -131,7 +138,13 @@ class Engine:
                             error="Cancellation requested during the attempt; recorded usage retained",
                         )
                     elif submission.error is None and submission.output is not None:
-                        checks = evaluate(scenario, submission.output, self.settings)
+                        grading_started = time.perf_counter()
+                        try:
+                            checks = evaluate(scenario, submission.output, self.settings)
+                        finally:
+                            timing["grading_ms"] = round(
+                                (time.perf_counter() - grading_started) * 1000, 3
+                            )
                         score = sum(c["score"] * c["weight"] for c in checks) / sum(
                             c["weight"] for c in checks
                         )
@@ -153,6 +166,12 @@ class Engine:
                         error=f"Execution failed ({type(exc).__name__}); inspect local configuration",
                     )
                 elapsed_ms = round((time.monotonic() - started) * 1000, 3)
+                timing["total_ms"] = elapsed_ms
+                provider_timing = result.get("provider_metadata", {}).get("timing", {})
+                for key in ("provider_ms", "tool_ms"):
+                    if isinstance(provider_timing.get(key), (int, float)):
+                        timing[key] = provider_timing[key]
+                result["timing"] = timing
                 result["evaluation_duration_ms"] = elapsed_ms
                 result["duration_ms"] = (
                     source_duration_ms if system.kind == "replay" else elapsed_ms

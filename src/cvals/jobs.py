@@ -20,7 +20,16 @@ def _validate_payload(kind: str, payload: dict[str, Any]) -> None:
     allowed = {
         "discover": {"project_id", "limit", "cursor"},
         "validate": {"project_id", "candidate_id"},
-        "prepare": {"project_id", "packages", "revision", "base_image", "refresh"},
+        "prepare": {
+            "project_id",
+            "packages",
+            "revision",
+            "base_image",
+            "refresh",
+            "language",
+            "runner",
+            "artifacts",
+        },
     }
     if not isinstance(payload, dict) or set(payload) - allowed[kind]:
         raise ValueError("Job payload contains unsupported fields")
@@ -43,8 +52,33 @@ def _validate_payload(kind: str, payload: dict[str, Any]) -> None:
     if kind == "prepare":
         from cvals.environments import validate_requirements
 
+        language, runner = payload.get("language", "python"), payload.get("runner", "node-test")
+        if (
+            not isinstance(language, str)
+            or not isinstance(runner, str)
+            or language not in {"python", "javascript", "typescript"}
+            or runner not in {"node-test", "jest", "vitest"}
+        ):
+            raise ValueError("Unsupported preparation language or Node test runner")
         if payload.get("packages") is not None:
+            if language != "python":
+                raise ValueError(
+                    "Node preparation uses the committed npm lockfile, not a package override"
+                )
             validate_requirements(payload["packages"])
+        artifacts = payload.get("artifacts")
+        if artifacts is not None and (
+            not isinstance(artifacts, list)
+            or len(artifacts) > 200
+            or any(
+                not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value)
+                for value in artifacts
+            )
+            or len(set(artifacts)) != len(artifacts)
+        ):
+            raise ValueError(
+                "Private dependency references must be at most 200 unique SHA-256 artifact IDs"
+            )
         if not isinstance(payload.get("revision"), str) or not re.fullmatch(
             r"[0-9a-f]{40,64}", payload["revision"]
         ):
@@ -214,8 +248,14 @@ class Jobs:
                 result = Environments(self.settings).prepare(**payload)
                 from cvals.benchmarks import Benchmarks
 
+                language = payload.get("language", "python")
                 result["profile"] = Benchmarks(self.settings).configure(
-                    payload["project_id"], result["image_digest"]
+                    payload["project_id"],
+                    result["image_digest"],
+                    runtime="python-pytest"
+                    if language == "python"
+                    else payload.get("runner", "node-test"),
+                    language=language,
                 )
             encoded = canonical_json(result)
             status, error = "completed", None

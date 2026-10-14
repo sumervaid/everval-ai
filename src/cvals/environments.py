@@ -342,7 +342,26 @@ class Environments:
         packages: builtins.list[str] | None = None,
         revision: str | None = None,
         base_image: str | None = None,
+        language: str = "python",
+        runner: str = "node-test",
+        artifacts: builtins.list[str] | None = None,
     ) -> dict[str, Any]:
+        if language != "python":
+            from cvals.node_environments import plan
+
+            return plan(
+                self,
+                project_id,
+                revision=revision,
+                base_image=base_image,
+                language=language,
+                runner=runner,
+                artifacts=artifacts,
+                packages=packages,
+            )
+        from cvals.private_artifacts import PrivateArtifacts
+
+        artifact_records = PrivateArtifacts(self.settings).resolve(artifacts, kind="wheel")
         project = self.projects.get(project_id)
         revision = revision or project["head_sha"]
         snapshot = self.projects.snapshot(
@@ -380,6 +399,7 @@ class Environments:
                 "revision": PREPARATION_REVISION,
                 "base": base,
                 "requirements": detected["requirements"],
+                **({"artifacts": artifact_records} if artifact_records else {}),
             }
         )
         manifest = {
@@ -389,6 +409,9 @@ class Environments:
         }
         return {
             "project_id": project_id,
+            "language": "python",
+            "runner": "python-pytest",
+            "artifacts": artifact_records,
             "source_commit": revision,
             "source_manifest_hash": content_hash(manifest),
             "source_manifest": manifest,
@@ -396,7 +419,9 @@ class Environments:
             "dependency_hash": dependency_hash,
             "requested_base_image": base_image or self.settings.sandbox_image,
             **detected,
-            "network_policy": "Dependency download only; install and grading have no network",
+            "network_policy": "Offline imported wheel closure; no network"
+            if artifact_records
+            else "Dependency download only; install and grading have no network",
             "package_index": "https://pypi.org/simple",
             "repository_execution": False,
             "preparation_revision": PREPARATION_REVISION,
@@ -410,8 +435,19 @@ class Environments:
         revision: str | None = None,
         base_image: str | None = None,
         refresh: bool = False,
+        language: str = "python",
+        runner: str = "node-test",
+        artifacts: builtins.list[str] | None = None,
     ) -> dict[str, Any]:
-        plan = self.plan(project_id, packages=packages, revision=revision, base_image=base_image)
+        plan = self.plan(
+            project_id,
+            packages=packages,
+            revision=revision,
+            base_image=base_image,
+            language=language,
+            runner=runner,
+            artifacts=artifacts,
+        )
         descriptor = os.open(
             self.root / f"{plan['dependency_hash']}.lock",
             os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW,
@@ -529,7 +565,7 @@ class Environments:
             ) from exc
         if result.returncode:
             raise ValueError(
-                "Dependency preparation failed. Verify that every requested package has a compatible public wheel; source builds and private indexes are disabled."
+                "Dependency preparation failed. Verify the pinned dependency closure and compatible package artifacts; lifecycle scripts and source builds are disabled."
             )
         state = _docker(["inspect", "--format", "{{json .State}}", name], self.settings)
         try:
@@ -548,18 +584,41 @@ class Environments:
         return result
 
     def _build(self, plan: dict[str, Any]) -> dict[str, Any]:
+        if plan.get("language", "python") != "python":
+            from cvals.node_environments import build
+
+            return build(self, plan)
         suffix = uuid4().hex
         download = f"cvals-env-download-{suffix}"
         install = f"cvals-env-install-{suffix}"
         image = None
         finished = False
         try:
-            self._create(
-                download, plan["base_image_digest"], _DOWNLOAD, plan["requirements"], download=True
-            )
-            result = self._start(download, timeout=210, output_limit=MAX_WHEEL_BYTES + 1024 * 1024)
-            archive, wheels = _wheel_archive(result.stdout)
-            _docker(["rm", "--force", "--volumes", download], self.settings)
+            if plan.get("artifacts"):
+                from cvals.private_artifacts import PrivateArtifacts
+
+                store = PrivateArtifacts(self.settings)
+                buffer = io.BytesIO()
+                with tarfile.open(fileobj=buffer, mode="w") as output:
+                    for artifact in plan["artifacts"]:
+                        payload = store.read(artifact["id"])
+                        item = tarfile.TarInfo(artifact["filename"])
+                        item.size = len(payload)
+                        output.addfile(item, io.BytesIO(payload))
+                archive, wheels = _wheel_archive(buffer.getvalue())
+            else:
+                self._create(
+                    download,
+                    plan["base_image_digest"],
+                    _DOWNLOAD,
+                    plan["requirements"],
+                    download=True,
+                )
+                result = self._start(
+                    download, timeout=210, output_limit=MAX_WHEEL_BYTES + 1024 * 1024
+                )
+                archive, wheels = _wheel_archive(result.stdout)
+                _docker(["rm", "--force", "--volumes", download], self.settings)
             self._create(
                 install, plan["base_image_digest"], _INSTALL, plan["requirements"], download=False
             )
@@ -611,7 +670,9 @@ class Environments:
                 "wheel_manifest": wheels,
                 "wheel_manifest_hash": content_hash(wheels),
                 "prepared_at": utc_now(),
-                "installs": "public wheels only; no source builds",
+                "installs": "imported offline wheels; no source builds"
+                if plan.get("artifacts")
+                else "public wheels only; no source builds",
                 "limits": {
                     "wheel_bytes": MAX_WHEEL_BYTES,
                     "expanded_bytes": MAX_EXPANDED_BYTES,

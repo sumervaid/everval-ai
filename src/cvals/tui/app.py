@@ -20,7 +20,16 @@ from textual.widgets import Button, DataTable, Footer, LoadingIndicator, RichLog
 
 from cvals.config import Settings
 from cvals.tui.dialogs import EvidenceDialog, FieldSpec, FormDialog, PlanDialog
-from cvals.tui.presentation import money, percent, plain, record_text, status, system_label
+from cvals.tui.growth import GrowthMixin
+from cvals.tui.presentation import (
+    human_text,
+    money,
+    percent,
+    plain,
+    record_text,
+    status,
+    system_label,
+)
 
 PAGES = (
     ("overview", "Overview", "F1"),
@@ -31,13 +40,23 @@ PAGES = (
     ("schedules", "Schedules", "F6"),
     ("audit", "Audit trail", "F7"),
     ("diagnostics", "Workspace", "F8"),
+    ("guides", "Guided runs", "F9"),
+    ("changes", "Change runs", "F10"),
 )
 TITLES = {key: title for key, title, _ in PAGES} | {
     "candidates": "Candidate ledger",
     "trials": "Trial evidence",
     "collections": "Collections",
+    "journey": "First real evaluation",
+    "health": "Benchmark health",
+    "artifacts": "Dependency artifacts",
 }
 DESCRIPTIONS = {
+    "artifacts": "Reviewed local wheels and npm archives; package code is never run during import.",
+    "guides": "Resume the path from a real repository to a frozen evaluation.",
+    "journey": "Every completed step points to saved evidence. Enter opens the selected step.",
+    "health": "Admissions, coverage, exclusions and observed control consistency.",
+    "changes": "Exact source and configuration fingerprints linked to local evaluations.",
     "overview": "Build a benchmark from work that actually happened.",
     "projects": "Connect history. Preserve why each candidate was admitted or rejected.",
     "candidates": "A discovered change is a draft until its reference and controls are verified.",
@@ -46,11 +65,28 @@ DESCRIPTIONS = {
     "experiments": "Compare systems on the same frozen tasks. Inspect every attempt.",
     "trials": "Outputs, checks, costs, and human judgments remain tied to this attempt.",
     "systems": "Endpoint configuration stores environment references, never API secrets.",
-    "schedules": "Each occurrence uses a frozen snapshot and its own provider budget.",
+    "schedules": "Frozen runs share a cumulative cap; uncertain billing stays reserved.",
     "audit": "A local record of workbench actions and their persisted outcomes.",
     "diagnostics": "Storage, execution, and provider readiness for this local workspace.",
 }
 TOOLS = {
+    "artifacts": "Dependency artifacts",
+    "artifact_import": "Import artifact",
+    "guide": "Start guide",
+    "resume": "Resume guide",
+    "continue": "Open step",
+    "health": "Benchmark health",
+    "digest": "Weekly digest",
+    "schedule_budget": "Lifetime cap",
+    "change_link": "Link changes",
+    "change_poll": "Poll and evaluate",
+    "change_toggle": "Pause / enable",
+    "change_history": "Change evidence",
+    "triage": "Triage",
+    "economics": "Cost / latency",
+    "brief": "Decision brief",
+    "diagnose": "Diagnose attempt",
+    "regrade": "Regrade saved output",
     "connect": "Connect repository",
     "discover": "Discover",
     "older": "Load older work",
@@ -75,8 +111,21 @@ TOOLS = {
     "back": "Back",
 }
 PAGE_TOOLS = {
-    "overview": ["connect", "run"],
-    "projects": ["connect", "discover", "candidates", "prepare", "profile", "release", "record"],
+    "overview": ["guide", "connect", "run"],
+    "guides": ["guide", "resume", "record"],
+    "journey": ["continue", "health", "record"],
+    "health": ["back", "record"],
+    "changes": ["change_poll", "change_toggle", "change_history", "record"],
+    "projects": [
+        "connect",
+        "discover",
+        "candidates",
+        "prepare",
+        "profile",
+        "health",
+        "release",
+        "record",
+    ],
     "candidates": [
         "back",
         "discover",
@@ -90,16 +139,30 @@ PAGE_TOOLS = {
     ],
     "releases": ["run", "record"],
     "collections": ["run", "record"],
-    "experiments": ["run", "trials", "cancel", "export", "diff", "gates", "schedule", "record"],
-    "trials": ["back", "review", "reviews", "export", "record"],
+    "experiments": [
+        "run",
+        "trials",
+        "triage",
+        "economics",
+        "brief",
+        "cancel",
+        "export",
+        "diff",
+        "gates",
+        "schedule",
+        "change_link",
+        "record",
+    ],
+    "trials": ["back", "diagnose", "regrade", "review", "reviews", "export", "record"],
     "systems": ["system", "record"],
-    "schedules": ["toggle", "record"],
+    "schedules": ["toggle", "schedule_budget", "digest", "record"],
     "audit": ["record"],
-    "diagnostics": ["record"],
+    "diagnostics": ["artifacts", "artifact_import", "record"],
+    "artifacts": ["artifact_import", "record"],
 }
 
 
-class WorkbenchApp(App[None]):
+class WorkbenchApp(GrowthMixin, App[None]):
     """A terminal client; no evaluation or storage rules are duplicated here."""
 
     TITLE = "Everval AI"
@@ -127,6 +190,7 @@ class WorkbenchApp(App[None]):
         self.service = workbench
         self.initial_source = source
         self.page = "overview"
+        self.guide_id: str | None = None
         self.project_id: str | None = None
         self._project_cursors: dict[str, str | None] = {}
         self.experiment_id: str | None = None
@@ -318,7 +382,8 @@ class WorkbenchApp(App[None]):
         for name, _, _ in PAGES:
             self.query_one("#nav-" + name).set_class(
                 page == name
-                or (page == "candidates" and name == "projects")
+                or (page in {"candidates", "health"} and name == "projects")
+                or (page == "journey" and name == "guides")
                 or (page == "trials" and name == "experiments"),
                 "active",
             )
@@ -340,10 +405,15 @@ class WorkbenchApp(App[None]):
     def _poll(self) -> None:
         if (
             self.is_running
-            and self.page in {"experiments", "trials"}
+            and self.page in {"experiments", "trials", "journey"}
             and len(self.screen_stack) == 1
             and not self._loading
-            and any(row.get("status") in {"queued", "running", "cancelling"} for row in self.rows)
+            and (
+                any(row.get("status") in {"queued", "running", "cancelling"} for row in self.rows)
+                or self.page == "journey"
+                and isinstance(self.payload, dict)
+                and self.payload.get("experiment_status") in {"queued", "running"}
+            )
         ):
             self.reload()
 
@@ -354,6 +424,8 @@ class WorkbenchApp(App[None]):
         self._loading = True
 
         def fetch() -> Any:
+            if page in {"guides", "journey", "health", "changes", "artifacts"}:
+                return self.growth_fetch(page)
             if page == "candidates":
                 project: dict[str, Any] = next(
                     (p for p in self.service.projects() if p["id"] == project_id), {}
@@ -410,6 +482,32 @@ class WorkbenchApp(App[None]):
                 (plain(r.get("name")), status(r.get("status", "connected")), plain(r.get("source")))
                 for r in self.rows
             ]
+        elif page == "journey":
+            self.rows = result["steps"]
+            self.project_id = result.get("project_id")
+            columns = ["Step", "Progress", "Evidence"]
+            table_rows = [
+                (plain(row["title"]), status(row["status"]), plain(row.get("evidence")))
+                for row in self.rows
+            ]
+            if self._focus_after_load:
+                selected_id = result.get("next_step")
+        elif page == "health":
+            self.rows = [
+                {"id": key, "name": key.replace("_", " "), "value": value}
+                for key, value in result.items()
+                if key not in {"project_id", "generated_at"}
+            ]
+            columns = ["Measure", "Evidence"]
+            table_rows = [
+                (
+                    plain(row["name"]),
+                    str(len(row["value"])) + " records"
+                    if isinstance(row["value"], (dict, list))
+                    else plain(row["value"]),
+                )
+                for row in self.rows
+            ]
         elif page == "trials":
             self.rows = result.get("trials", [])
             columns = ["Task", "System", "Attempt", "State", "Pass", "Cost"]
@@ -442,7 +540,42 @@ class WorkbenchApp(App[None]):
             self.rows = (
                 result if isinstance(result, list) else result.get("items", result.get(page, []))
             )
-            if page == "projects":
+            if page == "artifacts":
+                columns = ["Package", "Version", "Kind", "Registry", "Bytes"]
+                table_rows = [
+                    (
+                        plain(row["name"]),
+                        plain(row["version"]),
+                        plain(row["kind"]),
+                        plain(row["registry"]),
+                        plain(row["bytes"]),
+                    )
+                    for row in self.rows
+                ]
+            elif page == "guides":
+                columns = ["Guide", "Project", "Experiment", "Updated"]
+                table_rows = [
+                    (
+                        plain(row["name"]),
+                        plain(row.get("project_id")),
+                        plain(row.get("experiment_id")),
+                        plain(row["updated_at"]),
+                    )
+                    for row in self.rows
+                ]
+            elif page == "changes":
+                columns = ["Baseline", "State", "Version", "Source", "Configuration"]
+                table_rows = [
+                    (
+                        plain(row["name"]),
+                        status("enabled" if row["enabled"] else "paused"),
+                        plain(row["version"]),
+                        plain(row["source_commit"][:12]),
+                        plain(row["config_hash"][:12]),
+                    )
+                    for row in self.rows
+                ]
+            elif page == "projects":
                 columns = ["Project", "State", "Candidates", "Source"]
                 table_rows = [
                     (
@@ -513,11 +646,19 @@ class WorkbenchApp(App[None]):
                     for r in self.rows
                 ]
             elif page == "schedules":
-                columns = ["Schedule", "State", "Interval", "Next run", "Last error"]
+                columns = [
+                    "Schedule",
+                    "State",
+                    "Lifetime cap",
+                    "Interval",
+                    "Next run",
+                    "Last error",
+                ]
                 table_rows = [
                     (
                         plain(r.get("name")),
                         status("enabled" if r.get("enabled") else "paused"),
+                        money(r.get("lifetime_budget_usd")),
                         f"{r.get('interval_minutes', '—')} min",
                         plain(r.get("next_run_at")),
                         plain(r.get("last_error")),
@@ -580,11 +721,27 @@ class WorkbenchApp(App[None]):
             "experiments": "No experiments yet.\nRelease a validated benchmark or select an existing collection.",
             "systems": "No systems configured.\nAdd a compatible endpoint using an environment-variable key reference.",
             "schedules": "No recurring runs.\nSelect an experiment, then choose Schedule.",
+            "guides": "Start a guided run to build your first real evaluation. Progress resumes after closing the terminal.",
+            "changes": "Select a completed experiment, then Link changes to create a reviewed baseline.",
             "audit": "No workbench actions recorded yet.",
         }.get(self.page, "No records available.")
 
     def _update_actions(self) -> None:
         for key in {
+            "resume",
+            "continue",
+            "health",
+            "digest",
+            "schedule_budget",
+            "change_link",
+            "change_poll",
+            "change_toggle",
+            "change_history",
+            "triage",
+            "economics",
+            "brief",
+            "diagnose",
+            "regrade",
             "discover",
             "candidates",
             "validate",
@@ -609,6 +766,10 @@ class WorkbenchApp(App[None]):
                 enabled = bool(self.project_id)
             if key in {"export", "reviews"} and self.page == "trials":
                 enabled = bool(self.experiment_id)
+            if key == "health" and self.page == "journey":
+                enabled = bool(self.project_id)
+            if key == "regrade" and self.selected:
+                enabled = self.selected.get("status") not in {"queued", "running"}
             if key == "older":
                 enabled = bool(self.project_id and self._project_cursors.get(self.project_id))
             if key == "cancel" and self.selected:
@@ -625,7 +786,11 @@ class WorkbenchApp(App[None]):
         if event.row_key.value is not None:
             self.select_row(int(event.row_key.value))
             self.command(
-                "candidates"
+                "resume"
+                if self.page == "guides"
+                else "continue"
+                if self.page == "journey"
+                else "candidates"
                 if self.page in {"projects", "overview"}
                 else "trials"
                 if self.page == "experiments"
@@ -664,6 +829,9 @@ class WorkbenchApp(App[None]):
             "Record",
         )
         self.query_one("#detail-heading", Static).update("INSPECT  /  " + title)
+        if self.page in {"journey", "health", "guides", "changes", "artifacts"}:
+            log.write(Text(human_text(record)))
+            return
         report = record.get("report")
         if report:
             comparison = Table(box=None, padding=(0, 1), expand=True)
@@ -746,17 +914,24 @@ class WorkbenchApp(App[None]):
             self.action_connect()
 
     def command(self, name: str) -> None:
-        if name not in {"connect", "run", "system"} and name not in PAGE_TOOLS[self.page]:
+        if (
+            name not in {"connect", "run", "system", "guide", "artifacts", "artifact_import"}
+            and name not in PAGE_TOOLS[self.page]
+        ):
             self.notify("Open the relevant page and select a record first.", severity="warning")
             return
-        if name == "connect":
+        if name in {"artifacts", "artifact_import"}:
+            getattr(self, "command_" + name)()
+        elif name == "guide":
+            self.command_guide()
+        elif name == "connect":
             self.action_connect()
         elif name == "run":
             self.new_run()
         elif name == "system":
             self.new_system()
         elif name == "back":
-            self.show_page("projects" if self.page == "candidates" else "experiments")
+            self.show_page("projects" if self.page in {"candidates", "health"} else "experiments")
         elif (
             name in {"discover", "release", "profile", "older", "prepare"}
             and self.page == "candidates"
@@ -820,7 +995,9 @@ class WorkbenchApp(App[None]):
 
     def command_discover(self) -> None:
         project_id = (
-            self.project_id if self.page == "candidates" else (self.selected or {}).get("id")
+            self.project_id
+            if self.page in {"candidates", "journey"}
+            else (self.selected or {}).get("id")
         )
         if not isinstance(project_id, str):
             self.notify("Select a project first.", severity="warning")
@@ -867,65 +1044,132 @@ class WorkbenchApp(App[None]):
         )
 
     def command_prepare(self) -> None:
+        from cvals.private_artifacts import PrivateArtifacts
+
         project_id = (
-            self.project_id if self.page == "candidates" else (self.selected or {}).get("id")
+            self.project_id
+            if self.page in {"candidates", "journey"}
+            else (self.selected or {}).get("id")
         )
-        fields = [
-            FieldSpec(
-                "mode",
-                "Dependency source",
-                kind="choice",
-                value="detected",
-                options=[
-                    ("Detect supported package declarations", "detected"),
-                    ("Use only packages listed below", "explicit"),
-                ],
-            ),
-            FieldSpec(
-                "packages",
-                "Explicit package specifications · one per line",
-                kind="multiline",
-                required=False,
-            ),
-        ]
 
-        def submit(values: dict[str, Any]) -> None:
-            packages = (
-                [line.strip() for line in values["packages"].splitlines() if line.strip()]
-                if values["mode"] == "explicit"
-                else None
-            )
-
-            def planned(plan: dict[str, Any]) -> None:
-                def confirmed(accepted: bool | None) -> None:
-                    if accepted:
-                        self.request(
-                            "Preparing isolated runtime",
-                            partial(
-                                self.service.prepare_environment,
-                                project_id,
-                                packages=packages,
-                                revision=plan["source_commit"],
-                                base_image=plan["base_image_digest"],
-                            ),
-                            lambda result: self.mutation_done("Execution environment prepared"),
-                            mutation=True,
+        def loaded(artifacts: list[dict[str, Any]]) -> None:
+            fields = [
+                FieldSpec(
+                    "language",
+                    "Repository language",
+                    kind="choice",
+                    value="python",
+                    options=[
+                        ("Python", "python"),
+                        ("JavaScript", "javascript"),
+                        ("TypeScript", "typescript"),
+                    ],
+                ),
+                FieldSpec(
+                    "runner",
+                    "Node runner · ignored for Python",
+                    kind="choice",
+                    value="node-test",
+                    options=[
+                        ("Node built-in tests", "node-test"),
+                        ("Jest", "jest"),
+                        ("Vitest", "vitest"),
+                    ],
+                ),
+                FieldSpec(
+                    "mode",
+                    "Dependency source",
+                    kind="choice",
+                    value="detected",
+                    options=[
+                        ("Read committed declarations or npm lockfile", "detected"),
+                        ("Explicit Python package list", "explicit"),
+                    ],
+                ),
+                FieldSpec(
+                    "packages",
+                    "Explicit Python packages · one per line",
+                    kind="multiline",
+                    required=False,
+                ),
+                FieldSpec(
+                    "base_image",
+                    "Already-local base image · optional",
+                    required=False,
+                    placeholder="Default: configured Python image or node:24-slim",
+                ),
+                FieldSpec(
+                    "artifacts",
+                    "Imported dependency artifacts · Space selects · optional",
+                    kind="multi",
+                    required=False,
+                    options=[
+                        (
+                            f"{item['kind']} · {item['name']} {item['version']} · {item['registry']}",
+                            item["id"],
                         )
+                        for item in artifacts
+                    ],
+                ),
+            ]
 
-                self.push_screen(PlanDialog(plan), confirmed)
+            def submit(values: dict[str, Any]) -> None:
+                packages = (
+                    [line.strip() for line in values["packages"].splitlines() if line.strip()]
+                    if values["mode"] == "explicit"
+                    else None
+                )
+                options: dict[str, Any] = {}
+                if values["language"] != "python":
+                    options.update(language=values["language"], runner=values["runner"])
+                if values["artifacts"]:
+                    options["artifacts"] = values["artifacts"]
+                plan_options = dict(options)
+                if values["base_image"]:
+                    plan_options["base_image"] = values["base_image"]
 
-            self.request(
-                "Planning execution environment",
-                partial(self.service.environment_plan, project_id, packages=packages),
-                planned,
+                def planned(plan: dict[str, Any]) -> None:
+                    def confirmed(accepted: bool | None) -> None:
+                        if accepted:
+                            self.request(
+                                "Preparing isolated runtime",
+                                partial(
+                                    self.service.prepare_environment,
+                                    project_id,
+                                    packages=packages,
+                                    revision=plan["source_commit"],
+                                    base_image=plan["base_image_digest"],
+                                    **options,
+                                ),
+                                lambda result: self.mutation_done("Execution environment prepared"),
+                                mutation=True,
+                            )
+
+                    self.push_screen(PlanDialog(plan), confirmed)
+
+                self.request(
+                    "Planning execution environment",
+                    partial(
+                        self.service.environment_plan,
+                        project_id,
+                        packages=packages,
+                        **plan_options,
+                    ),
+                    planned,
+                )
+
+            self.form(
+                "Plan an execution runtime",
+                "Review exact dependencies and image before preparation. Python uses wheels; Node uses a committed npm lockfile with scripts disabled. Imported wheels must supply the offline dependency closure. Import artifacts from Workspace first.",
+                fields,
+                "Review plan",
+                submit,
             )
 
-        self.form(
-            "Plan an execution runtime",
-            "Inspect supported dependency declarations or provide a reviewed package list. The next screen shows exact requirements, source revision, base image, and network policy before any package download.",
-            fields,
-            "Review plan",
-            submit,
+        self.request(
+            "Reading imported dependency artifacts",
+            lambda: PrivateArtifacts(self.settings).list(),
+            loaded,
         )
 
     def command_review_candidate(self) -> None:
@@ -962,12 +1206,28 @@ class WorkbenchApp(App[None]):
 
     def command_profile(self) -> None:
         project_id = (
-            self.project_id if self.page == "candidates" else (self.selected or {}).get("id")
+            self.project_id
+            if self.page in {"candidates", "journey"}
+            else (self.selected or {}).get("id")
         )
         fields = [
             FieldSpec(
+                "profile",
+                "Language and test runner",
+                kind="choice",
+                value="python:python-pytest",
+                options=[
+                    ("Python · pytest", "python:python-pytest"),
+                    *[
+                        (language.title() + " · " + runner, language + ":" + runner)
+                        for language in ("javascript", "typescript")
+                        for runner in ("node-test", "jest", "vitest")
+                    ],
+                ],
+            ),
+            FieldSpec(
                 "image",
-                "Prepared pytest image · already installed",
+                "Prepared test image · already installed",
                 placeholder="local/repository-tests:reviewed",
             ),
             FieldSpec(
@@ -979,24 +1239,33 @@ class WorkbenchApp(App[None]):
                 maximum=120,
             ),
             FieldSpec(
-                "plugins", "Explicit pytest plugin modules · comma separated", required=False
+                "plugins",
+                "Explicit pytest plugin modules · Python only · comma separated",
+                required=False,
             ),
         ]
 
         def submit(values: dict[str, Any]) -> None:
+            language, runtime = values.pop("profile").split(":", 1)
             values["plugins"] = [
                 item.strip() for item in values["plugins"].split(",") if item.strip()
             ]
             self.request(
                 "Recording execution environment",
-                partial(self.service.add_project_profile, project_id, **values),
+                partial(
+                    self.service.add_project_profile,
+                    project_id,
+                    language=language,
+                    runtime=runtime,
+                    **values,
+                ),
                 lambda result: self.mutation_done("Prepared environment recorded"),
                 mutation=True,
             )
 
         self.form(
-            "Prepare repository validation",
-            "Register a preinstalled image with pytest and the project's dependencies. The core resolves its immutable identity; no install script runs here. Repository tests share a process with candidate code and are not resistant to deliberate grader manipulation.",
+            "Pin repository validation runtime",
+            "Choose an already prepared image matching the language and runner. The core pins its immutable identity. Tests run with candidate code inside the sandbox; deliberate grader manipulation remains outside this integrity guarantee.",
             fields,
             "Save environment",
             submit,
@@ -1014,7 +1283,9 @@ class WorkbenchApp(App[None]):
 
     def command_release(self) -> None:
         project_id = (
-            self.project_id if self.page == "candidates" else (self.selected or {}).get("id")
+            self.project_id
+            if self.page in {"candidates", "journey"}
+            else (self.selected or {}).get("id")
         )
         self.form(
             "Create benchmark release",
@@ -1330,9 +1601,16 @@ class WorkbenchApp(App[None]):
         identity = self.selected["id"]
         self.form(
             "Schedule a recurring evaluation",
-            "Every occurrence repeats the frozen experiment and can spend its full original provider budget. There is no cumulative lifetime budget. Imported submission replays cannot be scheduled.",
+            "Each occurrence repeats the frozen experiment. Its full per-run budget is reserved against your lifetime cap. Unknown billing holds that reservation and pauses future admission. Imported replays cannot be scheduled.",
             [
                 FieldSpec("name", "Schedule name"),
+                FieldSpec(
+                    "lifetime_budget_usd",
+                    "Cumulative schedule cap · USD",
+                    kind="number",
+                    minimum=0,
+                    value=str(self.selected.get("budget_usd", 0)),
+                ),
                 FieldSpec(
                     "interval_minutes",
                     "Interval · minutes",
@@ -1361,6 +1639,7 @@ class WorkbenchApp(App[None]):
                     values["name"],
                     values["interval_minutes"],
                     enabled=values["enabled"] == "enabled",
+                    lifetime_budget_usd=values["lifetime_budget_usd"],
                 ),
                 lambda result: self.schedule_saved(),
                 mutation=True,
@@ -1401,7 +1680,14 @@ class WorkbenchApp(App[None]):
                 options=[
                     ("Single structured-output request", "single-turn"),
                     ("Bounded tool-using harness", "tools"),
+                    ("External agent adapter", "external-agent"),
                 ],
+            ),
+            FieldSpec(
+                "adapter_revision",
+                "Adapter revision · external agent only",
+                value="1",
+                required=False,
             ),
             FieldSpec(
                 "max_steps",
@@ -1443,6 +1729,8 @@ class WorkbenchApp(App[None]):
 
         def submit(values: dict[str, Any]) -> None:
             payload = dict(values, kind="http")
+            if values["harness"] != "external-agent":
+                payload.pop("adapter_revision", None)
             self.request(
                 "Saving system",
                 partial(self.service.add_system, payload),
@@ -1464,6 +1752,8 @@ class WorkbenchApp(App[None]):
 
     def mutation_done(self, message: str) -> None:
         self.notify(message)
+        if self.page == "journey":
+            self._focus_after_load = True
         self.reload()
 
 

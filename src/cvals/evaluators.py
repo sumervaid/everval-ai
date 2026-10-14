@@ -138,7 +138,19 @@ def _grade(
                 raise EvaluationError("Verifier image must be pinned to a full SHA-256 image ID")
             grader_settings = replace(settings, sandbox_image=digest)
         try:
-            if "pytest" in expected:
+            if "node" in expected:
+                from cvals.node_runtime import run_node_tests
+
+                profile = expected["node"]
+                result = run_node_tests(
+                    {**base, **actual},
+                    profile["hidden_files"],
+                    profile["selectors"],
+                    grader_settings,
+                    profile.get("timeout_seconds", 60),
+                    profile["runner"],
+                )
+            elif "pytest" in expected:
                 profile = expected["pytest"]
                 result = run_repository_tests(
                     {**base, **actual},

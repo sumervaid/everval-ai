@@ -38,6 +38,8 @@ A narrow accepted subset is not a representative sample of all enterprise work. 
 | F6 | Recurring schedules |
 | F7 | Audit trail |
 | F8 | Workspace diagnostics |
+| F9 | Resumable guided runs |
+| F10 | Change-linked evaluations |
 | Ctrl+P | Search the command palette, including Collections |
 | Ctrl+N | Connect a repository |
 | Ctrl+R | Refresh the current page |
@@ -64,16 +66,22 @@ Use **Export** to write JSON, CSV, or readable HTML to the local workspace. Expo
 
 ## Reviews and recurring runs
 
-From a finalized trial, **Add review** records a dimension, score from zero to one, rationale, and reviewer label. Labels are self-reported rather than authenticated identities. Reviews are append-only, and automated scores remain separate. **Review history** retains earlier judgments.
+From a finalized trial, **Add review** records a dimension, score from zero to one, rationale, and reviewer label. These legacy local labels are self-reported. For authenticated assignments, frozen rubrics, and blinded comparisons, use the [browser review desk](team-review.md). Reviews are append-only, and automated scores remain separate. **Review history** retains earlier judgments.
 
-**Schedule** creates a recurrence from an experiment's frozen snapshot. The form defaults to **Paused** so you can inspect it before enabling. Each occurrence may spend the original experiment's full provider budget; there is no cumulative lifetime cap. Imported submission replays cannot be scheduled. Use **Schedules → Pause / enable** to change future admissions.
+**Schedule** creates a recurrence from an experiment's frozen snapshot. The form defaults to **Paused** so you can inspect it before enabling. Each occurrence reserves the original experiment's provider budget against an explicit cumulative lifetime cap. The default cap funds one occurrence. Uncertain charges retain their reservations. Imported submission replays cannot be scheduled. Use **Schedules → Pause / enable** to change future admissions.
 
 The interface displays durable execution state. A separate worker must be running to execute queued experiments and recurring schedules. Closing a view does not erase pending records. Follow the CLI launcher and [operations guide](operations.md) for the worker and tmux lifecycle.
 
 ## Local workspace boundaries
 
-Everval AI is a trusted, single-user local application. The terminal interface talks directly to the configured Python workbench adapter; it does not require the web server. Data stays in the configured local data directory unless you explicitly connect a source, invoke a provider, or copy an export. There is no telemetry or automatic result upload.
+The terminal is a trusted local operator interface. Optional browser team mode provides authenticated roles and assigned review queues. The terminal interface talks directly to the configured Python workbench adapter; it does not require the web server. Data stays in the configured local data directory unless you explicitly connect a source, invoke a provider, or copy an export. There is no telemetry or automatic result upload.
 
 Repository text and model output are displayed as data. Terminal control characters are removed from ordinary labels; complete JSON evidence escapes control characters. Repository hooks, install scripts, and candidate tests must never execute on the personal host. Unsupported execution policies fail closed in the shared backend.
 
 The application is built with [Textual](https://textual.textualize.io/). Long operations use background workers, and meaningful keyboard workflows are verified with Textual's headless pilot tests.
+
+## Guided and ongoing work
+
+Start at **F9 Guided runs** for a resumable repository-to-first-evaluation workflow. Each stage reflects actual retained evidence; a selected record alone does not mark a run complete. **F10 Change runs** links a frozen cohort to explicit commit/configuration fingerprints and deduplicates repeated triggers. See the [guided walkthrough](guided-run.md) and [change evaluation guide](change-evaluation.md).
+
+Experiment actions include failure triage, local regrading, economics, and a decision brief. Project health shows coverage denominators and gaps. Recurring schedules expose cumulative caps and retained digests.

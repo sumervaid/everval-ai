@@ -96,6 +96,9 @@ class Store:
             from cvals.audit import initialize_schema
 
             initialize_schema(connection)
+            from cvals.spend_limits import initialize_schema as initialize_spending
+
+            initialize_spending(connection)
         os.chmod(self.settings.database_path, 0o600)
 
     @staticmethod
@@ -275,6 +278,7 @@ class Store:
         parent_id: str | None = None,
     ) -> str:
         from cvals.benchmarks import assert_collection_admitted
+        from cvals.spend_limits import project_scope
 
         assert_collection_admitted(connection, collection)
         total = len(collection["scenarios"]) * len(systems) * request.repetitions
@@ -304,10 +308,11 @@ class Store:
             "systems": systems,
             "repetitions": request.repetitions,
             "budget_usd": request.budget_usd,
-            "harness_revision": "cvals/0.1.0",
+            "harness_revision": "everval/0.2.0",
             "grader_revision": "deterministic/1",
             "sandbox_image_requested": self.settings.sandbox_image,
             "protocol": "all scheduled trials; no automatic provider retries",
+            "budget_scope": project_scope(connection, collection),
         }
         if len(canonical_json(snapshot).encode()) > 128 * 1024 * 1024:
             raise ValueError("Experiment snapshot exceeds the 128 MiB limit")
@@ -660,6 +665,27 @@ class Store:
                 self._save_state(connection, state)
                 self._event(connection, id, "trial.budget_exceeded", {"trial_id": trial_id})
                 return trial
+            system = next(s for s in snapshot["systems"] if s["id"] == trial["system_id"])
+            if system["kind"] == "http":
+                from cvals.spend_limits import admit
+
+                blocked = admit(
+                    connection, id, trial_id, snapshot.get("budget_scope", "workspace"), reservation
+                )
+                if blocked:
+                    trial.update(
+                        status="budget_exceeded", error=blocked, finished_at=utc_now(), cost_usd=0.0
+                    )
+                    state["completed_trials"] += 1
+                    self._save_trial(connection, trial)
+                    self._save_state(connection, state)
+                    self._event(
+                        connection,
+                        id,
+                        "trial.cumulative_budget_exceeded",
+                        {"trial_id": trial_id, "reason": blocked},
+                    )
+                    return trial
             now = utc_now()
             trial.update(status="running", started_at=now, reserved_cost_usd=reservation)
             trial["attempts"].append(
@@ -711,6 +737,9 @@ class Store:
                 == "http"
             )
             if live_provider:
+                from cvals.spend_limits import settle
+
+                settle(connection, trial)
                 if trial["cost_usd"] is not None:
                     state["budget_committed_usd"] += trial["cost_usd"] - trial["reserved_cost_usd"]
                 elif trial["reserved_cost_usd"] > 0:

@@ -37,9 +37,9 @@ ssh -N -L 8765:127.0.0.1:8765 YOUR_HOST
 
 Then open http://127.0.0.1:8765 locally.
 
-Binding beyond loopback requires `EVERVAL_TOKEN`. Explicit hostnames must be added to `EVERVAL_ALLOWED_HOSTS`. Direct access and SSH tunnels are supported. The server disables proxy-header trust and checks the exact request origin, including scheme. A TLS-terminating proxy requires an explicitly designed and tested origin configuration; this release does not supply one. The browser stores its access token in session storage only.
+Binding beyond loopback requires a workspace token or enabled team authentication. Explicit hostnames must be added to `EVERVAL_ALLOWED_HOSTS`. Direct access and SSH tunnels are supported. The server disables proxy-header trust and checks the exact request origin, including scheme. A TLS-terminating proxy requires an explicitly designed and tested origin configuration; this release does not supply one. The browser stores its access token in session storage only.
 
-The service rejects cross-origin mutations and unexpected Host headers, caps upload bodies, and applies restrictive response headers. A workspace token grants workspace-wide access; it is not a substitute for multi-user roles or SSO.
+The service rejects cross-origin mutations and unexpected Host headers, caps upload bodies, and applies restrictive response headers. A legacy workspace token grants workspace-wide access. For shared browser use, bootstrap individual identities with `everval team bootstrap --name "Administrator"`; team mode then requires personal tokens and enforces roles. It does not provide SSO. See [team access](team-review.md).
 
 ## Storage
 
@@ -69,10 +69,10 @@ This release provides a local evaluation application. Distributed queues, organi
 
 ## Recurring evaluations
 
-Create a schedule from a recorded experiment. Every occurrence reuses that experiment's frozen collection, systems, repetition count, and **per-run** budget. There is no cumulative schedule spending cap; pause the schedule to stop future occurrences.
+Create a schedule from a recorded experiment. Every occurrence reuses that experiment's frozen collection, systems, repetition count, and **per-run** budget. A cumulative lifetime cap reserves every occurrence before admission; the default funds one occurrence. Configure it explicitly for longer operation, and pause the schedule to stop future occurrences.
 
 ```sh
-uv run everval schedules create EXPERIMENT_ID --name "Daily checks" --interval-minutes 1440 --paused
+uv run everval schedules create EXPERIMENT_ID --name "Daily checks" --interval-minutes 1440 --lifetime-budget 25 --paused
 uv run everval schedules resume SCHEDULE_ID
 uv run everval schedules list
 uv run everval schedules pause SCHEDULE_ID
@@ -82,7 +82,7 @@ The web service or standalone worker must remain running. The scheduler coalesce
 
 ## Human review
 
-Reviews are append-only judgments with a self-reported reviewer label. They retain prior revisions and an evidence fingerprint, and never replace automated outcomes.
+Legacy local reviews are append-only judgments with a self-reported reviewer label. Use [assigned browser reviews](team-review.md) for authenticated identities, frozen rubrics, and blinded comparisons. They retain prior revisions and an evidence fingerprint, and never replace automated outcomes.
 
 ```sh
 uv run everval reviews add EXPERIMENT_ID TRIAL_ID --reviewer "Reviewer" --dimension clarity --score 0.8 --rationale "Cites the relevant source but omits one qualification."
@@ -114,3 +114,9 @@ Model traces, private task bundles, full JSON exports, and audit details may con
 ## Local verification and CI gates
 
 Run `make check` and `make test` on the maintained machine. No hosted GitHub workflow is enabled by this repository. The `everval gate` command is suitable for a separately configured CI runner: passed exits zero; failed or inconclusive exits nonzero and retains the decision locally.
+
+## Cumulative cost and feedback
+
+Use `everval spending set --daily 25 --monthly 200` to replace workspace caps, or add `--scope project:PROJECT_ID` for a repository cap. Values are illustrative. Omitted periods become unlimited. Existing known charges count toward caps; uncertain attempts retain their reservations. API administrators can manage the same limits in the browser. See [cost accounting](cost-latency.md).
+
+Change-linked checks and weekly schedule digests remain local. GitHub polling is explicit and read-only; there are no automatic statuses or outbound notifications. [Production cases](production-cases.md) remain staged until an operator has authored and approved expected behavior and publication has validated the controls.

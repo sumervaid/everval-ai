@@ -17,6 +17,7 @@ import {
   Square,
   XCircle,
 } from 'lucide-react';
+import { EconomicView, FailureView } from './ExperimentValue';
 import { TrialReviews } from './Reviews';
 import { ScheduleForm } from './Schedules';
 import { SubmissionImport } from './SubmissionImport';
@@ -437,7 +438,9 @@ export function ExperimentDetail({ id, refresh }: { id: string; refresh: () => P
   const [busy, setBusy] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [scheduling, setScheduling] = useState(false);
-  const [tab, setTab] = useState<'results' | 'trials' | 'snapshot'>('results');
+  const [tab, setTab] = useState<'results' | 'trials' | 'snapshot' | 'economics' | 'failures'>(
+    'results',
+  );
   const [trialFilter, setTrialFilter] = useState('all');
   const [systemFilter, setSystemFilter] = useState('all');
   const [expanded, setExpanded] = useState('');
@@ -596,10 +599,18 @@ export function ExperimentDetail({ id, refresh }: { id: string; refresh: () => P
         <button role="tab" aria-selected={tab === 'trials'} onClick={() => setTab('trials')}>
           Trial evidence <span className="tab-count">{e.trials?.length ?? 0}</span>
         </button>
+        <button role="tab" aria-selected={tab === 'failures'} onClick={() => setTab('failures')}>
+          Failure inbox
+        </button>
+        <button role="tab" aria-selected={tab === 'economics'} onClick={() => setTab('economics')}>
+          Value analysis
+        </button>
         <button role="tab" aria-selected={tab === 'snapshot'} onClick={() => setTab('snapshot')}>
           Frozen configuration
         </button>
       </div>
+      {tab === 'failures' && <FailureView id={id} />}
+      {tab === 'economics' && <EconomicView id={id} />}
       {tab === 'results' &&
         (e.report ? (
           <ReportView report={e.report} systems={e.systems} />

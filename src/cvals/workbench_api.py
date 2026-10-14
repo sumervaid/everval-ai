@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, FastAPI, Query
 from pydantic import Field
@@ -35,6 +35,11 @@ class EnvironmentRequest(Manifest):
     packages: list[str] | None = Field(default=None, max_length=100)
     revision: str | None = Field(default=None, max_length=100)
     base_image: str | None = Field(default=None, max_length=300)
+    language: Literal["python", "javascript", "typescript"] = "python"
+    runner: Literal["node-test", "jest", "vitest"] = "node-test"
+    artifacts: list[Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")]] | None = Field(
+        default=None, max_length=200
+    )
 
 
 class GateRequest(Manifest):
@@ -46,7 +51,9 @@ class GateRequest(Manifest):
 class ProfileRequest(Manifest):
     image: str = Field(min_length=1, max_length=300)
     timeout_seconds: int = Field(default=60, ge=1, le=120)
-    plugins: list[str] | None = Field(default=None, max_length=30)
+    plugins: list[str] | None = Field(default=None, max_length=16)
+    runtime: Literal["python-pytest", "node-test", "jest", "vitest"] = "python-pytest"
+    language: Literal["python", "javascript", "typescript"] = "python"
 
 
 def register_workbench_routes(app: FastAPI, settings: Settings) -> None:
@@ -108,15 +115,17 @@ def register_workbench_routes(app: FastAPI, settings: Settings) -> None:
     def prepare(project_id: str, body: EnvironmentRequest) -> dict[str, Any]:
         # Admission parses dependencies before queuing any network operation.
         plan = workbench().environment_plan(project_id, **body.model_dump())
-        return enqueue(
-            "prepare",
-            {
-                "project_id": project_id,
-                "packages": body.packages,
-                "revision": plan["source_commit"],
-                "base_image": plan["base_image_digest"],
-            },
-        )
+        payload: dict[str, Any] = {
+            "project_id": project_id,
+            "packages": body.packages,
+            "revision": plan["source_commit"],
+            "base_image": plan["base_image_digest"],
+        }
+        if body.language != "python":
+            payload.update(language=body.language, runner=body.runner)
+        if body.artifacts:
+            payload["artifacts"] = body.artifacts
+        return enqueue("prepare", payload)
 
     @router.get("/releases")
     def releases(project_id: str | None = None) -> list[dict[str, Any]]:

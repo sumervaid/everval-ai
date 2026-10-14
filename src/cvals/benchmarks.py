@@ -34,7 +34,13 @@ def grader_hash() -> str:
     return content_hash(
         {
             name: (root / name).read_text(encoding="utf-8")
-            for name in ("benchmarks.py", "evaluators.py", "sandbox.py", "domains/mining.py")
+            for name in (
+                "benchmarks.py",
+                "evaluators.py",
+                "sandbox.py",
+                "node_runtime.py",
+                "domains/mining.py",
+            )
         }
     )
 
@@ -273,6 +279,9 @@ class Benchmarks:
         image: str,
         timeout_seconds: int = 60,
         plugins: list[str] | None = None,
+        *,
+        runtime: str = "python-pytest",
+        language: str = "python",
     ) -> dict[str, Any]:
         """Register a preinstalled pytest image; resolve its immutable local ID."""
         from cvals.sandbox import _image
@@ -280,6 +289,18 @@ class Benchmarks:
         self.projects.get(project_id)
         if type(timeout_seconds) is not int or not 1 <= timeout_seconds <= 120:
             raise ValueError("The repository test deadline must be 1–120 seconds")
+        from cvals.node_runtime import RUNNERS
+
+        if runtime not in {"python-pytest", *RUNNERS} or language not in {
+            "python",
+            "javascript",
+            "typescript",
+        }:
+            raise ValueError("Unsupported repository language or test runner")
+        if (runtime == "python-pytest") != (language == "python"):
+            raise ValueError("Python and Node profiles require a matching language and runner")
+        if runtime != "python-pytest" and plugins:
+            raise ValueError("Pytest plugins cannot be used with Node runners")
         plugins = plugins or []
         if len(plugins) > 16 or any(
             not isinstance(p, str) or not re.fullmatch(r"[A-Za-z_][\w.]{0,199}", p) for p in plugins
@@ -290,7 +311,9 @@ class Benchmarks:
             "id": new_id(),
             "project_id": project_id,
             "candidate_id": None,
-            "kind": "prepared-pytest",
+            "kind": "prepared-pytest" if runtime == "python-pytest" else "prepared-node",
+            "runner": runtime,
+            "language": language,
             "image_digest": digest,
             "requested_image": image,
             "timeout_seconds": timeout_seconds,
@@ -298,7 +321,7 @@ class Benchmarks:
             "max_files": 2048,
             "max_bytes": 16 * 1024 * 1024,
             "created_at": utc_now(),
-            "integrity_mode": "same-process pytest; not resistant to deliberate grader manipulation",
+            "integrity_mode": f"same-process {runtime}; not resistant to deliberate grader manipulation",
             "network": "none",
             "installs": "none",
         }
@@ -382,7 +405,54 @@ class Benchmarks:
         base_all, fixed_all = before["files"], after["files"]
         digest = profile["image_digest"] if profile else _image(self.settings)
         checks: list[Check] = []
-        if profile:
+        if profile and profile["kind"] == "prepared-node":
+            from cvals.node_runtime import hidden as node_hidden
+            from cvals.node_runtime import is_test, validate_source
+
+            base = {path: text for path, text in base_all.items() if not node_hidden(path)}
+            fixed = {path: text for path, text in fixed_all.items() if not node_hidden(path)}
+            historical = sorted(
+                path
+                for path, text in fixed_all.items()
+                if is_test(path) and base_all.get(path) != text
+            )
+            regression = sorted(
+                path
+                for path, text in base_all.items()
+                if is_test(path) and fixed_all.get(path) == text
+            )
+            if not historical or not regression:
+                raise ValueError(
+                    "Node admission requires changed/new test files and separate unchanged regression test files"
+                )
+            if len(historical) > 500 or len(regression) > 500:
+                raise ValueError("More than 500 selected Node test files")
+            for phase, selectors, source in (
+                ("historical", historical, fixed_all),
+                ("regression", regression, base_all),
+            ):
+                checks.append(
+                    Check(
+                        id=phase,
+                        name=phase.title(),
+                        kind="repository_tests",
+                        path="files",
+                        expected={
+                            "image_digest": digest,
+                            "phase": phase,
+                            "node": {
+                                "hidden_files": {p: t for p, t in source.items() if node_hidden(p)},
+                                "selectors": selectors,
+                                "runner": profile["runner"],
+                                "timeout_seconds": profile["timeout_seconds"],
+                            },
+                        },
+                    )
+                )
+            validate_source(base)
+            validate_source(fixed)
+            integrity = profile["integrity_mode"]
+        elif profile:
             base = {path: text for path, text in base_all.items() if not _hidden(path)}
             fixed = {path: text for path, text in fixed_all.items() if not _hidden(path)}
             old_tests, new_tests = _test_nodes(base_all), _test_nodes(fixed_all)
@@ -523,13 +593,17 @@ class Benchmarks:
                 "files": base,
                 "environment": {
                     "image_digest": digest,
-                    "kind": "prepared-pytest" if profile else "python-function-cases",
+                    "kind": profile["kind"] if profile else "python-function-cases",
                     "integrity_mode": integrity,
                 },
             },
             reference_output={"files": fixed, "replace_files": True},
             checks=checks,
-            tags=["historical", "python", "prepared-pytest" if profile else "function-cases"],
+            tags=[
+                "historical",
+                profile.get("language", "python") if profile else "python",
+                profile["kind"] if profile else "function-cases",
+            ],
             provenance={
                 "origin": "historical_benchmark",
                 "project_id": candidate["project_id"],
@@ -811,7 +885,7 @@ class Benchmarks:
                     "excluded": excluded,
                     "split_policy": "sha256(project_id:PR number or local reference SHA), integer first 8 hex modulo 5; zero=holdout",
                     "holdout_only": not partitions["dev"],
-                    "notice": "Three identical fresh controls screen obvious flakiness; they do not prove determinism. Same-process pytest is not tamper resistant.",
+                    "notice": "Three identical fresh controls screen obvious flakiness; they do not prove determinism. Same-process repository test runners are not tamper resistant.",
                 }
                 try:
                     connection.execute(

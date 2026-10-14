@@ -14,7 +14,14 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 Domain = Literal["coding", "documents", "data", "workflow"]
 CheckKind = Literal[
-    "equals", "contains", "numeric", "json_schema", "citation", "forbidden", "python_tests"
+    "equals",
+    "contains",
+    "numeric",
+    "json_schema",
+    "citation",
+    "forbidden",
+    "python_tests",
+    "repository_tests",
 ]
 Identifier = str
 MAX_MANIFEST_BYTES = 64 * 1024 * 1024
@@ -108,6 +115,16 @@ class Check(Manifest):
             isinstance(self.expected, bool) or not isinstance(self.expected, (int, float))
         ):
             raise ValueError("Numeric checks require a numeric expected value")
+        if self.kind == "repository_tests":
+            node = self.expected.get("node") if isinstance(self.expected, dict) else None
+            if (
+                not isinstance(node, dict)
+                or node.get("runner") not in {"node-test", "jest", "vitest"}
+                or not isinstance(node.get("selectors"), list)
+                or not node["selectors"]
+                or not all(isinstance(s, str) and s.strip() for s in node["selectors"])
+            ):
+                raise ValueError("Repository checks require a Node runner and nonempty selectors")
         if self.kind == "python_tests":
             if not isinstance(self.expected, dict):
                 raise ValueError("Python checks require a verifier object")
@@ -207,7 +224,10 @@ class System(Manifest):
     base_url: str = Field(default="", max_length=2000)
     api_key_env: str = Field(default="", max_length=128)
     temperature: float | None = Field(default=None, ge=0, le=2)
-    harness: Literal["single-turn", "tools"] = "single-turn"
+    harness: Literal["single-turn", "tools", "external-agent"] = "single-turn"
+    adapter_revision: str = Field(default="", max_length=200)
+    adapter_input_token_limit: int = Field(default=131072, ge=1, le=100000000)
+    adapter_output_token_limit: int = Field(default=32768, ge=1, le=100000000)
     max_steps: int = Field(default=8, ge=1, le=30)
     max_tokens: int = Field(default=2048, ge=1, le=32768)
     input_cost_per_million: float | None = Field(default=None, ge=0, le=100000)
@@ -230,6 +250,10 @@ class System(Manifest):
 
         if self.api_key_env and not re.fullmatch(r"[A-Z_][A-Z0-9_]*", self.api_key_env):
             raise ValueError("api_key_env must be an environment variable name, not a key")
+        if self.harness == "external-agent" and (
+            self.kind != "http" or not self.adapter_revision.strip()
+        ):
+            raise ValueError("External agents require an HTTP system and a pinned adapter revision")
         if self.kind == "http":
             url = urlsplit(self.base_url)
             if url.port is not None and not 1 <= url.port <= 65535:

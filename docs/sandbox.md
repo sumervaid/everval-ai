@@ -86,7 +86,12 @@ status. Collection errors, missing dependencies, skipped tests, zero tests and
 resource failures cannot establish admission. Same-process pytest does not resist
 deliberate grader manipulation. See [benchmark admission](benchmarks.md).
 
-Tool-using systems execute public Python snippets in fresh containers containing
+[Prepared Node profiles](javascript-typescript.md) use the same container
+restrictions with explicit Node/Jest/Vitest test selections and reconciled reports.
+Node test files must collect nonempty, stable cases. Dependency preparation is
+separate from grading.
+
+Tool-using systems execute public Python or Node snippets in fresh containers containing
 only public source and the snippet. Private grading material is introduced only
 for the separate evaluator. A complete submission can set replace_files to true
 to preserve deletions; otherwise files are partial replacements over the base.

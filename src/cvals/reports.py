@@ -71,7 +71,19 @@ def build_report(experiment: dict[str, Any]) -> dict[str, Any]:
         durations = [r["duration_ms"] for r in rows if r.get("duration_ms") is not None]
         costs = [r.get("cost_usd") for r in rows]
         cost_complete = bool(rows) and all(cost is not None for cost in costs)
-        known_cost = sum(cost for cost in costs if cost is not None)
+        partial_costs = [
+            row.get("provider_metadata", {}).get("known_cost_usd")
+            for row in rows
+            if row.get("cost_usd") is None
+        ]
+        known_cost = sum(cost for cost in costs if cost is not None) + sum(
+            cost
+            for cost in partial_costs
+            if isinstance(cost, (int, float))
+            and not isinstance(cost, bool)
+            and math.isfinite(cost)
+            and cost >= 0
+        )
         total_cost = known_cost if cost_complete else None
         scores = [r["score"] for r in completed if r.get("score") is not None]
         systems.append(
@@ -97,6 +109,32 @@ def build_report(experiment: dict[str, Any]) -> dict[str, Any]:
                 "cost_complete": cost_complete,
                 "cost_per_pass": total_cost / passed if passed and total_cost is not None else None,
                 "duration_scope": "all attempts with recorded duration, including errors",
+                "timings": {
+                    stage: {
+                        "recorded": len(values),
+                        "scheduled": n,
+                        "median_ms": median(values) if values else None,
+                        "p95_ms": _percentile(values, 0.95),
+                        "total_ms": sum(values) if values else None,
+                    }
+                    for stage in (
+                        "submission_ms",
+                        "provider_ms",
+                        "tool_ms",
+                        "grading_ms",
+                        "total_ms",
+                    )
+                    for values in [
+                        [
+                            r["timing"][stage]
+                            for r in rows
+                            if isinstance(r.get("timing", {}).get(stage), (int, float))
+                            and not isinstance(r["timing"][stage], bool)
+                            and math.isfinite(r["timing"][stage])
+                            and r["timing"][stage] >= 0
+                        ]
+                    ]
+                },
                 "median_duration_ms": median(durations) if durations else None,
                 "p95_duration_ms": _percentile(durations, 0.95),
             }

@@ -3,7 +3,13 @@ export interface Check {
   id: string;
   name: string;
   kind:
-    'equals' | 'contains' | 'numeric' | 'json_schema' | 'citation' | 'forbidden' | 'python_tests';
+    | 'equals'
+    | 'contains'
+    | 'numeric'
+    | 'json_schema'
+    | 'citation'
+    | 'forbidden'
+    | 'python_tests';
   path: string;
   expected: unknown;
   weight: number;
@@ -45,6 +51,8 @@ export interface System {
   input_cost_per_million: number | null;
   output_cost_per_million: number | null;
   configured?: boolean;
+  harness?: 'single-turn' | 'tools' | 'external-agent';
+  adapter_revision?: string;
 }
 export interface CheckResult {
   id: string;

@@ -20,7 +20,8 @@ benchmarks = typer.Typer(
 jobs = typer.Typer(no_args_is_help=True, help="Inspect durable repository jobs.")
 audit = typer.Typer(no_args_is_help=True, help="Inspect the local audit chain.")
 environments = typer.Typer(
-    no_args_is_help=True, help="Prepare isolated Python dependency environments."
+    no_args_is_help=True,
+    help="Prepare isolated Python, JavaScript and TypeScript dependency environments.",
 )
 app.add_typer(projects, name="projects")
 app.add_typer(benchmarks, name="benchmarks")
@@ -126,25 +127,65 @@ def profile(
     image: str,
     timeout: Annotated[int, typer.Option(min=1, max=120)] = 60,
     plugin: Annotated[list[str] | None, typer.Option("--plugin")] = None,
+    language: str = "python",
+    runtime: str = "python-pytest",
 ) -> None:
-    """Pin an already-local Python/pytest image and explicit plugin modules."""
-    call("add_project_profile", project_id, image, timeout, plugin)
+    """Pin an already-local Python or Node test runtime and explicit language."""
+    call(
+        "add_project_profile",
+        project_id,
+        image,
+        timeout,
+        plugin,
+        language=language,
+        runtime=runtime,
+    )
 
 
 @environments.command("plan")
 def plan_environment(
-    project_id: str, package: Annotated[list[str] | None, typer.Option("--package")] = None
+    project_id: str,
+    package: Annotated[list[str] | None, typer.Option("--package")] = None,
+    language: str = "python",
+    runner: str = "node-test",
+    artifact: Annotated[list[str] | None, typer.Option("--artifact")] = None,
+    base_image: str | None = None,
+    revision: str | None = None,
 ) -> None:
-    """Inspect declared dependencies and preparation constraints before download."""
-    call("environment_plan", project_id, package)
+    """Review Python wheels or committed npm lock dependencies before isolated preparation."""
+    call(
+        "environment_plan",
+        project_id,
+        package,
+        revision,
+        base_image,
+        language=language,
+        runner=runner,
+        artifacts=artifact,
+    )
 
 
 @environments.command("prepare")
 def prepare_environment(
-    project_id: str, package: Annotated[list[str] | None, typer.Option("--package")] = None
+    project_id: str,
+    package: Annotated[list[str] | None, typer.Option("--package")] = None,
+    language: str = "python",
+    runner: str = "node-test",
+    artifact: Annotated[list[str] | None, typer.Option("--artifact")] = None,
+    base_image: str | None = None,
+    revision: str | None = None,
 ) -> None:
-    """Prepare wheel dependencies in Docker; network is used only for dependency download."""
-    call("prepare_environment", project_id, package)
+    """Prepare reviewed wheels or npm archives in Docker; repository install scripts stay disabled."""
+    call(
+        "prepare_environment",
+        project_id,
+        package,
+        revision,
+        base_image,
+        language=language,
+        runner=runner,
+        artifacts=artifact,
+    )
 
 
 @benchmarks.command("release")

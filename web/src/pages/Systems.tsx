@@ -13,6 +13,11 @@ const initialForm = {
   temperature: '',
   token_limit_field: 'max_completion_tokens',
   max_tokens: '4096',
+  harness: 'single-turn',
+  max_steps: '8',
+  adapter_revision: '',
+  adapter_input_token_limit: '131072',
+  adapter_output_token_limit: '32768',
   input_cost_per_million: '',
   output_cost_per_million: '',
 };
@@ -36,6 +41,11 @@ export function SystemsPage({
         ...form,
         temperature: form.temperature === '' ? null : Number(form.temperature),
         max_tokens: Number(form.max_tokens),
+        harness: form.kind === 'http' ? form.harness : 'single-turn',
+        max_steps: Number(form.max_steps),
+        adapter_revision: form.harness === 'external-agent' ? form.adapter_revision : '',
+        adapter_input_token_limit: Number(form.adapter_input_token_limit),
+        adapter_output_token_limit: Number(form.adapter_output_token_limit),
         input_cost_per_million:
           form.input_cost_per_million === '' ? null : Number(form.input_cost_per_million),
         output_cost_per_million:
@@ -121,10 +131,76 @@ export function SystemsPage({
             {form.kind === 'http' ? (
               <>
                 <div className="form-grid">
+                  <Field label="Execution harness">
+                    <select
+                      value={form.harness}
+                      onChange={(event) => setForm({ ...form, harness: event.target.value })}
+                    >
+                      <option value="single-turn">Single structured response</option>
+                      <option value="tools">Bounded coding tools</option>
+                      <option value="external-agent">Existing agent adapter</option>
+                    </select>
+                  </Field>
+                  {form.harness === 'tools' && (
+                    <Field label="Maximum tool steps">
+                      <input
+                        type="number"
+                        required
+                        min={1}
+                        max={30}
+                        value={form.max_steps}
+                        onChange={(event) => setForm({ ...form, max_steps: event.target.value })}
+                      />
+                    </Field>
+                  )}
+                </div>
+                {form.harness === 'external-agent' && (
+                  <div className="form-grid">
+                    <Field label="Pinned adapter revision">
+                      <input
+                        required
+                        maxLength={200}
+                        value={form.adapter_revision}
+                        onChange={(event) =>
+                          setForm({ ...form, adapter_revision: event.target.value })
+                        }
+                      />
+                    </Field>
+                    <Field label="Adapter input token limit">
+                      <input
+                        type="number"
+                        required
+                        min={1}
+                        max={100000000}
+                        value={form.adapter_input_token_limit}
+                        onChange={(event) =>
+                          setForm({ ...form, adapter_input_token_limit: event.target.value })
+                        }
+                      />
+                    </Field>
+                    <Field label="Adapter output token limit">
+                      <input
+                        type="number"
+                        required
+                        min={1}
+                        max={100000000}
+                        value={form.adapter_output_token_limit}
+                        onChange={(event) =>
+                          setForm({ ...form, adapter_output_token_limit: event.target.value })
+                        }
+                      />
+                    </Field>
+                  </div>
+                )}
+                <div className="form-grid">
                   <Field
                     label="Base URL"
                     required
-                    hint="API base ending in /v1, for example http://localhost:11434/v1."
+                    hint={
+                      form.harness === 'external-agent'
+                        ? 'Adapter service base URL. The service must implement the Everval task protocol.'
+                        : 'API base ending in /v1, for example http://localhost:11434/v1.'
+                    }
                   >
                     <input
                       required
@@ -217,9 +293,13 @@ export function SystemsPage({
                   </Field>
                 </div>
                 <Notice>
-                  Each request contains the public scenario instruction and inputs, and asks for a
-                  JSON object. Confirm your endpoint supports this response format. Remote endpoints
-                  require service opt-in, pricing, and a positive experiment budget.
+                  {form.harness === 'external-agent'
+                    ? 'The adapter receives public task material and must return the pinned revision, submission, and usage accounting. Internal tool behavior belongs to your adapter.'
+                    : form.harness === 'tools'
+                      ? 'The bounded tool loop operates on public task files. Hidden checks stay in the evaluator.'
+                      : 'Each request contains public task instructions and inputs, and asks for a JSON object.'}{' '}
+                  Remote endpoints require service opt-in, pricing, and a positive experiment
+                  budget.
                 </Notice>
               </>
             ) : (

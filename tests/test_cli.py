@@ -10,7 +10,7 @@ runner = CliRunner()
 def test_version():
     result = runner.invoke(app, ["--version"])
     assert result.exit_code == 0, result.output
-    assert "0.1.0" in result.output
+    assert "0.2.0" in result.output
 
 
 def test_init_and_fixture_workflow(tmp_path, monkeypatch):

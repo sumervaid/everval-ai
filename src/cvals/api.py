@@ -31,6 +31,13 @@ from cvals import __version__
 from cvals.config import Settings
 from cvals.engine import Engine
 from cvals.exporting import export_experiment
+from cvals.identity import (
+    IdentityStore,
+    Principal,
+    _request_actor,
+    register_capability,
+    route_capability,
+)
 from cvals.models import Collection, ExperimentCreate, ReplaySubmission, System, content_hash
 from cvals.reviews import ReviewStore
 from cvals.schedules import ScheduleStore
@@ -66,11 +73,12 @@ class ReviewRequest(BaseModel):
 
 
 class ScheduleRequest(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
     name: str = Field(min_length=1, max_length=200)
     experiment_id: str = Field(min_length=1, max_length=128)
     interval_minutes: int = Field(ge=5, le=525600)
     enabled: bool = True
+    lifetime_budget_usd: float | None = Field(default=None, ge=0, le=1000000)
 
 
 class ScheduleUpdate(BaseModel):
@@ -148,6 +156,7 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
     store.init()
     worker = Worker(store, settings)
     reviews = ReviewStore(settings)
+    identities = IdentityStore(settings)
 
     @asynccontextmanager
     async def lifespan(_: FastAPI) -> AsyncIterator[None]:
@@ -167,9 +176,17 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
     app.state.store = store
     app.state.worker = worker
     app.state.settings = settings
+    app.state.identities = identities
+    app.state.capabilities = {}
     from cvals.workbench_api import register_workbench_routes
 
     register_workbench_routes(app, settings)
+    from cvals.team_api import register_team_routes
+
+    register_team_routes(app, settings)
+    from cvals.experience_api import register_experience_routes
+
+    register_experience_routes(app, settings)
     hosts = ["localhost", "127.0.0.1", "::1", "[::1]", "testserver"]
     hosts.extend(
         h.strip()
@@ -192,15 +209,39 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
                     )
             except ValueError:
                 return JSONResponse({"detail": "Invalid Content-Length."}, status_code=400)
-        if request.url.path.startswith("/api/") and request.url.path != "/api/health":
-            if settings.token:
+        who = Principal("local-console", "Local operator", "admin", "local")
+        is_api = request.url.path == "/api" or request.url.path.startswith("/api/")
+        public_health = request.url.path == "/api/health" and request.method == "GET"
+        if is_api and not public_health:
+            if await run_in_threadpool(identities.enabled):
+                authorization = request.headers.get("authorization", "")
+                token = authorization[7:] if authorization.startswith("Bearer ") else ""
+                authenticated = await run_in_threadpool(identities.authenticate, token)
+                if authenticated is None:
+                    return JSONResponse(
+                        {"detail": "A valid personal access token is required."},
+                        status_code=401,
+                        headers={"WWW-Authenticate": "Bearer", "Cache-Control": "no-store"},
+                    )
+                who = authenticated
+                capability = route_capability(app, request)
+                if capability is None or not who.permits(capability):
+                    return JSONResponse(
+                        {"detail": "This identity cannot access this endpoint."},
+                        status_code=403,
+                        headers={"Cache-Control": "no-store"},
+                    )
+            elif settings.token:
                 provided = request.headers.get("authorization", "")
                 if not hmac.compare_digest(
                     provided.encode("utf-8"), ("Bearer " + settings.token).encode("utf-8")
                 ):
                     return JSONResponse(
-                        {"detail": "A workspace access token is required."}, status_code=401
+                        {"detail": "A workspace access token is required."},
+                        status_code=401,
+                        headers={"WWW-Authenticate": "Bearer", "Cache-Control": "no-store"},
                     )
+                who = Principal("legacy-token", "Workspace operator", "admin", "legacy")
             if request.method not in {"GET", "HEAD", "OPTIONS"}:
                 origin = request.headers.get("origin")
                 host = request.headers.get("host", "")
@@ -234,7 +275,12 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
                     return JSONResponse(
                         {"detail": "Use JSON or a multipart upload."}, status_code=415
                     )
-        response: Response = await call_next(request)
+        request.state.principal = who
+        context = _request_actor.set(who.id if who.mode == "team" else None)
+        try:
+            response: Response = await call_next(request)
+        finally:
+            _request_actor.reset(context)
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Referrer-Policy"] = "no-referrer"
         response.headers["X-Frame-Options"] = "DENY"
@@ -386,7 +432,11 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
     @app.post("/api/schedules", status_code=201)
     def create_schedule(body: ScheduleRequest) -> dict[str, Any]:
         return worker.schedules.create(
-            body.name, body.experiment_id, body.interval_minutes, body.enabled
+            body.name,
+            body.experiment_id,
+            body.interval_minutes,
+            body.enabled,
+            lifetime_budget_usd=body.lifetime_budget_usd,
         )
 
     @app.patch("/api/schedules/{schedule_id}")
@@ -496,6 +546,10 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
         async def stream() -> AsyncIterator[str]:
             cursor = after
             while not await request.is_disconnected():
+                if await run_in_threadpool(identities.enabled) and not await run_in_threadpool(
+                    identities.active, request.state.principal
+                ):
+                    return
                 batch = await run_in_threadpool(store.events, experiment_id, cursor)
                 if batch:
                     for event in batch:
@@ -528,8 +582,64 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
             "docker_available": docker_available(settings),
             "remote_providers_enabled": settings.allow_remote_providers,
             "worker_running": worker.running,
-            "auth_enabled": bool(settings.token),
+            "auth_enabled": bool(settings.token) or identities.enabled(),
         }
+
+    for path in (
+        "/api/schema",
+        "/api/overview",
+        "/api/collections",
+        "/api/collections/{collection_id}",
+        "/api/collections/{collection_id}/agent-view",
+        "/api/schedules",
+        "/api/systems",
+        "/api/experiments",
+        "/api/experiments/{experiment_id}",
+        "/api/experiments/{experiment_id}/reviews",
+        "/api/experiments/{experiment_id}/export",
+        "/api/experiments/{experiment_id}/events",
+        "/api/settings",
+        "/api/projects",
+        "/api/projects/{project_id}/candidates",
+        "/api/projects/{project_id}/profile",
+        "/api/releases",
+        "/api/jobs",
+        "/api/jobs/{job_id}",
+        "/api/audit",
+        "/api/audit/verify",
+        "/api/experiments/{experiment_id}/gates",
+        "/api/compare",
+    ):
+        register_capability(app, "GET", path, "workspace.read")
+    for path in (
+        "/api/collections",
+        "/api/collections/{collection_id}/validate",
+        "/api/starters",
+        "/api/import",
+        "/api/sources",
+        "/api/repositories/inspect",
+        "/api/repositories/mine",
+        "/api/schedules",
+        "/api/systems",
+        "/api/submissions",
+        "/api/experiments",
+        "/api/experiments/{experiment_id}/reviews",
+        "/api/experiments/{experiment_id}/cancel",
+        "/api/experiments/{experiment_id}/rerun",
+        "/api/projects",
+        "/api/projects/{project_id}/discover",
+        "/api/projects/{project_id}/candidates/{candidate_id}/review",
+        "/api/projects/{project_id}/candidates/{candidate_id}/validate",
+        "/api/projects/{project_id}/profile",
+        "/api/projects/{project_id}/environment/plan",
+        "/api/projects/{project_id}/environment/prepare",
+        "/api/projects/{project_id}/releases",
+        "/api/experiments/{experiment_id}/gates",
+    ):
+        register_capability(app, "POST", path, "workspace.write")
+    register_capability(app, "PATCH", "/api/schedules/{schedule_id}", "workspace.write")
+    register_capability(app, "DELETE", "/api/collections/{collection_id}", "workspace.write")
+    register_capability(app, "DELETE", "/api/systems/{system_id}", "workspace.write")
 
     static = Path(__file__).parent / "static"
     if static.is_dir():

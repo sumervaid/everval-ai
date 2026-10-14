@@ -429,3 +429,93 @@ def test_total_deadline_prevents_followup_call_after_a_tool(
     result = submit(scenario, system, Settings(tmp_path), 10)
     assert len(captured) == 1 and "deadline" in result.error
     assert result.cost_usd == pytest.approx(0.00004)
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "package.json",
+        "package-lock.json",
+        "vitest.config.js",
+        "math.test.ts",
+        "__tests__/helper.js",
+        "node_modules/helper.js",
+    ],
+)
+def test_node_workspace_cannot_override_frozen_grader_paths(scenario, tmp_path, path):
+    scenario.inputs = {
+        "files": {"solution.ts": "export const total = (xs: number[]) => xs.length;"},
+        "environment": {"kind": "prepared-node", "image_digest": DIGEST},
+    }
+    workspace = PublicWorkspace(scenario, Settings(tmp_path))
+    with pytest.raises(ValueError, match="frozen"):
+        workspace.dispatch("write_file", {"path": path, "content": ""}, 30)
+    with pytest.raises(ValueError, match="run_node"):
+        workspace.dispatch("run_python", {"code": "print(1)"}, 30)
+
+
+def test_node_tool_dispatch_uses_only_public_snapshot(scenario, tmp_path, monkeypatch):
+    scenario.inputs = {
+        "files": {"solution.js": "exports.value=7;"},
+        "environment": {"kind": "prepared-node", "image_digest": DIGEST},
+    }
+    captured = []
+
+    def execute(files, grade, settings, timeout_seconds, **options):
+        captured.append((files, grade, settings, timeout_seconds, options))
+        return {"output": "7", "exit_code": 0, "image_digest": settings.sandbox_image}
+
+    monkeypatch.setattr("cvals.agent_runner._execute", execute)
+    workspace = PublicWorkspace(scenario, Settings(tmp_path))
+    result = workspace.dispatch(
+        "run_node", {"code": "console.log(require('./solution.js').value)"}, 9.5
+    )
+    assert result["output"] == "7"
+    files, grade, settings, timeout, options = captured[0]
+    assert files == scenario.inputs["files"] and set(grade) == {"runner.mjs"}
+    assert options["command"] == ["node", "/grade/runner.mjs"] and options["repository_mode"]
+    assert timeout == 9 and settings.sandbox_image == DIGEST
+    assert "CANARY_" not in canonical_json([files, grade])
+
+
+def test_node_provider_only_receives_matching_execution_tool(
+    scenario, system, tmp_path, monkeypatch
+):
+    scenario.inputs = {
+        "files": {"solution.js": "exports.value=7;"},
+        "environment": {"kind": "prepared-node", "image_digest": DIGEST},
+    }
+    captured = []
+    transport(monkeypatch, [response()], captured)
+    assert submit(scenario, system, Settings(tmp_path), 10).error is None
+    tools = {item["function"]["name"] for item in captured[0]["tools"]}
+    assert "run_node" in tools and "run_python" not in tools
+    assert "CANARY_" not in canonical_json(captured)
+
+
+@pytest.mark.sandbox
+@pytest.mark.skipif(os.environ.get("CVALS_TEST_NODE") != "1", reason="Requires prepared Node image")
+def test_live_node_tool_can_import_public_source_without_private_grader(scenario, tmp_path):
+    from cvals.sandbox import _image
+
+    settings = replace(
+        Settings.from_env(), data_dir=tmp_path / "data", sandbox_image="node:24-slim"
+    )
+    scenario.inputs = {
+        "files": {"solution.js": "exports.value=7;"},
+        "environment": {"kind": "prepared-node", "image_digest": _image(settings)},
+    }
+    workspace = PublicWorkspace(scenario, settings)
+    result = workspace.dispatch(
+        "run_node",
+        {
+            "code": "const fs=require('node:fs'); console.log(JSON.stringify({value:require('./solution.js').value,grade:fs.readdirSync('/grade'),git:fs.existsSync('/workspace/.git')}));"
+        },
+        30,
+    )
+    assert result["exit_code"] == 0, result
+    assert json.loads(result["output"].strip()) == {
+        "value": 7,
+        "grade": ["runner.mjs"],
+        "git": False,
+    }

@@ -333,7 +333,11 @@ def _execute(
     timeout_seconds: int,
     *,
     repository_mode: bool = False,
+    command: list[str] | None = None,
 ) -> dict[str, Any]:
+    command = command or ["python", "-I", "-B", "/grade/runner.py"]
+    if command not in (["python", "-I", "-B", "/grade/runner.py"], ["node", "/grade/runner.mjs"]):
+        raise ValueError("Unknown trusted verifier entrypoint")
     validate_files(files, repository_mode=repository_mode)
     if type(timeout_seconds) is not int or not 1 <= timeout_seconds <= 120:
         raise ValueError("The verifier deadline must be between 1 and 120 seconds")
@@ -362,8 +366,8 @@ def _execute(
                 "--cap-drop=ALL",
                 "--security-opt=no-new-privileges",
                 digest,
-                "python",
-                "-V",
+                command[0],
+                "--version",
             ],
             settings,
         )
@@ -417,10 +421,7 @@ def _execute(
                 "--env=PYTHONHASHSEED=0",
                 "--log-driver=none",
                 task_image,
-                "python",
-                "-I",
-                "-B",
-                "/grade/runner.py",
+                *command,
             ],
             settings,
         )

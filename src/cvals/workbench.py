@@ -87,8 +87,13 @@ class Workbench:
         image: str,
         timeout_seconds: int = 60,
         plugins: list[str] | None = None,
+        *,
+        runtime: str = "python-pytest",
+        language: str = "python",
     ) -> dict[str, Any]:
-        return self._benchmarks.configure(project_id, image, timeout_seconds, plugins)
+        return self._benchmarks.configure(
+            project_id, image, timeout_seconds, plugins, runtime=runtime, language=language
+        )
 
     def project_profile(self, project_id: str) -> dict[str, Any] | None:
         return self._benchmarks.profile(project_id)
@@ -99,11 +104,21 @@ class Workbench:
         packages: list[str] | None = None,
         revision: str | None = None,
         base_image: str | None = None,
+        *,
+        language: str = "python",
+        runner: str = "node-test",
+        artifacts: list[str] | None = None,
     ) -> dict[str, Any]:
         from cvals.environments import Environments
 
         return Environments(self.settings).plan(
-            project_id, packages=packages, revision=revision, base_image=base_image
+            project_id,
+            packages=packages,
+            revision=revision,
+            base_image=base_image,
+            language=language,
+            runner=runner,
+            artifacts=artifacts,
         )
 
     def prepare_environment(
@@ -112,17 +127,31 @@ class Workbench:
         packages: list[str] | None = None,
         revision: str | None = None,
         base_image: str | None = None,
+        *,
+        language: str = "python",
+        runner: str = "node-test",
+        artifacts: list[str] | None = None,
     ) -> dict[str, Any]:
-        plan = self.environment_plan(project_id, packages, revision, base_image)
-        return self._job(
-            "prepare",
-            {
-                "project_id": project_id,
-                "packages": packages,
-                "revision": plan["source_commit"],
-                "base_image": plan["base_image_digest"],
-            },
+        plan = self.environment_plan(
+            project_id,
+            packages,
+            revision,
+            base_image,
+            language=language,
+            runner=runner,
+            artifacts=artifacts,
         )
+        payload: dict[str, Any] = {
+            "project_id": project_id,
+            "packages": packages,
+            "revision": plan["source_commit"],
+            "base_image": plan["base_image_digest"],
+        }
+        if language != "python":
+            payload.update(language=language, runner=runner)
+        if artifacts:
+            payload["artifacts"] = artifacts
+        return self._job("prepare", payload)
 
     def release(self, project_id: str, name: str) -> dict[str, Any]:
         return self._benchmarks.release(project_id, name)
@@ -214,10 +243,19 @@ class Workbench:
         return ScheduleStore(self.settings, self.store).list()
 
     def add_schedule(
-        self, experiment_id: str, name: str, interval_minutes: int, enabled: bool = True
+        self,
+        experiment_id: str,
+        name: str,
+        interval_minutes: int,
+        enabled: bool = True,
+        lifetime_budget_usd: float | None = None,
     ) -> dict[str, Any]:
         result = ScheduleStore(self.settings, self.store).create(
-            name, experiment_id, interval_minutes, enabled
+            name,
+            experiment_id,
+            interval_minutes,
+            enabled,
+            lifetime_budget_usd=lifetime_budget_usd,
         )
         return result
 
@@ -257,4 +295,33 @@ class Workbench:
             policy,
             self.store.get_experiment(baseline_id) if baseline_id else None,
             policy_id=policy_id,
+        )
+
+    def triage(self, experiment_id: str) -> dict[str, Any]:
+        from cvals.diagnostics import Diagnostics
+
+        return Diagnostics(self.settings).triage(experiment_id)
+
+    def diagnose(self, experiment_id: str, trial_id: str) -> dict[str, Any]:
+        from cvals.diagnostics import Diagnostics
+
+        return Diagnostics(self.settings).diagnose(experiment_id, trial_id)
+
+    def regrade(self, experiment_id: str, trial_id: str) -> dict[str, Any]:
+        from cvals.diagnostics import Diagnostics
+
+        return Diagnostics(self.settings).regrade(experiment_id, trial_id)
+
+    def economics(self, experiment_id: str) -> dict[str, Any]:
+        from cvals.economics import analyze
+
+        return analyze(self.store.get_experiment(experiment_id))
+
+    def decision_brief(self, experiment_id: str) -> dict[str, Any]:
+        from cvals.economics import decision_brief
+        from cvals.policies import PolicyStore
+
+        return decision_brief(
+            self.store.get_experiment(experiment_id),
+            PolicyStore(self.settings).decisions(experiment_id),
         )

@@ -320,3 +320,39 @@ def test_solver_release_export_excludes_private_data_and_preserves_binding(tmp_p
     assert not exported["contains_private_grader_data"]
     assert exported["collections"]["dev"]["collection_hash"] == content_hash(collection)
     assert "checks" not in exported["collections"]["dev"]["scenarios"][0]
+
+
+def test_worker_start_waits_for_slow_imports_without_duplicate_launch(settings, monkeypatch):
+    from types import SimpleNamespace
+
+    from cvals import runtime
+
+    clock = [0.0]
+    launches = []
+    monkeypatch.setattr(runtime.time, "monotonic", lambda: clock[0])
+    monkeypatch.setattr(runtime.time, "sleep", lambda delay: clock.__setitem__(0, clock[0] + delay))
+    monkeypatch.setattr(runtime, "worker_running", lambda _: clock[0] >= 8)
+
+    def launch(*args, **kwargs):
+        launches.append(args)
+        return SimpleNamespace(poll=lambda: None)
+
+    monkeypatch.setattr(runtime.subprocess, "Popen", launch)
+    assert runtime.ensure_worker(settings)["started"]
+    assert len(launches) == 1 and clock[0] < 9
+
+
+def test_worker_start_reports_early_process_exit(settings, monkeypatch):
+    from types import SimpleNamespace
+
+    from cvals import runtime
+
+    monkeypatch.setattr(runtime, "worker_running", lambda _: False)
+    monkeypatch.setattr(
+        runtime.subprocess, "Popen", lambda *a, **kw: SimpleNamespace(poll=lambda: 1)
+    )
+    monkeypatch.setattr(
+        runtime.time, "sleep", lambda _: pytest.fail("Exited worker must fail immediately")
+    )
+    with pytest.raises(ValueError, match="Worker did not start"):
+        runtime.ensure_worker(settings)
