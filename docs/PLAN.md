@@ -1,114 +1,87 @@
-# Implementation plan
-
-Status: proposed implementation; repository foundation only.
-Date: 2026-10-13.
+# Delivery status and roadmap
 
 ## Product outcome
 
-Help a team answer: **Which coding agent should we use for this repository, under our actual constraints, and what evidence would change that decision?**
+Help an organization determine which system performs its actual work reliably, and retain enough evidence to understand and improve the result.
 
-The complete workflow should turn authorized repository history into reviewed tasks, run controlled experiments, explain failures, and maintain the benchmark as the code evolves. The initial code and documentation are Apache-2.0. Work occurs on the maintainer's iMac; benchmark data stays on its local or attached storage.
+Custom Vals now has a runnable local web application, CLI, HTTP API, evaluation engine, and original starter collections. The shared scenario model covers code, documents, structured data, and workflow simulations. This document distinguishes implemented functionality from the additional work needed for broader deployment.
 
-The [competitive review](COMPETITIVE_REVIEW.md) distinguishes documented Vals behavior from unverified features. The [architecture](ARCHITECTURE.md) defines the execution and data boundaries.
+## Implemented
 
-## Baseline to implement
+| Capability                 | Current behavior                                                                                                                                   |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Guided workbench           | Overview, collection authoring/import/review, system setup, experiment creation, live evidence, comparisons, exports, and workspace settings.      |
+| Typed task collections     | Versioned scenarios, public inputs, evaluator-only checks and references, provenance, explicit controls, and content fingerprints.                 |
+| Source ingestion           | Bounded local source previews and JSON/YAML task imports. An upload supplies material, not automatically a valid task.                             |
+| Historical task extraction | Conservative Python Git mining with supported literal function assertions and a complete candidate ledger. Extracted tasks remain drafts.          |
+| Task validation            | Evaluate a reference and declared negative controls; unavailable infrastructure and zero-test results do not establish correctness.                |
+| Coding isolation           | Fresh bounded Linux verification, external expected-value comparison for function cases, immutable image IDs, and ownership-scoped cleanup.        |
+| System execution           | A structured-output HTTP adapter, explicit positive/negative fixture controls, and imported external submissions.                                  |
+| Durable experiments        | Frozen task and system snapshots, one-worker leases, cancellation, interrupted-attempt recovery, and no automatic retries of ambiguous paid calls. |
+| Accounting                 | Conservative pre-call reservations, explicit prices, preserved incomplete attempts, and null values for missing usage or cost.                     |
+| Reporting                  | Scheduled-trial denominators, completion coverage, 95% intervals, paired task comparisons, and JSON/CSV/HTML evidence exports.                     |
+| Human judgment             | Append-only dimension scores and rationales linked to finalized evidence, with self-reported reviewer labels.                                      |
+| Continuous runs            | Recurring evaluations of frozen snapshots, pause/resume, occurrence history, and admission failure handling.                                       |
+| Local operation            | SQLite, configurable local storage, loopback service, optional bearer token, workspace diagnostics, and backup tooling.                            |
 
-Support local Git import and optional GitHub metadata; inspect language/test setup; identify suitable historical changes; reconstruct a task at its original starting point; separate issue text, reference patch, and evaluator tests; validate tests; compare configurable agent systems; present per-task outcomes and operational metrics.
+The four starter collections contain 19 original fixture scenarios: ten Python repairs and three each for documents, data, and workflows. They test installation and evaluator behavior. They are not a representative enterprise workload or measured model benchmark.
 
-Do not promise arbitrary repositories initially. Start with small Python projects using pytest, followed by TypeScript. Record unsupported environments with explicit reasons.
+Automated checks cover the engine, validation, source boundaries, provider accounting, reports, reviews, schedules, and frontend workflows. Live Linux sandbox tests require an explicitly configured runtime. Hardware-specific verification and test artifacts stay outside the portable repository.
 
-## Additions that make the product materially stronger
+## Current limits
 
-| Priority | Capability | Concrete behavior |
-| --- | --- | --- |
-| P0 | Auditable task factory | Every candidate has origin, base/reference commits, extraction version, test evidence, reviewer decision, and acceptance/rejection reasons. Show the entire mining funnel. |
-| P0 | Fresh and separate grading | Solver gets a reconstructed starting tree; gold patches, hidden tests, future Git objects, and grader credentials stay outside its environment. A fresh verifier grades the submitted patch. |
-| P0 | Replayable evidence | Immutable manifests identify environment/image digest, architecture, dependency locks, harness version, configuration, budgets, and artifact hashes. Export a replay bundle when content permissions allow it. |
-| P0 | Durable local execution | One-worker scheduler with transactional leases, crash recovery, cancellation, cleanup, disk limits, and admission checks. All state lives in configured local directories. |
-| P0 | Honest operational accounting | Preserve failures and incomplete trials; include retries, cache usage, setup time, model spend, and compute estimates. Distinguish measured, estimated, and unavailable values. |
-| P1 | Controlled comparisons | Freeze task cohort and budgets; use paired tasks and repeated trials; show uncertainty and ties; distinguish pass@1, pass@k, and reliability across repeats. |
-| P1 | Decision reports | Select systems subject to explicit cost, latency, and reliability constraints. Show cost per solved task and a quality/cost frontier with uncertainty. |
-| P1 | Failure workbench | Inspect candidate provenance, test evidence, patches, tool calls, traces, and failure categories. Compare the same task across systems and replay selected trials. |
-| P1 | Private holdouts and freshness | Separate development, calibration, selection, and final evaluation sets; maintain time splits and unreleased tasks; audit generated instructions for hindsight. |
-| P1 | Continuous evaluation | Incrementally mine repository changes, review benchmark diffs, rerun affected tasks, and detect regressions after agent/prompt/tool/model changes. |
-| P2 | Stronger task verification | Add property, mutation, differential, and adversarial tests where they improve evidence. Track quality signals separately from primary correctness. |
-| P2 | Broader engineering work | Add migrations, refactors, performance budgets, security repairs, browser/UI tasks, multi-service changes, and long-running tasks with explicit milestones. |
-| P2 | Team and enterprise operation | Add roles, review workflows, audit exports, quotas, retention controls, portable offline packages, and optional worker pools while preserving self-hosted operation. |
-| P2 | Agent improvement loop | Compare harness and prompt changes on calibration tasks, identify recurring failures, and propose interventions. Final holdouts remain sealed from tuning. |
+- The built-in HTTP adapter requests a JSON answer; it is not an interactive terminal or browser agent. External agents integrate through hash-bound submission bundles.
+- Workflow tasks currently evaluate submitted state and action descriptions rather than a live application’s independently observed state.
+- Citation validation checks source membership and quotation text, not whether the source entails a claim.
+- One validation cycle establishes observed reference/control behavior. It does not certify flakiness, broad regression coverage, or benchmark representativeness.
+- Python mining supports a deliberate subset of dependency-free function tests. Arbitrary builds, package installation, fixture-heavy tests, and other languages require additional work.
+- The service has one trusted workspace owner and one active worker. Token access does not provide roles, verified reviewer identity, or tenant isolation.
+- Recurring schedules rerun a fixed snapshot. They do not refresh a task collection, rotate holdouts, or impose a cumulative lifetime budget.
+- Statistical intervals do not correct contaminated tasks, selection bias, correlated repositories, or exploratory multiple comparisons.
 
-## Scientific rules
+These boundaries are part of the current product contract. Unsupported work should fail clearly rather than appear as validated evidence.
 
-A task is admitted only when its environment builds, tests are actually collected, the intended pre-fix assertions fail, the reference patch fixes them, and selected existing behavior remains intact. Record per-test evidence using trusted parsers. Zero tests, missing dependencies, and arbitrary process crashes are invalid evidence.
+## Next delivery: workload credibility
 
-Repeat validation in fresh environments; use at least three clean base/reference validation cycles for the first pilot. Quarantine inconsistent tasks. A reference patch is one accepted solution, not the definition of every correct implementation.
+Before treating a model comparison as a procurement or deployment recommendation:
 
-Preserve original issue text separately from synthesized descriptions. Label when text or tests were generated from a later change and review for solution leakage. Public historical tasks carry potential training-contamination risk; do not label them uncontaminated.
+1. Build reviewed collections from authorized work in several task categories.
+2. Record task provenance, permissible use, intended population, and known selection biases.
+3. Repeat reference/control validation in clean environments and quarantine inconsistent cases.
+4. Add meaningful regression and adversarial checks that challenge plausible incorrect answers.
+5. Run controlled provider or external-harness pilots with declared prices, budgets, and repetitions.
+6. Compare automated results with independent human judgments and document disagreements.
 
-Freeze the comparison protocol before running it. Show all scheduled trials and the exact denominator. Budget exhaustion counts as unsuccessful completion. Bound infrastructure retries, preserve every attempt, and show both valid-trial accuracy and operational completion coverage. Do not silently improve a score by dropping hard tasks or failed infrastructure.
+A useful acceptance target is at least 30 reviewed real tasks across multiple sources, with repeated trials on a declared subset. That is an engineering pilot target, not a statistical sufficiency claim. No such real-workload pilot is claimed by the starter fixtures.
 
-Use task-paired differences and suitable confidence intervals; cluster repeated trials by task and multi-repository comparisons by repository where appropriate. A single run per task cannot estimate within-task randomness. Do not claim two systems differ when evidence is insufficient. Cost per solved task uses total included attempt cost divided by solved tasks; zero solved tasks has no finite cost-per-solve. Unknown costs never become zero.
+## Next delivery: richer working environments
 
-A replay freezes inputs and permits a new run; external model services may still change or produce different outputs. Saved-log report reproduction and live model reruns are distinct operations.
+| Addition                     | Acceptance requirement                                                                                                                                     |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Interactive agent adapters   | Explicit tool and filesystem boundaries, isolated reset, captured tool evidence, cancellation, and controlled credential access.                           |
+| Live workflow simulations    | Deterministic reset, independently inspected final state, constraints on harmful or unauthorized transitions, and support for multiple valid action paths. |
+| Broader coding environments  | Reviewed dependency/image construction, more Python test forms, then TypeScript and additional languages with regression checks.                           |
+| Document and artifact review | Support for semantic claim evaluation and rendered output inspection, with clear judge limitations and human calibration.                                  |
+| Harness diagnostics          | Correlate submitted traces with failures and compare controlled harness changes on a fixed calibration collection.                                         |
 
-## Delivery milestones
+Keep the shared scenario/submission/evaluator boundary stable while adding adapters. Do not expose evaluator answers to a solver in order to make an integration easier.
 
-### M0: Repository and design — this delivery
+## Next delivery: living collections and stronger decisions
 
-Create the GitHub repository and authoritative iMac checkout; record the public research, architecture, scope, license, data exclusions, machine inventory, and implementation backlog.
+Add collection diffs, review states, incremental source refresh, benchmark release history, and explicit development/holdout partitions. A new collection version must remain distinguishable from a change in system performance.
 
-Completion: documents are linked and reviewed, Git exclusions cover machine/runtime data, the first commit is pushed, and local/remote revision identity is verified. No product functionality is claimed.
+Add saved decision constraints for reliability, latency, and spending; repeated-run reliability summaries; and uncertainty methods appropriate to multi-source task dependence. Recommendations should disclose task coverage and evidence limits rather than force a winner.
 
-### M1: Offline benchmark factory
+Recurring evaluation already supplies fixed-snapshot runs. Future regression gates should compare compatible cohorts, document tolerances, and preserve failed/incomplete attempts.
 
-Implement versioned schemas, a CLI, source import, candidate extraction, local artifacts, and Python task validation. Begin with original miniature fixtures; then use one authorized pilot repository. A deterministic patch replay adapter exercises the pipeline without model spending.
+## Later deployment work
 
-Completion: at least 10 manually reviewed real tasks reproduce in fresh Linux environments; reference patches pass; no-op and deliberately incorrect patches fail; invalid/flaky candidates are quarantined. A deliberately leaked Git object and a hidden-test canary remain inaccessible to the solver. Verify storage paths and inspect every artifact type.
+Pursue verified identities, roles, review permissions, retention policies, complete restore drills, and audit export guarantees before describing the product as a team service.
 
-Before container work: confirm the attached volume and free-space thresholds; configure a dedicated Linux VM with its disk and caches on attached storage; measure an appropriate memory budget. No mass image pulls or model downloads onto the nearly full internal disk.
+Consider PostgreSQL, worker pools, remote execution, and managed deployment only when measured workload or contention justifies them. Preserve local operation, explicit provider opt-in, and the ability to export a complete permitted record.
 
-### M2: Controlled agent execution
+Independent sandbox review, long-running recovery tests, provider compatibility matrices, and operational load testing remain necessary before a broad production rollout.
 
-Add a pinned Harbor adapter and generic command-agent contract. Run one task at a time. Introduce the scoped model gateway, limits, trusted result parsing, restart recovery, cancellation, and cleanup.
+## Reference
 
-Completion: two independently configured agent systems run the same frozen task cohort and budgets; all submissions are graded in fresh verifier environments. Stop/restart the orchestrator and recover without lost records or double-counted final results. Attempt evaluator access, forbidden networking, path traversal, result forgery, and quota bypass; each must fail or be reported as an unsupported policy before execution.
-
-Provider-backed model runs require an explicit configured spend budget. The default original-fixture workflow remains offline. Large local models are outside the initial 8 GB machine target.
-
-### M3: Decision workbench and initial usable release
-
-Add the browser interface after the CLI pipeline works. Ship repository/candidate review, experiment design, live run inspection, paired results, cost/latency tradeoffs, and replay/export.
-
-Completion: a pilot covers at least 30 validated tasks across at least three authorized repositories, with repeated trials on a declared subset. These are engineering acceptance targets, not a claim of statistical sufficiency. Reports regenerate exactly from stored artifacts; uncertainty, missing usage, ties, exclusions, and incomplete runs remain visible. An end user can trace every aggregate to tasks and attempts.
-
-### M4: Living benchmark and broader tasks
-
-Add TypeScript, incremental refresh, holdout rotation, benchmark release diffs, selected mutation tests, CI regression gates, and budgeted harness experiments.
-
-Completion: updating a repository creates a reviewable change set. Old suites remain replayable. Trend charts distinguish changes in task cohorts from changes in system performance. CI runs on the configured local evaluation service; public GitHub Actions do not receive private task content.
-
-### M5: Enterprise and ecosystem
-
-Add PostgreSQL and optional worker pools only after measured contention justifies them. Add roles/SSO, audit exports, data retention, backup/restore, air-gapped bundles, additional task domains, and interoperability.
-
-Completion: restore drills pass; authorization isolates projects; a compatible Linux worker can reproduce a permitted task bundle; public exports exclude private datasets and credentials. Remote workers are optional future deployments and are not enabled for this iMac-only workspace.
-
-## First implementation backlog
-
-| ID | Deliverable | Acceptance |
-| --- | --- | --- |
-| CVAL-001 | Workspace doctor | Reports architecture, RAM, writable/mounted roots, free space, VM state, tools, and supported executor capabilities without exposing secrets. |
-| CVAL-002 | Task and trial contracts | Versioned typed manifests, canonical hashing, migration rules, and separate agent/evaluator views. |
-| CVAL-003 | Original fixture repository | Small historical bug fixes plus invalid, flaky, zero-test, and weak-test counterexamples. |
-| CVAL-004 | Local Git importer | No host-side hooks or execution; reconstructs verified base snapshots without future history. |
-| CVAL-005 | Candidate extractor | Handles supported merge/squash cases and quarantines ambiguous reconstruction; preserves provenance. |
-| CVAL-006 | VM/executor capability spike | Proves separate grading, enforced egress, artifact restrictions, resource limits, cleanup, and ARM64 support before choosing a pinned backend version. |
-| CVAL-007 | Validation engine | Three clean fail/pass/regression cycles and trusted structured results. |
-| CVAL-008 | Durable job lifecycle | Idempotent trial finalization, leases, heartbeat, bounded retries, cancel and crash recovery. |
-| CVAL-009 | First replay report | Traces each result to its manifest and evidence; serializes incomplete and failed attempts explicitly. |
-| CVAL-010 | Agent adapters | Generic command contract plus first model-backed configurations with spend reservation and safe termination. |
-
-## Deliberate scope limits
-
-Initial language: Python. Initial worker count: one. Initial state: SQLite plus local files. Initial entry point: CLI. No Kubernetes, mandatory Redis, hosted database, multi-tenant SaaS, or universal language promise in the first release.
-
-The primary technical risks are environment reconstruction yield, weak tests, contamination/leakage, and operational resource limits. The milestones put these risks before dashboard polish.
+The [architecture](ARCHITECTURE.md) describes the implemented boundaries. [Interfaces](INTERFACES.md) document the current contracts. The [competitive review](COMPETITIVE_REVIEW.md) records the public-source research that informed the initial direction; it is not a claim of feature equivalence with another product.

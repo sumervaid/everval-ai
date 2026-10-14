@@ -1,0 +1,5 @@
+invoice_id,po_id,amount_cents
+I-1,PO-1,12500
+I-2,PO-2,8500
+I-1,PO-1,12500
+I-3,PO-3,3400

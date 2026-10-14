@@ -1,15 +1,54 @@
 # Contributing
 
-The repository is currently a product and architecture plan. Start with [the implementation plan](docs/PLAN.md). Work should complete the earliest unfinished milestone before expanding the scope.
+Start with the [quickstart](docs/quickstart.md), [architecture](docs/ARCHITECTURE.md), and [scenario format](docs/scenarios.md). Keep changes focused and explain their observable behavior.
 
-A contribution should explain the user-visible problem, resulting behavior, and meaningful validation. Keep changes small enough to review. Make proposed features, experimental results, and verified behavior easy to distinguish.
+## Development setup
 
-For runtime work, add checks that could detect a real failure: invalid task admission, grading leakage, lost jobs, inaccurate denominators, or broken replay. Do not add implementation-mirroring tests for simple documentation changes.
+```sh
+make setup
+make check
+make test
+```
 
-Use original, permitted fixtures. Never include private repositories, hidden holdout tasks, model credentials, raw private trajectories, or machine-specific configuration in a public change. Code licensing and dataset permissions are tracked separately.
+Python dependencies are managed by uv; the web app uses npm. Commit both lockfiles when dependencies change. The server runs on port 8765. The Vite development server proxies API requests to it.
 
-Dependency reuse must preserve applicable notices. The planned core is Apache-2.0; the architecture currently favors an independently implemented core with a Harbor adapter. Any change to that licensing or execution strategy needs an explicit architecture update.
+For separate development terminals:
 
-In the maintainer's current environment, all project work executes on the iMac; see [AGENTS.md](AGENTS.md). Other contributors can use their own development machines while following the same data-isolation and reproducibility requirements.
+```sh
+uv run cvals serve
+```
 
-No application tests, installation commands, or supported release versions exist yet.
+```sh
+cd web
+npm run dev
+```
+
+After a production web build, run `uv run python scripts/build_web.py` to include its assets in the Python package.
+
+## Checks that matter
+
+Test behavior across boundaries: invalid task admission, exposed reference data, ambiguous billing, cancelled/interrupted work, snapshot drift, missing metrics, artifact limits, and browser error states. New domain checks need known-positive and known-negative examples.
+
+Run Python unit/API/CLI tests, strict type checks, Ruff, web type checks, and component tests before submitting a change. Browser and Docker checks require their documented local runtimes.
+
+No commercial provider credentials are needed for tests. Use controlled HTTP responses and original fixtures.
+
+## Data and licensing
+
+Use permitted source material and preserve attribution. Code licensing and task-dataset permissions are separate. Never commit private repositories, holdouts, credentials, raw private traces, workspace databases, or machine-specific settings.
+
+## Pull requests
+
+Describe the problem, resulting behavior, and validation. Include screenshots when interface behavior changes. State actual limitations instead of claiming unsupported compatibility or benchmark performance.
+
+The project uses Apache-2.0 for original material. Reused dependencies or code must retain applicable notices.
+
+## Isolated integration tests
+
+With a dedicated Docker daemon and a pre-pulled Python image:
+
+```sh
+CVALS_TEST_SANDBOX=1 uv run pytest tests/test_sandbox.py tests/test_domains_mining.py -m sandbox
+```
+
+Set `CVALS_DOCKER_HOST` when using a separate daemon. The tests create original fixtures and never execute repository source on the host.

@@ -1,36 +1,71 @@
-# custom-vals-enterprises
+# Custom Vals
 
-An open-source laboratory for choosing and improving coding agents on your own repositories.
+A local evaluation workbench for code, documents, structured data, and business workflows.
 
-**Status: planning.** This repository currently contains the product plan, public-source research, architecture decisions, and contribution guidelines. There is no runnable application yet.
+Turn work you understand into explicit tasks, compare systems on the same inputs, and inspect the evidence behind each result. Use the **web app** for guided evaluation and the **CLI** for repeatable runs. Both use the same Python engine and local workspace.
 
-The intended workflow is:
+## Start here
 
-1. Import an authorized local repository or GitHub repository.
-2. Turn suitable historical changes into reviewed, executable tasks.
-3. Validate the tests against the original base and reference implementation.
-4. Compare agents in isolated environments under the same resource budgets.
-5. Inspect replayable evidence, uncertainty, cost, and failure causes.
-6. Maintain a fresh evaluation suite as the repository changes.
+You need Python 3.12 or newer, [uv](https://docs.astral.sh/uv/getting-started/installation/), and Node.js 24.15+ LTS, 22.22.2+, or 26+.
 
-The product will prioritize auditable task construction, separate grading, repeatable experiments, durable local execution, and useful model-selection decisions. Initial support targets Python/pytest, a single local worker, and a CLI. A browser workbench and additional languages follow a verified end-to-end pipeline.
+```sh
+git clone https://github.com/sumervaid/custom-vals-enterprises.git
+cd custom-vals-enterprises
+make setup
+uv run cvals init --starters
+uv run cvals serve
+```
 
-| Document | Purpose |
-| --- | --- |
-| [Implementation plan](docs/PLAN.md) | Differentiators, phases, acceptance gates, and first backlog |
-| [Competitive review](docs/COMPETITIVE_REVIEW.md) | Verified public behavior, limitations, uncertainties, and sources |
-| [Architecture](docs/ARCHITECTURE.md) | Components, storage, execution boundaries, and experiment contracts |
-| [Contributing](CONTRIBUTING.md) | Scope, evidence, and development expectations |
-| [Agent instructions](AGENTS.md) | Instructions for automated work in this repository |
+Open **http://127.0.0.1:8765**. This repository is private; cloning requires access.
 
-## Deployment intent
+In the app, open **Experiments → New experiment**, choose **Evidence and policy reading**, and select **Reference fixture · control** and **Empty submission · control**. Start the experiment, then open **Trial evidence** to inspect the individual checks.
 
-The complete default workflow will run on user-controlled hardware. Source checkouts, database files, task bundles, logs, and benchmark artifacts stay in configured local directories. GitHub hosts the reviewed project source and documentation.
+The four starter collections contain 19 original scenarios. These fixture controls verify the pipeline; they do not measure model performance. Document, data, and workflow examples need no model account or Docker installation. Coding checks need a separate Linux runtime and a locally available Python image; follow the [sandbox guide](docs/sandbox.md).
 
-A hosted model provider receives the code/context submitted to it; local artifact storage does not make such inference offline. Local-model and offline-replay modes are separate, explicit configurations. No hosted database, hosted benchmark service, or telemetry is required by the proposed architecture.
+## Choose your next step
 
-## Project provenance
+| I want to…                                             | Start with                                                                |
+| ------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Run my first comparison                                | [Quickstart](docs/quickstart.md)                                          |
+| Define tasks from my own work                          | [Scenario authoring](docs/scenarios.md)                                   |
+| Extract coding tasks from local history                | [Repository mining](docs/mining.md)                                       |
+| Connect a model endpoint                               | [Systems and providers](docs/providers.md)                                |
+| Evaluate an existing agent or harness                  | [Import recorded submissions](docs/submissions.md)                        |
+| Understand scores and uncertainty                      | [Reading results](docs/results.md)                                        |
+| Schedule runs, retain evidence, or operate the service | [Operations](docs/operations.md)                                          |
+| Understand the implementation                          | [Architecture](docs/ARCHITECTURE.md) and [interfaces](docs/INTERFACES.md) |
+| See current scope and future work                      | [Delivery status and roadmap](docs/PLAN.md)                               |
+| Contribute a change                                    | [Contributing](CONTRIBUTING.md)                                           |
 
-This is an independent implementation informed by public product behavior and published evaluation research. It is not affiliated with Vals AI. The initial repository contains original planning documents and no Vals implementation code, website assets, or benchmark datasets.
+## What you can do
 
-Original project material is licensed under [Apache-2.0](LICENSE). Imported repository content and task datasets retain their own permissions, attribution, and licensing.
+- **Define and inspect tasks.** Author scenarios, preview source files, import JSON/YAML collections, and review instructions, checks, provenance, and reference outputs.
+- **Mine supported Python changes.** Read local Git history into draft scenarios with a complete acceptance/rejection ledger. Validate extracted tasks separately.
+- **Compare systems.** Run compatible structured-output model endpoints, fixture controls, or externally produced submissions against a frozen collection.
+- **Follow every attempt.** Inspect output, individual checks, errors, timing, and available usage. Cancel work, recover interrupted execution, and rerun saved configurations.
+- **Review judgments.** Add a score, dimension, rationale, and reviewer label alongside the automated result. Earlier judgments remain in the history.
+- **Repeat evaluations.** Schedule recurring runs from a frozen experiment and pause or enable them in Settings. Each run has its own provider budget.
+- **Export evidence.** Reproduce reports and export JSON, CSV, or self-contained HTML with explicit uncertainty, incomplete attempts, and missing costs.
+
+The app supports a single local workspace and one active worker. Reviewer names are self-reported labels, not authenticated identities. The built-in HTTP adapter makes one structured-output request per task; interactive terminal and browser agents connect through [recorded submissions](docs/submissions.md). Workflow examples grade submitted final-state simulations rather than actions in a live business application.
+
+## Storage and network behavior
+
+Workspace data defaults to `~/.local/share/custom-vals`. Set `CVALS_DATA_DIR` to use another local volume. Keep private tasks, credentials, and runtime data outside the source checkout.
+
+There is no telemetry or automatic result upload. A configured hosted provider receives the scenario instructions and public inputs; evaluator checks and reference answers are excluded. Remote providers require explicit service opt-in, declared positive pricing, and a positive experiment budget. Local storage and local inference are separate choices.
+
+## Development
+
+```sh
+make check
+make test
+```
+
+`make check` runs Python linting, formatting, type checks, and frontend checks. `make test` runs the Python test suite. Live sandbox tests require separate runtime setup and an explicit test flag.
+
+Dependencies are locked in `uv.lock` and `web/package-lock.json`. See [Contributing](CONTRIBUTING.md) for the development workflow and [web/README.md](web/README.md) for interface development.
+
+## License
+
+Original project material is licensed under [Apache-2.0](LICENSE). Imported source material and task datasets retain their own permissions and attribution. Bundled web dependencies retain their [third-party notices](web/public/assets/third-party-notices.txt). This is an independent implementation and is not affiliated with Vals AI.

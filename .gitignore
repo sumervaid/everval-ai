@@ -38,3 +38,17 @@ dist/
 build/
 *.egg-info/
 .DS_Store
+
+# Packaged web assets and local build metadata
+src/cvals/static/
+*.tsbuildinfo
+coverage/
+*.sqlite3-shm
+*.sqlite3-wal
+*.sqlite-shm
+*.sqlite-wal
+
+# Environment and build directories may be symlinks to an attached drive.
+.venv
+node_modules
+dist

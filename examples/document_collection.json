@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "id": "starter-documents",
+  "name": "Evidence and policy reading",
+  "description": "Three invented document tasks with exact facts and source checks; citation checks do not establish semantic entailment.",
+  "domain": "documents",
+  "version": "1.0.0",
+  "created_at": "2026-10-13T00:00:00+00:00",
+  "scenarios": [
+    {
+      "id": "documents-contract-notice",
+      "name": "Read a contract notice requirement",
+      "domain": "documents",
+      "description": "Original reviewable fixture with explicit success criteria.",
+      "instruction": "Extract renewal notice days, accepted delivery method, and the cancellation consequence. Return notice_days, delivery, consequence, and citations with source_id and an exact supporting quote.",
+      "inputs": {
+        "sources": [
+          {
+            "id": "agreement-7",
+            "text": "Either party may prevent automatic renewal by giving written notice at least 45 days before the renewal date. Notice must be delivered by registered mail. A late notice takes effect at the following renewal date."
+          },
+          {
+            "id": "marketing-faq",
+            "text": "Our support team usually replies to cancellation questions within two business days. Support emails do not amend the agreement."
+          }
+        ]
+      },
+      "expected": {},
+      "checks": [
+        {
+          "id": "notice",
+          "name": "Notice deadline",
+          "kind": "numeric",
+          "path": "notice_days",
+          "expected": 45,
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        },
+        {
+          "id": "delivery",
+          "name": "Binding delivery method",
+          "kind": "equals",
+          "path": "delivery",
+          "expected": "registered mail",
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        },
+        {
+          "id": "consequence",
+          "name": "Late-notice consequence",
+          "kind": "equals",
+          "path": "consequence",
+          "expected": "following renewal date",
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        },
+        {
+          "id": "citation",
+          "name": "Agreement citation and verbatim quote",
+          "kind": "citation",
+          "path": "citations",
+          "expected": {
+            "source_ids": [
+              "agreement-7"
+            ],
+            "require_quote": true
+          },
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        }
+      ],
+      "reference_output": {
+        "notice_days": 45,
+        "delivery": "registered mail",
+        "consequence": "following renewal date",
+        "citations": [
+          {
+            "source_id": "agreement-7",
+            "quote": "A late notice takes effect at the following renewal date."
+          }
+        ]
+      },
+      "tags": [
+        "original-fixture",
+        "evidence-extraction"
+      ],
+      "provenance": {
+        "origin": "original_fixture",
+        "license": "Apache-2.0",
+        "purpose": "Demonstrate domain-specific evaluation; not a real-world performance claim",
+        "negative_controls": [
+          {
+            "notice_days": 2,
+            "delivery": "registered mail",
+            "consequence": "following renewal date",
+            "citations": [
+              {
+                "source_id": "agreement-7",
+                "quote": "A late notice takes effect at the following renewal date."
+              }
+            ]
+          },
+          {
+            "notice_days": 45,
+            "delivery": "registered mail",
+            "consequence": "following renewal date",
+            "citations": [
+              {
+                "source_id": "invented",
+                "quote": "Unsupported"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "documents-incident-obligations",
+      "name": "Identify incident response obligations",
+      "domain": "documents",
+      "description": "Original reviewable fixture with explicit success criteria.",
+      "instruction": "Read the incident policy. Return notify_within_hours, notify_role, required_records (alphabetically sorted), and citations containing source_id and an exact quote. Use only mandatory requirements.",
+      "inputs": {
+        "sources": [
+          {
+            "id": "security-policy",
+            "text": "On confirming a customer-data incident, the responder must notify the security lead within 4 hours. The incident record must include affected systems, discovery time, and containment actions. A public statement is not required unless approved by the communications owner."
+          }
+        ]
+      },
+      "expected": {},
+      "checks": [
+        {
+          "id": "deadline",
+          "name": "Required notification deadline",
+          "kind": "numeric",
+          "path": "notify_within_hours",
+          "expected": 4,
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        },
+        {
+          "id": "role",
+          "name": "Accountable recipient",
+          "kind": "equals",
+          "path": "notify_role",
+          "expected": "security lead",
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        },
+        {
+          "id": "records",
+          "name": "Complete mandatory record fields",
+          "kind": "equals",
+          "path": "required_records",
+          "expected": [
+            "affected systems",
+            "containment actions",
+            "discovery time"
+          ],
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        },
+        {
+          "id": "citation",
+          "name": "Policy citation and exact quotation",
+          "kind": "citation",
+          "path": "citations",
+          "expected": {
+            "source_ids": [
+              "security-policy"
+            ],
+            "require_quote": true
+          },
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        }
+      ],
+      "reference_output": {
+        "notify_within_hours": 4,
+        "notify_role": "security lead",
+        "required_records": [
+          "affected systems",
+          "containment actions",
+          "discovery time"
+        ],
+        "citations": [
+          {
+            "source_id": "security-policy",
+            "quote": "The incident record must include affected systems, discovery time, and containment actions."
+          }
+        ]
+      },
+      "tags": [
+        "original-fixture",
+        "evidence-extraction"
+      ],
+      "provenance": {
+        "origin": "original_fixture",
+        "license": "Apache-2.0",
+        "purpose": "Demonstrate domain-specific evaluation; not a real-world performance claim",
+        "negative_controls": [
+          {
+            "notify_within_hours": 4,
+            "notify_role": "security lead",
+            "required_records": [
+              "public statement"
+            ],
+            "citations": [
+              {
+                "source_id": "security-policy",
+                "quote": "The incident record must include affected systems, discovery time, and containment actions."
+              }
+            ]
+          },
+          {
+            "notify_within_hours": 4,
+            "notify_role": "security lead",
+            "required_records": [
+              "affected systems",
+              "containment actions",
+              "discovery time"
+            ],
+            "citations": [
+              {
+                "source_id": "invented",
+                "quote": "Unsupported"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "documents-retention-conflict",
+      "name": "Apply a legal-hold exception",
+      "domain": "documents",
+      "description": "Original reviewable fixture with explicit success criteria.",
+      "instruction": "Decide whether a 100-day-old support transcript under an active legal hold can be deleted. Return can_delete, reason_code ('legal_hold' or 'retention_elapsed'), policy_owner, and citations with exact quotes.",
+      "inputs": {
+        "sources": [
+          {
+            "id": "retention",
+            "text": "Support transcripts are deleted after 90 days. An active legal hold suspends deletion until the Legal team releases the hold."
+          },
+          {
+            "id": "hold-register",
+            "text": "Transcript T-204 is 100 days old. Legal hold LH-12 is active. Policy owner: Legal."
+          }
+        ]
+      },
+      "expected": {},
+      "checks": [
+        {
+          "id": "decision",
+          "name": "Hold prevents deletion",
+          "kind": "equals",
+          "path": "can_delete",
+          "expected": false,
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        },
+        {
+          "id": "reason",
+          "name": "Correct exception",
+          "kind": "equals",
+          "path": "reason_code",
+          "expected": "legal_hold",
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        },
+        {
+          "id": "owner",
+          "name": "Release authority",
+          "kind": "equals",
+          "path": "policy_owner",
+          "expected": "Legal",
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        },
+        {
+          "id": "citation",
+          "name": "Both policy and case evidence",
+          "kind": "citation",
+          "path": "citations",
+          "expected": {
+            "source_ids": [
+              "retention",
+              "hold-register"
+            ],
+            "require_quote": true
+          },
+          "weight": 1.0,
+          "required": true,
+          "tolerance": 0.0
+        }
+      ],
+      "reference_output": {
+        "can_delete": false,
+        "reason_code": "legal_hold",
+        "policy_owner": "Legal",
+        "citations": [
+          {
+            "source_id": "retention",
+            "quote": "An active legal hold suspends deletion until the Legal team releases the hold."
+          },
+          {
+            "source_id": "hold-register",
+            "quote": "Legal hold LH-12 is active."
+          }
+        ]
+      },
+      "tags": [
+        "original-fixture",
+        "evidence-extraction"
+      ],
+      "provenance": {
+        "origin": "original_fixture",
+        "license": "Apache-2.0",
+        "purpose": "Demonstrate domain-specific evaluation; not a real-world performance claim",
+        "negative_controls": [
+          {
+            "can_delete": true,
+            "reason_code": "retention_elapsed",
+            "policy_owner": "Legal",
+            "citations": [
+              {
+                "source_id": "retention",
+                "quote": "An active legal hold suspends deletion until the Legal team releases the hold."
+              },
+              {
+                "source_id": "hold-register",
+                "quote": "Legal hold LH-12 is active."
+              }
+            ]
+          },
+          {
+            "can_delete": false,
+            "reason_code": "legal_hold",
+            "policy_owner": "Legal",
+            "citations": [
+              {
+                "source_id": "invented",
+                "quote": "Unsupported"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

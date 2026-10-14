@@ -1,102 +1,110 @@
-# Proposed architecture
+# Architecture
 
-Status: design decisions for implementation; components are not built yet.
+Custom Vals is a local evaluation application with a React workbench, a Python CLI, and an HTTP API. They share a typed task model, a SQLite workspace, and a single-worker evaluation engine.
 
-## Components and flow
+The central unit is a **scenario**: public inputs and an instruction, paired with private evaluation checks. A repository is one possible source of scenarios. Documents, structured records, and simulated business states use the same execution and reporting contracts.
+
+## Flow
 
 ```mermaid
 flowchart LR
-    Repo["Authorized Git repository"] --> Import["Import and candidate extraction"]
-    Import --> Review["Task review and validation"]
-    Review --> Store["Local manifests and artifacts"]
-    Store --> Scheduler["Durable local scheduler"]
-    Scheduler --> Solver["Agent environment in Linux VM"]
-    Solver --> Patch["Restricted submission artifact"]
-    Patch --> Verifier["Fresh verifier environment"]
-    Verifier --> Results["Trial evidence and reports"]
-    Results --> UI["CLI and browser workbench"]
-    Gateway["Scoped model gateway"] --> Solver
+    Sources["Source files or local Git history"] --> Collection["Reviewed, versioned collection"]
+    Collection --> Snapshot["Frozen experiment snapshot"]
+    Systems["Model, fixture, or imported submission"] --> Snapshot
+    Snapshot --> Worker["Local worker"]
+    Worker --> Output["Structured output"]
+    Output --> Checks["Programmatic checks"]
+    Checks --> Evidence["Trial evidence and reports"]
+    Evidence --> App["Web app and CLI"]
+    Review["Human judgment"] --> Evidence
 ```
 
-The coordinator holds private evaluator data. Solver inputs are independently assembled from an allowlist; the solver never receives the full task-store directory.
+Source preview does not create a valid benchmark automatically. Collection validation tests a reference output and declared negative controls. Historical extraction creates drafts whose instructions and checks still require review.
 
-| Layer | Initial choice | Reason |
-| --- | --- | --- |
-| Shared core | Python 3.12, uv, Pydantic | Typed task and experiment contracts shared by import, CLI, API, and worker. |
-| CLI | Typer | A usable vertical slice before a web service is necessary. |
-| API | FastAPI, server-sent events | One local service for commands, review, and streamed run events. |
-| UI | React, TypeScript, Vite | Task review, run diagnosis, and comparisons after the CLI works. |
-| State | SQLite WAL with migrations | Durable local jobs without an extra database service. |
-| Artifacts | Content-addressed local filesystem | Immutable bundles and evidence with explicit ownership and retention. |
-| Execution | Harbor adapter, gated by capability tests | Reuse task/runtime integrations while owning validation and experiment semantics. |
-| Isolation | Dedicated Linux VM on the iMac | No imported code executes directly on the personal macOS host. |
+## Components
 
-Pin versions after the executor capability spike. Hardware architecture is part of every result; ARM64 and emulated x86 runs are not interchangeable performance measurements.
+| Module                          | Responsibility                                                                                               |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `models.py`                     | Bounded Pydantic manifests, canonical JSON, and SHA-256 fingerprints.                                        |
+| `config.py`                     | Environment configuration, data-directory admission, and storage paths.                                      |
+| `store.py`                      | Collection versions, frozen experiments, trial state, events, and worker leases.                             |
+| `engine.py`                     | One active experiment, budget reservation, submission, grading, and finalization.                            |
+| `providers.py`                  | Structured-output HTTP calls, deterministic fixtures, and imported submissions.                              |
+| `evaluators.py`                 | Exact values, containment, numeric tolerance, JSON Schema, citations, prohibited content, and Python checks. |
+| `domains/` and `ingestion.py`   | Source previews, scenario validation, and conservative local Git extraction.                                 |
+| `sandbox.py`                    | Disposable, bounded Linux verification for submitted Python files.                                           |
+| `reports.py` and `exporting.py` | Aggregates, uncertainty, paired comparisons, and portable exports.                                           |
+| `reviews.py`                    | Append-only human judgments linked to finalized evidence.                                                    |
+| `schedules.py`                  | Recurring runs of a frozen experiment, with admission checks and occurrence records.                         |
+| `api.py` and `cli.py`           | Local interfaces to the shared engine and stores.                                                            |
+| `web/`                          | Guided authoring, comparison, evidence inspection, and service setup.                                        |
 
-## Records
+The frontend uses same-origin HTTP requests. The production build is copied into the Python package by `scripts/build_web.py` and served by the application. During development, Vite proxies API requests to the local Python service. The UI polls active experiments; the API also provides an event stream.
 
-| Record | Required information |
-| --- | --- |
-| RepositorySnapshot | Origin, permission scope, source license/attribution, base commit, tree hash, acquisition time. |
-| Candidate | Historical change IDs, reconstruction method, test split, generated-text lineage, rejection/review history. |
-| TaskBundle | Task version, issue/context, agent-view hash, private evaluator hash, environment digest, supported platform, resource and network policy. |
-| ValidationReport | Collected test IDs, expected fail/pass sets, structured evidence for each clean cycle, regression outcomes, flaky/invalid classification. |
-| Experiment | Frozen cohort, systems, repetitions, randomization, budget/exclusion/retry rules, analysis method, cost assumptions. |
-| Trial and Attempt | Immutable system configuration, lease, lifecycle events, submitted patch, artifacts, token/spend records, terminal reason. |
-| ScoreReport | Included trials, exclusions, coverage, denominators, estimates/uncertainty, analysis version, links to evidence. |
+## Data and reproducibility
 
-Mutable review decisions and job states are kept separate from immutable content. Changing task tests or setup creates a new task version; it never silently rewrites an old benchmark.
+`CVALS_DATA_DIR` contains `workspace.sqlite3` and an `artifacts/` directory. The database stores collections, system definitions, frozen experiment snapshots, outputs, checks, attempt records, events, schedules, and reviews. It uses WAL mode and full synchronous writes. Database schema version 1 is explicit; an unknown schema version is rejected.
 
-## Storage and local development
+Saving changed collection content requires a new version. Creating an experiment copies the current collection and selected systems into its snapshot and records collection and snapshot hashes. Later edits or deletions of library records do not rewrite that snapshot. A rerun uses the saved snapshot rather than silently picking up current configurations.
 
-Configure separate source, private data, artifact, cache, and VM-disk roots. Keep data outside the public Git checkout. The local machine inventory records exact paths in the ignored `.local/IMAC.md`.
+Fingerprints detect mismatched content; they are not digital signatures or independent attestations. Host administrators retain access to the database. The current release does not implement a separate content-addressed object store, authenticated team tenancy, or tamper-proof external audit log.
 
-The current maintainer machine is an 8 GB ARM64 iMac with a nearly full internal disk and substantial attached-disk capacity. Keep this small source checkout in the home directory; place datasets, container images, VM disks, caches, and trial artifacts on the attached volume.
+The default data directory is local. For a path under macOS `/Volumes/`, startup requires the named volume to be mounted. Storage admission requires at least 100 MiB free. Machine-specific paths belong in ignored local configuration, not portable project files.
 
-The workspace doctor must verify volume identity and mount state before opening data roots. If the volume is unavailable, stop clearly; never fall back to a same-named directory on the internal disk. Start with one worker and small fixtures. Resource admission reserves space for the host, checks available memory/disk, and refuses tasks above configured limits. Only project-owned caches and containers are eligible for cleanup.
+## Public and private task views
 
-Use loopback binding by default. The maintainer can reach the browser over an SSH tunnel through Tailscale. Network exposure and team authentication become explicit configuration choices.
+Provider requests and exported task inputs use an allowlist:
 
-## Execution boundary
+```text
+id, name, domain, instruction, inputs
+```
 
-1. Import reads source/metadata without invoking repository hooks, builds, or install commands on the host.
-2. An isolated builder performs permitted dependency downloads with bounded access. It never receives model or GitHub credentials. Pin the resulting image and dependency manifests.
-3. Assemble the solver image from the historical source tree. Create a fresh Git repository only if the harness requires Git; exclude future objects, remotes, gold patches, hidden tests, and previous-trial caches.
-4. The solver runs with bounded CPU/RAM/disk/time/processes, no host home mount, and no container-engine socket. Evaluation network policy permits only the scoped model gateway and explicitly required test services.
-5. Collect an allowlisted patch or artifact under strict size/path limits. Reject path traversal, unsafe symlinks, grader overwrites, and attempts to modify trusted evaluation machinery.
-6. Apply the submission to a fresh verified base inside the verifier environment. Install evaluator tests from the trusted store. Parse structured outcomes; do not trust an agent-written score file.
-7. Keep logs/artifacts local, terminate task processes, and reconcile owned containers on completion or restart.
+They exclude expected values, checks, reference outputs, and evaluator provenance. Collection review and evidence exports are trusted workspace operations and can contain that private material.
 
-A fresh verifier separates solver state, but candidate code still executes during tests. Grader isolation needs adversarial verification; it is not proved by putting tests in a second container. Use trusted result collection and additional process/filesystem boundaries as needed. Any runtime that cannot enforce the requested policy is rejected for that experiment.
+The HTTP adapter sends one bounded, non-streaming chat-completions request and requires a JSON-object response. It does not run tool loops, edit a repository, operate a browser, or execute an external agent harness. Existing agents run in their own environment and return [submission bundles](submissions.md), bound to an exact collection hash.
 
-[Harbor documents separate verification](https://docs.harborframework.com/tasks/separate-verifier) as an explicit option. Our adapter must select it and control artifact transfer. Package defaults are not an isolation guarantee.
+The workflow fixtures describe inputs and expected final states. They do not connect to production applications or independently observe tool actions. Citation checks verify source identifiers and literal quotations; they do not establish semantic entailment. Human review can supplement these checks without overwriting their outcomes.
 
-## Credentials and model access
+## Python verification
 
-The host coordinator owns GitHub credentials and provider keys. The solver receives only a scoped gateway credential tied to its trial, allowed model, expiry, and budget. The gateway records actual usage when available, reserves spend before calls, limits concurrent calls/output, and revokes access on termination.
+Python submissions are text-file maps. The verifier combines the base task files with the submitted files and runs them in a fresh Linux container. The service never falls back to executing imported Python code on the host.
 
-Local inference, hosted inference, and offline replay are distinct modes. Hosted inference can transmit submitted source/context to the selected provider. A strict offline mode disallows external egress after staged dependency acquisition. The initial machine is not assumed to support large local models alongside worker environments.
+Execution requires a locally loaded image; the verifier resolves and records its immutable image ID. It uses a non-root user, no network or host mounts, a read-only root filesystem, dropped capabilities, and CPU, memory, process, time, input, and output limits. Staging copies files without executing repository code. Cleanup addresses only project-owned temporary resources; recovery additionally checks workspace ownership and age.
 
-## Scheduler and accounting
+The preferred mode invokes declared functions with JSON arguments. Expected values stay in the host evaluator, and bounded returned values determine the outcome. A candidate cannot supply its own passing score. Arbitrary unittest compatibility mode shares an interpreter between tests and submitted code and carries weaker resistance to grader manipulation. The [sandbox guide](sandbox.md) defines both modes and their limits.
 
-Use transactional states: queued, leased, preparing, running, grading, and a terminal success/failure/cancel/error state. Separate logical trials from retry attempts. Leases expire and can be recovered; attempt IDs, artifact hashes, and idempotent finalization prevent duplicate final results.
+The historical compiler accepts a restricted subset of Python changes and literal function assertions. It reads Git metadata and blobs without checkout, hooks, dependency installation, or test execution. Unsupported setup, fixtures, assertions, source layouts, and history are rejected with reasons. Extraction acceptance is separate from validation.
 
-Persist intent before launching a process. On restart, reconcile live owned processes/containers and expired leases before claiming more work. Retries preserve the original task, image, runner, harness, and analysis revisions. Container cleanup must not touch unrelated iMac projects.
+## Execution, recovery, and budgets
 
-Budget reservation includes pending calls and bounded provider accounting lag. Distinguish estimated enforcement from final billed usage. Cancellation stops future calls, terminates compute, revokes credentials, and records partial consumption.
+A durable singleton lease permits one active worker. The lease expires after 30 seconds and is renewed during execution. A stale worker cannot finalize another worker’s trial. All scheduled trials exist before execution begins, so missing attempts remain part of the record.
 
-## Reporting and browser workflow
+An expired lease marks an active attempt as interrupted and retains its evidence. Pending work can resume. An ambiguous provider attempt is not automatically retried. Cancellation finalizes queued work and prevents later submissions; an already active request may finish before its bounded timeout, and recorded usage is retained.
 
-The UI progresses through repository import, candidate review, experiment design, run monitoring, comparison, and replay. Each aggregate links to its task cohort, trial attempts, test evidence, and accounting.
+Before each HTTP call, the engine reserves a conservative estimate using bounded input, maximum output, and saved token prices. Reported usage supplies the calculated cost when available. Unknown billing remains unknown; uncertainty blocks further paid requests. These calculations do not reconcile a provider invoice or guarantee a provider’s external charging behavior.
 
-Use paired differences, uncertainty intervals, repeat reliability, and explicit ties. Show task-family coverage, candidate-selection bias, infrastructure errors, and missing metrics. Constraints for system recommendations are user-defined and saved with the report.
+Remote endpoints require HTTPS, explicit opt-in, positive pricing, and a positive experiment budget. Requests reject redirects and nonpublic remote destinations; loopback endpoints support local inference. Keys are resolved from named service environment variables and never stored as key values in system manifests. See [provider configuration](providers.md).
 
-The first release includes local exports. Publication is a separate action with dataset permissions and private-data exclusions. GitHub integration reads repository metadata and can later report approved aggregate checks without uploading private evidence.
+## Reports and human review
 
-## Reuse and future scaling
+Pass rate uses all scheduled trials, including errors and incomplete work. The report also gives completion coverage, check scores, costs, and latency. Unknown costs remain null; cost per pass is undefined if no trials pass.
 
-The core, schemas, validation pipeline, scheduler semantics, and decision reports are our own implementation. Harbor is the preferred backend after capability validation. SWE-bench compatibility follows; broader generators are optional plugins.
+Single-attempt task results use 95% Wilson intervals. Repeated results are grouped by scenario and use bounded task-level intervals. Paired differences compare shared tasks and use unadjusted task-level intervals. These methods assume representative, independent tasks; they do not remove selection bias, shared-source dependence, contamination, or multiple-comparison concerns.
 
-Vals' Valkyrie is already open-source under AGPL-3.0. No Valkyrie implementation is incorporated into this Apache-2.0 project. Compatibility can be independently implemented against documented interfaces if useful.
+Imported submissions preserve the external harness’s reported duration and usage separately from local evaluation time. Regrading identical outputs is not a new independent experiment. Fixture controls are labeled and excluded from the workspace’s headline system pass rate.
 
-PostgreSQL and multiple workers are future options when SQLite contention or workload measurements justify them. Preserve the same task contracts and artifacts. Remote compute remains disabled in the maintainer's iMac-only configuration.
+Human reviews record a reviewer label, dimension, score, rationale, timestamp, and evidence hash. A later judgment for the same reviewer, trial, and dimension supersedes the displayed latest judgment while preserving earlier records. Labels are self-reported, not verified identities. Human scores do not change automated pass rates.
+
+## Recurring evaluation
+
+Schedules refer to an experiment’s frozen snapshot. The worker checks due schedules while running and records each occurrence transactionally. It avoids queuing another occurrence while a related run remains outstanding and does not replay a backlog of missed intervals.
+
+Every occurrence has the original per-run budget. There is no aggregate lifetime spending ceiling for a schedule. Admission failures and uncertain billing disable a schedule with an explicit error. Imported-submission replays cannot be scheduled as fresh evidence. Changing the task cohort requires a new experiment.
+
+## Service boundary and deployment
+
+The default server binds to loopback. Optional bearer authentication protects API routes; the health endpoint and static app remain public. The browser stores a token only for the current session. Trusted-host checks, bounded request bodies, same-origin mutation checks, and response security headers constrain the local service.
+
+The deployment is intended for one trusted workspace owner. A workspace token is not a multi-user permission model. SSO, roles, tenant isolation, distributed workers, interactive tool-agent execution, benchmark holdout management, and universal repository support are future work.
+
+For access from another device, use an authenticated SSH tunnel to the loopback service. The [operations guide](operations.md) covers configuration, backups, recovery, and deployment details.
