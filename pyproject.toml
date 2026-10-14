@@ -3,7 +3,7 @@ requires = ["hatchling>=1.27,<2"]
 build-backend = "hatchling.build"
 
 [project]
-name = "custom-vals-enterprises"
+name = "everval-ai"
 version = "0.1.0"
 description = "A local workbench for evaluating agents on real work."
 readme = "README.md"
@@ -20,9 +20,12 @@ dependencies = [
   "pyyaml>=6.0.2,<7",
   "jsonschema>=4.23,<5",
   "pypdf>=5,<7",
+  "textual>=0.89,<8",
+  "packaging>=24,<27",
 ]
 
 [project.scripts]
+everval = "cvals.cli:app"
 cvals = "cvals.cli:app"
 
 [dependency-groups]

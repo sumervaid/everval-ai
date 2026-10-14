@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import math
+import re
+from dataclasses import replace
 from typing import TYPE_CHECKING, Any
 
 from jsonschema import Draft202012Validator
@@ -83,7 +85,12 @@ def _citations(scenario: Scenario, actual: Any, expected: Any) -> tuple[bool, st
 
 
 def _grade(
-    scenario: Scenario, check: Check, actual: Any, settings: Settings
+    scenario: Scenario,
+    check: Check,
+    actual: Any,
+    settings: Settings,
+    *,
+    replace_files: bool = False,
 ) -> tuple[bool, str, Any]:
     if actual is _MISSING:
         return False, "Required output path is missing", None
@@ -115,22 +122,38 @@ def _grade(
         passed, message = _citations(scenario, actual, expected)
         return passed, message, actual
     else:
-        from cvals.sandbox import run_python_cases, run_python_tests
+        from cvals.sandbox import run_python_cases, run_python_tests, run_repository_tests
 
         if not isinstance(actual, dict) or not all(
             isinstance(k, str) and isinstance(v, str) for k, v in actual.items()
         ):
             return False, "Code submission must map filenames to source text", actual
-        base = expected.get("files", scenario.inputs.get("files", {}))
+        base = {} if replace_files else expected.get("files", scenario.inputs.get("files", {}))
         if not isinstance(base, dict):
             raise EvaluationError("Python task base files must be an object")
+        grader_settings = settings
+        digest = expected.get("image_digest")
+        if digest is not None:
+            if not isinstance(digest, str) or not re.fullmatch(r"sha256:[0-9a-f]{64}", digest):
+                raise EvaluationError("Verifier image must be pinned to a full SHA-256 image ID")
+            grader_settings = replace(settings, sandbox_image=digest)
         try:
-            if "cases" in expected:
+            if "pytest" in expected:
+                profile = expected["pytest"]
+                result = run_repository_tests(
+                    {**base, **actual},
+                    profile["hidden_files"],
+                    profile["selectors"],
+                    grader_settings,
+                    profile.get("timeout_seconds", 60),
+                    profile.get("plugins", []),
+                )
+            elif "cases" in expected:
                 result = run_python_cases(
-                    {**base, **actual}, expected["entrypoint"], expected["cases"], settings
+                    {**base, **actual}, expected["entrypoint"], expected["cases"], grader_settings
                 )
             else:
-                result = run_python_tests({**base, **actual}, expected["tests"], settings)
+                result = run_python_tests({**base, **actual}, expected["tests"], grader_settings)
         except ValueError as exc:
             raise EvaluationError(str(exc)) from exc
         if result.get("infrastructure_error") or not result.get("tests_run"):
@@ -150,7 +173,13 @@ def evaluate(
     results = []
     for check in scenario.checks:
         try:
-            passed, message, actual = _grade(scenario, check, at_path(output, check.path), settings)
+            passed, message, actual = _grade(
+                scenario,
+                check,
+                at_path(output, check.path),
+                settings,
+                replace_files=output.get("replace_files") is True,
+            )
         except (RecursionError, TypeError, KeyError) as exc:
             raise EvaluationError(f"Invalid verifier configuration for {check.id}") from exc
         results.append(

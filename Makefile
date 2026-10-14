@@ -1,4 +1,4 @@
-.PHONY: setup web check test serve clean
+.PHONY: setup web check test serve tui tmux clean
 setup:
 	uv sync --frozen
 	cd web && npm ci
@@ -19,7 +19,13 @@ test:
 	uv run pytest
 
 serve:
-	uv run cvals serve
+	uv run everval serve
 
 clean:
 	uv run python -c 'import shutil; shutil.rmtree("web/dist", ignore_errors=True); shutil.rmtree("src/cvals/static", ignore_errors=True)'
+
+tui:
+	uv run everval tui
+
+tmux:
+	uv run everval tmux

@@ -1,6 +1,6 @@
 # Security and trust boundaries
 
-Custom Vals is designed for a single local workspace. The default service listens on loopback; an SSH tunnel is the supported remote-access path. A workspace token grants full workspace access, including private task definitions and recorded evidence. It is not a multi-user permission system.
+Everval AI is designed for a single local workspace. The default service listens on loopback; an SSH tunnel is the supported remote-access path. A workspace token grants full workspace access, including private task definitions and recorded evidence. It is not a multi-user permission system.
 
 ## Material with different trust levels
 

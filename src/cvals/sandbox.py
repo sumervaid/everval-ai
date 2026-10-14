@@ -70,10 +70,12 @@ sys.exit(0 if payload["passed"] else 1)
 """
 
 
-def validate_files(files: dict[str, str]) -> None:
+def validate_files(files: dict[str, str], *, repository_mode: bool = False) -> None:
     """Accept text files only; no paths may escape or replace the verifier."""
-    if not isinstance(files, dict) or not files or len(files) > MAX_FILES:
-        raise ValueError(f"A submission needs 1–{MAX_FILES} text files")
+    file_limit = 2048 if repository_mode else MAX_FILES
+    byte_limit = 16 * 1024 * 1024 if repository_mode else MAX_BUNDLE_BYTES
+    if not isinstance(files, dict) or not files or len(files) > file_limit:
+        raise ValueError(f"A submission needs 1–{file_limit} text files")
     total = 0
     for name, content in files.items():
         if not isinstance(name, str) or not isinstance(content, str):
@@ -88,7 +90,7 @@ def validate_files(files: dict[str, str]) -> None:
             or any(part in {"..", ".", ".git", "__pycache__"} for part in name.split("/"))
             or any(not part for part in name.split("/"))
             or any(part.startswith("__cvals") for part in path.parts)
-            or path.name.startswith("test_")
+            or (not repository_mode and path.name.startswith("test_"))
             or path.name in {"sitecustomize.py", "usercustomize.py"}
         ):
             raise ValueError(f"Unsafe or reserved submission path: {name!r}")
@@ -96,8 +98,8 @@ def validate_files(files: dict[str, str]) -> None:
         if size > MAX_FILE_BYTES:
             raise ValueError(f"Submission file exceeds {MAX_FILE_BYTES} bytes")
         total += size
-    if total > MAX_BUNDLE_BYTES:
-        raise ValueError(f"Submission exceeds {MAX_BUNDLE_BYTES} bytes")
+    if total > byte_limit:
+        raise ValueError(f"Submission exceeds {byte_limit} bytes")
 
 
 def _test_count(tests: str) -> int:
@@ -329,8 +331,10 @@ def _execute(
     grade_files: dict[str, str],
     settings: Any,
     timeout_seconds: int,
+    *,
+    repository_mode: bool = False,
 ) -> dict[str, Any]:
-    validate_files(files)
+    validate_files(files, repository_mode=repository_mode)
     if type(timeout_seconds) is not int or not 1 <= timeout_seconds <= 120:
         raise ValueError("The verifier deadline must be between 1 and 120 seconds")
     digest = _image(settings)
@@ -451,7 +455,7 @@ def _execute(
                 if cleanup.returncode:
                     errors.append(container_name)
         if task_image is not None:
-            cleanup = _docker(["image", "rm", task_image], settings)
+            cleanup = _docker(["image", "rm", "--no-prune", task_image], settings)
             if cleanup.returncode:
                 errors.append(task_image)
         if errors:
@@ -644,7 +648,7 @@ def cleanup_sandboxes(settings: Any, min_age_seconds: int = 300) -> dict[str, An
                 remove = (
                     ["rm", "--force", "--volumes", identifier]
                     if resource == "container"
-                    else ["image", "rm", identifier]
+                    else ["image", "rm", "--no-prune", identifier]
                 )
                 removed = _docker(remove, settings)
                 if removed.returncode:
@@ -656,3 +660,221 @@ def cleanup_sandboxes(settings: Any, min_age_seconds: int = 300) -> dict[str, An
             report["available"] = False
             report["errors"].append(str(exc))
     return report
+
+
+# Repository tests deliberately run inside the candidate interpreter. This mode
+# protects the host and keeps private tests out of agent inputs, but cannot prove
+# grader integrity against a candidate that intentionally tampers with pytest.
+_PYTEST_RUNNER = r"""
+import json
+import os
+import sys
+os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
+import pytest
+sys.path[:0] = ["/workspace", "/workspace/src"]
+with open("/grade/spec.json", encoding="utf-8") as stream:
+    spec = json.load(stream)
+class Evidence:
+    def __init__(self):
+        self.collected = []
+        self.records = []
+        self.collection_errors = 0
+    def pytest_collection_finish(self, session):
+        self.collected = [item.nodeid for item in session.items]
+        if len(self.collected) > 5000:
+            pytest.exit("Collection exceeds 5000 tests", returncode=4)
+    def pytest_collectreport(self, report):
+        if report.failed:
+            self.collection_errors += 1
+    @pytest.hookimpl(hookwrapper=True)
+    def pytest_runtest_makereport(self, item, call):
+        outcome = yield
+        report = outcome.get_result()
+        self.records.append({
+            "id": report.nodeid, "when": report.when, "outcome": report.outcome,
+            "exception": call.excinfo.type.__name__ if call.excinfo else None,
+            "xfail": hasattr(report, "wasxfail"),
+        })
+evidence = Evidence()
+args = ["-q", "--tb=short", "--color=no", "-p", "no:cacheprovider",
+        "-o", "addopts=", "--confcutdir=/workspace"]
+for plugin in spec["plugins"]:
+    args += ["-p", plugin]
+args += spec["selectors"]
+code = int(pytest.main(args, plugins=[evidence]))
+print("\n__CVALS_PYTEST__" + json.dumps({
+    "exit_code": code, "collected": evidence.collected,
+    "collection_errors": evidence.collection_errors, "records": evidence.records,
+}, separators=(",", ":")), flush=True)
+sys.exit(code)
+"""
+
+
+def validate_repository_source(files: dict[str, str]) -> None:
+    """Validate public source without permitting a private harness override."""
+    validate_files(files, repository_mode=True)
+    reserved = {
+        "pytest.ini",
+        ".pytest.ini",
+        "tox.ini",
+        "setup.cfg",
+        "pyproject.toml",
+        "conftest.py",
+    }
+    if any(
+        PurePosixPath(path).name in reserved
+        or PurePosixPath(path).name.startswith("test_")
+        or PurePosixPath(path).name.endswith("_test.py")
+        or any(part in {"test", "tests", ".github"} for part in PurePosixPath(path).parts)
+        for path in files
+    ):
+        raise ValueError(
+            "Candidate source cannot introduce private test paths or pytest configuration"
+        )
+
+
+def run_repository_tests(
+    files: dict[str, str],
+    hidden_files: dict[str, str],
+    selectors: list[str],
+    settings: Any,
+    timeout_seconds: int = 60,
+    plugins: list[str] | None = None,
+) -> dict[str, Any]:
+    """Run frozen pytest selections in a prepared local image without installing.
+
+    Explicit trusted test files override no candidate paths: overlapping paths are
+    rejected, including conftest/config overrides. Host-side reconciliation checks
+    collection, phase evidence and the independently observed Docker exit status.
+    """
+    validate_files(files, repository_mode=True)
+    validate_files(hidden_files, repository_mode=True)
+    validate_repository_source(files)
+    if set(files) & set(hidden_files):
+        raise ValueError("Candidate files cannot replace private repository tests or configuration")
+    if (
+        not isinstance(selectors, list)
+        or not 1 <= len(selectors) <= 500
+        or len(set(selectors)) != len(selectors)
+        or any(
+            not isinstance(selector, str)
+            or len(selector) > 600
+            or not re.fullmatch(r"[A-Za-z0-9_./-]+(?:::[A-Za-z0-9_]+){1,2}", selector)
+            or selector.split("::")[0] not in hidden_files
+            for selector in selectors
+        )
+    ):
+        raise ValueError("Repository tests require 1–500 explicit frozen test selectors")
+    plugins = plugins or []
+    if (
+        not isinstance(plugins, list)
+        or len(plugins) > 16
+        or any(
+            not isinstance(p, str) or not re.fullmatch(r"[A-Za-z_][\w.]{0,199}", p) for p in plugins
+        )
+    ):
+        raise ValueError("Prepared pytest plugins must be explicit Python module names")
+    runtime = _execute(
+        {**files, **hidden_files},
+        {
+            "runner.py": _PYTEST_RUNNER,
+            "spec.json": json.dumps({"selectors": selectors, "plugins": plugins}),
+        },
+        settings,
+        timeout_seconds,
+        repository_mode=True,
+    )
+    result: dict[str, Any] = {
+        **runtime,
+        "passed": False,
+        "tests_run": 0,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "test_cases": [],
+        "integrity": "same-process pytest; not resistant to deliberate grader manipulation",
+        "infrastructure_error": None,
+    }
+
+    def invalid(reason: str) -> dict[str, Any]:
+        result["errors"] = 1
+        result["infrastructure_error"] = reason
+        return result
+
+    if (
+        runtime["timed_out"]
+        or runtime["output_truncated"]
+        or runtime["oom_killed"]
+        or runtime["running"]
+    ):
+        return invalid("Container exceeded a resource limit or remained running")
+    lines = [line for line in runtime["output"].splitlines() if line.startswith("__CVALS_PYTEST__")]
+    if len(lines) != 1:
+        return invalid("Missing or ambiguous pytest evidence")
+    try:
+        payload = json.loads(lines[0][len("__CVALS_PYTEST__") :])
+        collected = payload["collected"]
+        records = payload["records"]
+        if (
+            not isinstance(collected, list)
+            or not 1 <= len(collected) <= 5000
+            or any(not isinstance(item, str) or len(item) > 2000 for item in collected)
+            or len(set(collected)) != len(collected)
+            or not isinstance(records, list)
+            or len(records) > 15000
+            or payload["collection_errors"] != 0
+            or payload["exit_code"] not in {0, 1}
+            or payload["exit_code"] != runtime["exit_code"]
+        ):
+            return invalid("Pytest did not produce complete, nonempty collection and exit evidence")
+        for selector in selectors:
+            if not any(item == selector or item.startswith(selector + "[") for item in collected):
+                return invalid("A frozen selector collected no tests")
+        if any(
+            not any(item == selector or item.startswith(selector + "[") for selector in selectors)
+            for item in collected
+        ):
+            return invalid("Pytest ran tests outside the frozen selection")
+        grouped: dict[str, dict[str, Any]] = {item: {} for item in collected}
+        for record in records:
+            node, phase = record["id"], record["when"]
+            if (
+                node not in grouped
+                or phase not in {"setup", "call", "teardown"}
+                or phase in grouped[node]
+            ):
+                return invalid("Duplicate or unexpected pytest phase evidence")
+            if record["outcome"] not in {"passed", "failed", "skipped"}:
+                return invalid("Invalid pytest phase status")
+            grouped[node][phase] = record
+        for node, phases in grouped.items():
+            if set(phases) != {"setup", "call", "teardown"}:
+                return invalid("A test did not complete setup, execution and teardown")
+            if any(phases[p]["outcome"] != "passed" for p in ("setup", "teardown")):
+                return invalid("Test setup or teardown failed")
+            call = phases["call"]
+            if (
+                any(record.get("xfail") for record in phases.values())
+                or call["outcome"] == "skipped"
+            ):
+                result["skipped"] += 1
+                return invalid(
+                    "Skipped or expected-failure tests cannot establish benchmark validity"
+                )
+            if call["outcome"] == "failed" and call.get("exception") not in {
+                "AssertionError",
+                "Failed",
+            }:
+                return invalid(
+                    "A test raised a non-assertion exception; dependency and runtime errors are not valid failures"
+                )
+            failed = call["outcome"] == "failed"
+            result["failures"] += int(failed)
+            result["test_cases"].append({"id": node, "status": "failed" if failed else "passed"})
+        result["tests_run"] = len(collected)
+        if (result["failures"] == 0) != (runtime["exit_code"] == 0):
+            return invalid("Docker exit status contradicts pytest evidence")
+        result["passed"] = result["failures"] == 0
+        return result
+    except (ValueError, KeyError, TypeError):
+        return invalid("Malformed pytest evidence")

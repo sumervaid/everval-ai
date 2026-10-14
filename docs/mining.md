@@ -1,20 +1,24 @@
-# Compile tasks from Python history
+# Inspect legacy Python history drafts
 
 The historical compiler turns a restricted class of local Git changes into
 reviewable coding scenarios. It reads commit metadata, source blobs, and Python
 syntax. It does not check out files, run hooks, import repository modules,
 install dependencies, or execute repository tests.
 
-This is a conservative starting point for small Python repositories. It is not
-an arbitrary repository benchmark generator.
+For admitted experiments, use the [historical benchmark release workflow](benchmarks.md).
+It adds GitHub projects, reviewed wording, repeated historical and regression
+controls, prepared pytest profiles, and immutable releases.
+
+The commands below remain available for inspecting conservative extraction drafts.
+Saving or diagnostically validating a draft does not admit it to experiments.
 
 ## Inspect, extract, then validate
 
 Use an absolute path to a local working repository:
 
 ```sh
-uv run cvals inspect /absolute/path/to/repository --limit 20
-uv run cvals mine /absolute/path/to/repository --limit 20
+uv run everval inspect /absolute/path/to/repository --limit 20
+uv run everval mine /absolute/path/to/repository --limit 20
 ```
 
 The first command previews recent commit metadata. The second returns:
@@ -28,18 +32,20 @@ By default, extraction does not save a collection. Add `--save` after reviewing
 the candidate scope:
 
 ```sh
-uv run cvals mine /absolute/path/to/repository --limit 20 --save
+uv run everval mine /absolute/path/to/repository --limit 20 --save
 ```
 
 Copy the returned `collection.id`, inspect its instructions and controls in
 the app, and validate it using the configured [coding sandbox](sandbox.md):
 
 ```sh
-uv run cvals collections validate COLLECTION_ID
+uv run everval collections validate COLLECTION_ID
 ```
 
-**Accepted means extraction succeeded.** The task remains unvalidated until its
-reference passes and its historical base fails in isolation. An unchanged
+**Accepted means extraction succeeded.** Diagnostic collection validation observes
+the reference and base but does not create a release attestation. Historical
+drafts cannot run as experiments, imported submissions, or scheduled reruns until
+the project workflow produces a matching reviewed release. An unchanged
 behavior test may extract successfully but fail the negative-control gate.
 A missing dependency, zero-case run, or unavailable runtime does not establish
 task validity.
@@ -120,6 +126,6 @@ Source permissions are marked for review. Keep private source snapshots and
 grading data in the configured workspace rather than the project repository.
 Do not label historical public tasks as uncontaminated.
 
-One validation cycle establishes the observed reference/base behavior only.
-Repeat validation when assessing flakiness and include regression cases that
-matter to the workload.
+One diagnostic validation cycle establishes observed reference/base behavior only.
+The benchmark release workflow requires three fresh cycles, unchanged regression
+controls, reviewed wording, and exact environment and grader fingerprints.

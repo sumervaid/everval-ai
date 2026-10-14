@@ -13,13 +13,13 @@ For a non-default daemon, configure both the application and the Docker command
 used to load its image:
 
 ```sh
-export CVALS_DOCKER_HOST=unix:///absolute/path/to/docker.sock
-DOCKER_HOST="$CVALS_DOCKER_HOST" docker pull python:3.12-slim
-export CVALS_SANDBOX_IMAGE=python:3.12-slim
-uv run cvals doctor
+export EVERVAL_DOCKER_HOST=unix:///absolute/path/to/docker.sock
+DOCKER_HOST="$EVERVAL_DOCKER_HOST" docker pull python:3.12-slim
+export EVERVAL_SANDBOX_IMAGE=python:3.12-slim
+uv run everval doctor
 ```
 
-For the default daemon, omit `CVALS_DOCKER_HOST` and use
+For the default daemon, omit `EVERVAL_DOCKER_HOST` and use
 `docker pull python:3.12-slim`. Loading an image is an explicit setup step.
 Execution only accepts an image already present in that daemon and records its
 immutable digest. There is no automatic pull or host execution fallback.
@@ -27,7 +27,7 @@ immutable digest. There is no automatic pull or host execution fallback.
 Validate the coding starter after setup:
 
 ```sh
-uv run cvals collections validate starter-coding
+uv run everval collections validate starter-coding
 ```
 
 Its ten original repair tasks contain 51 function cases. Every reference must
@@ -73,6 +73,23 @@ Arbitrary unittest mode is also available for trusted compatibility tests.
 Candidate code and tests share one interpreter in that mode; deliberate grader
 manipulation is outside its assurance boundary. The built-in coding collection
 and historical compiler use external expected-value comparisons.
+
+## Prepared repository tests
+
+Historical benchmark profiles run explicit pytest selections over complete UTF-8
+repository snapshots. Dependencies must already exist in a pinned local image.
+Private tests, pytest configuration, and reference source are excluded from the
+agent's public workspace; grading receives a separate frozen harness.
+
+The runner reconciles collection, setup/call/teardown evidence, and Docker exit
+status. Collection errors, missing dependencies, skipped tests, zero tests and
+resource failures cannot establish admission. Same-process pytest does not resist
+deliberate grader manipulation. See [benchmark admission](benchmarks.md).
+
+Tool-using systems execute public Python snippets in fresh containers containing
+only public source and the snippet. Private grading material is introduced only
+for the separate evaluator. A complete submission can set replace_files to true
+to preserve deletions; otherwise files are partial replacements over the base.
 
 ## Verification
 

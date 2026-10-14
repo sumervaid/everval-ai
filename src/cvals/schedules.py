@@ -137,7 +137,13 @@ class ScheduleStore:
                 connection,
                 experiment_id,
                 "schedule.created",
-                {"schedule_id": id, "interval_minutes": validated.interval_minutes},
+                {
+                    "schedule_id": id,
+                    "name": validated.name,
+                    "interval_minutes": validated.interval_minutes,
+                    "enabled": validated.enabled,
+                    "source_snapshot_hash": state["snapshot_hash"],
+                },
             )
             row = connection.execute(
                 "SELECT * FROM evaluation_schedules WHERE id=?", (id,)
@@ -153,6 +159,8 @@ class ScheduleStore:
             ).fetchone()
             if row is None:
                 raise KeyError(id)
+            if bool(row["enabled"]) == enabled and row["last_error"] is None:
+                return self._public(row)
             if enabled:
                 snapshot, state = self.store._read_experiment(
                     connection, row["source_experiment_id"]

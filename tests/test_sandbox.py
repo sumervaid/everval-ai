@@ -162,7 +162,7 @@ def test_nonroot_networkless_container_is_removed_even_on_timeout(tmp_path: Path
     assert not any(item.startswith(("--mount", "--volume", "-v=")) for item in create)
     assert _DIGEST in create
     assert any(call[:3] == ["rm", "--force", "--volumes"] for call in calls)
-    assert calls[-1] == ["image", "rm", _DIGEST]
+    assert calls[-1] == ["image", "rm", "--no-prune", _DIGEST]
     assert result["timed_out"] and not result["passed"]
 
 
@@ -330,4 +330,7 @@ def test_recovery_only_reaps_old_owned_workspace_resources(tmp_path: Path) -> No
     ):
         report = cleanup_sandboxes(settings)
     assert report == {"available": True, "containers_removed": 1, "images_removed": 1, "errors": []}
-    assert removed == [["rm", "--force", "--volumes", old_container], ["image", "rm", task_image]]
+    assert removed == [
+        ["rm", "--force", "--volumes", old_container],
+        ["image", "rm", "--no-prune", task_image],
+    ]

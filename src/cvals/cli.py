@@ -9,7 +9,7 @@ import signal
 import sqlite3
 import time
 from pathlib import Path
-from typing import Annotated, Any
+from typing import Annotated, Any, NoReturn
 
 import typer
 import uvicorn
@@ -68,14 +68,14 @@ def output(value: Any) -> None:
     typer.echo(json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False))
 
 
-def fail(exc: Exception) -> None:
+def fail(exc: Exception) -> NoReturn:
     err.print(f"Error: {exc}", markup=False)
     raise typer.Exit(1) from exc
 
 
 @app.callback(invoke_without_command=True)
 def main(version: Annotated[bool, typer.Option("--version", is_eager=True)] = False) -> None:
-    """Custom Vals: a local evaluation workspace."""
+    """Everval AI: a local evaluation workspace."""
     if version:
         typer.echo(__version__)
         raise typer.Exit()
@@ -164,7 +164,7 @@ def serve(
 
     settings = Settings.from_env()
     if host not in {"127.0.0.1", "localhost", "::1"} and not settings.token:
-        fail(ValueError("Set CVALS_TOKEN before exposing the workspace beyond loopback."))
+        fail(ValueError("Set EVERVAL_TOKEN before exposing the workspace beyond loopback."))
     uvicorn.run(
         create_app(settings, start_worker=worker),
         host=host,
@@ -181,16 +181,34 @@ def consume(
 ) -> None:
     """Process queued experiments; recover expired leases on startup."""
     settings, store = workspace()
-    from cvals.sandbox import cleanup_sandboxes
+    from cvals.jobs import Jobs
+    from cvals.runtime import worker_lock
     from cvals.schedules import ScheduleStore
 
+    lock = worker_lock(settings)
+    if lock is None:
+        fail(ValueError("A dedicated worker already serves this workspace"))
     engine = Engine(store, settings)
     engine.recover()
-    cleanup_sandboxes(settings)
+    from cvals.environments import cleanup_environments
+    from cvals.sandbox import cleanup_sandboxes
+
+    for cleanup in (cleanup_sandboxes, cleanup_environments):
+        try:
+            cleanup(settings)
+        except (OSError, ValueError) as exc:
+            logging.warning("Runtime cleanup unavailable (%s)", type(exc).__name__)
     schedules = ScheduleStore(settings, store)
+    jobs = Jobs(settings)
     if once:
         scheduled = schedules.tick()
-        output({"scheduled": scheduled, "processed": engine.run_pending_once()})
+        output(
+            {
+                "scheduled": scheduled,
+                "job": jobs.run_pending_once(),
+                "processed": engine.run_pending_once(),
+            }
+        )
         return
     stopping = False
 
@@ -200,60 +218,28 @@ def consume(
 
     signal.signal(signal.SIGINT, stop)
     signal.signal(signal.SIGTERM, stop)
+    print("Everval AI worker ready", flush=True)
     next_schedule_check = 0.0
-    while not stopping:
-        if time.monotonic() >= next_schedule_check:
-            schedules.tick()
-            next_schedule_check = time.monotonic() + 5
-        if not engine.run_pending_once():
-            time.sleep(0.5)
-
-
-@collections_app.command("list")
-def list_collections() -> None:
-    """List collections and their immutable current versions."""
-    _, store = workspace()
-    output(store.list_collections())
-
-
-@collections_app.command("import")
-def import_collection(path: Annotated[Path, typer.Argument(exists=True, dir_okay=False)]) -> None:
-    """Import a versioned JSON or YAML collection."""
-    from cvals.api import _load_collection
-
     try:
-        _, store = workspace()
-        if path.stat().st_size > 5 * 1024 * 1024:
-            raise ValueError("Collection exceeds the 5 MiB limit.")
-        value = Collection.model_validate(_load_collection(path.read_bytes(), path.name))
-        output(store.save_collection(value))
-    except (ValueError, OSError) as exc:
-        fail(exc)
-
-
-@collections_app.command("export")
-def export_collection(
-    collection_id: str, destination: Annotated[Path, typer.Option("--output")]
-) -> None:
-    """Write a portable collection manifest, including private grading data."""
-    _, store = workspace()
-    value = store.get_collection(collection_id)
-    _write_new(destination, json.dumps(value, indent=2, ensure_ascii=False))
-    typer.echo(str(destination))
-
-
-@collections_app.command("validate")
-def validate_collection_command(collection_id: str) -> None:
-    """Verify reference controls and negative controls for every scenario."""
-    from cvals.domains import validate_collection
-
-    settings, store = workspace()
-    result = validate_collection(
-        Collection.model_validate(store.get_collection(collection_id)), settings
-    )
-    output(result)
-    if not result["valid"]:
-        raise typer.Exit(1)
+        while not stopping:
+            try:
+                if time.monotonic() >= next_schedule_check:
+                    schedules.tick()
+                    next_schedule_check = time.monotonic() + 5
+                job = jobs.run_pending_once()
+                experiment = engine.run_pending_once()
+                if job or experiment:
+                    print(
+                        json.dumps({"job_processed": job, "experiment_processed": experiment}),
+                        flush=True,
+                    )
+                else:
+                    time.sleep(0.5)
+            except (OSError, sqlite3.Error) as exc:
+                logging.error("Workspace unavailable (%s); retrying", type(exc).__name__)
+                time.sleep(1)
+    finally:
+        lock.close()
 
 
 @app.command("mine")
@@ -305,6 +291,8 @@ def add_http_system(
     input_rate: Annotated[float, typer.Option(min=0, help="USD per million input tokens.")] = 0,
     output_rate: Annotated[float, typer.Option(min=0, help="USD per million output tokens.")] = 0,
     max_tokens: Annotated[int, typer.Option(min=1, max=32768)] = 2048,
+    harness: Annotated[str, typer.Option(help="single-turn or tools")] = "single-turn",
+    max_steps: Annotated[int, typer.Option(min=1, max=30)] = 8,
 ) -> None:
     """Register a model endpoint. External network access is separately enabled."""
     _, store = workspace()
@@ -315,6 +303,8 @@ def add_http_system(
         base_url=base_url,
         api_key_env=api_key_env,
         max_tokens=max_tokens,
+        harness=harness,  # type: ignore[arg-type]
+        max_steps=max_steps,
         input_cost_per_million=input_rate,
         output_cost_per_million=output_rate,
     )
@@ -591,3 +581,54 @@ def _write_new(path: Path, content: str) -> None:
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     app()
+
+
+@collections_app.command("list")
+def list_collections() -> None:
+    """List collections and their immutable current versions."""
+    _, store = workspace()
+    output(store.list_collections())
+
+
+@collections_app.command("import")
+def import_collection(path: Annotated[Path, typer.Argument(exists=True, dir_okay=False)]) -> None:
+    """Import a versioned JSON or YAML collection."""
+    from cvals.api import _load_collection
+
+    try:
+        _, store = workspace()
+        if path.stat().st_size > 5 * 1024 * 1024:
+            raise ValueError("Collection exceeds the 5 MiB limit.")
+        value = Collection.model_validate(_load_collection(path.read_bytes(), path.name))
+        output(store.save_collection(value))
+    except (ValueError, OSError) as exc:
+        fail(exc)
+
+
+@collections_app.command("export")
+def export_collection(
+    collection_id: str, destination: Annotated[Path, typer.Option("--output")]
+) -> None:
+    """Write a portable collection manifest, including private grading data."""
+    _, store = workspace()
+    value = store.get_collection(collection_id)
+    _write_new(destination, json.dumps(value, indent=2, ensure_ascii=False))
+    typer.echo(str(destination))
+
+
+@collections_app.command("validate")
+def validate_collection_command(collection_id: str) -> None:
+    """Verify reference controls and negative controls for every scenario."""
+    from cvals.domains import validate_collection
+
+    settings, store = workspace()
+    result = validate_collection(
+        Collection.model_validate(store.get_collection(collection_id)), settings
+    )
+    output(result)
+    if not result["valid"]:
+        raise typer.Exit(1)
+
+
+# Registration follows the shared command helpers to avoid circular initialization.
+from cvals import terminal_cli as _terminal_cli  # noqa: E402,F401

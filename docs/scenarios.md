@@ -50,8 +50,8 @@ Save this as `collection.json`:
 ```
 
 ```sh
-uv run cvals collections import collection.json
-uv run cvals collections validate invoice-checks
+uv run everval collections import collection.json
+uv run everval collections validate invoice-checks
 ```
 
 Manifests are limited to 5 MiB; collections support up to 1,000 scenarios and
@@ -107,7 +107,7 @@ work for every domain, including imported collections. If the list is omitted,
 validation uses an empty output as the only negative control.
 
 ```sh
-uv run cvals collections validate COLLECTION_ID
+uv run everval collections validate COLLECTION_ID
 ```
 
 Validation requires the reference to pass all required checks and every negative
@@ -153,7 +153,7 @@ endpoint. Checks, expected values, reference outputs, and evaluator provenance
 remain in the local workspace.
 
 ```sh
-uv run cvals collections tasks COLLECTION_ID --output tasks.json
+uv run everval collections tasks COLLECTION_ID --output tasks.json
 ```
 
 This exports solver inputs and the collection fingerprint. A full collection

@@ -1,71 +1,111 @@
-# Custom Vals
+# Everval AI
 
-A local evaluation workbench for code, documents, structured data, and business workflows.
+**Turn real work into repeatable evidence.**
 
-Turn work you understand into explicit tasks, compare systems on the same inputs, and inspect the evidence behind each result. Use the **web app** for guided evaluation and the **CLI** for repeatable runs. Both use the same Python engine and local workspace.
+Everval AI is a local evaluation workbench with a keyboard-first terminal interface, a styled tmux workspace, and a shared CLI/API. Connect a GitHub repository, curate engineering tasks from merged pull requests, validate each task, and compare systems against a frozen benchmark. The same evaluation engine supports document, data, and workflow tasks.
 
-## Start here
+Source is maintained in this **private repository**. Workspaces, repository mirrors, hidden graders, model traces, and credentials stay outside Git.
 
-You need Python 3.12 or newer, [uv](https://docs.astral.sh/uv/getting-started/installation/), and Node.js 24.15+ LTS, 22.22.2+, or 26+.
+![Everval AI terminal workbench with the original starter workspace](docs/assets/terminal.png)
+
+## Start in the terminal
+
+Install Python 3.12+, [uv](https://docs.astral.sh/uv/), and optionally [tmux](https://github.com/tmux/tmux/wiki). GitHub onboarding uses Git and the [GitHub CLI](https://cli.github.com/). Coding evaluation needs Docker and a local Python image; see [runtime setup](docs/sandbox.md).
 
 ```sh
-git clone https://github.com/sumervaid/custom-vals-enterprises.git
-cd custom-vals-enterprises
-make setup
-uv run cvals init --starters
-uv run cvals serve
+git clone https://github.com/sumervaid/everval-ai.git
+cd everval-ai
+uv sync --frozen
+uv run everval init --starters
+uv run everval tmux
 ```
 
-Open **http://127.0.0.1:8765**. This repository is private; cloning requires access.
+Without tmux, run `uv run everval tui`. Node.js is required only to build the optional web interface.
 
-In the app, open **Experiments → New experiment**, choose **Evidence and policy reading**, and select **Reference fixture · control** and **Empty submission · control**. Start the experiment, then open **Trial evidence** to inspect the individual checks.
+The workbench provides eight views: **Overview · Projects · Releases · Experiments · Systems · Schedules · Audit · Workspace**. Use **F1–F8** to navigate, **Ctrl+P** for commands, **Ctrl+N** to connect a repository, and **Ctrl+R** to refresh. A separate worker retains queued work when the terminal closes. In tmux, **Ctrl+B, D** detaches the session.
 
-The four starter collections contain 19 original scenarios. These fixture controls verify the pipeline; they do not measure model performance. Document, data, and workflow examples need no model account or Docker installation. Coding checks need a separate Linux runtime and a locally available Python image; follow the [sandbox guide](docs/sandbox.md).
+[Terminal walkthrough](docs/terminal.md) · [First experiment](docs/quickstart.md) · [GitHub onboarding](docs/github.md)
 
-## Choose your next step
+## From a repository to a benchmark
 
-| I want to…                                             | Start with                                                                |
-| ------------------------------------------------------ | ------------------------------------------------------------------------- |
-| Run my first comparison                                | [Quickstart](docs/quickstart.md)                                          |
-| Define tasks from my own work                          | [Scenario authoring](docs/scenarios.md)                                   |
-| Extract coding tasks from local history                | [Repository mining](docs/mining.md)                                       |
-| Connect a model endpoint                               | [Systems and providers](docs/providers.md)                                |
-| Evaluate an existing agent or harness                  | [Import recorded submissions](docs/submissions.md)                        |
-| Understand scores and uncertainty                      | [Reading results](docs/results.md)                                        |
-| Schedule runs, retain evidence, or operate the service | [Operations](docs/operations.md)                                          |
-| Understand the implementation                          | [Architecture](docs/ARCHITECTURE.md) and [interfaces](docs/INTERFACES.md) |
-| See current scope and future work                      | [Delivery status and roadmap](docs/PLAN.md)                               |
-| Contribute a change                                    | [Contributing](CONTRIBUTING.md)                                           |
+1. **Connect.** Paste a GitHub URL or `owner/repository`, or choose a local Git repository. GitHub imports use a private bare mirror; imported code is never checked out or executed on the host.
+2. **Discover.** Inspect merged PR candidates, lineage evidence, missing context, and rejection reasons. Paginate through older work without losing the candidate ledger.
+3. **Review.** Write an independent issue statement that describes the desired behavior without disclosing the fix. Review identity is a local label.
+4. **Prepare.** Inspect dependency declarations. For supported Python projects, prepare a pinned environment from public wheels, or select an already-local image.
+5. **Validate.** Repeat clean before/after runs. A repair must fail before the original fix, pass afterward, and preserve selected baseline behavior. Infrastructure failures, zero tests, inconsistent outcomes, and unclear lineage cannot establish validity.
+6. **Release.** Freeze accepted tasks into versioned development and holdout collections. Choose the partition explicitly; old releases retain their original evidence.
+7. **Evaluate.** Select a model or harness, declare prices and budget, and inspect every attempt. Compare compatible cohorts, apply quality gates, add human reviews, and export results.
 
-## What you can do
+```mermaid
+flowchart LR
+    A[GitHub or local history] --> B[Candidate ledger]
+    B --> C[Reviewed statement]
+    C --> D[Repeated isolated validation]
+    D --> E[Immutable release]
+    E --> F[Public task → solver]
+    F --> G[Separate private grader]
+    G --> H[Evidence · comparison · gates]
+```
 
-- **Define and inspect tasks.** Author scenarios, preview source files, import JSON/YAML collections, and review instructions, checks, provenance, and reference outputs.
-- **Mine supported Python changes.** Read local Git history into draft scenarios with a complete acceptance/rejection ledger. Validate extracted tasks separately.
-- **Compare systems.** Run compatible structured-output model endpoints, fixture controls, or externally produced submissions against a frozen collection.
-- **Follow every attempt.** Inspect output, individual checks, errors, timing, and available usage. Cancel work, recover interrupted execution, and rerun saved configurations.
-- **Review judgments.** Add a score, dimension, rationale, and reviewer label alongside the automated result. Earlier judgments remain in the history.
-- **Repeat evaluations.** Schedule recurring runs from a frozen experiment and pause or enable them in Settings. Each run has its own provider budget.
-- **Export evidence.** Reproduce reports and export JSON, CSV, or self-contained HTML with explicit uncertainty, incomplete attempts, and missing costs.
+Python has two validation paths: constrained literal function cases and a prepared full-repository pytest profile. Arbitrary builds, private package registries, native source builds, and other language runners are not supported by this release. See the [benchmark contract](docs/benchmarks.md) and [environment guide](docs/environments.md).
 
-The app supports a single local workspace and one active worker. Reviewer names are self-reported labels, not authenticated identities. The built-in HTTP adapter makes one structured-output request per task; interactive terminal and browser agents connect through [recorded submissions](docs/submissions.md). Workflow examples grade submitted final-state simulations rather than actions in a live business application.
+## Built for different responsibilities
 
-## Storage and network behavior
+| Responsibility | Workflow |
+| --- | --- |
+| Engineering owner | Connect repositories, review candidate quality, inspect reconstruction and regression evidence. |
+| Evaluation engineer | Freeze releases, separate development from holdout, configure harnesses, compare results. |
+| Platform or model owner | Set provider credentials, prices, limits, and run schedules; inspect cost and latency. |
+| Quality reviewer | Examine trial evidence and append judgments without replacing automated outcomes. |
+| Decision owner | Read cohort coverage, uncertainty, failures, and policy decisions before accepting a system. |
 
-Workspace data defaults to `~/.local/share/custom-vals`. Set `CVALS_DATA_DIR` to use another local volume. Keep private tasks, credentials, and runtime data outside the source checkout.
+One trusted local workspace is the supported deployment. These are workflow responsibilities, not authenticated application roles. SSO, RBAC, tenant isolation, distributed workers, and compliance certification are not provided.
 
-There is no telemetry or automatic result upload. A configured hosted provider receives the scenario instructions and public inputs; evaluator checks and reference answers are excluded. Remote providers require explicit service opt-in, declared positive pricing, and a positive experiment budget. Local storage and local inference are separate choices.
+## Beyond a repository score
+
+- **General task collections:** code, document evidence, structured data, and workflow-state simulations share one scenario/submission/evaluator contract.
+- **Two model harnesses:** a structured single-turn adapter and a bounded tool loop for public source inspection, editing, and isolated Python checks. Existing agents can submit recorded results.
+- **Durable evidence:** immutable experiment snapshots, recovery leases, cancellation, explicit missing costs, and no automatic retry of ambiguous paid calls.
+- **Living benchmark curation:** persistent candidate history, repeated validation, immutable releases, release diffs, and stable development/holdout partitioning.
+- **Decision support:** compatible-cohort comparisons, confidence intervals, completion/error/cost/latency/regression gates, and versioned policy decisions.
+- **Local operations:** recurring frozen evaluations, append-only human judgments, audit-chain verification, backups, and JSON/CSV/HTML exports.
+
+The four original starter collections contain 19 scenarios. Their reference and incomplete controls verify installation; their results are **not model performance measurements**. No paid model calls are needed for the test suite.
+
+## Choose a guide
+
+| Task | Guide |
+| --- | --- |
+| Connect and curate a repository | [GitHub](docs/github.md), [benchmark validation](docs/benchmarks.md) |
+| Prepare Python dependencies | [Environments](docs/environments.md), [sandbox](docs/sandbox.md) |
+| Configure a model or tool harness | [Providers](docs/providers.md) |
+| Evaluate an existing agent | [Recorded submissions](docs/submissions.md) |
+| Author document, data, or workflow tasks | [Scenarios](docs/scenarios.md) |
+| Interpret evidence and set a gate | [Results](docs/results.md), [quality policies](docs/policies.md) |
+| Operate and recover a local workspace | [Operations](docs/operations.md) |
+| Understand implementation and scope | [Architecture](docs/ARCHITECTURE.md), [interfaces](docs/INTERFACES.md), [delivery status](docs/PLAN.md) |
+| Develop or contribute | [Contributing](CONTRIBUTING.md) |
+
+## Storage and network
+
+Default data location: `~/.local/share/everval`. Set `EVERVAL_DATA_DIR` to a local disk; `CVALS_DATA_DIR` remains a compatibility alias. The `cvals` executable also remains available.
+
+There is no telemetry or automatic result upload. GitHub onboarding reads the chosen repository. Environment preparation downloads supported dependencies from the public Python package index. A configured hosted model receives public task material; hidden checks and reference solutions are excluded. Remote inference requires explicit opt-in, declared prices, and a budget. Local storage and local inference are separate choices.
+
+Keep credentials in environment variables. Set them before starting the worker. Treat full experiment exports and private grading bundles as sensitive workspace data.
 
 ## Development
 
+Install Node.js for the web checks, then run:
+
 ```sh
+make setup
 make check
 make test
 ```
 
-`make check` runs Python linting, formatting, type checks, and frontend checks. `make test` runs the Python test suite. Live sandbox tests require separate runtime setup and an explicit test flag.
-
-Dependencies are locked in `uv.lock` and `web/package-lock.json`. See [Contributing](CONTRIBUTING.md) for the development workflow and [web/README.md](web/README.md) for interface development.
+`make setup` also builds the optional web interface; `uv run everval serve` serves it on loopback. Dependencies are locked in `uv.lock` and `web/package-lock.json`. Live Docker and GitHub checks require explicit test flags; ordinary tests do not call paid providers.
 
 ## License
 
-Original project material is licensed under [Apache-2.0](LICENSE). Imported source material and task datasets retain their own permissions and attribution. Bundled web dependencies retain their [third-party notices](web/public/assets/third-party-notices.txt). This is an independent implementation and is not affiliated with Vals AI.
+Original project material is licensed under [Apache-2.0](LICENSE). Imported repositories and datasets retain their own permissions. Bundled web dependencies retain their [third-party notices](web/public/assets/third-party-notices.txt). Everval AI is an independent implementation and is not affiliated with Vals AI.

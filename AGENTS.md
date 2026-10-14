@@ -26,7 +26,7 @@ GitHub is the source/documentation mirror. Repository imports, hidden tests, ref
 
 ## Engineering sequence
 
-Implement a shared evaluation core with a CLI and guided web app. Validate code, document, data, and workflow tasks with appropriate evaluators. Prefer a shared Python core, SQLite, a local artifact store, and one worker initially. Use explicit executor capability checks; unsupported isolation policies must fail closed.
+Implement a shared evaluation core with a terminal workbench, tmux session, CLI, and secondary web app. Validate code, document, data, and workflow tasks with appropriate evaluators. Prefer a shared Python core, SQLite, a local artifact store, and one worker initially. Use explicit executor capability checks; unsupported isolation policies must fail closed.
 
 Run the smallest meaningful checks for the change. Regression tests should establish behavior, especially task validity, data isolation, experiment accounting, and job recovery. Documentation-only edits need document/link review and Git whitespace checks, not invented application tests.
 

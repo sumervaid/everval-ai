@@ -151,7 +151,7 @@ def test_unknown_record_is_404(client):
 def test_schema_is_local_and_hardened(client):
     response = client.get("/api/schema")
     assert response.status_code == 200
-    assert response.json()["info"]["title"] == "Custom Vals"
+    assert response.json()["info"]["title"] == "Everval AI"
     assert response.headers["x-content-type-options"] == "nosniff"
     assert response.headers["x-frame-options"] == "DENY"
 

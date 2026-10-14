@@ -255,7 +255,7 @@ export function SettingsPage({ workspace }: { workspace: Workspace }) {
           <dl className="settings-list">
             <div>
               <dt>Application</dt>
-              <dd>Custom Vals {s.version}</dd>
+              <dd>Everval AI {s.version}</dd>
             </div>
             <div>
               <dt>Python</dt>
@@ -409,7 +409,7 @@ export function SettingsPage({ workspace }: { workspace: Workspace }) {
         <div className="panel-body">
           <a
             className="text-link"
-            href="https://github.com/sumervaid/custom-vals-enterprises#readme"
+            href="https://github.com/sumervaid/everval-ai#readme"
             target="_blank"
             rel="noreferrer"
           >

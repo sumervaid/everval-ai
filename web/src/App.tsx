@@ -105,7 +105,7 @@ function Workbench() {
     return () => clearInterval(interval);
   }, [refresh]);
   useEffect(() => {
-    document.title = `${path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Custom Vals`;
+    document.title = `${path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
   }, [path]);
   useEffect(() => {
     if (!authRequired) return;
@@ -202,12 +202,12 @@ function Workbench() {
         />
       )}
       <aside className={`sidebar ${mobileNav ? 'mobile-open' : ''}`}>
-        <a href="#/" className="brand" aria-label="Custom Vals overview">
+        <a href="#/" className="brand" aria-label="Everval AI overview">
           <span className="brand-mark">
             v<span>_</span>
           </span>
           <span>
-            Custom Vals<span className="brand-subtitle">EVALUATION WORKBENCH</span>
+            Everval AI<span className="brand-subtitle">EVALUATION WORKBENCH</span>
           </span>
         </a>
         <div className="workspace-switch">
@@ -242,7 +242,7 @@ function Workbench() {
             Settings & setup
           </a>
           <a
-            href="https://github.com/sumervaid/custom-vals-enterprises"
+            href="https://github.com/sumervaid/everval-ai"
             target="_blank"
             rel="noreferrer"
           >
@@ -295,7 +295,7 @@ function Workbench() {
           {content}
         </main>
         <footer className="app-footer">
-          <span>Custom Vals</span>
+          <span>Everval AI</span>
           <span>Decisions grounded in evidence.</span>
           <span>Local workspace</span>
         </footer>

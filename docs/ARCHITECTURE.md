@@ -1,6 +1,6 @@
 # Architecture
 
-Custom Vals is a local evaluation application with a React workbench, a Python CLI, and an HTTP API. They share a typed task model, a SQLite workspace, and a single-worker evaluation engine.
+Everval AI is a local evaluation application with a React workbench, a Python CLI, and an HTTP API. They share a typed task model, a SQLite workspace, and a single-worker evaluation engine.
 
 The central unit is a **scenario**: public inputs and an instruction, paired with private evaluation checks. A repository is one possible source of scenarios. Documents, structured records, and simulated business states use the same execution and reporting contracts.
 
@@ -108,3 +108,13 @@ The default server binds to loopback. Optional bearer authentication protects AP
 The deployment is intended for one trusted workspace owner. A workspace token is not a multi-user permission model. SSO, roles, tenant isolation, distributed workers, interactive tool-agent execution, benchmark holdout management, and universal repository support are future work.
 
 For access from another device, use an authenticated SSH tunnel to the loopback service. The [operations guide](operations.md) covers configuration, backups, recovery, and deployment details.
+
+## Terminal and repository services
+
+The Textual interface calls `Workbench`, a synchronous application service used from background UI workers. A workspace-specific tmux session hosts the terminal and activity log. `Jobs` persists discovery, validation, and environment preparation independently of terminal lifetime; `runtime` manages the dedicated process and exclusive lock.
+
+`Projects` reconstructs bounded GitHub/local histories. `Environments` prepares wheel-based Python runtimes without executing repository installation code. `Benchmarks` binds repeated validation to exact task, image, and grader fingerprints and creates immutable releases. Admission is rechecked before executing a derived task.
+
+`agent_runner` implements a bounded public-file tool loop. It has no host-shell tool and never receives evaluator-only fields. The final source snapshot is evaluated independently. `comparison` checks cohort compatibility, and `policies` retains versioned decision constraints and evidence-bound outcomes.
+
+See [the validation contract](benchmarks.md), [environment boundary](environments.md), and [decision policies](policies.md) for operational guarantees and limits.

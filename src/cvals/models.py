@@ -17,7 +17,7 @@ CheckKind = Literal[
     "equals", "contains", "numeric", "json_schema", "citation", "forbidden", "python_tests"
 ]
 Identifier = str
-MAX_MANIFEST_BYTES = 5 * 1024 * 1024
+MAX_MANIFEST_BYTES = 64 * 1024 * 1024
 
 
 def utc_now() -> str:
@@ -48,7 +48,7 @@ class Manifest(BaseModel):
         except (ValueError, TypeError, RecursionError) as exc:
             raise ValueError("Manifest must contain finite, non-recursive JSON values") from exc
         if size > MAX_MANIFEST_BYTES:
-            raise ValueError("Manifest exceeds the 5 MiB limit")
+            raise ValueError("Manifest exceeds the 64 MiB limit")
         return self
 
 
@@ -118,6 +118,10 @@ class Check(Manifest):
                     or not isinstance(self.expected.get("entrypoint"), str)
                 ):
                     raise ValueError("Python case checks require nonempty cases and an entrypoint")
+            elif "pytest" in self.expected:
+                profile = self.expected["pytest"]
+                if not isinstance(profile, dict) or not profile.get("selectors"):
+                    raise ValueError("Repository checks require nonempty pytest selectors")
             elif not isinstance(self.expected.get("tests"), str):
                 raise ValueError("Python checks require expected.tests or cases with an entrypoint")
         return self
@@ -165,6 +169,8 @@ class Collection(Manifest):
     domain: Literal["coding", "documents", "data", "workflow", "mixed"] = "mixed"
     version: str = Field(default="1.0.0", min_length=1, max_length=64)
     created_at: str = Field(default_factory=utc_now)
+    benchmark_release_id: str | None = Field(default=None, max_length=128)
+    benchmark_partition: Literal["dev", "holdout", "all"] | None = None
     scenarios: list[Scenario] = Field(min_length=1, max_length=1000)
 
     @model_validator(mode="after")
@@ -201,6 +207,8 @@ class System(Manifest):
     base_url: str = Field(default="", max_length=2000)
     api_key_env: str = Field(default="", max_length=128)
     temperature: float | None = Field(default=None, ge=0, le=2)
+    harness: Literal["single-turn", "tools"] = "single-turn"
+    max_steps: int = Field(default=8, ge=1, le=30)
     max_tokens: int = Field(default=2048, ge=1, le=32768)
     input_cost_per_million: float | None = Field(default=None, ge=0, le=100000)
     output_cost_per_million: float | None = Field(default=None, ge=0, le=100000)

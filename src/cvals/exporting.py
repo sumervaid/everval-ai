@@ -95,7 +95,7 @@ def export_experiment(experiment: dict[str, Any], format: str) -> tuple[str, str
     document = f"""<!doctype html><html lang="en"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
-<title>{title} — Custom Vals</title><style>
+<title>{title} — Everval AI</title><style>
 body{{max-width:1100px;margin:48px auto;padding:0 24px;font:16px/1.6 system-ui;color:#202621;background:#fafaf6}}
 h1{{font-size:36px;letter-spacing:-1px}}h2{{margin-top:36px}}.meta{{color:#586159}}
 table{{border-collapse:collapse;width:100%;font-size:14px}}th,td{{text-align:left;padding:12px;border-bottom:1px solid #dadfd8;vertical-align:top}}th{{background:#eff2ec}}code{{overflow-wrap:anywhere}}

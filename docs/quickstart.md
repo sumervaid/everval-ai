@@ -1,110 +1,39 @@
-# Your first evaluation
+# First session
 
-## 1. Create the workspace
+Start with a local installation check, then connect real work.
 
-The commands below assume you have cloned the repository and are in its root.
-To keep runtime data on another local disk, set this before initialization:
-
-```sh
-export CVALS_DATA_DIR=/absolute/path/to/custom-vals-data
-```
-
-Omit that setting to use the default `~/.local/share/custom-vals`.
-On macOS, a configured path under `/Volumes` is rejected if its volume is
-not mounted.
+## Open the workbench
 
 ```sh
-make setup
-uv run cvals init --starters
-uv run cvals doctor
-uv run cvals serve
+uv sync --frozen
+uv run everval init --starters
+uv run everval tmux
 ```
 
-Open **http://127.0.0.1:8765**. Leave the server running; use a second terminal
-for subsequent CLI commands. The web app and CLI share the configured local
-workspace. The server includes one durable worker by default.
+Use `uv run everval tui` if tmux is unavailable. The terminal starts a dedicated worker. Quitting the interface leaves queued jobs and experiments intact.
 
-## 2. Learn the workflow with controls
+## Verify the pipeline without a model account
 
-Open **Collections** and select **Evidence and policy reading**
-(`starter-documents`). Review its three scenarios, source documents,
-checks, reference outputs, and negative controls. Validate the collection before
-running the comparison.
+Open **Experiments → New experiment**. Choose **Evidence and policy reading**, select **Reference fixture · control** and **Empty submission · control**, and leave the budget at zero.
 
-Create an experiment using **Reference fixture · control**
-(`fixture-reference`) and **Empty submission · control**
-(`fixture-incomplete`), one repetition, and a zero model budget. Open
-individual trials to inspect the evidence behind each check.
+After completion, inspect a trial's output and checks. The reference should satisfy the intended checks; the empty control should expose missing work. These controls test the installation. They do not establish model quality.
 
-All three reference submissions should pass. All three empty submissions should
-fail their checks. These are installation controls, not measured model results.
-This collection needs neither Docker nor a model account.
+## Connect a repository
 
-The equivalent CLI workflow is:
+Open **Projects → Connect** and enter a GitHub URL, `owner/repository`, or local repository path. GitHub access uses the current `gh` authentication; the app stores no GitHub token.
 
-```sh
-uv run cvals systems list
-uv run cvals collections list
-uv run cvals collections validate starter-documents
-uv run cvals run starter-documents \
-  --system fixture-reference \
-  --system fixture-incomplete \
-  --name "Document controls"
-```
+Discover candidates, select one, and inspect its lineage and rejection reasons. Write a reviewed independent statement. For a prepared pytest project, inspect the environment plan and prepare its dependencies, or register an existing local image. Validate candidates and freeze a release.
 
-The command prints the experiment ID and its recorded result. Use the listed
-system IDs if your workspace contains different controls.
+Use [GitHub onboarding](github.md) for reconstruction details and [benchmark validation](benchmarks.md) for admission requirements.
 
-## 3. Bring your own tasks
+## Run a system
 
-Create a collection in the app or import a JSON/YAML manifest. The
-[portable document example](../examples/document_collection.json) shows the full
-format. It is the same collection installed by `--starters`. Re-importing its unchanged
-manifest preserves that content; choose a new ID when adapting it into your own tasks.
+Configure a provider under **Systems** or import an existing agent's [recorded submissions](submissions.md). Choose the release partition, systems, repetitions, and budget in **New experiment**.
 
-```sh
-uv run cvals collections import examples/document_collection.json
-```
+A remote provider requires explicit opt-in and actual configured prices. Unknown billing halts additional requests. Begin with a small reviewed cohort and inspect failed attempts before scaling up.
 
-Read [Scenario authoring](scenarios.md) to create your own collection with a new
-ID. [Example source files](../examples/sources/) can be uploaded for previews.
-A source upload does not establish correct answers or create a validated
-benchmark. Add explicit instructions, independent checks, and controls.
+## Read a decision
 
-For a local Python repository with suitable history, use the restricted
-[historical task compiler](mining.md). It reports extraction and rejection
-reasons, and requires separate validation.
+A completion gate alone does not establish quality. Configure explicit pass-rate, cost, latency, or regression thresholds appropriate to your use case. Read [quality policies](policies.md) and [result interpretation](results.md).
 
-## 4. Compare a real system
-
-Connect a compatible local model endpoint, configure an external provider
-deliberately, or import results from an existing agent. See
-[Systems and providers](providers.md) and [Recorded submissions](submissions.md).
-
-Freeze the task set and budget before comparing systems. Repetitions help assess
-within-task variability; they do not create more independent tasks.
-
-## 5. Keep the evidence
-
-Open an experiment's export controls for JSON, CSV, or a standalone HTML report.
-JSON retains the full recorded evidence, CSV is a trial ledger, and HTML is a
-shareable summary.
-
-```sh
-uv run cvals experiments export EXPERIMENT_ID --format html --output report.html
-uv run cvals replay EXPERIMENT_ID
-```
-
-Replace `EXPERIMENT_ID` with the recorded ID. Export commands refuse to
-overwrite existing files. `replay` recomputes analysis from saved evidence.
-`experiments rerun` creates a new run with the original frozen configuration
-and may spend money when a provider is involved.
-
-## Troubleshooting
-
-- **The page says the web app needs building:** run `make web` and refresh.
-- **Coding checks report no runtime:** see [Sandbox setup](sandbox.md). Other domains work without Docker.
-- **A model key is unavailable:** set the environment variable named in the system configuration, then restart the service.
-- **External provider requests are refused:** check explicit network opt-in, HTTPS, pricing, and the experiment budget.
-- **The data disk is absent:** mount it before restarting.
-- **A collection edit is rejected:** increment its version when changing content. Existing experiments retain their previous snapshot.
+The CLI equivalents remain available through `everval --help`; all interfaces use the same workspace database.

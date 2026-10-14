@@ -93,16 +93,22 @@ class Store:
                 );
                 PRAGMA user_version = 1;
             """)
+            from cvals.audit import initialize_schema
+
+            initialize_schema(connection)
         os.chmod(self.settings.database_path, 0o600)
 
     @staticmethod
     def _event(
         connection: sqlite3.Connection, experiment_id: str, kind: str, data: dict[str, Any]
     ) -> None:
+        from cvals.audit import append_audit
+
         connection.execute(
             "INSERT INTO events(experiment_id,created_at,kind,data) VALUES(?,?,?,?)",
             (experiment_id, utc_now(), kind, canonical_json(data)),
         )
+        append_audit(connection, kind, experiment_id, data)
 
     @staticmethod
     def _get(connection: sqlite3.Connection, table: str, key: str) -> dict[str, Any]:
@@ -135,20 +141,49 @@ class Store:
             ).fetchone()
             if old:
                 previous = json.loads(old[0])
+                if previous.get("benchmark_release_id") and previous != value:
+                    raise ValueError(
+                        "Released benchmark collections are immutable; create a new release"
+                    )
+                # Preserve existing hashes when optional schema defaults were absent.
+                for optional in ("benchmark_release_id", "benchmark_partition"):
+                    if optional not in previous and value.get(optional) is None:
+                        value.pop(optional, None)
                 # Stable starter installation may reconstruct its timestamp.
                 value["created_at"] = previous["created_at"]
                 if previous["version"] == value["version"] and previous != value:
                     raise ValueError("Changing a collection requires a new version")
+            if old and previous == value:
+                return value
             connection.execute(
                 "INSERT INTO collections(id,data) VALUES(?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data",
                 (collection.id, canonical_json(value)),
+            )
+            from cvals.audit import append_audit
+
+            append_audit(
+                connection,
+                "collection.saved",
+                collection.id,
+                {
+                    "name": value["name"],
+                    "version": value["version"],
+                    "hash": content_hash(value),
+                    "previous_hash": content_hash(previous) if old else None,
+                },
             )
         return value
 
     def delete_collection(self, id: str) -> None:
         with self._connect(write=True) as connection:
+            existing = self._get(connection, "collections", id)
+            if existing.get("benchmark_release_id"):
+                raise ValueError("Released benchmark collections are immutable")
             if not connection.execute("DELETE FROM collections WHERE id=?", (id,)).rowcount:
                 raise KeyError(id)
+            from cvals.audit import append_audit
+
+            append_audit(connection, "collection.deleted", id, {"hash": content_hash(existing)})
 
     @staticmethod
     def _system_public(value: dict[str, Any]) -> dict[str, Any]:
@@ -173,16 +208,37 @@ class Store:
     def save_system(self, system: System) -> dict[str, Any]:
         value = system.model_dump(mode="json")
         with self._connect(write=True) as connection:
+            old = connection.execute("SELECT data FROM systems WHERE id=?", (system.id,)).fetchone()
+            previous = json.loads(old["data"]) if old else None
+            if previous == value:
+                return self._system_public(value)
             connection.execute(
                 "INSERT INTO systems(id,data) VALUES(?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data",
                 (system.id, canonical_json(value)),
+            )
+            from cvals.audit import append_audit
+
+            append_audit(
+                connection,
+                "system.saved",
+                system.id,
+                {
+                    "name": system.name,
+                    "kind": system.kind,
+                    "hash": content_hash(value),
+                    "previous_hash": content_hash(previous) if previous else None,
+                },
             )
         return self._system_public(value)
 
     def delete_system(self, id: str) -> None:
         with self._connect(write=True) as connection:
+            existing = self._get(connection, "systems", id)
             if not connection.execute("DELETE FROM systems WHERE id=?", (id,)).rowcount:
                 raise KeyError(id)
+            from cvals.audit import append_audit
+
+            append_audit(connection, "system.deleted", id, {"hash": content_hash(existing)})
 
     def ensure_fixture_systems(self) -> list[dict[str, Any]]:
         fixtures = [
@@ -191,10 +247,23 @@ class Store:
         ]
         with self._connect(write=True) as connection:
             for system in fixtures:
-                connection.execute(
+                inserted = connection.execute(
                     "INSERT OR IGNORE INTO systems(id,data) VALUES(?,?)",
                     (system.id, system.model_dump_json()),
-                )
+                ).rowcount
+                if inserted:
+                    from cvals.audit import append_audit
+
+                    append_audit(
+                        connection,
+                        "system.fixture_installed",
+                        system.id,
+                        {
+                            "name": system.name,
+                            "kind": system.kind,
+                            "hash": content_hash(system.model_dump(mode="json")),
+                        },
+                    )
         return [self.get_system(system.id) for system in fixtures]
 
     def _insert_experiment(
@@ -205,6 +274,9 @@ class Store:
         systems: list[dict[str, Any]],
         parent_id: str | None = None,
     ) -> str:
+        from cvals.benchmarks import assert_collection_admitted
+
+        assert_collection_admitted(connection, collection)
         total = len(collection["scenarios"]) * len(systems) * request.repetitions
         if total > MAX_TRIALS:
             raise ValueError(f"Experiment exceeds the {MAX_TRIALS:,} trial limit")
@@ -237,8 +309,8 @@ class Store:
             "sandbox_image_requested": self.settings.sandbox_image,
             "protocol": "all scheduled trials; no automatic provider retries",
         }
-        if len(canonical_json(snapshot).encode()) > 10 * 1024 * 1024:
-            raise ValueError("Experiment snapshot exceeds the 10 MiB limit")
+        if len(canonical_json(snapshot).encode()) > 128 * 1024 * 1024:
+            raise ValueError("Experiment snapshot exceeds the 128 MiB limit")
         state = {
             "id": id,
             "name": request.name,
@@ -309,7 +381,19 @@ class Store:
                         (trial["id"], id, position, canonical_json(trial), "queued"),
                     )
                     position += 1
-        self._event(connection, id, "experiment.queued", {"total_trials": total})
+        self._event(
+            connection,
+            id,
+            "experiment.queued",
+            {
+                "total_trials": total,
+                "snapshot_hash": state["snapshot_hash"],
+                "collection_hash": state["collection_hash"],
+                "system_ids": state["system_ids"],
+                "budget_usd": state["budget_usd"],
+                "parent_experiment_id": parent_id,
+            },
+        )
         return id
 
     def create_experiment(self, request: ExperimentCreate) -> dict[str, Any]:
@@ -542,12 +626,28 @@ class Store:
     def start_trial(self, id: str, owner: str, trial_id: str, reservation: float) -> dict[str, Any]:
         with self._connect(write=True) as connection:
             self._assert_lease(connection, id, owner)
-            _, state = self._read_experiment(connection, id)
+            snapshot, state = self._read_experiment(connection, id)
             trial = self._get(connection, "trials", trial_id)
             if trial["experiment_id"] != id or trial["status"] != "queued":
                 raise ValueError("Trial is not available for execution")
             if state["cancel_requested"]:
                 raise ValueError("Experiment cancellation requested")
+            from cvals.benchmarks import assert_collection_admitted
+
+            try:
+                assert_collection_admitted(connection, snapshot["collection"])
+            except (ValueError, KeyError) as exc:
+                trial.update(
+                    status="error",
+                    error=f"Benchmark admission failed: {exc}",
+                    finished_at=utc_now(),
+                    cost_usd=0.0,
+                )
+                state["completed_trials"] += 1
+                self._save_trial(connection, trial)
+                self._save_state(connection, state)
+                self._event(connection, id, "trial.admission_blocked", {"trial_id": trial_id})
+                return trial
             if state["budget_committed_usd"] + reservation > state["budget_usd"] + 1e-12:
                 trial.update(
                     status="budget_exceeded",

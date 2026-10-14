@@ -15,7 +15,7 @@ Python dependencies are managed by uv; the web app uses npm. Commit both lockfil
 For separate development terminals:
 
 ```sh
-uv run cvals serve
+uv run everval serve
 ```
 
 ```sh

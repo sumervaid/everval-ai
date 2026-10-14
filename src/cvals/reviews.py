@@ -146,6 +146,13 @@ class ReviewStore:
                 connection,
                 experiment_id,
                 "review.added",
-                {"review_id": value["id"], "trial_id": trial_id, "dimension": validated.dimension},
+                {
+                    "review_id": value["id"],
+                    "trial_id": trial_id,
+                    "dimension": validated.dimension,
+                    "reviewer_label": validated.reviewer,
+                    "score": validated.score,
+                    "review_hash": content_hash(value),
+                },
             )
         return {**value, "latest": True}

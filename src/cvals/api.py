@@ -157,7 +157,7 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
         worker.stop()
 
     app = FastAPI(
-        title="Custom Vals",
+        title="Everval AI",
         version=__version__,
         lifespan=lifespan,
         docs_url=None,
@@ -167,8 +167,15 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
     app.state.store = store
     app.state.worker = worker
     app.state.settings = settings
+    from cvals.workbench_api import register_workbench_routes
+
+    register_workbench_routes(app, settings)
     hosts = ["localhost", "127.0.0.1", "::1", "[::1]", "testserver"]
-    hosts.extend(h.strip() for h in os.getenv("CVALS_ALLOWED_HOSTS", "").split(",") if h.strip())
+    hosts.extend(
+        h.strip()
+        for h in os.getenv("EVERVAL_ALLOWED_HOSTS", os.getenv("CVALS_ALLOWED_HOSTS", "")).split(",")
+        if h.strip()
+    )
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=hosts)
     from cvals.http_limits import BodyLimitMiddleware
 

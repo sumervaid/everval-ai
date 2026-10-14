@@ -54,9 +54,10 @@ def test_init_and_fixture_workflow(tmp_path, monkeypatch):
 def test_remote_bind_requires_token(tmp_path, monkeypatch):
     monkeypatch.setenv("CVALS_DATA_DIR", str(tmp_path / "workspace"))
     monkeypatch.delenv("CVALS_TOKEN", raising=False)
+    monkeypatch.delenv("EVERVAL_TOKEN", raising=False)
     result = runner.invoke(app, ["serve", "--host", "0.0.0.0"])
     assert result.exit_code == 1
-    assert "CVALS_TOKEN" in result.output
+    assert "EVERVAL_TOKEN" in result.output
 
 
 def test_cli_reviews_schedules_and_due_worker(tmp_path, monkeypatch):

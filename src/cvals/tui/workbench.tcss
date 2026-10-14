@@ -1,0 +1,89 @@
+$ev-ink: #0d1722;
+$ev-panel: #132230;
+$ev-line: #2b4050;
+$ev-paper: #dce5ea;
+$ev-muted: #9aaebd;
+$ev-teal: #83d7c7;
+$ev-amber: #e6bd76;
+
+Screen { background: $ev-ink; color: $ev-paper; }
+#masthead { height: 3; background: $ev-panel; border-bottom: solid $ev-line; align-vertical: middle; padding: 0 2; }
+#monogram { width: 9; color: $ev-teal; text-style: bold; }
+#brand { width: 1fr; text-style: bold; }
+#local-badge { width: auto; color: $ev-muted; }
+#body { height: 1fr; }
+#rail { width: 23; background: $ev-panel; border-right: solid $ev-line; padding: 1; }
+.rail-label { color: $ev-muted; height: 2; padding: 0 1; }
+.nav-button { width: 100%; height: 3; border: none; background: transparent; color: $ev-muted; text-align: left; padding: 0 1; margin-bottom: 0; }
+.nav-button:hover { background: #203748; color: $ev-paper; }
+.nav-button.active { background: #23483f; color: $ev-teal; text-style: bold; border-left: thick $ev-teal; }
+.nav-button:focus { text-style: bold; background: #2b4050; color: $ev-paper; }
+#rail-note { height: 1fr; min-height: 3; color: $ev-muted; padding: 2 1; }
+#rail-connect { width: 100%; }
+#workspace { width: 1fr; padding: 1 2 0 2; }
+#page-title { height: 2; color: $ev-paper; text-style: bold; }
+#page-description { height: 2; color: $ev-muted; }
+#notice { height: auto; max-height: 5; color: #f1b2a3; background: #36252a; padding: 0 1; margin-bottom: 1; }
+#metrics { height: 3; color: $ev-teal; text-style: bold; border-top: solid $ev-line; padding-top: 1; }
+#intro { height: 9; background: $ev-panel; color: $ev-paper; padding: 1 2; margin-bottom: 1; }
+#panes { height: 1fr; min-height: 3; }
+#ledger-pane { width: 3fr; height: 100%; border: solid $ev-line; }
+#ledger { height: 100%; width: 100%; background: $ev-ink; scrollbar-size: 1 1; }
+DataTable > .datatable--header { background: $ev-panel; color: $ev-muted; text-style: bold; }
+DataTable > .datatable--cursor { background: #274b49; color: #e8f5ef; }
+DataTable > .datatable--odd-row { background: #101e2b; }
+DataTable > .datatable--even-row { background: $ev-ink; }
+#empty { padding: 2; height: auto; color: $ev-muted; }
+#detail-pane { width: 2fr; height: 100%; margin-left: 1; background: $ev-panel; border: solid $ev-line; }
+#detail-heading { height: 2; color: $ev-teal; text-style: bold; padding: 0 1; border-bottom: solid $ev-line; }
+#detail { height: 1fr; background: $ev-panel; padding: 1; scrollbar-size: 1 1; }
+#actions { height: 4; align-vertical: middle; overflow-x: auto; overflow-y: hidden; scrollbar-size: 1 1; }
+Button { min-width: 12; height: 3; margin-right: 1; background: #203344; border: tall #203344; color: $ev-paper; }
+Button:hover { background: #2b4858; border: tall #2b4858; }
+Button:focus { text-style: bold; border: tall $ev-teal; }
+Button.-primary { background: #28584b; border: tall #28584b; color: #e1f6ed; }
+Button.-primary:hover { background: #347263; border: tall #347263; }
+Button:disabled { opacity: 45%; }
+#statusbar { height: 1; padding: 0 2; background: $ev-panel; color: $ev-muted; }
+#busy { width: 5; height: 1; color: $ev-amber; }
+#activity { width: 1fr; }
+#palette-hint { width: 20; text-align: right; color: $ev-teal; }
+Footer { background: #09111a; color: $ev-muted; height: 1; }
+Footer > .footer--key { background: #192d3c; color: $ev-teal; }
+.compact #rail { display: none; }
+.compact #workspace { padding: 1 1 0 1; }
+.compact #local-badge { display: none; }
+.compact #panes { layout: vertical; }
+.compact #ledger-pane { width: 100%; height: 2fr; }
+.compact #detail-pane { width: 100%; height: 1fr; min-height: 4; margin-left: 0; margin-top: 1; }
+.short #workspace { padding-top: 0; }
+.short #page-title { height: 1; }
+.short #page-description { height: 1; }
+.short #intro { height: 5; padding: 0 1; }
+.short #metrics { height: 2; padding-top: 0; }
+.short #detail-pane { display: none; }
+.short #actions { height: 3; }
+.short #rail-note { display: none; }
+.short .nav-button { height: 2; }
+.short #masthead { height: 2; }
+ModalScreen { align: center middle; background: #061019 75%; }
+.dialog { width: 78; max-width: 95%; max-height: 92%; background: $ev-panel; border: thick $ev-line; padding: 1 2; }
+#form-dialog { height: auto; }
+.dialog-title { height: auto; min-height: 2; text-style: bold; color: $ev-teal; }
+.dialog-description { height: auto; max-height: 5; color: $ev-muted; margin-bottom: 1; }
+#form-fields { height: 1fr; min-height: 3; max-height: 24; }
+.field-label { height: 1; color: $ev-paper; margin-top: 1; }
+Input, Select { width: 100%; height: 3; background: $ev-ink; border: tall $ev-line; }
+Input:focus { border: tall $ev-teal; }
+TextArea { height: 6; background: $ev-ink; border: solid $ev-line; }
+SelectionList { height: 7; background: $ev-ink; border: solid $ev-line; }
+#form-error { height: auto; max-height: 3; color: #f1b2a3; }
+.dialog-actions { height: 3; margin-top: 1; align-horizontal: right; }
+#evidence-dialog { height: 90%; width: 110; }
+#evidence-log { height: 1fr; margin: 1 0; background: $ev-ink; }
+#evidence-close { align-horizontal: right; }
+.muted { color: $ev-muted; height: auto; }
+
+#plan-log { height: 1fr; margin: 1 0; background: $ev-ink; }
+
+DataTable, RichLog, VerticalScroll, #actions { scrollbar-color: #355d5b; scrollbar-background: #0d1722; scrollbar-color-hover: #83d7c7; scrollbar-color-active: #83d7c7; }

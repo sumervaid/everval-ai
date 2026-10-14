@@ -38,12 +38,18 @@ class Settings:
 
     @classmethod
     def from_env(cls) -> Settings:
-        default = Path.home() / ".local" / "share" / "custom-vals"
+        default = Path.home() / ".local" / "share" / "everval"
         return cls(
-            data_dir=Path(os.getenv("CVALS_DATA_DIR", str(default))).expanduser().absolute(),
-            token=os.getenv("CVALS_TOKEN") or None,
-            docker_host=os.getenv("CVALS_DOCKER_HOST") or None,
-            sandbox_image=os.getenv("CVALS_SANDBOX_IMAGE", "python:3.12-slim"),
-            allow_remote_providers=os.getenv("CVALS_ALLOW_REMOTE_PROVIDERS", "").lower()
+            data_dir=Path(os.getenv("EVERVAL_DATA_DIR", os.getenv("CVALS_DATA_DIR", str(default))))
+            .expanduser()
+            .absolute(),
+            token=os.getenv("EVERVAL_TOKEN", os.getenv("CVALS_TOKEN")) or None,
+            docker_host=os.getenv("EVERVAL_DOCKER_HOST", os.getenv("CVALS_DOCKER_HOST")) or None,
+            sandbox_image=os.getenv(
+                "EVERVAL_SANDBOX_IMAGE", os.getenv("CVALS_SANDBOX_IMAGE", "python:3.12-slim")
+            ),
+            allow_remote_providers=os.getenv(
+                "EVERVAL_ALLOW_REMOTE_PROVIDERS", os.getenv("CVALS_ALLOW_REMOTE_PROVIDERS", "")
+            ).lower()
             in {"1", "true"},
         )

@@ -1,6 +1,6 @@
 # Workbench interface
 
-A guided React application for the local Custom Vals service. Start with the repository’s [quickstart](../README.md) for the complete application.
+A guided React application for the local Everval AI service. Start with the repository’s [quickstart](../README.md) for the complete application.
 
 ## Development
 

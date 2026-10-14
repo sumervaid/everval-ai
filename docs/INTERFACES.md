@@ -243,7 +243,7 @@ Source inspection and mining require an absolute local repository path and a lim
 
 ## CLI companion
 
-Run `uv run cvals --help` for current command options. Commands include:
+Run `uv run everval --help` for current command options. Commands include:
 
 ```text
 init --starters
@@ -264,3 +264,18 @@ backup
 ```
 
 `run` and `experiments rerun` can execute synchronously or enqueue. `replay` regenerates a report without provider calls. The CLI operates directly on the configured local workspace; HTTP bearer authentication applies to API clients, not to an owner’s direct filesystem access.
+
+## Repository and decision interfaces
+
+The primary executable is `everval`; `cvals` remains a compatibility alias. The terminal and CLI share `Workbench`. New command groups are `projects`, `environments`, `benchmarks`, `jobs`, `audit`, and `policies`; `compare` and `gate` operate on frozen experiment evidence.
+
+Authenticated API routes include:
+
+- `GET/POST /api/projects`, plus project candidates, review, profile, discovery, validation, and environment plan/preparation.
+- `GET /api/releases` and `POST /api/projects/{id}/releases`.
+- `GET /api/jobs` and `GET /api/jobs/{id}`; long repository mutations return 202 with a durable job.
+- `GET /api/audit` and `GET /api/audit/verify`.
+- `GET /api/compare?before=ID&after=ID`.
+- `POST /api/experiments/{id}/gates` to record a decision; `GET` on that path reads decision history.
+
+The existing host/origin, token, upload-size, and response-header boundaries cover these endpoints. These are trusted-owner workspace APIs, not multi-tenant endpoints.

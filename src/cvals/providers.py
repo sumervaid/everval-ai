@@ -1,8 +1,4 @@
-"""One-shot JSON submissions from explicit fixtures or a configured HTTP provider.
-
-The wire format follows Chat Completions. No tools, retrieval, hidden checks,
-reference submissions, or evaluator provenance are sent to the model.
-"""
+"""Public-input submissions from fixtures or bounded HTTP model harnesses."""
 
 from __future__ import annotations
 
@@ -139,6 +135,10 @@ def payload_for(scenario: Scenario, system: System) -> dict[str, Any]:
 def reserve_cost(scenario: Scenario, system: System) -> float:
     if system.kind != "http":
         return 0.0
+    if system.harness == "tools":
+        from cvals.agent_runner import reservation
+
+        return reservation(system)
     payload = payload_for(scenario, system)
     # One token per UTF-8 byte plus framing is deliberately conservative for
     # byte-based tokenizers. External provider billing remains authoritative.
@@ -153,7 +153,12 @@ def _usage(raw: Any, system: System) -> tuple[int | None, int | None, float | No
     if not isinstance(raw, dict):
         return None, None, None
     prompt, completion = raw.get("prompt_tokens"), raw.get("completion_tokens")
-    if type(prompt) is not int or type(completion) is not int or prompt < 0 or completion < 0:
+    if (
+        type(prompt) is not int
+        or type(completion) is not int
+        or not 0 <= prompt <= 1_000_000_000
+        or not 0 <= completion <= 1_000_000_000
+    ):
         return None, None, None
     if system.input_cost_per_million is None or system.output_cost_per_million is None:
         return prompt, completion, None
@@ -201,6 +206,10 @@ def submit(scenario: Scenario, system: System, settings: Settings, budget_usd: f
     if system.kind == "incomplete":
         return Submission({}, cost_usd=0, metadata={"fixture_control": True})
     validate_provider(system, settings, budget_usd)
+    if system.harness == "tools":
+        from cvals.agent_runner import submit_agent
+
+        return submit_agent(scenario, system, settings)
     payload = payload_for(scenario, system)
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
     if system.api_key_env:
@@ -226,12 +235,12 @@ def submit(scenario: Scenario, system: System, settings: Settings, budget_usd: f
                     error=f"Provider returned HTTP {response.status_code}; response body omitted",
                 )
             chunks = bytearray()
-            for chunk in response.iter_bytes():
+            for chunk in response.iter_bytes(chunk_size=65536):
                 if time.monotonic() - started > system.timeout_seconds:
                     return Submission(None, error="Provider exceeded the total response deadline")
-                chunks.extend(chunk)
-                if len(chunks) > MAX_RESPONSE_BYTES:
+                if len(chunks) + len(chunk) > MAX_RESPONSE_BYTES:
                     return Submission(None, error="Provider response exceeded the 2 MiB limit")
+                chunks.extend(chunk)
         data = json.loads(chunks)
         if not isinstance(data, dict):
             return Submission(None, error="Provider response must be an object")
@@ -268,6 +277,9 @@ def submit(scenario: Scenario, system: System, settings: Settings, budget_usd: f
             canonical_json(output)
         except (TypeError, ValueError, RecursionError):
             result.error = "Provider did not return a finite JSON object"
+            return result
+        if finish_reason != "stop":
+            result.error = "Provider did not complete its solution"
             return result
         result.output = output
         return result

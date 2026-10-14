@@ -1,11 +1,11 @@
 # Importing recorded submissions
 
-Use this workflow to evaluate outputs from a coding agent, a document pipeline, or another harness. Custom Vals grades the outputs locally and retains their supplied provenance.
+Use this workflow to evaluate outputs from a coding agent, a document pipeline, or another harness. Everval AI grades the outputs locally and retains their supplied provenance.
 
 ## Export the task inputs
 
 ```sh
-uv run cvals collections tasks COLLECTION_ID --output tasks.json
+uv run everval collections tasks COLLECTION_ID --output tasks.json
 ```
 
 The export contains scenario IDs, instructions, inputs, and a collection fingerprint. It excludes evaluator checks and reference outputs.
@@ -39,7 +39,7 @@ The example fingerprint is explanatory; a real import requires the exact collect
 ## Import and grade
 
 ```sh
-uv run cvals import-results submissions.json
+uv run everval import-results submissions.json
 ```
 
 The app also provides **Import results**. The bundle is checked against the collection fingerprint. Missing scenario outputs remain visible as errors; extra or mismatched scenario IDs are rejected.
