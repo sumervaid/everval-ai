@@ -207,9 +207,17 @@ def consume(
         except (OSError, ValueError) as exc:
             logging.warning("Runtime cleanup unavailable (%s)", type(exc).__name__)
     schedules = ScheduleStore(settings, store)
+    from cvals.autopilot import Autopilot
+    from cvals.optimization import Optimizer
+
+    autopilot = Autopilot(settings, store)
+    optimizer = Optimizer(settings)
     jobs = Jobs(settings)
     if once:
         scheduled = schedules.tick()
+        autopilot.tick()
+        optimizer.tick()
+        autopilot.investigate_pending()
         output(
             {
                 "scheduled": scheduled,
@@ -233,6 +241,9 @@ def consume(
             try:
                 if time.monotonic() >= next_schedule_check:
                     schedules.tick()
+                    autopilot.tick()
+                    optimizer.tick()
+                    autopilot.investigate_pending()
                     next_schedule_check = time.monotonic() + 5
                 job = jobs.run_pending_once()
                 experiment = engine.run_pending_once()
@@ -646,6 +657,20 @@ _register_experience(app, systems_app)
 _register_growth(app)
 register_team_cli(app)
 
+
+from cvals.autopilot_cli import register as _register_autopilot  # noqa: E402
+from cvals.budgeting_cli import register as _register_budgeting  # noqa: E402
+from cvals.community_cli import register as _register_community  # noqa: E402
+from cvals.demo_cli import register as _register_demo  # noqa: E402
+from cvals.research_cli import register as _register_research  # noqa: E402
+from cvals.variants import register as _register_variants  # noqa: E402
+
+_register_autopilot(app)
+_register_research(app)
+_register_community(app)
+_register_demo(app)
+_register_budgeting(app)
+_register_variants(systems_app)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")

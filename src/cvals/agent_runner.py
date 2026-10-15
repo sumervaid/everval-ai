@@ -263,7 +263,11 @@ def submit_agent(scenario: Scenario, system: System, settings: Settings) -> Subm
         for path, body in sorted(workspace.files.items())
     ]
     messages: list[dict[str, Any]] = [
-        {"role": "system", "content": INSTRUCTION},
+        {
+            "role": "system",
+            "content": INSTRUCTION
+            + ("\n\n" + system.additional_instructions if system.additional_instructions else ""),
+        },
         {"role": "user", "content": canonical_json(public)},
     ]
     headers = {"Content-Type": "application/json", "Accept": "application/json"}

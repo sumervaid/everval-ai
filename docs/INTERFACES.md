@@ -96,6 +96,7 @@ harness: single-turn | tools | external-agent
 adapter_revision: string            required for external-agent
 adapter_input_token_limit: integer
 adapter_output_token_limit: integer
+additional_instructions: string      max 8,000 characters; live built-in harnesses only
 temperature: number | null         null omits the parameter
 max_tokens: integer                1–32,768
 input_cost_per_million: number | null
@@ -302,3 +303,27 @@ Optional team mode replaces the shared token with individual identities and serv
 | /api/case-imports, /api/production-cases | Redacted staging, explicit approval, validated publication |
 
 Guided onboarding, benchmark health, change admission, and recurring digests are also available through the TUI and CLI. Run `everval guides --help`, `everval changes --help`, and `everval recurring --help`. Runtime preparation accepts language, runner, and imported artifact fingerprints; see [JavaScript/TypeScript](javascript-typescript.md). Existing live agents use the separate [adapter protocol](agent-adapters.md).
+
+## Continuous evaluation and research routes
+
+These routes require operator access (`workspace.read` or `workspace.write`), except the bundled public catalog which accepts summary access. Private holdout, research and imported task material are excluded from viewer endpoints. The complete bounded request schemas are available in the local OpenAPI schema.
+
+| Route | Behavior |
+| --- | --- |
+| GET /api/budget/status | Provider ledger, reservations and configured caps |
+| POST /api/budget/projection | A projection without admitting work |
+| GET, POST /api/autopilot | Inspect or create continuous policies |
+| GET, PATCH /api/autopilot/{id} | History, budget, investigations and configuration |
+| GET /api/research, /api/research/{id} | Retained private research records |
+| POST /api/experiments/{id}/trials/{trial}/investigate | Repeat saved grading, bounded to 2–10 cycles |
+| POST /api/experiments/{id}/trials/{trial}/reduce | Bounded failure-preserving output reduction |
+| POST /api/collections/{id}/quality | Structural grader probes and lexical duplicate evidence |
+| GET, POST /api/optimization | Inspect or queue constrained candidate studies |
+| GET /api/optimization/{id} | Frozen study and proposal evidence |
+| POST /api/optimization/{id}/advance | Progress durable study state without directly calling a provider |
+| GET /api/community/catalog | Bundled pack metadata; no private workspace content |
+| GET, POST /api/community/packs | Inspect staged packs or submit raw pack JSON bytes |
+| GET /api/community/packs/{id} | Public task and provenance preview |
+| POST /api/community/packs/{id}/approve | Authenticated behavior review and local control validation |
+
+The dedicated worker and optional embedded worker progress continuous policies and studies. API mutations queue work; they do not enable remote inference or launch a separate worker automatically. CLI and terminal launches can start the dedicated worker. API approval identities come from the authenticated principal; terminal labels remain self-reported.

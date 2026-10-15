@@ -20,6 +20,7 @@ from textual.widgets import Button, DataTable, Footer, LoadingIndicator, RichLog
 
 from cvals.config import Settings
 from cvals.tui.dialogs import EvidenceDialog, FieldSpec, FormDialog, PlanDialog
+from cvals.tui.evolution import EvolutionMixin
 from cvals.tui.growth import GrowthMixin
 from cvals.tui.presentation import (
     human_text,
@@ -42,6 +43,8 @@ PAGES = (
     ("diagnostics", "Workspace", "F8"),
     ("guides", "Guided runs", "F9"),
     ("changes", "Change runs", "F10"),
+    ("autopilot", "Autopilot", "F11"),
+    ("lab", "Research lab", "F12"),
 )
 TITLES = {key: title for key, title, _ in PAGES} | {
     "candidates": "Candidate ledger",
@@ -50,8 +53,12 @@ TITLES = {key: title for key, title, _ in PAGES} | {
     "journey": "First real evaluation",
     "health": "Benchmark health",
     "artifacts": "Dependency artifacts",
+    "packs": "Community packs",
 }
 DESCRIPTIONS = {
+    "packs": "Inspect provenance, review expected behavior and retain validation before admission.",
+    "autopilot": "Continuous screening, bounded escalation and retained change evidence.",
+    "lab": "Investigate outcomes, challenge graders and validate configuration proposals.",
     "artifacts": "Reviewed local wheels and npm archives; package code is never run during import.",
     "guides": "Resume the path from a real repository to a frozen evaluation.",
     "journey": "Every completed step points to saved evidence. Enter opens the selected step.",
@@ -70,6 +77,22 @@ DESCRIPTIONS = {
     "diagnostics": "Storage, execution, and provider readiness for this local workspace.",
 }
 TOOLS = {
+    "packs": "Staged packs",
+    "pack_stage": "Stage pack",
+    "pack_review": "Review pack",
+    "pack_record": "Pack evidence",
+    "variant": "Save variant",
+    "budget": "Budget ledger",
+    "forecast": "Forecast budget",
+    "autopilot_new": "New policy",
+    "autopilot_toggle": "Pause / enable",
+    "autopilot_history": "Run history",
+    "investigate": "Investigate",
+    "reduce": "Reduce output",
+    "quality": "Check quality",
+    "optimize": "New study",
+    "lab_record": "Research evidence",
+    "catalog": "Community packs",
     "artifacts": "Dependency artifacts",
     "artifact_import": "Import artifact",
     "guide": "Start guide",
@@ -110,8 +133,11 @@ TOOLS = {
     "record": "Full record",
     "back": "Back",
 }
-PAGE_TOOLS = {
-    "overview": ["guide", "connect", "run"],
+PAGE_TOOLS: dict[str, list[str]] = {
+    "packs": ["pack_stage", "pack_review", "pack_record", "catalog"],
+    "autopilot": ["autopilot_new", "autopilot_toggle", "autopilot_history", "budget", "record"],
+    "lab": ["optimize", "quality", "catalog", "packs", "lab_record", "budget"],
+    "overview": ["guide", "connect", "run", "budget"],
     "guides": ["guide", "resume", "record"],
     "journey": ["continue", "health", "record"],
     "health": ["back", "record"],
@@ -141,6 +167,7 @@ PAGE_TOOLS = {
     "collections": ["run", "record"],
     "experiments": [
         "run",
+        "forecast",
         "trials",
         "triage",
         "economics",
@@ -153,8 +180,18 @@ PAGE_TOOLS = {
         "change_link",
         "record",
     ],
-    "trials": ["back", "diagnose", "regrade", "review", "reviews", "export", "record"],
-    "systems": ["system", "record"],
+    "trials": [
+        "back",
+        "diagnose",
+        "investigate",
+        "reduce",
+        "regrade",
+        "review",
+        "reviews",
+        "export",
+        "record",
+    ],
+    "systems": ["system", "variant", "record"],
     "schedules": ["toggle", "schedule_budget", "digest", "record"],
     "audit": ["record"],
     "diagnostics": ["artifacts", "artifact_import", "record"],
@@ -162,7 +199,7 @@ PAGE_TOOLS = {
 }
 
 
-class WorkbenchApp(GrowthMixin, App[None]):
+class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
     """A terminal client; no evaluation or storage rules are duplicated here."""
 
     TITLE = "Everval AI"
@@ -424,6 +461,8 @@ class WorkbenchApp(GrowthMixin, App[None]):
         self._loading = True
 
         def fetch() -> Any:
+            if page in {"autopilot", "lab", "packs"}:
+                return self.evolution_fetch(page)
             if page in {"guides", "journey", "health", "changes", "artifacts"}:
                 return self.growth_fetch(page)
             if page == "candidates":
@@ -540,7 +579,41 @@ class WorkbenchApp(GrowthMixin, App[None]):
             self.rows = (
                 result if isinstance(result, list) else result.get("items", result.get(page, []))
             )
-            if page == "artifacts":
+            if page == "autopilot":
+                columns = ["Policy", "State", "Interval", "Lifetime cap", "Last error"]
+                table_rows = [
+                    (
+                        plain(r.get("name")),
+                        status("enabled" if r.get("enabled") else "paused"),
+                        f"{r.get('interval_minutes', '—')} min",
+                        money(r.get("lifetime_budget_usd")),
+                        plain(r.get("last_error")),
+                    )
+                    for r in self.rows
+                ]
+            elif page == "packs":
+                columns = ["Pack", "Version", "State", "License"]
+                table_rows = [
+                    (
+                        plain(r.get("name")),
+                        plain(r.get("version")),
+                        status(r.get("status")),
+                        plain(r.get("license")),
+                    )
+                    for r in self.rows
+                ]
+            elif page == "lab":
+                columns = ["Research", "Kind", "State", "Created"]
+                table_rows = [
+                    (
+                        plain(r.get("name", r.get("kind", r.get("id")))),
+                        plain(r.get("record_kind")),
+                        status(r.get("status", "retained")),
+                        plain(r.get("created_at")),
+                    )
+                    for r in self.rows
+                ]
+            elif page == "artifacts":
                 columns = ["Package", "Version", "Kind", "Registry", "Bytes"]
                 table_rows = [
                     (
@@ -714,6 +787,8 @@ class WorkbenchApp(GrowthMixin, App[None]):
 
     def empty_message(self) -> str:
         return {
+            "autopilot": "Create a paused policy from full and screening development runs. Enable it after reviewing its budget.",
+            "lab": "Investigate a trial, check a collection, or start a controlled optimization study.",
             "overview": "Connect your first repository to start reconstructing real tasks.\nCtrl+N opens the connection form.",
             "projects": "No repositories connected.\nConnect a GitHub URL or an existing local repository.",
             "candidates": "No candidates discovered for this project.\nDiscover reads history and records both acceptance and rejection reasons.",
@@ -728,6 +803,15 @@ class WorkbenchApp(GrowthMixin, App[None]):
 
     def _update_actions(self) -> None:
         for key in {
+            "variant",
+            "pack_review",
+            "pack_record",
+            "autopilot_toggle",
+            "autopilot_history",
+            "lab_record",
+            "investigate",
+            "reduce",
+            "forecast",
             "resume",
             "continue",
             "health",
@@ -915,12 +999,37 @@ class WorkbenchApp(GrowthMixin, App[None]):
 
     def command(self, name: str) -> None:
         if (
-            name not in {"connect", "run", "system", "guide", "artifacts", "artifact_import"}
+            name
+            not in {
+                "connect",
+                "run",
+                "system",
+                "guide",
+                "artifacts",
+                "artifact_import",
+                "budget",
+                "quality",
+                "optimize",
+                "catalog",
+                "autopilot_new",
+                "packs",
+                "pack_stage",
+            }
             and name not in PAGE_TOOLS[self.page]
         ):
             self.notify("Open the relevant page and select a record first.", severity="warning")
             return
-        if name in {"artifacts", "artifact_import"}:
+        if name in {
+            "artifacts",
+            "artifact_import",
+            "budget",
+            "quality",
+            "optimize",
+            "catalog",
+            "autopilot_new",
+            "packs",
+            "pack_stage",
+        }:
             getattr(self, "command_" + name)()
         elif name == "guide":
             self.command_guide()

@@ -120,7 +120,18 @@ def payload_for(scenario: Scenario, system: System) -> dict[str, Any]:
         raise ValueError("Public task input exceeds the 128 KiB provider limit")
     payload: dict[str, Any] = {
         "model": system.model,
-        "messages": [{"role": "system", "content": PROMPT}, {"role": "user", "content": public}],
+        "messages": [
+            {
+                "role": "system",
+                "content": PROMPT
+                + (
+                    "\n\n" + system.additional_instructions
+                    if system.additional_instructions
+                    else ""
+                ),
+            },
+            {"role": "user", "content": public},
+        ],
         system.token_limit_field: system.max_tokens,
         "response_format": {"type": "json_object"},
         "stream": False,

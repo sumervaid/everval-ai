@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 — 2026-10-14
+
+- Added opt-in Autopilot with periodic/change observations, frozen screening cohorts, bounded escalation, cumulative reservations and retained automatic investigations.
+- Added repeated grading, failure-preserving output reduction, structural grader probes and duplicate signals.
+- Added explicit configuration variants and constrained optimization studies with a reserved single-use holdout and reviewable proposals.
+- Added versioned data-only community packs, independent review, control validation, three no-key examples and local evidence exports.
+- Added budget projections and Autopilot/Research lab terminal views, CLI commands and role-scoped API routes.
+
+
 ## 0.2.0 — 2026-10-14
 
 - Added resumable guided repository onboarding, benchmark health, and commit/configuration-linked evaluations.

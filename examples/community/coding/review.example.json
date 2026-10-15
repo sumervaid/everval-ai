@@ -1,0 +1,6 @@
+{
+  "rationale": "Teaching example only: inspected the original fixture inputs, intended behavior, and near-miss controls.",
+  "expected_behaviors": {
+    "demo-coding": "Update cart.py so total multiplies each item's price by its quantity. Return a files object containing cart.py. This installation fixture checks the canonical edit; use sandbox tests for semantic equivalence."
+  }
+}

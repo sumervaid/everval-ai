@@ -1,12 +1,12 @@
 # Delivery status
 
-Everval AI 0.2 is a terminal-first local evaluation product with a guided repository workflow, optional authenticated review browser, and shared CLI/API.
+Everval AI 0.3 is a terminal-first local evaluation product with a guided repository workflow, optional authenticated review browser, and shared CLI/API.
 
 ## Implemented workflows
 
 | Area | Behavior |
 | --- | --- |
-| Terminal workbench | Ten views, command palette, responsive forms, resumable guided runs, health, evidence, recurring and change-linked evaluations. |
+| Terminal workbench | Twelve views, command palette, responsive forms, resumable guided runs, health, evidence, recurring and change-linked evaluations. |
 | GitHub integration | Read-only metadata, private bare mirrors, bounded history discovery, persistent rejection ledger, pagination, and conservative lineage checks. |
 | Task curation | Independent reviewed statements, provenance fingerprints, before/reference/regression validation, immutable development/holdout releases. |
 | Repository runtimes | Python/pytest plus JavaScript/TypeScript node:test, Jest and Vitest profiles; pinned image IDs and controlled offline private wheel/npm imports. |
@@ -20,6 +20,16 @@ Everval AI 0.2 is a terminal-first local evaluation product with a guided reposi
 | Operations | Durable jobs and worker recovery, local audit chain, consistent backups, exports, and no automatic result uploads. |
 
 The repository contains original installation and integration fixtures. They are not representative customer benchmarks or paid-model performance measurements. See [verification](verification.md) for the current release checks.
+
+## Continuous evaluation and research
+
+The 0.3 services add opt-in worker-driven Autopilot policies, atomic screening/full-run budget reservations, configuration/source observations, and bounded provider-free investigations for supported pure graders. Git observations describe source provenance. Adapter-reported revision checks enforce the configured adapter contract; a Git commit alone does not verify a deployed service.
+
+Research records retain repeated grading, failure-preserving output reduction, structural negative controls and lexical duplicate signals. These are bounded diagnostic techniques, not proof of model determinism, causal attribution, semantic equivalence or grader completeness. Optimization compares explicitly saved configurations and reserves one unused final holdout; it does not invent prompts or deploy winners autonomously.
+
+Portable community packs are bounded data-only manifests. Executable/custom graders, registry downloads and automatic pack publication are unsupported. Human behavior review and successful controls are required for pack admission. The bundled three-domain demo is an installation walkthrough, not representative model evidence.
+
+Budget forecasts expose assumptions and distinguish observed costs from reservations. The provider ledger excludes external hosting, tools and development-service bills.
 
 ## Deployment boundary
 

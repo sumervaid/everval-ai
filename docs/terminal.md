@@ -40,6 +40,8 @@ A narrow accepted subset is not a representative sample of all enterprise work. 
 | F8 | Workspace diagnostics |
 | F9 | Resumable guided runs |
 | F10 | Change-linked evaluations |
+| F11 | Autopilot policies and screening history |
+| F12 | Research lab, studies and community packs |
 | Ctrl+P | Search the command palette, including Collections |
 | Ctrl+N | Connect a repository |
 | Ctrl+R | Refresh the current page |
@@ -85,3 +87,15 @@ The application is built with [Textual](https://textual.textualize.io/). Long op
 Start at **F9 Guided runs** for a resumable repository-to-first-evaluation workflow. Each stage reflects actual retained evidence; a selected record alone does not mark a run complete. **F10 Change runs** links a frozen cohort to explicit commit/configuration fingerprints and deduplicates repeated triggers. See the [guided walkthrough](guided-run.md) and [change evaluation guide](change-evaluation.md).
 
 Experiment actions include failure triage, local regrading, economics, and a decision brief. Project health shows coverage denominators and gaps. Recurring schedules expose cumulative caps and retained digests.
+
+## Continuous improvement
+
+**F11 Autopilot** creates paused policies from completed full and screening development runs. Inspect the cumulative cap before enabling. **Run history** shows screening, escalation and retained automatic investigations. The independent worker performs opted-in periodic/change checks; see [Autopilot](autopilot.md).
+
+**F12 Research lab** starts controlled studies and inspects saved research evidence. **Check quality** runs bounded grader probes and duplicate checks. From a failed trial, **Investigate** repeats recorded grading; **Reduce output** creates a smaller submission preserving the observed check outcome. Neither action resubmits to a provider. See [research loop](research-loop.md) for supported check types and limits.
+
+**Systems → Save variant** creates a separate model, instruction or tool-budget configuration. Optimization compares selected saved systems, reserves an unused holdout and produces a proposal for review. It never deploys a change. Adapter variations require their own pinned revision.
+
+**Staged packs** reads local pack JSON, retains its provenance and collects independently reviewed expected behavior before control validation and admission. The guided review form supports up to ten tasks; larger packs use the CLI review map. **Pack evidence** includes hidden grading material and belongs only in the trusted workspace.
+
+**Budget ledger** is available from the overview and research views. **Experiments → Forecast budget** projects repetitions of a frozen run while keeping unknown costs unknown. See [budget planning](budget-planning.md).

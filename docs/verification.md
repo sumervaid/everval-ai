@@ -1,4 +1,29 @@
-# Version 0.2 verification
+# Version 0.3 verification
+
+Verified on 2026-10-14 on the maintained iMac workspace. No paid provider calls were made. Fixtures and demonstrations are installation/integration controls, not representative model benchmarks.
+
+| Check | Observed result |
+| --- | --- |
+| Full Python suite | 524 passed; 21 Docker/GitHub checks skipped behind explicit opt-in flags |
+| Python static checks | Ruff lint and formatting passed for 112 files; strict mypy passed for 74 source modules |
+| Frontend | 20 tests passed; TypeScript checking and production build passed |
+| Fresh package | Built 0.3.0 wheel installed offline in a separate environment; CLI version and document demo passed |
+| Offline walkthrough | Three-domain demo completed with retained comparison, diagnosis, evidence and valid audit chain; zero provider calls |
+| Coding execution demo | Explicit Docker-backed coding demo validated its controls; zero provider calls |
+| Terminal | Headless integration exercises Autopilot, Research lab, budgets, catalog and staged-pack forms; wide and 80×24 captures inspected |
+| Repository | Relative documentation links checked; source mirror remains private |
+
+The full suite includes reservation/deduplication/recovery, zero-rate unknown usage, cancellation and late settlement, immutable holdout exclusion, configuration pricing, role restrictions, pack admission, malicious schema rejection, provider-free demonstrations and evidence export checks. The test client emits a third-party Starlette/httpx deprecation warning.
+
+The original Python/Node Docker release suites were verified for 0.2 and are retained below as historical evidence; they were not all rerun for 0.3. The new coding demonstration did run in the configured local sandbox. New Autopilot and optimizer lifecycle tests use deterministic local doubles rather than paid hosted services. No representative customer workload, long-duration deployment study or independent security audit is claimed.
+
+Browser-based rendering of new terminal SVG captures timed out in this environment; terminal layout was checked with native rendering and Textual's headless interaction tests. The existing optional browser frontend passed its automated tests and build.
+
+Run `make check` and `make test` to reproduce the ordinary checks. See [deployment limits](PLAN.md), [Autopilot](autopilot.md), [research](research-loop.md), and [community packs](community-packs.md) for the implemented boundaries.
+
+---
+
+## Historical version 0.2 verification
 
 Verified on 2026-10-14 using the maintained local workspace and dedicated Docker runtime. Test fixtures are original installation/integration controls, not customer benchmarks or model performance claims. No paid provider calls were made.
 

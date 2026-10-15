@@ -1,0 +1,145 @@
+{
+  "format": "everval.community-pack",
+  "schema_version": 1,
+  "name": "Calculate net revenue without cancelled orders",
+  "slug": "everval-demo-data",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "provenance": {
+    "origin": "original:everval-installation-examples",
+    "authors": [
+      "Everval contributors"
+    ],
+    "permission_basis": "Original project fixtures distributed under Apache-2.0; all business records are invented."
+  },
+  "runtime": {
+    "executor": "offline-checks",
+    "revision": "1",
+    "network": "none",
+    "code_execution": false
+  },
+  "purpose": "installation-control",
+  "collection": {
+    "schema_version": 1,
+    "id": "demo-data-collection",
+    "name": "Calculate net revenue without cancelled orders",
+    "description": "Installation controls only. No model was called; these results do not measure model performance.",
+    "domain": "data",
+    "version": "1.0.0",
+    "created_at": "2026-10-14T00:00:00+00:00",
+    "benchmark_release_id": null,
+    "benchmark_partition": null,
+    "scenarios": [
+      {
+        "id": "demo-data",
+        "name": "Calculate net revenue without cancelled orders",
+        "domain": "data",
+        "description": "A small invented dataset with explicit numeric checks; no live warehouse connection.",
+        "instruction": "Return currency, net_revenue, and paid_orders as JSON. Include only paid orders; subtract refunds from gross revenue. Report the count of paid orders.",
+        "inputs": {
+          "currency": "USD",
+          "orders": [
+            {
+              "gross": 120,
+              "id": "A",
+              "refund": 20,
+              "status": "paid"
+            },
+            {
+              "gross": 900,
+              "id": "B",
+              "refund": 0,
+              "status": "cancelled"
+            },
+            {
+              "gross": 50,
+              "id": "C",
+              "refund": 10,
+              "status": "paid"
+            }
+          ]
+        },
+        "expected": {},
+        "checks": [
+          {
+            "id": "output-shape",
+            "name": "Typed analytical result",
+            "kind": "json_schema",
+            "path": "",
+            "expected": {
+              "additionalProperties": false,
+              "properties": {
+                "currency": {
+                  "const": "USD"
+                },
+                "net_revenue": {
+                  "type": "number"
+                },
+                "paid_orders": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "currency",
+                "net_revenue",
+                "paid_orders"
+              ],
+              "type": "object"
+            },
+            "weight": 1.0,
+            "required": true,
+            "tolerance": 0.0
+          },
+          {
+            "id": "net-revenue",
+            "name": "Refund-adjusted paid revenue",
+            "kind": "numeric",
+            "path": "net_revenue",
+            "expected": 140,
+            "weight": 1.0,
+            "required": true,
+            "tolerance": 0.005
+          },
+          {
+            "id": "paid-orders",
+            "name": "Paid order count",
+            "kind": "numeric",
+            "path": "paid_orders",
+            "expected": 2,
+            "weight": 1.0,
+            "required": true,
+            "tolerance": 0.0
+          }
+        ],
+        "reference_output": {
+          "currency": "USD",
+          "net_revenue": 140,
+          "paid_orders": 2
+        },
+        "tags": [
+          "installation-control",
+          "original-fixture"
+        ],
+        "provenance": {
+          "license": "Apache-2.0",
+          "negative_controls": [
+            {},
+            {
+              "currency": "USD",
+              "net_revenue": 170,
+              "paid_orders": 2
+            },
+            {
+              "currency": "USD",
+              "net_revenue": 1040,
+              "paid_orders": 3
+            }
+          ],
+          "origin": "original_fixture",
+          "purpose": "installation-control"
+        }
+      }
+    ]
+  },
+  "digest": "e30e6c457de9c0e5cfabc8e8139b9c85f7b18b2e1978f8841b4a8f5a1d77cfef"
+}

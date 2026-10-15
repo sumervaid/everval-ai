@@ -276,10 +276,14 @@ class Store:
         collection: dict[str, Any],
         systems: list[dict[str, Any]],
         parent_id: str | None = None,
+        *,
+        holdout_reservation_id: str | None = None,
     ) -> str:
         from cvals.benchmarks import assert_collection_admitted
+        from cvals.optimization import assert_holdout_available
         from cvals.spend_limits import project_scope
 
+        assert_holdout_available(connection, collection, holdout_reservation_id)
         assert_collection_admitted(connection, collection)
         total = len(collection["scenarios"]) * len(systems) * request.repetitions
         if total > MAX_TRIALS:
@@ -308,7 +312,7 @@ class Store:
             "systems": systems,
             "repetitions": request.repetitions,
             "budget_usd": request.budget_usd,
-            "harness_revision": "everval/0.2.0",
+            "harness_revision": "everval/0.3.0",
             "grader_revision": "deterministic/1",
             "sandbox_image_requested": self.settings.sandbox_image,
             "protocol": "all scheduled trials; no automatic provider retries",
@@ -742,7 +746,8 @@ class Store:
                 settle(connection, trial)
                 if trial["cost_usd"] is not None:
                     state["budget_committed_usd"] += trial["cost_usd"] - trial["reserved_cost_usd"]
-                elif trial["reserved_cost_usd"] > 0:
+                else:
+                    # Zero configured rates do not establish that an unmetered call was free.
                     state["budget_uncertain"] = True
                 if trial.get("provider_metadata", {}).get("budget_uncertain"):
                     state["budget_uncertain"] = True

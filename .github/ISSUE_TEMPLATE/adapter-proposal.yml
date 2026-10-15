@@ -1,0 +1,25 @@
+name: Agent adapter proposal
+description: Add a versioned integration with reproducible protocol tests.
+title: "[Adapter] "
+body:
+  - type: textarea
+    id: use
+    attributes:
+      label: Application and user workflow
+      description: Describe the integration and the decision it enables.
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Execution and accounting contract
+      description: Explain revision identity, aggregate usage, timeouts, cancellation, isolation, and token ceilings.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      description: Provide reproducible no-key protocol tests and explain optional paid checks. Include attribution for reused material.
+    validations:
+      required: true

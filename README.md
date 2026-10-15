@@ -1,10 +1,39 @@
 # Everval AI
 
-**Turn real work into repeatable evidence.**
+**Continuous evaluation for agents doing real work.**
 
 Everval AI turns an organization's real work into validated benchmarks and repeatable decisions about the agents it deploys. It brings task curation, controlled execution, cost and latency analysis, human review, and ongoing evaluation into one local workspace, with a tmux terminal interface and a shared CLI/API. The same engine evaluates code, documents, structured data, and workflows.
 
 Source is maintained in this **private repository**. Workspaces, repository mirrors, hidden graders, model traces, and credentials stay outside Git.
+
+## Try it without a model key
+
+After `uv sync --frozen`, run:
+
+```sh
+uv run everval demo
+```
+
+The local walkthrough shows a behavioral regression, failure evidence and a passing candidate across code contracts, grounded document answers and structured data. It writes an inspectable evidence bundle without network access, Docker or a model key. These are **installation controls**, clearly separated from live agent measurements. [Walkthrough and examples](docs/demo.md).
+
+## Keep improving after the first evaluation
+
+```mermaid
+flowchart LR
+    A[Watch changes] --> B[Screen]
+    B --> C{Escalate?}
+    C -->|Yes| D[Full development run]
+    D --> E[Investigate failures]
+    E --> F[Compare saved candidates]
+    F --> G[Reserved final holdout]
+    G --> H[Review the proposal]
+    C -->|No| A
+    H --> A
+```
+
+**[Autopilot](docs/autopilot.md)** checks configured changes or intervals, reserves a cumulative budget and runs a small screening workload before optional full evaluation. **[Research lab](docs/research-loop.md)** retains grading reproductions, reduced outputs and grader-quality signals. Configuration studies compare explicit model, prompt and tool-budget candidates, then validate a selected candidate once against a reserved holdout. Deployment remains a reviewed decision.
+
+**[Community packs](docs/community-packs.md)** carry versioned tasks, provenance, licenses and runtime contracts. Imports are staged for independent behavior review and control validation. **[Budget projections](docs/budget-planning.md)** separate observed costs, reservations and assumptions before recurring work starts.
 
 ## Workflow at a glance
 
@@ -36,7 +65,9 @@ The product extends benchmark execution with reviewed task creation, versioned e
 | **Explicit decision policies** | Set quality, completion, error, cost, latency, and regression gates; version policies and retain their decisions with the supporting evidence. |
 | **Existing agents** | Connect a versioned live agent adapter or import recorded submissions; retain usage, revisions, and bounded traces. |
 | **Failure investigation** | Group failures, inspect file differences and stage timings, and regrade recorded outputs without another model call. |
-| **Ongoing evaluation** | Deduplicate change-linked runs, cap recurring spending, retain digests, and inspect benchmark health. |
+| **Ongoing evaluation** | Watch configured changes, screen before escalating, retain automatic pure-grader investigations, cap recurring spending, and inspect benchmark health. |
+| **Controlled improvement** | Compare frozen configuration candidates, reserve an unused holdout, and retain a reviewable proposal without deploying it. |
+| **Portable benchmark packs** | Inspect versioned, licensed data-only packs; review expected behavior and validate controls before admission. |
 | **Team decisions** | Assign blinded comparisons with frozen rubrics, enforce personal identities and API roles, and retain review decisions. |
 | **Production feedback** | Redact and stage real examples, review expected behavior, then publish control-validated task collections. |
 
@@ -58,7 +89,7 @@ uv run everval tmux
 
 Without tmux, run `uv run everval tui`. Node.js is required only to build the optional web interface.
 
-The workbench provides ten views: **Overview · Projects · Releases · Experiments · Systems · Schedules · Audit · Workspace · Guided runs · Change runs**. Use **F1–F10** to navigate, **Ctrl+P** for commands, **Ctrl+N** to connect a repository, and **Ctrl+R** to refresh. A separate worker retains queued work when the terminal closes. In tmux, **Ctrl+B, D** detaches the session.
+The workbench provides twelve views: **Overview · Projects · Releases · Experiments · Systems · Schedules · Audit · Workspace · Guided runs · Change runs · Autopilot · Research lab**. Use **F1–F12** to navigate, **Ctrl+P** for commands, **Ctrl+N** to connect a repository, and **Ctrl+R** to refresh. A separate worker retains queued work when the terminal closes. In tmux, **Ctrl+B, D** detaches the session.
 
 [Terminal walkthrough](docs/terminal.md) · [First experiment](docs/quickstart.md) · [GitHub onboarding](docs/github.md)
 
@@ -110,6 +141,8 @@ The four original starter collections contain 19 scenarios. Their reference and 
 | Evaluate changes and recurring work | [Change-linked runs and digests](docs/change-evaluation.md), [benchmark health](docs/guided-run.md) |
 | Assign reviews and learn from production | [Team review](docs/team-review.md), [production cases](docs/production-cases.md) |
 | Author document, data, or workflow tasks | [Scenarios](docs/scenarios.md) |
+| Run continuously and improve configurations | [Autopilot](docs/autopilot.md), [research lab](docs/research-loop.md), [budget planning](docs/budget-planning.md) |
+| Try or contribute a portable task pack | [Free demo](docs/demo.md), [community packs](docs/community-packs.md) |
 | Interpret evidence and set a gate | [Results](docs/results.md), [cost and latency](docs/cost-latency.md), [quality policies](docs/policies.md) |
 | Operate and recover a local workspace | [Operations](docs/operations.md) |
 | Understand implementation and scope | [Methodology](docs/METHODOLOGY.md), [architecture](docs/ARCHITECTURE.md), [interfaces](docs/INTERFACES.md), [delivery status](docs/PLAN.md) |

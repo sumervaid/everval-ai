@@ -1,0 +1,6 @@
+{
+  "rationale": "Teaching example only: inspected the original fixture inputs, intended behavior, and near-miss controls.",
+  "expected_behaviors": {
+    "demo-data": "Return currency, net_revenue, and paid_orders as JSON. Include only paid orders; subtract refunds from gross revenue. Report the count of paid orders."
+  }
+}

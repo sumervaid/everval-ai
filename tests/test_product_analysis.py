@@ -183,3 +183,42 @@ def test_frontier_excludes_controls_and_unknown_costs(workspace, monkeypatch):
     economics = analyze(result)
     assert economics["observed_frontier"] == ["live"]
     assert economics["systems"][1]["eligible_for_frontier"] is False
+
+
+def test_zero_rate_missing_usage_is_uncertain_and_blocks_followups(workspace, monkeypatch):
+    settings, store = workspace
+    store.save_system(
+        System(
+            id="free",
+            name="Zero configured rates",
+            kind="http",
+            model="test",
+            base_url="http://127.0.0.1:9910",
+            input_cost_per_million=0,
+            output_cost_per_million=0,
+        )
+    )
+    calls = []
+
+    def submit(*args):
+        calls.append(True)
+        return Submission({"total": 5})
+
+    monkeypatch.setattr("cvals.engine.submit", submit)
+    experiment = store.create_experiment(
+        ExperimentCreate(
+            name="Unknown zero-rate usage",
+            collection_id="tasks",
+            system_ids=["free"],
+            repetitions=2,
+            budget_usd=0,
+        )
+    )
+    result = Engine(store, settings).run_experiment(experiment["id"])
+    assert result["budget_uncertain"] is True
+    assert len(calls) == 1
+    assert result["trials"][0]["cost_usd"] is None
+    from cvals.schedules import ScheduleStore
+
+    with pytest.raises(ValueError, match="Uncertain"):
+        ScheduleStore(settings, store).create("Blocked", experiment["id"], 60)

@@ -1,0 +1,25 @@
+name: Grader proposal
+description: Propose a bounded evaluator with meaningful correctness evidence.
+title: "[Grader] "
+body:
+  - type: textarea
+    id: contract
+    attributes:
+      label: What behavior does the grader establish?
+      description: Define inputs, outputs, success criteria, unsupported cases, and intended users.
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Isolation and resource limits
+      description: Describe execution requirements, network policy, private-material separation, timeouts, and bounded work. Imported community packs cannot install custom graders.
+    validations:
+      required: true
+  - type: textarea
+    id: controls
+    attributes:
+      label: Controls and verification
+      description: Supply passing references, realistic failing controls, infrastructure-failure handling, and reproducible tests. Include licenses for reused work.
+    validations:
+      required: true

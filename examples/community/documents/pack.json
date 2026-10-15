@@ -1,0 +1,122 @@
+{
+  "format": "everval.community-pack",
+  "schema_version": 1,
+  "name": "Ground a refund answer in current policy",
+  "slug": "everval-demo-documents",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "provenance": {
+    "origin": "original:everval-installation-examples",
+    "authors": [
+      "Everval contributors"
+    ],
+    "permission_basis": "Original project fixtures distributed under Apache-2.0; all business records are invented."
+  },
+  "runtime": {
+    "executor": "offline-checks",
+    "revision": "1",
+    "network": "none",
+    "code_execution": false
+  },
+  "purpose": "installation-control",
+  "collection": {
+    "schema_version": 1,
+    "id": "demo-documents-collection",
+    "name": "Ground a refund answer in current policy",
+    "description": "Installation controls only. No model was called; these results do not measure model performance.",
+    "domain": "documents",
+    "version": "1.0.0",
+    "created_at": "2026-10-14T00:00:00+00:00",
+    "benchmark_release_id": null,
+    "benchmark_partition": null,
+    "scenarios": [
+      {
+        "id": "demo-documents",
+        "name": "Ground a refund answer in current policy",
+        "domain": "documents",
+        "description": "Checks the numeric answer, source identity, and verbatim quotation; semantic entailment is not assessed.",
+        "instruction": "Using only the supplied sources, return refund_days for enterprise customers and citations with source_id and exact supporting quote. The archived policy is superseded.",
+        "inputs": {
+          "sources": [
+            {
+              "id": "refund-policy",
+              "text": "Current policy. Enterprise customers may request a refund within 30 days of purchase."
+            },
+            {
+              "id": "archived-policy",
+              "text": "Archived policy: refunds were available within 14 days."
+            }
+          ]
+        },
+        "expected": {},
+        "checks": [
+          {
+            "id": "refund-days",
+            "name": "Current refund window",
+            "kind": "numeric",
+            "path": "refund_days",
+            "expected": 30,
+            "weight": 1.0,
+            "required": true,
+            "tolerance": 0.0
+          },
+          {
+            "id": "grounded-citation",
+            "name": "Verifiable current-policy quotation",
+            "kind": "citation",
+            "path": "citations",
+            "expected": {
+              "require_quote": true,
+              "source_ids": [
+                "refund-policy"
+              ]
+            },
+            "weight": 1.0,
+            "required": true,
+            "tolerance": 0.0
+          }
+        ],
+        "reference_output": {
+          "citations": [
+            {
+              "quote": "Enterprise customers may request a refund within 30 days of purchase.",
+              "source_id": "refund-policy"
+            }
+          ],
+          "refund_days": 30
+        },
+        "tags": [
+          "installation-control",
+          "original-fixture"
+        ],
+        "provenance": {
+          "license": "Apache-2.0",
+          "negative_controls": [
+            {},
+            {
+              "citations": [
+                {
+                  "quote": "refunds were available within 14 days.",
+                  "source_id": "archived-policy"
+                }
+              ],
+              "refund_days": 14
+            },
+            {
+              "citations": [
+                {
+                  "quote": "Refunds are always unlimited.",
+                  "source_id": "refund-policy"
+                }
+              ],
+              "refund_days": 30
+            }
+          ],
+          "origin": "original_fixture",
+          "purpose": "installation-control"
+        }
+      }
+    ]
+  },
+  "digest": "2d81c0a70b32d1b79b2429358538577f7e74291f940684d1b5dab769942365d2"
+}

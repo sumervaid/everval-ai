@@ -93,6 +93,13 @@ class Worker:
         self.engine = Engine(store, settings)
         self.settings = settings
         self.schedules = ScheduleStore(settings, store)
+        from cvals.autopilot import Autopilot
+        from cvals.jobs import Jobs
+        from cvals.optimization import Optimizer
+
+        self.autopilot = Autopilot(settings, store)
+        self.optimizer = Optimizer(settings)
+        self.jobs = Jobs(settings)
         self.stop_event = threading.Event()
         self.wake_event = threading.Event()
         self.thread: threading.Thread | None = None
@@ -115,7 +122,11 @@ class Worker:
             try:
                 if time.monotonic() >= next_schedule_check:
                     self.schedules.tick()
+                    self.autopilot.tick()
+                    self.optimizer.tick()
+                    self.autopilot.investigate_pending()
                     next_schedule_check = time.monotonic() + 5
+                self.jobs.run_pending_once()
                 if self.engine.run_pending_once():
                     continue
             except Exception:
@@ -187,6 +198,9 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
     from cvals.experience_api import register_experience_routes
 
     register_experience_routes(app, settings)
+    from cvals.evolution_api import register_evolution_routes
+
+    register_evolution_routes(app, settings)
     hosts = ["localhost", "127.0.0.1", "::1", "[::1]", "testserver"]
     hosts.extend(
         h.strip()

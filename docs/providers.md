@@ -51,3 +51,17 @@ Only scenario instructions and public inputs enter provider context. Expected ou
 A hosted endpoint still receives the public task material. Choose local inference when that material must remain on the machine. Full trial exports can contain private source, outputs, and traces; handle them as workspace evidence.
 
 The automated test suite uses fixtures, mock endpoints, and local Docker execution. It makes no paid model calls.
+
+## Reviewable configuration variants
+
+Create a separate saved candidate before comparing a model, prompt or tool budget:
+
+```sh
+everval systems variant SOURCE_SYSTEM "Concise candidate" --instructions-file prompt.txt --max-tokens 1024
+everval systems variant SOURCE_SYSTEM "Alternate model" --model YOUR_MODEL \
+  --input-rate YOUR_INPUT_RATE --output-rate YOUR_OUTPUT_RATE --pricing-version YOUR_REVIEWED_RATE_VERSION
+```
+
+Changing the model requires explicit input/output rates and a pricing version; source-model prices are never assumed valid for another model. Additional instructions are bounded to 8,000 characters and apply only to built-in single-turn and tool harnesses. They do not expose private graders. External adapter changes require a separately pinned adapter revision. The terminal offers **Systems → Save variant**.
+
+[Compare candidates with a reserved holdout](research-loop.md) · [Project the budget](budget-planning.md)

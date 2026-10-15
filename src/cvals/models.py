@@ -224,6 +224,7 @@ class System(Manifest):
     base_url: str = Field(default="", max_length=2000)
     api_key_env: str = Field(default="", max_length=128)
     temperature: float | None = Field(default=None, ge=0, le=2)
+    additional_instructions: str = Field(default="", max_length=8000)
     harness: Literal["single-turn", "tools", "external-agent"] = "single-turn"
     adapter_revision: str = Field(default="", max_length=200)
     adapter_input_token_limit: int = Field(default=131072, ge=1, le=100000000)
@@ -242,6 +243,12 @@ class System(Manifest):
 
     @model_validator(mode="after")
     def provider_config(self) -> Self:
+        if self.additional_instructions and (
+            self.kind != "http" or self.harness == "external-agent"
+        ):
+            raise ValueError(
+                "Additional instructions require a live single-turn or tool harness; external adapter changes need a new revision"
+            )
         if self.kind == "replay":
             if not re.fullmatch(r"[a-f0-9]{64}", self.collection_hash):
                 raise ValueError("Replay systems require a SHA-256 collection fingerprint")

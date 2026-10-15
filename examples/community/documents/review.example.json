@@ -1,0 +1,6 @@
+{
+  "rationale": "Teaching example only: inspected the original fixture inputs, intended behavior, and near-miss controls.",
+  "expected_behaviors": {
+    "demo-documents": "Using only the supplied sources, return refund_days for enterprise customers and citations with source_id and exact supporting quote. The archived policy is superseded."
+  }
+}

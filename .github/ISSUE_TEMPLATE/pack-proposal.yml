@@ -1,0 +1,30 @@
+name: Task pack proposal
+description: Propose a permitted, reproducible workload with reviewed controls.
+title: "[Pack] "
+body:
+  - type: textarea
+    id: user
+    attributes:
+      label: Who will use this workload?
+      description: Describe the decision it supports and the task contract.
+    validations:
+      required: true
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Provenance and permission
+      description: State the source, author, SPDX license, and basis for redistribution. Do not attach private customer material.
+    validations:
+      required: true
+  - type: textarea
+    id: controls
+    attributes:
+      label: Validation and limitations
+      description: Describe passing references, plausible failing controls, grader limits, runtime, version, and reproducible commands.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reviewed evidence
+      description: Link a reviewed public summary or describe local verification. Never attach hidden customer checks, traces, or credentials.
