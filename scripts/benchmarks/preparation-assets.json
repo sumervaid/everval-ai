@@ -1,0 +1,246 @@
+{
+  "repository": "https://github.com/SWE-bench/swe-bench-tasks",
+  "revision": "3d07b464b7b311a0cbfb5ed5b2d8a3b96f84a33d",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "b4d7119d879c7356e58dec4b66e60b8fc13e67c9e5d47a84c4cbe23ff7f50fa0",
+      "bytes": 568
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "9370096f3d1c8c9e9737dfea77bb747003a4f755ebc308c5eaff94f13b18f376",
+      "bytes": 513
+    },
+    {
+      "path": "sweb.yaml",
+      "sha256": "ed5f759cc4f8659f384b22c2f587b47fc3e894f66f13c3758e422cf352e8d7fc",
+      "bytes": 111
+    },
+    {
+      "path": "tasks/pallets__flask-4045/Dockerfile",
+      "sha256": "756c58affd93a993a86a525aef4958824c99f4c7512024af05c37b5be65563cd",
+      "bytes": 4777
+    },
+    {
+      "path": "tasks/pallets__flask-4045/environment.yml",
+      "sha256": "fef29bcc45f98f1d53b348486ec249718acbda2b13c812fc96bde296b6c0d5f4",
+      "bytes": 2418
+    },
+    {
+      "path": "tasks/pallets__flask-4045/task.yaml",
+      "sha256": "fb021d48105b4f4d7c0822966d6184e94c753435e9cc6c8c6fd12002984d9b39",
+      "bytes": 412
+    },
+    {
+      "path": "tasks/pallets__flask-4992/Dockerfile",
+      "sha256": "462284a2eb6fa2570b78f285e55e283d992bebee1f3b98c4be80fcd766dddfe0",
+      "bytes": 4796
+    },
+    {
+      "path": "tasks/pallets__flask-4992/environment.yml",
+      "sha256": "a2eaf87d32c0ba498ef140d81d8b667e4da95781c30989987f794fe18a7ff7a1",
+      "bytes": 2437
+    },
+    {
+      "path": "tasks/pallets__flask-4992/task.yaml",
+      "sha256": "a077f682466c3c9afb98502f8de4cbceaea2a6ca082db7c010eb5938c9522e57",
+      "bytes": 412
+    },
+    {
+      "path": "tasks/pallets__flask-5063/Dockerfile",
+      "sha256": "e2c0e9f67eac74d6fe5c2417a40a6e508736dc577aee3b44f8d30be805f37d92",
+      "bytes": 4819
+    },
+    {
+      "path": "tasks/pallets__flask-5063/environment.yml",
+      "sha256": "d998dc343fc0463b27f3c4fa111ca12cd58ecf5a70e66bd5a1b751c55ca4237f",
+      "bytes": 2460
+    },
+    {
+      "path": "tasks/pallets__flask-5063/task.yaml",
+      "sha256": "d9a9c983efa21022e280b0c6587fa66cf515b77f9f5699e7cf7d16d7351c641c",
+      "bytes": 412
+    },
+    {
+      "path": "tasks/psf__requests-2148/Dockerfile",
+      "sha256": "b772d0cf33e4436aa8e9129fbdbd39b7e4b6d4ef6087037e7d82a47cd76ee528",
+      "bytes": 3299
+    },
+    {
+      "path": "tasks/psf__requests-2148/environment.yml",
+      "sha256": "2fe76b22a8518ddfb2ae926998b3f6d752c8cb868528aad1509b97f568e8e701",
+      "bytes": 944
+    },
+    {
+      "path": "tasks/psf__requests-2148/task.yaml",
+      "sha256": "d2006e9852c21401e3162d95bf7435aab7fb874b61c2474433ea475bd7fd7dfe",
+      "bytes": 412
+    },
+    {
+      "path": "tasks/psf__requests-2317/Dockerfile",
+      "sha256": "4c9f39a89c5a144387f1ad816bda207fc865fb3530c482874cfc964908ae40b8",
+      "bytes": 3272
+    },
+    {
+      "path": "tasks/psf__requests-2317/environment.yml",
+      "sha256": "d683258cf56777fd9b48a729ba26a95ae58f48dbfbe8edcddb7ae9000bcb82b3",
+      "bytes": 917
+    },
+    {
+      "path": "tasks/psf__requests-2317/task.yaml",
+      "sha256": "11d51b5b1bd9a8ee23ad42b09c597cecca59986385a102564522326ee2e0271b",
+      "bytes": 467
+    },
+    {
+      "path": "tasks/psf__requests-2674/Dockerfile",
+      "sha256": "4952a21adcd977cd3f347a02cc0624e8516f20e61cd83718de8bf5b304d4edbe",
+      "bytes": 3272
+    },
+    {
+      "path": "tasks/psf__requests-2674/environment.yml",
+      "sha256": "d683258cf56777fd9b48a729ba26a95ae58f48dbfbe8edcddb7ae9000bcb82b3",
+      "bytes": 917
+    },
+    {
+      "path": "tasks/psf__requests-2674/task.yaml",
+      "sha256": "a10cdef74accff7509624fc8863d9bbf1286a88c0f6c795532abb13cf4f21c7f",
+      "bytes": 412
+    },
+    {
+      "path": "tasks/psf__requests-3362/Dockerfile",
+      "sha256": "d96d33caa52ef974098e3c265b9609ecd54493fb793bb6963a90791d3a619890",
+      "bytes": 3272
+    },
+    {
+      "path": "tasks/psf__requests-3362/environment.yml",
+      "sha256": "d683258cf56777fd9b48a729ba26a95ae58f48dbfbe8edcddb7ae9000bcb82b3",
+      "bytes": 917
+    },
+    {
+      "path": "tasks/psf__requests-3362/task.yaml",
+      "sha256": "dde66c2448feaee193e43284434bed4f6481e1ee798c28815af20c868634abad",
+      "bytes": 413
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-11143/Dockerfile",
+      "sha256": "8406cf82cd03a6a79d48d78d792eae2e3ffd8924bc5a948723690b0e6a992622",
+      "bytes": 3200
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-11143/environment.yml",
+      "sha256": "e521e5262a3454aafe1e995c29529190ed3981f8147c11b18a495bb4488b9792",
+      "bytes": 837
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-11143/task.yaml",
+      "sha256": "a018cd51b97a7687b65e0870d323414f2aa8b56bd8da39b47c43facdb7c75473",
+      "bytes": 427
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-11148/Dockerfile",
+      "sha256": "01548a1b602b55dbb22c3a0ecf732583226ff3c0fbd66acc8d2ecba76027dfb9",
+      "bytes": 3200
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-11148/environment.yml",
+      "sha256": "e521e5262a3454aafe1e995c29529190ed3981f8147c11b18a495bb4488b9792",
+      "bytes": 837
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-11148/task.yaml",
+      "sha256": "fc76fd5eb06aa7c52a0e0d7e1f1b5adb84eca91281a1345b077fc5d3007f6b80",
+      "bytes": 427
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-8906/Dockerfile",
+      "sha256": "f741137d1eea8a46ee5ffc7cad45ba5b13eb42d917ffe81afa97165839bfc0f8",
+      "bytes": 3212
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-8906/environment.yml",
+      "sha256": "65893bcdc4499148b921bd4b7314d03c8613f73c70a4d5f0ef9ea4599af2f583",
+      "bytes": 849
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-8906/task.yaml",
+      "sha256": "9cdebe8505b3c515adbcd57c2aaa9c02f361493fe34bbe6802c8e49f2e48933a",
+      "bytes": 425
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-9359/Dockerfile",
+      "sha256": "8ccd5993da382b0195823996981eae00ed5a7539643950b0704d28adc02eb242",
+      "bytes": 3212
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-9359/environment.yml",
+      "sha256": "65893bcdc4499148b921bd4b7314d03c8613f73c70a4d5f0ef9ea4599af2f583",
+      "bytes": 849
+    },
+    {
+      "path": "tasks/pytest-dev__pytest-9359/task.yaml",
+      "sha256": "fdb2af70392d616dab6d88cf33a1e86bc08a28e1db7118846d4bedafcef8bff5",
+      "bytes": 425
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-10325/Dockerfile",
+      "sha256": "78c00d93c09f79f05e7d8e2d6e9b5b3e5fbe064114d66c118e92418fc9213395",
+      "bytes": 4283
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-10325/environment.yml",
+      "sha256": "51578ba8ee0071f3ece12323eee5f6d0c8b9328b4dfddf26a3535b94ed5af43f",
+      "bytes": 1876
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-10325/task.yaml",
+      "sha256": "d517ed35542ac4dce734eee39cc9f0f1b149b0713b2833f32ea6ae6a6e393e7c",
+      "bytes": 427
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-10451/Dockerfile",
+      "sha256": "7ba3df5baf2cdfe7670766896952d9fa462b26936ad03a020ef591256da70fb3",
+      "bytes": 4233
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-10451/environment.yml",
+      "sha256": "cea5540531bc04d4b86335bd1a38b4443313720ce808ad23b3857c2136e20982",
+      "bytes": 1826
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-10451/task.yaml",
+      "sha256": "36a9f0f8f5ef90946b48c0332639f64448efe6e5aef150ee7c7472b242d86a8b",
+      "bytes": 427
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-11445/Dockerfile",
+      "sha256": "75b15b2ae9cd5b1545b899376d455f5e6224c1f6ac328eb9eef8c9ba09657ad0",
+      "bytes": 4002
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-11445/environment.yml",
+      "sha256": "35f3b5e453ea0c4fbe521589b4896a5b83604000883b114085818016e69b3d65",
+      "bytes": 1595
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-11445/task.yaml",
+      "sha256": "28a10067816e1a01abf82dd581ac26d98d74e48abff99ce4c1d4a18120fb9d88",
+      "bytes": 486
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-8801/Dockerfile",
+      "sha256": "c0f20ceadae4cbf36b2f62253cf257b2bb592c27e12234b7ee767521e9379af8",
+      "bytes": 4785
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-8801/environment.yml",
+      "sha256": "ba43bc1909cc5a8eb9d9ab7dc793896522293716cbdb2e3d618e5991c2f40fe0",
+      "bytes": 1822
+    },
+    {
+      "path": "tasks/sphinx-doc__sphinx-8801/task.yaml",
+      "sha256": "1690f0e7aaa1583e96fa58d413a61a5586b9836ea9cbe5957fa3628b05d61e87",
+      "bytes": 425
+    }
+  ]
+}

@@ -32,19 +32,27 @@ For each selected task, before admitting paid evaluation:
 3. Apply the official reference patch to another fresh base and rerun the full official test contract. Every FAIL_TO_PASS and PASS_TO_PASS case must pass.
 4. Retain command logs, parsed case outcomes, image identity, durations, and explicit rejection reasons. Missing dependencies, missing cases, zero-test runs, and unsuccessful setup do not satisfy a control.
 
-Each submitted patch is graded in another fresh container using the pinned row's evaluation script and official log parser. Resolution requires all official FAIL_TO_PASS and PASS_TO_PASS cases to pass after a complete grading run. There is no selected-test shortcut or custom success fallback.
+Each submitted patch is graded in another fresh container using the pinned row's evaluation script and official log parser. Resolution requires all official FAIL_TO_PASS and PASS_TO_PASS cases to pass after a complete grading run. There is no selected-test shortcut or custom success fallback. The required set is the complete official FAIL_TO_PASS and PASS_TO_PASS lists, rather than every test in the repository. Additional cases can appear in the invoked suite; retain their observed status counts and actual suite exit code, and do not describe a resolved task as proof that the entire repository suite passed.
+
+The upstream evaluation script does not independently record every setup command's exit status. The runner checks script completion, recognized setup-error signals, and complete required-test outcomes, and retains the logs for inspection. A successful test subset alone cannot override a detected setup failure; the exported controls disclose this distinction.
 
 Both arms also enforce the same `python-source-v1` patch policy: reject edits to tests, `conftest.py`, build and dependency files, configuration files, Git metadata, binary files and symlinks. Legitimate source modules such as `src/_pytest/config/__init__.py` remain allowed. A reference repair incompatible with this policy excludes the task before paid admission. This restriction hardens the local grader and is another difference from an unmodified leaderboard run.
 
-Use distinct run IDs for base, reference, baseline, and reviewed attempts. The [official harness FAQ](https://www.swebench.com/SWE-bench/faq/) warns that evaluation caching is keyed by run and instance identity, rather than patch content.
+This runner uses separate evidence directories and fresh grading containers for base controls, reference controls, and each agent attempt; it does not reuse the official evaluation cache. If reproducing through the official harness, use distinct run IDs: its [FAQ](https://www.swebench.com/SWE-bench/faq/) warns that caching is keyed by run and instance identity, rather than patch content.
 
-The agent receives the issue statement and starting source snapshot. Reference patches, test patches, hidden grading material, future commits, and evaluator logs stay outside its environment. Agent and grader containers have no network access or host filesystem mounts. Source installation, hooks, builds, and tests never run on the personal host.
+The agent receives the issue statement and starting source snapshot. Reference patches, test patches, hidden grading material, future commits, and evaluator logs stay outside its environment. Agent and grader containers have no network access or host filesystem mounts. Evaluated repository installation, hooks, builds, and tests never run on the personal host. The host runs trusted, pinned orchestration and grading tools.
 
 ## Native ARM runtime
 
-The local Docker allocation is two CPUs and approximately 2 GiB of memory on ARM64. The selected official task recipes specify x86 Ubuntu, an x86 Miniconda installer, and architecture-specific Conda builds. Their dataset image tags are provenance references, not immutable native ARM images.
+The local Docker allocation is two CPUs and approximately 4 GiB of memory on ARM64. Preparation initially used 2 GiB; the allocation increased before any official repository controls or paid attempts. Both arms retain the same per-container resource limits. The selected official task recipes specify x86 Ubuntu, an x86 Miniconda installer, and architecture-specific Conda builds. Their dataset image tags are provenance references, not immutable native ARM images.
 
 Any native adaptation must retain the original task and test contract, record the Dockerfile and dependency changes, pin the resulting image identity, and pass the controls above. Both comparison arms use that same prepared image. The published evidence must distinguish this adaptation from the official x86 image. The [SWE-bench Docker guide](https://www.swebench.com/SWE-bench/guides/docker_setup/) describes broader resource expectations; this small pilot is intentionally narrower.
+
+The [preparation recipe](../../../scripts/benchmarks/README.md) switches Ubuntu and the same-release Miniconda installer to ARM64, removes x86 build strings and explicit platform-runtime pins, and retains declared Python and Python-library version pins. It uses checksum-verified micromamba 2.9.0-0 with sharded metadata to reduce resolver memory. Copied setup scripts preserve tracked executable bits instead of making every file executable. Evidence records the original and adapted recipes, script hashes, resolved Conda package records, explicit package references, pip packages, and installer hash. A later rebuild can resolve different transitive packages from mutable indexes; the evaluated image IDs remain fixed.
+
+Preparation separates reusable Conda stages from each task's ordered pip installs and repository setup. Identical ordered Conda pins, channels, platform, and resolver settings can share a stage; the selected recipes form four such groups. The pip entries keep their original order and target interpreter.
+
+To support the unchanged evaluator's offline installers, images include a local wheelhouse for build tooling, with exact versions, filenames, sizes, and SHA-256 hashes retained. The evaluator uses this local package source with package-index access disabled. A required backend missing from that source remains a setup failure; passing tests do not override it.
 
 Dependency preparation may download public sources and packages inside Docker. Evaluation itself runs offline. A mutable dataset image tag alone is insufficient runtime provenance.
 
@@ -60,7 +68,7 @@ Both arms use the same model, task snapshot, prepared runtime, command interface
 | Transport | Chat Completions with textual actions |
 | Agent step ceiling | 250 |
 | Provider cost ceiling | $6 per attempt |
-| Attempt deadline | 1,800 seconds |
+| Model-step admission threshold | 1,800 seconds |
 | Command deadline | 60 seconds |
 | Conversation input ceiling | 128 KiB of serialized message text |
 | Command output ceiling | 1 MiB before upstream observation formatting |
@@ -69,13 +77,15 @@ Both arms use the same model, task snapshot, prepared runtime, command interface
 
 Each task is run as a pair. Baseline runs first when the first byte of the SHA-256 of the instance ID is even; Everval runs first when it is odd. This counterbalances order without consulting outcomes.
 
+The upstream agent checks elapsed time before admitting another model request. An in-flight request and its action may finish after the threshold; grading and cleanup extend total elapsed time separately. The HTTP client has operation timeouts, not an absolute request wall-clock deadline.
+
 The review consumes the same step, time, and spending allowance; it receives no additional budget. The exact upstream mini-SWE-agent revision, prompts, implementation hashes, returned provider model, runtime image, and effective settings must be retained with attempts.
 
 The model name is an alias, not a frozen provider snapshot. Record the provider-returned model identifier and run times. Availability of an alias does not establish behavior stability.
 
 Both configurations are declared before outcomes. The three development tasks exercise the process using these same fixed configurations; they are not a license to tune against test failures. A later configuration change requires a separately declared experiment and must retain the earlier evidence.
 
-A meaningful paired report gives each task's outcome for both arms, raw success counts, unresolved and infrastructure counts, paired differences, provider cost, and elapsed time. It must not equate a lower cost from an incomplete attempt with an improvement. Latency depends on this local runtime and recorded scheduling conditions.
+A meaningful paired report gives each task's outcome for both arms, raw success counts, unresolved and infrastructure counts, paired differences, provider cost, and elapsed time. It must not equate a lower cost from an incomplete attempt with an improvement. Reported attempt duration measures solver elapsed time, including solver setup and cleanup; it excludes grading. Latency depends on this local runtime and recorded scheduling conditions.
 
 ## Spending and accounting
 
@@ -83,9 +93,9 @@ The cumulative measured OpenAI evaluation allowance is $200, including the previ
 
 The conservative maximum is therefore **$180.482999 including prior spend**. Campaign admission stops at $190, leaving room below the user's $200 limit. These are ceilings and reservations, not observed spend.
 
-The initial accounting configuration uses $2.50 per million input tokens and $10 per million output tokens. Verify the current [official model and pricing documentation](https://developers.openai.com/api/docs/models/gpt-6.1-sol) before a fresh paid run, record the configured pricing version, and fail closed when usage cannot be reconciled. Record actual returned usage rather than presenting reservations as billed cost. This provider ledger does not measure unrelated development services, infrastructure, or other accounts.
+The initial accounting configuration uses $2.50 per million input tokens and $10 per million output tokens. Verify the current [official model documentation](https://developers.openai.com/api/docs/models/gpt-6.1-sol) and [pricing table](https://developers.openai.com/api/docs/pricing) before a fresh paid run, record the configured pricing version, and fail closed when usage cannot be reconciled. Record actual returned usage rather than presenting reservations as billed cost. This provider ledger does not measure unrelated development services, infrastructure, or other accounts.
 
-No paid attempt is admitted before selection, provenance, applicable controls, and budget checks are complete. Failed and interrupted calls retain their usage or unresolved accounting state.
+No paid attempt is admitted before selection, provenance, applicable controls, and budget checks are complete. Failed and interrupted calls retain their usage or unresolved accounting state. Missing or stale accounting cannot be replaced with a fresh zero-cost ledger when attempt evidence exists. Admission and export reconcile retained provider evidence against the ledger; incomplete evidence blocks continuation and cost-completeness claims.
 
 ## Interpretation and public evidence
 

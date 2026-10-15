@@ -1,0 +1,16 @@
+-r tooling-requirements.txt
+setuptools==80.9.0
+wheel==0.45.1
+
+# Declared runtime dependencies of the two hash-verified upstream source pins.
+# Exact versions and distribution hashes are retained in tooling-requirements.lock.
+beautifulsoup4
+chardet
+ghapi<2
+GitPython
+litellm!=1.82.7,!=1.82.8,>=1.75.5
+openai!=1.100.0,!=1.100.1
+pre-commit
+prompt_toolkit
+textual
+typer

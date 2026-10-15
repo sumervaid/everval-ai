@@ -85,6 +85,8 @@ The small, original task set establishes exercised compatibility; it does not ra
 
 [Results and artifacts](docs/evidence/2026-10-15/README.md) · [Reproduce acceptance](docs/release-acceptance.md) · [Verification scope](docs/verification.md)
 
+The separate [public repository pilot](docs/benchmarks/public-repositories-2026-10-15/methodology.md) declares a matched agent comparison on Flask, Requests, pytest, and Sphinx. [Reproduce its preparation, controls, budgeted runs, and metadata export](scripts/benchmarks/README.md). Real-repository model results are pending.
+
 ## Your workspace, your evidence
 
 Workspaces live locally; the default is `~/.local/share/everval`. Set `EVERVAL_DATA_DIR` to choose another disk. There is no telemetry or automatic result upload. Hosted inference is an explicit choice requiring configured prices, credentials, and a budget.

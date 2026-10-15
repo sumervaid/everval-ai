@@ -59,4 +59,4 @@ The supported deployment is one local workspace with a dedicated worker. Read [o
 
 The bundled examples are original installation controls. The dated live results describe those bounded tasks, not representative customer performance. Source remains in the private repository.
 
-Read the [frozen public repository pilot protocol](benchmarks/public-repositories-2026-10-15/methodology.md) for task selection, controls and the matched baseline comparison.
+Read the [frozen public repository pilot protocol](benchmarks/public-repositories-2026-10-15/methodology.md) for task selection, controls and the matched baseline comparison. Use the [reproduction recipe](../scripts/benchmarks/README.md) to prepare tasks, validate controls, run within a budget and export metadata.
