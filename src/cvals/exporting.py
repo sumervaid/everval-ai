@@ -99,7 +99,7 @@ def export_experiment(experiment: dict[str, Any], format: str) -> tuple[str, str
 body{{max-width:1100px;margin:48px auto;padding:0 24px;font:16px/1.6 system-ui;color:#202621;background:#fafaf6}}
 h1{{font-size:36px;letter-spacing:-1px}}h2{{margin-top:36px}}.meta{{color:#586159}}
 table{{border-collapse:collapse;width:100%;font-size:14px}}th,td{{text-align:left;padding:12px;border-bottom:1px solid #dadfd8;vertical-align:top}}th{{background:#eff2ec}}code{{overflow-wrap:anywhere}}
-</style><main><p class="meta">CUSTOM VALS / EXPERIMENT REPORT</p><h1>{title}</h1>
+</style><main><p class="meta">EVERVAL AI / EXPERIMENT REPORT</p><h1>{title}</h1>
 <p class="meta">Recorded {esc(experiment.get("created_at"))} · Status: {esc(experiment.get("status"))}</p>
 <p>Collection fingerprint: <code>{esc(experiment.get("collection_hash"))}</code></p>
 <h2>System comparison</h2><table><thead><tr><th>System</th><th>Completed</th><th>Scheduled</th><th>Pass rate</th><th>Recorded cost</th><th>Cost complete</th></tr></thead><tbody>{"".join(rows)}</tbody></table>

@@ -2,7 +2,7 @@
 
 **Turn real work into repeatable evidence.**
 
-Everval AI is a local evaluation workbench with a keyboard-first terminal interface, a styled tmux workspace, and a shared CLI/API. Connect a GitHub repository, curate engineering tasks from merged pull requests, validate each task, and compare systems against a frozen benchmark. The same evaluation engine supports document, data, and workflow tasks.
+Everval AI turns an organization's real work into validated benchmarks and repeatable decisions about the agents it deploys. It brings task curation, controlled execution, cost and latency analysis, human review, and ongoing evaluation into one local workspace, with a tmux terminal interface and a shared CLI/API. The same engine evaluates code, documents, structured data, and workflows.
 
 Source is maintained in this **private repository**. Workspaces, repository mirrors, hidden graders, model traces, and credentials stay outside Git.
 
@@ -21,13 +21,13 @@ An **engineering owner** connects a GitHub or local repository and reviews tasks
 
 [Start a guided run](docs/guided-run.md) · [Follow the terminal workflow](docs/terminal.md) · [See the validation contract](docs/benchmarks.md)
 
-## How Everval builds on Vals Smith
+## Built for the full evaluation lifecycle
 
-[Vals Smith's published methodology](https://www.vals.ai/vals-smith) turns merged pull requests into reproducible tasks, checks that hidden tests fail before the historical fix and pass afterward, and evaluates models without revealing the fix. Passing also requires preserving existing behavior. That is the shared foundation.
+Everval builds on established practices in software testing and model evaluation: historical task reconstruction, hidden checks, regression testing, frozen comparisons, and expert review. It connects these foundations into a workflow that teams can operate, inspect, and improve over time.
 
-Everval is an independent implementation of this approach. It extends the repository-benchmark workflow into a local workbench for curating tasks, comparing systems, making decisions, and retaining the evidence behind them.
+The product extends benchmark execution with reviewed task creation, versioned evidence, live agent adapters, cumulative spending controls, authenticated decisions, and a path from production failures back into validated tests. Each decision stays connected to the workload, configuration, outcomes, and costs that support it.
 
-| Extension in Everval | What it lets you do |
+| Everval capability | What it lets you do |
 | --- | --- |
 | **Local terminal operations** | Work in a tmux TUI, CLI, or API; keep workspace records locally and let durable queued work continue after the terminal closes. |
 | **Benchmark history** | Inspect a persistent candidate and rejection ledger, review issue statements, repeat validation, and freeze versioned development/holdout releases with release diffs. |
@@ -40,7 +40,7 @@ Everval is an independent implementation of this approach. It extends the reposi
 | **Team decisions** | Assign blinded comparisons with frozen rubrics, enforce personal identities and API roles, and retain review decisions. |
 | **Production feedback** | Redact and stage real examples, review expected behavior, then publish control-validated task collections. |
 
-The table describes capabilities implemented in Everval; feature availability beyond Vals' public description is unverified. Everval supports Python and JavaScript/TypeScript repository validation, offline private dependencies, and one local workspace with optional authenticated browser roles. See [delivery status and deployment boundaries](docs/PLAN.md).
+These capabilities are implemented in Everval. Read the [methodology and design](docs/METHODOLOGY.md) for the principles connecting them. Everval supports Python and JavaScript/TypeScript repository validation, offline private dependencies, and one local workspace with optional authenticated browser roles. See [delivery status and deployment boundaries](docs/PLAN.md).
 
 ![Everval AI terminal workbench with the original starter workspace](docs/assets/terminal.png)
 
@@ -112,7 +112,7 @@ The four original starter collections contain 19 scenarios. Their reference and 
 | Author document, data, or workflow tasks | [Scenarios](docs/scenarios.md) |
 | Interpret evidence and set a gate | [Results](docs/results.md), [cost and latency](docs/cost-latency.md), [quality policies](docs/policies.md) |
 | Operate and recover a local workspace | [Operations](docs/operations.md) |
-| Understand implementation and scope | [Architecture](docs/ARCHITECTURE.md), [interfaces](docs/INTERFACES.md), [delivery status](docs/PLAN.md) |
+| Understand implementation and scope | [Methodology](docs/METHODOLOGY.md), [architecture](docs/ARCHITECTURE.md), [interfaces](docs/INTERFACES.md), [delivery status](docs/PLAN.md) |
 | Develop or contribute | [Contributing](CONTRIBUTING.md) |
 
 ## Storage and network
@@ -137,4 +137,4 @@ make test
 
 ## License
 
-Original project material is licensed under [Apache-2.0](LICENSE). Imported repositories and datasets retain their own permissions. Bundled web dependencies retain their [third-party notices](web/public/assets/third-party-notices.txt). Everval AI is an independent implementation and is not affiliated with Vals AI.
+Original project material is licensed under [Apache-2.0](LICENSE). Imported repositories and datasets retain their own permissions. Bundled web dependencies retain their [third-party notices](web/public/assets/third-party-notices.txt). Everval AI is developed by Sumer S. Vaid and contributors.

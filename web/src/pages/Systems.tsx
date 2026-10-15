@@ -227,7 +227,7 @@ export function SystemsPage({
                     <KeyRound size={16} />
                     <input
                       pattern="[A-Z_][A-Z0-9_]*"
-                      placeholder="e.g. CUSTOM_VALS_PROVIDER_KEY"
+                      placeholder="e.g. EVERVAL_PROVIDER_KEY"
                       value={form.api_key_env}
                       onChange={(e) => setForm({ ...form, api_key_env: e.target.value })}
                     />

@@ -30,4 +30,4 @@ Implement a shared evaluation core with a terminal workbench, tmux session, CLI,
 
 Run the smallest meaningful checks for the change. Regression tests should establish behavior, especially task validity, data isolation, experiment accounting, and job recovery. Documentation-only edits need document/link review and Git whitespace checks, not invented application tests.
 
-Report what changed, evidence of verification, and remaining limitations. Distinguish observed public-product behavior from inference and from unverified private features.
+Report what changed, evidence of verification, and remaining limitations. Position the product around Everval's implemented capabilities and its extensions to established evaluation practices. Keep product claims consistent with retained verification and supported deployment boundaries.

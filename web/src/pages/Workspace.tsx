@@ -400,11 +400,11 @@ export function SettingsPage({ workspace }: { workspace: Workspace }) {
         detail="Use the CLI for scripts, repeatable runs, and service diagnostics."
       >
         <div className="terminal-block">
-          <span>$</span> cvals --help
+          <span>$</span> everval --help
           <br />
-          <span>$</span> cvals doctor
+          <span>$</span> everval doctor
           <br />
-          <span>$</span> cvals serve
+          <span>$</span> everval serve
         </div>
         <div className="panel-body">
           <a
