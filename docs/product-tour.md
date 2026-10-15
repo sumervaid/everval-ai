@@ -4,6 +4,8 @@
 
 Everval helps a team answer a specific question: did a change make an agent better at the work that matters, within the available budget?
 
+For concrete owners and decisions, see [practical use cases](use-cases.md).
+
 The terminal workbench is the main interface. Use the CLI for scripts, the shared API for integrations, and the optional browser for authenticated reviews. All four use the same local records.
 
 ## 1. Turn work into a testable contract

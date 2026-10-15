@@ -6,6 +6,8 @@ Use your own work to decide whether an agent change is worth shipping. Everval k
 
 ## Start here
 
+**Where would your team use it?** Find the operator, decision and setup path in [practical use cases](use-cases.md).
+
 **Want the whole workflow in plain language?** Read [one shopping-cart bug, from discovery to decision](worked-example.md).
 
 **New to Everval?** Follow the [first session](quickstart.md): run the offline demo, inspect its evidence in tmux, and choose your first real workload. No model key or Docker installation is needed for the demo.
@@ -56,3 +58,5 @@ The supported deployment is one local workspace with a dedicated worker. Read [o
 [Verification record](verification.md) · [Release acceptance procedure](release-acceptance.md) · [Dated evidence](evidence/2026-10-15/README.md) · [Changelog](../CHANGELOG.md)
 
 The bundled examples are original installation controls. The dated live results describe those bounded tasks, not representative customer performance. Source remains in the private repository.
+
+Read the [frozen public repository pilot protocol](benchmarks/public-repositories-2026-10-15/methodology.md) for task selection, controls and the matched baseline comparison.

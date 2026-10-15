@@ -6,7 +6,7 @@
 
 Turn repository changes, documents, data tasks, and workflow simulations into repeatable evaluations. Compare quality, cost, and latency. Keep checking as your models, prompts, and code change—all from a local terminal workbench.
 
-[Quickstart](docs/quickstart.md) · [Product tour](docs/product-tour.md) · [Documentation](docs/index.md) · [Evidence](docs/evidence/2026-10-15/README.md) · [Contribute](CONTRIBUTING.md)
+[Quickstart](docs/quickstart.md) · [Use cases](docs/use-cases.md) · [Product tour](docs/product-tour.md) · [Documentation](docs/index.md) · [Evidence](docs/evidence/2026-10-15/README.md) · [Contribute](CONTRIBUTING.md)
 
 **See the whole workflow:** [Follow one shopping-cart bug from repository to recurring checks](docs/worked-example.md).
 
