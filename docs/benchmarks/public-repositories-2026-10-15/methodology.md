@@ -32,7 +32,9 @@ For each selected task, before admitting paid evaluation:
 3. Apply the official reference patch to another fresh base and rerun the full official test contract. Every FAIL_TO_PASS and PASS_TO_PASS case must pass.
 4. Retain command logs, parsed case outcomes, image identity, durations, and explicit rejection reasons. Missing dependencies, missing cases, zero-test runs, and unsuccessful setup do not satisfy a control.
 
-Each submitted patch is graded in another fresh container using the pinned row's evaluation script and official log parser. Resolution requires all official FAIL_TO_PASS and PASS_TO_PASS cases to pass. There is no selected-test shortcut or custom success fallback.
+Each submitted patch is graded in another fresh container using the pinned row's evaluation script and official log parser. Resolution requires all official FAIL_TO_PASS and PASS_TO_PASS cases to pass after a complete grading run. There is no selected-test shortcut or custom success fallback.
+
+Both arms also enforce the same `python-source-v1` patch policy: reject edits to tests, `conftest.py`, build and dependency files, configuration files, Git metadata, binary files and symlinks. Legitimate source modules such as `src/_pytest/config/__init__.py` remain allowed. A reference repair incompatible with this policy excludes the task before paid admission. This restriction hardens the local grader and is another difference from an unmodified leaderboard run.
 
 Use distinct run IDs for base, reference, baseline, and reviewed attempts. The [official harness FAQ](https://www.swebench.com/SWE-bench/faq/) warns that evaluation caching is keyed by run and instance identity, rather than patch content.
 
