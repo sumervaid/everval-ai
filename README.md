@@ -1,180 +1,102 @@
 # Everval AI
 
+![Everval AI — know what improved, know what it cost](docs/assets/everval-banner.svg)
+
 **Continuous evaluation for agents doing real work.**
 
-Everval AI turns an organization's real work into validated benchmarks and repeatable decisions about the agents it deploys. It brings task curation, controlled execution, cost and latency analysis, human review, and ongoing evaluation into one local workspace, with a tmux terminal interface and a shared CLI/API. The same engine evaluates code, documents, structured data, and workflows.
+Turn repository changes, documents, data tasks, and workflow simulations into repeatable evaluations. Compare quality, cost, and latency. Keep checking as your models, prompts, and code change—all from a local terminal workbench.
 
-Source is maintained in this **private repository**. Workspaces, repository mirrors, hidden graders, model traces, and credentials stay outside Git.
+[Quickstart](docs/quickstart.md) · [Product tour](docs/product-tour.md) · [Documentation](docs/index.md) · [Evidence](docs/evidence/2026-10-15/README.md) · [Contribute](CONTRIBUTING.md)
 
-The [0.3.1 verification record](docs/verification.md) separates installation controls, live-provider evidence, and deployment limits. Follow the [release acceptance procedure](docs/release-acceptance.md) or inspect the [dated evidence record](docs/evidence/2026-10-15/README.md).
+**See the whole workflow:** [Follow one shopping-cart bug from repository to recurring checks](docs/worked-example.md).
 
-## Try it without a model key
+## Try it without a key
 
-After `uv sync --frozen`, run:
-
-```sh
-uv run everval demo
-```
-
-The local walkthrough shows a behavioral regression, failure evidence and a passing candidate across code contracts, grounded document answers and structured data. It writes an inspectable evidence bundle without network access, Docker or a model key. These are **installation controls**, clearly separated from live agent measurements. [Walkthrough and examples](docs/demo.md).
-
-## Keep improving after the first evaluation
-
-```mermaid
-flowchart LR
-    A[Watch changes] --> B[Screen]
-    B --> C{Escalate?}
-    C -->|Yes| D[Full development run]
-    D --> E[Investigate failures]
-    E --> F[Compare saved candidates]
-    F --> G[Reserved final holdout]
-    G --> H[Review the proposal]
-    C -->|No| A
-    H --> A
-```
-
-**[Autopilot](docs/autopilot.md)** checks configured changes or intervals, reserves a cumulative budget and runs a small screening workload before optional full evaluation. **[Research lab](docs/research-loop.md)** retains grading reproductions, reduced outputs and grader-quality signals. Configuration studies compare explicit model, prompt and tool-budget candidates, then validate a selected candidate once against a reserved holdout. Deployment remains a reviewed decision.
-
-**[Community packs](docs/community-packs.md)** carry versioned tasks, provenance, licenses and runtime contracts. Imports are staged for independent behavior review and control validation. **[Budget projections](docs/budget-planning.md)** separate observed costs, reservations and assumptions before recurring work starts.
-
-## Workflow at a glance
-
-```mermaid
-flowchart LR
-    A[Connect] --> B[Review]
-    B --> C[Validate]
-    C --> D[Freeze]
-    D --> E[Compare]
-    E --> F[Decide]
-```
-
-An **engineering owner** connects a GitHub or local repository and reviews tasks from real changes. An **evaluation engineer** validates the tasks and freezes a benchmark. A **platform owner** compares systems; a **decision owner** reviews quality, cost, and latency evidence, applies a policy, and schedules follow-up runs.
-
-[Start a guided run](docs/guided-run.md) · [Follow the terminal workflow](docs/terminal.md) · [See the validation contract](docs/benchmarks.md)
-
-## Built for the full evaluation lifecycle
-
-Everval builds on established practices in software testing and model evaluation: historical task reconstruction, hidden checks, regression testing, frozen comparisons, and expert review. It connects these foundations into a workflow that teams can operate, inspect, and improve over time.
-
-The product extends benchmark execution with reviewed task creation, versioned evidence, live agent adapters, cumulative spending controls, authenticated decisions, and a path from production failures back into validated tests. Each decision stays connected to the workload, configuration, outcomes, and costs that support it.
-
-| Everval capability | What it lets you do |
-| --- | --- |
-| **Local terminal operations** | Work in a tmux TUI, CLI, or API; keep workspace records locally and let durable queued work continue after the terminal closes. |
-| **Benchmark history** | Inspect a persistent candidate and rejection ledger, review issue statements, repeat validation, and freeze versioned development/holdout releases with release diffs. |
-| **Tasks beyond code** | Author or import document, structured-data, and workflow-simulation collections into the same evaluation engine. These tasks are curated separately from repository mining. |
-| **[Cost, latency, and quality](docs/cost-latency.md)** | Compare compatible frozen cohorts, inspect uncertainty and individual attempts, and retain cost, latency, errors, and missing accounting alongside task success. |
-| **Explicit decision policies** | Set quality, completion, error, cost, latency, and regression gates; version policies and retain their decisions with the supporting evidence. |
-| **Existing agents** | Connect a versioned live agent adapter or import recorded submissions; retain usage, revisions, and bounded traces. |
-| **Failure investigation** | Group failures, inspect file differences and stage timings, and regrade recorded outputs without another model call. |
-| **Ongoing evaluation** | Watch configured changes, screen before escalating, retain automatic pure-grader investigations, cap recurring spending, and inspect benchmark health. |
-| **Controlled improvement** | Compare frozen configuration candidates, reserve an unused holdout, and retain a reviewable proposal without deploying it. |
-| **Portable benchmark packs** | Inspect versioned, licensed data-only packs; review expected behavior and validate controls before admission. |
-| **Team decisions** | Assign blinded comparisons with frozen rubrics, enforce personal identities and API roles, and retain review decisions. |
-| **Production feedback** | Redact and stage real examples, review expected behavior, then publish control-validated task collections. |
-
-These capabilities are implemented in Everval. Read the [methodology and design](docs/METHODOLOGY.md) for the principles connecting them. Everval supports Python and JavaScript/TypeScript repository validation, offline private dependencies, and one local workspace with optional authenticated browser roles. See [delivery status and deployment boundaries](docs/PLAN.md).
-
-![Everval AI Autopilot view displaying a paused installation-control policy](docs/assets/autopilot.png)
-
-*The terminal workbench, displaying original installation controls.*
-
-## Start in the terminal
-
-Install Python 3.12+, [uv](https://docs.astral.sh/uv/), and optionally [tmux](https://github.com/tmux/tmux/wiki). GitHub onboarding uses Git and the [GitHub CLI](https://cli.github.com/). Coding evaluation needs Docker and a compatible local runtime image; see [runtime setup](docs/sandbox.md).
+You need Git, Python 3.12+, and [uv](https://docs.astral.sh/uv/getting-started/installation/). The source is currently private; cloning requires repository access.
 
 ```sh
 git clone https://github.com/sumervaid/everval-ai.git
 cd everval-ai
 uv sync --frozen
+uv run everval demo
+```
+
+Watch a passing reference, a deliberate regression, and a restored candidate run across three examples. Inspect failures, compare the same frozen tasks, and keep the evidence locally. **The installed demo makes zero model calls and needs no Docker or network connection.** Dependency installation may use the network.
+
+These are installation controls, not a model leaderboard. [Open the demo in tmux](docs/demo.md) or [connect your own repository](docs/guided-run.md).
+
+![Everval terminal comparing original reference and incomplete controls](docs/assets/terminal.png)
+
+*The actual terminal workbench. These results are original installation controls.*
+
+## What you can do
+
+| Your question | Everval's workflow |
+| --- | --- |
+| **Did our coding agent improve?** | Reconstruct tasks from repository history, validate fail-before/pass-after behavior, freeze a cohort, and compare systems. [Repository guide →](docs/github.md) |
+| **Is the cheaper model good enough?** | Compare success, cost per passing attempt, and latency on the same workload. Retain errors and unknown accounting. [Economics →](docs/cost-latency.md) |
+| **What broke after a change?** | Link runs to revisions, inspect failure evidence, and regrade stored outputs without another model call. [Investigate →](docs/diagnostics.md) |
+| **Can we keep checking automatically?** | Schedule bounded screening, escalate to full evaluation, and inspect recurring budget projections. [Autopilot →](docs/autopilot.md) |
+| **Which configuration should we ship?** | Compare saved candidates, validate the selected candidate against a reserved holdout, and review a proposal. [Research lab →](docs/research-loop.md) |
+| **Can this evaluate more than code?** | Use reviewed document, structured-data, and workflow tasks with explicit success criteria. [Task packs →](examples/community/README.md) |
+
+The terminal is the primary interface: twelve views, a command palette, tmux sessions, and a durable local worker. The CLI and API use the same core. An optional browser gives reviewers blinded assignments and role-based access. [See the product tour →](docs/product-tour.md)
+
+## From real work to a decision
+
+```mermaid
+flowchart LR
+    A[Connect work] --> B[Review tasks]
+    B --> C[Validate controls]
+    C --> D[Freeze a benchmark]
+    D --> E[Compare agents]
+    E --> F[Decide with evidence]
+    F --> G[Watch for changes]
+    G --> E
+```
+
+An engineering owner curates the work. An evaluation engineer validates the tasks. A platform owner runs comparisons within a budget. A decision owner reviews the evidence. [Choose your team's workflow →](docs/enterprise-workflows.md)
+
+Repository tasks must fail before the original fix, pass afterward, and preserve selected baseline behavior. Agents receive the starting point and issue statement; hidden checks and reference solutions stay with the evaluator. Infrastructure failures and empty test runs cannot establish validity. [Read the validation contract →](docs/benchmarks.md)
+
+## Start your own workspace
+
+After the demo, start a separate workspace with the original starter collections:
+
+```sh
 uv run everval init --starters
 uv run everval tmux
 ```
 
-Without tmux, run `uv run everval tui`. Node.js is required only to build the optional web interface.
+Install [tmux](https://github.com/tmux/tmux/wiki) for the session launcher, or run `uv run everval tui` directly. Press **Ctrl+N** to connect a repository, **F9** for a guided run, and **Ctrl+P** for commands. **Ctrl+B, D** detaches tmux while queued work continues.
 
-The workbench provides twelve views: **Overview · Projects · Releases · Experiments · Systems · Schedules · Audit · Workspace · Guided runs · Change runs · Autopilot · Research lab**. Use **F1–F12** to navigate, **Ctrl+P** for commands, **Ctrl+N** to connect a repository, and **Ctrl+R** to refresh. A separate worker retains queued work when the terminal closes. In tmux, **Ctrl+B, D** detaches the session.
+Python and JavaScript/TypeScript repository execution require Docker and a prepared runtime. GitHub onboarding uses Git and the [GitHub CLI](https://cli.github.com/). Node.js is only needed to build the optional browser interface. [Setup and first experiment →](docs/quickstart.md)
 
-[Terminal walkthrough](docs/terminal.md) · [First experiment](docs/quickstart.md) · [GitHub onboarding](docs/github.md)
+## Evidence you can inspect
 
-## From a repository to a benchmark
+The [0.3.1 acceptance record](docs/evidence/2026-10-15/README.md) includes:
 
-1. **Connect.** Paste a GitHub URL or `owner/repository`, or choose a local Git repository. GitHub imports use a private bare mirror; imported code is never checked out or executed on the host.
-2. **Discover.** Inspect merged PR candidates, lineage evidence, missing context, and rejection reasons. Paginate through older work without losing the candidate ledger.
-3. **Review.** Write an independent issue statement that describes the desired behavior without disclosing the fix. Review identity is a local label.
-4. **Prepare.** Inspect dependency declarations. Prepare a pinned Python/pytest or JavaScript/TypeScript runtime. Import inspected private dependency archives when required, or select a compatible local image.
-5. **Validate.** Repeat clean before/after runs. A repair must fail before the original fix, pass afterward, and preserve selected baseline behavior. Infrastructure failures, zero tests, inconsistent outcomes, and unclear lineage cannot establish validity.
-6. **Release.** Freeze accepted tasks into versioned development and holdout collections. Choose the partition explicitly; old releases retain their original evidence.
-7. **Evaluate.** Select a model or harness, declare prices and budget, and inspect every attempt. Compare compatible cohorts, apply quality gates, add human reviews, and export results.
+- **114/114 completed live OpenAI trials passed** across 19 original tasks, three models, and two repetitions.
+- **135 repository and pack checks**, plus **21 Docker/GitHub checks** with no skips.
+- Terminal, browser, access controls, worker recovery, spending limits, and backup/restore exercises.
+- **$0.482999 estimated provider cost across 179 calls** for the complete live campaign, with no unsettled usage.
 
-Python supports constrained literal function cases and prepared full-repository pytest profiles. JavaScript/TypeScript supports prepared node:test, Jest, and Vitest profiles with npm lockfiles. Private packages are imported as inspected offline wheels or npm archives; repository install hooks and native source builds are disabled. See the [benchmark contract](docs/benchmarks.md), [Python environments](docs/environments.md), and [JavaScript/TypeScript guide](docs/javascript-typescript.md).
+The small, original task set establishes exercised compatibility; it does not rank models or establish performance on customer repositories. Costs use recorded tokens and configured rates, not invoice reconciliation. Earlier attempts, excluded trials, overlapping checks, and deployment limits remain in the record.
 
-## Built for different responsibilities
+[Results and artifacts](docs/evidence/2026-10-15/README.md) · [Reproduce acceptance](docs/release-acceptance.md) · [Verification scope](docs/verification.md)
 
-| Responsibility | Workflow |
-| --- | --- |
-| Engineering owner | Connect repositories, review candidate quality, inspect reconstruction and regression evidence. |
-| Evaluation engineer | Freeze releases, separate development from holdout, configure harnesses, compare results. |
-| Platform or model owner | Set provider credentials, prices, limits, and run schedules; inspect cost and latency. |
-| Quality reviewer | Examine trial evidence and append judgments without replacing automated outcomes. |
-| Decision owner | Read cohort coverage, uncertainty, failures, and policy decisions before accepting a system. |
+## Your workspace, your evidence
 
-Operate one local workspace. Optional team mode enforces **administrator, operator, reviewer, and viewer** roles with individual, expiring, revocable tokens. Assigned reviewers receive blinded evidence; viewers receive summaries. The terminal and filesystem remain trusted operator surfaces. SSO, tenant isolation, distributed workers, and compliance certification are outside this release. See [team access and review](docs/team-review.md).
+Workspaces live locally; the default is `~/.local/share/everval`. Set `EVERVAL_DATA_DIR` to choose another disk. There is no telemetry or automatic result upload. Hosted inference is an explicit choice requiring configured prices, credentials, and a budget.
 
-## Cost and latency in practice
+Imported code runs in supported isolated runtimes. Hidden graders, traces, credentials, and repository mirrors stay outside Git. [Storage, network, and operating boundaries →](docs/operations.md)
 
-Compare **pass rate, cost per passing attempt, median duration, and p95 duration** on the same frozen workload. Spending on unsuccessful attempts stays in cost per pass. Missing accounting remains unknown.
+The supported deployment is one local workspace and worker, with optional authenticated browser roles. SSO, tenant isolation, distributed execution, and compliance certification are outside this release. [Current scope](docs/PLAN.md) · [Security](SECURITY.md)
 
-Live duration covers the complete attempt, with separate submission, provider, tool, and grading timing coverage. Workspace, repository, and recurring-schedule caps limit cumulative admissions. The economics view shows the observed quality/cost/latency frontier. Use quality, spending, and duration gates together to identify systems that meet the workload's requirements. The experiment budget controls combined run admission; a cost gate evaluates each system's recorded spend.
+## Make it useful for your team—and others
 
-[See the metric definitions and a worked decision example](docs/cost-latency.md).
+Start with a [runnable example](examples/community/README.md), contribute a well-tested [task pack](docs/community-packs.md), or improve the path you just used. A useful contribution includes the problem, a small reproduction, and evidence of what changed.
 
-## Installation controls
+[Contribution guide](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Support](SUPPORT.md) · [Changelog](CHANGELOG.md) · [Cite](CITATION.cff)
 
-The four original starter collections contain 19 scenarios. Their reference and incomplete controls verify installation; their results are **not model performance measurements**. No paid model calls are needed for the test suite.
-
-The document, data, and workflow starter collections are version 1.1.0. Their nine structured tasks publish the required output types, casing, citations, ordering, and state transitions in the task itself. Existing frozen experiments retain their original contracts.
-
-## Choose a guide
-
-| Task | Guide |
-| --- | --- |
-| Connect and curate a repository | [GitHub](docs/github.md), [benchmark validation](docs/benchmarks.md) |
-| Prepare repository dependencies | [Python](docs/environments.md), [JavaScript/TypeScript and private packages](docs/javascript-typescript.md), [sandbox](docs/sandbox.md) |
-| Configure a model or tool harness | [Providers](docs/providers.md) |
-| Evaluate an existing agent | [Live adapters](docs/agent-adapters.md), [recorded submissions](docs/submissions.md) |
-| Diagnose a failed attempt | [Failure investigation](docs/diagnostics.md) |
-| Evaluate changes and recurring work | [Change-linked runs and digests](docs/change-evaluation.md), [benchmark health](docs/guided-run.md) |
-| Assign reviews and learn from production | [Team review](docs/team-review.md), [production cases](docs/production-cases.md) |
-| Author document, data, or workflow tasks | [Scenarios](docs/scenarios.md) |
-| Run continuously and improve configurations | [Autopilot](docs/autopilot.md), [research lab](docs/research-loop.md), [budget planning](docs/budget-planning.md) |
-| Try or contribute a portable task pack | [Free demo](docs/demo.md), [community packs](docs/community-packs.md) |
-| Interpret evidence and set a gate | [Results](docs/results.md), [cost and latency](docs/cost-latency.md), [quality policies](docs/policies.md) |
-| Operate and recover a local workspace | [Operations](docs/operations.md) |
-| Understand implementation and scope | [Methodology](docs/METHODOLOGY.md), [architecture](docs/ARCHITECTURE.md), [interfaces](docs/INTERFACES.md), [delivery status](docs/PLAN.md) |
-| Verify an installed release | [Release acceptance](docs/release-acceptance.md), [verification record](docs/verification.md), [dated evidence](docs/evidence/2026-10-15/README.md) |
-| Develop or contribute | [Contributing](CONTRIBUTING.md) |
-
-## Storage and network
-
-Default data location: `~/.local/share/everval`. Set `EVERVAL_DATA_DIR` to a local disk; `CVALS_DATA_DIR` remains a compatibility alias. The `cvals` executable also remains available.
-
-There is no telemetry or automatic result upload. GitHub onboarding reads the chosen repository. Environment preparation can download supported public wheels or pinned npm dependencies. Private packages enter through inspected offline imports; registry credentials do not enter benchmark containers. A configured hosted model receives public task material; hidden checks and reference solutions are excluded. Remote inference requires explicit opt-in, declared prices, and a budget. Local storage and local inference are separate choices.
-
-Keep credentials in environment variables. Set them before starting the worker. Treat full experiment exports and private grading bundles as sensitive workspace data.
-
-## Development
-
-Install Node.js for the web checks, then run:
-
-```sh
-make setup
-make check
-make test
-```
-
-`make setup` also builds the optional web interface; `uv run everval serve` serves it on loopback. Dependencies are locked in `uv.lock` and `web/package-lock.json`. Live Docker and GitHub checks require explicit test flags; ordinary tests do not call paid providers.
-
-## License
-
-Original project material is licensed under [Apache-2.0](LICENSE). Imported repositories and datasets retain their own permissions. Bundled web dependencies retain their [third-party notices](web/public/assets/third-party-notices.txt). Everval AI is developed by Sumer S. Vaid and contributors.
+Original project material is licensed under [Apache-2.0](LICENSE). Imported work retains its own permissions; bundled web dependencies retain their [notices](web/public/assets/third-party-notices.txt). Developed by Sumer S. Vaid and contributors.

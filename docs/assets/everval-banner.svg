@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="180" viewBox="0 0 1280 300" role="img" aria-labelledby="title desc">
+<title id="title">Everval AI — know what improved, know what it cost</title>
+<desc id="desc">Continuous evaluation for agents. A local terminal workbench for code, documents, data, and workflows.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#12222e"/><stop offset="1" stop-color="#09121b"/></linearGradient>
+  <linearGradient id="line"><stop stop-color="#7dd9c8"/><stop offset="1" stop-color="#4a92bd"/></linearGradient>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#28404d" stroke-width="0.6" opacity=".45"/></pattern>
+</defs>
+<rect width="1280" height="300" rx="20" fill="url(#bg)"/>
+<rect x="800" width="480" height="300" fill="url(#grid)"/>
+<rect x="1" y="1" width="1278" height="298" rx="19" fill="none" stroke="#304653"/>
+<rect x="44" y="38" width="58" height="58" rx="14" fill="#173e3f" stroke="#3f8c83"/>
+<path d="M60 54h16m-16 12h12m-12 12h16m10-24-8 24" fill="none" stroke="#9aebd9" stroke-width="4" stroke-linecap="round"/>
+<text x="120" y="77" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#f1f6f8">Everval AI</text>
+<text x="44" y="151" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="42" font-weight="650" letter-spacing="-1.1" fill="#f1f6f8">Know what improved.</text>
+<text x="44" y="202" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="42" font-weight="650" letter-spacing="-1.1" fill="#8edccc">Know what it cost.</text>
+<text x="46" y="256" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="17" fill="#aabecb">Code · Documents · Data · Workflows</text>
+<g font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" letter-spacing="1.5" fill="#b6cbd5">
+<text x="896" y="54">LOCAL WORKSPACE</text>
+<text x="896" y="246">CONTINUOUS EVALUATION</text>
+</g>
+<path d="M872 192H934V155H998V174H1062V117H1126V91H1200" fill="none" stroke="#193b42" stroke-width="18" stroke-linejoin="round" opacity=".6"/>
+<path d="M872 192H934V155H998V174H1062V117H1126V91H1200" fill="none" stroke="url(#line)" stroke-width="3" stroke-linejoin="round"/>
+<g fill="#0e1c27" stroke="#8edccc" stroke-width="2">
+<circle cx="934" cy="155" r="6"/><circle cx="998" cy="174" r="6"/><circle cx="1062" cy="117" r="6"/><circle cx="1126" cy="91" r="6"/>
+</g>
+<circle cx="1200" cy="91" r="7" fill="#9aebd9"/>
+</svg>

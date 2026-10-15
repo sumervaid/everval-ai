@@ -1,4 +1,4 @@
-.PHONY: setup web check test serve tui tmux clean
+.PHONY: setup web check docs-check test serve tui tmux clean
 setup:
 	uv sync --frozen
 	cd web && npm ci
@@ -8,7 +8,10 @@ web:
 	cd web && npm run build
 	uv run python scripts/build_web.py
 
-check:
+docs-check:
+	uv run python scripts/check_docs.py
+
+check: docs-check
 	uv run ruff check src tests scripts
 	uv run ruff format --check src tests scripts
 	uv run mypy src/cvals

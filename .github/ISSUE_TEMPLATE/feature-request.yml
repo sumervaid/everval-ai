@@ -1,0 +1,44 @@
+name: Feature request
+description: Propose a concrete improvement to an evaluation workflow.
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Start with the user's task and the decision this would improve.
+        Check the [delivery status](https://github.com/sumervaid/everval-ai/blob/main/docs/PLAN.md) first.
+        Use the dedicated proposal forms for task packs, graders, or agent adapters.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Who needs this, and what is difficult today?
+      description: Describe a specific workflow and the current obstacle. Use a shareable example.
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Proposed workflow
+      description: Walk through the behavior you want, including where it belongs in the terminal, CLI, API, or browser.
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: What would demonstrate success?
+      description: Give an observable outcome or example. Mention relevant correctness, privacy, runtime, or spending constraints.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or current workaround
+      description: What have you tried? A smaller change or documentation improvement may solve the same problem.
+  - type: dropdown
+    id: participation
+    attributes:
+      label: How would you like to help?
+      options:
+        - Sharing the use case
+        - Reviewing a design or testing a change
+        - Implementing a change

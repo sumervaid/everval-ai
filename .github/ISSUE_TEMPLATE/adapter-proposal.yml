@@ -2,6 +2,11 @@ name: Agent adapter proposal
 description: Add a versioned integration with reproducible protocol tests.
 title: "[Adapter] "
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Read the [adapter contract](https://github.com/sumervaid/everval-ai/blob/main/docs/agent-adapters.md) before proposing an integration.
+        Use original protocol fixtures and no-key tests. Keep credentials, private task material, and raw agent traces out of this issue.
   - type: textarea
     id: use
     attributes:

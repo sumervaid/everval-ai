@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use Everval AI in research, cite the software and record the exact commit."
+type: software
+title: Everval AI
+authors:
+  - family-names: Vaid
+    given-names: Sumer S.
+repository-code: "https://github.com/sumervaid/everval-ai"
+license: Apache-2.0

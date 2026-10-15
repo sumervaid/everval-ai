@@ -1,0 +1,171 @@
+name: Manual validation
+
+'on':
+  workflow_dispatch:
+
+# Deliberately manual: no billed hosted runs start on pushes or pull requests.
+permissions:
+  contents: read
+
+concurrency:
+  group: manual-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  UV_NO_PROGRESS: "1"
+  EVERVAL_ALLOW_REMOTE_PROVIDERS: "false"
+  CVALS_ALLOW_REMOTE_PROVIDERS: "false"
+  CVALS_TEST_SANDBOX: "0"
+  CVALS_TEST_ENVIRONMENTS: "0"
+  CVALS_TEST_BENCHMARKS: "0"
+  CVALS_TEST_NODE: "0"
+  CVALS_TEST_GITHUB: "0"
+
+jobs:
+  python:
+    name: Python and documentation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out the selected revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install the validated uv toolchain
+        uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.11.23"
+          python-version: "3.12"
+          enable-cache: false
+      - name: Install locked development dependencies
+        run: uv sync --locked
+      - name: Lint, format, types and documentation
+        run: |
+          uv run --no-sync ruff check src tests scripts
+          uv run --no-sync ruff format --check src tests scripts
+          uv run --no-sync mypy src/cvals
+          uv run --no-sync python scripts/check_docs.py
+      - name: Run ordinary Python tests
+        run: uv run --no-sync pytest
+
+  web:
+    name: Web checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out the selected revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install the validated Node toolchain
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "26.0.0"
+          package-manager-cache: false
+      - name: Install locked web dependencies
+        working-directory: web
+        run: npm ci
+      - name: Check, test and build the web application
+        working-directory: web
+        run: |
+          npm run typecheck
+          npm test -- --run
+          npm run build
+
+  package:
+    name: Distribution and installed demo
+    needs: [python, web]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out the selected revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install the validated uv toolchain
+        uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.11.23"
+          python-version: "3.12"
+          enable-cache: false
+      - name: Install the validated Node toolchain
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "26.0.0"
+          package-manager-cache: false
+      - name: Build distributions with bundled web assets
+        run: |
+          uv sync --locked
+          npm ci --prefix web
+          npm run build --prefix web
+          uv run --no-sync python scripts/build_web.py
+          uv build --wheel --sdist --out-dir "$RUNNER_TEMP/everval-dist"
+      - name: Inspect package contents and licenses
+        run: |
+          uv run --no-sync python - <<'PY'
+          import os
+          import tarfile
+          import zipfile
+          from pathlib import Path, PurePosixPath
+
+          directory = Path(os.environ["RUNNER_TEMP"]) / "everval-dist"
+          wheels = list(directory.glob("*.whl"))
+          sources = list(directory.glob("*.tar.gz"))
+          assert len(wheels) == len(sources) == 1
+          with zipfile.ZipFile(wheels[0]) as archive:
+              names = set(archive.namelist())
+          assert "cvals/static/index.html" in names
+          assert "cvals/tui/workbench.tcss" in names
+          assert any(name.endswith(".dist-info/licenses/LICENSE") for name in names)
+          assert any(name.endswith(".dist-info/licenses/NOTICE") for name in names)
+          with tarfile.open(sources[0]) as archive:
+              source_names = archive.getnames()
+          assert any(name.endswith("/LICENSE") for name in source_names)
+          assert any(name.endswith("/NOTICE") for name in source_names)
+          forbidden = {".git", ".local", ".venv", "node_modules", "__pycache__"}
+          for name in names | set(source_names):
+              parts = PurePosixPath(name).parts
+              assert not forbidden.intersection(parts), name
+              assert not name.startswith("/") and ".." not in parts, name
+          print("Wheel, source archive, terminal styles, web assets and notices verified.")
+          PY
+      - name: Install the wheel with locked runtime dependencies
+        run: |
+          uv export --locked --no-dev --no-emit-project --format requirements.txt \
+            --output-file "$RUNNER_TEMP/everval-runtime.txt"
+          uv venv --python 3.12 "$RUNNER_TEMP/everval-installed"
+          uv pip sync --python "$RUNNER_TEMP/everval-installed/bin/python" \
+            --require-hashes "$RUNNER_TEMP/everval-runtime.txt"
+          uv pip install --python "$RUNNER_TEMP/everval-installed/bin/python" \
+            --no-deps "$RUNNER_TEMP/everval-dist/"*.whl
+      - name: Verify the installed package without provider calls
+        run: |
+          cd "$RUNNER_TEMP"
+          unset PYTHONPATH
+          export EVERVAL_DATA_DIR="$RUNNER_TEMP/everval-state"
+          "$RUNNER_TEMP/everval-installed/bin/python" - <<'PY'
+          import cvals
+          from importlib.resources import files
+
+          assert "site-packages" in cvals.__file__
+          assert files("cvals").joinpath("static/index.html").is_file()
+          assert files("cvals").joinpath("tui/workbench.tcss").is_file()
+          PY
+          "$RUNNER_TEMP/everval-installed/bin/everval" --version
+          "$RUNNER_TEMP/everval-installed/bin/everval" demo \
+            --workspace "$RUNNER_TEMP/everval-demo" --json > "$RUNNER_TEMP/everval-demo.json"
+          "$RUNNER_TEMP/everval-installed/bin/python" - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          result = json.loads((Path(os.environ["RUNNER_TEMP"]) / "everval-demo.json").read_text())
+          assert result["provider_calls"] == result["provider_cost_usd"] == 0
+          assert result["audit"]["valid"] and not result["sandbox"]
+          assert [run["report"]["systems"][0]["pass_rate"] for run in result["runs"]] == [1, 0, 1]
+          print("Installed three-domain demo passed; fixture controls only, zero provider calls.")
+          PY

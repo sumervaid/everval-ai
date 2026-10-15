@@ -1,6 +1,8 @@
-# A useful first minute
+# Your first demo
 
-Run the complete workflow without an account, API key, paid provider, network request, or Docker installation:
+[Documentation](index.md) · [Install and open in tmux](quickstart.md) · [Your first real evaluation](guided-run.md)
+
+From an installed source checkout, run the complete walkthrough without an account, API key, paid provider, network request or Docker installation. Start with the [first session](quickstart.md) if you have not installed Everval yet:
 
 ```sh
 uv sync --frozen
@@ -52,9 +54,15 @@ Follow [the runnable examples](../examples/community/README.md) for a code edit,
 
 For real evidence, review a permitted workload, validate and freeze the tasks, connect an [existing agent adapter](agent-adapters.md), declare its actual rates and a budget, and run a comparison. Keep a development cohort separate from final holdout validation. Fixtures remain useful for checking integration but must not enter claims about model performance.
 
-To browse retained demo records, set `EVERVAL_DATA_DIR` to the printed demo directory and run `everval tui`. Restore your normal environment afterward.
+To browse retained records, use the printed **Workspace** path for this launch only:
 
-[Community packs](community-packs.md) · [First real experiment](quickstart.md) · [Cost and latency](cost-latency.md)
+```sh
+EVERVAL_DATA_DIR="/absolute/path/printed/by/the/demo" uv run everval tui --no-worker
+```
+
+Open **F4 · Experiments** and inspect **Demo · changed** to see the deliberate failure. The completed walkthrough needs no background worker. Your normal workspace setting stays unchanged. For a repeatable demo that opens in tmux without a path placeholder, follow the [first session](quickstart.md#run-the-demo).
+
+[Community packs](community-packs.md) · [First repository evaluation](guided-run.md) · [Cost and latency](cost-latency.md)
 
 ## Share a deliberate summary
 

@@ -2,6 +2,11 @@ name: Grader proposal
 description: Propose a bounded evaluator with meaningful correctness evidence.
 title: "[Grader] "
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Read the [scenario contract](https://github.com/sumervaid/everval-ai/blob/main/docs/scenarios.md) before proposing a grader.
+        Describe behavior with original or shareable examples. Keep hidden customer checks, private answers, and traces out of this issue.
   - type: textarea
     id: contract
     attributes:

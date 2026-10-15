@@ -1,6 +1,10 @@
 # Your first real evaluation
 
-Open `everval tui`, choose **Start guide** on Overview, and give the run a name. **F9 · Guided runs** resumes it after the terminal closes. The guide stores choices in the local workspace and reconstructs completion from saved evidence. A checked step cannot be supplied by a progress flag.
+[Documentation](index.md) · [First session](quickstart.md) · [Terminal reference](terminal.md)
+
+This guide is for a permitted GitHub repository or local Git checkout. If you want to explore the product before connecting one, run the [offline demo](demo.md). For document, data or simulated-workflow tasks, start with the [runnable examples](../examples/community/README.md) and [community packs](community-packs.md).
+
+From the installed checkout, run `uv run everval tmux` (or `uv run everval tui`), choose **Start guide** on Overview, and give the run a name. **F9 · Guided runs** resumes it after the terminal closes. The guide stores choices in the local workspace and reconstructs completion from saved evidence. A checked step cannot be supplied by a progress flag.
 
 1. **Check local execution.** Inspect Git, the configured local Docker image, storage and worker readiness. Follow the diagnostic's remediation when a prerequisite is missing.
 2. **Connect.** Enter an authorized GitHub repository or a local Git path.
@@ -42,3 +46,7 @@ everval guides status GUIDE_ID
 ```
 
 The CLI reports state and evidence. Repository connection, review, environment preparation, validation and release commands continue to use the shared services described in the other guides.
+
+## Continue from the first result
+
+Read [results](results.md) and [cost and latency](cost-latency.md), then record thresholds with [decision policies](policies.md). When the development cohort is useful and its accounting is complete, consider [change-linked runs](change-evaluation.md) or [Autopilot](autopilot.md). A first completed run establishes an integration path; broader independently reviewed work is still needed for a useful benchmark.
