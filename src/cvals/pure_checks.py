@@ -42,7 +42,6 @@ def assert_schema_bounded(value: Any, depth: int = 0) -> None:
         "maximum",
         "exclusiveMinimum",
         "exclusiveMaximum",
-        "multipleOf",
         "enum",
         "const",
         "description",

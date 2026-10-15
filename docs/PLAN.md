@@ -1,6 +1,6 @@
 # Delivery status
 
-Everval AI 0.3 is a terminal-first local evaluation product with a guided repository workflow, optional authenticated review browser, and shared CLI/API.
+Everval AI 0.3.1 is a terminal-first local evaluation product with a guided repository workflow, optional authenticated review browser, and shared CLI/API.
 
 ## Implemented workflows
 
@@ -19,7 +19,13 @@ Everval AI 0.3 is a terminal-first local evaluation product with a guided reposi
 | Team review | Opt-in personal identities and API roles, assigned blind comparisons, frozen rubrics, append-only judgments, and evidence-bound decisions. |
 | Operations | Durable jobs and worker recovery, local audit chain, consistent backups, exports, and no automatic result uploads. |
 
-The repository contains original installation and integration fixtures. They are not representative customer benchmarks or paid-model performance measurements. See [verification](verification.md) for the current release checks.
+The repository contains original installation and integration fixtures. Reference and incomplete submissions verify the pipeline; separate opt-in live runs measure compatibility and outcomes on those bounded tasks. Neither establishes representative customer performance. Source remains in a private repository.
+
+## Release acceptance
+
+Version 0.3.1 adds repeatable acceptance against a separately installed wheel, including real HTTP and browser role boundaries, actual tmux launch, Textual forms, repository admission, accounting, and recovery. Executed checks and omissions are documented in the [verification record](verification.md); the [dated evidence summary](evidence/2026-10-15/summary.json) retains final outcomes. Follow the [acceptance procedure](release-acceptance.md) to reproduce the stages without conflating free fixture controls and optional paid provider runs.
+
+Acceptance also tightened interrupted-attempt accounting, development-partition admission, bounded schema validation, and visible terminal selection controls. The nine structured starter tasks now expose precise public output contracts in document, data, and workflow collection version 1.1.0. Frozen historical experiments keep their original contracts; earlier ambiguous-contract live cohorts are excluded from quality claims.
 
 ## Continuous evaluation and research
 
@@ -44,7 +50,7 @@ External adapters own isolation and ceiling enforcement inside their service. Ev
 ## Remaining deployment work
 
 - Validate representative authorized customer repositories and business tasks; characterize selection bias, flakiness, and usefulness with real users.
-- Conduct independent security review, long-duration fault testing, restore drills, and controlled provider compatibility pilots.
+- Conduct independent security review, long-duration fault testing, routine restore drills, and broader provider compatibility studies.
 - Add broader build systems and language profiles only when their isolation and reconstruction contracts are verified.
 - Add independently inspected live business-application state and calibrated semantic document assessment.
 - Evaluate SSO, tenant isolation, externally anchored audit records, and distributed execution when actual deployment needs require them.

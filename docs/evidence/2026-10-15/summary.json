@@ -1,0 +1,1219 @@
+{
+  "schema": "everval.release-acceptance.v1",
+  "product": "Everval AI",
+  "version": "0.3.1",
+  "date": "2026-10-15",
+  "status": "passed_with_documented_fixes_and_focused_rechecks",
+  "repository_visibility": "private",
+  "publication_action": "Prepared for documentation in the private source repository. This builder performs no Git commit or public release.",
+  "status_scope": "Acceptance completion and operational invariants; not a claim that every model answered every task correctly.",
+  "scope": "Installed application acceptance on one local workstation; original controlled fixtures plus a separate read-only GitHub metadata check.",
+  "source_verification": {
+    "full_python": {
+      "passed": 533,
+      "opt_in_skipped": 21,
+      "warnings": 1
+    },
+    "affected_domain_followup": {
+      "passed": 103,
+      "docker_deselected": 1,
+      "includes_new_starter_contract_tests": 3
+    },
+    "terminal_choice_followup": {
+      "passed": 2
+    },
+    "paid_acceptance_guards": {
+      "passed": 14,
+      "new_cases_after_full_run": 8,
+      "case_groups": {
+        "restored_saved_configuration_mutations": 6,
+        "audit_and_plan_guards": 5,
+        "equally_priced_model_replacement": 1,
+        "legacy_plan_preservation": 1,
+        "cohort_persistence_binding": 1
+      },
+      "paid_calls": 0,
+      "paid_workflow_rerun": false,
+      "scope": "Local tests of the current guard code with provider execution fenced; these do not revalidate the earlier paid workflow."
+    },
+    "frontend": {
+      "passed": 20,
+      "typecheck": "passed",
+      "production_build": "passed",
+      "status_basis": "Operator-recorded successful command exits; retained logs are hashed."
+    },
+    "python_static": {
+      "ruff": "passed",
+      "formatted_files": 122,
+      "strict_mypy_source_files": 74
+    },
+    "runtime_opt_ins": {
+      "schema": "everval.runtime-acceptance.v1",
+      "status": "passed",
+      "source_suite": true,
+      "installed_package_acceptance": false,
+      "paid_provider_calls": 0,
+      "selected_function_count": 17,
+      "expected_case_count": 21,
+      "python_image": "sha256:925aed5a5fc5eceb7c462d08db7f23eb379c9d969ec18a4bf30addffadc34968",
+      "launcher_sha256": "41b54fdf2a53ce14ff398bd6c05c40ce1d8daf6eb3380fb8852a02b08333d599",
+      "returncode": 0,
+      "elapsed_seconds": 360.16,
+      "case_count": 21,
+      "counts": {
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0
+      },
+      "checks": [
+        {
+          "status": "passed",
+          "duration_seconds": 30.172,
+          "case_index": 1,
+          "function": "tests.test_benchmarks::test_live_prepared_repo_repeated_admission_and_missing_dependency"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 18.277,
+          "case_index": 2,
+          "function": "tests.test_benchmarks::test_live_function_admission_uses_repeated_host_compared_controls"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 33.58,
+          "case_index": 3,
+          "function": "tests.test_node_repositories::test_live_historical_node_admission"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 27.634,
+          "case_index": 4,
+          "function": "tests.test_node_repositories::test_live_historical_node_admission"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 5.087,
+          "case_index": 5,
+          "function": "tests.test_node_repositories::test_live_offline_private_npm_install_disables_scripts"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 74.714,
+          "case_index": 6,
+          "function": "tests.test_node_repositories::test_live_common_node_runners"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 50.552,
+          "case_index": 7,
+          "function": "tests.test_node_repositories::test_live_common_node_runners"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 6.453,
+          "case_index": 8,
+          "function": "tests.test_node_repositories::test_live_offline_private_wheel"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 2.528,
+          "case_index": 9,
+          "function": "tests.test_node_repositories::test_live_node_empty_and_load_failure_are_infrastructure_errors"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 2.907,
+          "case_index": 10,
+          "function": "tests.test_node_repositories::test_live_node_empty_and_load_failure_are_infrastructure_errors"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 2.241,
+          "case_index": 11,
+          "function": "tests.test_node_repositories::test_live_node_empty_and_load_failure_are_infrastructure_errors"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 19.131,
+          "case_index": 12,
+          "function": "tests.test_environments::test_live_prepared_pytest_image"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 5.541,
+          "case_index": 13,
+          "function": "tests.test_agent_runner::test_live_public_python_cannot_read_private_grader_or_git_history"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 2.781,
+          "case_index": 14,
+          "function": "tests.test_agent_runner::test_live_node_tool_can_import_public_source_without_private_grader"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 1.129,
+          "case_index": 15,
+          "function": "tests.test_projects::test_live_public_github_metadata"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 55.775,
+          "case_index": 16,
+          "function": "tests.test_sandbox::test_all_coding_references_pass_and_buggy_bases_fail"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 1.667,
+          "case_index": 17,
+          "function": "tests.test_sandbox::test_live_sandbox_denies_host_network_and_source_mutation"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 2.549,
+          "case_index": 18,
+          "function": "tests.test_sandbox::test_live_stdout_spoof_cannot_mark_wrong_answer_correct"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 4.006,
+          "case_index": 19,
+          "function": "tests.test_sandbox::test_live_timeout_is_recorded_and_container_removed"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 1.689,
+          "case_index": 20,
+          "function": "tests.test_sandbox::test_live_output_flood_is_bounded"
+        },
+        {
+          "status": "passed",
+          "duration_seconds": 4.184,
+          "case_index": 21,
+          "function": "tests.test_domains_mining::test_mined_fix_passes_and_historical_base_fails"
+        }
+      ],
+      "test_source_sha256": {
+        "tests/test_agent_runner.py": "428b32eef8b20ed031097475c10b47274d43b9bcd5f1841828ed8615ab8818dd",
+        "tests/test_benchmarks.py": "fd187e48801f44250e4043b98cb18a3f9c951a600faa500be55b7ed65bfa60de",
+        "tests/test_domains_mining.py": "189914f984d554160370aa5836cacac7e61634e82e4a04c3d6b0f8055df9fdb2",
+        "tests/test_environments.py": "dc71f58abcd69a2cf030ceba0b03de37a7b6cca01cf478bb2dfa7d30fc276369",
+        "tests/test_node_repositories.py": "22588ab4dbfb5f1bb9768e46bd4d82b820258deb573fe6067f0478856f41270b",
+        "tests/test_projects.py": "e3e884ab0313a3d28385a7c65a228aa96cc29311dc666a66092f4f540c90bd2a",
+        "tests/test_sandbox.py": "3476691a888e0e00ee8d63864dae1f5ca61186f93e1dcf9acfc0755b806ba476"
+      }
+    },
+    "counting": "Suites and focused follow-ups overlap; these are not additive unique-test counts."
+  },
+  "installed_acceptance": {
+    "repository_and_packs": {
+      "status": "passed",
+      "checks": 135,
+      "installed_cli_commands": 73,
+      "elapsed_seconds": 129.433,
+      "original_git_histories": 4,
+      "validation_cycles": 6,
+      "portable_pack_workspaces": 2,
+      "demo_domains": 3,
+      "original_report_correction": "A metadata counter initially included four sibling review files as repositories. The corrected report counts only directories containing .git; the original report and executed harness remain retained.",
+      "installed_package_sha256": "ebf642fbb5a55ce64cba453d9e2a8c51ef786e8478c4637528a7f3cd48241a0d",
+      "executed_harness_sha256": "af0893679b74f9cbb6fd67c6df042b8fee80aeb7915075a0e1e9e01558e42c86"
+    },
+    "automation": {
+      "status": "passed_with_documented_readiness_rechecks",
+      "verified_invariants": 7,
+      "checks": [
+        {
+          "name": "autopilot",
+          "status": "passed"
+        },
+        {
+          "name": "unknown_usage",
+          "status": "passed"
+        },
+        {
+          "name": "optimizer",
+          "status": "passed"
+        },
+        {
+          "name": "caps_and_cancellation",
+          "status": "passed"
+        },
+        {
+          "name": "recovery_priced",
+          "status": "passed"
+        },
+        {
+          "name": "recovery_zero",
+          "status": "passed"
+        },
+        {
+          "name": "backup_restore",
+          "status": "passed"
+        }
+      ],
+      "recheck_reason": "The first final run exceeded a 25-second harness worker-start allowance during zero-rate recovery and restored-workspace startup. The zero-rate worker subsequently started and its retained state already satisfied the accounting invariants; the first restored worker never reached readiness before cleanup. A fresh recheck used a bounded 90-second startup allowance and explicit process cleanup if readiness fails. Autopilot was recreated solely as the backup fixture prerequisite.",
+      "scope": [
+        "Installed 0.3.1 wheel, real loopback HTTP adapter subprocesses, actual dedicated CLI workers and SQLite workspaces on the iMac volume.",
+        "Natural worker polling and lease expiry; SIGKILL recovery does not alter database timestamps or replay ambiguous attempts.",
+        "Seven acceptance invariants verified across preserved original and recheck attempts. This is not a claim that every original phase passed.",
+        "Synthetic token rates exercise reservation and settlement; no real provider invoice or representative model-quality comparison.",
+        "Backup restoration uses the documented SQLite restore plus a separate artifact copy. This does not measure startup or service-level latency under controlled host load."
+      ],
+      "measured_run_seconds": 621.186,
+      "attempts": [
+        {
+          "status": "failed",
+          "phase_count": 7,
+          "duration_seconds": 506.571,
+          "adapter_requests": 22,
+          "failed_checks": [
+            {
+              "name": "recovery_zero",
+              "status": "failed",
+              "error_type": "AssertionError",
+              "duration_seconds": 73.683
+            },
+            {
+              "name": "backup_restore",
+              "status": "failed",
+              "error_type": "AssertionError",
+              "duration_seconds": 63.721
+            }
+          ]
+        },
+        {
+          "status": "passed",
+          "phase_count": 3,
+          "duration_seconds": 114.615,
+          "adapter_requests": 10,
+          "failed_checks": []
+        }
+      ]
+    },
+    "interfaces": {
+      "schema_version": 1,
+      "status": "passed",
+      "provider_admissions": 0,
+      "known_provider_cost_usd": 0,
+      "limits": [
+        "Original installation controls only; not customer/model-performance validation.",
+        "One iMac installed-wheel environment; not cross-platform, load, or external identity-provider certification.",
+        "One private long mobile regrade capture has repeated viewport tiles; retained with limitation and excluded from curated assets. The clean desktop regrade and earlier blind-review mobile captures were inspected.",
+        "Full interface and focused follow-up checks overlap; their counts must not be added as independent coverage."
+      ],
+      "checks": [
+        {
+          "name": "Installed CLI, actual tmux, Textual, real HTTP and Chromium workflows",
+          "status": "passed",
+          "evidence": {
+            "check_groups": 29,
+            "textual_detail_checks": 40,
+            "textual_views": 12,
+            "form_types": 6,
+            "role_capability_assertions": 52,
+            "terminal_sizes": [
+              [
+                136,
+                46
+              ],
+              [
+                80,
+                24
+              ]
+            ],
+            "note": "Full pass before final choice-border CSS fix; affected CSS verified separately below."
+          }
+        },
+        {
+          "name": "Final installed choice controls visibly render and accept keyboard selection",
+          "status": "passed",
+          "evidence": {
+            "checks": 2,
+            "installed_identity": {
+              "version": "0.3.1",
+              "package_init_sha256": "77986844a4794fe54f5a9daf68fd16e9291c6998f1c1f126f15210fcaf2c691d",
+              "tui_styles_sha256": "d6a7e7f8103c6b7e721e1fdef534c5a32747288d9cb1577cd7231e852bfe94b5"
+            }
+          }
+        },
+        {
+          "name": "Final installed regrade completes and retains new evidence",
+          "status": "passed",
+          "evidence": {
+            "check_groups": 13,
+            "retained_regrades_before": 2,
+            "retained_regrades_after": 3,
+            "mutation_http_status": 201
+          }
+        },
+        {
+          "name": "Genuine labeled terminal visuals curated after inspection",
+          "status": "passed",
+          "evidence": {}
+        }
+      ]
+    },
+    "free_stages_paid_provider_calls": 0
+  },
+  "live_openai": {
+    "scope": "Single-turn Chat Completions compatibility and operational measurement on original fixtures. No model tools or autonomous repository solver in this comparison.",
+    "cohort": {
+      "cohort_id": "acceptance-openai-starters-v2",
+      "cohort_version": "2.0.0",
+      "cohort_hash": "e250436458b134dd4aa91de55abd7be348deb6014ea758268d2cf298620fe43b",
+      "task_count": 19,
+      "repetitions": 2,
+      "scheduled_benchmark_trials": 114,
+      "starter_versions": {
+        "starter-coding": "1.0.0",
+        "starter-documents": "1.1.0",
+        "starter-data": "1.1.0",
+        "starter-workflow": "1.1.0"
+      },
+      "domains": {
+        "coding": 10,
+        "data": 3,
+        "documents": 3,
+        "workflow": 3
+      }
+    },
+    "controls": {
+      "status": "passed",
+      "package_version": "0.3.1",
+      "cohort_hash": "e250436458b134dd4aa91de55abd7be348deb6014ea758268d2cf298620fe43b",
+      "installed_code_sha256": "6552256609f8e0446b440891a344eab129f7f12d3a938a77633695c64c5e079d",
+      "script_sha256": "ade69c5ac34a15724581b03d996e8d98a33fb1c23eb7a1deee5f0db471bf5189",
+      "sandbox_image": "sha256:925aed5a5fc5eceb7c462d08db7f23eb379c9d969ec18a4bf30addffadc34968",
+      "elapsed_seconds": 40.01,
+      "task_count": 19,
+      "positive_controls_passed": 19,
+      "negative_controls_rejected": 22,
+      "provider_calls": 0
+    },
+    "benchmark": {
+      "status": "completed",
+      "trials": 114,
+      "all_trials_completed": true,
+      "systems": [
+        {
+          "system_id": "gpt-6-luna",
+          "scheduled": 38,
+          "completed": 38,
+          "passed": 38,
+          "failed": 0,
+          "errors": 0,
+          "incomplete": 0,
+          "pass_rate": 1.0,
+          "ci_low": 0.6884301440956435,
+          "ci_high": 1,
+          "interval_method": "task-cluster Hoeffding 95%",
+          "cost_usd": 0.003671,
+          "cost_per_pass": 9.660526315789473e-05,
+          "cost_complete": true,
+          "timings": {
+            "submission_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 2522.0995,
+              "p95_ms": 6348.1494999999995,
+              "total_ms": 113242.028
+            },
+            "provider_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 2522.0649999999996,
+              "p95_ms": 6348.1182,
+              "total_ms": 113240.889
+            },
+            "tool_ms": {
+              "recorded": 0,
+              "scheduled": 38,
+              "median_ms": null,
+              "p95_ms": null,
+              "total_ms": null
+            },
+            "grading_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 1825.757,
+              "p95_ms": 3999.049899999999,
+              "total_ms": 60924.884
+            },
+            "total_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 3960.32,
+              "p95_ms": 9165.2136,
+              "total_ms": 178381.491
+            }
+          }
+        },
+        {
+          "system_id": "gpt-6.1-sol",
+          "scheduled": 38,
+          "completed": 38,
+          "passed": 38,
+          "failed": 0,
+          "errors": 0,
+          "incomplete": 0,
+          "pass_rate": 1.0,
+          "ci_low": 0.6884301440956435,
+          "ci_high": 1,
+          "interval_method": "task-cluster Hoeffding 95%",
+          "cost_usd": 0.05212,
+          "cost_per_pass": 0.001371578947368421,
+          "cost_complete": true,
+          "timings": {
+            "submission_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 2538.035,
+              "p95_ms": 4916.796199999998,
+              "total_ms": 108436.653
+            },
+            "provider_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 2538.0055,
+              "p95_ms": 4916.764149999998,
+              "total_ms": 108435.497
+            },
+            "tool_ms": {
+              "recorded": 0,
+              "scheduled": 38,
+              "median_ms": null,
+              "p95_ms": null,
+              "total_ms": null
+            },
+            "grading_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 1674.4185,
+              "p95_ms": 3959.43745,
+              "total_ms": 56070.625
+            },
+            "total_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 3859.7799999999997,
+              "p95_ms": 8259.7762,
+              "total_ms": 167771.345
+            }
+          }
+        },
+        {
+          "system_id": "gpt-6-astra",
+          "scheduled": 38,
+          "completed": 38,
+          "passed": 38,
+          "failed": 0,
+          "errors": 0,
+          "incomplete": 0,
+          "pass_rate": 1.0,
+          "ci_low": 0.6884301440956435,
+          "ci_high": 1,
+          "interval_method": "task-cluster Hoeffding 95%",
+          "cost_usd": 0.2524,
+          "cost_per_pass": 0.006642105263157895,
+          "cost_complete": true,
+          "timings": {
+            "submission_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 2527.2215,
+              "p95_ms": 5230.8532,
+              "total_ms": 110960.689
+            },
+            "provider_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 2527.1895,
+              "p95_ms": 5230.826299999999,
+              "total_ms": 110959.61
+            },
+            "tool_ms": {
+              "recorded": 0,
+              "scheduled": 38,
+              "median_ms": null,
+              "p95_ms": null,
+              "total_ms": null
+            },
+            "grading_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 1461.7365,
+              "p95_ms": 4147.1948,
+              "total_ms": 60080.691
+            },
+            "total_ms": {
+              "recorded": 38,
+              "scheduled": 38,
+              "median_ms": 4398.172500000001,
+              "p95_ms": 9179.391549999997,
+              "total_ms": 177491.374
+            }
+          }
+        }
+      ],
+      "domains": [
+        {
+          "domain": "coding",
+          "system_id": "gpt-6-luna",
+          "trials": 20,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "data",
+          "system_id": "gpt-6-luna",
+          "trials": 6,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "documents",
+          "system_id": "gpt-6-luna",
+          "trials": 6,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "workflow",
+          "system_id": "gpt-6-luna",
+          "trials": 6,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "coding",
+          "system_id": "gpt-6.1-sol",
+          "trials": 20,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "data",
+          "system_id": "gpt-6.1-sol",
+          "trials": 6,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "documents",
+          "system_id": "gpt-6.1-sol",
+          "trials": 6,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "workflow",
+          "system_id": "gpt-6.1-sol",
+          "trials": 6,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "coding",
+          "system_id": "gpt-6-astra",
+          "trials": 20,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "data",
+          "system_id": "gpt-6-astra",
+          "trials": 6,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "documents",
+          "system_id": "gpt-6-astra",
+          "trials": 6,
+          "pass_rate": 1.0
+        },
+        {
+          "domain": "workflow",
+          "system_id": "gpt-6-astra",
+          "trials": 6,
+          "pass_rate": 1.0
+        }
+      ],
+      "comparisons": [
+        {
+          "left": "gpt-6-luna",
+          "right": "gpt-6.1-sol",
+          "paired_tasks": 19,
+          "difference": 0.0,
+          "ci_low": -0.6231397118087131,
+          "ci_high": 0.6231397118087131,
+          "interval_method": "paired task-cluster Hoeffding 95% (unadjusted)",
+          "conclusion": "insufficient evidence"
+        },
+        {
+          "left": "gpt-6-luna",
+          "right": "gpt-6-astra",
+          "paired_tasks": 19,
+          "difference": 0.0,
+          "ci_low": -0.6231397118087131,
+          "ci_high": 0.6231397118087131,
+          "interval_method": "paired task-cluster Hoeffding 95% (unadjusted)",
+          "conclusion": "insufficient evidence"
+        },
+        {
+          "left": "gpt-6.1-sol",
+          "right": "gpt-6-astra",
+          "paired_tasks": 19,
+          "difference": 0.0,
+          "ci_low": -0.6231397118087131,
+          "ci_high": 0.6231397118087131,
+          "interval_method": "paired task-cluster Hoeffding 95% (unadjusted)",
+          "conclusion": "insufficient evidence"
+        }
+      ],
+      "failures": [],
+      "failure_details": "Only task/system identifiers and completion grades are published. Free-form errors, outputs, traces and grader details stay private.",
+      "snapshot_hash": "5c3b36a50cb59491c47d55a99a7e2072e2db78bab61a4865a58ff8cdb3621009",
+      "executed_collection_hash": "e63ed6b348913ff22a899dbe33eed329c27ef6f76705e81e8cd2c025865472fa",
+      "cohort_serialization_binding": {
+        "status": "passed",
+        "manifest_cohort_hash": "e250436458b134dd4aa91de55abd7be348deb6014ea758268d2cf298620fe43b",
+        "controls_cohort_hash": "e250436458b134dd4aa91de55abd7be348deb6014ea758268d2cf298620fe43b",
+        "executed_collection_hash": "e63ed6b348913ff22a899dbe33eed329c27ef6f76705e81e8cd2c025865472fa",
+        "normalized_manifest_cohort_hash": "e63ed6b348913ff22a899dbe33eed329c27ef6f76705e81e8cd2c025865472fa",
+        "executed_snapshot_hash": "5c3b36a50cb59491c47d55a99a7e2072e2db78bab61a4865a58ff8cdb3621009",
+        "frozen_systems_hash": "943a82ffaeccd0b209b46d37cbeef3bbf09cbb169e34e2a93acf083d38065457",
+        "numeric_default_field_paths": [
+          "scenarios[0].checks[0].weight",
+          "scenarios[0].checks[0].tolerance",
+          "scenarios[1].checks[0].weight",
+          "scenarios[1].checks[0].tolerance",
+          "scenarios[2].checks[0].weight",
+          "scenarios[2].checks[0].tolerance",
+          "scenarios[3].checks[0].weight",
+          "scenarios[3].checks[0].tolerance",
+          "scenarios[4].checks[0].weight",
+          "scenarios[4].checks[0].tolerance",
+          "scenarios[5].checks[0].weight",
+          "scenarios[5].checks[0].tolerance",
+          "scenarios[6].checks[0].weight",
+          "scenarios[6].checks[0].tolerance",
+          "scenarios[7].checks[0].weight",
+          "scenarios[7].checks[0].tolerance",
+          "scenarios[8].checks[0].weight",
+          "scenarios[8].checks[0].tolerance",
+          "scenarios[9].checks[0].weight",
+          "scenarios[9].checks[0].tolerance",
+          "scenarios[10].checks[0].weight",
+          "scenarios[10].checks[0].tolerance",
+          "scenarios[10].checks[1].weight",
+          "scenarios[10].checks[1].tolerance",
+          "scenarios[10].checks[2].weight",
+          "scenarios[10].checks[2].tolerance",
+          "scenarios[10].checks[3].weight",
+          "scenarios[10].checks[3].tolerance",
+          "scenarios[11].checks[0].weight",
+          "scenarios[11].checks[0].tolerance",
+          "scenarios[11].checks[1].weight",
+          "scenarios[11].checks[1].tolerance",
+          "scenarios[11].checks[2].weight",
+          "scenarios[11].checks[2].tolerance",
+          "scenarios[11].checks[3].weight",
+          "scenarios[11].checks[3].tolerance",
+          "scenarios[12].checks[0].weight",
+          "scenarios[12].checks[0].tolerance",
+          "scenarios[12].checks[1].weight",
+          "scenarios[12].checks[1].tolerance",
+          "scenarios[12].checks[2].weight",
+          "scenarios[12].checks[2].tolerance",
+          "scenarios[12].checks[3].weight",
+          "scenarios[12].checks[3].tolerance",
+          "scenarios[13].checks[0].weight",
+          "scenarios[13].checks[0].tolerance",
+          "scenarios[13].checks[1].weight",
+          "scenarios[13].checks[1].tolerance",
+          "scenarios[13].checks[2].weight",
+          "scenarios[13].checks[2].tolerance",
+          "scenarios[13].checks[3].weight",
+          "scenarios[13].checks[3].tolerance",
+          "scenarios[14].checks[0].weight",
+          "scenarios[14].checks[0].tolerance",
+          "scenarios[14].checks[1].weight",
+          "scenarios[14].checks[1].tolerance",
+          "scenarios[14].checks[2].weight",
+          "scenarios[14].checks[3].weight",
+          "scenarios[14].checks[3].tolerance",
+          "scenarios[15].checks[0].weight",
+          "scenarios[15].checks[0].tolerance",
+          "scenarios[15].checks[1].weight",
+          "scenarios[15].checks[1].tolerance",
+          "scenarios[15].checks[2].weight",
+          "scenarios[15].checks[2].tolerance",
+          "scenarios[16].checks[0].weight",
+          "scenarios[16].checks[0].tolerance",
+          "scenarios[16].checks[1].weight",
+          "scenarios[16].checks[1].tolerance",
+          "scenarios[16].checks[2].weight",
+          "scenarios[16].checks[2].tolerance",
+          "scenarios[16].checks[3].weight",
+          "scenarios[16].checks[3].tolerance",
+          "scenarios[17].checks[0].weight",
+          "scenarios[17].checks[0].tolerance",
+          "scenarios[17].checks[1].weight",
+          "scenarios[17].checks[1].tolerance",
+          "scenarios[17].checks[2].weight",
+          "scenarios[17].checks[2].tolerance",
+          "scenarios[17].checks[3].weight",
+          "scenarios[17].checks[3].tolerance",
+          "scenarios[18].checks[0].weight",
+          "scenarios[18].checks[0].tolerance",
+          "scenarios[18].checks[1].weight",
+          "scenarios[18].checks[1].tolerance"
+        ],
+        "numeric_default_field_count": 85,
+        "allowed_fields": [
+          "weight",
+          "tolerance"
+        ],
+        "normalization": "Only equal-value int-to-float serialization of Check.weight and Check.tolerance defaults.",
+        "all_other_content_byte_identical_after_canonical_json": true,
+        "no_provider_admissions": true
+      },
+      "installed_code_sha256": "6552256609f8e0446b440891a344eab129f7f12d3a938a77633695c64c5e079d",
+      "executed_harness_sha256": "ade69c5ac34a15724581b03d996e8d98a33fb1c23eb7a1deee5f0db471bf5189",
+      "elapsed_seconds": 537.167,
+      "audit_checkpoint": {
+        "valid": true,
+        "count": 403,
+        "head": "5aa1af5ec27a554c51b1195e578f647db8bcb9e53fbc1d93587bd4f88ae520a4",
+        "trust": "local hash chain; independent digest retention required for tamper evidence"
+      }
+    },
+    "lifecycle": {
+      "checks_passed": 15,
+      "autopilot_occurrences": 1,
+      "selected_model_on_separate_original_settlement_fixtures": "gpt-6-luna",
+      "deployment_performed": false,
+      "paid_calls": 62,
+      "executed_harness_sha256": "9c9af45284c1742bbea7c9303d1244755a4dbb71b3e124958b31c1a4fb935051",
+      "audit_checkpoint_valid": true,
+      "audit_note": "The original successful phase recorded a checkpoint before a redundant final pause appended an event. Its checkpoint is not represented as the final campaign head; the future harness now avoids that append.",
+      "plan_note": "The original stage marker hashed regenerated creation metadata instead of the persisted plan. The retained source, model/task snapshots, and plan remain available. Future admission now hashes the exact retained plan and freezes model definitions.",
+      "diagnostic_exclusion": "All 48 original Autopilot trials are excluded from accuracy claims. Eighteen raw failures revealed undocumented output formatting in two tasks; none established a violation of the public instructions. Old grades and costs remain retained."
+    },
+    "pilot": {
+      "paid_calls": 3,
+      "purpose": "API compatibility only",
+      "package_version": "0.3.0",
+      "provenance_limit": "The early pilot result did not retain installed-code or executed-harness digests; package version comes from its retained campaign manifest."
+    },
+    "accounting": {
+      "as_of": "2026-10-15T05:18:25.289518+00:00",
+      "known_provider_cost_usd": 0.48299899999999996,
+      "committed_provider_usd": 0.482999,
+      "unsettled_reservations": 0,
+      "provider_admissions": 179,
+      "limits": [
+        {
+          "daily_usd": null,
+          "lifetime_usd": 90.0,
+          "monthly_usd": null,
+          "scope": "workspace",
+          "updated_at": "2026-10-15T04:33:05.362414+00:00",
+          "usage": {
+            "daily_usd": 0.482999,
+            "monthly_usd": 0.482999,
+            "lifetime_usd": 0.482999
+          }
+        }
+      ],
+      "accounting_basis": "reported provider usage at frozen configured prices; not an invoice",
+      "external_service_cost_usd": null,
+      "scope": "Everval provider calls only; excludes hosting, electricity, tools and development-service billing"
+    },
+    "token_cost_reconciliation": {
+      "status": "passed",
+      "provider_admissions": 179,
+      "all_usage_known": true,
+      "known_provider_cost_usd": 0.48299899999999996,
+      "recomputed_cost_usd": 0.482999,
+      "absolute_difference_usd": 4e-17,
+      "tolerance_usd": 1e-09,
+      "models": [
+        {
+          "model": "gpt-6-luna",
+          "calls": 61,
+          "input_tokens": 11152,
+          "output_tokens": 8560,
+          "input_cost_per_million": 0.125,
+          "output_cost_per_million": 0.5,
+          "pricing_version": "openai-standard-short-context-2026-10-15-input-cache-write-upper-bound",
+          "known_cost_usd": 0.005674,
+          "recomputed_cost_usd": 0.005674
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "calls": 59,
+          "input_tokens": 10825,
+          "output_tokens": 5675,
+          "input_cost_per_million": 2.5,
+          "output_cost_per_million": 10.0,
+          "pricing_version": "openai-standard-short-context-2026-10-15-input-cache-write-upper-bound",
+          "known_cost_usd": 0.0838125,
+          "recomputed_cost_usd": 0.0838125
+        },
+        {
+          "model": "gpt-6-astra",
+          "calls": 59,
+          "input_tokens": 10825,
+          "output_tokens": 5164,
+          "input_cost_per_million": 12.5,
+          "output_cost_per_million": 50.0,
+          "pricing_version": "openai-standard-short-context-2026-10-15-input-cache-write-upper-bound",
+          "known_cost_usd": 0.3935125,
+          "recomputed_cost_usd": 0.3935125
+        }
+      ],
+      "scope": "All retained pilot, lifecycle and benchmark provider admissions, including failed semantic grades. Token quantities multiplied by frozen declared prices; not a provider invoice."
+    },
+    "authorized_ceiling_usd": 100,
+    "admission_ceiling_usd": 90,
+    "pricing": [
+      {
+        "model": "gpt-6-luna",
+        "input_per_million_usd": 0.125,
+        "output_per_million_usd": 0.5,
+        "revision": "openai-standard-short-context-2026-10-15-input-cache-write-upper-bound"
+      },
+      {
+        "model": "gpt-6.1-sol",
+        "input_per_million_usd": 2.5,
+        "output_per_million_usd": 10.0,
+        "revision": "openai-standard-short-context-2026-10-15-input-cache-write-upper-bound"
+      },
+      {
+        "model": "gpt-6-astra",
+        "input_per_million_usd": 12.5,
+        "output_per_million_usd": 50.0,
+        "revision": "openai-standard-short-context-2026-10-15-input-cache-write-upper-bound"
+      }
+    ],
+    "pricing_sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "https://developers.openai.com/api/docs/models/gpt-6-astra"
+    ],
+    "cost_basis": "Reported token counts times conservative declared rates; input charged at cache-write upper bound, output at Standard rate. No cache discount. Not an invoice.",
+    "benchmark_reservation_usd": 19.9857515,
+    "limitations": [
+      "Live compatibility and operational measurement on small, public, original starter fixtures. No general capability ranking or customer-workload claim.",
+      "Reported token counts times conservative declared rates; input charged at cache-write upper bound, output at Standard rate. No cache discount. Not an invoice.",
+      "Request order is fixed; latency is descriptive and not a randomized service-level study.",
+      "Published task fixtures may have been seen during model training.",
+      "Pairwise intervals are exploratory and unadjusted for multiple comparisons; they do not establish a confirmatory ranking.",
+      "Intervals assume representative independent tasks and do not correct selection bias or shared-source dependence."
+    ]
+  },
+  "dependency_advisories": {
+    "development_python_audited": 71,
+    "installed_runtime_python_audited": 36,
+    "installed_runtime_distributions_recorded": 37,
+    "reported_known_advisories_python": 0,
+    "reported_known_advisories_npm": 0,
+    "first_party_lookup": "Unpublished everval-ai excluded from advisory lookup; not a first-party security audit.",
+    "runtime_lock_difference": [
+      {
+        "name": "fastapi",
+        "version": "0.143.1"
+      }
+    ]
+  },
+  "fixes": [
+    "Retain unknown billing after interrupted HTTP attempts even at zero configured prices.",
+    "Only offer explicitly partitioned development collections for optimization.",
+    "Reject multipleOf in the bounded pure-schema admission subset.",
+    "Render selected terminal values without clipping.",
+    "Version and clarify public output contracts for all nine structured starter tasks without changing references, hidden checks or past experiment snapshots."
+  ],
+  "provenance": {
+    "tested_wheel_sha256": "4a69c88a7aaad2617873310a76939b92df3c8364ac93878b5e02bb47ad1a1baa",
+    "source_manifest_sha256": "0f07bc97c3ec4b9382dfd7a9e5b4639138031bd60b3ba91bc258f4d4da5dcd0f",
+    "source_manifest_scope": "Publication-time checkout of the listed package and acceptance files, not the exact tree executed by every earlier phase. It excludes unlisted files, including source tests and frontend sources. Executed harness and installed-runtime hashes are reported separately.",
+    "source_file_hashes": {
+      "pyproject.toml": "15279fd6d910df65bd36db506f0dd1f2477e9d0b49e7f114ba51b534a0c0fa72",
+      "scripts/acceptance/automation.py": "1ad07607a22d6d878ac0cc217697a78b280df6d900406ba52ac5f2d2dfc99935",
+      "scripts/acceptance/interfaces.py": "7b2cf87b7c63ae78af32cdd678c34001ed4278554f1c3ce55fb35cf2e40efc17",
+      "scripts/acceptance/openai_live.py": "cb0cb05acc81c5fd0570774a0388adeb410324b9c8df993c57159dec814b2f22",
+      "scripts/acceptance/openai_workflows.py": "9ec6e93dd0379a71204b449d11f09d354c9e2452e83261524941196d5d7af128",
+      "scripts/acceptance/repositories.py": "2c09cfbe4595a5c7efb7b69c923e441068a47f2ecb51c3863054250a9c86a90d",
+      "scripts/acceptance/run.py": "c0f14093b906722083c7e70a0ca88dfdd0cf5d4d4d473e2bc6179faa5405c8cf",
+      "src/cvals/__init__.py": "77986844a4794fe54f5a9daf68fd16e9291c6998f1c1f126f15210fcaf2c691d",
+      "src/cvals/__main__.py": "de013c97d27c02d6cc61fb3a3767bd1cd6b5dc13574c421e3f261aa5c1c2d905",
+      "src/cvals/agent_runner.py": "c4888db2629abc0fa91572fe652d5b6314a99f29e111f27be61a35427197a1c7",
+      "src/cvals/agent_sdk.py": "3497d26537520f558c09758362b9654f908a7af0a966fb8a17bb6c535a208f83",
+      "src/cvals/api.py": "0a1a998c150aad1cd402d8990171f36e376b7d9139100d2727eec0fc27e164c7",
+      "src/cvals/audit.py": "aec52420a10473eadc9afa55d44e5f792ce2a226b9b3f8be4a7916126121d558",
+      "src/cvals/autopilot.py": "5430eba56caab6e673e54fc4d35b479e3251105058c9545b80069ce452e19c2f",
+      "src/cvals/autopilot_cli.py": "3aee08301f3c58d4d8934755b8e54f8ed72372b77c4c7218d0bc5379d94080c2",
+      "src/cvals/benchmark_health.py": "336619b95bd6a7a806327b64f46e4cf45d9777d0b5299c49be60fd504e24d6c8",
+      "src/cvals/benchmarks.py": "40e37900a42a15b81598a29ec2137748f59e2af86f4af2d57d32f151e53c6a72",
+      "src/cvals/budgeting.py": "ba8b467b71fd34c55841dbdc593ebdb392665a32baf8ff97143488404677c65e",
+      "src/cvals/budgeting_cli.py": "6dc37668011ae9e966bea0d7f23c297df0a9059c536c9925aecc9843e6d2c34a",
+      "src/cvals/case_imports.py": "a828faba63d9f56e85c9fdda3beda2d5692e76070aa2bfb8aeb0dcf1afb1c4a5",
+      "src/cvals/change_runs.py": "a78cadeb894185145d54f909d02b5ee0a0b1c680e2e86f310f44e9eba98f2579",
+      "src/cvals/cli.py": "afd3fe7cb682fd38e5e0ac110422a35c690ddc9b6f2c5d5b8f49ce9b0c8b65b4",
+      "src/cvals/community.py": "c631701137322b9cd79da45eb70a860bda02d5d27f771abda4e5b318faf56304",
+      "src/cvals/community_cli.py": "f69ed67f379d49fdd17a4199f15e888777406c0f42db25dbfe8ce965b0240a29",
+      "src/cvals/comparison.py": "cc269909d0ef97b2d07cc37d007a22a7849921a9fb50c0fce742a9c52b0b65eb",
+      "src/cvals/config.py": "79485da85990762d4c5ad92fc8be6699349b2722022c7761567daac3d19e49a6",
+      "src/cvals/demo.py": "1f24df47e561f166197bbb338bcb621ca76a73cc4c0a4bd5c7d00202af542d2c",
+      "src/cvals/demo_cli.py": "dc4308eb647d4ec49da003bb9d4a80d0ca2e8cbc715701cc57f85563cfd94f98",
+      "src/cvals/diagnostics.py": "ff13b3cc782fff0d2f752dc197e047c112924fb21bf252dc3d350b2e5df996e6",
+      "src/cvals/domains/__init__.py": "61fe486dd17ae7924cfb8c80bf997ac80a77000e5c560430a026ecd5a3d8e187",
+      "src/cvals/domains/_pdf_worker.py": "d1b2d5988a582c04e0831c4f503d5ddb50811714499bdb32efe232f0951944d5",
+      "src/cvals/domains/_process.py": "6331f366da219e2016af0d044b5e90405d3ce9f6010d9e9fdf0787407b3af831",
+      "src/cvals/domains/mining.py": "bf370a0315d28762f1ec3b5e98e50e7e8f2472bbb904c9585165897cfe892565",
+      "src/cvals/economics.py": "6cef503f4304354ea28e4ac6be4bb4c15b7c36d8cd8ec194e81b08ce13313a20",
+      "src/cvals/engine.py": "711fe0d82d7c5bdf39761f2d0946ff8f948e87ae0f683f2ed60edceac3e402f9",
+      "src/cvals/environments.py": "9f9c927802c68e9bd3da18d2b9ea4290fa2dd938ebdf0c31c5cb270b56fe25c0",
+      "src/cvals/evaluators.py": "06b01bb6921feb317e016b3e433e92c8bf8fd0ca3e812400e1141b8b5dd7175d",
+      "src/cvals/evolution_api.py": "560d3fc97ad1758aaa0f1f7f77fd2dee34afb2893f8d950a220575d4d9ae7564",
+      "src/cvals/experience_api.py": "74fdc9e49412c3685fb70f50998cdaa0ee0ec9fe419b60e7b7ac756c29f7760f",
+      "src/cvals/experience_cli.py": "e8392822f26974f46467bbb9f38dbe978435efb1646697d06dfee6a8644c7cef",
+      "src/cvals/exporting.py": "6fe8a367f131b84a543a48060c8bb616f646b6f6cb17088600129b89ec9eeff8",
+      "src/cvals/external_agent.py": "73c911403598af8ca69ac85954de162142e19d9d019db12134db90d9a5bef978",
+      "src/cvals/github.py": "d0a961993bcaa7d9bb9ec18647a23c82c87745bccb61e7b671950b0771417022",
+      "src/cvals/growth_cli.py": "18913818a3bd407ebc1f4285a28ce2ee958913a887a98795fd004595e9ef3430",
+      "src/cvals/http_limits.py": "6cd158ce38a5db47853909c8d562b35f5ba3b39acc1ed377caafc38448e22f2c",
+      "src/cvals/identity.py": "db2731015f785de3cfcc6e03ff41a811cdbc0da9c9d6be1979efd19fdd76829c",
+      "src/cvals/ingestion.py": "7d4ba8e2759ef81766dc517d990847374b84886836f0f3fdc17d7141e4d613b7",
+      "src/cvals/jobs.py": "74dc2657fed98870d2c24cbf192ca58f4bde1f28472ca571b3c546845b16ab9c",
+      "src/cvals/models.py": "37b656eaacc043d9c71eab9fa4c95773a3c64ed8db8fbdb88b817d0726039335",
+      "src/cvals/node_environments.py": "cea752b892ac0ffd0b9e21b272fd91b6a198ec11017f2a31369c2d62f486fe20",
+      "src/cvals/node_runtime.py": "2b8c25c5406b69efd85508050d07a90dcecef5d0a8d6f7f41ab3e2ba90c5425a",
+      "src/cvals/onboarding.py": "a7f2bc55bdcb68de87c0db07e4678cce06460c5369f67d416d6114d55cb472f6",
+      "src/cvals/optimization.py": "07193c8dd657ea56879814707f5e93ba4a82a5b8d1264dcef9805c58895ddfaf",
+      "src/cvals/packs/__init__.py": "b69199e02e19325898185c2bb9b9c3832646166eb6d51694ab53b716a596a39e",
+      "src/cvals/policies.py": "70e921118c27fa38bfcc87fa6a113641063924c01c0342a3203a0ffa8c094334",
+      "src/cvals/private_artifacts.py": "e1dfd810dff9d706fd3cf721e30a2ca6da25b8bc4c29c79ba7ae6044d72ff8a8",
+      "src/cvals/projects.py": "994a67e7b6183ecc5f8372a575747587c0e6e48ffc309f9eb4291efa0b122c7b",
+      "src/cvals/providers.py": "e4d4626baa2ba439bd9c753f98c775ddabe1347e0dd8d5e77176c6953ba38e18",
+      "src/cvals/pure_checks.py": "088c07996c406721a1162bf441397e86bb78cf20d8f396105dab9f05c491c628",
+      "src/cvals/reports.py": "8ef95142110605b24016603b8ccdc8169561098166d65a61ba1c8d98f7d70a7f",
+      "src/cvals/research.py": "aa0464915c2f16207bfae333aa13bb51f890980c46ecdc2f74ed903c0826185a",
+      "src/cvals/research_cli.py": "09b1f071fd1da6fdbdcd28d6500ef940baa84b2696fc94c95a2788737509d47f",
+      "src/cvals/review_queues.py": "0abc2c07be71bdaa90e682ef4911a2144a3d19c38d87d83c7205886b2a11d9a7",
+      "src/cvals/reviews.py": "898e389c3f514a98c162abf2aec4e007ca6f41e91827e73e61dd38406049c8ca",
+      "src/cvals/runtime.py": "2bcb43af5c4c33a09a3be29f66cf95454cb1fac901d737248a3d2ec6ea835595",
+      "src/cvals/sandbox.py": "b912ef7ef0224573a597d3afdc301b8693c451adf8b3bc86a9f6f27b4725116f",
+      "src/cvals/schedules.py": "a4c0e9b4ef2f89999a88c3ff882fccd579a828148d41c43100484e1f2599255a",
+      "src/cvals/spend_limits.py": "a2a85cf697355e06840325f5247774d0cedaccb0606b2e50b86bc9fdce641ab9",
+      "src/cvals/static/assets/index-BRIEn-xk.js": "492f8df5aeeae19f0cc2f011f6c4a98f9ebf1267a79ddeb9cc2b1103609589a7",
+      "src/cvals/static/assets/index-LjfmIrTr.css": "c0f7cac85e10720750055f91c30f4d33e979d5e4d4e6bc98cf2c17bd149a89d3",
+      "src/cvals/static/index.html": "5110573b6e50d1bd39128a680f06e717e6a2dc3b0e1c48601bf0708b5f9c697d",
+      "src/cvals/store.py": "62870b017ebe5fc90cab47b98ac4e4e2e1d53cff3933f4805cfa74c2d90cdb24",
+      "src/cvals/team_api.py": "db2299ead3aa46dbd9e51783b62ad2fb829c2f6ea1d5fad47682c6394d025946",
+      "src/cvals/team_cli.py": "05539ffe1d2462d4824b499027e562bdb53577ac7d2def37f20ea76e8dcf5fc4",
+      "src/cvals/terminal_cli.py": "d375235fdd5a035ab1aac2d732caf8d75e1e0903c408185bd743aadc7ff6bcd7",
+      "src/cvals/tui/__init__.py": "4ceea4140e5d2a62887f8749663b7263f9110ce6601749421cc024f62b70a2ca",
+      "src/cvals/tui/app.py": "00a518cc08a9da5429e6ef815f391c337f6739f130537609f1030d0c77d68132",
+      "src/cvals/tui/dialogs.py": "14b40a0f4c1463553f165d54f1f799de3ecd32b7f1f9b89e6fa9556fa4afb522",
+      "src/cvals/tui/evolution.py": "e6891d35b18425e54f9bad760ea6dbb3bc5de9062ca9766c50b235a3810577ae",
+      "src/cvals/tui/growth.py": "135f570e048e95387d11d5b36ae462d5cf8d90f225a983991d0d9683dd0610c0",
+      "src/cvals/tui/presentation.py": "d83fe6cf4b3b227b94705220f23d1ca948ee77f3553f3b7136380e50533df1a5",
+      "src/cvals/tui/workbench.tcss": "d6a7e7f8103c6b7e721e1fdef534c5a32747288d9cb1577cd7231e852bfe94b5",
+      "src/cvals/variants.py": "de84e4f22672ec47f0a8d85a0d6a969bbe28f4af9d5ac50db8124f2437ac33aa",
+      "src/cvals/workbench.py": "da26bb5597b289e32a45db678afc3cab1fc06f73493b7272fab9f9d76b964a56",
+      "src/cvals/workbench_api.py": "e8f77c5b1b51d6e8a0159c57622b30bc9d36cd2dc5cc83579d7d66bcd1576399",
+      "uv.lock": "d20bc457d34921c6fa340bb66b723e7ffdef261226754ffe5c951b4e3cbe8f7b",
+      "web/package-lock.json": "103372b49138aa9b8945007228a826c1d0e7fb9995604c48cf5b03509ed67379"
+    },
+    "private_artifact_hashes": [
+      {
+        "artifact": "pytest.log",
+        "sha256": "cd3f986cefe5b4b490a20069105ef2302eb01a868398e86aea56fb29f07081e8"
+      },
+      {
+        "artifact": "starter-contract-tests.log",
+        "sha256": "11f668c03814e68eed99127aa25c4743fb307ce9ee848069d38cf0dae95c7666"
+      },
+      {
+        "artifact": "acceptance-guards-tests.json",
+        "sha256": "8247a900af836651dedde3b390288aec3ebbdf157938c1375e32a434a282375e"
+      },
+      {
+        "artifact": "acceptance-guards-tests.log",
+        "sha256": "ed1a9b6542dacfbff37dfe19f64e209dc81485306b3f43626a218971ee1c9ede"
+      },
+      {
+        "artifact": "acceptance-guards-final.json",
+        "sha256": "fb8f980a7544319aaf9dedf0d7004cb47748d077d3d7eb8dbc60a73c3b40f09f"
+      },
+      {
+        "artifact": "acceptance-guards-final.log",
+        "sha256": "6a1ba19f2c4d7720dbd0e9c4fed63dddd396b377169252ee1769c29cc56ddbc3"
+      },
+      {
+        "artifact": "acceptance-guards-final.xml",
+        "sha256": "bcdb4cf0a05005b29f898eb54236503174b8cb9359379cfd1be2466923bdc52b"
+      },
+      {
+        "artifact": "web-tests.log",
+        "sha256": "637bf1605f7fbc7341b9ad3d2f9fa356d86c4bb1ba2f3da588b07a7a3c10b291"
+      },
+      {
+        "artifact": "web-typecheck.log",
+        "sha256": "f6e0c7adb21ba5302103a08156648eca19ba267c92409adbc0064f3a4cbc7fa2"
+      },
+      {
+        "artifact": "web-build.log",
+        "sha256": "6fb1fe48cc9164a12337daf8be047e4e7463d3e69492da1d2fb3fa54a3e36140"
+      },
+      {
+        "artifact": "mypy-final.log",
+        "sha256": "4ef32b02733c640ba275e5de2c0f630d3ea2a6293bb124ad0dc2173d46e40541"
+      },
+      {
+        "artifact": "tui-choice-tests.log",
+        "sha256": "d8d29956e773d2304174bae58867ff68972514659e6b6302ece1ef1c3aa16b00"
+      },
+      {
+        "artifact": "tui-choice-tests.xml",
+        "sha256": "66490496e30e48ad3e5c68eec63a93efd0e546b862d260474b53b46985b1fa24"
+      },
+      {
+        "artifact": "mypy-final.log",
+        "sha256": "4ef32b02733c640ba275e5de2c0f630d3ea2a6293bb124ad0dc2173d46e40541"
+      },
+      {
+        "artifact": "lint-final.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "artifact": "format-final.log",
+        "sha256": "a7b33b14dcd88b8016b9d74d605d0ba45f7a54081064355a3e9ec7c9a8735a9e"
+      },
+      {
+        "artifact": "python-audit.json",
+        "sha256": "42214f0bacc166dedc94dbe68a851d4b65ebb81877c4c49f9725a21380f5366a"
+      },
+      {
+        "artifact": "package-release-audit.json",
+        "sha256": "541b90d45f255eb533f8873da208ccdf72a2271af7ef6db7ad6b2c705a236f09"
+      },
+      {
+        "artifact": "npm-audit.json",
+        "sha256": "1a7f1e0a0d4365c8e64fade82ee45b963ad7c7a2acb2886ac31debdd84090b6f"
+      },
+      {
+        "artifact": "package-release-identity.json",
+        "sha256": "b683be8206711b82d24902cfc3c460e9b422e1cbb928ae6c568ff842df7a294d"
+      },
+      {
+        "artifact": "repositories-v031/results.json",
+        "sha256": "702d9d2ec03b4fab2f44b8fa317e204e4ca9dbc087c5af93c0742e7805895967"
+      },
+      {
+        "artifact": "runtime-v031/results.json",
+        "sha256": "8fcc458b4ed60e953c93041098c6da889deb7ffec295dc20ee01d00f011f760d"
+      },
+      {
+        "artifact": "runtime-v031/junit.xml",
+        "sha256": "7f3c37cd231e24dcbc8dd33396720ec445e52efe0bb39a6b6c80c6c3420b6d50"
+      },
+      {
+        "artifact": "automation-results.json",
+        "sha256": "71fff7d6cc13ff2ec4a814b90662f285f56d1b7e3f04879777ba0b211481fc86"
+      },
+      {
+        "artifact": "interfaces/acceptance-summary.json",
+        "sha256": "86a1924bce1d5bbb134868a768f3a2d704342720a996eb8d45b187c881a47f29"
+      },
+      {
+        "artifact": "interfaces/final-3/results.json",
+        "sha256": "31ee17ba600317aacf3d1f4c44d9afb6c4d18f8e0b5265d551c1be73c8718de5"
+      },
+      {
+        "artifact": "interfaces/choice-final/results.json",
+        "sha256": "e5ef3063fd57616e2f2fa8f7178cd8ed710e1794b08cfb40a0bc977b0030dd3b"
+      },
+      {
+        "artifact": "interfaces/regrade-final-2/results.json",
+        "sha256": "d49b9f3165d924586d1f2178f71813e8969bd83a35e1209db8c492130bd4801f"
+      },
+      {
+        "artifact": "live/manifest-v1.json",
+        "sha256": "4a625ad41e2ddd4f7b076575f49722a8d700aea591d90269b14847f8e8ade88f"
+      },
+      {
+        "artifact": "live/manifest.json",
+        "sha256": "b02010e2f2c5f1a56baa6be288ca948b0fc958f734d9de12e61e13d45de2ee7b"
+      },
+      {
+        "artifact": "live/cohort-revision.json",
+        "sha256": "1c14585592797906e85a4c64cdc8358f9c7c58e2ddf71bc02a06d2038c7ddaf3"
+      },
+      {
+        "artifact": "live/pilot-results.json",
+        "sha256": "782887ca7f2051b72802857e0d67a5ac71e2cd62497a59305e1081c5aa1d7b28"
+      },
+      {
+        "artifact": "live/workflows-results.json",
+        "sha256": "f81fe697ccf95459516c06eeded632a8ce0aaa546b89a8bc50b1544e03703b27"
+      },
+      {
+        "artifact": "live/diagnostics/failure-summary.json",
+        "sha256": "a72ef0d96e5c0d225744d8c07b420fcf9df61b7e5be2c257be4e260ea92f14c9"
+      },
+      {
+        "artifact": "live/controls-results.json",
+        "sha256": "ea8a3e70d0abdbb1eac798033c77ac6d2ab11042280f5a46b14dcc52bfa2cf31"
+      },
+      {
+        "artifact": "live/benchmark-results.json",
+        "sha256": "60d50b8f08b95c98f61c6d2dd43a8a3586c802a0b10be57beb6d8a77ee9e9642"
+      },
+      {
+        "artifact": "live/budget.json",
+        "sha256": "5dbbb0a114c7aa5d7eb45e65d729e781d9932873be12ee558d5775e78ea461e6"
+      },
+      {
+        "artifact": "live/accounting-reconciliation.json",
+        "sha256": "a5dac737ee863af28a0700e8a0956e205c351fed8a16c0500f1e2b67dc999b59"
+      },
+      {
+        "artifact": "live/cohort-snapshot-binding.json",
+        "sha256": "ebe13ffc332d1bf8947072e1b84c2ebfc111a8fbbe87398f3ec39ba88e8ca167"
+      },
+      {
+        "artifact": "verify_cohort_binding.py",
+        "sha256": "85fb91cbce4752b8cad8b9dbc54f939f318b333be048b6033967031c4a8df323"
+      },
+      {
+        "artifact": "cohort-binding-verification.log",
+        "sha256": "b2c105484e9b479a1f6199878af0c27abc1d2b0cb15d5a42207ddcda89541b8d"
+      },
+      {
+        "artifact": "build_public_evidence.py",
+        "sha256": "07b0b760c245f81f357ad8ac8771a6fd4291a35e732aef8332dcbd12085b0072"
+      },
+      {
+        "artifact": "test_public_evidence.py",
+        "sha256": "6e278d336f70e4fb6c2f276a4af9b53b0a1d6914f9e997fa5bb1d6fa529fdb56"
+      },
+      {
+        "artifact": "public-evidence-projection-tests.log",
+        "sha256": "f86aacd47ec79cdaad4430abdb9ca02739816368c1cd04cb75bb3aba0e85c96f"
+      },
+      {
+        "artifact": "live/source-ade69c5ac34a15724581b03d996e8d98a33fb1c23eb7a1deee5f0db471bf5189.py",
+        "sha256": "ade69c5ac34a15724581b03d996e8d98a33fb1c23eb7a1deee5f0db471bf5189"
+      },
+      {
+        "artifact": "live/source-9c9af45284c1742bbea7c9303d1244755a4dbb71b3e124958b31c1a4fb935051.py",
+        "sha256": "9c9af45284c1742bbea7c9303d1244755a4dbb71b3e124958b31c1a4fb935051"
+      }
+    ],
+    "raw_evidence": "Retained locally outside Git; public evidence contains no credentials, task answers, hidden graders or model traces.",
+    "candidate_builds": "Successive 0.3.1 candidates were used. The final installed package contains all five fixes; changed controls were checked against that package. Earlier phase package identities and scripts remain retained."
+  },
+  "limitations": [
+    "Original small controlled fixtures do not establish general model rankings or representative customer outcomes.",
+    "Local Git histories and separate GitHub metadata retrieval do not establish end-to-end grading of an external customer repository.",
+    "One workstation; no cross-platform, sustained-load, hosted-identity, multi-tenant or service-level certification.",
+    "No independent security review or adversarial isolation certification.",
+    "Failed harness attempts and grading-contract diagnostics are retained; focused successful rechecks are distinguished from original attempts.",
+    "All measurements are developer-run and not independently certified."
+  ]
+}

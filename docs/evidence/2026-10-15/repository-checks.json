@@ -1,0 +1,542 @@
+[
+  {
+    "name": "runtime: Python and Node images already local",
+    "passed": true
+  },
+  {
+    "name": "python: local history identified",
+    "passed": true
+  },
+  {
+    "name": "python: repair discovered",
+    "passed": true
+  },
+  {
+    "name": "python: exact base reconstructed",
+    "passed": true
+  },
+  {
+    "name": "python: release blocked before validation",
+    "passed": true
+  },
+  {
+    "name": "python: admission valid",
+    "passed": true
+  },
+  {
+    "name": "python: three clean cycles retained",
+    "passed": true
+  },
+  {
+    "name": "python: historical and regression controls present",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 1 historical distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 1 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 1 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 1 historical collection stable",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 1 regression distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 1 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 1 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 1 regression collection stable",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 2 historical distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 2 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 2 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 2 historical collection stable",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 2 regression distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 2 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 2 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 2 regression collection stable",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 3 historical distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 3 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 3 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 3 historical collection stable",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 3 regression distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 3 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 3 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "python: cycle 3 regression collection stable",
+    "passed": true
+  },
+  {
+    "name": "python: outcome signatures stable across cycles",
+    "passed": true
+  },
+  {
+    "name": "python: no hidden or future material in public task",
+    "passed": true
+  },
+  {
+    "name": "python: starting source is the base",
+    "passed": true
+  },
+  {
+    "name": "python: public file tool agrees with snapshot",
+    "passed": true
+  },
+  {
+    "name": "python: private read rejected test_private.py",
+    "passed": true
+  },
+  {
+    "name": "python: private read rejected .git/HEAD",
+    "passed": true
+  },
+  {
+    "name": "python: hidden overwrite rejected",
+    "passed": true
+  },
+  {
+    "name": "python: public probe executed",
+    "passed": true
+  },
+  {
+    "name": "python: public container uses unprivileged UID",
+    "passed": true
+  },
+  {
+    "name": "python: public container source is read-only",
+    "passed": true
+  },
+  {
+    "name": "python: public container lacks Git history",
+    "passed": true
+  },
+  {
+    "name": "python: public container has no network route",
+    "passed": true
+  },
+  {
+    "name": "python: public container has no private graders",
+    "passed": true
+  },
+  {
+    "name": "python: one validated member frozen",
+    "passed": true
+  },
+  {
+    "name": "python: declared partition retained",
+    "passed": true
+  },
+  {
+    "name": "python: release name immutable",
+    "passed": true
+  },
+  {
+    "name": "python: engine reference passes",
+    "passed": true
+  },
+  {
+    "name": "python: engine incomplete control fails",
+    "passed": true
+  },
+  {
+    "name": "python: provider spend zero",
+    "passed": true
+  },
+  {
+    "name": "python: exported solver bundle excludes hidden content",
+    "passed": true
+  },
+  {
+    "name": "python: private export deliberate and labeled",
+    "passed": true
+  },
+  {
+    "name": "python: share summary preserves fixture label",
+    "passed": true
+  },
+  {
+    "name": "python-invalid: local history identified",
+    "passed": true
+  },
+  {
+    "name": "python-invalid: repair discovered",
+    "passed": true
+  },
+  {
+    "name": "python-invalid: exact base reconstructed",
+    "passed": true
+  },
+  {
+    "name": "python: invalid test infrastructure quarantined",
+    "passed": true
+  },
+  {
+    "name": "python: no imported host execution tripwire",
+    "passed": true
+  },
+  {
+    "name": "node: local history identified",
+    "passed": true
+  },
+  {
+    "name": "node: repair discovered",
+    "passed": true
+  },
+  {
+    "name": "node: exact base reconstructed",
+    "passed": true
+  },
+  {
+    "name": "node: release blocked before validation",
+    "passed": true
+  },
+  {
+    "name": "node: preparation succeeded with failing lifecycle hook disabled",
+    "passed": true
+  },
+  {
+    "name": "node: prepared profile pinned",
+    "passed": true
+  },
+  {
+    "name": "node: admission valid",
+    "passed": true
+  },
+  {
+    "name": "node: three clean cycles retained",
+    "passed": true
+  },
+  {
+    "name": "node: historical and regression controls present",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 1 historical distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 1 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 1 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 1 historical collection stable",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 1 regression distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 1 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 1 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 1 regression collection stable",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 2 historical distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 2 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 2 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 2 historical collection stable",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 2 regression distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 2 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 2 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 2 regression collection stable",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 3 historical distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 3 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 3 historical real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 3 historical collection stable",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 3 regression distinguishes behavior",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 3 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 3 regression real tests",
+    "passed": true
+  },
+  {
+    "name": "node: cycle 3 regression collection stable",
+    "passed": true
+  },
+  {
+    "name": "node: outcome signatures stable across cycles",
+    "passed": true
+  },
+  {
+    "name": "node: no hidden or future material in public task",
+    "passed": true
+  },
+  {
+    "name": "node: starting source is the base",
+    "passed": true
+  },
+  {
+    "name": "node: public file tool agrees with snapshot",
+    "passed": true
+  },
+  {
+    "name": "node: private read rejected private.test.js",
+    "passed": true
+  },
+  {
+    "name": "node: private read rejected .git/HEAD",
+    "passed": true
+  },
+  {
+    "name": "node: hidden overwrite rejected",
+    "passed": true
+  },
+  {
+    "name": "node: public probe executed",
+    "passed": true
+  },
+  {
+    "name": "node: public container uses unprivileged UID",
+    "passed": true
+  },
+  {
+    "name": "node: public container source is read-only",
+    "passed": true
+  },
+  {
+    "name": "node: public container lacks Git history",
+    "passed": true
+  },
+  {
+    "name": "node: public container has no network route",
+    "passed": true
+  },
+  {
+    "name": "node: public container has no private graders",
+    "passed": true
+  },
+  {
+    "name": "node: one validated member frozen",
+    "passed": true
+  },
+  {
+    "name": "node: declared partition retained",
+    "passed": true
+  },
+  {
+    "name": "node: release name immutable",
+    "passed": true
+  },
+  {
+    "name": "node: engine reference passes",
+    "passed": true
+  },
+  {
+    "name": "node: engine incomplete control fails",
+    "passed": true
+  },
+  {
+    "name": "node: provider spend zero",
+    "passed": true
+  },
+  {
+    "name": "node: exported solver bundle excludes hidden content",
+    "passed": true
+  },
+  {
+    "name": "node: private export deliberate and labeled",
+    "passed": true
+  },
+  {
+    "name": "node: share summary preserves fixture label",
+    "passed": true
+  },
+  {
+    "name": "node-invalid: local history identified",
+    "passed": true
+  },
+  {
+    "name": "node-invalid: repair discovered",
+    "passed": true
+  },
+  {
+    "name": "node-invalid: exact base reconstructed",
+    "passed": true
+  },
+  {
+    "name": "node: invalid test infrastructure quarantined",
+    "passed": true
+  },
+  {
+    "name": "node: no imported host execution tripwire",
+    "passed": true
+  },
+  {
+    "name": "packs: versioned three-example catalog",
+    "passed": true
+  },
+  {
+    "name": "packs: hidden disclosure acknowledgement required",
+    "passed": true
+  },
+  {
+    "name": "packs: local content identity verified",
+    "passed": true
+  },
+  {
+    "name": "packs: staged content not admitted",
+    "passed": true
+  },
+  {
+    "name": "packs: reviewed controls passed",
+    "passed": true
+  },
+  {
+    "name": "packs: export preserves exact content digest",
+    "passed": true
+  },
+  {
+    "name": "packs: fresh workspace does not trust previous approval",
+    "passed": true
+  },
+  {
+    "name": "packs: independent workspace admission succeeds",
+    "passed": true
+  },
+  {
+    "name": "packs: content tampering rejected",
+    "passed": true
+  },
+  {
+    "name": "packs: nondiscriminating controls remain staged",
+    "passed": true
+  },
+  {
+    "name": "demo: no providers or Docker requested",
+    "passed": true
+  },
+  {
+    "name": "demo: all-domain evidence flow completed",
+    "passed": true
+  },
+  {
+    "name": "demo: audit valid",
+    "passed": true
+  },
+  {
+    "name": "workspace: audit chain valid",
+    "passed": true
+  },
+  {
+    "name": "workspace: dedicated acceptance worker stopped",
+    "passed": true
+  },
+  {
+    "name": "runtime: no owned grading containers retained",
+    "passed": true
+  }
+]

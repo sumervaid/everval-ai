@@ -249,7 +249,7 @@ def _documents() -> Collection:
         {
             "id": "contract-notice",
             "name": "Read a contract notice requirement",
-            "instruction": "Extract renewal notice days, accepted delivery method, and the cancellation consequence. Return notice_days, delivery, consequence, and citations with source_id and an exact supporting quote.",
+            "instruction": "Extract the binding renewal-notice requirements. Return notice_days as an integer, delivery as a string, consequence as a string, and citations as an array of objects with string source_id and quote fields. For delivery, copy only the delivery-method noun phrase from the binding source in lowercase, without an article or final punctuation. For consequence, copy only the lowercase time expression saying when a late notice takes effect; omit leading prepositions and articles, and omit sentence punctuation. Do not return a full sentence in either string. Quotes must be exact source substrings with their original casing. Cite the binding source. Additional output fields are ignored.",
             "sources": [
                 {
                     "id": "agreement-7",
@@ -296,7 +296,7 @@ def _documents() -> Collection:
         {
             "id": "incident-obligations",
             "name": "Identify incident response obligations",
-            "instruction": "Read the incident policy. Return notify_within_hours, notify_role, required_records (alphabetically sorted), and citations containing source_id and an exact quote. Use only mandatory requirements.",
+            "instruction": "Read the incident policy using only mandatory requirements. Return notify_within_hours as an integer; notify_role as the exact lowercase role noun phrase from the policy, without an article; required_records as an alphabetically sorted array of the exact lowercase record-field phrases from the policy; and citations as an array of objects containing string source_id and quote fields. Quotes must be exact policy substrings with their original casing. Do not add explanations or punctuation to the role or record-field strings. Additional output fields are ignored.",
             "sources": [
                 {
                     "id": "security-policy",
@@ -343,7 +343,7 @@ def _documents() -> Collection:
         {
             "id": "retention-conflict",
             "name": "Apply a legal-hold exception",
-            "instruction": "Decide whether a 100-day-old support transcript under an active legal hold can be deleted. Return can_delete, reason_code ('legal_hold' or 'retention_elapsed'), policy_owner, and citations with exact quotes.",
+            "instruction": "Decide whether the support transcript described in the sources can be deleted under the retention policy. Return can_delete as a JSON boolean, reason_code as exactly 'legal_hold' or 'retention_elapsed', policy_owner as a string, and citations as an array of objects with string source_id and quote fields. Copy policy_owner exactly from the value after 'Policy owner:' in the case source, preserving its casing and omitting terminal punctuation. Include at least one citation to the policy source and at least one to the case source; every quote must be an exact substring of its cited source. Additional output fields are ignored.",
             "sources": [
                 {
                     "id": "retention",
@@ -406,7 +406,7 @@ def _documents() -> Collection:
         name="Evidence and policy reading",
         domain="documents",
         description="Three invented document tasks with exact facts and source checks; citation checks do not establish semantic entailment.",
-        version="1.0.0",
+        version="1.1.0",
         created_at=_CREATED,
         scenarios=scenarios,
     )
@@ -418,7 +418,7 @@ def _data() -> Collection:
             "data-invoice-reconciliation",
             "Reconcile purchase orders and invoices",
             "data",
-            "All amounts are integer cents. Match invoices to purchase orders by po_id. Flag duplicate invoice IDs after their first occurrence; exclude duplicates and invoices with an amount mismatch from payable_total_cents. Return payable_total_cents, approved_invoice_ids, duplicate_invoice_ids, and mismatch_invoice_ids, each ID list sorted.",
+            "All amounts are integer cents. Match invoices to purchase orders by po_id. Flag duplicate invoice IDs after their first occurrence; exclude duplicates and invoices with an amount mismatch from payable_total_cents. Return payable_total_cents as an integer and approved_invoice_ids, duplicate_invoice_ids, and mismatch_invoice_ids as arrays of strings. Each array must contain each applicable ID once, sorted lexicographically, preserving the input ID spelling and casing. An eligible first occurrence remains approved even if a later duplicate is excluded. Additional output fields are ignored.",
             {
                 "purchase_orders": [
                     {"id": "PO-1", "amount_cents": 12500},
@@ -478,7 +478,7 @@ def _data() -> Collection:
             "data-weighted-service-level",
             "Calculate request-weighted success",
             "data",
-            "Calculate total requests, successful requests, and overall success_rate from these shards. Do not average shard percentages. Return total_requests, successful_requests, success_rate (fraction 0..1), and meets_target for a target of at least 0.98.",
+            "Calculate total requests, successful requests, and overall success_rate from these shards. Do not average shard percentages. Return total_requests and successful_requests as integers, success_rate as a JSON number representing a fraction from 0 to 1 accurate within 0.000001, and meets_target as a JSON boolean for a target of at least 0.98. Do not return numeric strings or a percentage. Additional output fields are ignored.",
             {
                 "shards": [
                     {"name": "east", "requests": 900, "successful": 891},
@@ -526,7 +526,7 @@ def _data() -> Collection:
             "data-customer-deduplication",
             "Normalize and deduplicate customer rows",
             "data",
-            "Normalize email with trim and lowercase. For each normalized email, keep the row with the greatest updated_at ISO date. Return customers sorted by email, each with email and plan; also return input_rows and unique_customers.",
+            "Normalize email with trim and lowercase. For each normalized email, keep the row with the greatest updated_at ISO date. Return customers as an array sorted by normalized email. Each customer object must contain exactly email and plan, both strings: use the normalized email and copy plan from the selected row with its original spelling and casing. Do not include updated_at or other fields inside customer objects. Also return input_rows and unique_customers as integers. Additional top-level output fields are ignored.",
             {
                 "rows": [
                     {"email": " A@Example.com ", "plan": "basic", "updated_at": "2026-01-01"},
@@ -575,7 +575,7 @@ def _data() -> Collection:
         name="Structured data decisions",
         domain="data",
         description="Three invented reconciliation and aggregation tasks with independently specified numeric and membership checks.",
-        version="1.0.0",
+        version="1.1.0",
         created_at=_CREATED,
         scenarios=scenarios,
     )
@@ -587,7 +587,7 @@ def _workflow() -> Collection:
             "workflow-refund-approval",
             "Route a refund requiring approval",
             "workflow",
-            "Simulate this refund request. Return the complete final_state and ordered actions. A requested refund above 5000 cents needs manager approval before any payout. No approval has been given. The customer record must remain unchanged.",
+            "Simulate the refund request using the event and approvals. Return final_state containing ticket, refund, and customer, and actions as an ordered array of action-name strings. Preserve every existing field in each state object; do not add or remove fields. A requested refund above 5000 cents requires manager approval before payout. If that approval is required but absent, set both ticket.status and refund.status to 'pending_approval', leave refund.paid_cents unchanged, and return only the action 'request_manager_approval'. Otherwise set ticket.status to 'closed', refund.status to 'paid', refund.paid_cents to the requested integer amount, and return only the action 'pay_refund'. Keep ticket.id and the entire customer record unchanged. Use these exact lowercase status and action names; actions are strings, not objects, and must not include extra bookkeeping actions. Additional top-level output fields are ignored.",
             {
                 "initial_state": {
                     "ticket": {"id": "T-10", "status": "open"},
@@ -651,7 +651,7 @@ def _workflow() -> Collection:
             "workflow-stock-reservation",
             "Handle a duplicate reservation event",
             "workflow",
-            "Process the incoming reservation event exactly once. If its event_id is already in processed_events, keep all state unchanged and return actions=['ignore_duplicate']. Otherwise reserve the requested quantity only when stock is sufficient. Return complete final_state and actions.",
+            "Process the incoming reservation event exactly once. Return complete final_state and actions as an ordered array of action-name strings. Preserve the state's existing fields and their types: available and reserved are integers, processed_events is an array of event-ID strings. If event_id is already in processed_events, keep all state unchanged, including ledger order, and return actions=['ignore_duplicate']. Otherwise, when stock is sufficient, subtract quantity from available, add it to reserved, append event_id to processed_events, and return actions=['reserve_stock']. If stock is insufficient, keep state unchanged and return actions=['reject_insufficient_stock']. Use the exact action strings, not objects; do not add state fields or extra actions. Additional top-level output fields are ignored.",
             {
                 "initial_state": {"available": 6, "reserved": 4, "processed_events": ["E-1"]},
                 "event": {"event_id": "E-1", "quantity": 4},
@@ -700,7 +700,7 @@ def _workflow() -> Collection:
             "workflow-access-expiration",
             "Revoke an expired temporary grant",
             "workflow",
-            "At current_time, revoke temporary grants whose expires_at is at or before current_time. Preserve active and permanent grants. Return final_state.grants in the input order and actions containing revoke:<id> for revoked grants.",
+            "At current_time, revoke temporary grants whose expires_at is at or before current_time. An expires_at value of null denotes a permanent grant. Preserve unexpired and permanent grants. Return final_state.grants as an array in input order; preserve every grant object's existing keys and values except set status to the exact lowercase string 'revoked' for an expired grant. Do not add metadata fields or reformat timestamps. Return actions as an array of strings, one 'revoke:<id>' per revoked grant in input order, substituting its unchanged ID. Do not return action objects or extra actions. Additional top-level output fields are ignored.",
             {
                 "current_time": "2026-03-01T12:00:00Z",
                 "initial_state": {
@@ -755,7 +755,7 @@ def _workflow() -> Collection:
         name="Business workflow simulations",
         domain="workflow",
         description="Three final-state simulations. They do not connect to live applications or verify actual tool actions.",
-        version="1.0.0",
+        version="1.1.0",
         created_at=_CREATED,
         scenarios=scenarios,
     )

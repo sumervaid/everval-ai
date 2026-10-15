@@ -6,6 +6,8 @@ Everval AI turns an organization's real work into validated benchmarks and repea
 
 Source is maintained in this **private repository**. Workspaces, repository mirrors, hidden graders, model traces, and credentials stay outside Git.
 
+The [0.3.1 verification record](docs/verification.md) separates installation controls, live-provider evidence, and deployment limits. Follow the [release acceptance procedure](docs/release-acceptance.md) or inspect the [dated evidence record](docs/evidence/2026-10-15/README.md).
+
 ## Try it without a model key
 
 After `uv sync --frozen`, run:
@@ -73,7 +75,9 @@ The product extends benchmark execution with reviewed task creation, versioned e
 
 These capabilities are implemented in Everval. Read the [methodology and design](docs/METHODOLOGY.md) for the principles connecting them. Everval supports Python and JavaScript/TypeScript repository validation, offline private dependencies, and one local workspace with optional authenticated browser roles. See [delivery status and deployment boundaries](docs/PLAN.md).
 
-![Everval AI terminal workbench with the original starter workspace](docs/assets/terminal.png)
+![Everval AI Autopilot view displaying a paused installation-control policy](docs/assets/autopilot.png)
+
+*The terminal workbench, displaying original installation controls.*
 
 ## Start in the terminal
 
@@ -129,6 +133,8 @@ Live duration covers the complete attempt, with separate submission, provider, t
 
 The four original starter collections contain 19 scenarios. Their reference and incomplete controls verify installation; their results are **not model performance measurements**. No paid model calls are needed for the test suite.
 
+The document, data, and workflow starter collections are version 1.1.0. Their nine structured tasks publish the required output types, casing, citations, ordering, and state transitions in the task itself. Existing frozen experiments retain their original contracts.
+
 ## Choose a guide
 
 | Task | Guide |
@@ -146,6 +152,7 @@ The four original starter collections contain 19 scenarios. Their reference and 
 | Interpret evidence and set a gate | [Results](docs/results.md), [cost and latency](docs/cost-latency.md), [quality policies](docs/policies.md) |
 | Operate and recover a local workspace | [Operations](docs/operations.md) |
 | Understand implementation and scope | [Methodology](docs/METHODOLOGY.md), [architecture](docs/ARCHITECTURE.md), [interfaces](docs/INTERFACES.md), [delivery status](docs/PLAN.md) |
+| Verify an installed release | [Release acceptance](docs/release-acceptance.md), [verification record](docs/verification.md), [dated evidence](docs/evidence/2026-10-15/README.md) |
 | Develop or contribute | [Contributing](CONTRIBUTING.md) |
 
 ## Storage and network

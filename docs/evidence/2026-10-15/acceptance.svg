@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300" role="img" aria-labelledby="title description">
+  <title id="title">Everval AI 0.3.1 installed-product acceptance</title>
+  <desc id="description">135 repository and pack checks, 21 runtime and GitHub checks, and 12 terminal views were exercised. Original controlled workloads on one host. See the dated evidence record for scope and results.</desc>
+  <rect x="1" y="1" width="958" height="298" rx="18" fill="#0d1722" stroke="#2b4050" stroke-width="2"/>
+  <path d="M19 1h5v298h-5a18 18 0 0 1-18-18V19A18 18 0 0 1 19 1Z" fill="#83d7c7"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <text x="52" y="49" fill="#83d7c7" font-size="13" font-weight="600" letter-spacing="2">EVERVAL AI · INSTALLED PRODUCT</text>
+    <text x="52" y="87" fill="#e4edf2" font-size="28" font-weight="600">Release acceptance, with retained evidence</text>
+    <rect x="798" y="31" width="110" height="35" rx="17" fill="#17382f" stroke="#315b50"/>
+    <text x="853" y="54" fill="#a2e5d5" font-size="15" font-weight="600" text-anchor="middle">v0.3.1</text>
+    <path d="M52 112H908" stroke="#2b4050"/>
+    <text x="52" y="178" fill="#e4edf2" font-size="48" font-weight="600">135</text>
+    <text x="52" y="207" fill="#a9bcc9" font-size="16">Repository &amp; pack checks</text>
+    <path d="M338 137v78M623 137v78" stroke="#2b4050"/>
+    <text x="366" y="178" fill="#e4edf2" font-size="48" font-weight="600">21</text>
+    <text x="366" y="207" fill="#a9bcc9" font-size="16">Runtime &amp; GitHub checks</text>
+    <text x="652" y="178" fill="#e4edf2" font-size="48" font-weight="600">12</text>
+    <text x="652" y="207" fill="#a9bcc9" font-size="16">Terminal views exercised</text>
+    <path d="M52 233H908" stroke="#2b4050"/>
+    <text x="52" y="266" fill="#839baa" font-size="13">15 OCT 2026 · Original controls · One host · Explicit deployment limits</text>
+    <text x="908" y="266" fill="#83d7c7" font-size="13" text-anchor="end">Evidence record →</text>
+  </g>
+</svg>

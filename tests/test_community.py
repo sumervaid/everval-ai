@@ -249,3 +249,15 @@ def test_schema_and_aggregate_control_work_are_bounded() -> None:
     scenario["reference_output"] = {"large": list(range(2000))}
     with pytest.raises(ValueError, match="work budget"):
         parse_pack(encode(value))
+
+
+def test_tiny_multiple_of_cannot_overflow_automatic_grading() -> None:
+    from cvals.pure_checks import assert_pure_work
+
+    value = packed()
+    scenario = value["collection"]["scenarios"][0]
+    scenario["checks"][0]["expected"] = {"type": "number", "multipleOf": 1e-308}
+    with pytest.raises(ValueError, match="unsupported or unbounded"):
+        parse_pack(encode(value))
+    with pytest.raises(ValueError, match="unsupported or unbounded"):
+        assert_pure_work(scenario, {"net_revenue": 1e308})

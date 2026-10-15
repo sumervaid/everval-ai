@@ -73,8 +73,10 @@ ModalScreen { align: center middle; background: #061019 75%; }
 .dialog-description { height: auto; max-height: 5; color: $ev-muted; margin-bottom: 1; }
 #form-fields { height: 1fr; min-height: 3; max-height: 24; }
 .field-label { height: 1; color: $ev-paper; margin-top: 1; }
-Input, Select { width: 100%; height: 3; background: $ev-ink; border: tall $ev-line; }
-Input:focus { border: tall $ev-teal; }
+Input, Select { width: 100%; height: 3; background: $ev-ink; }
+Select { border: none; }
+Input, SelectCurrent { background: $ev-ink; border: tall $ev-line; }
+Input:focus, Select:focus > SelectCurrent { border: tall $ev-teal; }
 TextArea { height: 6; background: $ev-ink; border: solid $ev-line; }
 SelectionList { height: 7; background: $ev-ink; border: solid $ev-line; }
 #form-error { height: auto; max-height: 3; color: #f1b2a3; }

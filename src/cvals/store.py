@@ -312,7 +312,7 @@ class Store:
             "systems": systems,
             "repetitions": request.repetitions,
             "budget_usd": request.budget_usd,
-            "harness_revision": "everval/0.3.0",
+            "harness_revision": "everval/0.3.1",
             "grader_revision": "deterministic/1",
             "sandbox_image_requested": self.settings.sandbox_image,
             "protocol": "all scheduled trials; no automatic provider retries",
@@ -814,7 +814,10 @@ class Store:
             count = 0
             for row in rows:
                 id = row["id"]
-                _, state = self._read_experiment(connection, id)
+                snapshot, state = self._read_experiment(connection, id)
+                live_systems = {
+                    system["id"] for system in snapshot["systems"] if system["kind"] == "http"
+                }
                 for trial_row in connection.execute(
                     "SELECT data FROM trials WHERE experiment_id=? AND status='running'", (id,)
                 ).fetchall():
@@ -830,7 +833,9 @@ class Store:
                             finished_at=trial["finished_at"],
                             error=trial["error"],
                         )
-                    if trial["reserved_cost_usd"] > 0:
+                    # A zero configured price does not establish complete usage
+                    # after process loss. Retain uncertainty for every live call.
+                    if trial["reserved_cost_usd"] > 0 or trial["system_id"] in live_systems:
                         state["budget_uncertain"] = True
                     self._save_trial(connection, trial)
                 state["completed_trials"] = connection.execute(

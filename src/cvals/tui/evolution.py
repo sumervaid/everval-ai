@@ -260,7 +260,7 @@ class EvolutionMixin:
         dev = [
             (plain(c["name"]), c["id"])
             for c in collections
-            if c.get("benchmark_partition") not in {"holdout", "all"}
+            if c.get("benchmark_partition") == "dev"
         ]
         holdout = [
             (plain(c["name"]), c["id"])
@@ -272,8 +272,8 @@ class EvolutionMixin:
             self.human_evidence(
                 "Prepare an optimization study",
                 {
-                    "required": "A development collection, a disjoint unused holdout collection, and saved live systems.",
-                    "next_step": "Register candidate model, prompt, or harness configurations as Systems; freeze a separate holdout before starting.",
+                    "required": "A collection explicitly marked development, a disjoint unused holdout collection, and saved live systems.",
+                    "next_step": "Register candidate configurations as Systems; declare dev and holdout collection partitions and freeze the separate holdout before starting.",
                     "scope": "The study evaluates explicit candidates and produces a proposal for review. It does not deploy changes.",
                 },
             )

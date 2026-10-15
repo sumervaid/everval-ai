@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.1 — 2026-10-15
+
+- Retained unknown usage after interrupted HTTP attempts even when configured token prices are zero, preventing recovery from treating an uncertain charge as free.
+- Required an explicitly declared development collection in the terminal optimization form, matching the protected-holdout admission contract.
+- Rejected `multipleOf` in automatically reviewed pure JSON schemas to close a floating-point overflow path in bounded grading.
+- Fixed clipped terminal selection controls; selected values and keyboard changes remain visible at wide and narrow terminal sizes.
+- Clarified public output contracts for all nine structured starter tasks. Document, data, and workflow collections advance to 1.1.0; existing frozen experiments retain their previous task definitions.
+- Added repeatable installed-wheel acceptance across repository admission, automation, CLI, tmux, API, browser roles, and blind review, with separate opt-in live-provider procedures and retained evidence.
+
+See the [release acceptance procedure](docs/release-acceptance.md), [verification record](docs/verification.md), and [dated evidence summary](docs/evidence/2026-10-15/summary.json) for executed checks, costs, and limits. Earlier live results from ambiguous starter contracts are retained for diagnosis and lifecycle evidence; the entire earlier cohort is excluded from quality claims.
+
 ## 0.3.0 — 2026-10-14
 
 - Added opt-in Autopilot with periodic/change observations, frozen screening cohorts, bounded escalation, cumulative reservations and retained automatic investigations.
