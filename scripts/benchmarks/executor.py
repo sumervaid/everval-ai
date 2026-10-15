@@ -23,6 +23,8 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
+from . import repository_setup
+
 MINI_REVISION = "a83fcae82d2a08f0ee0c688f9d137b3566c097f8"
 SWEBENCH_REVISION = "02e7a74ffd0b707aab73d203fe87bdc7c76afc8e"
 SUBMIT_MARKER = "COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT"
@@ -404,7 +406,7 @@ class DockerSandbox:
             raise SandboxFailure(result["exception_info"])
         return result
 
-    def prepare_solver(self, base_commit: str) -> None:
+    def prepare_solver(self, base_commit: str, *, remove_repository_setup: bool = False) -> None:
         if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
             raise ValueError("Invalid frozen base commit")
         command = (
@@ -422,10 +424,24 @@ class DockerSandbox:
             "chmod -R a+rwX /testbed /tmp/everval-home\n"
             "rm -f /eval.sh /tmp/patch.diff /tmp/test.patch /tmp/gold.patch\n"
         )
+        if remove_repository_setup:
+            command += (
+                "rm -f /opt/everval-repository-setup.py "
+                "/opt/everval-provenance/repository-setup.json "
+                "/opt/everval-provenance/repository-setup.diff\n"
+            )
         result = self.shell(command, user="0:0", timeout=120)
         if result["returncode"]:
             raise SandboxFailure("Could not prepare a history-free solver checkout")
         self.verify_solver_boundary()
+        if remove_repository_setup:
+            removed = self.shell(
+                "test ! -e /opt/everval-repository-setup.py && "
+                "test ! -e /opt/everval-provenance/repository-setup.json && "
+                "test ! -e /opt/everval-provenance/repository-setup.diff"
+            )
+            if removed["returncode"]:
+                raise SandboxFailure("Repository setup artifacts remain visible to the solver")
 
     def verify_solver_boundary(self) -> None:
         result = self.shell(
@@ -442,7 +458,11 @@ class DockerSandbox:
             raise SandboxFailure("Solver isolation preflight failed")
 
     def put_file(self, source: Path, destination: str) -> None:
-        if destination not in {"/tmp/everval-patch.diff", "/tmp/everval-eval.sh"}:
+        if destination not in {
+            "/tmp/everval-patch.diff",
+            "/tmp/everval-eval.sh",
+            "/tmp/everval-repository-setup.py",
+        }:
             raise ValueError("Unsupported evaluator destination")
         with source.open("rb") as stream:
             material = stream.read(MAX_PATCH_BYTES + 1)
@@ -621,7 +641,10 @@ def run_attempt(
     }
     try:
         sandbox.start()
-        sandbox.prepare_solver(task["base_commit"])
+        if repository_setup.profile(task["instance_id"], task["base_commit"]) is None:
+            sandbox.prepare_solver(task["base_commit"])
+        else:
+            sandbox.prepare_solver(task["base_commit"], remove_repository_setup=True)
         result.update(agent.run(task=task["problem_statement"]))
     except BaseException as exc:
         result.update(exit_status=type(exc).__name__, error_type=type(exc).__name__)
@@ -738,6 +761,57 @@ def setup_error_signals(output: str) -> list[str]:
     return sorted(name for name, pattern in patterns.items() if re.search(pattern, prefix))
 
 
+def restore_grader_configuration(
+    sandbox: DockerSandbox, task: dict[str, Any], output_dir: Path
+) -> dict[str, str] | None:
+    selected = repository_setup.profile(task["instance_id"], task["base_commit"])
+    if selected is None:
+        return None
+    helper = Path(repository_setup.__file__).read_bytes()
+    staged = output_dir / "repository-setup.py"
+    staged.write_bytes(helper)
+    staged.chmod(0o600)
+    sandbox.put_file(staged, "/tmp/everval-repository-setup.py")
+    applied = sandbox.shell(
+        "/opt/miniconda3/envs/testbed/bin/python -I -S /tmp/everval-repository-setup.py "
+        "apply --instance-id "
+        + selected["instance_id"]
+        + " --base-commit "
+        + selected["base_commit"],
+        user="0:0",
+        timeout=120,
+    )
+    if applied["returncode"]:
+        raise SandboxFailure("Could not restore verified upstream grader configuration")
+    evidence = json.loads(applied["output"])
+    if (
+        not isinstance(evidence, dict)
+        or set(evidence)
+        != {
+            "revision",
+            "helper_sha256",
+            "patch_sha256",
+            "manifest_sha256",
+            "source_dockerfile_sha256",
+        }
+        or evidence.get("revision") != repository_setup.REVISION
+        or evidence.get("helper_sha256") != _digest(helper)
+        or evidence.get("source_dockerfile_sha256") != selected["source_dockerfile_sha256"]
+        or any(
+            not isinstance(evidence.get(key), str)
+            or re.fullmatch(r"[0-9a-f]{64}", evidence[key]) is None
+            for key in (
+                "helper_sha256",
+                "patch_sha256",
+                "manifest_sha256",
+                "source_dockerfile_sha256",
+            )
+        )
+    ):
+        raise SandboxFailure("Verified grader configuration evidence differs")
+    return evidence
+
+
 def grade_patch(
     *,
     task: dict[str, Any],
@@ -810,6 +884,9 @@ def grade_patch(
             if apply["returncode"]:
                 result["status"] = "invalid_patch"
                 return result
+        configuration = restore_grader_configuration(sandbox, task, output_dir)
+        if configuration is not None:
+            result["repository_setup"] = configuration
         sandbox.put_file(eval_path, "/tmp/everval-eval.sh")
         execution = sandbox.shell(
             "bash /tmp/everval-eval.sh", user="0:0", timeout=timeout, max_bytes=16 * 1024 * 1024

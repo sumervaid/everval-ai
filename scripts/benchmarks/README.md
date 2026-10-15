@@ -2,7 +2,7 @@
 
 This optional research runner compares an upstream coding-agent workflow with one explicit review checkpoint on a frozen SWE-bench Lite cohort. It uses Everval's local evidence and accounting conventions with the official SWE-bench grading contract. It is separate from the curated-task TUI runtime. Evaluation operators can use it to compare whether one review checkpoint changes successful repairs and recorded cost on this cohort. Adoption decisions still need their own authorized tasks; see the [enterprise use cases](../../docs/use-cases.md).
 
-Read the [frozen protocol](../../docs/benchmarks/public-repositories-2026-10-15/methodology.md) before interpreting a score. This is a small native ARM pilot, not an official leaderboard submission.
+Read the [frozen protocol](../../docs/benchmarks/public-repositories-2026-10-15/methodology.md) before interpreting a score. This is a small native ARM pilot, not an official leaderboard submission. Model comparison results remain pending.
 
 ## What you need
 
@@ -12,6 +12,8 @@ Read the [frozen protocol](../../docs/benchmarks/public-repositories-2026-10-15/
 - An OpenAI credential only when you reach the explicit paid phase.
 
 Historical dependency builds can take substantial time. Identical Conda requirements share a build stage, while task-specific pip installs and repository setup retain their order. Preparation also captures a local wheelhouse so the evaluator can install required build tooling offline. Package manifests, wheel hashes, and image identities are retained; mutable package indexes mean a later rebuild is not guaranteed to produce identical image bytes.
+
+For the four Sphinx tasks, preparation verifies installation changes to configuration against the pinned recipe and original source, records their hashes, and restores a clean starting point. Unexpected tracked changes fail preparation. The solver cannot access the retained setup artifacts. A fresh grader restores the verified configuration before running the unchanged official evaluation script; source, artifact, and image hashes retain its provenance.
 
 ## 1. Prepare the frozen tasks and tooling
 
@@ -29,7 +31,15 @@ The default Docker context must resolve to a local Unix socket. Set `CVALS_DOCKE
 
 Task rows, reference repairs, hidden tests, downloaded sources, dependency environments, and build logs remain in the private directory. Repository installation and tests execute inside Docker; the host runs trusted orchestration and grading tools.
 
-Every selected task remains in the manifest, including failed preparation. Use an explicit retry option to repair preparation while preserving earlier build evidence. Do not replace a difficult task with another.
+Every selected task remains in the manifest, including failed preparation. Use `--retry-failed` to retry a failed build. For a reviewed preparation repair to an already prepared image, use `--rebuild` with an explicit task ID:
+
+```sh
+uv run --locked --script scripts/benchmarks/prepare.py \
+  --output-dir "$benchmark_dir" build \
+  --instance-id sphinx-doc__sphinx-11445 --rebuild
+```
+
+Both options preserve earlier build evidence. Run controls again for the new image before freezing. Do not replace a difficult task with another.
 
 ## 2. Validate controls and freeze the campaign
 
@@ -88,6 +98,8 @@ A started attempt is never silently rerun. Incomplete and failed attempts stay i
 ```
 
 The exporter includes task identities, configuration hashes, per-task outcomes, matched differences, conservative provider cost, and solver elapsed time, including solver setup and cleanup but excluding grading. Exclusions remain in the original denominator. Failed-attempt spending contributes to cost per resolved task. Incomplete accounting prevents a cost-per-success claim.
+
+Parsed status counts are diagnostic: pytest's own tests can print deliberate failures from nested runs. Interpret required test identities alongside the actual test-command exit code; those counts do not measure the outer suite's failure total.
 
 Review the summary before publishing it. Raw task text, patches, private grading material, and trajectories are not included in this export. Public benchmark tasks can have appeared in training data. The cohort has 12 test tasks and 3 separate development tasks, with one attempt per arm; it cannot establish repeatability or broad superiority.
 

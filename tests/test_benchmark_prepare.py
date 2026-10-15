@@ -9,7 +9,7 @@ import json
 import os
 import sys
 from pathlib import Path
-from types import ModuleType
+from types import ModuleType, SimpleNamespace
 
 import pytest
 
@@ -739,14 +739,25 @@ def test_declared_backends_get_pinned_absent_only_fallbacks(prepare, monkeypatch
 
 
 def test_required_backend_is_bound_to_task_recipe(prepare, tmp_path):
-    source = tmp_path / "sphinx-doc__sphinx-11445"
+    assert prepare.required_backends("sphinx-doc__sphinx-11445") == ("flit-core",)
+    assert "NEEDED_BACKENDS = ('flit-core',)" in prepare.wheelhouse_script(
+        "sphinx-doc__sphinx-11445"
+    )
+    source = tmp_path / "pytest-dev__pytest-11148"
     _shared_recipe_fixture(source, ("idna==3.10",))
     _, scripts, provenance = prepare.adapt(source)
-    assert "NEEDED_BACKENDS = ('flit-core',)" in scripts["prepare-wheelhouse.py"]
-    assert provenance["offline_build_wheels"]["required_backends"] == ["flit-core"]
+    assert "NEEDED_BACKENDS = ('setuptools-scm',)" in scripts["prepare-wheelhouse.py"]
+    assert provenance["offline_build_wheels"]["required_backends"] == ["setuptools-scm"]
     assert provenance["build_scripts"]["prepare-wheelhouse.py"] == prepare.digest(
         scripts["prepare-wheelhouse.py"].encode()
     )
+
+
+def test_sphinx_adaptation_rejects_an_unverified_recipe(prepare, tmp_path):
+    source = tmp_path / "sphinx-doc__sphinx-11445"
+    _shared_recipe_fixture(source, ("idna==3.10",))
+    with pytest.raises(ValueError, match="recipe differs"):
+        prepare.adapt(source)
 
 
 def test_pinned_backend_artifact_hash_is_checked_before_manifest(prepare, tmp_path, monkeypatch):
@@ -769,3 +780,187 @@ def test_pinned_backend_artifact_hash_is_checked_before_manifest(prepare, tmp_pa
     namespace["main"]()
     result = json.loads((tmp_path / "opt/everval-provenance/offline-wheels.json").read_text())
     assert result["verified_pinned_backend_artifacts"][0]["sha256"] == pin["sha256"]
+
+
+@pytest.fixture
+def cached_preparation(prepare, tmp_path, monkeypatch):
+    task = {"instance_id": "sphinx-doc__sphinx-11445", "task_sha256": "1" * 64}
+    earlier = {"preparation_status": "failed", "reason": "retained earlier attempt"}
+    existing = {
+        "selection_sha256": prepare.SELECTION_SHA,
+        "task_sha256": task["task_sha256"],
+        "preparation_status": "ready",
+        "cleanup_complete": True,
+        "image_id": "sha256:" + "2" * 64,
+        "artifacts": "runtime-builds/old",
+        "previous_preparations": [earlier],
+    }
+    directory = tmp_path / existing["artifacts"]
+    directory.mkdir(parents=True)
+    (directory / "build.log").write_bytes(b"retained original build evidence")
+    (directory / "preparation.json").write_text(json.dumps(existing))
+    prepare.atomic_json(tmp_path / "runtime-images.json", {task["instance_id"]: existing})
+    monkeypatch.setattr(prepare, "selection", lambda root: {"tasks": [task]})
+    inspected = []
+
+    def inspect(command, **kwargs):
+        inspected.append(command)
+        return SimpleNamespace(returncode=0, stdout=existing["image_id"] + " arm64", stderr="")
+
+    monkeypatch.setattr(prepare.subprocess, "run", inspect)
+    arguments = SimpleNamespace(
+        command="build",
+        instance_id=[task["instance_id"]],
+        timeout_seconds=60,
+        docker_host="unix:///tmp/test-docker.sock",
+        retry_failed=False,
+        rebuild=False,
+    )
+    return task, existing, arguments, inspected
+
+
+def test_explicit_rebuild_retains_history_and_original_artifacts(
+    prepare, tmp_path, monkeypatch, cached_preparation
+):
+    task, existing, arguments, inspected = cached_preparation
+    arguments.rebuild = True
+    old_artifacts = {
+        file: file.read_bytes() for file in (tmp_path / existing["artifacts"]).iterdir()
+    }
+    calls = []
+
+    def build(root, selected, prefix, timeout):
+        calls.append(selected["instance_id"])
+        assert inspected == [
+            [
+                "docker",
+                "--host",
+                arguments.docker_host,
+                "image",
+                "inspect",
+                "--format",
+                "{{.Id}} {{.Architecture}}",
+                existing["image_id"],
+            ]
+        ]
+        assert not (root / "preparation-blocked.json").exists()
+        record = {
+            "preparation_status": "ready",
+            "cleanup_complete": True,
+            "image_id": "sha256:" + "3" * 64,
+            "ownership_token": "fresh-build",
+            "artifacts": "runtime-builds/new",
+        }
+        directory = root / record["artifacts"]
+        directory.mkdir(parents=True)
+        prepare.immutable(directory / "preparation.json", prepare.json_bytes(record))
+        prepare.immutable(
+            root / "preparation-blocked.json",
+            prepare.json_bytes({"ownership_token": record["ownership_token"]}),
+        )
+        return record
+
+    monkeypatch.setattr(prepare, "build_one", build)
+    assert prepare.execute(arguments, tmp_path) == 0
+    current = json.loads((tmp_path / "runtime-images.json").read_text())[task["instance_id"]]
+    assert calls == [task["instance_id"]]
+    assert current["image_id"] != existing["image_id"]
+    assert current["previous_preparations"] == [
+        *existing["previous_preparations"],
+        {key: value for key, value in existing.items() if key != "previous_preparations"},
+    ]
+    assert all(file.read_bytes() == original for file, original in old_artifacts.items())
+    assert (tmp_path / current["artifacts"] / "preparation.json").exists()
+    assert not (tmp_path / "preparation-blocked.json").exists()
+
+
+def test_rebuild_requires_explicit_selection_before_any_preparation(prepare, tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        prepare,
+        "selection",
+        lambda root: pytest.fail("Missing selector must fail before preparation"),
+    )
+    arguments = SimpleNamespace(command="build", instance_id=None, rebuild=True)
+    with pytest.raises(ValueError, match="--rebuild requires.*--instance-id"):
+        prepare.execute(arguments, tmp_path)
+    assert not (tmp_path / "runtime-images.json").exists()
+
+
+@pytest.mark.parametrize("retry_failed", [False, True])
+def test_ready_image_reuse_is_unchanged_without_rebuild(
+    prepare, tmp_path, monkeypatch, cached_preparation, retry_failed
+):
+    task, existing, arguments, inspected = cached_preparation
+    arguments.retry_failed = retry_failed
+    before = (tmp_path / "runtime-images.json").read_bytes()
+    monkeypatch.setattr(
+        prepare, "build_one", lambda *args: pytest.fail("Ready images require explicit --rebuild")
+    )
+    assert prepare.execute(arguments, tmp_path) == 0
+    assert len(inspected) == 1
+    assert (tmp_path / "runtime-images.json").read_bytes() == before
+
+
+@pytest.mark.parametrize(
+    "returncode,identity",
+    [(1, ""), (0, "sha256:" + "4" * 64 + " arm64"), (0, "sha256:" + "2" * 64 + " amd64")],
+)
+def test_rebuild_cannot_bypass_existing_image_identity(
+    prepare, tmp_path, monkeypatch, cached_preparation, returncode, identity
+):
+    task, existing, arguments, inspected = cached_preparation
+    arguments.rebuild = True
+    before = (tmp_path / "runtime-images.json").read_bytes()
+    monkeypatch.setattr(
+        prepare.subprocess,
+        "run",
+        lambda *args, **kwargs: SimpleNamespace(returncode=returncode, stdout=identity, stderr=""),
+    )
+    monkeypatch.setattr(
+        prepare, "build_one", lambda *args: pytest.fail("Image mismatch must block rebuild")
+    )
+    with pytest.raises(ValueError, match="Cached image is missing or differs"):
+        prepare.execute(arguments, tmp_path)
+    assert (tmp_path / "runtime-images.json").read_bytes() == before
+
+
+@pytest.mark.parametrize("filename", ["campaign.json", "preparation-blocked.json"])
+def test_rebuild_cannot_bypass_frozen_or_unresolved_state(
+    prepare, tmp_path, monkeypatch, cached_preparation, filename
+):
+    task, existing, arguments, inspected = cached_preparation
+    arguments.rebuild = True
+    (tmp_path / filename).write_text("{}")
+    monkeypatch.setattr(
+        prepare, "build_one", lambda *args: pytest.fail("Blocked state must prevent rebuild")
+    )
+    with pytest.raises(ValueError, match="frozen|blocked"):
+        prepare.execute(arguments, tmp_path)
+    assert inspected == []
+
+
+def test_cli_rebuild_reaches_locked_execution_with_explicit_selector(
+    prepare, tmp_path, monkeypatch
+):
+    arguments = [
+        "prepare.py",
+        "--output-dir",
+        str(tmp_path),
+        "build",
+        "--instance-id",
+        "sphinx-doc__sphinx-11445",
+        "--rebuild",
+    ]
+    monkeypatch.setattr(sys, "argv", arguments)
+    monkeypatch.setattr(prepare, "private_root", lambda value: tmp_path)
+
+    def execute(parsed, root):
+        assert parsed.rebuild is True
+        assert parsed.retry_failed is False
+        assert parsed.instance_id == ["sphinx-doc__sphinx-11445"]
+        with pytest.raises(ValueError, match="owns"), prepare.preparation_lock(root):
+            pytest.fail("CLI execution must retain the preparation lock")
+        return 0
+
+    monkeypatch.setattr(prepare, "execute", execute)
+    assert prepare.main() == 0

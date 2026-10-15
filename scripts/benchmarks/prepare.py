@@ -16,6 +16,7 @@ import copy
 import datetime as dt
 import fcntl
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -779,6 +780,27 @@ def adapt(source: Path, *, shared_conda: bool = True) -> tuple[str, dict[str, st
     text = text.replace("\n" + permission_command + "\n", "\nchmod -R a+rwX /testbed\n")
     offset = text.index("RUN <<")
     text = text[:offset] + resolver + text[offset:]
+    setup = None
+    helper_source = None
+    if source.name.startswith("sphinx-doc__sphinx-"):
+        helper_path = Path(__file__).with_name("repository_setup.py")
+        spec = importlib.util.spec_from_file_location("everval_repository_setup", helper_path)
+        if spec is None or spec.loader is None:
+            raise ValueError("Repository setup helper is unavailable")
+        helper = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(helper)
+        setup = helper.verify_recipe(source.name, original)
+        helper_source = helper_path.read_text()
+        text += (
+            "\nCOPY repository-setup.py /opt/everval-repository-setup.py\n"
+            "RUN chmod 600 /opt/everval-repository-setup.py && "
+            "/opt/miniconda3/envs/testbed/bin/python -I -S /opt/everval-repository-setup.py "
+            "capture-reset --instance-id "
+            + source.name
+            + " --base-commit "
+            + setup["base_commit"]
+            + "\n"
+        )
     text += (
         "\nCOPY prepare-wheelhouse.py /opt/everval-prepare-wheelhouse.py\n"
         "RUN /opt/miniconda3/envs/testbed/bin/python /opt/everval-prepare-wheelhouse.py && "
@@ -804,6 +826,8 @@ def adapt(source: Path, *, shared_conda: bool = True) -> tuple[str, dict[str, st
         scripts[name] = "\n".join(body) + "\n"
         output.extend([f"COPY {name} /opt/everval-{name}", f"RUN bash /opt/everval-{name}"])
     scripts["prepare-wheelhouse.py"] = wheelhouse_script(source.name)
+    if helper_source is not None:
+        scripts["repository-setup.py"] = helper_source
     result = "\n".join(output) + "\n"
     provenance = {
         "source_repository": "SWE-bench/swe-bench-tasks",
@@ -867,6 +891,14 @@ def adapt(source: Path, *, shared_conda: bool = True) -> tuple[str, dict[str, st
             "Retain exact-version build backend wheels for unchanged offline isolated installation",
         ],
     }
+    if setup is not None:
+        provenance["repository_setup"] = {
+            **setup,
+            "helper_sha256": digest(helper_source.encode()),
+            "artifact_binding": "Root-only image artifacts bound by immutable image ID",
+            "solver_visibility": "Removed before solver admission",
+            "evaluation": "Reapply verified configuration before unchanged official evaluation",
+        }
     if shared_conda:
         return _split_environment((result, scripts, provenance), pins=pins, pip_lines=pip_lines)
     return result, scripts, provenance
@@ -976,6 +1008,8 @@ def build_one(
     try:
         source = verified_build_assets(root, instance)
         dockerfile, scripts, provenance = adapt(source)
+        if "repository-setup.py" in scripts:
+            immutable(attempt / "repository-setup.py", scripts["repository-setup.py"].encode())
         context = directory / "contexts" / provenance["recipe_bundle_sha256"]
         context.mkdir(parents=True, exist_ok=True, mode=0o700)
         immutable(context / "Dockerfile", dockerfile.encode())
@@ -1026,14 +1060,17 @@ def build_one(
         if not re.fullmatch(r"sha256:[0-9a-f]{64}", image_id):
             raise ValueError("Docker did not return an immutable image identifier")
         record["built_image_id"] = image_id
-        for name in [
+        manifest_names = [
             "conda-explicit.txt",
             "conda-list.json",
             "pip-freeze.txt",
             "miniconda-sha256.txt",
             "conda-package-records.json",
             "offline-wheels.json",
-        ]:
+        ]
+        if "repository_setup" in provenance:
+            manifest_names.extend(["repository-setup.json", "repository-setup.diff"])
+        for name in manifest_names:
             container_name = "everval-preparation-" + uuid.uuid4().hex
             command = docker + [
                 "run",
@@ -1222,6 +1259,8 @@ def tooling(root: Path) -> dict[str, Any]:
 
 def execute(arguments: argparse.Namespace, root: Path) -> int:
     require_unfrozen(root)
+    if arguments.command == "build" and arguments.rebuild and not arguments.instance_id:
+        raise ValueError("--rebuild requires at least one explicit --instance-id")
     manifest = selection(root)
     if arguments.command == "selection":
         print(json.dumps({"selection_sha256": SELECTION_SHA, "counts": manifest["counts"]}))
@@ -1251,7 +1290,6 @@ def execute(arguments: argparse.Namespace, root: Path) -> int:
         existing = images.get(instance)
         if existing:
             validate_cached(existing, task)
-        if existing and not (arguments.retry_failed and existing["preparation_status"] == "failed"):
             if existing["preparation_status"] == "ready":
                 inspected = subprocess.run(
                     prefix
@@ -1272,9 +1310,12 @@ def execute(arguments: argparse.Namespace, root: Path) -> int:
                     or inspected.stdout.strip() != existing["image_id"] + " arm64"
                 ):
                     raise ValueError("Cached image is missing or differs; use a fresh private root")
-            print(json.dumps({"instance_id": instance, **existing}), flush=True)
-            failed |= existing["preparation_status"] != "ready"
-            continue
+            if not arguments.rebuild and not (
+                arguments.retry_failed and existing["preparation_status"] == "failed"
+            ):
+                print(json.dumps({"instance_id": instance, **existing}), flush=True)
+                failed |= existing["preparation_status"] != "ready"
+                continue
         record = build_one(root, task, prefix, arguments.timeout_seconds)
         if existing:
             record["previous_preparations"] = existing.get("previous_preparations", []) + [
@@ -1307,6 +1348,11 @@ def main() -> int:
     build.add_argument("--timeout-seconds", type=int, default=3600)
     build.add_argument(
         "--retry-failed", action="store_true", help="Retain evidence and retry failed builds"
+    )
+    build.add_argument(
+        "--rebuild",
+        action="store_true",
+        help="Rebuild explicitly selected images while retaining every prior preparation",
     )
     arguments = parser.parse_args()
     root = private_root(arguments.output_dir)

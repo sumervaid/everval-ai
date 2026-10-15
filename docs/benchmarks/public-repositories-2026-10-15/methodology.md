@@ -1,6 +1,6 @@
 # Public repository pilot: frozen protocol
 
-This pilot compares two agent workflows on external tasks from SWE-bench Lite. The [frozen selection](selection.json) contains 12 test tasks across Flask, Requests, pytest, and Sphinx, plus three separate development tasks. It records the choice before controls or paid model outcomes. This document specifies the comparison; it reports no evaluation outcomes.
+This pilot compares two agent workflows on external tasks from SWE-bench Lite. The [frozen selection](selection.json) contains 12 test tasks across Flask, Requests, pytest, and Sphinx, plus three separate development tasks. It records the choice before controls or paid model outcomes. This document specifies the comparison; it reports no evaluation outcomes. Model comparison results remain pending.
 
 These projects are public benchmark sources. They are not Everval customers or endorsers. A small cohort running on an adapted native ARM environment cannot establish an official SWE-bench score, a representative model ranking, or superiority over unrelated systems.
 
@@ -32,7 +32,7 @@ For each selected task, before admitting paid evaluation:
 3. Apply the official reference patch to another fresh base and rerun the full official test contract. Every FAIL_TO_PASS and PASS_TO_PASS case must pass.
 4. Retain command logs, parsed case outcomes, image identity, durations, and explicit rejection reasons. Missing dependencies, missing cases, zero-test runs, and unsuccessful setup do not satisfy a control.
 
-Each submitted patch is graded in another fresh container using the pinned row's evaluation script and official log parser. Resolution requires all official FAIL_TO_PASS and PASS_TO_PASS cases to pass after a complete grading run. There is no selected-test shortcut or custom success fallback. The required set is the complete official FAIL_TO_PASS and PASS_TO_PASS lists, rather than every test in the repository. Additional cases can appear in the invoked suite; retain their observed status counts and actual suite exit code, and do not describe a resolved task as proof that the entire repository suite passed.
+Each submitted patch is graded in another fresh container using the pinned row's evaluation script and official log parser. Resolution requires all official FAIL_TO_PASS and PASS_TO_PASS cases to pass after a complete grading run. There is no selected-test shortcut or custom success fallback. The required set is the complete official FAIL_TO_PASS and PASS_TO_PASS lists, rather than every test in the repository. Additional cases and deliberately failing nested pytest runs can appear in the log. Observed status counts summarize parsed records, rather than failures in the outer suite. Interpret the official required test identities alongside the actual test-command exit code, and do not describe a resolved task as proof that the entire repository suite passed.
 
 The upstream evaluation script does not independently record every setup command's exit status. The runner checks script completion, recognized setup-error signals, and complete required-test outcomes, and retains the logs for inspection. A successful test subset alone cannot override a detected setup failure; the exported controls disclose this distinction.
 
@@ -53,6 +53,10 @@ The [preparation recipe](../../../scripts/benchmarks/README.md) switches Ubuntu 
 Preparation separates reusable Conda stages from each task's ordered pip installs and repository setup. Identical ordered Conda pins, channels, platform, and resolver settings can share a stage; the selected recipes form four such groups. The pip entries keep their original order and target interpreter.
 
 To support the unchanged evaluator's offline installers, images include a local wheelhouse for build tooling, with exact versions, filenames, sizes, and SHA-256 hashes retained. The evaluator uses this local package source with package-index access disabled. A required backend missing from that source remains a setup failure; passing tests do not override it.
+
+The four selected Sphinx recipes modify `tox.ini` to report passing cases; Sphinx task 8801 also changes dependency constraints in `setup.py`. Preparation verifies these exact transformations against the pinned recipe and frozen base bytes. It rejects unexpected tracked files or content changes, captures the verified configuration patch and manifest, then restores the reviewed files and checks the complete clean base.
+
+The setup artifacts are root-only image files, bound to the campaign by the immutable image ID. Solver initialization removes them before model execution. After checking the base and applying a submission, the fresh grader verifies and restores the captured configuration before running the unchanged official evaluation script. Evidence retains hashes of the recipe, helper, original and configured files, patch, manifest, and image. Task statements, reference patches, hidden tests, and official required-test identities remain unchanged; any replay mismatch is an infrastructure failure.
 
 Dependency preparation may download public sources and packages inside Docker. Evaluation itself runs offline. A mutable dataset image tag alone is insufficient runtime provenance.
 
