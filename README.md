@@ -10,14 +10,15 @@ Turn repository changes, documents, data tasks, and workflow simulations into re
 
 ## Try it without a key
 
-You need Git, Python 3.12+, and [uv](https://docs.astral.sh/uv/getting-started/installation/). Cloning requires repository access when the source repository is private.
+Use Linux or macOS with a supported Node.js release (`^22.22.2 || ^24.15.0 || >=26.0.0`), an existing Python 3.12+ interpreter, and [uv](https://docs.astral.sh/uv/getting-started/installation/).
 
 ```sh
-git clone https://github.com/sumervaid/everval-ai.git
-cd everval-ai
-uv sync --frozen
-uv run everval demo
+npm install --global everval-ai@0.3.1
+everval setup
+everval demo
 ```
+
+For source installation, follow the [quickstart](docs/quickstart.md). Cloning requires repository access when the source repository is private. With npm, omit `uv run` from later examples and source-based guides.
 
 Watch a passing reference, a deliberate regression, and a restored candidate run across three examples. Inspect failures, compare the same frozen tasks, and keep the evidence locally. **The installed demo makes zero model calls and needs no Docker or network connection.** Dependency installation may use the network.
 

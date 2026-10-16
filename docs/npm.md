@@ -10,10 +10,10 @@ Use Linux or macOS with a supported Node.js release
 (`^22.22.2 || ^24.15.0 || >=26.0.0`), an existing Python 3.12+ interpreter,
 and [uv](https://docs.astral.sh/uv/getting-started/installation/).
 
-For a published release:
+Install [Everval AI 0.3.1 from npm](https://www.npmjs.com/package/everval-ai/v/0.3.1):
 
 ```sh
-npm install --global everval-ai
+npm install --global everval-ai@0.3.1
 everval setup
 everval demo
 ```
@@ -163,6 +163,12 @@ the same accepted archive:
 ```sh
 npm publish ./dist/everval-ai-0.3.1.tgz --access public --ignore-scripts
 ```
+
+npm can accept an upload before the version becomes installable while
+[publish-time scanning](https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/)
+runs. Wait for the exact version to become available, compare its downloaded
+archive with the accepted checksum, and verify a fresh registry installation
+before announcing the release.
 
 For an authorized private registry package, supply a scoped name and
 `--access restricted`, for example
