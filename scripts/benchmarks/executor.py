@@ -235,6 +235,38 @@ def bounded_process(
     }
 
 
+def _solver_snapshot_command(base_commit: str) -> str:
+    """Recreate exactly the tracked base tree without retaining its Git history."""
+    if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
+        raise ValueError("Invalid frozen base commit")
+    return (
+        "set -eu\n"
+        f"git diff --exit-code {base_commit}\n"
+        f"git reset --hard {base_commit}\n"
+        "git clean -ffd\n"
+        f"everval_base_tree=$(git rev-parse --verify {base_commit}^{{tree}})\n"
+        "everval_snapshot_dir=$(umask 077; mktemp -d /tmp/everval-snapshot.XXXXXX)\n"
+        "trap 'rm -rf \"$everval_snapshot_dir\"' EXIT\n"
+        'git ls-files --stage > "$everval_snapshot_dir/stages"\n'
+        "if grep -q '^160000 ' \"$everval_snapshot_dir/stages\"; then\n"
+        "  echo 'Tracked submodules cannot be isolated by this runner' >&2\n"
+        "  exit 1\n"
+        "fi\n"
+        'git ls-files -z > "$everval_snapshot_dir/paths"\n'
+        "rm -rf .git\n"
+        "git -c init.defaultBranch=main init\n"
+        "git config user.email benchmark@localhost\n"
+        "git config user.name Benchmark\n"
+        "git --literal-pathspecs add --force "
+        '--pathspec-from-file="$everval_snapshot_dir/paths" --pathspec-file-nul\n'
+        'test "$(git write-tree)" = "$everval_base_tree"\n'
+        "git -c core.hooksPath=/dev/null commit -qm 'Benchmark starting point'\n"
+        'test "$(git rev-parse HEAD^{tree})" = "$everval_base_tree"\n'
+        'rm -rf "$everval_snapshot_dir"\n'
+        "trap - EXIT\n"
+    )
+
+
 class DockerSandbox:
     """One resource-bounded, network-isolated container with no host mounts."""
 
@@ -407,19 +439,7 @@ class DockerSandbox:
         return result
 
     def prepare_solver(self, base_commit: str, *, remove_repository_setup: bool = False) -> None:
-        if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
-            raise ValueError("Invalid frozen base commit")
-        command = (
-            "set -eu\n"
-            f"git diff --exit-code {base_commit}\n"
-            f"git reset --hard {base_commit}\n"
-            "git clean -ffd\n"
-            "rm -rf .git\n"
-            "git -c init.defaultBranch=main init\n"
-            "git config user.email benchmark@localhost\n"
-            "git config user.name Benchmark\n"
-            "git add -A\n"
-            "git -c core.hooksPath=/dev/null commit -qm 'Benchmark starting point'\n"
+        command = _solver_snapshot_command(base_commit) + (
             "mkdir -p /tmp/everval-home\n"
             "chmod -R a+rwX /testbed /tmp/everval-home\n"
             "rm -f /eval.sh /tmp/patch.diff /tmp/test.patch /tmp/gold.patch\n"

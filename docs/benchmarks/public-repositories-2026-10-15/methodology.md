@@ -42,6 +42,8 @@ This runner uses separate evidence directories and fresh grading containers for 
 
 The agent receives the issue statement and starting source snapshot. Reference patches, test patches, hidden grading material, future commits, and evaluator logs stay outside its environment. Agent and grader containers have no network access or host filesystem mounts. Evaluated repository installation, hooks, builds, and tests never run on the personal host. The host runs trusted, pinned orchestration and grading tools.
 
+Solver initialization preserves the exact tracked base tree, including tracked files matched by ignore rules. It verifies Git tree identity before and after creating one synthetic commit. Tracked submodules are rejected because their nested history is outside this isolation contract.
+
 ## Native ARM runtime
 
 The local Docker allocation is two CPUs and approximately 4 GiB of memory on ARM64. Preparation initially used 2 GiB; the allocation increased before any official repository controls or paid attempts. Both arms retain the same per-container resource limits. The selected official task recipes specify x86 Ubuntu, an x86 Miniconda installer, and architecture-specific Conda builds. Their dataset image tags are provenance references, not immutable native ARM images.
