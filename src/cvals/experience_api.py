@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import Any, TypeVar
+from typing import Annotated, Any, TypeVar
 
-from fastapi import APIRouter, FastAPI
+from fastapi import APIRouter, FastAPI, Query
 from pydantic import Field
 
 from cvals.config import Settings
@@ -34,6 +34,10 @@ def register_experience_routes(app: FastAPI, settings: Settings) -> None:
     ) -> Callable[[Endpoint], Endpoint]:
         registry.append((method, "/api" + path, capability))
         return router.api_route(path, methods=[method], **kwargs)
+
+    @endpoint("GET", "/rankings", "workspace.read")
+    def rankings(limit: Annotated[int, Query(ge=1, le=500)] = 100) -> dict[str, Any]:
+        return workbench.rankings(limit=limit)
 
     @endpoint("GET", "/experiments/{experiment_id}/triage", "workspace.read")
     def triage(experiment_id: str) -> dict[str, Any]:

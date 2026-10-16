@@ -42,6 +42,7 @@ A narrow accepted subset is not a representative sample of all enterprise work. 
 | F10 | Change-linked evaluations |
 | F11 | Autopilot policies and screening history |
 | F12 | Research lab, studies and community packs |
+| Ctrl+L | Model-by-benchmark Rankings matrix |
 | Ctrl+P | Search the command palette, including Collections |
 | Ctrl+N | Connect a repository |
 | Ctrl+R | Refresh the current page |
@@ -99,3 +100,7 @@ Experiment actions include failure triage, local regrading, economics, and a dec
 **Staged packs** reads local pack JSON, retains its provenance and collects independently reviewed expected behavior before control validation and admission. The guided review form supports up to ten tasks; larger packs use the CLI review map. **Pack evidence** includes hidden grading material and belongs only in the trusted workspace.
 
 **Budget ledger** is available from the overview and research views. **Experiments → Forecast budget** projects repetitions of a frozen run while keeping unknown costs unknown. See [budget planning](budget-planning.md).
+
+## Compare across benchmarks
+
+Press **Ctrl+L** to open [Rankings](rankings.md). Model configurations form the rows; frozen benchmark cohorts form the columns. Switch quality, cost per success and P95 latency with **1/2/3**. Select a cell, press **Enter** for evidence or **O** to open its source experiment. Missing, partial and control results stay explicit. Opening the view makes no model calls.

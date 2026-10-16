@@ -23,8 +23,8 @@ from cvals.providers import (
     MAX_PROMPT_BYTES,
     MAX_RESPONSE_BYTES,
     Submission,
-    _pin_destination,
     _usage,
+    provider_http_options,
 )
 from cvals.sandbox import _execute, validate_files, validate_repository_source
 
@@ -301,9 +301,7 @@ def submit_agent(scenario: Scenario, system: System, settings: Settings) -> Subm
         return result
 
     try:
-        with httpx.Client(
-            follow_redirects=False, trust_env=False, event_hooks={"request": [_pin_destination]}
-        ) as client:
+        with httpx.Client(**provider_http_options(system, settings)) as client:
             for step in range(system.max_steps):
                 remaining = deadline - time.monotonic()
                 if remaining <= 0:

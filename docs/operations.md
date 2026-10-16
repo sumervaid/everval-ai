@@ -1,5 +1,7 @@
 # Operating a workspace
 
+Use the [on-premises how-to](on-premises.md) for enterprise installation, service templates, internal inference and operational handover.
+
 ## Deployment model
 
 The supported default is one local workspace, one API process, and one durable worker. SQLite uses WAL, explicit transactions, a worker lease, and immutable experiment snapshots. Keep the database on a local filesystem.

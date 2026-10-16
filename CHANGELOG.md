@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Added an on-premises deployment guide, systemd service templates and startup preflight checks, with offline installation, personal authentication, private storage, backups and upgrade procedures. Linux service validation remains target-specific.
+- Added exact-origin internal HTTPS inference and private CA support across all HTTP harnesses, while retaining disabled public providers by default; diagnostics distinguish the two policies.
+- Corrected API health reporting for a dedicated worker.
+
+- Added a workspace Rankings matrix across terminal, browser, CLI and API, with quality, cost-per-success and P95 views, exact cohort/configuration separation, coverage and evidence drilldown.
+
 - Added explicit, evidence-bound benchmark continuation for inspected output-limit errors with unknown usage. Full reservations and earlier outcomes remain intact; started attempts are never retried.
 - Separated terminal attempt coverage from comparable graded outcomes and added matched cost/latency reporting.
 - Completed the scheduled [public repository pilot](docs/benchmarks/public-repositories-2026-10-15/results.md), retaining exclusions, interrupted attempts and accounting limits alongside the results.

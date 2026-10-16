@@ -6,7 +6,7 @@ Everval AI 0.3.1 is a terminal-first local evaluation product with a guided repo
 
 | Area | Behavior |
 | --- | --- |
-| Terminal workbench | Twelve views, command palette, responsive forms, resumable guided runs, health, evidence, recurring and change-linked evaluations. |
+| Terminal workbench | Thirteen views, command palette, responsive forms, resumable guided runs, health, evidence, recurring and change-linked evaluations. |
 | GitHub integration | Read-only metadata, private bare mirrors, bounded history discovery, persistent rejection ledger, pagination, and conservative lineage checks. |
 | Task curation | Independent reviewed statements, provenance fingerprints, before/reference/regression validation, immutable development/holdout releases. |
 | Repository runtimes | Python/pytest plus JavaScript/TypeScript node:test, Jest and Vitest profiles; pinned image IDs and controlled offline private wheel/npm imports. |
@@ -14,9 +14,11 @@ Everval AI 0.3.1 is a terminal-first local evaluation product with a guided repo
 | Existing agents | Versioned public-task adapter and SDK, frozen revision and token ceilings, reported usage and bounded traces; recorded submissions remain supported. |
 | Failure investigation | Failure inbox, bounded file differences, stage timings, and separately retained local regrades without another provider call. |
 | General evaluation | Documents, structured data, and workflow simulations; redacted production examples become reviewed, control-validated collections. |
+| Workspace rankings | Read-only model/configuration-by-frozen-benchmark matrix in TUI, browser, CLI and API; latest evidence, exact ties, coverage and metric-specific eligibility. |
 | Cost and latency | Partial-cost lower bounds, stage coverage, observed quality/cost/latency frontier, workspace/project/schedule cumulative caps. |
 | Ongoing evaluation | Commit/configuration-linked deduplicated admission, local CI gates, frozen recurring cohorts, benchmark health and retained schedule digests. |
 | Team review | Opt-in personal identities and API roles, assigned blind comparisons, frozen rubrics, append-only judgments, and evidence-bound decisions. |
+| On-premises deployment | Single-host service templates and preflight, offline installation guide, explicit internal HTTPS inference origins and private CA trust; target Linux service verification remains required. |
 | Operations | Durable jobs and worker recovery, local audit chain, consistent backups, exports, and no automatic result uploads. |
 
 The repository contains original installation and integration fixtures. Reference and incomplete submissions verify the pipeline; separate opt-in live runs measure compatibility and outcomes on those bounded tasks. Neither establishes representative customer performance. Source remains in a private repository.

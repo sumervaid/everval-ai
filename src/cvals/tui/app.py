@@ -31,9 +31,11 @@ from cvals.tui.presentation import (
     status,
     system_label,
 )
+from cvals.tui.rankings import RankingsMixin
 
 PAGES = (
     ("overview", "Overview", "F1"),
+    ("rankings", "Rankings", "Ctrl+L"),
     ("projects", "Projects", "F2"),
     ("releases", "Releases", "F3"),
     ("experiments", "Experiments", "F4"),
@@ -56,6 +58,7 @@ TITLES = {key: title for key, title, _ in PAGES} | {
     "packs": "Community packs",
 }
 DESCRIPTIONS = {
+    "rankings": "Rank within each frozen benchmark. Exact model configurations stay separate.",
     "packs": "Inspect provenance, review expected behavior and retain validation before admission.",
     "autopilot": "Continuous screening, bounded escalation and retained change evidence.",
     "lab": "Investigate outcomes, challenge graders and validate configuration proposals.",
@@ -77,6 +80,12 @@ DESCRIPTIONS = {
     "diagnostics": "Storage, execution, and provider readiness for this local workspace.",
 }
 TOOLS = {
+    "rankings": "Model rankings",
+    "ranking_quality": "1 Quality",
+    "ranking_cost": "2 Cost / pass",
+    "ranking_latency": "3 P95 latency",
+    "ranking_details": "Details ↵",
+    "ranking_run": "Open run · O",
     "packs": "Staged packs",
     "pack_stage": "Stage pack",
     "pack_review": "Review pack",
@@ -134,10 +143,17 @@ TOOLS = {
     "back": "Back",
 }
 PAGE_TOOLS: dict[str, list[str]] = {
+    "rankings": [
+        "ranking_quality",
+        "ranking_cost",
+        "ranking_latency",
+        "ranking_details",
+        "ranking_run",
+    ],
     "packs": ["pack_stage", "pack_review", "pack_record", "catalog"],
     "autopilot": ["autopilot_new", "autopilot_toggle", "autopilot_history", "budget", "record"],
     "lab": ["optimize", "quality", "catalog", "packs", "lab_record", "budget"],
-    "overview": ["guide", "connect", "run", "budget"],
+    "overview": ["rankings", "guide", "connect", "run", "budget"],
     "guides": ["guide", "resume", "record"],
     "journey": ["continue", "health", "record"],
     "health": ["back", "record"],
@@ -166,6 +182,7 @@ PAGE_TOOLS: dict[str, list[str]] = {
     "releases": ["run", "record"],
     "collections": ["run", "record"],
     "experiments": [
+        "rankings",
         "run",
         "forecast",
         "trials",
@@ -199,7 +216,7 @@ PAGE_TOOLS: dict[str, list[str]] = {
 }
 
 
-class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
+class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
     """A terminal client; no evaluation or storage rules are duplicated here."""
 
     TITLE = "Everval AI"
@@ -209,6 +226,10 @@ class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
         Binding("ctrl+q", "quit", "Quit", priority=True),
         Binding("ctrl+n", "connect", "Connect", priority=True),
         Binding("ctrl+r", "refresh", "Refresh", priority=True),
+        Binding("1", "ranking_metric('quality')", "Quality", show=False),
+        Binding("2", "ranking_metric('cost')", "Cost / pass", show=False),
+        Binding("3", "ranking_metric('latency')", "P95 latency", show=False),
+        Binding("o", "ranking_run", "Open run", show=False),
         *[
             Binding(key.lower(), f"navigate('{name}')", label, show=False, priority=True)
             for name, label, key in PAGES
@@ -267,6 +288,12 @@ class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
                 yield Static("", id="notice", markup=False)
                 yield Static("", id="metrics", markup=False)
                 yield Static("", id="intro", markup=False)
+                yield Static("", id="ranking-summary", markup=False)
+                yield Static(
+                    "← ↑ ↓ → select · Enter details · O open run · 1/2/3 metrics · Ctrl+R refresh",
+                    id="ranking-help",
+                    markup=False,
+                )
                 with Horizontal(id="panes"):
                     with Vertical(id="ledger-pane"):
                         yield Static("", id="empty", markup=False)
@@ -335,6 +362,11 @@ class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
                 "Work on the selected record" if key not in {"connect", "run", "system"} else label,
                 partial(self.command, key),
             )
+
+    def check_action(self, action: str, parameters: tuple[object, ...]) -> bool | None:
+        if action in {"ranking_metric", "ranking_run"}:
+            return self.page == "rankings" and len(self.screen_stack) == 1
+        return super().check_action(action, parameters)
 
     def _status(self) -> None:
         # Textual stops the app before unmounting its screens; a queued timer
@@ -416,6 +448,13 @@ class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
         self.query_one("#notice").display = False
         self.query_one("#intro").display = page == "overview"
         self.query_one("#metrics").display = page == "overview"
+        self.set_class(page == "rankings", "rankings-page")
+        self.query_one("#ranking-summary").display = page == "rankings"
+        self.query_one("#ranking-help").display = page == "rankings"
+        table = self.query_one("#ledger", DataTable)
+        table.cursor_type = "cell" if page == "rankings" else "row"
+        table.fixed_columns = 1 if page == "rankings" else 0
+        table.header_height = 2 if page == "rankings" else 1
         for name, _, _ in PAGES:
             self.query_one("#nav-" + name).set_class(
                 page == name
@@ -487,6 +526,9 @@ class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
         self._render_revision += 1
         selected_id = self.selected.get("id") if self.selected else None
         page = self.page
+        if page == "rankings":
+            self.render_rankings(result)
+            return
         if page == "candidates" and isinstance(result, dict) and self.project_id:
             self._project_cursors[self.project_id] = (
                 result.get("project", {}).get("last_discovery", {}).get("next_cursor")
@@ -549,6 +591,16 @@ class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
             ]
         elif page == "trials":
             self.rows = result.get("trials", [])
+            if self.ranking_trial_system_id:
+                selected_id = next(
+                    (
+                        row["id"]
+                        for row in self.rows
+                        if row.get("system_id") == self.ranking_trial_system_id
+                    ),
+                    selected_id,
+                )
+                self.ranking_trial_system_id = None
             columns = ["Task", "System", "Attempt", "State", "Pass", "Cost"]
             table_rows = [
                 (
@@ -860,14 +912,22 @@ class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
                 enabled = self.selected.get("status") in {"queued", "running", "cancelling"}
             self.query_one("#tool-" + key, Button).disabled = not enabled
 
+    @on(DataTable.CellHighlighted, "#ledger")
+    def cell_highlighted(self, event: DataTable.CellHighlighted) -> None:
+        self.ranking_highlighted(event)
+
+    @on(DataTable.CellSelected, "#ledger")
+    def cell_opened(self, event: DataTable.CellSelected) -> None:
+        self.ranking_opened(event)
+
     @on(DataTable.RowHighlighted, "#ledger")
     def highlighted(self, event: DataTable.RowHighlighted) -> None:
-        if event.row_key.value is not None:
+        if self.page != "rankings" and event.row_key.value is not None:
             self.select_row(int(event.row_key.value))
 
     @on(DataTable.RowSelected, "#ledger")
     def opened(self, event: DataTable.RowSelected) -> None:
-        if event.row_key.value is not None:
+        if self.page != "rankings" and event.row_key.value is not None:
             self.select_row(int(event.row_key.value))
             self.command(
                 "resume"
@@ -998,6 +1058,12 @@ class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
             self.action_connect()
 
     def command(self, name: str) -> None:
+        if name == "rankings":
+            self.show_page("rankings")
+            return
+        if self.page == "rankings" and name.startswith("ranking_"):
+            self.ranking_command(name)
+            return
         if (
             name
             not in {
@@ -1488,6 +1554,7 @@ class WorkbenchApp(EvolutionMixin, GrowthMixin, App[None]):
         self.show_page("experiments")
 
     def command_trials(self) -> None:
+        self.ranking_trial_system_id = None
         assert self.selected
         self.experiment_id = self.selected["id"]
         self.show_page("trials")

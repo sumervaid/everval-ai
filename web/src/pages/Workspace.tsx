@@ -328,15 +328,37 @@ export function SettingsPage({ workspace }: { workspace: Workspace }) {
               <GitBranch size={19} />
             </div>
             <div>
-              <h3>Remote model endpoints</h3>
+              <h3>Public model endpoints</h3>
               <p>
                 {s.remote_providers_enabled
                   ? 'Enabled. Provider runs still require configured pricing and a budget.'
-                  : 'Disabled. Enable explicitly on the service to use a remote provider.'}
+                  : 'Disabled. Internal inference uses its own explicit origin policy.'}
               </p>
             </div>
             <span className={`pill ${s.remote_providers_enabled ? 'green' : ''}`}>
               {s.remote_providers_enabled ? 'Enabled' : 'Disabled'}
+            </span>
+          </div>
+          <div className="capability">
+            <div className="capability-icon">
+              <ShieldCheck size={19} />
+            </div>
+            <div>
+              <h3>Internal inference</h3>
+              <p>
+                {s.internal_provider_origins?.length
+                  ? s.internal_provider_origins.join(', ')
+                  : 'No internal HTTPS origins approved. Configure them on the service host.'}
+              </p>
+              <p>
+                TLS verification required.
+                {s.provider_ca_configured
+                  ? ' An additional CA bundle is configured.'
+                  : ' Standard certificate trust applies.'}
+              </p>
+            </div>
+            <span className={`pill ${s.internal_provider_origins?.length ? 'green' : ''}`}>
+              {s.internal_provider_origins?.length ?? 0} approved
             </span>
           </div>
           <div className="capability">

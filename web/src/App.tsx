@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   BookOpen,
   ChevronRight,
+  ChartNoAxesColumnIncreasing,
   FlaskConical,
   FolderClosed,
   LayoutDashboard,
@@ -22,6 +23,7 @@ import { Dashboard, SettingsPage } from './pages/Workspace';
 import { CollectionsPage, CollectionDetail, NewCollection } from './pages/Collections';
 import { ExperimentsPage, NewExperiment, ExperimentDetail } from './pages/Experiments';
 import { SystemsPage } from './pages/Systems';
+import { RankingsPage } from './pages/Rankings';
 import {
   ReviewInbox,
   ReviewTask,
@@ -36,6 +38,7 @@ const workspaceNav = [
   { path: '/', name: 'Overview', icon: LayoutDashboard },
   { path: '/collections', name: 'Collections', icon: FolderClosed },
   { path: '/experiments', name: 'Experiments', icon: FlaskConical },
+  { path: '/rankings', name: 'Rankings', icon: ChartNoAxesColumnIncreasing },
   { path: '/systems', name: 'Systems', icon: SlidersHorizontal },
 ];
 function currentPath() {
@@ -132,7 +135,7 @@ function Workbench() {
     return () => clearInterval(interval);
   }, [refresh]);
   useEffect(() => {
-    document.title = `${path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/reviews') ? 'Review desk' : path.startsWith('/cases') ? 'Production examples' : path.startsWith('/team') ? 'Team access' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
+    document.title = `${path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/rankings') ? 'Rankings' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/reviews') ? 'Review desk' : path.startsWith('/cases') ? 'Production examples' : path.startsWith('/team') ? 'Team access' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
   }, [path]);
   useEffect(() => {
     if (!authRequired) return;
@@ -214,6 +217,7 @@ function Workbench() {
           refresh={refresh}
         />
       );
+    else if (route === '/rankings') content = <RankingsPage />;
     else if (route === '/systems')
       content = <SystemsPage workspace={workspace} refresh={refresh} />;
     else if (route === '/settings') content = <SettingsPage workspace={workspace} />;

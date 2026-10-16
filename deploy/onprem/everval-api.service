@@ -1,0 +1,40 @@
+[Unit]
+Description=Everval api
+Documentation=https://github.com/sumervaid/everval-ai/blob/main/docs/on-premises.md
+After=network-online.target
+Wants=network-online.target
+RequiresMountsFor=/var/lib/everval /opt/everval
+
+[Service]
+Type=simple
+User=everval
+Group=everval
+WorkingDirectory=/var/lib/everval
+EnvironmentFile=/etc/everval/everval.env
+EnvironmentFile=-/etc/everval/provider-secrets.env
+ExecStartPre=/opt/everval/current/venv/bin/python /opt/everval/current/deploy/onprem/preflight.py --component api
+ExecStart=/opt/everval/current/venv/bin/everval serve --host 127.0.0.1 --port 8765 --no-worker
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=3600
+KillMode=mixed
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+AmbientCapabilities=
+ReadWritePaths=/var/lib/everval /var/cache/everval
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -3,13 +3,7 @@ export interface Check {
   id: string;
   name: string;
   kind:
-    | 'equals'
-    | 'contains'
-    | 'numeric'
-    | 'json_schema'
-    | 'citation'
-    | 'forbidden'
-    | 'python_tests';
+    'equals' | 'contains' | 'numeric' | 'json_schema' | 'citation' | 'forbidden' | 'python_tests';
   path: string;
   expected: unknown;
   weight: number;
@@ -159,6 +153,8 @@ export interface Settings {
   storage_free_bytes: number;
   docker_available: boolean;
   remote_providers_enabled: boolean;
+  internal_provider_origins?: string[];
+  provider_ca_configured?: boolean;
   worker_running: boolean;
   auth_enabled: boolean;
 }

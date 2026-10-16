@@ -20,6 +20,8 @@ Document, data, and workflow tasks start with explicit instructions and independ
 
 Freeze a benchmark and select systems, repetitions, and a spending ceiling. Each attempt keeps its outcome, errors, timing, accounting, and revisions. Failed and incomplete attempts stay in the denominator. Missing usage stays unknown.
 
+Open **Rankings** (**Ctrl+L** in the terminal) for a visual model-by-benchmark matrix. Switch quality, cost per success and P95 latency, then select a cell to inspect its exact run. [Read the matrix →](rankings.md)
+
 Compare success rate, cost per passing attempt, provider time, and total attempt duration. Inspect the supported uncertainty estimate and task coverage before deciding that a difference matters.
 
 ![Actual experiment view with original installation controls](assets/terminal.png)

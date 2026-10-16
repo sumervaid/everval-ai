@@ -165,6 +165,11 @@ class Workbench:
     def experiments(self) -> list[dict[str, Any]]:
         return self.store.list_experiments()
 
+    def rankings(self, limit: int = 100) -> dict[str, Any]:
+        from cvals.rankings import build_rankings
+
+        return build_rankings(self.store, limit=limit)
+
     def systems(self) -> list[dict[str, Any]]:
         return self.store.list_systems()
 
@@ -274,6 +279,8 @@ class Workbench:
             "tmux_available": bool(shutil.which("tmux")),
             "worker_running": worker_running(self.settings),
             "remote_providers_enabled": self.settings.allow_remote_providers,
+            "internal_provider_origins": list(self.settings.internal_provider_origins),
+            "provider_ca_configured": self.settings.provider_ca_bundle is not None,
             "audit": self._audit.verify(),
             "jobs": self._jobs.list()[:20],
         }

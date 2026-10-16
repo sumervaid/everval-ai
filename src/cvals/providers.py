@@ -7,14 +7,17 @@ import ipaddress
 import json
 import os
 import socket
+import ssl
 import time
 from contextlib import suppress
 from dataclasses import dataclass, field
+from functools import partial
 from typing import TYPE_CHECKING, Any
 from urllib.parse import urlsplit
 
 import httpx
 
+from cvals.config import provider_origin
 from cvals.models import Scenario, System, canonical_json
 
 if TYPE_CHECKING:
@@ -46,13 +49,49 @@ def is_local_provider(system: System) -> bool:
         return False
 
 
+_INTERNAL_NETWORKS = (
+    ipaddress.ip_network("10.0.0.0/8"),
+    ipaddress.ip_network("172.16.0.0/12"),
+    ipaddress.ip_network("192.168.0.0/16"),
+    ipaddress.ip_network("fc00::/7"),
+)
+
+
+def is_internal_provider(system: System, settings: Settings) -> bool:
+    """Only an explicitly approved HTTPS origin is an internal destination."""
+    return provider_origin(system.base_url) in settings.internal_provider_origins
+
+
+def _internal_address(address: ipaddress.IPv4Address | ipaddress.IPv6Address) -> bool:
+    return any(address in network for network in _INTERNAL_NETWORKS)
+
+
+def _unsafe_address(address: ipaddress.IPv4Address | ipaddress.IPv6Address) -> bool:
+    if (
+        address.is_link_local
+        or address.is_multicast
+        or address.is_unspecified
+        or address.is_reserved
+    ):
+        return True
+    if isinstance(address, ipaddress.IPv6Address):
+        return bool(
+            address.ipv4_mapped is not None
+            or address.sixtofour is not None
+            or address.teredo is not None
+            or address in ipaddress.ip_network("64:ff9b::/96")
+        )
+    return False
+
+
 def validate_provider(system: System, settings: Settings, budget_usd: float) -> None:
     if system.kind != "http":
         return
     local = is_local_provider(system)
-    if not local and not settings.allow_remote_providers:
+    internal = is_internal_provider(system, settings)
+    if not local and not internal and not settings.allow_remote_providers:
         raise ValueError(
-            "Remote providers are disabled; explicitly enable them in workspace settings"
+            "Remote providers are disabled; approve an internal HTTPS origin or explicitly enable public providers"
         )
     if not local and urlsplit(system.base_url).scheme != "https":
         raise ValueError("Remote providers require HTTPS")
@@ -62,28 +101,51 @@ def validate_provider(system: System, settings: Settings, budget_usd: float) -> 
             address = ipaddress.ip_address(hostname)
         except ValueError:
             address = None
-        if address is not None and not address.is_global:
-            raise ValueError("Remote provider destinations must be public internet addresses")
+        if address is not None and (
+            _unsafe_address(address)
+            or not (
+                internal
+                and _internal_address(address)
+                or settings.allow_remote_providers
+                and address.is_global
+            )
+        ):
+            raise ValueError(
+                "Provider destination is outside its approved public or internal network"
+            )
     if system.api_key_env and not os.environ.get(system.api_key_env):
         raise ValueError(f"Provider credential environment variable {system.api_key_env} is unset")
     rates = (system.input_cost_per_million, system.output_cost_per_million)
     if any(rate is None for rate in rates):
         raise ValueError(
-            "Explicit input and output pricing is required, including zero for a free local provider"
+            "Explicit input and output pricing is required, including zero for free local or internal inference"
         )
-    if not local and (budget_usd <= 0 or not any(rates)):
+    if not local and not internal and (budget_usd <= 0 or not any(rates)):
         raise ValueError("Remote providers require a positive budget and nonzero declared pricing")
     if any(rates) and budget_usd <= 0:
         raise ValueError("A priced provider requires a positive experiment budget")
 
 
-def _pin_destination(request: httpx.Request) -> None:
-    """Resolve once, reject nonpublic remote addresses, and preserve TLS SNI.
-
-    Pinning the request URL avoids a second DNS lookup at socket connection time.
-    The original Host header and TLS server name still identify the provider.
-    """
+def _pin_destination(
+    request: httpx.Request,
+    *,
+    settings: Settings | None = None,
+    expected_origin: str | None = None,
+    allow_public: bool | None = None,
+) -> None:
+    """Validate every DNS answer, then connect to one checked address with TLS SNI."""
+    origin = provider_origin(str(request.url))
+    if expected_origin is not None and origin != expected_origin:
+        raise ValueError("Provider request changed its approved origin")
     hostname = request.url.host
+    literal_loopback = False
+    with suppress(ValueError):
+        literal_loopback = ipaddress.ip_address(hostname).is_loopback
+    local = hostname == "localhost" or literal_loopback
+    internal = settings is not None and origin in settings.internal_provider_origins
+    public = (settings is None or settings.allow_remote_providers) and allow_public is not False
+    if not local and (request.url.scheme != "https" or not (internal or public)):
+        raise ValueError("Provider request is outside the configured destination policy")
     if hostname == "localhost":
         addresses = ["127.0.0.1"]
     else:
@@ -95,23 +157,54 @@ def _pin_destination(request: httpx.Request) -> None:
                 dict.fromkeys(
                     str(result[4][0])
                     for result in socket.getaddrinfo(
-                        hostname, request.url.port or 443, type=socket.SOCK_STREAM
+                        hostname,
+                        request.url.port or (443 if request.url.scheme == "https" else 80),
+                        type=socket.SOCK_STREAM,
                     )
                 )
             )
     if not addresses:
         raise ValueError("Provider destination did not resolve")
-    literal_loopback = False
-    with suppress(ValueError):
-        literal_loopback = ipaddress.ip_address(hostname).is_loopback
-    allow_loopback = hostname == "localhost" or literal_loopback
-    if (
-        any(not ipaddress.ip_address(address).is_global for address in addresses)
-        and not allow_loopback
-    ):
-        raise ValueError("Remote provider destination resolves to a nonpublic address")
+    for value in addresses:
+        address = ipaddress.ip_address(value)
+        permitted = (
+            address.is_loopback
+            if local
+            else not _unsafe_address(address)
+            and not address.is_loopback
+            and (internal and _internal_address(address) or public and address.is_global)
+        )
+        if not permitted:
+            raise ValueError("Provider destination resolves to a nonpublic or unapproved address")
     request.extensions["sni_hostname"] = hostname
     request.url = request.url.copy_with(host=addresses[0])
+
+
+def provider_http_options(system: System, settings: Settings) -> dict[str, Any]:
+    """Share destination pinning and verified TLS across every HTTP harness."""
+    verify: bool | ssl.SSLContext = True
+    if settings.provider_ca_bundle is not None:
+        if not settings.provider_ca_bundle.is_file():
+            raise ValueError("Provider CA bundle must be an existing certificate file")
+        context = ssl.create_default_context()
+        context.load_verify_locations(cafile=str(settings.provider_ca_bundle))
+        verify = context
+    return {
+        "verify": verify,
+        "follow_redirects": False,
+        "trust_env": False,
+        "event_hooks": {
+            "request": [
+                partial(
+                    _pin_destination,
+                    settings=settings,
+                    expected_origin=provider_origin(system.base_url),
+                    allow_public=settings.allow_remote_providers
+                    and bool(system.input_cost_per_million or system.output_cost_per_million),
+                )
+            ],
+        },
+    }
 
 
 def payload_for(scenario: Scenario, system: System) -> dict[str, Any]:
@@ -226,7 +319,7 @@ def _submit(
     if system.harness == "external-agent":
         from cvals.external_agent import submit_external
 
-        return submit_external(scenario, system)
+        return submit_external(scenario, system, settings)
     if system.harness == "tools":
         from cvals.agent_runner import submit_agent
 
@@ -244,9 +337,7 @@ def _submit(
                 timeout=httpx.Timeout(
                     system.timeout_seconds, connect=min(10, system.timeout_seconds)
                 ),
-                follow_redirects=False,
-                trust_env=False,
-                event_hooks={"request": [_pin_destination]},
+                **provider_http_options(system, settings),
             ) as client,
             client.stream("POST", endpoint, json=payload, headers=headers) as response,
         ):

@@ -316,9 +316,25 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
     async def invalid(_: Request, exc: ValueError) -> JSONResponse:
         return JSONResponse({"detail": str(exc)}, status_code=400)
 
+    def execution_status() -> dict[str, Any]:
+        from cvals.runtime import worker_running
+
+        dedicated = worker_running(settings)
+        embedded = worker.running
+        mode = (
+            "embedded+dedicated"
+            if embedded and dedicated
+            else "embedded"
+            if embedded
+            else "dedicated"
+            if dedicated
+            else "stopped"
+        )
+        return {"worker_running": embedded or dedicated, "worker_mode": mode}
+
     @app.get("/api/health")
     def health() -> dict[str, Any]:
-        return {"status": "ok", "version": __version__, "worker_running": worker.running}
+        return {"status": "ok", "version": __version__, **execution_status()}
 
     @app.get("/api/schema")
     def schema() -> dict[str, Any]:
@@ -595,7 +611,9 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
             "storage_free_bytes": shutil.disk_usage(settings.data_dir).free,
             "docker_available": docker_available(settings),
             "remote_providers_enabled": settings.allow_remote_providers,
-            "worker_running": worker.running,
+            "internal_provider_origins": list(settings.internal_provider_origins),
+            "provider_ca_configured": settings.provider_ca_bundle is not None,
+            **execution_status(),
             "auth_enabled": bool(settings.token) or identities.enabled(),
         }
 

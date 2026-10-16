@@ -136,6 +136,8 @@ def doctor(
         "storage_free_bytes": free,
         "docker_available": docker_available(settings),
         "remote_providers_enabled": settings.allow_remote_providers,
+        "internal_provider_origins": list(settings.internal_provider_origins),
+        "provider_ca_configured": settings.provider_ca_bundle is not None,
         "auth_enabled": bool(settings.token) or team_enabled,
         "auth_mode": "team" if team_enabled else "workspace-token" if settings.token else "local",
         "issues": issues,
@@ -662,11 +664,13 @@ from cvals.autopilot_cli import register as _register_autopilot  # noqa: E402
 from cvals.budgeting_cli import register as _register_budgeting  # noqa: E402
 from cvals.community_cli import register as _register_community  # noqa: E402
 from cvals.demo_cli import register as _register_demo  # noqa: E402
+from cvals.rankings_cli import register as _register_rankings  # noqa: E402
 from cvals.research_cli import register as _register_research  # noqa: E402
 from cvals.variants import register as _register_variants  # noqa: E402
 
 _register_autopilot(app)
 _register_research(app)
+_register_rankings(app)
 _register_community(app)
 _register_demo(app)
 _register_budgeting(app)

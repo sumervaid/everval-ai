@@ -10,13 +10,14 @@ import httpx
 
 from cvals.agent_sdk import AgentLimits, AgentRequest, AgentResult, PublicTask
 from cvals.audit import _redact
+from cvals.config import Settings
 from cvals.models import Scenario, System, canonical_json, new_id
 from cvals.providers import (
     MAX_PROMPT_BYTES,
     MAX_RESPONSE_BYTES,
     Submission,
-    _pin_destination,
     _usage,
+    provider_http_options,
 )
 
 
@@ -27,7 +28,7 @@ def reservation(system: System) -> float:
     ) / 1_000_000
 
 
-def submit_external(scenario: Scenario, system: System) -> Submission:
+def submit_external(scenario: Scenario, system: System, settings: Settings) -> Submission:
     request = AgentRequest(
         request_id=new_id(),
         revision=system.adapter_revision,
@@ -64,9 +65,7 @@ def submit_external(scenario: Scenario, system: System) -> Submission:
                 timeout=httpx.Timeout(
                     system.timeout_seconds, connect=min(10, system.timeout_seconds)
                 ),
-                follow_redirects=False,
-                trust_env=False,
-                event_hooks={"request": [_pin_destination]},
+                **provider_http_options(system, settings),
             ) as client,
             client.stream(
                 "POST",

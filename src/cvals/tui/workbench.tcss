@@ -89,3 +89,11 @@ SelectionList { height: 7; background: $ev-ink; border: solid $ev-line; }
 #plan-log { height: 1fr; margin: 1 0; background: $ev-ink; }
 
 DataTable, RichLog, VerticalScroll, #actions { scrollbar-color: #355d5b; scrollbar-background: #0d1722; scrollbar-color-hover: #83d7c7; scrollbar-color-active: #83d7c7; }
+
+#ranking-summary { display: none; height: auto; max-height: 3; color: $ev-teal; padding: 0 0 1 0; }
+#ranking-help { display: none; height: auto; max-height: 2; color: $ev-muted; margin-bottom: 1; }
+.rankings-page #ledger-pane { width: 5fr; }
+.rankings-page #detail-pane { width: 2fr; }
+.compact.rankings-page #ledger-pane, .compact.rankings-page #detail-pane { width: 100%; }
+.short #ranking-summary { padding: 0; max-height: 2; }
+.short #ranking-help { margin-bottom: 0; max-height: 2; }

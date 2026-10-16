@@ -69,6 +69,10 @@ def ensure_worker(settings: Settings) -> dict[str, object]:
     environment["EVERVAL_SANDBOX_IMAGE"] = settings.sandbox_image
     environment["CVALS_ALLOW_REMOTE_PROVIDERS"] = str(settings.allow_remote_providers).lower()
     environment["EVERVAL_ALLOW_REMOTE_PROVIDERS"] = str(settings.allow_remote_providers).lower()
+    environment["EVERVAL_INTERNAL_PROVIDER_ORIGINS"] = ",".join(settings.internal_provider_origins)
+    environment["EVERVAL_PROVIDER_CA_BUNDLE"] = (
+        str(settings.provider_ca_bundle) if settings.provider_ca_bundle else ""
+    )
     with os.fdopen(descriptor, "a") as stream:
         process = subprocess.Popen(
             [sys.executable, "-m", "cvals", "worker"],
@@ -113,6 +117,11 @@ def tmux_session(settings: Settings, *, attach: bool = True) -> str:
             "EVERVAL_SANDBOX_IMAGE=" + settings.sandbox_image,
             "-e",
             "EVERVAL_ALLOW_REMOTE_PROVIDERS=" + str(settings.allow_remote_providers).lower(),
+            "-e",
+            "EVERVAL_INTERNAL_PROVIDER_ORIGINS=" + ",".join(settings.internal_provider_origins),
+            "-e",
+            "EVERVAL_PROVIDER_CA_BUNDLE="
+            + (str(settings.provider_ca_bundle) if settings.provider_ca_bundle else ""),
         ]
         if settings.docker_host:
             environment += [

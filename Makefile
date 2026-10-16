@@ -12,8 +12,8 @@ docs-check:
 	uv run python scripts/check_docs.py
 
 check: docs-check
-	uv run ruff check src tests scripts
-	uv run ruff format --check src tests scripts
+	uv run ruff check src tests scripts deploy
+	uv run ruff format --check src tests scripts deploy
 	uv run mypy src/cvals
 	cd web && npm run typecheck
 	cd web && npm test -- --run

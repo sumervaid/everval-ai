@@ -2,11 +2,11 @@
 
 ![Everval AI — know what improved, know what it cost](docs/assets/everval-banner.svg)
 
-**Continuous evaluation for agents doing real work.**
+**Continuous evaluation for agents doing real work, on your infrastructure.**
 
 Turn repository changes, documents, data tasks, and workflow simulations into repeatable evaluations. Compare quality, cost, and latency. Keep checking as your models, prompts, and code change—all from a local terminal workbench.
 
-[Quickstart](docs/quickstart.md) · [Use cases](docs/use-cases.md) · [Product tour](docs/product-tour.md) · [Documentation](docs/index.md) · [Evidence](docs/evidence/2026-10-15/README.md) · [Contribute](CONTRIBUTING.md)
+[Quickstart](docs/quickstart.md) · [On-premises deployment](docs/on-premises.md) · [Use cases](docs/use-cases.md) · [Product tour](docs/product-tour.md) · [Documentation](docs/index.md) · [Evidence](docs/evidence/2026-10-15/README.md) · [Contribute](CONTRIBUTING.md)
 
 **See the whole workflow:** [Follow one shopping-cart bug from repository to recurring checks](docs/worked-example.md).
 
@@ -34,13 +34,14 @@ These are installation controls, not a model leaderboard. [Open the demo in tmux
 | Your question | Everval's workflow |
 | --- | --- |
 | **Did our coding agent improve?** | Reconstruct tasks from repository history, validate fail-before/pass-after behavior, freeze a cohort, and compare systems. [Repository guide →](docs/github.md) |
+| **Which model works best on each of our benchmarks?** | Scan a model-by-benchmark matrix, switch quality/cost/latency, and inspect the exact evidence. [Rankings →](docs/rankings.md) |
 | **Is the cheaper model good enough?** | Compare success, cost per passing attempt, and latency on the same workload. Retain errors and unknown accounting. [Economics →](docs/cost-latency.md) |
 | **What broke after a change?** | Link runs to revisions, inspect failure evidence, and regrade stored outputs without another model call. [Investigate →](docs/diagnostics.md) |
 | **Can we keep checking automatically?** | Schedule bounded screening, escalate to full evaluation, and inspect recurring budget projections. [Autopilot →](docs/autopilot.md) |
 | **Which configuration should we ship?** | Compare saved candidates, validate the selected candidate against a reserved holdout, and review a proposal. [Research lab →](docs/research-loop.md) |
 | **Can this evaluate more than code?** | Use reviewed document, structured-data, and workflow tasks with explicit success criteria. [Task packs →](examples/community/README.md) |
 
-The terminal is the primary interface: twelve views, a command palette, tmux sessions, and a durable local worker. The CLI and API use the same core. An optional browser gives reviewers blinded assignments and role-based access. [See the product tour →](docs/product-tour.md)
+The terminal is the primary interface: thirteen views, a command palette, tmux sessions, and a durable local worker. The CLI and API use the same core. An optional browser gives reviewers blinded assignments and role-based access. [See the product tour →](docs/product-tour.md)
 
 ## From real work to a decision
 
@@ -68,7 +69,7 @@ uv run everval init --starters
 uv run everval tmux
 ```
 
-Install [tmux](https://github.com/tmux/tmux/wiki) for the session launcher, or run `uv run everval tui` directly. Press **Ctrl+N** to connect a repository, **F9** for a guided run, and **Ctrl+P** for commands. **Ctrl+B, D** detaches tmux while queued work continues.
+Install [tmux](https://github.com/tmux/tmux/wiki) for the session launcher, or run `uv run everval tui` directly. Press **Ctrl+L** for rankings, **Ctrl+N** to connect a repository, **F9** for a guided run, and **Ctrl+P** for commands. **Ctrl+B, D** detaches tmux while queued work continues.
 
 Python and JavaScript/TypeScript repository execution require Docker and a prepared runtime. GitHub onboarding uses Git and the [GitHub CLI](https://cli.github.com/). Node.js is only needed to build the optional browser interface. [Setup and first experiment →](docs/quickstart.md)
 
@@ -93,7 +94,7 @@ Workspaces live locally; the default is `~/.local/share/everval`. Set `EVERVAL_D
 
 Imported code runs in supported isolated runtimes. Hidden graders, traces, credentials, and repository mirrors stay outside Git. [Storage, network, and operating boundaries →](docs/operations.md)
 
-The supported deployment is one local workspace and worker, with optional authenticated browser roles. SSO, tenant isolation, distributed execution, and compliance certification are outside this release. [Current scope](docs/PLAN.md) · [Security](SECURITY.md)
+The supported deployment is one on-premises workspace and worker, with optional authenticated browser roles. Follow the [enterprise installation guide](docs/on-premises.md) for service templates, internal inference, access, backups and upgrades. SSO, tenant isolation, distributed execution, and compliance certification are outside this release. [Current scope](docs/PLAN.md) · [Security](SECURITY.md)
 
 ## Make it useful for your team—and others
 
