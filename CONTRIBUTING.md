@@ -4,8 +4,8 @@ Start with a small, reproducible improvement: fix a bug, clarify a workflow, imp
 
 ## Choose a starting point
 
-- **Fix a bug:** describe the smallest reproduction and the expected behavior in a [bug report](https://github.com/sumervaid/everval-ai/issues/new?template=bug-report.yml).
-- **Improve a workflow:** open a [feature request](https://github.com/sumervaid/everval-ai/issues/new?template=feature-request.yml) with the user's task and a concrete success criterion.
+- **Fix a bug:** describe the smallest reproduction and the expected behavior in a [bug report](https://github.com/sumervaid/everval-continuous-benchmarking/issues/new?template=bug-report.yml).
+- **Improve a workflow:** open a [feature request](https://github.com/sumervaid/everval-continuous-benchmarking/issues/new?template=feature-request.yml) with the user's task and a concrete success criterion.
 - **Add evaluation material:** read the [scenario contract](docs/scenarios.md) and [community pack guide](docs/community-packs.md). Use the dedicated task-pack, grader, or adapter proposal form.
 - **Improve documentation:** a focused pull request with corrected steps or examples is enough.
 

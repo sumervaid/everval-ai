@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         Start with the user's task and the decision this would improve.
-        Check the [delivery status](https://github.com/sumervaid/everval-ai/blob/main/docs/PLAN.md) first.
+        Check the [delivery status](https://github.com/sumervaid/everval-continuous-benchmarking/blob/main/docs/PLAN.md) first.
         Use the dedicated proposal forms for task packs, graders, or agent adapters.
   - type: textarea
     id: problem

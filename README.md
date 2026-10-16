@@ -1,4 +1,4 @@
-# Everval AI
+# Everval AI — Continuous benchmarking for AI agents
 
 ![Everval AI — know what improved, know what it cost](docs/assets/everval-banner.svg)
 
@@ -15,8 +15,8 @@ Turn repository changes, documents, data tasks, and workflow simulations into re
 You need Git, Python 3.12+, and [uv](https://docs.astral.sh/uv/getting-started/installation/). The source is currently private; cloning requires repository access.
 
 ```sh
-git clone https://github.com/sumervaid/everval-ai.git
-cd everval-ai
+git clone https://github.com/sumervaid/everval-continuous-benchmarking.git
+cd everval-continuous-benchmarking
 uv sync --frozen
 uv run everval demo
 ```

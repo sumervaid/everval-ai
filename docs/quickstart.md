@@ -11,8 +11,8 @@ For the big picture first, read [one plain-language example of the entire workfl
 You need Git, Python 3.12 or newer, and uv. Install tmux to use the split terminal workspace; the standalone terminal interface also works. Cloning currently requires access to the private repository.
 
 ```sh
-git clone https://github.com/sumervaid/everval-ai.git
-cd everval-ai
+git clone https://github.com/sumervaid/everval-continuous-benchmarking.git
+cd everval-continuous-benchmarking
 uv sync --frozen
 ```
 

@@ -7,7 +7,7 @@ body:
       value: |
         Describe a minimal reproduction using original or synthetic data.
         Keep credentials, private task material, hidden checks, model traces, and workspace exports out of the report.
-        For a vulnerability, follow the [private security reporting route](https://github.com/sumervaid/everval-ai/blob/main/SECURITY.md#reporting-a-vulnerability).
+        For a vulnerability, follow the [private security reporting route](https://github.com/sumervaid/everval-continuous-benchmarking/blob/main/SECURITY.md#reporting-a-vulnerability).
   - type: dropdown
     id: area
     attributes:

@@ -431,7 +431,7 @@ export function SettingsPage({ workspace }: { workspace: Workspace }) {
         <div className="panel-body">
           <a
             className="text-link"
-            href="https://github.com/sumervaid/everval-ai#readme"
+            href="https://github.com/sumervaid/everval-continuous-benchmarking#readme"
             target="_blank"
             rel="noreferrer"
           >

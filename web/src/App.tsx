@@ -333,7 +333,7 @@ function Workbench() {
               Settings & setup
             </a>
           )}
-          <a href="https://github.com/sumervaid/everval-ai" target="_blank" rel="noreferrer">
+          <a href="https://github.com/sumervaid/everval-continuous-benchmarking" target="_blank" rel="noreferrer">
             <BookOpen size={17} />
             Documentation
             <ArrowUpRight size={13} className="end-icon" />
