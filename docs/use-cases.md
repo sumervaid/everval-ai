@@ -76,6 +76,6 @@ The worker must remain running. Unknown billing holds the affected automatic adm
 
 The bundled examples are original installation controls. Public repositories used in benchmarks are external subjects. Their inclusion does not imply a customer relationship, partnership or maintainer endorsement. Read each result's task selection, execution settings and limits before applying it to your own work.
 
-The [public repository pilot protocol](benchmarks/public-repositories-2026-10-15/methodology.md) specifies a matched comparison on Flask, Requests, pytest and Sphinx. It includes the frozen task selection, baseline, grading contract and spending limits; it does not yet report model outcomes.
+The [public repository pilot](benchmarks/public-repositories-2026-10-15/results.md) records completed attempts, cost and latency for admitted Flask, pytest and Sphinx tasks. The frozen selection also includes Requests tasks, which failed admission controls and remain excluded. Results separate observed resolutions from comparable graded pairs and retain unknown spending.
 
 For a simple explanation of the whole process, follow [one shopping-cart bug from discovery to decision](worked-example.md).

@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-16T01:55:17.458257+00:00",
+  "source_report_sha256": "6764d3b1462668807b318883c24cc160ea838e9d41b6b116374ecd8cf6fc1e75",
+  "plan_sha256": "fa30392969d40d790fc36f6806c18f479a22034fd8ed69f71aadf16a2438f597",
+  "amendment_sha256": "39b40733c6d57f545047827ed79ca8e692cb923eb393f4978797f6784d917795",
+  "ledger_events_sha256": "26977fc7f7d417806675c491ac7b79ac2001f474490179eb3ba7b9a8034734fc",
+  "ledger_event_count": 345,
+  "ledger_request_state_counts": {
+    "settled": 158,
+    "uncertain": 4
+  },
+  "retained_attempt_results_verified": 16,
+  "matched_quality_test": {
+    "scope": "Admitted test pairs with both grading_status=graded and required_tests_observed=true; both costs complete and durations observed.",
+    "instance_ids": [
+      "pallets__flask-5063",
+      "pytest-dev__pytest-11143",
+      "sphinx-doc__sphinx-11445",
+      "sphinx-doc__sphinx-10325"
+    ],
+    "pairs": 4,
+    "arms": {
+      "baseline": {
+        "attempts": 4,
+        "resolved": 4,
+        "outcome_counts": {
+          "resolved": 4
+        },
+        "known_cost_usd": "0.7716725",
+        "cost_complete": true,
+        "retained_reserved_usd": "0",
+        "outstanding_allocation_usd": "0",
+        "committed_cost_usd": "0.7716725",
+        "provider_request_admissions": 44,
+        "settled_requests": 44,
+        "uncertain_requests": 0,
+        "pending_requests": 0,
+        "known_input_tokens": 244245,
+        "known_output_tokens": 16106,
+        "latency_observations": 4,
+        "median_solver_seconds": 61.844648125000276,
+        "sum_solver_seconds": 388.2280103760004
+      },
+      "everval": {
+        "attempts": 4,
+        "resolved": 4,
+        "outcome_counts": {
+          "resolved": 4
+        },
+        "known_cost_usd": "1.1182325",
+        "cost_complete": true,
+        "retained_reserved_usd": "0",
+        "outstanding_allocation_usd": "0",
+        "committed_cost_usd": "1.1182325",
+        "provider_request_admissions": 59,
+        "settled_requests": 59,
+        "uncertain_requests": 0,
+        "pending_requests": 0,
+        "known_input_tokens": 386001,
+        "known_output_tokens": 15323,
+        "latency_observations": 4,
+        "median_solver_seconds": 115.29025881250072,
+        "sum_solver_seconds": 446.2494257920025
+      }
+    },
+    "both_resolved": 4,
+    "review_only_resolved": 0,
+    "baseline_only_resolved": 0,
+    "review_minus_baseline_total_cost_usd": "0.34656",
+    "aggregate_cost_ratio_formula": "sum(review known cost)/sum(baseline known cost), on these same four pairs",
+    "aggregate_review_to_baseline_cost_ratio": "1.4491024365906521225001538865256958100748698443964",
+    "aggregate_review_cost_percent_change": "44.910243659065212250015388652569581007486984439640",
+    "review_minus_baseline_total_solver_seconds": 58.02141541600213,
+    "aggregate_duration_ratio_formula": "sum(review solver seconds)/sum(baseline solver seconds), on these same four pairs",
+    "aggregate_review_to_baseline_duration_ratio": 1.1494519042039448,
+    "aggregate_review_duration_percent_change": 14.945190420394482,
+    "median_within_pair_cost_difference_usd": "0.08857625",
+    "median_within_pair_duration_difference_seconds": 20.044955166000364,
+    "median_within_pair_duration_ratio": 1.358451878839925,
+    "per_pair": [
+      {
+        "instance_id": "pallets__flask-5063",
+        "baseline": {
+          "resolved": true,
+          "known_cost_usd": "0.1405125",
+          "cost_complete": true,
+          "duration_seconds": 61.929530249999516,
+          "provider_calls": 11
+        },
+        "everval": {
+          "resolved": true,
+          "known_cost_usd": "0.32356",
+          "cost_complete": true,
+          "duration_seconds": 158.50597341700086,
+          "provider_calls": 17
+        },
+        "review_minus_baseline_cost_usd": "0.1830475",
+        "review_to_baseline_cost_ratio": "2.3027132817365003113601992705275331376212080775732",
+        "review_minus_baseline_seconds": 96.57644316700134,
+        "review_to_baseline_duration_ratio": 2.55945705993793
+      },
+      {
+        "instance_id": "pytest-dev__pytest-11143",
+        "baseline": {
+          "resolved": true,
+          "known_cost_usd": "0.1227",
+          "cost_complete": true,
+          "duration_seconds": 45.474426958999175,
+          "provider_calls": 9
+        },
+        "everval": {
+          "resolved": true,
+          "known_cost_usd": "0.20927",
+          "cost_complete": true,
+          "duration_seconds": 57.162934750000204,
+          "provider_calls": 12
+        },
+        "review_minus_baseline_cost_usd": "0.08657",
+        "review_to_baseline_cost_ratio": "1.7055419722901385493072534637326813365933170334148",
+        "review_minus_baseline_seconds": 11.68850779100103,
+        "review_to_baseline_duration_ratio": 1.2570347461781028
+      },
+      {
+        "instance_id": "sphinx-doc__sphinx-11445",
+        "baseline": {
+          "resolved": true,
+          "known_cost_usd": "0.0993",
+          "cost_complete": true,
+          "duration_seconds": 61.759766000001036,
+          "provider_calls": 8
+        },
+        "everval": {
+          "resolved": true,
+          "known_cost_usd": "0.1898825",
+          "cost_complete": true,
+          "duration_seconds": 90.16116854100073,
+          "provider_calls": 13
+        },
+        "review_minus_baseline_cost_usd": "0.0905825",
+        "review_to_baseline_cost_ratio": "1.9122104733131923464249748237663645518630412890232",
+        "review_minus_baseline_seconds": 28.401402540999698,
+        "review_to_baseline_duration_ratio": 1.4598690115017472
+      },
+      {
+        "instance_id": "sphinx-doc__sphinx-10325",
+        "baseline": {
+          "resolved": true,
+          "known_cost_usd": "0.40916",
+          "cost_complete": true,
+          "duration_seconds": 219.06428716700066,
+          "provider_calls": 16
+        },
+        "everval": {
+          "resolved": true,
+          "known_cost_usd": "0.39552",
+          "cost_complete": true,
+          "duration_seconds": 140.41934908400071,
+          "provider_calls": 17
+        },
+        "review_minus_baseline_cost_usd": "-0.01364",
+        "review_to_baseline_cost_ratio": "0.96666340795776713266203930002932838009580604164630",
+        "review_minus_baseline_seconds": -78.64493808299994,
+        "review_to_baseline_duration_ratio": 0.6409960788220763
+      }
+    ]
+  },
+  "operational": {
+    "test": {
+      "baseline": {
+        "attempts": 7,
+        "resolved": 4,
+        "outcome_counts": {
+          "incomplete": 3,
+          "resolved": 4
+        },
+        "known_cost_usd": "0.7716725",
+        "cost_complete": false,
+        "retained_reserved_usd": "0.3723275",
+        "outstanding_allocation_usd": "0.3723275",
+        "committed_cost_usd": "1.144",
+        "provider_request_admissions": 47,
+        "settled_requests": 44,
+        "uncertain_requests": 3,
+        "pending_requests": 0,
+        "known_input_tokens": 244245,
+        "known_output_tokens": 16106,
+        "latency_observations": 7,
+        "median_solver_seconds": 91.63566033400093,
+        "sum_solver_seconds": 691.4511301270013
+      },
+      "everval": {
+        "attempts": 7,
+        "resolved": 6,
+        "outcome_counts": {
+          "incomplete": 1,
+          "resolved": 6
+        },
+        "known_cost_usd": "1.744005",
+        "cost_complete": false,
+        "retained_reserved_usd": "0.1194075",
+        "outstanding_allocation_usd": "0.1194075",
+        "committed_cost_usd": "1.8634125",
+        "provider_request_admissions": 91,
+        "settled_requests": 90,
+        "uncertain_requests": 1,
+        "pending_requests": 0,
+        "known_input_tokens": 612094,
+        "known_output_tokens": 21377,
+        "latency_observations": 7,
+        "median_solver_seconds": 92.38838504199884,
+        "sum_solver_seconds": 722.1138340840025
+      }
+    },
+    "development": {
+      "baseline": {
+        "attempts": 1,
+        "resolved": 1,
+        "outcome_counts": {
+          "resolved": 1
+        },
+        "known_cost_usd": "0.145025",
+        "cost_complete": true,
+        "retained_reserved_usd": "0",
+        "outstanding_allocation_usd": "0",
+        "committed_cost_usd": "0.145025",
+        "provider_request_admissions": 10,
+        "settled_requests": 10,
+        "uncertain_requests": 0,
+        "pending_requests": 0,
+        "known_input_tokens": 50750,
+        "known_output_tokens": 1815,
+        "latency_observations": 1,
+        "median_solver_seconds": 59.86103800000001,
+        "sum_solver_seconds": 59.86103800000001
+      },
+      "everval": {
+        "attempts": 1,
+        "resolved": 0,
+        "outcome_counts": {
+          "submitted_unresolved": 1
+        },
+        "known_cost_usd": "0.2240525",
+        "cost_complete": true,
+        "retained_reserved_usd": "0",
+        "outstanding_allocation_usd": "0",
+        "committed_cost_usd": "0.2240525",
+        "provider_request_admissions": 14,
+        "settled_requests": 14,
+        "uncertain_requests": 0,
+        "pending_requests": 0,
+        "known_input_tokens": 79969,
+        "known_output_tokens": 2413,
+        "latency_observations": 1,
+        "median_solver_seconds": 78.2700375000004,
+        "sum_solver_seconds": 78.2700375000004
+      }
+    },
+    "all_pilot_attempts": {
+      "baseline": {
+        "attempts": 8,
+        "resolved": 5,
+        "outcome_counts": {
+          "incomplete": 3,
+          "resolved": 5
+        },
+        "known_cost_usd": "0.9166975",
+        "cost_complete": false,
+        "retained_reserved_usd": "0.3723275",
+        "outstanding_allocation_usd": "0.3723275",
+        "committed_cost_usd": "1.289025",
+        "provider_request_admissions": 57,
+        "settled_requests": 54,
+        "uncertain_requests": 3,
+        "pending_requests": 0,
+        "known_input_tokens": 294995,
+        "known_output_tokens": 17921,
+        "latency_observations": 8,
+        "median_solver_seconds": 76.78259529200022,
+        "sum_solver_seconds": 751.3121681270013
+      },
+      "everval": {
+        "attempts": 8,
+        "resolved": 6,
+        "outcome_counts": {
+          "incomplete": 1,
+          "resolved": 6,
+          "submitted_unresolved": 1
+        },
+        "known_cost_usd": "1.9680575",
+        "cost_complete": false,
+        "retained_reserved_usd": "0.1194075",
+        "outstanding_allocation_usd": "0.1194075",
+        "committed_cost_usd": "2.087465",
+        "provider_request_admissions": 105,
+        "settled_requests": 104,
+        "uncertain_requests": 1,
+        "pending_requests": 0,
+        "known_input_tokens": 692063,
+        "known_output_tokens": 23790,
+        "latency_observations": 8,
+        "median_solver_seconds": 91.27477679149979,
+        "sum_solver_seconds": 800.3838715840029
+      }
+    }
+  },
+  "accounting": {
+    "prior_acceptance_usd": "0.482999",
+    "known_new_pilot_usd": "2.884755",
+    "known_cumulative_usd": "3.367754",
+    "retained_uncertain_reservation_usd": "0.491735",
+    "committed_new_pilot_usd": "3.37649",
+    "committed_cumulative_usd": "3.859489",
+    "user_ceiling_usd": "200",
+    "headroom_to_user_ceiling_usd": "196.140511",
+    "cost_complete": false,
+    "uncertain_requests": 4,
+    "uncertain_attempts": [
+      {
+        "attempt_id": "pallets__flask-4045.baseline",
+        "state": "uncertain",
+        "reserved_usd": "0.1187025",
+        "known_cost_usd": "0",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      {
+        "attempt_id": "pallets__flask-4045.everval",
+        "state": "uncertain",
+        "reserved_usd": "0.1194075",
+        "known_cost_usd": "0",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      {
+        "attempt_id": "pytest-dev__pytest-11148.baseline",
+        "state": "uncertain",
+        "reserved_usd": "0.1263625",
+        "known_cost_usd": "0",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      {
+        "attempt_id": "pytest-dev__pytest-9359.baseline",
+        "state": "uncertain",
+        "reserved_usd": "0.1272625",
+        "known_cost_usd": "0",
+        "input_tokens": null,
+        "output_tokens": null
+      }
+    ]
+  },
+  "limitations": [
+    "Matched repair outcomes are all ties; no demonstrated quality advantage.",
+    "Two additional operational review successes have interrupted, ungraded baselines.",
+    "Development is separate and favors baseline on its one graded pair.",
+    "One attempt per arm on a purposive Python subset; no repeatability or superiority claim.",
+    "Costs use frozen configured token rates, not invoices; all-arm test cost completeness is false.",
+    "Committed reserves are budget allocations for unknown usage, not confirmed charges.",
+    "Solver elapsed time includes setup/cleanup and excludes grading and campaign recovery waits.",
+    "Operational medians include interruptions; matched metrics use the same four fully graded pairs."
+  ]
+}

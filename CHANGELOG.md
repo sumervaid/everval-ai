@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Added explicit, evidence-bound benchmark continuation for inspected output-limit errors with unknown usage. Full reservations and earlier outcomes remain intact; started attempts are never retried.
+- Separated terminal attempt coverage from comparable graded outcomes and added matched cost/latency reporting.
+- Completed the scheduled [public repository pilot](docs/benchmarks/public-repositories-2026-10-15/results.md), retaining exclusions, interrupted attempts and accounting limits alongside the results.
+
 ## 0.3.1 — 2026-10-15
 
 - Retained unknown usage after interrupted HTTP attempts even when configured token prices are zero, preventing recovery from treating an uncertain charge as free.

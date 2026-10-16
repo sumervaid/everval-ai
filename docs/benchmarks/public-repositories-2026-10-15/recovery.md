@@ -1,8 +1,8 @@
 # Bounded accounting recovery
 
-This is an explicit **post-outcome accounting amendment** to the [public repository pilot](methodology.md). The initial comparison stopped after an inspected HTTP 400 output-limit response omitted usage. The earlier outcomes and [partial report](results.md) remain part of the record.
+This is an explicit **post-outcome accounting amendment** to the [public repository pilot](methodology.md). The initial comparison stopped after an inspected HTTP 400 output-limit response omitted usage. The earlier outcomes and [original partial export](partial-summary.json) remain part of the record.
 
-**Verification status:** 423 benchmark-runner tests passed, including a complete recovery lifecycle using retained fixture artifacts and SQLite: amendment, individual review, continuation and report export. The amendment has not yet been applied to this pilot's real ledger, and no amended paid run has started.
+**Verification status:** 423 benchmark-runner tests passed; two opt-in Docker cases were deselected. The tests include a full retained-artifact and SQLite recovery lifecycle. The amendment was then applied to this pilot's existing ledger, and all 16 admitted attempts reached terminal records without retries. Four output-limit requests were individually reviewed; their usage remains unknown and their full reservations remain committed. Four test pairs have comparable grades and all tied; three are unevaluable for repair quality. See the [recorded outcomes](results.md) and [final metadata](final-summary.json) for the incomplete accounting and separate quality coverage.
 
 ## What the amendment permits
 

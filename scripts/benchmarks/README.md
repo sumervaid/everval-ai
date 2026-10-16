@@ -2,7 +2,7 @@
 
 This optional research runner compares an upstream coding-agent workflow with one explicit review checkpoint on a frozen SWE-bench Lite cohort. It uses Everval's local evidence and accounting conventions with the official SWE-bench grading contract. It is separate from the curated-task TUI runtime. Evaluation operators can use it to compare whether one review checkpoint changes successful repairs and recorded cost on this cohort. Adoption decisions still need their own authorized tasks; see the [enterprise use cases](../../docs/use-cases.md).
 
-Read the [frozen protocol](../../docs/benchmarks/public-repositories-2026-10-15/methodology.md) before interpreting a score. This is a small native ARM pilot, not an official leaderboard submission. The [partial results](../../docs/benchmarks/public-repositories-2026-10-15/results.md) record one completed test pair and an accounting stop; six admitted pairs remain pending.
+Read the [frozen protocol](../../docs/benchmarks/public-repositories-2026-10-15/methodology.md) before interpreting a score. This is a small native ARM pilot, not an official leaderboard submission. The [results](../../docs/benchmarks/public-repositories-2026-10-15/results.md) retain all scheduled attempts, exclusions and unresolved usage. The [accounting amendment](../../docs/benchmarks/public-repositories-2026-10-15/recovery.md) explains the bounded continuation.
 
 ## What you need
 
