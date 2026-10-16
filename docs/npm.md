@@ -152,8 +152,13 @@ npm pack ./dist/npm-public --ignore-scripts --pack-destination dist
 
 Review the archive, record its checksum, install that exact tarball in an
 isolated prefix, and run setup plus the no-key demo before publication.
-Authenticate on the publishing host with `npm login`, then publish the same
-accepted archive:
+Publishing through the CLI requires an npm account with two-factor
+authentication enabled. Configure it through the
+[npm account settings](https://docs.npmjs.com/configuring-two-factor-authentication/)
+before authenticating on the publishing host with `npm login`. Login and
+publication can require separate browser approvals. Run publishing from an
+interactive terminal so npm can present its authentication flow, then publish
+the same accepted archive:
 
 ```sh
 npm publish ./dist/everval-ai-0.3.1.tgz --access public --ignore-scripts
