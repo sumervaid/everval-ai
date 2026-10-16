@@ -1,0 +1,1743 @@
+{
+  "schema_version": 1,
+  "campaign_id": "public-repositories-20261015",
+  "plan_sha256": "fa30392969d40d790fc36f6806c18f479a22034fd8ed69f71aadf16a2438f597",
+  "selection_sha256": "4698b8cd1b4eb0637018690c594c9ab81477920adc7d05fc91dba46f242b64bb",
+  "model": {
+    "model_name": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "max_completion_tokens": 8192
+  },
+  "pricing": {
+    "pricing_version": "openai-standard-short-context-2026-10-15-input-cache-write-upper-bound",
+    "input_rate_per_million": "2.50",
+    "output_rate_per_million": "10"
+  },
+  "execution": {
+    "step_limit": 250,
+    "cost_limit": 6.0,
+    "wall_time_limit_seconds": 1800,
+    "command_timeout": 60
+  },
+  "source_sha256": {
+    "scripts/benchmarks/budget.py": "6feb66bb98decc360f090cecb450adce4600e2ea5c4facaf36323f239e49372b",
+    "scripts/benchmarks/campaign.py": "97d8c9949a099e17c05269151f12b6d2697b7f640d7e3a639756951f9b502197",
+    "scripts/benchmarks/executor.py": "56c86df3c7e6d4970ffac83e6c3af590f5cdc2aad321a0d1a7b1026da2eae487",
+    "scripts/benchmarks/freeze.py": "baa762e50118ec2a5b57121d07fcf8991ac131da69be9994821abd4c2ec5af1e",
+    "scripts/benchmarks/model.py": "57f35ef6a745b9b69ee95a6cf23d6df4a859ac21d94230f5b9c65d352927158e",
+    "scripts/benchmarks/prepare.py": "0491acfb71368d684cf46bf796f079ca73eae1603f918af60c89bc6c65298508",
+    "scripts/benchmarks/report.py": "fc8f20d2acd8376f5c3015c8c3b60b34c7ffef53030f9f7d5de621688823d290",
+    "scripts/benchmarks/repository_setup.py": "5cc506e151f281dd4a1e67c26a36e249465268f7e5b8fed2044d69528c722514",
+    "scripts/benchmarks/smoke.py": "01844e4657c2f3809205b51853583af9f675e5878eae0340dc2bab52e9ae0fd6",
+    "src/cvals/providers.py": "e4d4626baa2ba439bd9c753f98c775ddabe1347e0dd8d5e77176c6953ba38e18",
+    "src/cvals/models.py": "37b656eaacc043d9c71eab9fa4c95773a3c64ed8db8fbdb88b817d0726039335"
+  },
+  "accounting": {
+    "opening_spend_usd": "0.482999",
+    "known_spend_usd": "1.316149",
+    "committed_spend_usd": "1.4348515",
+    "pending_requests": 0,
+    "uncertain_requests": 1,
+    "cost_complete": false,
+    "evidence_reconciled": true,
+    "admission_ceiling_usd": "190",
+    "user_ceiling_usd": "200"
+  },
+  "development": {
+    "complete": true,
+    "arms": {
+      "baseline": {
+        "selected_tasks": 3,
+        "admitted_tasks": 1,
+        "resolved": 1,
+        "not_run": 0,
+        "excluded": 2,
+        "outcome_counts": {
+          "excluded": 2,
+          "resolved": 1
+        },
+        "selected_resolution_rate": 0.3333333333333333,
+        "admitted_resolution_rate": 1.0,
+        "known_cost_usd": "0.145025",
+        "cost_complete": true,
+        "cost_per_resolved_usd": "0.145025",
+        "median_attempt_seconds": 59.86103800000001,
+        "latency_observations": 1,
+        "provider_calls": 10,
+        "known_input_tokens": 50750,
+        "known_output_tokens": 1815
+      },
+      "everval": {
+        "selected_tasks": 3,
+        "admitted_tasks": 1,
+        "resolved": 0,
+        "not_run": 0,
+        "excluded": 2,
+        "outcome_counts": {
+          "excluded": 2,
+          "submitted_unresolved": 1
+        },
+        "selected_resolution_rate": 0.0,
+        "admitted_resolution_rate": 0.0,
+        "known_cost_usd": "0.2240525",
+        "cost_complete": true,
+        "cost_per_resolved_usd": null,
+        "median_attempt_seconds": 78.2700375000004,
+        "latency_observations": 1,
+        "provider_calls": 14,
+        "known_input_tokens": 79969,
+        "known_output_tokens": 2413
+      }
+    },
+    "paired": {
+      "admitted_pairs": 1,
+      "completed_pairs": 1,
+      "pending_pairs": 0,
+      "everval_only_resolved": 0,
+      "baseline_only_resolved": 1,
+      "both_resolved": 0,
+      "neither_resolved": 0,
+      "resolution_difference": -1,
+      "comparison_final": true
+    }
+  },
+  "test": {
+    "complete": false,
+    "arms": {
+      "baseline": {
+        "selected_tasks": 12,
+        "admitted_tasks": 7,
+        "resolved": 1,
+        "not_run": 5,
+        "excluded": 5,
+        "outcome_counts": {
+          "excluded": 5,
+          "incomplete": 1,
+          "not_run": 5,
+          "resolved": 1
+        },
+        "selected_resolution_rate": 0.08333333333333333,
+        "admitted_resolution_rate": 0.14285714285714285,
+        "known_cost_usd": "0.1405125",
+        "cost_complete": false,
+        "cost_per_resolved_usd": null,
+        "median_attempt_seconds": 76.78259529200022,
+        "latency_observations": 2,
+        "provider_calls": 12,
+        "known_input_tokens": 47453,
+        "known_output_tokens": 2188
+      },
+      "everval": {
+        "selected_tasks": 12,
+        "admitted_tasks": 7,
+        "resolved": 1,
+        "not_run": 6,
+        "excluded": 5,
+        "outcome_counts": {
+          "excluded": 5,
+          "not_run": 6,
+          "resolved": 1
+        },
+        "selected_resolution_rate": 0.08333333333333333,
+        "admitted_resolution_rate": 0.14285714285714285,
+        "known_cost_usd": "0.32356",
+        "cost_complete": true,
+        "cost_per_resolved_usd": "0.32356",
+        "median_attempt_seconds": 158.50597341700086,
+        "latency_observations": 1,
+        "provider_calls": 17,
+        "known_input_tokens": 96500,
+        "known_output_tokens": 8231
+      }
+    },
+    "paired": {
+      "admitted_pairs": 7,
+      "completed_pairs": 1,
+      "pending_pairs": 6,
+      "everval_only_resolved": 0,
+      "baseline_only_resolved": 0,
+      "both_resolved": 1,
+      "neither_resolved": 0,
+      "resolution_difference": 0,
+      "comparison_final": false
+    }
+  },
+  "tasks": [
+    {
+      "instance_id": "pallets__flask-5063",
+      "repository": "pallets/flask",
+      "split": "test",
+      "base_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4",
+      "task_sha256": "6d92256c241d4e3f1907c014ca9c16084b388536c62ae55d6ad1646e4352bcda",
+      "image_id": "sha256:3b3d1b2594a319a7246990041c7128d5a5b911d489aec2290606474826a769da",
+      "admitted": true,
+      "control_sha256": "5b48eb1b6fe8e5fac37e88cb20faae368c8ebadc3d8a83813f7e6e22dce9131a",
+      "controls": {
+        "valid": true,
+        "required_counts": {
+          "fail_to_pass": 2,
+          "pass_to_pass": 54
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 2,
+            "PASSED": 54
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 2
+            },
+            "pass_to_pass": {
+              "PASSED": 54
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "PASSED": 56
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 2
+            },
+            "pass_to_pass": {
+              "PASSED": 54
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": true,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 0
+        }
+      },
+      "exclusion_reason": null,
+      "arms": {
+        "baseline": {
+          "outcome": "resolved",
+          "resolved": true,
+          "submitted": true,
+          "exit_status": "Submitted",
+          "known_cost_usd": "0.1405125",
+          "cost_complete": true,
+          "provider_calls": 11,
+          "known_input_tokens": 47453,
+          "known_output_tokens": 2188,
+          "duration_seconds": 61.929530249999516,
+          "steps": 11,
+          "review_checkpoint_used": false,
+          "result_sha256": "b1bbec0dad7a690607f8e36afe5ee24c61f21dd03c466b55704479c810cafc59",
+          "required_tests_observed": true,
+          "required_tests_passed": true,
+          "grading_status": "graded",
+          "test_suite_exit_code": 0,
+          "container_script_returncode": 0,
+          "observed_test_status_counts": {
+            "PASSED": 56
+          }
+        },
+        "everval": {
+          "outcome": "resolved",
+          "resolved": true,
+          "submitted": true,
+          "exit_status": "Submitted",
+          "known_cost_usd": "0.32356",
+          "cost_complete": true,
+          "provider_calls": 17,
+          "known_input_tokens": 96500,
+          "known_output_tokens": 8231,
+          "duration_seconds": 158.50597341700086,
+          "steps": 17,
+          "review_checkpoint_used": true,
+          "result_sha256": "9f7affa8a164de1772fd67b336a39955868cacb33600fd5f59dd199e9576f7af",
+          "required_tests_observed": true,
+          "required_tests_passed": true,
+          "grading_status": "graded",
+          "test_suite_exit_code": 0,
+          "container_script_returncode": 0,
+          "observed_test_status_counts": {
+            "PASSED": 56
+          }
+        }
+      }
+    },
+    {
+      "instance_id": "pallets__flask-4992",
+      "repository": "pallets/flask",
+      "split": "test",
+      "base_commit": "4c288bc97ea371817199908d0d9b12de9dae327e",
+      "task_sha256": "41e297bcc1f98ca26342b3de945fe73f5d9aa1f5709ef3d9a7bbc74fb375e5b5",
+      "image_id": "sha256:1c2fdc180835ecb5931bd358f9171fbea285bda90675e4623ea441046f2c4cd8",
+      "admitted": false,
+      "control_sha256": "221d0820e3c6318fb835a46cbe9d5dfe45d015eced32c2e5cc76be41f76b0c7b",
+      "controls": {
+        "valid": false,
+        "required_counts": {
+          "fail_to_pass": 1,
+          "pass_to_pass": 18
+        },
+        "base": {
+          "status": "infrastructure_error",
+          "setup_error_detected": true,
+          "observed_status_counts": {
+            "FAILED": 1,
+            "PASSED": 18
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 18
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "infrastructure_error",
+          "setup_error_detected": true,
+          "observed_status_counts": {
+            "PASSED": 19
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 18
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": true,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 0
+        }
+      },
+      "exclusion_reason": "control_contract_failed",
+      "arms": {
+        "baseline": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "pallets__flask-4045",
+      "repository": "pallets/flask",
+      "split": "test",
+      "base_commit": "d8c37f43724cd9fb0870f77877b7c4c7e38a19e0",
+      "task_sha256": "6eecf00dd1518fd42b9ff93de0bf7419723ab4c9eefd5ca218edf45859963170",
+      "image_id": "sha256:045b11d4164807ce7921e66d2a35ec0620d3296c0d3bc1ae2f211efbd8d702d4",
+      "admitted": true,
+      "control_sha256": "5a37ebfb5ee3783b6ab55dc1e9aa57ca3f4e842b7d7e6cd553d9307145ac382b",
+      "controls": {
+        "valid": true,
+        "required_counts": {
+          "fail_to_pass": 2,
+          "pass_to_pass": 50
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "ERROR": 11,
+            "FAILED": 118,
+            "PASSED": 50
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 2
+            },
+            "pass_to_pass": {
+              "PASSED": 50
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "ERROR": 11,
+            "FAILED": 116,
+            "PASSED": 52
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 2
+            },
+            "pass_to_pass": {
+              "PASSED": 50
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": true,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        }
+      },
+      "exclusion_reason": null,
+      "arms": {
+        "baseline": {
+          "outcome": "incomplete",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": "UnknownUsage",
+          "known_cost_usd": "0",
+          "cost_complete": false,
+          "provider_calls": 1,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": 91.63566033400093,
+          "steps": 1,
+          "review_checkpoint_used": false,
+          "result_sha256": "baa04210576ec4501f466e4814e1bfab939a0ec54a8e42d4c79e866ae2e9c044",
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "psf__requests-3362",
+      "repository": "psf/requests",
+      "split": "test",
+      "base_commit": "36453b95b13079296776d11b09cab2567ea3e703",
+      "task_sha256": "1d5b6a0be316eea9b7e739c2894dad9b32aef8e6325956cdbc5149105c6d5778",
+      "image_id": "sha256:2a196fa68219f2dd04f552ca6c653c5ef5e7134f6ca7e1b22374295532386a22",
+      "admitted": false,
+      "control_sha256": "97c1160a3c6d0d765ea0407a4f39b58e6b11fc55a6bbb31aa15f82b620951e3c",
+      "controls": {
+        "valid": false,
+        "required_counts": {
+          "fail_to_pass": 1,
+          "pass_to_pass": 75
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "ERROR": 108,
+            "FAILED": 3,
+            "PASSED": 73,
+            "XFAIL": 1
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 1
+            },
+            "pass_to_pass": {
+              "FAILED": 2,
+              "PASSED": 73
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "ERROR": 108,
+            "FAILED": 2,
+            "PASSED": 74,
+            "XFAIL": 1
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 1
+            },
+            "pass_to_pass": {
+              "FAILED": 2,
+              "PASSED": 73
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        }
+      },
+      "exclusion_reason": "control_contract_failed",
+      "arms": {
+        "baseline": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "psf__requests-2674",
+      "repository": "psf/requests",
+      "split": "test",
+      "base_commit": "0be38a0c37c59c4b66ce908731da15b401655113",
+      "task_sha256": "f5a574750f0ae2d6fde6e2a84bf546d55e6cf0f15d59ca8acbefc47ebf8641b6",
+      "image_id": "sha256:f267c1381e79b8d3c3660ded3e76e53ae1d584cf0b5340ee69869b5c57360ca2",
+      "admitted": false,
+      "control_sha256": "3a43e6fd92894b52787f8fd1c339b8b81b502c528d9d40841f6f9ab9c169c82e",
+      "controls": {
+        "valid": false,
+        "required_counts": {
+          "fail_to_pass": 12,
+          "pass_to_pass": 142
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 66,
+            "PASSED": 95,
+            "XFAIL": 1
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 12
+            },
+            "pass_to_pass": {
+              "FAILED": 47,
+              "PASSED": 95
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 66,
+            "PASSED": 95,
+            "XFAIL": 1
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 12
+            },
+            "pass_to_pass": {
+              "FAILED": 47,
+              "PASSED": 95
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        }
+      },
+      "exclusion_reason": "control_contract_failed",
+      "arms": {
+        "baseline": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "psf__requests-2317",
+      "repository": "psf/requests",
+      "split": "test",
+      "base_commit": "091991be0da19de9108dbe5e3752917fea3d7fdc",
+      "task_sha256": "b17c1baf9f852cab2c466265414bb9971a764eb04b7d061970c1e36c493ee168",
+      "image_id": "sha256:49557e4787cfd83d91ed42709df46e09b7b489fb7d4b35a6197cf22b432d3eaf",
+      "admitted": false,
+      "control_sha256": "58a0523014157cd746c2ea9bd28141ecf5aba4c1dd0bb9591ac0ddb17c37845a",
+      "controls": {
+        "valid": false,
+        "required_counts": {
+          "fail_to_pass": 8,
+          "pass_to_pass": 133
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 62,
+            "PASSED": 81
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 8
+            },
+            "pass_to_pass": {
+              "FAILED": 52,
+              "PASSED": 81
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 62,
+            "PASSED": 81
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 8
+            },
+            "pass_to_pass": {
+              "FAILED": 52,
+              "PASSED": 81
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        }
+      },
+      "exclusion_reason": "control_contract_failed",
+      "arms": {
+        "baseline": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "psf__requests-2148",
+      "repository": "psf/requests",
+      "split": "development",
+      "base_commit": "fe693c492242ae532211e0c173324f09ca8cf227",
+      "task_sha256": "d511c74c8e0f2423011153fbac17ea0cdcb06ade014f6c3420dca8d30090213f",
+      "image_id": "sha256:e84cc1e8e09b902d7db344beb461ad2549081fedf18fb9066ca000af034d369d",
+      "admitted": false,
+      "control_sha256": "bce81075f4ee33df3d740a8ca2dad83648378348e014aba1d0d13619ff096755",
+      "controls": {
+        "valid": false,
+        "required_counts": {
+          "fail_to_pass": 10,
+          "pass_to_pass": 118
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 56,
+            "PASSED": 77
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 10
+            },
+            "pass_to_pass": {
+              "FAILED": 41,
+              "PASSED": 77
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 55,
+            "PASSED": 78
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 9,
+              "PASSED": 1
+            },
+            "pass_to_pass": {
+              "FAILED": 41,
+              "PASSED": 77
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        }
+      },
+      "exclusion_reason": "control_contract_failed",
+      "arms": {
+        "baseline": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "pytest-dev__pytest-11148",
+      "repository": "pytest-dev/pytest",
+      "split": "test",
+      "base_commit": "2f7415cfbc4b6ca62f9013f1abd27136f46b9653",
+      "task_sha256": "33ce486b1503772d4d0576fd9dd24a861ec9883632b16d6dd9e8833643e5bc78",
+      "image_id": "sha256:3da28ced01192a8bbbc8936afb7cd668e357de6ae4b9b5380ff7935f467af556",
+      "admitted": true,
+      "control_sha256": "13aa4a1d9258a1ec040af36eb1355320686cba124e66a6716fae05a570420ef9",
+      "controls": {
+        "valid": true,
+        "required_counts": {
+          "fail_to_pass": 2,
+          "pass_to_pass": 129
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "ERROR": 7,
+            "FAILED": 9,
+            "PASSED": 129,
+            "UNKNOWN": 6,
+            "XFAIL": 1
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 2
+            },
+            "pass_to_pass": {
+              "PASSED": 129
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "ERROR": 7,
+            "FAILED": 6,
+            "PASSED": 131,
+            "UNKNOWN": 6,
+            "XFAIL": 1
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 2
+            },
+            "pass_to_pass": {
+              "PASSED": 129
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": true,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 0
+        }
+      },
+      "exclusion_reason": null,
+      "arms": {
+        "baseline": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "pytest-dev__pytest-11143",
+      "repository": "pytest-dev/pytest",
+      "split": "test",
+      "base_commit": "6995257cf470d2143ad1683824962de4071c0eb7",
+      "task_sha256": "e59a9ee3318af211661c5a1aa57d6a061a26a9a7fc94e1a73bb923e8f626fd8c",
+      "image_id": "sha256:9769dedbd77ee26af6db3dd3b3698a7c6f3c6e2c766c60be73b960fe20b1ce68",
+      "admitted": true,
+      "control_sha256": "449e219dd3e6d6d9efa1a7419a03f10a45d6e2b38b13c312c9c3755730e58ae8",
+      "controls": {
+        "valid": true,
+        "required_counts": {
+          "fail_to_pass": 1,
+          "pass_to_pass": 114
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "ERROR": 1,
+            "FAILED": 25,
+            "PASSED": 114
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 114
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 24,
+            "PASSED": 115
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 114
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": true,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 0
+        }
+      },
+      "exclusion_reason": null,
+      "arms": {
+        "baseline": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "pytest-dev__pytest-9359",
+      "repository": "pytest-dev/pytest",
+      "split": "test",
+      "base_commit": "e2ee3144ed6e241dea8d96215fcdca18b3892551",
+      "task_sha256": "6d8a68fb3f7f2738f7e6df34b5b87c7e916e9db8f027ccca3da03c500568fa37",
+      "image_id": "sha256:7f657279b748d7f27f1d029b22f889b1cd756259e35ac59ca100e8f784dfaa32",
+      "admitted": true,
+      "control_sha256": "2f57ff634074a6a795692367681a73e79c34716d499d4417508edcddef7cfabc",
+      "controls": {
+        "valid": true,
+        "required_counts": {
+          "fail_to_pass": 1,
+          "pass_to_pass": 54
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 1,
+            "PASSED": 54
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 54
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "PASSED": 55
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 54
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": true,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 0
+        }
+      },
+      "exclusion_reason": null,
+      "arms": {
+        "baseline": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "pytest-dev__pytest-8906",
+      "repository": "pytest-dev/pytest",
+      "split": "development",
+      "base_commit": "69356d20cfee9a81972dcbf93d8caf9eabe113e8",
+      "task_sha256": "c588b6cfc71764404612156bd45ed296e150361cf588f7e7c91137890135d13b",
+      "image_id": "sha256:bfa25290ef5d796c07fba1d05df2a1112ba449db30429fb33c59d408d38bb8ce",
+      "admitted": true,
+      "control_sha256": "f506533bf03a7cf1d3641af9f208d500ecfb31aea96baa4e82f58966695ca9d3",
+      "controls": {
+        "valid": true,
+        "required_counts": {
+          "fail_to_pass": 1,
+          "pass_to_pass": 84
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "ERROR": 8,
+            "FAILED": 9,
+            "PASSED": 84,
+            "XFAIL": 9
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 84
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "ERROR": 8,
+            "FAILED": 8,
+            "PASSED": 85,
+            "XFAIL": 9
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 84
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": true,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 0
+        }
+      },
+      "exclusion_reason": null,
+      "arms": {
+        "baseline": {
+          "outcome": "resolved",
+          "resolved": true,
+          "submitted": true,
+          "exit_status": "Submitted",
+          "known_cost_usd": "0.145025",
+          "cost_complete": true,
+          "provider_calls": 10,
+          "known_input_tokens": 50750,
+          "known_output_tokens": 1815,
+          "duration_seconds": 59.86103800000001,
+          "steps": 10,
+          "review_checkpoint_used": false,
+          "result_sha256": "1a01882594e6d3eb0921a2ecc506fefb95d988afe214087469685fb5c5657b7f",
+          "required_tests_observed": true,
+          "required_tests_passed": true,
+          "grading_status": "graded",
+          "test_suite_exit_code": 0,
+          "container_script_returncode": 0,
+          "observed_test_status_counts": {
+            "ERROR": 8,
+            "FAILED": 8,
+            "PASSED": 85,
+            "XFAIL": 9
+          }
+        },
+        "everval": {
+          "outcome": "submitted_unresolved",
+          "resolved": false,
+          "submitted": true,
+          "exit_status": "Submitted",
+          "known_cost_usd": "0.2240525",
+          "cost_complete": true,
+          "provider_calls": 14,
+          "known_input_tokens": 79969,
+          "known_output_tokens": 2413,
+          "duration_seconds": 78.2700375000004,
+          "steps": 14,
+          "review_checkpoint_used": true,
+          "result_sha256": "e63ec37fbf80f6b2f0917230090948b07ce3a79e3db42bbf0f7040d5499342c1",
+          "required_tests_observed": true,
+          "required_tests_passed": false,
+          "grading_status": "graded",
+          "test_suite_exit_code": 1,
+          "container_script_returncode": 0,
+          "observed_test_status_counts": {
+            "ERROR": 8,
+            "FAILED": 9,
+            "PASSED": 84,
+            "XFAIL": 9
+          }
+        }
+      }
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-11445",
+      "repository": "sphinx-doc/sphinx",
+      "split": "test",
+      "base_commit": "71db08c05197545944949d5aa76cd340e7143627",
+      "task_sha256": "67ead3f8aeb7d021334c940710a9dfbab61bf0da549c5b02837b9fa66cf724e9",
+      "image_id": "sha256:de75076299d9271b226c6eac73c0645ddbbbd28414c1195ef5ec140a11791ec4",
+      "admitted": true,
+      "control_sha256": "618e734414a8cf6461c13633ef1a2421e33b990d08cc4931ccadbe33f6ecdefc",
+      "controls": {
+        "valid": true,
+        "required_counts": {
+          "fail_to_pass": 2,
+          "pass_to_pass": 8
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 2,
+            "PASSED": 8
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 2
+            },
+            "pass_to_pass": {
+              "PASSED": 8
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "PASSED": 10
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 2
+            },
+            "pass_to_pass": {
+              "PASSED": 8
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": true,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 0
+        }
+      },
+      "exclusion_reason": null,
+      "arms": {
+        "baseline": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-10451",
+      "repository": "sphinx-doc/sphinx",
+      "split": "test",
+      "base_commit": "195e911f1dab04b8ddeacbe04b7d214aaf81bb0b",
+      "task_sha256": "12d7a8720d73e1e787579f4b515b5ac7581514fd7299530ab0183ae3a79e65d5",
+      "image_id": "sha256:c90487320f767f683940d9b67dfbf6685660afae0fa10756c5bde1b851b5ba26",
+      "admitted": false,
+      "control_sha256": "8f39bb0ba7718a88afd54218c73dc8dea46b4e2ebadff3e0b60d815f593651f0",
+      "controls": {
+        "valid": false,
+        "required_counts": {
+          "fail_to_pass": 2,
+          "pass_to_pass": 80
+        },
+        "base": {
+          "status": "infrastructure_error",
+          "setup_error_detected": true,
+          "observed_status_counts": {
+            "FAILED": 2,
+            "PASSED": 80
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 2
+            },
+            "pass_to_pass": {
+              "MISSING": 3,
+              "PASSED": 77
+            }
+          },
+          "all_required_tests_observed": false,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "infrastructure_error",
+          "setup_error_detected": true,
+          "observed_status_counts": {
+            "PASSED": 82
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 2
+            },
+            "pass_to_pass": {
+              "MISSING": 3,
+              "PASSED": 77
+            }
+          },
+          "all_required_tests_observed": false,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 0
+        }
+      },
+      "exclusion_reason": "control_contract_failed",
+      "arms": {
+        "baseline": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-10325",
+      "repository": "sphinx-doc/sphinx",
+      "split": "test",
+      "base_commit": "7bdc11e87c7d86dcc2a087eccb7a7c129a473415",
+      "task_sha256": "a0f160a14f525c6cd5c5ae8e802c01719f0e6fee3929c065a9cc503722ee4cbd",
+      "image_id": "sha256:3fcb7b59a9c488653b53076ef9d8e969003b4645c8b8e2bcfe1083cbaa56d990",
+      "admitted": true,
+      "control_sha256": "9f8969eb76140a71a1b9ac30f4855d8a905b4fa29a52d67ecab953da343f0e45",
+      "controls": {
+        "valid": true,
+        "required_counts": {
+          "fail_to_pass": 1,
+          "pass_to_pass": 5
+        },
+        "base": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "FAILED": 1,
+            "PASSED": 5
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 5
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "graded",
+          "setup_error_detected": false,
+          "observed_status_counts": {
+            "PASSED": 6
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 5
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": true,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 0
+        }
+      },
+      "exclusion_reason": null,
+      "arms": {
+        "baseline": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "not_run",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-8801",
+      "repository": "sphinx-doc/sphinx",
+      "split": "development",
+      "base_commit": "7ca279e33aebb60168d35e6be4ed059f4a68f2c1",
+      "task_sha256": "640fcdc3e3ecb93d302335abf10d1f8fcde7e221da6debd7a45d628a12938ad4",
+      "image_id": "sha256:f6675cb6643c5a10a65f82d6bfdb31f660331a5fc4df579bc8ce8c0d0b8e262c",
+      "admitted": false,
+      "control_sha256": "b57b7747443be7a9d4df736228972ab41dbb6179e90e716a98980c0b6dbd93a9",
+      "controls": {
+        "valid": false,
+        "required_counts": {
+          "fail_to_pass": 1,
+          "pass_to_pass": 8
+        },
+        "base": {
+          "status": "infrastructure_error",
+          "setup_error_detected": true,
+          "observed_status_counts": {
+            "FAILED": 1,
+            "PASSED": 8
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "FAILED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 8
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": false,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 1
+        },
+        "gold": {
+          "status": "infrastructure_error",
+          "setup_error_detected": true,
+          "observed_status_counts": {
+            "PASSED": 9
+          },
+          "required_status_counts": {
+            "fail_to_pass": {
+              "PASSED": 1
+            },
+            "pass_to_pass": {
+              "PASSED": 8
+            }
+          },
+          "all_required_tests_observed": true,
+          "all_required_tests_passed": true,
+          "cleanup_confirmed": true,
+          "test_suite_exit_code": 0
+        }
+      },
+      "exclusion_reason": "control_contract_failed",
+      "arms": {
+        "baseline": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        },
+        "everval": {
+          "outcome": "excluded",
+          "resolved": false,
+          "submitted": false,
+          "exit_status": null,
+          "known_cost_usd": "0",
+          "cost_complete": true,
+          "provider_calls": 0,
+          "known_input_tokens": 0,
+          "known_output_tokens": 0,
+          "duration_seconds": null,
+          "steps": null,
+          "review_checkpoint_used": null,
+          "result_sha256": null,
+          "required_tests_observed": null,
+          "required_tests_passed": null,
+          "grading_status": null,
+          "test_suite_exit_code": null,
+          "container_script_returncode": null,
+          "observed_test_status_counts": null
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Purposive Python subset: 12 test tasks and 3 development tasks; not an official leaderboard score.",
+    "Public tasks may have appeared in model training.",
+    "One attempt per arm does not establish repeatability or statistical superiority.",
+    "Native ARM images and shared edit policy differ from upstream leaderboard environments.",
+    "Costs use conservative configured token rates, not a provider invoice.",
+    "Attempt duration includes solver setup and cleanup, but excludes grading.",
+    "Provider model is an alias; future behavior may differ."
+  ]
+}

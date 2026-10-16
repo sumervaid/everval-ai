@@ -76,16 +76,16 @@ Python and JavaScript/TypeScript repository execution require Docker and a prepa
 
 The [0.3.1 acceptance record](docs/evidence/2026-10-15/README.md) includes:
 
-- **114/114 completed live OpenAI trials passed** across 19 original tasks, three models, and two repetitions.
+- **114/114 single-turn OpenAI acceptance trials passed** across 19 original starter tasks, three models, and two repetitions.
 - **135 repository and pack checks**, plus **21 Docker/GitHub checks** with no skips.
 - Terminal, browser, access controls, worker recovery, spending limits, and backup/restore exercises.
-- **$0.482999 estimated provider cost across 179 calls** for the complete live campaign, with no unsettled usage.
+- **$0.482999 estimated provider cost across 179 acceptance calls**, with no unsettled usage.
 
-The small, original task set establishes exercised compatibility; it does not rank models or establish performance on customer repositories. Costs use recorded tokens and configured rates, not invoice reconciliation. Earlier attempts, excluded trials, overlapping checks, and deployment limits remain in the record.
+These single-turn acceptance trials exercised API compatibility and grading on small original tasks; models did not use tools or attempt autonomous repository repairs. The repository and Docker checks exercised installation controls. This evidence does not rank models or establish performance on customer repositories. Costs use recorded tokens and configured rates, not invoice reconciliation. Earlier attempts, excluded trials, overlapping checks, and deployment limits remain in the record.
 
 [Results and artifacts](docs/evidence/2026-10-15/README.md) · [Reproduce acceptance](docs/release-acceptance.md) · [Verification scope](docs/verification.md)
 
-The separate [public repository pilot](docs/benchmarks/public-repositories-2026-10-15/methodology.md) declares a matched agent comparison on Flask, Requests, pytest, and Sphinx. [Reproduce its preparation, controls, budgeted runs, and metadata export](scripts/benchmarks/README.md). Real-repository model results are pending.
+The separate [public repository pilot has partial results](docs/benchmarks/public-repositories-2026-10-15/results.md): one completed test pair tied, six admitted pairs remain pending, and the development pair favored the baseline. An OpenAI output-limit error omitted usage, so the accounting guard stopped further calls. This does not demonstrate a performance improvement. Inspect the [metadata](docs/benchmarks/public-repositories-2026-10-15/partial-summary.json), [frozen protocol](docs/benchmarks/public-repositories-2026-10-15/methodology.md), and [reproduction recipe](scripts/benchmarks/README.md).
 
 ## Your workspace, your evidence
 

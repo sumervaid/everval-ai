@@ -4,6 +4,8 @@
 
 Acceptance completed on 15 October 2026 using an installed release and original controlled workloads on one iMac. Source remains private; raw traces, hidden graders, credentials, and workspaces remain local.
 
+This acceptance record covers installed-product checks and single-turn model responses to original starter tasks. Autonomous public-repository repairs are evaluated separately in the [public repository pilot](../../benchmarks/public-repositories-2026-10-15/methodology.md).
+
 The [machine-readable summary](summary.json) retains counts, identities, and evidence limitations. See [verification](../../verification.md) for detailed and historical checks, or [release acceptance](../../release-acceptance.md) to reproduce the stages.
 
 ## Installed product checks
