@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added an npm distribution of the complete CLI, terminal and browser application, with explicit setup, hashed Python dependencies, disconnected wheelhouse installation, and allowlisted release packaging.
+
 - Added an on-premises deployment guide, systemd service templates and startup preflight checks, with offline installation, personal authentication, private storage, backups and upgrade procedures. Linux service validation remains target-specific.
 - Added exact-origin internal HTTPS inference and private CA support across all HTTP harnesses, while retaining disabled public providers by default; diagnostics distinguish the two policies.
 - Corrected API health reporting for a dedicated worker.

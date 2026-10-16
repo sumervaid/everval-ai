@@ -10,7 +10,7 @@ Use the existing private project channel through which you received repository a
 
 Include the affected version or commit, a minimal synthetic reproduction, the boundary you expected to hold, and the observed impact. Reports should distinguish code execution already authorized by the user from a boundary bypass. Do not include live credentials, private task data, or exploit details in an ordinary issue, even while the repository is private.
 
-For a reproducible non-security bug, use the [bug report form](https://github.com/sumervaid/everval-continuous-benchmarking/issues/new?template=bug-report.yml). This document describes the reporting route and deployment boundaries; it does not promise a response time or a supported-version window.
+For a reproducible non-security bug, use the [bug report form](https://github.com/sumervaid/everval-ai/issues/new?template=bug-report.yml). This document describes the reporting route and deployment boundaries; it does not promise a response time or a supported-version window.
 
 ## Material with different trust levels
 

@@ -6,6 +6,8 @@ Use your own work to decide whether an agent change is worth shipping. Everval k
 
 ## Start here
 
+**Prefer npm?** Use the [packaged CLI installation guide](npm.md), including disconnected setup and release verification.
+
 **Deploying inside an enterprise?** Follow the [on-premises installation and operations guide](on-premises.md).
 
 **Where would your team use it?** Find the operator, decision and setup path in [practical use cases](use-cases.md).
@@ -60,6 +62,6 @@ The supported deployment is one local workspace with a dedicated worker. Read [o
 
 [Verification record](verification.md) · [Release acceptance procedure](release-acceptance.md) · [Dated evidence](evidence/2026-10-15/README.md) · [Changelog](../CHANGELOG.md)
 
-The bundled examples are original installation controls. The dated acceptance record covers single-turn API trials on original tasks; it did not evaluate autonomous public-repository repairs or establish representative customer performance. Source remains in the private repository.
+The bundled examples are original installation controls. The dated acceptance record covers single-turn API trials on original tasks; it did not evaluate autonomous public-repository repairs or establish representative customer performance.
 
 Read the [completed public repository pilot](benchmarks/public-repositories-2026-10-15/results.md) and the [frozen protocol](benchmarks/public-repositories-2026-10-15/methodology.md) for outcomes, exclusions, task selection and controls. Use the [reproduction recipe](../scripts/benchmarks/README.md) to prepare tasks, validate controls, run within a budget and export metadata.

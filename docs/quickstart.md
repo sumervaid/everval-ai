@@ -6,13 +6,15 @@ Run a local walkthrough, inspect the evidence in tmux, then bring your own work.
 
 For the big picture first, read [one plain-language example of the entire workflow](worked-example.md).
 
+Prefer a packaged CLI? Follow the [npm installation guide](npm.md); after setup, replace `uv run everval` below with `everval`.
+
 ## Install from source
 
-You need Git, Python 3.12 or newer, and uv. Install tmux to use the split terminal workspace; the standalone terminal interface also works. Cloning currently requires access to the private repository.
+You need Git, Python 3.12 or newer, and uv. Install tmux to use the split terminal workspace; the standalone terminal interface also works. Cloning requires repository access when the source repository is private.
 
 ```sh
-git clone https://github.com/sumervaid/everval-continuous-benchmarking.git
-cd everval-continuous-benchmarking
+git clone https://github.com/sumervaid/everval-ai.git
+cd everval-ai
 uv sync --frozen
 ```
 

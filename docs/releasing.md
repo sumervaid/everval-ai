@@ -1,6 +1,6 @@
 # Maintaining and releasing Everval
 
-Everval currently uses a private source mirror and local release acceptance.
+Everval supports local release acceptance and separately controlled publication.
 Creating a release, publishing a package, deploying a service and making the
 repository public are separate maintainer decisions. None is performed by the
 validation workflow.
@@ -107,6 +107,8 @@ review ownership. Require reviews for workflow and dependency changes; do not
 give a validation job publishing credentials to simplify a later release step.
 
 ## Publish only after a separate decision
+
+The [npm distribution guide](npm.md#build-and-review-a-distribution) covers the allowlisted launcher bundle, locked runtime, local tarball verification, and explicit public or private registry publication.
 
 No release or registry publishing command is embedded in this repository's
 workflow. When publication is authorized, decide the destination, access level,

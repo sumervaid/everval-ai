@@ -22,6 +22,8 @@ The internal HTTPS policy was exercised with mocked transports and DNS responses
 
 The bundled Playwright headless shell timed out during image capture. The installed Chrome channel completed the browser journey and captures; terminal SVGs were rasterized locally with Quick Look. The original failed capture attempts remain in the local QA artifacts.
 
+The separate [npm distribution verification](npm.md) records the packaged launcher, disconnected installation, terminal signal checks, and installed browser service.
+
 ## Limits
 
 No paid model calls or new public-repository benchmark attempts were made for this change. The Docker runtime remained stopped. The skipped cases require separately enabled Docker/GitHub integration or optional benchmark tooling; they are not counted as passing.

@@ -4,6 +4,8 @@ Everval can keep benchmark definitions, repository mirrors, hidden graders, outp
 
 This guide supplies a **single-host deployment kit**, with one local SQLite workspace, one API, and one worker. The Linux systemd templates require validation on your target distribution; the portable preflight tests do not establish a tested Linux deployment. No service is installed or started automatically.
 
+Operator workstations can also use the [npm distribution](npm.md), with explicit runtime setup and a disconnected wheelhouse. The service deployment below installs Python directly and does not require Node.js on the runtime host.
+
 ## The deployment
 
 ```mermaid
@@ -30,7 +32,7 @@ Use a dedicated Linux host or VM, a supported systemd release, Python 3.12+, and
 
 ## 1. Build a release on an approved builder
 
-Use a builder matching the target Linux architecture, Python minor version, and libc. Install approved versions of uv, Node.js, npm, and Python's pip there. Check out a reviewed commit using your private repository access. The runtime host does not need GitHub, npm, PyPI, Node.js, or a build toolchain.
+Use a builder matching the target Linux architecture, Python minor version, and libc. Install approved versions of uv, Node.js, npm, and Python's pip there. Check out a reviewed commit with repository access if required. The runtime host does not need GitHub, npm, PyPI, Node.js, or a build toolchain.
 
 From that source checkout, in one shell:
 

@@ -1,22 +1,20 @@
-# Everval AI — Continuous benchmarking for AI agents
+# Everval AI — On-prem continuous benchmarking for AI models and agents
 
 ![Everval AI — know what improved, know what it cost](docs/assets/everval-banner.svg)
 
-**Continuous evaluation for agents doing real work, on your infrastructure.**
-
 Turn repository changes, documents, data tasks, and workflow simulations into repeatable evaluations. Compare quality, cost, and latency. Keep checking as your models, prompts, and code change—all from a local terminal workbench.
 
-[Quickstart](docs/quickstart.md) · [On-premises deployment](docs/on-premises.md) · [Use cases](docs/use-cases.md) · [Product tour](docs/product-tour.md) · [Documentation](docs/index.md) · [Evidence](docs/evidence/2026-10-15/README.md) · [Contribute](CONTRIBUTING.md)
+[Quickstart](docs/quickstart.md) · [npm installation](docs/npm.md) · [On-premises deployment](docs/on-premises.md) · [Use cases](docs/use-cases.md) · [Product tour](docs/product-tour.md) · [Documentation](docs/index.md) · [Evidence](docs/evidence/2026-10-15/README.md) · [Contribute](CONTRIBUTING.md)
 
 **See the whole workflow:** [Follow one shopping-cart bug from repository to recurring checks](docs/worked-example.md).
 
 ## Try it without a key
 
-You need Git, Python 3.12+, and [uv](https://docs.astral.sh/uv/getting-started/installation/). The source is currently private; cloning requires repository access.
+You need Git, Python 3.12+, and [uv](https://docs.astral.sh/uv/getting-started/installation/). Cloning requires repository access when the source repository is private.
 
 ```sh
-git clone https://github.com/sumervaid/everval-continuous-benchmarking.git
-cd everval-continuous-benchmarking
+git clone https://github.com/sumervaid/everval-ai.git
+cd everval-ai
 uv sync --frozen
 uv run everval demo
 ```
@@ -71,7 +69,7 @@ uv run everval tmux
 
 Install [tmux](https://github.com/tmux/tmux/wiki) for the session launcher, or run `uv run everval tui` directly. Press **Ctrl+L** for rankings, **Ctrl+N** to connect a repository, **F9** for a guided run, and **Ctrl+P** for commands. **Ctrl+B, D** detaches tmux while queued work continues.
 
-Python and JavaScript/TypeScript repository execution require Docker and a prepared runtime. GitHub onboarding uses Git and the [GitHub CLI](https://cli.github.com/). Node.js is only needed to build the optional browser interface. [Setup and first experiment →](docs/quickstart.md)
+Python and JavaScript/TypeScript repository execution require Docker and a prepared runtime. GitHub onboarding uses Git and the [GitHub CLI](https://cli.github.com/). Node.js is needed for the npm launcher or to build the optional browser interface from source. [Setup and first experiment →](docs/quickstart.md)
 
 ## Evidence you can inspect
 

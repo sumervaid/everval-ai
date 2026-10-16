@@ -13,7 +13,7 @@ Start with the guide for the task you are trying to complete:
 
 ## Report a problem
 
-Search existing issues first. If you can reproduce unexpected behavior, use the [bug report form](https://github.com/sumervaid/everval-continuous-benchmarking/issues/new?template=bug-report.yml). Include the Everval version or commit, relevant environment details, the smallest reproduction, and expected versus observed behavior.
+Search existing issues first. If you can reproduce unexpected behavior, use the [bug report form](https://github.com/sumervaid/everval-ai/issues/new?template=bug-report.yml). Include the Everval version or commit, relevant environment details, the smallest reproduction, and expected versus observed behavior.
 
 Use original or synthetic examples. Remove credentials, private task material, hidden graders, and raw workspace exports before sharing logs or screenshots. An experiment export can contain more than the visible result summary.
 
@@ -21,7 +21,7 @@ For usage questions that do not yet describe a reproducible problem, use your ex
 
 ## Suggest an improvement
 
-Use the [feature request form](https://github.com/sumervaid/everval-continuous-benchmarking/issues/new?template=feature-request.yml) for a workflow improvement. Explain who needs it, what they cannot do today, and how success would be recognized.
+Use the [feature request form](https://github.com/sumervaid/everval-ai/issues/new?template=feature-request.yml) for a workflow improvement. Explain who needs it, what they cannot do today, and how success would be recognized.
 
 The issue chooser also has dedicated forms for [task packs](.github/ISSUE_TEMPLATE/pack-proposal.yml), [graders](.github/ISSUE_TEMPLATE/grader-proposal.yml), and [agent adapters](.github/ISSUE_TEMPLATE/adapter-proposal.yml). Implementation guidance is in [CONTRIBUTING.md](CONTRIBUTING.md).
 

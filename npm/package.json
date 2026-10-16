@@ -1,0 +1,49 @@
+{
+  "name": "everval-ai",
+  "version": "0.3.1",
+  "private": true,
+  "description": "On-prem continuous benchmarking for AI models and agents.",
+  "type": "module",
+  "bin": {
+    "everval": "bin/everval.mjs",
+    "everval-ai": "bin/everval.mjs"
+  },
+  "files": [
+    "bin/everval.mjs",
+    "lib/launcher.mjs",
+    "runtime/",
+    "runtime.json",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sumer S. Vaid",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumervaid/everval-ai.git"
+  },
+  "homepage": "https://github.com/sumervaid/everval-ai#readme",
+  "bugs": {
+    "url": "https://github.com/sumervaid/everval-ai/issues"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "benchmarking",
+    "continuous-benchmarking",
+    "evaluations",
+    "on-prem",
+    "tui"
+  ]
+}

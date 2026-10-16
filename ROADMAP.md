@@ -4,7 +4,7 @@
 
 Everval's direction is to make evaluation a routine part of operating an agent: use real work, preserve the evidence, and make quality and cost changes easy to understand.
 
-These are proposed priorities, not shipped features or delivery commitments. Propose a concrete use case through a [feature request](https://github.com/sumervaid/everval-continuous-benchmarking/issues/new?template=feature-request.yml). For a small fix, go straight to the contribution guide.
+These are proposed priorities, not shipped features or delivery commitments. Propose a concrete use case through a [feature request](https://github.com/sumervaid/everval-ai/issues/new?template=feature-request.yml). For a small fix, go straight to the contribution guide.
 
 ## Available now
 

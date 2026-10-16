@@ -1,6 +1,6 @@
 [Unit]
 Description=Everval api
-Documentation=https://github.com/sumervaid/everval-continuous-benchmarking/blob/main/docs/on-premises.md
+Documentation=https://github.com/sumervaid/everval-ai/blob/main/docs/on-premises.md
 After=network-online.target
 Wants=network-online.target
 RequiresMountsFor=/var/lib/everval /opt/everval

@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Read the [community pack guide](https://github.com/sumervaid/everval-continuous-benchmarking/blob/main/docs/community-packs.md) before proposing a workload.
+        Read the [community pack guide](https://github.com/sumervaid/everval-ai/blob/main/docs/community-packs.md) before proposing a workload.
         Use original or permitted material. Keep customer tasks, protected holdouts, credentials, and private traces out of this issue.
   - type: textarea
     id: user
