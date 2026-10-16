@@ -106,11 +106,30 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def verify_plan(path: Path) -> tuple[dict[str, Any], str]:
-    return verify_plan_data(read_json(path))
+def verify_plan(path: Path, *, amendment: Path | None = None) -> tuple[dict[str, Any], str]:
+    if amendment is None:
+        return verify_plan_data(read_json(path))
+    return verify_plan_data(
+        read_json(path), amendment=amendment, campaign_root=path.parent, plan_path=path
+    )
 
 
-def verify_plan_data(plan: dict[str, Any]) -> tuple[dict[str, Any], str]:
+def load_recovery_context(plan_path: Path, amendment: Path | None, plan: dict):
+    """Validate a declared amendment without changing the original plan identity."""
+    if amendment is None:
+        return None
+    from .recovery import load_context
+
+    return load_context(amendment, plan_path, plan)
+
+
+def verify_plan_data(
+    plan: dict[str, Any],
+    *,
+    amendment: Path | None = None,
+    campaign_root: Path | None = None,
+    plan_path: Path | None = None,
+) -> tuple[dict[str, Any], str]:
     if plan.get("schema_version") != 1:
         raise ValueError("Unsupported campaign schema")
     if not set(plan["model"]) <= {"model_name", "reasoning_effort", "max_completion_tokens"}:
@@ -118,7 +137,22 @@ def verify_plan_data(plan: dict[str, Any]) -> tuple[dict[str, Any], str]:
     root = Path(__file__).resolve().parents[2]
     if not plan["source_sha256"].keys() >= REQUIRED_SOURCES:
         raise ValueError("Frozen campaign omits required execution sources")
-    for relative, expected in plan["source_sha256"].items():
+    expected_sources = dict(plan["source_sha256"])
+    if amendment is not None:
+        if campaign_root is None:
+            raise ValueError("Recovery verification requires the original campaign directory")
+        from .recovery import public_recovery_metadata
+
+        metadata = public_recovery_metadata(amendment, plan_path or campaign_root / "campaign.json")
+        if (
+            metadata["original_plan_canonical_sha256"]
+            != hashlib.sha256(canonical(plan)).hexdigest()
+        ):
+            raise ValueError("Recovery amendment belongs to another campaign")
+        expected_sources.update(
+            {name: binding["after"] for name, binding in metadata["source_overrides"].items()}
+        )
+    for relative, expected in expected_sources.items():
         source = (root / relative).resolve()
         if not source.is_relative_to(root) or sha256(source) != expected:
             raise ValueError("Campaign source differs from the frozen configuration: " + relative)
@@ -274,13 +308,20 @@ def _validate_start(marker: dict, attempt_id: str, attempt_hash: str, plan_hash:
         raise ValueError("Attempt start marker belongs to a different frozen run")
 
 
-def _retain_interrupted(root: Path, plan: dict, plan_hash: str) -> None:
+def _retain_interrupted(root: Path, plan: dict, plan_hash: str, *, recovery_context=None) -> None:
     expected = _expected_attempts(plan, plan_hash)
     for attempt_id, directory in _attempt_directories(root, expected).items():
         marker, result_path = directory / "started.json", directory / "result.json"
         item, arm, attempt_hash = expected[attempt_id]
         if marker.exists() or marker.is_symlink():
-            _validate_start(_evidence_json(marker), attempt_id, attempt_hash, plan_hash)
+            start = _evidence_json(marker)
+            _validate_start(start, attempt_id, attempt_hash, plan_hash)
+            if (
+                recovery_context is not None
+                and attempt_id in dict(recovery_context.allowed_attempts)
+                and start.get("accounting_amendment_sha256") != recovery_context.amendment_sha256
+            ):
+                raise ValueError("Interrupted start marker differs from the reviewed amendment")
             if not result_path.exists():
                 # This can precede model construction/ledger registration. Retain the
                 # interruption without fabricating a registration or zero-cost account.
@@ -293,6 +334,11 @@ def _retain_interrupted(root: Path, plan: dict, plan_hash: str) -> None:
                         "status": "interrupted",
                         "cleanup_confirmed": False,
                         "accounting_recovery_required": True,
+                        **(
+                            {"accounting_amendment_sha256": recovery_context.amendment_sha256}
+                            if recovery_context is not None
+                            else {}
+                        ),
                         "submitted": False,
                         "resolved": False,
                         "attempt_hash": attempt_hash,
@@ -309,12 +355,21 @@ def _retain_interrupted(root: Path, plan: dict, plan_hash: str) -> None:
                 raise RuntimeError("Unconfirmed sandbox cleanup blocks campaign resume")
 
 
-def open_campaign_ledger(root: Path, plan: dict, plan_hash: str, *, create: bool) -> BudgetLedger:
+def open_campaign_ledger(
+    root: Path, plan: dict, plan_hash: str, *, create: bool, recovery_context=None
+) -> BudgetLedger:
     path = root / "budget.sqlite3"
     directories = _attempt_directories(root, _expected_attempts(plan, plan_hash))
     if not path.exists() and directories:
         raise BudgetError(
             "Accounting ledger is missing beside retained attempts; recovery is required"
+        )
+    if recovery_context is not None:
+        return BudgetLedger(
+            path,
+            budget_config(plan, plan_hash),
+            create=create,
+            recovery_context=recovery_context,
         )
     return BudgetLedger(path, budget_config(plan, plan_hash), create=create)
 
@@ -498,19 +553,43 @@ def reconcile_accounting(root: Path, plan: dict, plan_hash: str, ledger: BudgetL
     return status
 
 
-def run_phase(plan_path: Path, phase: str, *, execute: bool) -> dict[str, Any]:
-    plan, plan_hash = verify_plan(plan_path)
+def run_phase(
+    plan_path: Path, phase: str, *, execute: bool, amendment: Path | None = None
+) -> dict[str, Any]:
+    plan, plan_hash = (
+        verify_plan(plan_path) if amendment is None else verify_plan(plan_path, amendment=amendment)
+    )
     output = plan_path.parent
     with campaign_lock(output):
+        recovery_context = load_recovery_context(plan_path, amendment, plan)
         if execute:
-            _retain_interrupted(output, plan, plan_hash)
+            if recovery_context is not None:
+                _retain_interrupted(output, plan, plan_hash, recovery_context=recovery_context)
+            else:
+                _retain_interrupted(output, plan, plan_hash)
+        if recovery_context is not None:
+            return _run_phase_locked(
+                output, plan, plan_hash, phase, execute=execute, recovery_context=recovery_context
+            )
         return _run_phase_locked(output, plan, plan_hash, phase, execute=execute)
 
 
 def _run_phase_locked(
-    output: Path, plan: dict, plan_hash: str, phase: str, *, execute: bool
+    output: Path,
+    plan: dict,
+    plan_hash: str,
+    phase: str,
+    *,
+    execute: bool,
+    recovery_context=None,
 ) -> dict:
-    ledger = open_campaign_ledger(output, plan, plan_hash, create=True)
+    ledger = (
+        open_campaign_ledger(
+            output, plan, plan_hash, create=False, recovery_context=recovery_context
+        )
+        if recovery_context is not None
+        else open_campaign_ledger(output, plan, plan_hash, create=True)
+    )
     status = reconcile_accounting(output, plan, plan_hash, ledger)
     selected = [item for item in plan["tasks"] if item["split"] == phase]
     if not execute:
@@ -562,6 +641,11 @@ def _run_phase_locked(
                     "attempt_hash": attempt_hash,
                     "plan_sha256": plan_hash,
                     "started_at": datetime.now(UTC).isoformat(),
+                    **(
+                        {"accounting_amendment_sha256": recovery_context.amendment_sha256}
+                        if recovery_context is not None
+                        else {}
+                    ),
                 },
             )
             model = MeteredOpenAI(
@@ -602,6 +686,8 @@ def _run_phase_locked(
                     "provider": model.serialize(),
                 }
             )
+            if recovery_context is not None:
+                result["accounting_amendment_sha256"] = recovery_context.amendment_sha256
             patch = result.get("patch", "")
             grade = None
             if result.get("submitted") is True and isinstance(patch, str) and patch:
@@ -651,9 +737,15 @@ def main() -> None:
     parser.add_argument("--plan", type=Path, required=True)
     parser.add_argument("--phase", choices=("development", "test"), default="development")
     parser.add_argument("--execute", action="store_true")
+    parser.add_argument("--amendment", type=Path)
     args = parser.parse_args()
     os.umask(0o077)
-    status = run_phase(args.plan.expanduser().resolve(), args.phase, execute=args.execute)
+    status = run_phase(
+        args.plan.expanduser().resolve(),
+        args.phase,
+        execute=args.execute,
+        amendment=args.amendment.expanduser().absolute() if args.amendment else None,
+    )
     print(json.dumps(status, indent=2, allow_nan=False))
 
 

@@ -125,13 +125,23 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
         for row in admitted
         if all(value["outcome"] != "not_run" for value in row["arms"].values())
     ]
+    # Terminal evidence can record an interrupted or ungradable attempt. Compare
+    # repair quality only when both arms observed the complete required test set.
+    comparable = [
+        row
+        for row in paired
+        if all(
+            value.get("grading_status") == "graded" and value.get("required_tests_observed") is True
+            for value in row["arms"].values()
+        )
+    ]
     wins = sum(
         row["arms"]["everval"]["resolved"] and not row["arms"]["baseline"]["resolved"]
-        for row in paired
+        for row in comparable
     )
     losses = sum(
         row["arms"]["baseline"]["resolved"] and not row["arms"]["everval"]["resolved"]
-        for row in paired
+        for row in comparable
     )
     return {
         "complete": complete,
@@ -140,13 +150,17 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "admitted_pairs": len(admitted),
             "completed_pairs": len(paired),
             "pending_pairs": len(admitted) - len(paired),
+            "quality_comparable_pairs": len(comparable),
+            "unevaluable_pairs": len(paired) - len(comparable),
+            "quality_comparison_complete": len(comparable) == len(admitted),
+            "resolution_outcome_scope": "quality_comparable_pairs",
             "everval_only_resolved": wins,
             "baseline_only_resolved": losses,
             "both_resolved": sum(
-                all(value["resolved"] for value in row["arms"].values()) for row in paired
+                all(value["resolved"] for value in row["arms"].values()) for row in comparable
             ),
             "neither_resolved": sum(
-                not any(value["resolved"] for value in row["arms"].values()) for row in paired
+                not any(value["resolved"] for value in row["arms"].values()) for row in comparable
             ),
             "resolution_difference": wins - losses,
             "comparison_final": complete,
@@ -154,13 +168,53 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def build_report(plan_path: Path) -> dict[str, Any]:
-    plan, plan_hash = verify_plan(plan_path)
+def build_report(plan_path: Path, *, amendment: Path | None = None) -> dict[str, Any]:
+    if amendment is None:
+        plan, plan_hash = verify_plan(plan_path)
+    else:
+        plan, plan_hash = verify_plan(plan_path, amendment=amendment)
     root = plan_path.parent
     with campaign_lock(root):
-        ledger = open_campaign_ledger(root, plan, plan_hash, create=False)
+        context = None
+        if amendment is not None:
+            from .campaign import load_recovery_context
+
+            context = load_recovery_context(plan_path, amendment, plan)
+        if context is None:
+            ledger = open_campaign_ledger(root, plan, plan_hash, create=False)
+        else:
+            ledger = open_campaign_ledger(
+                root, plan, plan_hash, create=False, recovery_context=context
+            )
         status = reconcile_accounting(root, plan, plan_hash, ledger)
-        return _build_report_locked(root, plan, plan_hash, status)
+        report = _build_report_locked(root, plan, plan_hash, status)
+        if amendment is not None:
+            from .recovery import public_recovery_metadata
+
+            metadata = public_recovery_metadata(amendment, plan_path)
+            if metadata["amendment_sha256"] != status["recovery_amendment_sha256"]:
+                raise ValueError("Report recovery provenance differs from accounting context")
+            report["recovery"] = {
+                **metadata,
+                **{
+                    key: status[key]
+                    for key in (
+                        "reviewed_uncertain_requests",
+                        "unreviewed_uncertain_requests",
+                        "bounded_reviewed_reservation_usd",
+                        "quarantined_attempts",
+                    )
+                },
+            }
+            report["source_sha256_scope"] = "original_frozen_campaign"
+            report["runtime_source_sha256"] = {
+                **plan["source_sha256"],
+                **{
+                    relative: override["after"]
+                    for relative, override in metadata["source_overrides"].items()
+                },
+            }
+        return report
 
 
 def _build_report_locked(root: Path, plan: dict, plan_hash: str, status: dict) -> dict[str, Any]:
@@ -235,7 +289,7 @@ def _build_report_locked(root: Path, plan: dict, plan_hash: str, status: dict) -
             }
         rows.append(row)
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "campaign_id": plan["campaign_id"],
         "plan_sha256": plan_hash,
         "selection_sha256": plan["selection_sha256"],
@@ -279,8 +333,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--plan", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--amendment", type=Path)
     args = parser.parse_args()
-    report = build_report(args.plan.expanduser().resolve())
+    if args.amendment is None:
+        report = build_report(args.plan.expanduser().resolve())
+    else:
+        report = build_report(
+            args.plan.expanduser().resolve(), amendment=args.amendment.expanduser().resolve()
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x") as stream:
         json.dump(report, stream, indent=2, allow_nan=False)

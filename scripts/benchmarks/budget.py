@@ -139,21 +139,64 @@ class BudgetConfig:
             ) / MILLION
 
 
+@dataclass(frozen=True)
+class RecoveryContext:
+    """Explicitly verified amendment scope; never part of frozen budget settings."""
+
+    plan_sha256: str
+    amendment_sha256: str
+    allowed_attempts: tuple[tuple[str, str], ...]
+
+    def __post_init__(self) -> None:
+        _hash(self.plan_sha256, "plan_sha256")
+        _hash(self.amendment_sha256, "amendment_sha256")
+        if type(self.allowed_attempts) is not tuple or not 1 <= len(self.allowed_attempts) <= 1000:
+            raise BudgetError("Recovery needs a bounded immutable attempt allowlist")
+        for entry in self.allowed_attempts:
+            if type(entry) is not tuple or len(entry) != 2:
+                raise BudgetError("Recovery attempt entries must be immutable identity/hash pairs")
+            _label(entry[0], "allowed_attempt_id")
+            _hash(entry[1], "allowed_attempt_hash")
+        if tuple(sorted(self.allowed_attempts)) != self.allowed_attempts:
+            raise BudgetError("Recovery attempt allowlist must be sorted")
+        if len({entry[0] for entry in self.allowed_attempts}) != len(self.allowed_attempts):
+            raise BudgetError("Recovery attempt identities must be unique")
+        if len({entry[1] for entry in self.allowed_attempts}) != len(self.allowed_attempts):
+            raise BudgetError("Recovery attempt hashes must be unique")
+
+    @property
+    def allowed_attempts_sha256(self) -> str:
+        return hashlib.sha256(_json(self.allowed_attempts).encode()).hexdigest()
+
+
 class BudgetLedger:
-    def __init__(self, path: Path, config: BudgetConfig, *, create: bool = True):
+    def __init__(
+        self,
+        path: Path,
+        config: BudgetConfig,
+        *,
+        create: bool = True,
+        recovery_context: RecoveryContext | None = None,
+    ):
         if not isinstance(config, BudgetConfig):
             raise BudgetError("A validated BudgetConfig is required")
+        if recovery_context is not None and (
+            not isinstance(recovery_context, RecoveryContext)
+            or recovery_context.plan_sha256 != config.campaign_config_hash
+        ):
+            raise BudgetError("Recovery context differs from the frozen campaign")
+        self._recovery_context = recovery_context
         self.path = Path(path).expanduser().absolute()
         self._config = config
         self._config_json = _json(config.as_dict())
         self._config_digest = hashlib.sha256(self._config_json.encode()).hexdigest()
-        if not create and not self.path.exists():
+        if (not create or recovery_context is not None) and not self.path.exists():
             raise BudgetError("Existing accounting ledger is required; refusing to create it")
         self.path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
         os.chmod(self.path.parent, 0o700)
         created = False
         try:
-            if not create:
+            if not create or recovery_context is not None:
                 raise FileExistsError
             descriptor = os.open(
                 self.path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600
@@ -291,6 +334,11 @@ class BudgetLedger:
                 if existing["attempt_hash"] != attempt_hash:
                     raise BudgetError("Attempt identity already has a different frozen hash")
                 return
+            if (
+                self._recovery_context is not None
+                and dict(self._recovery_context.allowed_attempts).get(attempt_id) != attempt_hash
+            ):
+                raise BudgetError("Attempt is outside the explicit recovery allowlist")
             if connection.execute(
                 "SELECT id FROM attempts WHERE attempt_hash=?", (attempt_hash,)
             ).fetchone():
@@ -304,6 +352,187 @@ class BudgetLedger:
                 {"attempt_hash": attempt_hash},
                 attempt_id=attempt_id,
             )
+
+    @staticmethod
+    def _review_snapshot(row: sqlite3.Row) -> dict[str, Any]:
+        return {
+            key: row[key]
+            for key in (
+                "id",
+                "attempt_id",
+                "request_hash",
+                "state",
+                "input_ceiling",
+                "output_ceiling",
+                "reserved_usd",
+                "known_cost_usd",
+                "input_tokens",
+                "output_tokens",
+                "reason",
+                "created_at",
+                "updated_at",
+            )
+        }
+
+    def _check_review_bound(self, row: sqlite3.Row) -> None:
+        if row["state"] != "uncertain" or row["reason"] != "UnknownUsage":
+            raise BudgetError("Only an UnknownUsage uncertainty can receive a bounded review")
+        reserved = _decimal(Decimal(row["reserved_usd"]), "reserved_usd")
+        known = _decimal(
+            Decimal(row["known_cost_usd"]), "known_cost_usd", zero=True, fractional_places=24
+        )
+        if reserved != self.config.cost(row["input_ceiling"], row["output_ceiling"]):
+            raise BudgetError("Reviewed reservation differs from frozen token pricing")
+        if known > reserved:
+            raise BudgetError("Known charges exceed the proposed bounded allocation")
+        for name, ceiling in (
+            ("input_tokens", "input_ceiling"),
+            ("output_tokens", "output_ceiling"),
+        ):
+            value = row[name]
+            if value is not None and _tokens(value, name) > row[ceiling]:
+                raise BudgetError("Known usage exceeds the proposed bounded allocation")
+
+    @staticmethod
+    def _events_digest(events: list[dict[str, Any]]) -> str:
+        payload = json.dumps(
+            events, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
+        ).encode("utf-8")
+        return hashlib.sha256(payload).hexdigest()
+
+    @classmethod
+    def _check_event_prefix(
+        cls, events: list[dict[str, Any]], prefix: object, *, preceding: int
+    ) -> None:
+        if (
+            not isinstance(prefix, dict)
+            or set(prefix) != {"count", "sha256"}
+            or type(prefix["count"]) is not int
+            or prefix["count"] < 1
+            or prefix["count"] != preceding
+            or prefix["count"] > len(events)
+            or [event["sequence"] for event in events[:preceding]] != list(range(1, preceding + 1))
+            or cls._events_digest(events[:preceding]) != prefix["sha256"]
+        ):
+            raise BudgetError("Bounded review event prefix differs from the retained history")
+
+    def _reviewed_requests(
+        self, connection: sqlite3.Connection, rows: list[sqlite3.Row]
+    ) -> dict[str, sqlite3.Row]:
+        context = self._recovery_context
+        if context is None:
+            return {}
+        by_id = {row["id"]: row for row in rows}
+        reviewed: dict[str, sqlite3.Row] = {}
+        history = [
+            dict(event) for event in connection.execute("SELECT * FROM events ORDER BY sequence")
+        ]
+        for event in connection.execute(
+            "SELECT * FROM events WHERE kind='bounded_unknown_reviewed' ORDER BY sequence"
+        ):
+            try:
+                data = json.loads(event["data"])
+            except (TypeError, ValueError) as error:
+                raise BudgetError("Bounded review event is malformed") from error
+            row = by_id.get(event["request_id"])
+            if row is None or event["request_id"] in reviewed:
+                raise BudgetError("Bounded review request is missing or duplicated")
+            self._check_review_bound(row)
+            registration = connection.execute(
+                "SELECT attempt_hash FROM attempts WHERE id=?", (row["attempt_id"],)
+            ).fetchone()
+            if registration is None:
+                raise BudgetError("Bounded review has no registered attempt")
+            expected = {
+                "schema_version": 1,
+                "plan_sha256": context.plan_sha256,
+                "amendment_sha256": context.amendment_sha256,
+                "allowed_attempts_sha256": context.allowed_attempts_sha256,
+                "attempt_hash": registration["attempt_hash"],
+                "request_record": self._review_snapshot(row),
+            }
+            if (
+                not isinstance(data, dict)
+                or set(data) != {*expected, "decision_sha256", "evidence_sha256", "event_prefix"}
+                or type(data.get("schema_version")) is not int
+                or any(data.get(key) != value for key, value in expected.items())
+                or event["attempt_id"] != row["attempt_id"]
+            ):
+                raise BudgetError("Bounded review does not match its immutable scope or request")
+            _hash(data["decision_sha256"], "decision_sha256")
+            _hash(data["evidence_sha256"], "evidence_sha256")
+            self._check_event_prefix(history, data["event_prefix"], preceding=event["sequence"] - 1)
+            reviewed[row["id"]] = event
+        return reviewed
+
+    def record_bounded_review(
+        self,
+        request_id: str,
+        *,
+        request_hash: str,
+        reserved_usd: Decimal,
+        decision_sha256: str,
+        evidence_sha256: str,
+        event_prefix_count: int,
+        event_prefix_sha256: str,
+    ) -> int:
+        """Append a reviewed budget allocation without claiming known usage.
+
+        The caller must first validate the amendment, decision documents, cleanup,
+        and retained evidence. This operation never changes a request or releases
+        its reservation. A subsequent unknown request still requires a new review.
+        """
+        context = self._recovery_context
+        if context is None:
+            raise BudgetError("An explicitly validated recovery context is required")
+        _label(request_id, "request_id")
+        _hash(request_hash, "request_hash")
+        _hash(decision_sha256, "decision_sha256")
+        _hash(evidence_sha256, "evidence_sha256")
+        _hash(event_prefix_sha256, "event_prefix_sha256")
+        if type(event_prefix_count) is not int or event_prefix_count < 1:
+            raise BudgetError("A positive event prefix count is required")
+        _decimal(reserved_usd, "reserved_usd")
+        with self._connection(write=True) as connection:
+            row = self._request(connection, request_id)
+            self._check_review_bound(row)
+            if row["request_hash"] != request_hash or Decimal(row["reserved_usd"]) != reserved_usd:
+                raise BudgetError("Review request identity or reservation differs")
+            registration = connection.execute(
+                "SELECT attempt_hash FROM attempts WHERE id=?", (row["attempt_id"],)
+            ).fetchone()
+            if registration is None:
+                raise BudgetError("Review requires a registered attempt")
+            data = {
+                "schema_version": 1,
+                "plan_sha256": context.plan_sha256,
+                "amendment_sha256": context.amendment_sha256,
+                "allowed_attempts_sha256": context.allowed_attempts_sha256,
+                "attempt_hash": registration["attempt_hash"],
+                "request_record": self._review_snapshot(row),
+                "decision_sha256": decision_sha256,
+                "evidence_sha256": evidence_sha256,
+                "event_prefix": {"count": event_prefix_count, "sha256": event_prefix_sha256},
+            }
+            rows = list(connection.execute("SELECT * FROM requests"))
+            existing = self._reviewed_requests(connection, rows).get(request_id)
+            if existing is not None:
+                if json.loads(existing["data"]) != data:
+                    raise BudgetError("An existing bounded review is immutable")
+                return int(existing["sequence"])
+            history = [
+                dict(event)
+                for event in connection.execute("SELECT * FROM events ORDER BY sequence")
+            ]
+            self._check_event_prefix(history, data["event_prefix"], preceding=len(history))
+            self._event(
+                connection,
+                "bounded_unknown_reviewed",
+                data,
+                request_id=request_id,
+                attempt_id=row["attempt_id"],
+            )
+            return int(connection.execute("SELECT last_insert_rowid()").fetchone()[0])
 
     @staticmethod
     def _totals(rows: list[sqlite3.Row]) -> dict[str, Decimal | int]:
@@ -362,7 +591,24 @@ class BudgetLedger:
             ).fetchone():
                 raise BudgetError("This request hash was already admitted for the attempt")
             rows = list(connection.execute("SELECT * FROM requests"))
-            if any(row["state"] != "settled" for row in rows):
+            reviewed = self._reviewed_requests(connection, rows)
+            quarantined = {row["attempt_id"] for row in rows if row["id"] in reviewed}
+            if attempt_id in quarantined:
+                raise BudgetError("A reviewed incomplete attempt is permanently quarantined")
+            if self._recovery_context is not None:
+                registration = connection.execute(
+                    "SELECT attempt_hash FROM attempts WHERE id=?", (attempt_id,)
+                ).fetchone()
+                if (
+                    dict(self._recovery_context.allowed_attempts).get(attempt_id)
+                    != registration["attempt_hash"]
+                ):
+                    raise BudgetError("Attempt is outside the explicit recovery allowlist")
+            if any(
+                row["state"] == "pending"
+                or (row["state"] == "uncertain" and row["id"] not in reviewed)
+                for row in rows
+            ):
                 raise BudgetError("Pending or uncertain usage blocks all further admissions")
             totals = self._totals(rows)
             committed = self.config.opening_spend_usd + Decimal(
@@ -488,6 +734,11 @@ class BudgetLedger:
             row = self._request(connection, identifier)
             if row["state"] == "settled":
                 raise UsageError("A settled request cannot be rewritten as uncertain")
+            if connection.execute(
+                "SELECT sequence FROM events WHERE kind='bounded_unknown_reviewed' AND request_id=?",
+                (identifier,),
+            ).fetchone():
+                raise UsageError("A reviewed uncertain request is immutable")
             inputs = max(v for v in (row["input_tokens"], input_tokens, -1) if v is not None)
             outputs = max(v for v in (row["output_tokens"], output_tokens, -1) if v is not None)
             lower_bound = max(
@@ -529,6 +780,12 @@ class BudgetLedger:
                 totals["committed_request_cost_usd"]
             )
             blocked_usage = bool(totals["pending_requests"] or totals["uncertain_requests"])
+            reviewed = self._reviewed_requests(connection, rows)
+            unreviewed = int(totals["uncertain_requests"]) - len(reviewed)
+            admission_usage_blocked = bool(totals["pending_requests"] or unreviewed)
+            reviewed_reservations = sum(
+                (Decimal(row["reserved_usd"]) for row in rows if row["id"] in reviewed), ZERO
+            )
             attempts = []
             for attempt in connection.execute("SELECT * FROM attempts ORDER BY created_at,id"):
                 own = self._totals([row for row in rows if row["attempt_id"] == attempt["id"]])
@@ -563,10 +820,19 @@ class BudgetLedger:
                     max(ZERO, self.config.user_ceiling_usd - committed)
                 ),
                 "cost_complete": not blocked_usage,
-                "admissions_blocked": blocked_usage
+                "reviewed_uncertain_requests": len(reviewed),
+                "unreviewed_uncertain_requests": unreviewed,
+                "bounded_reviewed_reservation_usd": _text(reviewed_reservations),
+                "quarantined_attempts": sorted(
+                    {row["attempt_id"] for row in rows if row["id"] in reviewed}
+                ),
+                "recovery_amendment_sha256": self._recovery_context.amendment_sha256
+                if self._recovery_context is not None
+                else None,
+                "admissions_blocked": admission_usage_blocked
                 or committed >= self.config.admission_ceiling_usd,
                 "blocked_reason": "unsettled_usage"
-                if blocked_usage
+                if admission_usage_blocked
                 else (
                     "admission_ceiling" if committed >= self.config.admission_ceiling_usd else None
                 ),

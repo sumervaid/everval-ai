@@ -56,7 +56,7 @@ export PYTHONPATH="$PWD:$PWD/src"
 
 Controls must establish every official expected failure before the fix, every expected pass afterward, and preservation of the official regression cases. The model never receives control logs, hidden tests, reference repairs, or future Git history.
 
-The frozen plan binds task bytes, prepared images, control evidence, runner sources, model settings, and the budget. Source changes after freezing are rejected.
+The frozen plan binds task bytes, prepared images, control evidence, runner sources, model settings, and the budget. Undeclared source changes after freezing are rejected.
 
 A fresh campaign has zero opening spend. To carry forward an earlier supported accounting reconciliation, supply both `--opening-spend-usd` and `--prior-accounting`. The original pilot carries forward $0.482999 from 179 prior calls. The helper verifies that amount against complete retained usage; it does not reset previous charges.
 
@@ -88,6 +88,15 @@ Both arms use `gpt-6.1-sol`, the same prepared image and limits, and one attempt
 The default cap is $6 per attempt, $190 for cumulative admission, and $200 for the user ceiling. Every provider request reserves its maximum declared token cost before sending. Missing usage, unexpected pricing, an interrupted request, or unconfirmed container cleanup blocks further admissions. Unknown charges never become zero.
 
 A started attempt is never silently rerun. Incomplete and failed attempts stay in the evidence. Investigate a blocked campaign locally; do not delete its ledger or start markers to bypass the stop. A missing or stale ledger with retained attempt evidence requires recovery; report export never creates a replacement ledger. Reconciliation detects mismatches among the surviving records, but cannot detect a coordinated rollback of every local copy without an independent audit anchor.
+
+For the inspected HTTP 400 output-limit response with missing usage, an explicit
+[post-outcome accounting amendment](../../docs/benchmarks/public-repositories-2026-10-15/recovery.md)
+can admit only the 11 originally unstarted pilot attempts after individual review.
+It retains the full unknown reservation, prior evidence and all frozen solver settings;
+started attempts are never retried. Every new unknown request stops again. Supply
+the same `--amendment` to campaign and report commands. The recovery guide separates
+implementation verification from actual application to the pilot ledger and explains
+why terminal completion does not imply complete costs or comparable quality outcomes.
 
 ## 4. Export only the reviewable metadata
 
