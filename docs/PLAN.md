@@ -22,7 +22,7 @@ Everval AI 0.3.1 is a terminal-first local evaluation product with a guided repo
 | On-premises deployment | Single-host service templates and preflight, offline installation guide, explicit internal HTTPS inference origins and private CA trust; target Linux service verification remains required. |
 | Operations | Durable jobs and worker recovery, local audit chain, consistent backups, exports, and no automatic result uploads. |
 
-The repository contains original installation and integration fixtures. Reference and incomplete submissions verify the pipeline; separate opt-in live runs measure compatibility and outcomes on those bounded tasks. Neither establishes representative customer performance. Source remains in a private repository.
+The repository contains original installation and integration fixtures. Reference and incomplete submissions verify the pipeline; separate opt-in live runs measure compatibility and outcomes on those bounded tasks. Neither establishes representative customer performance. The source repository is public; private workspaces and evaluation artifacts remain local.
 
 ## Release acceptance
 

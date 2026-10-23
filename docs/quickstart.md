@@ -10,13 +10,15 @@ Prefer a packaged CLI? Follow the [npm installation guide](npm.md); after setup,
 
 ## Install from source
 
-You need Git, Python 3.12 or newer, and uv. Install tmux to use the split terminal workspace; the standalone terminal interface also works. Cloning requires repository access when the source repository is private.
+You need Git, Python 3.12 or newer, and uv. Install tmux to use the split terminal workspace; the standalone terminal interface also works. The source repository is public.
 
 ```sh
 git clone https://github.com/sumervaid/everval-ai.git
 cd everval-ai
 uv sync --frozen
 ```
+
+This checkout includes the latest checkpoint-monitoring workflow, which is not in the published npm 0.3.1 package. See the [checkpoint operator guide](post-training.md) to use it, or the [measured study and reproduction recipe](benchmarks/checkpoint-study-2026-10-22/results.md) for the local training experiment.
 
 Dependency installation may use the network. The installed default demo runs offline.
 

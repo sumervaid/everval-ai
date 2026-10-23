@@ -2,7 +2,7 @@
 
 For the later unreleased Rankings and on-premises changes, see the separate [2026-10-16 feature verification](evidence/2026-10-16/README.md).
 
-Release acceptance completed on 2026-10-15 in the maintained iMac workspace. The table below identifies the executed checks and their scope. The repository remains private; raw workspaces, hidden graders, credentials, and traces remain local.
+Release acceptance completed on 2026-10-15 in the maintained iMac workspace. The table below identifies the executed checks and their scope. The source repository was private at acceptance and is now public. Raw workspaces, hidden graders, credentials, and traces remain local.
 
 The [release acceptance procedure](release-acceptance.md) explains how to reproduce the installed-wheel checks. The [dated evidence summary](evidence/2026-10-15/summary.json) records the final retained outcomes and their provenance. Original fixtures exercise installation and operating behavior; they do not establish representative customer performance.
 

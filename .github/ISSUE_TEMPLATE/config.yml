@@ -2,7 +2,7 @@ blank_issues_enabled: false
 contact_links:
   - name: Usage help and supported workflows
     url: https://github.com/sumervaid/everval-ai/blob/main/SUPPORT.md
-    about: Find the relevant guide or route a question through the existing project channel.
+    about: Find a guide, ask a public usage question, or choose the right issue form.
   - name: Report a security vulnerability
     url: https://github.com/sumervaid/everval-ai/blob/main/SECURITY.md#reporting-a-vulnerability
     about: Read the private reporting instructions before sharing sensitive details.

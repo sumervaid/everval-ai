@@ -1,12 +1,12 @@
 # Everval AI — On-prem continuous benchmarking for AI models and agents
 
-![Everval AI — know what improved, know what it cost](docs/assets/everval-banner.svg)
+![Everval AI — Know what improved. Know what it cost.](docs/assets/everval-launch.png)
 
-Turn repository changes, documents, data tasks, and workflow simulations into repeatable evaluations. Compare quality, cost, and latency. Keep checking as your models, prompts, and code change—all from a local terminal workbench.
+Decide whether a model, prompt, or agent change is ready to ship. Everval turns your work into repeatable benchmarks, compares quality, cost, and latency, and keeps checking as your system changes.
 
-[Quickstart](docs/quickstart.md) · [npm installation](docs/npm.md) · [On-premises deployment](docs/on-premises.md) · [Use cases](docs/use-cases.md) · [Product tour](docs/product-tour.md) · [Documentation](docs/index.md) · [Evidence](docs/evidence/2026-10-15/README.md) · [Contribute](CONTRIBUTING.md)
+For ML platform and evaluation engineers who need evidence on their own infrastructure: a terminal workbench, a shared CLI/API, and an optional review browser. Evaluate repository tasks, documents, structured data, and workflow simulations.
 
-**See the whole workflow:** [Follow one shopping-cart bug from repository to recurring checks](docs/worked-example.md).
+[Try it](#try-it-without-a-key) · [One complete workflow](docs/worked-example.md) · [Deploy on-premises](docs/on-premises.md) · [Measured checkpoint study](docs/benchmarks/checkpoint-study-2026-10-22/results.md)
 
 ## Try it without a key
 
@@ -18,7 +18,7 @@ everval setup
 everval demo
 ```
 
-For source installation, follow the [quickstart](docs/quickstart.md). Cloning requires repository access when the source repository is private. With npm, omit `uv run` from later examples and source-based guides.
+**Choose the right installation:** npm 0.3.1 provides the packaged evaluation workbench. For the latest source features, including checkpoint monitoring, use the [source quickstart](docs/quickstart.md#install-from-source). With npm, omit `uv run` from source-based guides.
 
 Watch a passing reference, a deliberate regression, and a restored candidate run across three examples. Inspect failures, compare the same frozen tasks, and keep the evidence locally. **The installed demo makes zero model calls and needs no Docker or network connection.** Dependency installation may use the network.
 
@@ -67,11 +67,11 @@ Repository tasks must fail before the original fix, pass afterward, and preserve
 After the demo, start a separate workspace with the original starter collections:
 
 ```sh
-uv run everval init --starters
-uv run everval tmux
+everval init --starters
+everval tmux
 ```
 
-Install [tmux](https://github.com/tmux/tmux/wiki) for the session launcher, or run `uv run everval tui` directly. Press **Ctrl+T** for training checkpoints, **Ctrl+L** for rankings, **Ctrl+N** to connect a repository, **F9** for a guided run, and **Ctrl+P** for commands. **Ctrl+B, D** detaches tmux while queued work continues.
+From a source checkout, prefix these commands with `uv run`. Install [tmux](https://github.com/tmux/tmux/wiki) for the session launcher, or run `everval tui` directly. Press **Ctrl+L** for rankings, **Ctrl+N** to connect a repository, **F9** for a guided run, and **Ctrl+P** for commands. In the current source checkout, **Ctrl+T** opens training checkpoints. **Ctrl+B, D** detaches tmux while queued work continues.
 
 Python and JavaScript/TypeScript repository execution require Docker and a prepared runtime. GitHub onboarding uses Git and the [GitHub CLI](https://cli.github.com/). Node.js is needed for the npm launcher or to build the optional browser interface from source. [Setup and first experiment →](docs/quickstart.md)
 
@@ -108,6 +108,6 @@ The supported deployment is one on-premises workspace and worker, with optional 
 
 Start with a [runnable example](examples/community/README.md), contribute a well-tested [task pack](docs/community-packs.md), or improve the path you just used. A useful contribution includes the problem, a small reproduction, and evidence of what changed.
 
-[Contribution guide](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Support](SUPPORT.md) · [Changelog](CHANGELOG.md) · [Cite](CITATION.cff)
+[Documentation](docs/index.md) · [Use cases](docs/use-cases.md) · [Contribution guide](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Support](SUPPORT.md) · [Changelog](CHANGELOG.md) · [Cite](CITATION.cff)
 
 Original project material is licensed under [Apache-2.0](LICENSE). Imported work retains its own permissions; bundled web dependencies retain their [notices](web/public/assets/third-party-notices.txt). Developed by Sumer S. Vaid and contributors.

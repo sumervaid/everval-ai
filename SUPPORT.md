@@ -17,7 +17,7 @@ Search existing issues first. If you can reproduce unexpected behavior, use the 
 
 Use original or synthetic examples. Remove credentials, private task material, hidden graders, and raw workspace exports before sharing logs or screenshots. An experiment export can contain more than the visible result summary.
 
-For usage questions that do not yet describe a reproducible problem, use your existing private project channel. The repository remains private; this guide does not create a public support forum or a response-time commitment.
+For help choosing or completing a workflow, open a [usage question](https://github.com/sumervaid/everval-ai/issues/new?template=usage-question.yml). Explain the decision you want to make, your installation version, and what you have tried. Questions and attachments are public: use original or synthetic examples and remove private material before posting. This community support route does not promise a response time.
 
 ## Suggest an improvement
 

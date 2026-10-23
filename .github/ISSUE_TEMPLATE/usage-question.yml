@@ -1,0 +1,40 @@
+name: Usage question
+description: Get help choosing or completing an Everval workflow.
+title: "[Question] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Start with the [first-session guide](https://github.com/sumervaid/everval-ai/blob/main/docs/quickstart.md)
+        or [supported workflows](https://github.com/sumervaid/everval-ai/blob/main/docs/PLAN.md).
+        This issue and its attachments will be public. Use original or synthetic examples.
+        Do not upload credentials, private repositories, task statements, hidden graders,
+        raw model responses, workspace databases, or full experiment exports.
+        For a possible security vulnerability, use the private route in
+        [SECURITY.md](https://github.com/sumervaid/everval-ai/blob/main/SECURITY.md#reporting-a-vulnerability).
+  - type: textarea
+    id: goal
+    attributes:
+      label: What are you trying to do?
+      description: Describe the workflow and the decision you want the evaluation to support.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Installation and environment
+      description: Include the package version or source commit, operating system, and whether you use the terminal, CLI, API, or browser.
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried?
+      description: Link the guide or command you followed and explain where you got stuck. Share only a small, redacted example if needed.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public information
+      options:
+        - label: I have checked that this question and any attachments contain no credentials or private evaluation material.
+          required: true
