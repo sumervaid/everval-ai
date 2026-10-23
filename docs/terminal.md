@@ -43,6 +43,7 @@ A narrow accepted subset is not a representative sample of all enterprise work. 
 | F11 | Autopilot policies and screening history |
 | F12 | Research lab, studies and community packs |
 | Ctrl+L | Model-by-benchmark Rankings matrix |
+| Ctrl+T | Training checkpoints, coverage, intervals and investigations |
 | Ctrl+P | Search the command palette, including Collections |
 | Ctrl+N | Connect a repository |
 | Ctrl+R | Refresh the current page |
@@ -104,3 +105,7 @@ Experiment actions include failure triage, local regrading, economics, and a dec
 ## Compare across benchmarks
 
 Press **Ctrl+L** to open [Rankings](rankings.md). Model configurations form the rows; frozen benchmark cohorts form the columns. Switch quality, cost per success and P95 latency with **1/2/3**. Select a cell, press **Enter** for evidence or **O** to open its source experiment. Missing, partial and control results stay explicit. Opening the view makes no model calls.
+
+## Follow training checkpoints
+
+Press **Ctrl+T** to open [Training](post-training.md). Select a training run, then navigate its chronological checkpoint-by-domain table. Inspect coverage, declared provenance, uncertainty, evaluation lag, unknown costs, and linked regression investigations. At narrow terminal sizes, press Enter to open the full evidence. The view makes no model calls. Exploratory and synthetic-control labels remain visible; an inconclusive comparison is not a passing deployment gate.

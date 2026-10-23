@@ -16,7 +16,7 @@ from textual.containers import Horizontal, Vertical
 from textual.events import Resize
 from textual.screen import Screen
 from textual.timer import Timer
-from textual.widgets import Button, DataTable, Footer, LoadingIndicator, RichLog, Static
+from textual.widgets import Button, DataTable, Footer, LoadingIndicator, RichLog, Select, Static
 
 from cvals.config import Settings
 from cvals.tui.dialogs import EvidenceDialog, FieldSpec, FormDialog, PlanDialog
@@ -32,10 +32,12 @@ from cvals.tui.presentation import (
     system_label,
 )
 from cvals.tui.rankings import RankingsMixin
+from cvals.tui.training import TrainingMixin
 
 PAGES = (
     ("overview", "Overview", "F1"),
     ("rankings", "Rankings", "Ctrl+L"),
+    ("training", "Training", "Ctrl+T"),
     ("projects", "Projects", "F2"),
     ("releases", "Releases", "F3"),
     ("experiments", "Experiments", "F4"),
@@ -58,6 +60,7 @@ TITLES = {key: title for key, title, _ in PAGES} | {
     "packs": "Community packs",
 }
 DESCRIPTIONS = {
+    "training": "Checkpoint trajectories, coverage and evidence for post-training decisions.",
     "rankings": "Rank within each frozen benchmark. Exact model configurations stay separate.",
     "packs": "Inspect provenance, review expected behavior and retain validation before admission.",
     "autopilot": "Continuous screening, bounded escalation and retained change evidence.",
@@ -80,6 +83,8 @@ DESCRIPTIONS = {
     "diagnostics": "Storage, execution, and provider readiness for this local workspace.",
 }
 TOOLS = {
+    "training_details": "Checkpoint details ↵",
+    "training_protocol": "Frozen protocol",
     "rankings": "Model rankings",
     "ranking_quality": "1 Quality",
     "ranking_cost": "2 Cost / pass",
@@ -143,6 +148,7 @@ TOOLS = {
     "back": "Back",
 }
 PAGE_TOOLS: dict[str, list[str]] = {
+    "training": ["training_details", "training_protocol"],
     "rankings": [
         "ranking_quality",
         "ranking_cost",
@@ -216,7 +222,7 @@ PAGE_TOOLS: dict[str, list[str]] = {
 }
 
 
-class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
+class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
     """A terminal client; no evaluation or storage rules are duplicated here."""
 
     TITLE = "Everval AI"
@@ -292,6 +298,13 @@ class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
                 yield Static(
                     "← ↑ ↓ → select · Enter details · O open run · 1/2/3 metrics · Ctrl+R refresh",
                     id="ranking-help",
+                    markup=False,
+                )
+                yield Select([], prompt="Select a training run", id="training-run")
+                yield Static("", id="training-summary", markup=False)
+                yield Static(
+                    "↑ ↓ checkpoint · Enter evidence · Shift+Tab runs · Ctrl+R refresh",
+                    id="training-help",
                     markup=False,
                 )
                 with Horizontal(id="panes"):
@@ -449,6 +462,9 @@ class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
         self.query_one("#intro").display = page == "overview"
         self.query_one("#metrics").display = page == "overview"
         self.set_class(page == "rankings", "rankings-page")
+        self.set_class(page == "training", "training-page")
+        for identity in ("training-run", "training-summary", "training-help"):
+            self.query_one("#" + identity).display = page == "training"
         self.query_one("#ranking-summary").display = page == "rankings"
         self.query_one("#ranking-help").display = page == "rankings"
         table = self.query_one("#ledger", DataTable)
@@ -481,11 +497,12 @@ class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
     def _poll(self) -> None:
         if (
             self.is_running
-            and self.page in {"experiments", "trials", "journey"}
+            and self.page in {"experiments", "trials", "journey", "training"}
             and len(self.screen_stack) == 1
             and not self._loading
             and (
                 any(row.get("status") in {"queued", "running", "cancelling"} for row in self.rows)
+                or self.page == "training"
                 or self.page == "journey"
                 and isinstance(self.payload, dict)
                 and self.payload.get("experiment_status") in {"queued", "running"}
@@ -500,6 +517,8 @@ class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
         self._loading = True
 
         def fetch() -> Any:
+            if page == "training":
+                return self.training_fetch()
             if page in {"autopilot", "lab", "packs"}:
                 return self.evolution_fetch(page)
             if page in {"guides", "journey", "health", "changes", "artifacts"}:
@@ -526,6 +545,9 @@ class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
         self._render_revision += 1
         selected_id = self.selected.get("id") if self.selected else None
         page = self.page
+        if page == "training":
+            self.render_training(result)
+            return
         if page == "rankings":
             self.render_rankings(result)
             return
@@ -912,6 +934,10 @@ class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
                 enabled = self.selected.get("status") in {"queued", "running", "cancelling"}
             self.query_one("#tool-" + key, Button).disabled = not enabled
 
+    @on(Select.Changed, "#training-run")
+    def training_changed(self, event: Select.Changed) -> None:
+        self.training_run_changed(event)
+
     @on(DataTable.CellHighlighted, "#ledger")
     def cell_highlighted(self, event: DataTable.CellHighlighted) -> None:
         self.ranking_highlighted(event)
@@ -927,6 +953,10 @@ class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
 
     @on(DataTable.RowSelected, "#ledger")
     def opened(self, event: DataTable.RowSelected) -> None:
+        if self.page == "training" and event.row_key.value is not None:
+            self.select_training_checkpoint(int(event.row_key.value))
+            self.training_command("training_details")
+            return
         if self.page != "rankings" and event.row_key.value is not None:
             self.select_row(int(event.row_key.value))
             self.command(
@@ -942,6 +972,9 @@ class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
             )
 
     def select_row(self, index: int) -> None:
+        if self.page == "training":
+            self.select_training_checkpoint(index)
+            return
         if index >= len(self.rows):
             return
         self.selected = self.rows[index]
@@ -1058,6 +1091,9 @@ class WorkbenchApp(RankingsMixin, EvolutionMixin, GrowthMixin, App[None]):
             self.action_connect()
 
     def command(self, name: str) -> None:
+        if self.page == "training" and name.startswith("training_"):
+            self.training_command(name)
+            return
         if name == "rankings":
             self.show_page("rankings")
             return

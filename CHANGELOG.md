@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Added post-training checkpoint monitoring across terminal, browser, CLI and API, including finalized manifest ingestion, immutable evaluation protocols, frozen budgeted jobs and retained decisions.
+- Added paired family-aware uncertainty with declared inference scope, evaluation qualification diagnostics, fixed-output grader comparisons, evidence-linked investigations and protected evaluation-mix validation.
+- Added a no-key synthetic checkpoint walkthrough and a prospective research protocol; no real-model training-study results are claimed.
+
 - Added an npm distribution of the complete CLI, terminal and browser application, with explicit setup, hashed Python dependencies, disconnected wheelhouse installation, and allowlisted release packaging.
 
 - Added an on-premises deployment guide, systemd service templates and startup preflight checks, with offline installation, personal authentication, private storage, backups and upgrade procedures. Linux service validation remains target-specific.

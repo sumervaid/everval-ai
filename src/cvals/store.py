@@ -671,8 +671,27 @@ class Store:
                 return trial
             system = next(s for s in snapshot["systems"] if s["id"] == trial["system_id"])
             if system["kind"] == "http":
+                from cvals.posttraining import training_budget_block
                 from cvals.spend_limits import admit
 
+                training_blocked = training_budget_block(connection, id)
+                if training_blocked:
+                    trial.update(
+                        status="budget_exceeded",
+                        error=training_blocked,
+                        finished_at=utc_now(),
+                        cost_usd=0.0,
+                    )
+                    state["completed_trials"] += 1
+                    self._save_trial(connection, trial)
+                    self._save_state(connection, state)
+                    self._event(
+                        connection,
+                        id,
+                        "trial.training_budget_blocked",
+                        {"trial_id": trial_id, "reason": training_blocked},
+                    )
+                    return trial
                 blocked = admit(
                     connection, id, trial_id, snapshot.get("budget_scope", "workspace"), reservation
                 )

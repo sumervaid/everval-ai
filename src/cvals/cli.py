@@ -664,6 +664,7 @@ from cvals.autopilot_cli import register as _register_autopilot  # noqa: E402
 from cvals.budgeting_cli import register as _register_budgeting  # noqa: E402
 from cvals.community_cli import register as _register_community  # noqa: E402
 from cvals.demo_cli import register as _register_demo  # noqa: E402
+from cvals.posttraining_cli import register as _register_training  # noqa: E402
 from cvals.rankings_cli import register as _register_rankings  # noqa: E402
 from cvals.research_cli import register as _register_research  # noqa: E402
 from cvals.variants import register as _register_variants  # noqa: E402
@@ -671,6 +672,7 @@ from cvals.variants import register as _register_variants  # noqa: E402
 _register_autopilot(app)
 _register_research(app)
 _register_rankings(app)
+_register_training(app)
 _register_community(app)
 _register_demo(app)
 _register_budgeting(app)

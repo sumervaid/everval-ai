@@ -38,9 +38,12 @@ These are installation controls, not a model leaderboard. [Open the demo in tmux
 | **What broke after a change?** | Link runs to revisions, inspect failure evidence, and regrade stored outputs without another model call. [Investigate →](docs/diagnostics.md) |
 | **Can we keep checking automatically?** | Schedule bounded screening, escalate to full evaluation, and inspect recurring budget projections. [Autopilot →](docs/autopilot.md) |
 | **Which configuration should we ship?** | Compare saved candidates, validate the selected candidate against a reserved holdout, and review a proposal. [Research lab →](docs/research-loop.md) |
+| **How is a model changing during training?** | Follow declared checkpoints, inspect paired uncertainty and qualification gaps, investigate regressions, and validate evaluation mixes. [Post-training →](docs/post-training.md) |
 | **Can this evaluate more than code?** | Use reviewed document, structured-data, and workflow tasks with explicit success criteria. [Task packs →](examples/community/README.md) |
 
-The terminal is the primary interface: thirteen views, a command palette, tmux sessions, and a durable local worker. The CLI and API use the same core. An optional browser gives reviewers blinded assignments and role-based access. [See the product tour →](docs/product-tour.md)
+**Current source addition:** [Checkpoint monitoring](docs/post-training.md) is available from the source checkout; the published npm 0.3.1 package predates this workflow.
+
+The terminal is the primary interface: fourteen views, a command palette, tmux sessions, and a durable local worker. The CLI and API use the same core. An optional browser gives reviewers blinded assignments and role-based access. [See the product tour →](docs/product-tour.md)
 
 ## From real work to a decision
 
@@ -68,7 +71,7 @@ uv run everval init --starters
 uv run everval tmux
 ```
 
-Install [tmux](https://github.com/tmux/tmux/wiki) for the session launcher, or run `uv run everval tui` directly. Press **Ctrl+L** for rankings, **Ctrl+N** to connect a repository, **F9** for a guided run, and **Ctrl+P** for commands. **Ctrl+B, D** detaches tmux while queued work continues.
+Install [tmux](https://github.com/tmux/tmux/wiki) for the session launcher, or run `uv run everval tui` directly. Press **Ctrl+T** for training checkpoints, **Ctrl+L** for rankings, **Ctrl+N** to connect a repository, **F9** for a guided run, and **Ctrl+P** for commands. **Ctrl+B, D** detaches tmux while queued work continues.
 
 Python and JavaScript/TypeScript repository execution require Docker and a prepared runtime. GitHub onboarding uses Git and the [GitHub CLI](https://cli.github.com/). Node.js is needed for the npm launcher or to build the optional browser interface from source. [Setup and first experiment →](docs/quickstart.md)
 

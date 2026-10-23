@@ -4231,3 +4231,266 @@ tbody tr:hover {
 .rankings-method p {
   margin-bottom: 0;
 }
+
+.training-page {
+  display: grid;
+  gap: 22px;
+}
+.training-page .page-heading {
+  margin-bottom: 0;
+}
+.training-page > .field {
+  max-width: 580px;
+}
+.training-refresh-note {
+  color: var(--muted);
+  margin: -10px 0 0;
+  font-size: 12px;
+}
+.training-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--line);
+}
+.training-summary > div {
+  background: var(--paper);
+  padding: 20px;
+  display: grid;
+  gap: 8px;
+}
+.training-summary span,
+.training-summary small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.training-summary strong {
+  font-size: 21px;
+  font-weight: 600;
+}
+.training-trajectory {
+  margin: 0;
+  padding: 12px 24px 22px;
+}
+.training-trajectory svg {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+}
+.training-trajectory text {
+  fill: var(--muted);
+  font-size: 12px;
+  font-family: inherit;
+}
+.training-trajectory .training-gap {
+  fill: var(--amber);
+  font-size: 22px;
+}
+.training-gridline {
+  stroke: var(--line);
+  stroke-dasharray: 3 5;
+}
+.training-point circle {
+  fill: var(--green);
+  stroke: var(--paper);
+  stroke-width: 2;
+}
+.training-point.selected circle {
+  fill: var(--ink);
+  stroke: var(--green);
+  stroke-width: 3;
+}
+.training-connection {
+  stroke: var(--green);
+  stroke-width: 1.5;
+  opacity: 0.5;
+}
+.training-interval {
+  stroke: var(--green);
+  stroke-width: 2;
+  opacity: 0.7;
+}
+.training-trajectory figcaption {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.training-step-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.training-step-buttons button,
+.training-matrix th button {
+  background: var(--paper);
+  color: var(--green);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 10px;
+}
+.training-step-buttons [aria-pressed='true'],
+.training-matrix th [aria-pressed='true'] {
+  background: var(--green);
+  color: white;
+}
+.training-table-scroll {
+  overflow-x: auto;
+}
+.training-matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.training-matrix caption {
+  padding: 0 20px 12px;
+  color: var(--muted);
+  text-align: left;
+  font-size: 12px;
+}
+.training-matrix th,
+.training-matrix td {
+  padding: 16px 20px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  min-width: 150px;
+}
+.training-matrix thead th {
+  background: var(--canvas);
+  color: var(--muted);
+  font-size: 12px;
+}
+.training-matrix td strong {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+.training-matrix td > span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
+}
+.training-matrix th > .status {
+  display: flex;
+  width: fit-content;
+  margin-top: 9px;
+}
+.training-matrix tr.selected {
+  background: var(--soft);
+}
+.training-checkpoint dl {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 12px 20px;
+  margin: 0;
+  padding: 20px 24px;
+  font-size: 13px;
+}
+.training-checkpoint dt {
+  color: var(--muted);
+}
+.training-checkpoint dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.training-domain-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  border-top: 1px solid var(--line);
+}
+.training-domain-details article {
+  padding: 20px 24px;
+}
+.training-domain-details p {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.training-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+.training-records > p,
+.training-page > .panel > p {
+  padding: 0 24px 16px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.training-record {
+  padding: 16px 24px;
+  border-top: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.training-record h3 {
+  margin: 12px 0 6px;
+}
+.training-record p {
+  margin: 8px 0;
+}
+.training-page .json-view {
+  margin: 12px 24px 20px;
+}
+.training-record .json-view {
+  margin: 12px 0 0;
+}
+@media (max-width: 900px) {
+  .training-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .training-evidence-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .training-summary strong {
+    font-size: 17px;
+  }
+  .training-summary > div {
+    padding: 14px;
+  }
+  .training-checkpoint dl {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .training-checkpoint dd {
+    margin-bottom: 12px;
+  }
+  .training-trajectory {
+    padding: 10px 12px;
+  }
+}
+
+.training-decision {
+  margin-top: 16px;
+  border-left: 3px solid var(--line);
+  padding-left: 14px;
+}
+.training-decision h4 {
+  margin-bottom: 8px;
+}
+.training-decision p,
+.training-decision li {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.training-page .status.regression {
+  background: #f9eae6;
+  color: var(--danger);
+}
+.training-page .status.inconclusive,
+.training-page .status.stale_evidence {
+  background: #fbf1db;
+  color: var(--amber);
+}
+
+.training-inference-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}

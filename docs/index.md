@@ -45,6 +45,8 @@ Use [benchmark validation](benchmarks.md) to understand what qualifies for a rel
 
 ## Keep checking as systems change
 
+- [Post-training checkpoint monitoring](post-training.md) connects a training trajectory to frozen evaluations, qualified measurements, regression investigations, and held-out mix studies.
+
 - [Change-linked evaluations](change-evaluation.md) bind a run to an explicit source or configuration change.
 - [Autopilot](autopilot.md) schedules bounded screening and escalates qualifying changes within a cumulative budget.
 - [Research lab](research-loop.md) investigates recorded failures, probes supported graders and compares explicit configuration candidates with a reserved final holdout.

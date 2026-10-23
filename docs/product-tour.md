@@ -65,6 +65,7 @@ Export a local decision brief or a deliberately limited evidence summary. Inspec
 | A data analysis agent | [Data example](../examples/community/data/README.md) |
 | A workflow agent's proposed state changes | [Scenario contracts](scenarios.md) |
 | An agent you already operate | [Live adapter protocol](agent-adapters.md) |
+| Checkpoints from a post-training run | [Checkpoint monitoring](post-training.md) and [measurement methods](posttraining-methods.md) |
 | A model or prompt change over time | [Autopilot](autopilot.md) and [research lab](research-loop.md) |
 
 Screenshots show original installation fixtures. They demonstrate working interfaces, not model quality or customer outcomes. The [acceptance record](evidence/2026-10-15/README.md) separates live-provider trials, local controls, and deployment limits.

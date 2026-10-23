@@ -99,6 +99,9 @@ class Worker:
 
         self.autopilot = Autopilot(settings, store)
         self.optimizer = Optimizer(settings)
+        from cvals.posttraining import PostTraining
+
+        self.training = PostTraining(settings, store)
         self.jobs = Jobs(settings)
         self.stop_event = threading.Event()
         self.wake_event = threading.Event()
@@ -125,6 +128,7 @@ class Worker:
                     self.autopilot.tick()
                     self.optimizer.tick()
                     self.autopilot.investigate_pending()
+                    self.training.tick()
                     next_schedule_check = time.monotonic() + 5
                 self.jobs.run_pending_once()
                 if self.engine.run_pending_once():
@@ -201,6 +205,9 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
     from cvals.evolution_api import register_evolution_routes
 
     register_evolution_routes(app, settings)
+    from cvals.posttraining_api import register_training_routes
+
+    register_training_routes(app, settings)
     hosts = ["localhost", "127.0.0.1", "::1", "[::1]", "testserver"]
     hosts.extend(
         h.strip()

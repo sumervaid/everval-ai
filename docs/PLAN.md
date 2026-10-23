@@ -6,7 +6,7 @@ Everval AI 0.3.1 is a terminal-first local evaluation product with a guided repo
 
 | Area | Behavior |
 | --- | --- |
-| Terminal workbench | Thirteen views, command palette, responsive forms, resumable guided runs, health, evidence, recurring and change-linked evaluations. |
+| Terminal workbench | Fourteen views, command palette, responsive forms, resumable guided runs, health, evidence, recurring and change-linked evaluations. |
 | GitHub integration | Read-only metadata, private bare mirrors, bounded history discovery, persistent rejection ledger, pagination, and conservative lineage checks. |
 | Task curation | Independent reviewed statements, provenance fingerprints, before/reference/regression validation, immutable development/holdout releases. |
 | Repository runtimes | Python/pytest plus JavaScript/TypeScript node:test, Jest and Vitest profiles; pinned image IDs and controlled offline private wheel/npm imports. |
@@ -18,6 +18,7 @@ Everval AI 0.3.1 is a terminal-first local evaluation product with a guided repo
 | Cost and latency | Partial-cost lower bounds, stage coverage, observed quality/cost/latency frontier, workspace/project/schedule cumulative caps. |
 | Ongoing evaluation | Commit/configuration-linked deduplicated admission, local CI gates, frozen recurring cohorts, benchmark health and retained schedule digests. |
 | Team review | Opt-in personal identities and API roles, assigned blind comparisons, frozen rubrics, append-only judgments, and evidence-bound decisions. |
+| Post-training monitoring (current source) | Frozen run/checkpoint declarations, trainer-manifest ingestion, budgeted evaluation queues, exploratory/predeclared paired family analysis, evaluation qualification, investigations, and held-out mix diagnostics. |
 | On-premises deployment | Single-host service templates and preflight, offline installation guide, explicit internal HTTPS inference origins and private CA trust; target Linux service verification remains required. |
 | Operations | Durable jobs and worker recovery, local audit chain, consistent backups, exports, and no automatic result uploads. |
 
@@ -48,6 +49,10 @@ Team mode enforces administrator, operator, reviewer, and viewer permissions in 
 Prepared tests execute in isolated containers. Same-process repository tests remain susceptible to deliberately hostile grader manipulation; neither Python nor Node is a formally verified adversarial sandbox. Dependency preparation disables repository hooks, lifecycle scripts, and native builds. Private packages enter through inspected offline archives, not stored registry credentials. Unsupported histories and dependencies are rejected with reasons.
 
 External adapters own isolation and ceiling enforcement inside their service. Everval reserves configured limits and checks returned usage and revision; it cannot independently meter that service or cancel its internal work after an HTTP timeout.
+
+## Post-training evidence boundary
+
+The source checkout adds checkpoint evaluation operations and a provider-free synthetic walkthrough. The published npm 0.3.1 artifact predates this addition. Weight and deployment identities remain declared; the runtime does not independently attest remotely served weights. Statistical interpretations depend on documented independence and frozen measurement assumptions. Evaluation-mix reports are descriptive diagnostics. No real-model post-training experiment, blinded human calibration study, or distributed-fleet validation is claimed. See the [operator guide](post-training.md), [methods](posttraining-methods.md), and [prospective study protocol](../examples/post-training/STUDY.md).
 
 ## Remaining deployment work
 

@@ -24,6 +24,7 @@ import { CollectionsPage, CollectionDetail, NewCollection } from './pages/Collec
 import { ExperimentsPage, NewExperiment, ExperimentDetail } from './pages/Experiments';
 import { SystemsPage } from './pages/Systems';
 import { RankingsPage } from './pages/Rankings';
+import { TrainingPage } from './pages/Training';
 import {
   ReviewInbox,
   ReviewTask,
@@ -135,7 +136,7 @@ function Workbench() {
     return () => clearInterval(interval);
   }, [refresh]);
   useEffect(() => {
-    document.title = `${path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/rankings') ? 'Rankings' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/reviews') ? 'Review desk' : path.startsWith('/cases') ? 'Production examples' : path.startsWith('/team') ? 'Team access' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
+    document.title = `${path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/rankings') ? 'Rankings' : path.startsWith('/training') ? 'Training' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/reviews') ? 'Review desk' : path.startsWith('/cases') ? 'Production examples' : path.startsWith('/team') ? 'Team access' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
   }, [path]);
   useEffect(() => {
     if (!authRequired) return;
@@ -175,10 +176,14 @@ function Workbench() {
     };
   }, [authRequired]);
   const canManage = session?.capabilities.includes('workspace.write') ?? false;
+  const canReadWorkspace = session?.capabilities.includes('workspace.read') ?? false;
   const canReview = session?.capabilities.includes('reviews.assigned') ?? false;
   const canSummarize = session?.capabilities.includes('summary.read') ?? false;
   const nav = [
     ...(canManage ? workspaceNav : []),
+    ...(canReadWorkspace
+      ? [{ path: '/training', name: 'Training', icon: ChartNoAxesColumnIncreasing }]
+      : []),
     ...(canReview ? [{ path: '/reviews', name: 'Review desk', icon: ShieldCheck }] : []),
     ...(!canReview && canSummarize
       ? [{ path: '/reviews/queues', name: 'Decision briefs', icon: ShieldCheck }]
@@ -229,7 +234,8 @@ function Workbench() {
       );
   }
   if (session) {
-    if ((route === '/reviews' || (route === '/' && !canManage)) && canReview)
+    if (route === '/training' && canReadWorkspace) content = <TrainingPage />;
+    else if ((route === '/reviews' || (route === '/' && !canManage)) && canReview)
       content = <ReviewInbox key={session.id} session={session} />;
     else if ((route === '/reviews/queues' || (route === '/' && !canManage)) && canSummarize)
       content = <ReviewQueueList canManage={canManage} />;

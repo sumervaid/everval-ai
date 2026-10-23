@@ -97,3 +97,11 @@ DataTable, RichLog, VerticalScroll, #actions { scrollbar-color: #355d5b; scrollb
 .compact.rankings-page #ledger-pane, .compact.rankings-page #detail-pane { width: 100%; }
 .short #ranking-summary { padding: 0; max-height: 2; }
 .short #ranking-help { margin-bottom: 0; max-height: 2; }
+
+#training-run { display: none; height: 3; margin-bottom: 0; }
+#training-summary { display: none; height: auto; max-height: 3; color: $ev-teal; }
+#training-help { display: none; height: auto; max-height: 2; color: $ev-muted; margin-bottom: 1; }
+.training-page #ledger-pane { width: 5fr; }
+.training-page #detail-pane { width: 2fr; }
+.compact.training-page #ledger-pane, .compact.training-page #detail-pane { width: 100%; }
+.short #training-help { margin-bottom: 0; max-height: 1; }
