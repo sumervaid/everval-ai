@@ -1,5 +1,14 @@
 # Checkpoint monitoring examples
 
+For actual model training and evaluation, start with the [completed local checkpoint study](../../docs/benchmarks/checkpoint-study-2026-10-22/results.md).
+It trained three QLoRA seeds, evaluated twelve checkpoints, and retained all
+3,072 model responses. The [frozen executed protocol](REAL_STUDY_PROTOCOL.md),
+[hashed setup and reproduction guide](../../scripts/posttraining/SETUP.md), and
+[published aggregate evidence](../../docs/benchmarks/checkpoint-study-2026-10-22/summary.json)
+include the negative and inconclusive findings.
+
+## No-key installation walkthrough
+
 Start with the complete executable installation walkthrough:
 
 ```sh

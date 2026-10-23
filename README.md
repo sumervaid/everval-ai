@@ -41,7 +41,7 @@ These are installation controls, not a model leaderboard. [Open the demo in tmux
 | **How is a model changing during training?** | Follow declared checkpoints, inspect paired uncertainty and qualification gaps, investigate regressions, and validate evaluation mixes. [Post-training →](docs/post-training.md) |
 | **Can this evaluate more than code?** | Use reviewed document, structured-data, and workflow tasks with explicit success criteria. [Task packs →](examples/community/README.md) |
 
-**Current source addition:** [Checkpoint monitoring](docs/post-training.md) is available from the source checkout; the published npm 0.3.1 package predates this workflow.
+**Current source addition:** [Checkpoint monitoring](docs/post-training.md) is available from the source checkout; the published npm 0.3.1 package predates this workflow. [Read the completed checkpoint study](docs/benchmarks/checkpoint-study-2026-10-22/results.md): three actual local QLoRA training runs, twelve checkpoints, and 3,072 model responses, with a frozen protocol, withheld validation, plots, and [reproduction instructions](scripts/posttraining/SETUP.md).
 
 The terminal is the primary interface: fourteen views, a command palette, tmux sessions, and a durable local worker. The CLI and API use the same core. An optional browser gives reviewers blinded assignments and role-based access. [See the product tour →](docs/product-tour.md)
 
@@ -89,6 +89,12 @@ These single-turn acceptance trials exercised API compatibility and grading on s
 [Results and artifacts](docs/evidence/2026-10-15/README.md) · [Reproduce acceptance](docs/release-acceptance.md) · [Verification scope](docs/verification.md)
 
 The separate [public repository pilot](docs/benchmarks/public-repositories-2026-10-15/results.md) has finished all 16 scheduled attempts. Of 12 selected test tasks, seven passed admission and five were excluded. Review resolved 6/12 selected tasks and baseline 4/12 (6/7 and 4/7 admitted), while all four comparable graded pairs tied. The difference came from ungraded baseline API interruptions, so no repair-quality improvement is demonstrated. Four unknown requests remain fully reserved after an explicit [accounting amendment](docs/benchmarks/public-repositories-2026-10-15/recovery.md). Known cumulative provider spending is $3.367754; the budget commitment is $3.859489. Inspect the [final metadata](docs/benchmarks/public-repositories-2026-10-15/final-summary.json), [original partial export](docs/benchmarks/public-repositories-2026-10-15/partial-summary.json), [protocol](docs/benchmarks/public-repositories-2026-10-15/methodology.md), and [reproduction recipe](scripts/benchmarks/README.md).
+
+The separate [checkpoint study](docs/benchmarks/checkpoint-study-2026-10-22/results.md) trained Qwen2.5-0.5B-Instruct locally. In both withheld validation runs, exact JSON-contract success reached 64/64 for routing (from 0/64) and extraction (from 6/64). Arithmetic remained 0/64, making retention inconclusive. A suite selected before validation used 37.7% less recorded provider-call time in a counterfactual replay, with 1.56 percentage-point mean absolute change-estimation error. No reference regressions occurred, so detection recall is undefined. These are generated diagnostics with shared templates; they do not establish customer performance or general capability gains.
+
+![Measured exact JSON-contract success across twelve trained model checkpoints](docs/assets/checkpoint-trajectories.png)
+
+*Actual local inference on generated tasks. Each line is one training seed; the validation runs reuse the same withheld task cohort. [Methods, uncertainty and all baseline results →](docs/benchmarks/checkpoint-study-2026-10-22/results.md)*
 
 ## Your workspace, your evidence
 

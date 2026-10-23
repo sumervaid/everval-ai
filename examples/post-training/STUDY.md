@@ -1,7 +1,10 @@
 # Prospective study: evaluation cost and missed training regressions
 
 Status: protocol template. The engineering controls are implemented; this document
-does not report an executed real-model training study.
+does not report an executed real-model training study. A separately frozen
+[local checkpoint study](../../docs/benchmarks/checkpoint-study-2026-10-22/results.md)
+has now been completed; its [executed protocol](REAL_STUDY_PROTOCOL.md) records
+the exact narrower design and limitations.
 
 ## Question and primary outcomes
 

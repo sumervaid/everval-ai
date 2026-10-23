@@ -1,0 +1,181 @@
+{
+  "amendment_policy": "No overwrite. Any post-freeze methodological/source change requires a linked explicit amendment; report deviations before results.",
+  "analysis": {
+    "alpha_per_run": 0.016666666666666666,
+    "alpha_total": 0.05,
+    "auxiliary_metrics": [
+      "json_syntax_validity",
+      "json_object_validity",
+      "strict_answer_contract_validity",
+      "exact_answer_accuracy_given_valid_json_object",
+      "strict_primary_grade"
+    ],
+    "baseline_draws": 32,
+    "baseline_policy": "Uniform fixed-seed draws from enumerated feasible covered subsets; separate one-per-domain stratified draws; same ceiling, actual time reported",
+    "baseline_seed": 20261022,
+    "budget_fraction": 0.7,
+    "cost_unit": "wall_seconds",
+    "development_seed": 17,
+    "development_steps": [
+      0,
+      80,
+      160
+    ],
+    "family_unit": "Underlying record, with both paraphrases grouped",
+    "inference_scope": "exploratory; prospective conditional generated-population measurement",
+    "max_looks": 3,
+    "min_clusters": 5,
+    "phase_order": "Phase1 seed17 steps0/80/160; freeze selection; only then dev320 and all validation checkpoint evaluation",
+    "planned_domains": 4,
+    "practical_threshold": 0.1,
+    "primary_validation_step": 320,
+    "protected_domains": [
+      "routing",
+      "extraction",
+      "arithmetic",
+      "injection"
+    ],
+    "selection_path": "analysis/mix-selection.json",
+    "sensitivity_cluster_unit": "Fixed surface paraphrase template, two clusters per domain",
+    "validation_family_cohort_shared": true,
+    "validation_seeds": [
+      29,
+      43
+    ]
+  },
+  "artifact_file_paths": [
+    "converted-file-manifest.json",
+    "requirements.lock",
+    "runtime-freeze.txt",
+    "source-file-manifest.json",
+    "training-config.json",
+    "training-seed-17-config.json",
+    "training-seed-29-config.json",
+    "training-seed-43-config.json",
+    "upstream-model.json"
+  ],
+  "budget": {
+    "hardware_energy_cost_usd": null,
+    "hosted_provider_cap_usd": 0.0,
+    "policy": "No paid provider or cloud calls; retain missing and interrupted outcomes",
+    "remote_fallback_allowed": false
+  },
+  "checkpoint_steps": [
+    0,
+    80,
+    160,
+    320
+  ],
+  "dataset": {
+    "content_sha256": "4d369a66b1983aa22643264d816c0a2a321639df68f6f7465b516d5cafe19b76",
+    "generator_version": "original-enterprise-diagnostics/1",
+    "limitations": [
+      "All tasks are generated; no customer population or public benchmark representativeness is claimed.",
+      "Two fixed surface forms share each underlying record and are one task family.",
+      "Records share task and attack templates; record grouping does not establish independent templates or attack diversity.",
+      "Exact structured-answer success measures both format adherence and correctness.",
+      "Validation collections are private development-format objects reserved by the separately frozen study schedule."
+    ],
+    "manifest_path": "dataset/dataset-manifest.json"
+  },
+  "domains": [
+    "routing",
+    "extraction",
+    "arithmetic",
+    "injection"
+  ],
+  "evaluation_runtime_freeze": {
+    "before": "First benchmark response",
+    "binds": [
+      "initial_protocol_sha256",
+      "adapter_source_sha256",
+      "runner_source_sha256",
+      "analysis_source_sha256"
+    ],
+    "path": "evaluation-runtime-freeze.json",
+    "reason": "Training/methodology frozen first; final evaluation code independently frozen before evaluation",
+    "required": true
+  },
+  "expected_total_generations": 3072,
+  "families_per_domain": 32,
+  "measurement": {
+    "grader_revision": "deterministic/1",
+    "input_limit": 512,
+    "invalid_json_policy": "completed_failed_empty_object",
+    "json_policy": "Reject duplicate keys and nonfinite numbers; no extraction or repair; non-object becomes empty object",
+    "max_new_tokens": 32,
+    "primary_grade": "Exact frozen string answer and strict JSON object schema with only answer:string",
+    "repetitions": 1,
+    "runtime_field": "provider_ms / 1000",
+    "runtime_scope": "Client provider-call wall time inclusive of adapter/RPC/tokenization/prefill/generation; excludes model setup/training/orchestration/grading",
+    "runtime_unit": "wall_seconds",
+    "system_prompt": "Follow the task instructions. Return only the requested JSON object.",
+    "temperature": 0.0,
+    "timeout_seconds": 120
+  },
+  "model": {
+    "checkpoint_zero": "Actual seed-initialized LoRA arrays with zero B; functionally base-equivalent; no artificial digest salting",
+    "conversion": {
+      "bits": 4,
+      "group_size": 64,
+      "mode": "affine",
+      "source_dtype": "bfloat16"
+    },
+    "license": "apache-2.0",
+    "repo": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "upstream_weights_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+  },
+  "paraphrases": 2,
+  "schema_version": 1,
+  "seed_splits": {
+    "17": "development",
+    "29": "validation",
+    "43": "validation"
+  },
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "source_file_paths": [
+    "examples/post-training/REAL_STUDY_PROTOCOL.md",
+    "scripts/posttraining/build_dataset.py",
+    "scripts/posttraining/model_runtime.py",
+    "scripts/posttraining/freeze_protocol.py",
+    "examples/post-training/real-study-protocol-template.json"
+  ],
+  "study_id": "structured-output-specialization-and-retention-replication",
+  "title": "Structured-output specialization and retention in a locally trained small model",
+  "training": {
+    "batch_size": 4,
+    "checkpoint_steps": [
+      0,
+      80,
+      160,
+      320
+    ],
+    "gradient_accumulation_steps": 1,
+    "gradient_checkpointing": false,
+    "iters": 320,
+    "learning_rate": 0.0001,
+    "lora_dropout": 0.0,
+    "lora_keys": [
+      "self_attn.q_proj",
+      "self_attn.v_proj"
+    ],
+    "lora_scale": 16.0,
+    "max_seq_length": 512,
+    "num_layers": 4,
+    "optimizer": "Adam",
+    "prompt_masking": true,
+    "rank": 8,
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "validation_batches": 2,
+    "validation_interval": 320
+  }
+}

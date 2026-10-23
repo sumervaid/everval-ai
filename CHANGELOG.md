@@ -4,7 +4,8 @@
 
 - Added post-training checkpoint monitoring across terminal, browser, CLI and API, including finalized manifest ingestion, immutable evaluation protocols, frozen budgeted jobs and retained decisions.
 - Added paired family-aware uncertainty with declared inference scope, evaluation qualification diagnostics, fixed-output grader comparisons, evidence-linked investigations and protected evaluation-mix validation.
-- Added a no-key synthetic checkpoint walkthrough and a prospective research protocol; no real-model training-study results are claimed.
+- Added a no-key synthetic checkpoint walkthrough and a prospective research protocol template.
+- Completed a [real local checkpoint study](docs/benchmarks/checkpoint-study-2026-10-22/results.md): three QLoRA training seeds, twelve inspected checkpoints, 3,072 completed model generations, frozen selection and withheld validation, reproducible figures, and retained qualification/investigation records. Results include structured-output gains, an arithmetic floor, inconclusive template sensitivity, and undefined regression-detection recall when no reference regressions occurred.
 
 - Added an npm distribution of the complete CLI, terminal and browser application, with explicit setup, hashed Python dependencies, disconnected wheelhouse installation, and allowlisted release packaging.
 

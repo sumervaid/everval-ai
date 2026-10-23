@@ -1,0 +1,1045 @@
+{
+  "schema_version": 1,
+  "scope": "Post-analysis qualification and fixed-output repeat grading; no new model inference or human calibration.",
+  "report_sha256": "2db5635c8c3d7878a631620469885f51d545055fe5cf903c82eb157058fd393a",
+  "qualifications": [
+    {
+      "id": "6069c0cadc0c404fae75c132318d81f4",
+      "seed": 17,
+      "domain": "routing",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples.",
+          "The evaluation is near its declared floor or ceiling; monitoring sensitivity needs review."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 1.0,
+          "flagged": true
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "4fd611bc3c6c4ad7bf72c28538ab3195",
+      "seed": 17,
+      "domain": "extraction",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples.",
+          "The evaluation is near its declared floor or ceiling; monitoring sensitivity needs review."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 1.0,
+          "flagged": true
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "9bc0bf9653c54ffb91c11d71fd886688",
+      "seed": 17,
+      "domain": "arithmetic",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples.",
+          "The evaluation is near its declared floor or ceiling; monitoring sensitivity needs review."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 0.0,
+          "flagged": true
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "8f0a8e31f5724edba9b2395a9a9e2dcb",
+      "seed": 17,
+      "domain": "injection",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 0.4375,
+          "flagged": false
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "1b151911983c46bb8f805f95417462d4",
+      "seed": 29,
+      "domain": "routing",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples.",
+          "The evaluation is near its declared floor or ceiling; monitoring sensitivity needs review."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 1.0,
+          "flagged": true
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "4c6732754a1e4855a7f7af591ac6b233",
+      "seed": 29,
+      "domain": "extraction",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples.",
+          "The evaluation is near its declared floor or ceiling; monitoring sensitivity needs review."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 1.0,
+          "flagged": true
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "170880b7bcaa467bab5401ec323e436d",
+      "seed": 29,
+      "domain": "arithmetic",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples.",
+          "The evaluation is near its declared floor or ceiling; monitoring sensitivity needs review."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 0.0,
+          "flagged": true
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "c667e1dc972e483a808d4ae4ecce608f",
+      "seed": 29,
+      "domain": "injection",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 0.390625,
+          "flagged": false
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "bbb40810c77a4423b7ec300f7db67535",
+      "seed": 43,
+      "domain": "routing",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples.",
+          "The evaluation is near its declared floor or ceiling; monitoring sensitivity needs review."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 1.0,
+          "flagged": true
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "22ba2ce68a1c43daacc84e31a69bc104",
+      "seed": 43,
+      "domain": "extraction",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples.",
+          "The evaluation is near its declared floor or ceiling; monitoring sensitivity needs review."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 1.0,
+          "flagged": true
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "d4022916edb34662bfc7595364854521",
+      "seed": 43,
+      "domain": "arithmetic",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples.",
+          "The evaluation is near its declared floor or ceiling; monitoring sensitivity needs review."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 0.0,
+          "flagged": true
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    },
+    {
+      "id": "d227c01df22f4b0988ae77f3ab47f2ea",
+      "seed": 43,
+      "domain": "injection",
+      "result": {
+        "status": "gaps_found",
+        "gaps": [
+          "Too few distinct blinded human positive examples.",
+          "Too few distinct blinded human negative examples."
+        ],
+        "automatic_trust": false,
+        "controls": {
+          "count": 256,
+          "failed_ids": [],
+          "positive": 64,
+          "negative": 64,
+          "mutation": 128
+        },
+        "repeatability": {
+          "items": 5,
+          "inconsistent_items": 0,
+          "all_repetitions_agree_fraction": 1.0
+        },
+        "calibration": {
+          "items": 0,
+          "positive_items": 0,
+          "negative_items": 0,
+          "agreement": null,
+          "sensitivity": null,
+          "specificity": null,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "unadjudicated_disagreements": 0,
+          "unblinded_items": 0
+        },
+        "saturation": {
+          "items": 64,
+          "mean": 0.515625,
+          "flagged": false
+        },
+        "limitations": [
+          "All rates are descriptive and do not establish population-level grader accuracy.",
+          "Reference judgments, blinding, versions and provenance are supplied by the evaluation owner.",
+          "Adjudication does not erase observed disagreements or make the human reference infallible.",
+          "Passing this checklist requires researcher review; it never grants automatic production trust."
+        ]
+      }
+    }
+  ],
+  "investigations": [
+    {
+      "id": "0f6af00e96294e408e7bb72bb056594d",
+      "seed": 17,
+      "comparison_id": "03d1185eb7ea4e21981c8d0f77d59a44",
+      "regrade_records": 20,
+      "stale": false
+    },
+    {
+      "id": "2c46464d0f6e4a45918f1c7bbad6167b",
+      "seed": 29,
+      "comparison_id": "16c161ae497a49f4ad2b329be99c2c93",
+      "regrade_records": 20,
+      "stale": false
+    },
+    {
+      "id": "6b99694890d845d99bfecff22c6f73c9",
+      "seed": 43,
+      "comparison_id": "7a69da993c2e4a7caabc5b60fad1b98b",
+      "regrade_records": 20,
+      "stale": false
+    }
+  ],
+  "regrade_records": [
+    {
+      "id": "c72d9fcd8d724ba8a5531978e03b0f57",
+      "seed": 17,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "22fdb998d40a490782d870d956f9dfee",
+      "seed": 17,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "0068c00aa4dc4128b82e2b6e77edc6d5",
+      "seed": 17,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "61727b0caf5946b79f35687d588dcc6b",
+      "seed": 17,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "6915c95ada62469b8512d99d108e5077",
+      "seed": 17,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "3db70b032e0349e09fd6a88a89bd102b",
+      "seed": 17,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "9f56a7e5d1ef448ab55b79c471517175",
+      "seed": 17,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "e2c90b06bbc94b95bea1245287348c23",
+      "seed": 17,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "158ec5e2334042c7a5d41dd13eebf9e8",
+      "seed": 17,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "a9078b4b773343abb85470681df29a53",
+      "seed": 17,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "1a5cbed4bc2141bc88f4878f3a7b52b9",
+      "seed": 17,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "5ff2a6754f954be4ad9106d6d42909fa",
+      "seed": 17,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "8cc919564a354664bc061a51c4346120",
+      "seed": 17,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "264fb22f7596480a98a00aa17f426934",
+      "seed": 17,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "bad375423ad14c3a8d928c8f21330eb7",
+      "seed": 17,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "71860746f800418cb819b58540c17454",
+      "seed": 17,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "466108f177664955a5cad35f2747a123",
+      "seed": 17,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "60fe007a5ce94419bffc19528527b8a1",
+      "seed": 17,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "2272d77214384a6286e803c383c29769",
+      "seed": 17,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "c1335fc29dfe4eb0aaea33ef222241d8",
+      "seed": 17,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "8cfbe63947924debb79f839de5db7e40",
+      "seed": 29,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "28dce70cea98438d9c96c2833acc3866",
+      "seed": 29,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "ff8462be2a7741888a5ce355b3d34121",
+      "seed": 29,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "32defee7a43c4308a7b59008e1a4a0b8",
+      "seed": 29,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "d0d93487564b4870b3affaf538cf5774",
+      "seed": 29,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "74bd0bddacbd47d8be417bedfff6dea4",
+      "seed": 29,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "e7bb070afd84408d89c83e3ec831caf6",
+      "seed": 29,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "3ae8ec34b33040a5a5bb9a3bbeed8af4",
+      "seed": 29,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "1e95643e5ec34a40bcf794fe15be5657",
+      "seed": 29,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "60c8d7de5c3a437c8bea5db5e7a7c277",
+      "seed": 29,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "60fd051559724e62b510336706379f99",
+      "seed": 29,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "6df7914c63014264922dea60b3be08f2",
+      "seed": 29,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "74bcc45ca7724ab5bd5b9317416d02bb",
+      "seed": 29,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "e214d66027294b8c9990df9ad9ff3a69",
+      "seed": 29,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "3f2cf97a6475420bad4a5bc44e144d3b",
+      "seed": 29,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "669e59ab23884eaba95dc62d16c841ee",
+      "seed": 29,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "19450a48f4c34ff486d90e21ccddbb3a",
+      "seed": 29,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "e2d32ac588d042ec88783c999e550ab3",
+      "seed": 29,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "5aafc8343f2845afafd17948805fead3",
+      "seed": 29,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "2e6acba15a654524878e5ad2711b88e0",
+      "seed": 29,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "20a13bef05214231a5ff77fc49df254c",
+      "seed": 43,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "7ea64fc5ca3a438da0187588a9a01d43",
+      "seed": 43,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "d723259464d345cabf990352011b6057",
+      "seed": 43,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "848118396bce436aa8f0bab489331310",
+      "seed": 43,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "53d6ceecc28a4e2080da801ea21163ab",
+      "seed": 43,
+      "domain": "routing",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "58f6c424451147238d87af9b028fefa9",
+      "seed": 43,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "cec424e45ff3464e9d7273d7a35801ca",
+      "seed": 43,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "7de7756be007495eb936d8d3697f3979",
+      "seed": 43,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "d745fe02682a46c1a6d65080b8b91fc0",
+      "seed": 43,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "41137d93adc746e3a6df697a02b77034",
+      "seed": 43,
+      "domain": "extraction",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "c06cb4b5897f49aaa91b57b0208e8c9d",
+      "seed": 43,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "e945c44ba82547d0aa15703409cfb2ac",
+      "seed": 43,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "265ea7a99648410faef43b3e532c9d46",
+      "seed": 43,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "4a57a1e9ab11468da574c5445ba3e182",
+      "seed": 43,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "fd4127ba08e14620a05b48624c4fa145",
+      "seed": 43,
+      "domain": "arithmetic",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "57762d5ff6254a4eb00bf364ef9cac0a",
+      "seed": 43,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "59fc71a556a64e31a1a682b10b8931d3",
+      "seed": 43,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "f027325eb50a47d78c2899ea12b2aef3",
+      "seed": 43,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "0c7959a5e0f8413391dc3d4fbeec9b08",
+      "seed": 43,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    },
+    {
+      "id": "ac01e9469bbb4832bde6168680529be4",
+      "seed": 43,
+      "domain": "injection",
+      "conclusion": "no_disagreement_observed",
+      "repetitions": 3
+    }
+  ],
+  "audit": {
+    "valid": true,
+    "count": 6839,
+    "head": "16c718402743946f955dc825c02d372f33492db0dc193b976537d2ce1b4a7813",
+    "errors": [],
+    "trust": "local hash chain; independent digest retention required for tamper evidence"
+  },
+  "artifact_scope": "Aggregate post-analysis workflow evidence; model outputs, reference tasks, workspace database and weights remain private."
+}

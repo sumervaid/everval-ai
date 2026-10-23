@@ -52,7 +52,9 @@ External adapters own isolation and ceiling enforcement inside their service. Ev
 
 ## Post-training evidence boundary
 
-The source checkout adds checkpoint evaluation operations and a provider-free synthetic walkthrough. The published npm 0.3.1 artifact predates this addition. Weight and deployment identities remain declared; the runtime does not independently attest remotely served weights. Statistical interpretations depend on documented independence and frozen measurement assumptions. Evaluation-mix reports are descriptive diagnostics. No real-model post-training experiment, blinded human calibration study, or distributed-fleet validation is claimed. See the [operator guide](post-training.md), [methods](posttraining-methods.md), and [prospective study protocol](../examples/post-training/STUDY.md).
+The source checkout adds checkpoint evaluation operations and a provider-free synthetic walkthrough. The published npm 0.3.1 artifact predates this addition. The [completed local checkpoint study](benchmarks/checkpoint-study-2026-10-22/results.md) includes three actual QLoRA training runs, twelve inspected checkpoint artifacts, and 3,072 completed model generations under a frozen protocol. Its generated diagnostics demonstrate bounded structured-output improvements, an arithmetic floor, and counterfactual evaluation-time trade-offs. Shared templates, only two validation seeds, no observed regressions, and no human calibration limit the conclusions.
+
+Weight and deployment identities in the general product remain declared; the runtime does not independently attest remotely served weights. The local study separately verifies its saved tensor contents. Statistical interpretations depend on documented independence and frozen measurement assumptions. Evaluation-mix reports are descriptive diagnostics; neither distributed-fleet validation nor autonomous training intervention is claimed. See the [operator guide](post-training.md), [methods](posttraining-methods.md), [study reproduction](../scripts/posttraining/SETUP.md), and [prospective protocol template](../examples/post-training/STUDY.md).
 
 ## Remaining deployment work
 

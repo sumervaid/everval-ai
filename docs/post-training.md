@@ -288,5 +288,20 @@ partition. The mix selector supports at most 64 evaluations and 256 development
 checkpoints. Run lists default to 100 entries and support offset pagination.
 
 This implements checkpoint evaluation operations on the supported local worker.
-It does not establish distributed-fleet scale, independently verified weights,
-a completed real-model post-training study, or an autonomous training intervention.
+The [completed local research study](benchmarks/checkpoint-study-2026-10-22/results.md)
+runs three real QLoRA training seeds and evaluates twelve saved checkpoints
+through this workflow. It retains 3,072 model responses privately and publishes
+aggregate results, lineage hashes, plots, and [reproduction instructions](../scripts/posttraining/SETUP.md).
+Its inspected local artifacts do not establish remote weight attestation,
+distributed-fleet scale, customer-workload generalization, or autonomous training intervention.
+
+The study's [post-analysis review](benchmarks/checkpoint-study-2026-10-22/post-analysis-review.json)
+retains twelve qualification records and three investigations, including
+180 repeated grades of 60 saved model outputs. The deterministic controls agree,
+but no human calibration was collected and floor/ceiling saturation remains
+visible. These later records do not retroactively change the frozen comparisons.
+
+![Actual checkpoint workspace with recorded qualification gaps](assets/checkpoint-live-dashboard.png)
+
+*The real study workspace, viewed through a read-only database copy after
+evaluation and review. The no-key walkthrough above remains a separate synthetic control.*

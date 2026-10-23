@@ -16,6 +16,7 @@ from typing import Any
 from cvals.models import content_hash
 
 from .analyze_real_study import _bounded_file, _write_once, load_case_registry
+from .model_runtime import fingerprint
 from .run_study import environment_manifest, verify_protocol
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -76,7 +77,11 @@ def freeze_initial(study: Path) -> Path:
         ("converted_manifest", "converted-file-manifest.json"),
     ):
         protocol["model"][key] = json.loads((study / name).read_text())
+    if fingerprint(study / "qwen-mlx-4bit") != protocol["model"]["converted_manifest"]:
+        raise ValueError("Converted model bytes differ from the prepared manifest")
     source = protocol["model"]["source_manifest"]
+    if fingerprint(study / "qwen-upstream")["files"] != source["files"]:
+        raise ValueError("Upstream model bytes differ from the prepared manifest")
     if (
         source["model"] != protocol["model"]["repo"]
         or source["revision"] != protocol["model"]["revision"]

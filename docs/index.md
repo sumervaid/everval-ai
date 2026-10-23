@@ -45,7 +45,7 @@ Use [benchmark validation](benchmarks.md) to understand what qualifies for a rel
 
 ## Keep checking as systems change
 
-- [Post-training checkpoint monitoring](post-training.md) connects a training trajectory to frozen evaluations, qualified measurements, regression investigations, and held-out mix studies.
+- [Post-training checkpoint monitoring](post-training.md) connects a training trajectory to frozen evaluations, qualified measurements, regression investigations, and held-out mix studies. Read the [completed local checkpoint study](benchmarks/checkpoint-study-2026-10-22/results.md) and [reproduce its actual training and inference](../scripts/posttraining/SETUP.md).
 
 - [Change-linked evaluations](change-evaluation.md) bind a run to an explicit source or configuration change.
 - [Autopilot](autopilot.md) schedules bounded screening and escalates qualifying changes within a cumulative budget.

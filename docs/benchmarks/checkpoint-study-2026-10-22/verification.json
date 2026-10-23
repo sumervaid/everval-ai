@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "scope": "Internal evidence and implementation verification; no external certification.",
+  "targeted_python_tests": {
+    "passed": 58,
+    "failed": 0,
+    "command": "pytest tests/test_checkpoint_study_adapter.py tests/test_checkpoint_study_dataset.py tests/test_real_study_analysis.py tests/test_posttraining_study_setup.py -q",
+    "warning": "One existing Starlette/httpx deprecation warning.",
+    "full_product_suite_rerun": false
+  },
+  "ruff": {
+    "status": "passed",
+    "scope": "scripts/posttraining and four targeted study test modules"
+  },
+  "documentation": {
+    "status": "passed",
+    "scope": "Local Markdown targets and git diff whitespace; external URLs are not checked"
+  },
+  "independent_evidence_audit": {
+    "method": "Independent direct read-only SQLite trial audit, raw JSON parsing and exact grader reconstruction, arithmetic recomputation of every trajectory/interval/mix strategy",
+    "report_sha256": "2db5635c8c3d7878a631620469885f51d545055fe5cf903c82eb157058fd393a",
+    "observations_file_sha256": "f3329d0088eae9b7d59269e584e6861bcdfa66726fad5528f6d07920a6b11703",
+    "experiments_verified": 48,
+    "trials_verified": 3072,
+    "trajectories_verified": 48,
+    "comparisons_verified": 36,
+    "mix_strategies_verified": 66,
+    "decision_counts": {
+      "inconclusive": 18,
+      "improvement": 18
+    },
+    "known_provider_cash_usd": 0,
+    "unknown_accounting_trials": 0,
+    "runtime_source": "Durable trial timing.provider_ms/1000 checked row-for-row"
+  },
+  "checkpoint_tensor_audit": {
+    "checkpoints": 12,
+    "all_finite": true,
+    "trained_parameters": 90112,
+    "step_zero_B_matrices_zero": true,
+    "all_16_arrays_changed_at_each_trained_checkpoint": true
+  },
+  "frozen_snapshot_audit": {
+    "method": "Independent direct read-only SQLite snapshot hash and exact frozen collection/system contract comparison",
+    "experiments_verified": 48,
+    "exact_frozen_task_collections": true,
+    "exact_frozen_grader_revision": true,
+    "exact_checkpoint_adapter_revision": true,
+    "loopback_only_provider": true,
+    "zero_price_rates": true
+  },
+  "browser": {
+    "source": "SQLite backup of actual local checkpoint study; validation seed 29",
+    "run_id": "903d59dc15fd415a8d7ffae97dff80c4",
+    "checkpoints": 4,
+    "desktop": [
+      1440,
+      1261
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "page_errors": [],
+    "failed_http": [],
+    "mobile_horizontal_overflow": false,
+    "requests": 15,
+    "mutation_requests": 0,
+    "worker_started": false,
+    "source_database_opened_readonly": true
+  },
+  "post_review_report_identical": true,
+  "retained_verification_artifact_hashes": {
+    "independent-final-evidence-audit.json": "40d7b0040b84fdbb6e55036bb9935e954fed24cb045db2f5ff967d91d5651852",
+    "independent-lineage-audit.json": "4b2c828f62a707f1f3cbdbb88b85fb7b47fddc4073dab9c9f7797a793d3a5abc",
+    "independent-snapshot-audit.json": "d94dad0c4bedb92c1d80fbb367f82a48ea97495a96034f6a1003e49cc33a1559",
+    "browser/browser-verification.json": "8456714f04df98c8e43618e5b61111875499245c84622c7d9184332f450e6f94",
+    "final-study-tests.log": "ab396c68177b46b2a0c6afc45b547be66de2d7440fd59de94112da81e115209b"
+  }
+}
