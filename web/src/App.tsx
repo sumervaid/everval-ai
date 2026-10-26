@@ -9,6 +9,7 @@ import {
   FolderClosed,
   LayoutDashboard,
   Menu,
+  MessageCircle,
   Settings2,
   ShieldCheck,
   SlidersHorizontal,
@@ -25,6 +26,7 @@ import { ExperimentsPage, NewExperiment, ExperimentDetail } from './pages/Experi
 import { SystemsPage } from './pages/Systems';
 import { RankingsPage } from './pages/Rankings';
 import { TrainingPage } from './pages/Training';
+import { ChatPage } from './pages/Chat';
 import {
   ReviewInbox,
   ReviewTask,
@@ -37,6 +39,7 @@ import { TeamAccess } from './pages/TeamAccess';
 
 const workspaceNav = [
   { path: '/', name: 'Overview', icon: LayoutDashboard },
+  { path: '/chat', name: 'Chat', icon: MessageCircle },
   { path: '/collections', name: 'Collections', icon: FolderClosed },
   { path: '/experiments', name: 'Experiments', icon: FlaskConical },
   { path: '/rankings', name: 'Rankings', icon: ChartNoAxesColumnIncreasing },
@@ -136,7 +139,7 @@ function Workbench() {
     return () => clearInterval(interval);
   }, [refresh]);
   useEffect(() => {
-    document.title = `${path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/rankings') ? 'Rankings' : path.startsWith('/training') ? 'Training' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/reviews') ? 'Review desk' : path.startsWith('/cases') ? 'Production examples' : path.startsWith('/team') ? 'Team access' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
+    document.title = `${path.startsWith('/chat') ? 'Chat' : path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/rankings') ? 'Rankings' : path.startsWith('/training') ? 'Training' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/reviews') ? 'Review desk' : path.startsWith('/cases') ? 'Production examples' : path.startsWith('/team') ? 'Team access' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
   }, [path]);
   useEffect(() => {
     if (!authRequired) return;
@@ -199,6 +202,7 @@ function Workbench() {
   let content: ReactNode = <Loading />;
   if (workspace) {
     if (route === '/') content = <Dashboard workspace={workspace} refresh={refresh} />;
+    else if (route === '/chat' && canManage) content = <ChatPage />;
     else if (route === '/collections')
       content = <CollectionsPage workspace={workspace} refresh={refresh} />;
     else if (route === '/collections/new') content = <NewCollection refresh={refresh} />;

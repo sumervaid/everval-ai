@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "feature": "Conversational recurring benchmark setup",
+  "distribution": "current source; npm 0.3.1 predates feature",
+  "python_checks_passed": 137,
+  "frontend_checks_passed": 46,
+  "python_source_files_typechecked": 93,
+  "typescript_build": "passed",
+  "source_and_test_formatting": "passed",
+  "repository_lint": "passed",
+  "browser_control_trials": 6,
+  "automatic_report_formats_verified": [
+    "html",
+    "csv"
+  ],
+  "additional_report_formats_verified_by_integration_tests": [
+    "markdown",
+    "json"
+  ],
+  "model_calls": 0,
+  "new_provider_cost_usd": 0,
+  "scope": "Original installation controls; no hosted model quality or two-week uptime claim",
+  "known_validation_notes": [
+    "Existing Starlette test-client deprecation warning",
+    "Pre-existing formatting issue in scripts/posttraining/plot_real_study.py left untouched"
+  ]
+}

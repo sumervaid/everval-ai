@@ -28,6 +28,14 @@ These are installation controls, not a model leaderboard. [Open the demo in tmux
 
 *The actual terminal workbench. These results are original installation controls.*
 
+## Describe the benchmark in a conversation
+
+In the [current source checkout](docs/quickstart.md#install-from-source), run `uv run everval chat`, press **Ctrl+J** in the workbench, or choose **Chat** in the browser.
+
+> Compare Support baseline and Support candidate on Support tickets every two weeks. Save HTML and CSV reports. Budget $2 per run and $20 total.
+
+Use names saved in your workspace. Everval asks for missing details, starts complete requests, and keeps reports locally. Type **status**, **pause**, or **resume** in the same conversation. [Try the no-key walkthrough →](docs/chat.md)
+
 ## What you can do
 
 | Your question | Everval's workflow |

@@ -93,6 +93,9 @@ class Worker:
         self.engine = Engine(store, settings)
         self.settings = settings
         self.schedules = ScheduleStore(settings, store)
+        from cvals.conversation_execution import ExecutionService
+
+        self.conversation_execution = ExecutionService(settings, store)
         from cvals.autopilot import Autopilot
         from cvals.jobs import Jobs
         from cvals.optimization import Optimizer
@@ -125,6 +128,7 @@ class Worker:
             try:
                 if time.monotonic() >= next_schedule_check:
                     self.schedules.tick()
+                    self.conversation_execution.tick()
                     self.autopilot.tick()
                     self.optimizer.tick()
                     self.autopilot.investigate_pending()
@@ -208,6 +212,9 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
     from cvals.posttraining_api import register_training_routes
 
     register_training_routes(app, settings)
+    from cvals.conversation_api import register_conversation_routes
+
+    register_conversation_routes(app, settings)
     hosts = ["localhost", "127.0.0.1", "::1", "[::1]", "testserver"]
     hosts.extend(
         h.strip()

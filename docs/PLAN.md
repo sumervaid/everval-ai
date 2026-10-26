@@ -6,6 +6,7 @@ Everval AI 0.3.1 is a terminal-first local evaluation product with a guided repo
 
 | Area | Behavior |
 | --- | --- |
+| Conversational setup (current source) | Terminal/browser chat, CLI and API; configured model/task selection, bounded recurring runs, cumulative caps including the initial run, and local reports. |
 | Terminal workbench | Fourteen views, command palette, responsive forms, resumable guided runs, health, evidence, recurring and change-linked evaluations. |
 | GitHub integration | Read-only metadata, private bare mirrors, bounded history discovery, persistent rejection ledger, pagination, and conservative lineage checks. |
 | Task curation | Independent reviewed statements, provenance fingerprints, before/reference/regression validation, immutable development/holdout releases. |

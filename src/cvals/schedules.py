@@ -139,61 +139,90 @@ class ScheduleStore:
         interval_minutes: int,
         enabled: bool = True,
         lifetime_budget_usd: float | None = None,
+        *,
+        include_source_in_budget: bool = False,
     ) -> dict[str, Any]:
-        validated = _ScheduleInput(name=name, interval_minutes=interval_minutes, enabled=enabled)
         with self.store._connect(write=True) as connection:
-            snapshot, state = self.store._read_experiment(connection, experiment_id)
-            cap = state["budget_usd"] if lifetime_budget_usd is None else lifetime_budget_usd
-            if (
-                isinstance(cap, bool)
-                or not isinstance(cap, (int, float))
-                or not math.isfinite(cap)
-                or cap < 0
-            ):
-                raise ValueError("Lifetime budget must be a finite nonnegative USD amount")
-            if cap < state["budget_usd"]:
-                raise ValueError("Lifetime budget must cover at least one full per-run budget")
-            if any(system["kind"] == "replay" for system in snapshot["systems"]):
-                raise ValueError(
-                    "Recorded submissions cannot produce new evidence on a recurring schedule"
-                )
-            if validated.enabled:
-                self._admit(snapshot, state)
-            if connection.execute("SELECT COUNT(*) FROM evaluation_schedules").fetchone()[0] >= 100:
-                raise ValueError("The workspace supports at most 100 schedules")
-            id = new_id()
-            connection.execute(
-                "INSERT INTO evaluation_schedules VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-                (
-                    id,
-                    validated.name,
-                    experiment_id,
-                    validated.interval_minutes,
-                    int(validated.enabled),
-                    time.time() + validated.interval_minutes * 60,
-                    utc_now(),
-                    None,
-                    None,
-                    None,
-                    cap,
-                ),
-            )
-            self.store._event(
+            return self._create(
                 connection,
+                name,
                 experiment_id,
-                "schedule.created",
-                {
-                    "schedule_id": id,
-                    "name": validated.name,
-                    "interval_minutes": validated.interval_minutes,
-                    "enabled": validated.enabled,
-                    "source_snapshot_hash": state["snapshot_hash"],
-                    "lifetime_budget_usd": cap,
-                },
+                interval_minutes,
+                enabled,
+                lifetime_budget_usd,
+                include_source_in_budget=include_source_in_budget,
             )
-            row = connection.execute(
-                "SELECT * FROM evaluation_schedules WHERE id=?", (id,)
-            ).fetchone()
+
+    def _create(
+        self,
+        connection: sqlite3.Connection,
+        name: str,
+        experiment_id: str,
+        interval_minutes: int,
+        enabled: bool = True,
+        lifetime_budget_usd: float | None = None,
+        *,
+        include_source_in_budget: bool = False,
+    ) -> dict[str, Any]:
+        """Create within the caller's transaction, including its initial run when requested."""
+        if type(include_source_in_budget) is not bool:
+            raise ValueError("include_source_in_budget must be a boolean")
+        validated = _ScheduleInput(name=name, interval_minutes=interval_minutes, enabled=enabled)
+        snapshot, state = self.store._read_experiment(connection, experiment_id)
+        cap = state["budget_usd"] if lifetime_budget_usd is None else lifetime_budget_usd
+        if (
+            isinstance(cap, bool)
+            or not isinstance(cap, (int, float))
+            or not math.isfinite(cap)
+            or cap < 0
+        ):
+            raise ValueError("Lifetime budget must be a finite nonnegative USD amount")
+        if cap < state["budget_usd"]:
+            raise ValueError("Lifetime budget must cover at least one full per-run budget")
+        if any(system["kind"] == "replay" for system in snapshot["systems"]):
+            raise ValueError(
+                "Recorded submissions cannot produce new evidence on a recurring schedule"
+            )
+        if validated.enabled:
+            self._admit(snapshot, state)
+        if connection.execute("SELECT COUNT(*) FROM evaluation_schedules").fetchone()[0] >= 100:
+            raise ValueError("The workspace supports at most 100 schedules")
+        id = new_id()
+        connection.execute(
+            "INSERT INTO evaluation_schedules VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+            (
+                id,
+                validated.name,
+                experiment_id,
+                validated.interval_minutes,
+                int(validated.enabled),
+                time.time() + validated.interval_minutes * 60,
+                utc_now(),
+                None,
+                None,
+                None,
+                cap,
+            ),
+        )
+        if include_source_in_budget:
+            connection.execute(
+                "INSERT INTO schedule_budget_reservations VALUES(?,?,?,?,?)",
+                (id, experiment_id, state["budget_usd"], state["budget_usd"], "reserved"),
+            )
+        self.store._event(
+            connection,
+            experiment_id,
+            "schedule.created",
+            {
+                "schedule_id": id,
+                "name": validated.name,
+                "interval_minutes": validated.interval_minutes,
+                "enabled": validated.enabled,
+                "source_snapshot_hash": state["snapshot_hash"],
+                "lifetime_budget_usd": cap,
+            },
+        )
+        row = connection.execute("SELECT * FROM evaluation_schedules WHERE id=?", (id,)).fetchone()
         return self._public(row)
 
     def set_enabled(self, id: str, enabled: bool) -> dict[str, Any]:
@@ -443,7 +472,14 @@ class ScheduleStore:
             "committed_usd": charged,
             "remaining_usd": max(0.0, cap - charged) if cap is not None else None,
             "reservations": reservations,
-            "scope": "Occurrences only; original source run is outside this cap. Uncertain billing retains the full reservation.",
+            "scope": (
+                "Includes the initial source run and all occurrences. "
+                if any(
+                    value["experiment_id"] == row["source_experiment_id"] for value in reservations
+                )
+                else "Occurrences only; original source run is outside this cap. "
+            )
+            + "Uncertain billing retains the full reservation.",
         }
 
     def set_budget(self, identifier: str, lifetime_budget_usd: float) -> dict[str, Any]:

@@ -210,9 +210,11 @@ def consume(
             logging.warning("Runtime cleanup unavailable (%s)", type(exc).__name__)
     schedules = ScheduleStore(settings, store)
     from cvals.autopilot import Autopilot
+    from cvals.conversation_execution import ExecutionService
     from cvals.optimization import Optimizer
 
     autopilot = Autopilot(settings, store)
+    conversations = ExecutionService(settings, store)
     optimizer = Optimizer(settings)
     jobs = Jobs(settings)
     if once:
@@ -225,6 +227,7 @@ def consume(
                 "scheduled": scheduled,
                 "job": jobs.run_pending_once(),
                 "processed": engine.run_pending_once(),
+                "reports": conversations.tick(),
             }
         )
         return
@@ -246,9 +249,12 @@ def consume(
                     autopilot.tick()
                     optimizer.tick()
                     autopilot.investigate_pending()
+                    conversations.tick()
                     next_schedule_check = time.monotonic() + 5
                 job = jobs.run_pending_once()
                 experiment = engine.run_pending_once()
+                if experiment:
+                    conversations.tick()
                 if job or experiment:
                     print(
                         json.dumps({"job_processed": job, "experiment_processed": experiment}),
@@ -662,6 +668,7 @@ register_team_cli(app)
 
 from cvals.autopilot_cli import register as _register_autopilot  # noqa: E402
 from cvals.budgeting_cli import register as _register_budgeting  # noqa: E402
+from cvals.chat_cli import register as _register_chat  # noqa: E402
 from cvals.community_cli import register as _register_community  # noqa: E402
 from cvals.demo_cli import register as _register_demo  # noqa: E402
 from cvals.posttraining_cli import register as _register_training  # noqa: E402
@@ -669,6 +676,7 @@ from cvals.rankings_cli import register as _register_rankings  # noqa: E402
 from cvals.research_cli import register as _register_research  # noqa: E402
 from cvals.variants import register as _register_variants  # noqa: E402
 
+_register_chat(app)
 _register_autopilot(app)
 _register_research(app)
 _register_rankings(app)

@@ -18,7 +18,7 @@ cd everval-ai
 uv sync --frozen
 ```
 
-This checkout includes the latest checkpoint-monitoring workflow, which is not in the published npm 0.3.1 package. See the [checkpoint operator guide](post-training.md) to use it, or the [measured study and reproduction recipe](benchmarks/checkpoint-study-2026-10-22/results.md) for the local training experiment.
+This checkout includes [conversational benchmark setup](chat.md) and the latest checkpoint-monitoring workflow, which are not in the published npm 0.3.1 package. See the [checkpoint operator guide](post-training.md) to use it, or the [measured study and reproduction recipe](benchmarks/checkpoint-study-2026-10-22/results.md) for the local training experiment.
 
 Dependency installation may use the network. The installed default demo runs offline.
 

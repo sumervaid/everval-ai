@@ -231,6 +231,7 @@ class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, Ap
     BINDINGS = [
         Binding("ctrl+q", "quit", "Quit", priority=True),
         Binding("ctrl+n", "connect", "Connect", priority=True),
+        Binding("ctrl+j", "chat", "Chat", priority=True),
         Binding("ctrl+r", "refresh", "Refresh", priority=True),
         Binding("1", "ranking_metric('quality')", "Quality", show=False),
         Binding("2", "ranking_metric('cost')", "Cost / pass", show=False),
@@ -280,6 +281,7 @@ class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, Ap
         with Horizontal(id="body"):
             with Vertical(id="rail"):
                 yield Static("WORKBENCH", classes="rail-label")
+                yield Button("Ctrl+J  Benchmark chat", id="open-chat", classes="nav-button")
                 for key, title, hotkey in PAGES:
                     yield Button(f"{hotkey}  {title}", id="nav-" + key, classes="nav-button")
                 yield Static(
@@ -364,6 +366,9 @@ class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, Ap
 
     def get_system_commands(self, screen: Screen[Any]) -> Iterable[SystemCommand]:
         yield from super().get_system_commands(screen)
+        yield SystemCommand(
+            "Benchmark chat", "Describe models, tasks, schedule and results.", self.action_chat
+        )
         for page, title, _ in PAGES:
             yield SystemCommand(title, DESCRIPTIONS[page], partial(self.show_page, page))
         yield SystemCommand(
@@ -377,6 +382,8 @@ class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, Ap
             )
 
     def check_action(self, action: str, parameters: tuple[object, ...]) -> bool | None:
+        if action == "chat":
+            return len(self.screen_stack) == 1
         if action in {"ranking_metric", "ranking_run"}:
             return self.page == "rankings" and len(self.screen_stack) == 1
         return super().check_action(action, parameters)
@@ -1083,12 +1090,19 @@ class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, Ap
     @on(Button.Pressed)
     def button_pressed(self, event: Button.Pressed) -> None:
         identity = event.button.id or ""
-        if identity.startswith("nav-"):
+        if identity == "open-chat":
+            self.action_chat()
+        elif identity.startswith("nav-"):
             self.show_page(identity[4:])
         elif identity.startswith("tool-"):
             self.command(identity[5:])
         elif identity == "rail-connect":
             self.action_connect()
+
+    def action_chat(self) -> None:
+        from cvals.tui.chat import ChatScreen
+
+        self.push_screen(ChatScreen(self.settings))
 
     def command(self, name: str) -> None:
         if self.page == "training" and name.startswith("training_"):

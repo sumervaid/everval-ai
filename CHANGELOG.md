@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added conversational benchmark setup in the terminal, browser, CLI and API: describe configured models, a task set, an interval, report formats and spending limits; complete requests queue an initial run and a durable recurring schedule.
+- Added automatic local HTML, CSV, JSON and Markdown reports, idempotent activation, and conversation budgets that include the first run. Unknown resources and unsupported delivery requests remain explicit questions.
+
 - Added post-training checkpoint monitoring across terminal, browser, CLI and API, including finalized manifest ingestion, immutable evaluation protocols, frozen budgeted jobs and retained decisions.
 - Added paired family-aware uncertainty with declared inference scope, evaluation qualification diagnostics, fixed-output grader comparisons, evidence-linked investigations and protected evaluation-mix validation.
 - Added a no-key synthetic checkpoint walkthrough and a prospective research protocol template.
