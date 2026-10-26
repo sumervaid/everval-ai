@@ -99,3 +99,61 @@ it('binds a recorded decision to the exact displayed brief fingerprint', async (
   );
   expect(JSON.parse(call?.[1].body as string).evidence_hash).toBe(brief.evidence_hash);
 });
+
+it('makes locked study reviews read-only', async () => {
+  const item = {
+    id: 'locked-item',
+    queue_name: 'Blind study',
+    blind: true,
+    rubric,
+    locked: true,
+    study_id: 'study',
+    study_status: 'locked',
+    task: { name: 'Locked invoice', domain: 'data', instruction: 'Add amounts.', inputs: {} },
+    responses: { A: { output: { total: 5 } }, B: { output: { total: 0 } } },
+    previous: null,
+    blinding_note: 'Identities withheld.',
+  };
+  const fetcher = vi.fn(async () => Response.json(item));
+  vi.stubGlobal('fetch', fetcher);
+  render(<ReviewTask id="locked-item" />);
+  await screen.findByText(
+    'These judgments are locked. You can read your review, but it cannot be changed.',
+  );
+  expect(screen.getByRole('button', { name: 'Record judgment' }).hasAttribute('disabled')).toBe(
+    true,
+  );
+  expect(screen.getAllByRole('combobox').every((input) => input.hasAttribute('disabled'))).toBe(
+    true,
+  );
+  expect(
+    screen.getByRole('textbox', { name: 'Explain your judgment' }).hasAttribute('disabled'),
+  ).toBe(true);
+  expect(fetcher.mock.calls).toHaveLength(1);
+});
+it('routes a sealed legacy queue to its study without decision or assignment forms', async () => {
+  vi.stubGlobal(
+    'fetch',
+    vi.fn(async (url: string) =>
+      Response.json(
+        url.endsWith('/reviewers')
+          ? []
+          : {
+              study_id: 'study',
+              study_status: 'collecting',
+              name: 'Blind study',
+              rubric: { name: 'Sealed' },
+              preferences: {},
+              assigned_reviews: 2,
+              completed_reviews: 0,
+            },
+      ),
+    ),
+  );
+  render(<QueueBrief id="queue" canManage />);
+  expect((await screen.findByRole('link', { name: 'Open blind study' })).getAttribute('href')).toBe(
+    '#/blind/study',
+  );
+  expect(screen.queryByRole('button', { name: 'Record decision with evidence' })).toBeNull();
+  expect(screen.queryByRole('checkbox')).toBeNull();
+});

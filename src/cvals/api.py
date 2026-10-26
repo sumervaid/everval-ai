@@ -215,6 +215,9 @@ def create_app(settings: Settings | None = None, *, start_worker: bool = True) -
     from cvals.conversation_api import register_conversation_routes
 
     register_conversation_routes(app, settings)
+    from cvals.blind_studies_api import register_blind_study_routes
+
+    register_blind_study_routes(app, settings)
     hosts = ["localhost", "127.0.0.1", "::1", "[::1]", "testserver"]
     hosts.extend(
         h.strip()

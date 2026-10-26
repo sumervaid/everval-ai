@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-26",
+  "capability": "trusted-custodian double-blind review studies",
+  "release_channel": "source; npm 0.3.1 predates this capability",
+  "python_ordinary_suite": {
+    "passed": 1416,
+    "skipped": 46,
+    "warnings": 1,
+    "seconds": 212.34,
+    "scope": "Full ordinary suite; optional Docker, GitHub and separately pinned benchmark tooling checks skipped."
+  },
+  "final_study_regression_suite": {
+    "passed": 56,
+    "seconds": 34.64,
+    "scope": "Rerun after final completed-source admission and catalog changes; overlaps the full suite."
+  },
+  "browser_unit_suite": {
+    "passed": 54,
+    "files": 13
+  },
+  "static_checks": {
+    "ruff_lint": "passed",
+    "ruff_format_python_files": 205,
+    "mypy_source_files": 97,
+    "typescript_and_production_build": "passed",
+    "markdown_links": "passed",
+    "git_diff_whitespace": "passed"
+  },
+  "browser_walkthrough": {
+    "browser": "Google Chrome (native, headless)",
+    "status": "passed",
+    "fixture_only": true,
+    "judgments": 2,
+    "phase_transitions": [
+      "collecting",
+      "locked",
+      "revealed"
+    ],
+    "javascript_errors": [],
+    "model_api_calls": 0,
+    "server_stopped": true,
+    "checks": [
+      "Separate coordinator, reviewer and viewer sessions",
+      "Study creation through the browser",
+      "Anonymous A/B review forms and submitted judgments",
+      "Sealed viewer view before reveal",
+      "Complete-coverage lock followed by explicit reveal",
+      "Locked review controls disabled",
+      "Released viewer report",
+      "HTML and JSON downloads"
+    ]
+  },
+  "provider_calls_for_feature_validation": 0,
+  "limitations": [
+    "Scripted fixture judgments, not an independent human-quality study.",
+    "No model-quality claim, TEE, hardware attestation, provider-prompt secrecy or administrator isolation.",
+    "No new npm release or externally hosted CI run."
+  ],
+  "screenshot": {
+    "path": "docs/assets/double-blind-study.png",
+    "sha256": "2b3a7512f2b624321f36435728a288a3457e1b13382baa749503d230a929d4a6"
+  },
+  "final_chat_regression_suite": {
+    "passed": 76,
+    "seconds": 9.9,
+    "scope": "Conversation, API and execution tests after adding explicit TEE/trusted-execution request blocking; overlaps the full suite."
+  }
+}

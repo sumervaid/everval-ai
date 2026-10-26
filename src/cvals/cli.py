@@ -667,6 +667,7 @@ register_team_cli(app)
 
 
 from cvals.autopilot_cli import register as _register_autopilot  # noqa: E402
+from cvals.blind_studies_cli import register as _register_blind_studies  # noqa: E402
 from cvals.budgeting_cli import register as _register_budgeting  # noqa: E402
 from cvals.chat_cli import register as _register_chat  # noqa: E402
 from cvals.community_cli import register as _register_community  # noqa: E402
@@ -677,6 +678,7 @@ from cvals.research_cli import register as _register_research  # noqa: E402
 from cvals.variants import register as _register_variants  # noqa: E402
 
 _register_chat(app)
+_register_blind_studies(app)
 _register_autopilot(app)
 _register_research(app)
 _register_rankings(app)

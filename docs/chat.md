@@ -74,6 +74,8 @@ HTML gives a readable comparison, CSV gives trial rows, JSON preserves detailed 
 
 Automatic email, Slack, external destinations, and PDF generation are not implemented in this workflow. Requests for unsupported delivery remain unresolved until you choose a supported format and local delivery.
 
+For independent human review with locked judgments and controlled identity reveal, use [Double-blind studies](double-blind.md). Requests for double-blind or confidential execution stay blocked in chat across follow-ups; they do not silently become ordinary runs. Say **use standard unblinded evaluation** only if you want to remove that requirement. Existing active runs cannot be retroactively protected.
+
 ## What runs in the background
 
 Everval freezes the tasks, model configurations, and per-run budget. The initial experiment, recurring schedule, and activation record commit together; retrying activation does not create a duplicate initial run. Later runs use that frozen comparison and retain failures, incomplete attempts, and unknown costs.

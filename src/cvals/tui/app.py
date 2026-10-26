@@ -232,6 +232,7 @@ class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, Ap
         Binding("ctrl+q", "quit", "Quit", priority=True),
         Binding("ctrl+n", "connect", "Connect", priority=True),
         Binding("ctrl+j", "chat", "Chat", priority=True),
+        Binding("ctrl+y", "blind_studies", "Blind studies", priority=True),
         Binding("ctrl+r", "refresh", "Refresh", priority=True),
         Binding("1", "ranking_metric('quality')", "Quality", show=False),
         Binding("2", "ranking_metric('cost')", "Cost / pass", show=False),
@@ -282,6 +283,9 @@ class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, Ap
             with Vertical(id="rail"):
                 yield Static("WORKBENCH", classes="rail-label")
                 yield Button("Ctrl+J  Benchmark chat", id="open-chat", classes="nav-button")
+                yield Button(
+                    "Ctrl+Y  Double-blind studies", id="open-blind-studies", classes="nav-button"
+                )
                 for key, title, hotkey in PAGES:
                     yield Button(f"{hotkey}  {title}", id="nav-" + key, classes="nav-button")
                 yield Static(
@@ -369,6 +373,11 @@ class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, Ap
         yield SystemCommand(
             "Benchmark chat", "Describe models, tasks, schedule and results.", self.action_chat
         )
+        yield SystemCommand(
+            "Double-blind studies",
+            "Lock judgments before revealing model identities.",
+            self.action_blind_studies,
+        )
         for page, title, _ in PAGES:
             yield SystemCommand(title, DESCRIPTIONS[page], partial(self.show_page, page))
         yield SystemCommand(
@@ -382,7 +391,7 @@ class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, Ap
             )
 
     def check_action(self, action: str, parameters: tuple[object, ...]) -> bool | None:
-        if action == "chat":
+        if action in {"chat", "blind_studies"}:
             return len(self.screen_stack) == 1
         if action in {"ranking_metric", "ranking_run"}:
             return self.page == "rankings" and len(self.screen_stack) == 1
@@ -1092,12 +1101,19 @@ class WorkbenchApp(TrainingMixin, RankingsMixin, EvolutionMixin, GrowthMixin, Ap
         identity = event.button.id or ""
         if identity == "open-chat":
             self.action_chat()
+        elif identity == "open-blind-studies":
+            self.action_blind_studies()
         elif identity.startswith("nav-"):
             self.show_page(identity[4:])
         elif identity.startswith("tool-"):
             self.command(identity[5:])
         elif identity == "rail-connect":
             self.action_connect()
+
+    def action_blind_studies(self) -> None:
+        from cvals.tui.blind_studies import BlindStudyScreen
+
+        self.push_screen(BlindStudyScreen(self.settings))
 
     def action_chat(self) -> None:
         from cvals.tui.chat import ChatScreen

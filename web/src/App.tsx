@@ -6,6 +6,7 @@ import {
   ChevronRight,
   ChartNoAxesColumnIncreasing,
   FlaskConical,
+  EyeOff,
   FolderClosed,
   LayoutDashboard,
   Menu,
@@ -27,6 +28,7 @@ import { SystemsPage } from './pages/Systems';
 import { RankingsPage } from './pages/Rankings';
 import { TrainingPage } from './pages/Training';
 import { ChatPage } from './pages/Chat';
+import { BlindStudiesPage, BlindStudyDetail, NewBlindStudy } from './pages/BlindStudies';
 import {
   ReviewInbox,
   ReviewTask,
@@ -139,7 +141,7 @@ function Workbench() {
     return () => clearInterval(interval);
   }, [refresh]);
   useEffect(() => {
-    document.title = `${path.startsWith('/chat') ? 'Chat' : path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/rankings') ? 'Rankings' : path.startsWith('/training') ? 'Training' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/reviews') ? 'Review desk' : path.startsWith('/cases') ? 'Production examples' : path.startsWith('/team') ? 'Team access' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
+    document.title = `${path.startsWith('/blind') ? 'Double-blind evaluations' : path.startsWith('/chat') ? 'Chat' : path.startsWith('/collections') ? 'Collections' : path.startsWith('/experiments') ? 'Experiments' : path.startsWith('/rankings') ? 'Rankings' : path.startsWith('/training') ? 'Training' : path.startsWith('/systems') ? 'Systems' : path.startsWith('/reviews') ? 'Review desk' : path.startsWith('/cases') ? 'Production examples' : path.startsWith('/team') ? 'Team access' : path.startsWith('/settings') ? 'Settings' : 'Overview'} · Everval AI`;
   }, [path]);
   useEffect(() => {
     if (!authRequired) return;
@@ -191,6 +193,7 @@ function Workbench() {
     ...(!canReview && canSummarize
       ? [{ path: '/reviews/queues', name: 'Decision briefs', icon: ShieldCheck }]
       : []),
+    ...(canSummarize ? [{ path: '/blind', name: 'Double-blind', icon: EyeOff }] : []),
     ...(canManage ? [{ path: '/cases', name: 'Production examples', icon: FolderClosed }] : []),
     ...(session?.capabilities.includes('team.admin')
       ? [{ path: '/team', name: 'Team access', icon: Settings2 }]
@@ -238,7 +241,17 @@ function Workbench() {
       );
   }
   if (session) {
-    if (route === '/training' && canReadWorkspace) content = <TrainingPage />;
+    if (route === '/blind' && canSummarize) content = <BlindStudiesPage canManage={canManage} />;
+    else if (route === '/blind/new' && canManage) content = <NewBlindStudy />;
+    else if (route.startsWith('/blind/') && route !== '/blind/new' && canSummarize)
+      content = (
+        <BlindStudyDetail
+          key={route}
+          id={decodeURIComponent(route.slice('/blind/'.length))}
+          canManage={canManage}
+        />
+      );
+    else if (route === '/training' && canReadWorkspace) content = <TrainingPage />;
     else if ((route === '/reviews' || (route === '/' && !canManage)) && canReview)
       content = <ReviewInbox key={session.id} session={session} />;
     else if ((route === '/reviews/queues' || (route === '/' && !canManage)) && canSummarize)

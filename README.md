@@ -18,7 +18,7 @@ everval setup
 everval demo
 ```
 
-**Choose the right installation:** npm 0.3.1 provides the packaged evaluation workbench. For the latest source features, including checkpoint monitoring, use the [source quickstart](docs/quickstart.md#install-from-source). With npm, omit `uv run` from source-based guides.
+**Choose the right installation:** npm 0.3.1 provides the packaged evaluation workbench. For the latest source features, including chat, double-blind review studies and checkpoint monitoring, use the [source quickstart](docs/quickstart.md#install-from-source). With npm, omit `uv run` from source-based guides.
 
 Watch a passing reference, a deliberate regression, and a restored candidate run across three examples. Inspect failures, compare the same frozen tasks, and keep the evidence locally. **The installed demo makes zero model calls and needs no Docker or network connection.** Dependency installation may use the network.
 
@@ -36,10 +36,17 @@ In the [current source checkout](docs/quickstart.md#install-from-source), run `u
 
 Use names saved in your workspace. Everval asks for missing details, starts complete requests, and keeps reports locally. Type **status**, **pause**, or **resume** in the same conversation. [Try the no-key walkthrough →](docs/chat.md)
 
+## Judge first. Reveal later.
+
+Open **Double-blind** in the browser, or run \`uv run everval blind tui\` from the source checkout (**Ctrl+Y** in the workbench). Choose a completed two-model comparison, freeze a rubric, and assign at least two reviewers. Responses appear as randomized A/B pairs. All required judgments must be locked before the coordinator releases identities and results.
+
+This is **trusted-custodian reviewer and report-reader blinding**. Operators can inspect the workspace; hosted model providers still see prompts. Hardware-backed mutual confidentiality is a separate, unimplemented capability. All Everval application code can remain public while evaluation material stays private. [Workflow, guarantees and open-source boundaries →](docs/double-blind.md)
+
 ## What you can do
 
 | Your question | Everval's workflow |
 | --- | --- |
+| **Can reviewers judge answers without seeing model names?** | Freeze independent reviews, lock all judgments, and explicitly reveal results. [Double-blind studies →](docs/double-blind.md) |
 | **Did our coding agent improve?** | Reconstruct tasks from repository history, validate fail-before/pass-after behavior, freeze a cohort, and compare systems. [Repository guide →](docs/github.md) |
 | **Which model works best on each of our benchmarks?** | Scan a model-by-benchmark matrix, switch quality/cost/latency, and inspect the exact evidence. [Rankings →](docs/rankings.md) |
 | **Is the cheaper model good enough?** | Compare success, cost per passing attempt, and latency on the same workload. Retain errors and unknown accounting. [Economics →](docs/cost-latency.md) |
@@ -51,7 +58,7 @@ Use names saved in your workspace. Everval asks for missing details, starts comp
 
 **Current source addition:** [Checkpoint monitoring](docs/post-training.md) is available from the source checkout; the published npm 0.3.1 package predates this workflow. [Read the completed checkpoint study](docs/benchmarks/checkpoint-study-2026-10-22/results.md): three actual local QLoRA training runs, twelve checkpoints, and 3,072 model responses, with a frozen protocol, withheld validation, plots, and [reproduction instructions](scripts/posttraining/SETUP.md).
 
-The terminal is the primary interface: fourteen views, a command palette, tmux sessions, and a durable local worker. The CLI and API use the same core. An optional browser gives reviewers blinded assignments and role-based access. [See the product tour →](docs/product-tour.md)
+The terminal is the primary interface: focused views, a command palette, tmux sessions, and a durable local worker. The CLI and API use the same core. An optional browser gives reviewers blinded assignments and role-based access. [See the product tour →](docs/product-tour.md)
 
 ## From real work to a decision
 

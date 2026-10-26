@@ -327,3 +327,7 @@ The [dated feature verification](evidence/2026-10-16/README.md) records automate
 This kit is a practical starting point for one trusted host and workspace. It does not provide SSO, tenant isolation, distributed workers, high availability, a supplied TLS reverse-proxy configuration, or compliance certification. An organization's deployment review, Linux service verification, restore drill, and workload-specific sandbox tests remain necessary before operational use.
 
 Continue with [team access](team-review.md), [operations](operations.md), [guided repository evaluation](guided-run.md), and [cost and latency](cost-latency.md).
+
+## Private blind studies with open software
+
+The source checkout includes [double-blind review studies](double-blind.md). Keep the application source public and retain task sets, raw outputs, identity mappings, credentials and unreleased reports inside the workspace. Use separate reviewer-only accounts with no filesystem access; the coordinator and host administrators remain trusted. This workflow does not protect prompts from an external inference provider and does not provide hardware-backed confidential execution.

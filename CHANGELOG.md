@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added dedicated trusted-custodian double-blind studies in the terminal, browser, CLI and API: freeze two systems and independent reviewer assignments, lock complete judgments, and explicitly reveal local HTML/JSON reports. Existing summary and mutation routes respect study seals.
+- Unsupported blind/confidential requests in benchmark chat now stay blocked until routed to the study workflow or explicitly changed to standard unblinded evaluation. Hardware-backed confidential execution remains unavailable.
+
 - Added conversational benchmark setup in the terminal, browser, CLI and API: describe configured models, a task set, an interval, report formats and spending limits; complete requests queue an initial run and a durable recurring schedule.
 - Added automatic local HTML, CSV, JSON and Markdown reports, idempotent activation, and conversation budgets that include the first run. Unknown resources and unsupported delivery requests remain explicit questions.
 

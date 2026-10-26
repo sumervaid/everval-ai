@@ -128,6 +128,7 @@ function ReviewTaskForm({ item }: { item: ReviewItem }) {
   const [saved, setSaved] = useState(false);
   async function submit(event: React.FormEvent) {
     event.preventDefault();
+    if (item.locked) return;
     setBusy(true);
     setError('');
     setSaved(false);
@@ -165,6 +166,11 @@ function ReviewTaskForm({ item }: { item: ReviewItem }) {
           <EyeOff size={16} /> {item.blinding_note}
         </Notice>
       )}
+      {item.locked && (
+        <Notice>
+          These judgments are locked. You can read your review, but it cannot be changed.
+        </Notice>
+      )}
       <Panel title="The task" className="review-task-panel">
         <div className="team-panel-body">
           <p className="task-instruction">{item.task.instruction}</p>
@@ -194,6 +200,7 @@ function ReviewTaskForm({ item }: { item: ReviewItem }) {
                 {labels.map((label) => (
                   <Field key={label} label={'Response ' + label + ' · ' + dimension.name}>
                     <select
+                      disabled={item.locked}
                       required
                       value={scores[label][dimension.id]}
                       onChange={(event) =>
@@ -218,6 +225,7 @@ function ReviewTaskForm({ item }: { item: ReviewItem }) {
           {labels.length === 2 && (
             <Field label="Which response better satisfies the task?">
               <select
+                disabled={item.locked}
                 required
                 value={preference}
                 onChange={(event) => setPreference(event.target.value)}
@@ -231,6 +239,7 @@ function ReviewTaskForm({ item }: { item: ReviewItem }) {
           )}
           <Field label="Overall judgment">
             <select
+              disabled={item.locked}
               required
               value={disposition}
               onChange={(event) => setDisposition(event.target.value)}
@@ -246,6 +255,7 @@ function ReviewTaskForm({ item }: { item: ReviewItem }) {
             hint="Describe the evidence that informed your scores."
           >
             <textarea
+              disabled={item.locked}
               required
               rows={4}
               maxLength={10000}
@@ -259,14 +269,14 @@ function ReviewTaskForm({ item }: { item: ReviewItem }) {
               Review recorded. <a href="#/reviews">Return to your review desk.</a>
             </Notice>
           )}
-          {item.previous && (
+          {item.previous && !item.locked && (
             <p className="muted">
               Previously reviewed by {item.previous.reviewer_name}. Saving again retains the earlier
               judgment.
             </p>
           )}
           <div className="form-actions">
-            <Button busy={busy} type="submit">
+            <Button busy={busy} disabled={item.locked} type="submit">
               {item.previous || saved ? 'Save revised judgment' : 'Record judgment'}
             </Button>
             <LinkButton href="#/reviews" secondary>
@@ -495,7 +505,7 @@ export function CreateReviewQueue({
     </div>
   );
 }
-function CreateRubric({ onSaved }: { onSaved: (id: string) => void }) {
+export function CreateRubric({ onSaved }: { onSaved: (id: string) => void }) {
   const [name, setName] = useState('');
   const [version, setVersion] = useState('1');
   const [instructions, setInstructions] = useState('');
@@ -620,6 +630,22 @@ export function QueueBrief({ id, canManage }: { id: string; canManage: boolean }
   if (brief.error) return <Notice tone="error">{brief.error}</Notice>;
   if (!brief.data) return <Loading />;
   const data = brief.data;
+  if (data.study_id && data.study_status !== 'revealed')
+    return (
+      <div className="team-stack">
+        <PageHeader
+          eyebrow="BLIND STUDY"
+          title={data.name}
+          description="Identities and aggregate results remain sealed until the study coordinator releases them."
+        />
+        <Notice>
+          Review assignments are fixed. All judgments must be complete and locked before reveal.
+        </Notice>
+        <LinkButton href={'#/blind/' + encodeURIComponent(data.study_id)}>
+          Open blind study
+        </LinkButton>
+      </div>
+    );
   return (
     <div className="team-stack">
       <PageHeader
@@ -741,7 +767,7 @@ export function QueueBrief({ id, canManage }: { id: string; canManage: boolean }
           </form>
         </Panel>
       )}
-      {canManage && (
+      {canManage && !data.study_id && (
         <details className="panel team-panel-body">
           <summary>Change assigned reviewers</summary>
           <p>

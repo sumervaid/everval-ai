@@ -557,6 +557,20 @@ class ConversationService:
             details.append("Type start to queue the first run and enable the schedule.")
         return "\n".join(details)
 
+    @staticmethod
+    def _protected_request(text: str) -> bool:
+        return bool(
+            re.search(
+                r"\b(?:double[ -]blind(?:ed)?|single[ -]blind(?:ed)?|blind(?:ed)?|blinding|"
+                r"confidential(?:ity)?|enclaves?|attested|attestation|sealed|tees?|zero[ -]knowledge)\b"
+                r"|\btrusted\s+execution\s+environments?\b"
+                r"|\b(?:hide|mask|withhold|conceal)\s+(?:the\s+)?(?:model|vendor|system)\s+(?:names?|identit(?:y|ies))\b"
+                r"|\bprivate\s+from\s+(?:the\s+)?(?:model\s+)?(?:vendor|provider)s?\b",
+                text,
+                re.I,
+            )
+        )
+
     def send(self, identifier: str, message: str) -> dict[str, Any]:
         if not isinstance(message, str) or not message.strip() or len(message) > 8000:
             raise ValueError("Send a nonempty message of at most 8,000 characters")
@@ -568,6 +582,19 @@ class ConversationService:
             return self.pause(identifier)
         if command in {"resume", "resume it"}:
             return self.resume(identifier)
+        standard_mode = command in {
+            "use standard unblinded evaluation",
+            "use standard evaluation",
+            "standard unblinded evaluation",
+        }
+        protected_request = self._protected_request(text) and not standard_mode
+        protection_note = (
+            "This chat creates standard recurring benchmarks. Use Double-blind studies "
+            "(everval blind tui) for independent reviewers, locked judgments, and controlled reveal. "
+            "Hardware-backed confidential execution is not available. "
+            "No protected benchmark has been started. "
+            "To explicitly choose an ordinary run here, say 'use standard unblinded evaluation'."
+        )
         catalog = self.catalog()
         current = self.get(identifier)
         activate = False
@@ -606,6 +633,13 @@ class ConversationService:
                     if not catalog[kind]:
                         lines.append("None configured yet.")
                 answer = "\n".join(lines)
+            elif protected_request and (
+                value["status"] != "draft" or value.get("activation_requested")
+            ):
+                answer = (
+                    "This existing benchmark is still a standard evaluation; it has not been "
+                    "converted to a protected study. " + protection_note
+                )
             elif value["status"] != "draft" or value.get("activation_requested"):
                 if command in {"start", "run it", "start it", "go", "do it"}:
                     activate = True
@@ -617,7 +651,12 @@ class ConversationService:
                     )
             else:
                 value["blockers"].pop("admission", None)
-                self._resources(value, text, catalog)
+                if standard_mode:
+                    value["blockers"].pop("blinding", None)
+                elif protected_request:
+                    value["blockers"]["blinding"] = protection_note
+                if not standard_mode:
+                    self._resources(value, text, catalog)
                 schedule_text = text
                 for item in [*catalog["systems"], *catalog["collections"]]:
                     for key in ("name", "id", "model"):

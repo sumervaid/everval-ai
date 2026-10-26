@@ -62,6 +62,9 @@ def register_experience_routes(app: FastAPI, settings: Settings) -> None:
 
     @endpoint("GET", "/experiments/{experiment_id}/brief", "summary.read")
     def brief(experiment_id: str) -> dict[str, Any]:
+        from cvals.blind_studies import BlindStudies
+
+        BlindStudies(settings).require_revealed_experiment(experiment_id)
         return workbench.decision_brief(experiment_id)
 
     @endpoint("GET", "/spending-limits", "workspace.read")

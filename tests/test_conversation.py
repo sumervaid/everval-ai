@@ -405,3 +405,57 @@ def test_sentence_punctuation_in_resource_followups(workspace):
     session = service.send(session["id"], "Every two weeks.")
     assert session["status"] == "active"
     assert len(store.list_experiments()) == 1
+
+
+@pytest.mark.parametrize(
+    "constraint",
+    [
+        "Make this double blind.",
+        "Use blinded evaluation.",
+        "Keep results confidential.",
+        "Run in a secure enclave.",
+        "Run inside a TEE.",
+        "Use a trusted execution environment.",
+        "Require hardware attestation.",
+        "Use a sealed test set.",
+        "Hide model identities from reviewers.",
+        "Keep the prompts private from providers.",
+    ],
+)
+def test_protected_requests_never_become_standard_runs(workspace, constraint):
+    _, store, service = workspace
+    session = service.send(service.create()["id"], request(constraint))
+    assert session["status"] == "draft"
+    assert "blinding" in session["blockers"]
+    assert "everval blind tui" in session["messages"][-1]["content"]
+    assert not store.list_experiments()
+    with pytest.raises(ValueError, match="resolve the listed issues"):
+        service.activate(session["id"])
+    session = service.send(session["id"], "start")
+    assert "blinding" in session["blockers"]
+    assert not store.list_experiments()
+    session = service.send(session["id"], "Use HTML instead.")
+    assert "blinding" in session["blockers"]
+    assert not store.list_experiments()
+
+
+def test_standard_mode_requires_explicit_opt_out_of_requested_blinding(workspace):
+    _, store, service = workspace
+    session = service.send(service.create()["id"], request("Make it double blind."))
+    session = service.send(session["id"], "Standard evaluation must still be double blind.")
+    assert "blinding" in session["blockers"]
+    assert not store.list_experiments()
+    session = service.send(session["id"], "Use standard unblinded evaluation.")
+    assert session["status"] == "active"
+    assert "blinding" not in session["blockers"]
+    assert len(store.list_experiments()) == 1
+
+
+def test_blinding_cannot_be_added_to_an_already_running_conversation(workspace):
+    _, store, service = workspace
+    session = service.send(service.create()["id"], request())
+    experiment_id = session["experiment_id"]
+    result = service.send(session["id"], "Make this double blind.")
+    assert result["experiment_id"] == experiment_id
+    assert len(store.list_experiments()) == 1
+    assert "has not been converted" in result["messages"][-1]["content"]

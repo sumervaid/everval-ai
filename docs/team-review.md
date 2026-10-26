@@ -39,6 +39,8 @@ Every API route requires an explicit registered capability in team mode. New or 
 
 Token revocation and identity disabling take effect on subsequent requests. Active experiment event streams also recheck access. API mutations retain the authenticated identity in transactional audit records. The audit chain remains locally controlled; it is not an independently anchored log.
 
+For a comparison that must complete every assigned review, lock judgments, and explicitly reveal model identities, use [Double-blind studies](double-blind.md). That dedicated workflow requires at least two reviewer-only identities and freezes assignments; ordinary review queues below do not provide the same lock-and-reveal protocol.
+
 ## Create a review queue
 
 1. Finish an experiment that has recorded outputs for the chosen systems.
@@ -57,7 +59,7 @@ Reviewers open **Your review desk**, inspect the task and supporting inputs, sco
 
 Revised judgments append a new record and retain the earlier judgment. Reviewers see their own latest judgment. Changing assignments immediately removes access for people who are no longer assigned.
 
-Operators and viewers can read the decision brief. It shows review coverage, dispositions, pair preferences, rubric, and retained decisions. These descriptive counts do not establish independent model-performance estimates. Human judgments remain separate from automated outcomes.
+Operators and viewers can read an ordinary queue's decision brief. A [double-blind study](double-blind.md) withholds its decision brief and report until reveal. It shows review coverage, dispositions, pair preferences, rubric, and retained decisions. These descriptive counts do not establish independent model-performance estimates. Human judgments remain separate from automated outcomes.
 
 Decision briefs label installation fixtures and imported submissions explicitly. Reviewing fixtures does not measure model performance, and reviewing the same imported output creates no additional independent model attempt.
 

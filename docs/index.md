@@ -43,6 +43,7 @@ Use [benchmark validation](benchmarks.md) to understand what qualifies for a rel
 | What did the run cost, and where did time go? | [Cost and latency](cost-latency.md) |
 | What can we afford to run next? | [Budget planning](budget-planning.md) |
 | Is the change good enough to adopt? | [Decision policies](policies.md) |
+| Can we lock blind judgments before revealing model identities? | [Double-blind studies and open-source boundaries](double-blind.md) |
 | How do people review answers independently? | [Assigned and blinded team review](team-review.md) |
 
 ## Keep checking as systems change

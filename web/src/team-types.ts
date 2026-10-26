@@ -44,6 +44,9 @@ export interface ReviewJudgment {
   created_at: string;
 }
 export interface ReviewItem {
+  study_id?: string;
+  study_status?: string;
+  locked?: boolean;
   id: string;
   queue_name: string;
   blind: boolean;
@@ -61,6 +64,9 @@ export interface QueueSummary {
   experiment_id: string;
 }
 export interface ReviewBrief {
+  study_id?: string;
+  study_status?: string;
+  sealed?: boolean;
   queue_id: string;
   name: string;
   evidence_hash: string;

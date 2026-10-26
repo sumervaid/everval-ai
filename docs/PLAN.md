@@ -6,6 +6,7 @@ Everval AI 0.3.1 is a terminal-first local evaluation product with a guided repo
 
 | Area | Behavior |
 | --- | --- |
+| Double-blind studies (current source) | Trusted-custodian review of completed outputs; two selected systems, reviewer-only accounts, frozen assignments/rubric, randomized response labels, complete-coverage lock, explicit reveal, and local HTML/JSON reports. |
 | Conversational setup (current source) | Terminal/browser chat, CLI and API; configured model/task selection, bounded recurring runs, cumulative caps including the initial run, and local reports. |
 | Terminal workbench | Fourteen views, command palette, responsive forms, resumable guided runs, health, evidence, recurring and change-linked evaluations. |
 | GitHub integration | Read-only metadata, private bare mirrors, bounded history discovery, persistent rejection ledger, pagination, and conservative lineage checks. |
@@ -44,6 +45,8 @@ Budget forecasts expose assumptions and distinguish observed costs from reservat
 ## Deployment boundary
 
 Operate one workspace on a local filesystem with a dedicated worker. SQLite transactions retain queues, accounting, and evidence. Terminal disconnection does not cancel queued work.
+
+Double-blind studies blind reviewers and summary readers from study creation through reveal. They cannot undo prior exposure, conceal content clues, hide prompts from inference providers, or protect against workspace operators. The protocol is retrospective; confidential-computing attestation and model-weight protection are not implemented. [Scope and workflow](double-blind.md).
 
 Team mode enforces administrator, operator, reviewer, and viewer permissions in the API and browser. Personal tokens are salted, hashed, expiring, and revocable. Terminal and filesystem access remain trusted administrative surfaces. Repository issue-review labels and legacy local review labels remain self-reported; assigned browser judgments use authenticated identities.
 
