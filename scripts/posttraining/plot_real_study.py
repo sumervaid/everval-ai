@@ -38,7 +38,9 @@ def save(fig, directory: Path, name: str, report_hash: str) -> None:
         )
         if extension == "svg":
             path = directory / f"{name}.{extension}"
-            path.write_text("\n".join(line.rstrip() for line in path.read_text().splitlines()) + "\n")
+            path.write_text(
+                "\n".join(line.rstrip() for line in path.read_text().splitlines()) + "\n"
+            )
     plt.close(fig)
 
 

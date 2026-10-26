@@ -7,7 +7,7 @@ This record covers the current-source chat workflow. It is not part of the publi
 - **137 Python checks passed** across conversation planning, execution, CLI, terminal, schedules, API, audit atomicity, and existing workflow regressions.
 - **46 browser-component checks passed**, including six conversation tests.
 - Python type checking passed for all 93 source files. TypeScript checking and the production browser build passed.
-- Ruff lint passed across source, tests, scripts, deployment helpers, and npm tests. Source and test formatting passed.
+- Ruff lint passed across source, tests, scripts, deployment helpers, and npm tests. Full-repository formatting passed.
 - Actual terminal rendering was inspected at wide and compact sizes.
 - An actual browser request admitted and executed six original control trials through the local worker. HTML and CSV reports appeared automatically, the HTML download was inspected, and pausing and reopening the saved conversation worked.
 - Desktop and mobile browser checks found no horizontal overflow, JavaScript errors, or HTTP errors. A follow-up resize check verified that the latest reply remains visible.
@@ -20,7 +20,7 @@ Tests cover fixed intervals, frozen task snapshots, explicit paid-run caps, init
 
 Chat resolves configured models and saved task collections. It does not automatically create valid grading rules from arbitrary raw data. Reports stay local; automatic email/Slack delivery is unsupported. Parsing is local and bounded rather than an unrestricted language-model agent.
 
-The full-repository formatting check also found one existing long line in `scripts/posttraining/plot_real_study.py`. That historical study helper was left untouched. The HTTP test client emitted an existing Starlette deprecation warning; no checks were skipped.
+The full-repository formatting check found one existing long line in `scripts/posttraining/plot_real_study.py`. It was reformatted, with Python syntax-tree equality verified before and after. The HTTP test client emitted an existing Starlette deprecation warning; no checks were skipped.
 
 See the [workflow guide](../../chat.md) and [machine-readable summary](summary.json). Private transcripts, reports, databases, and test workspaces remain outside Git.
 

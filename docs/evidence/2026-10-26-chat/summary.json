@@ -23,6 +23,7 @@
   "scope": "Original installation controls; no hosted model quality or two-week uptime claim",
   "known_validation_notes": [
     "Existing Starlette test-client deprecation warning",
-    "Pre-existing formatting issue in scripts/posttraining/plot_real_study.py left untouched"
-  ]
+    "Pre-existing plotting-helper formatting normalized with identical Python syntax tree"
+  ],
+  "repository_formatting": "passed"
 }
