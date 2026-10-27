@@ -45,9 +45,27 @@ Secondary diagnostics include human–human alpha, judge agreement and kappa, co
 
 The historical response generators do not match the current judge model snapshots. Exact-model self-preference is therefore unavailable in this cohort. A provider-family match would not establish self-preference. The implementation supports the diagnostic when exact identities and suitable references exist.
 
+## Pre-holdout amendment
+
+Development produced abstentions and records rejected by the frozen response parser. The original primary analysis requires a completely valid response grid, so even one such record can make its inferential interval unavailable. That original rule is preserved; answers are not repaired or retried for the original analysis. A later raw-response audit found that two development records contained valid final answers preceded by commentary: the original transport combined both messages. Those records expose a harness phase-selection error, rather than establishing that the model's final answer violated the requested schema. A separately labeled offline sensitivity audit evaluates phase-aware parsing without new model calls.
+
+Before any holdout dispatch, the [amendment](amendment.json) froze a separate **delivered-agreement** secondary endpoint. A valid A/B/tie judgment receives its agreement with the reference votes or execution result; an observed abstention, invalid answer or error receives zero delivered agreement. Truly missing or unattempted jobs still prevent complete-cohort inference. Every scheduled attempt stays in the denominator, and coverage is reported separately.
+
+The three secondary rubric contrasts use alpha 0.05/3 within their own exploratory family; the six per-configuration intervals use 0.05/6. This is not joint primary-plus-secondary familywise error control. The point of this secondary measure is operational usefulness, including failure to deliver a usable judgment.
+
+The same amendment permits four simultaneous calls per model, with reservations committed before dispatch. Unknown usage stops new admissions while already reserved calls settle. The original plan, all 624 development result hashes, unchanged request grid and additional source fingerprints are bound to the amendment. It was frozen at 2026-10-27 17:52:46 UTC.
+
+## Policy rejection and bounded continuation
+
+One scheduled Luna request for MT-Bench question 160 received a provider policy rejection with no reported usage. Admissions stopped, active reservations settled, and the full $0.0036065 reservation remained charged against the budget. The rejected content was not retried, rewritten or sent to another model.
+
+A continuation was frozen at 2026-10-27 18:15:27 UTC, before further dispatch. It quarantined all eight still-unattempted jobs for that question and allowed only the 1,823 untouched, unrelated scheduled jobs. Original request bodies, responses, results, prices and analysis rules were retained. The continuation is bound to its local evidence by canonical SHA-256 8f87f9888934613b33753323ccb52171966cb6d5c34cbee5113a15cff62fd614.
+
+The original 64-question human holdout denominator remains unchanged. An observed policy error is a delivered-agreement failure; an unattempted quarantined job is missing. Missing cells suppress complete-cohort intervals wherever they are required. Any analysis restricted to 63 questions, or bounding missing decisions within the finite scheduled cohort, is explicitly post hoc and cannot replace the planned analysis.
+
 ## Costs and limits
 
-The complete work has a $50 ceiling. This judge runner has a separate $30 ceiling, split into $2 for Luna, $8 for Terra and $20 for Sol. The remaining $20 is reserved for a separately frozen fresh repository experiment.
+The complete work has a $50 ceiling. This judge runner has a separate $30 ceiling, split into $2 for Luna, $8 for Terra and $20 for Sol. A separately frozen fresh repository experiment has a $12 OpenAI cap and a $0 Modal cap. A further $8 remains reserved for a possible, separately specified diagnostic; reserving it does not authorize unplanned calls. These allocations total the same $50 ceiling.
 
 Each call reserves a conservative maximum before dispatch. Accounting charges all input tokens at 2.5 times the standard uncached input rate and output at the standard rate to cover possible cache-write billing. The resulting number is an upper-bound estimate from reported usage, not a verified invoice. Unknown usage blocks new admissions and leaves its reservation intact. Failed or incomplete calls remain visible.
 

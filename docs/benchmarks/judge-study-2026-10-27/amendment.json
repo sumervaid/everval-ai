@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-27T17:52:46.946112+00:00",
+  "base_plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+  "change": "Four calls per model (twelve total), plus a separately labeled pre-holdout secondary endpoint.",
+  "unchanged": [
+    "job identities",
+    "cohorts",
+    "prompts",
+    "prices",
+    "caps",
+    "original primary analysis",
+    "holdout selection"
+  ],
+  "max_inflight_per_model": 4,
+  "max_total_inflight": 12,
+  "secondary_endpoint_amendment": {
+    "reason": "Development invalid/abstained judgments prevent strict primary complete-grid inference; original primary retained unchanged.",
+    "before_any_holdout": true,
+    "endpoint": "Delivered agreement over scheduled attempted judgments: valid categorical vote/reference agreement; observed abstain/invalid/error zero; missing/unattempted block inference.",
+    "allocation": "Secondary exploratory contrasts alpha=.05/3, individual configurations alpha=.05/6; not joint primary-plus-secondary familywise control.",
+    "no_salvage_or_retries": true
+  },
+  "additional_descriptive_analysis": [
+    "Observed human-panel vote agreement maximum; not a universal capability ceiling.",
+    "Execution repository sensitivity: equal repository means, frozen alpha/resamples/minimum families; no population-of-repositories inference."
+  ],
+  "graceful_stop": "Stop new admissions and await already reserved calls.",
+  "cost_before_amendment": {
+    "recorded_at": "2026-10-27T17:52:04.986244+00:00",
+    "cost_basis": "Conservative upper bound: all input at 2.5x standard uncached input price, all output at standard price. This is not an invoice.",
+    "inference_cap_usd": 30,
+    "total_user_cap_usd": 50,
+    "conservative_committed_usd": "2.73695475",
+    "conservative_settled_usd": "2.73695475",
+    "requests": 624,
+    "unknown_requests": 0,
+    "models": {
+      "gpt-6-luna": {
+        "committed_spend_usd": "0.08825475",
+        "known_spend_usd": "0.08825475",
+        "admissions_blocked": false,
+        "blocked_reason": null
+      },
+      "gpt-6.1-terra": {
+        "committed_spend_usd": "0.849825",
+        "known_spend_usd": "0.849825",
+        "admissions_blocked": false,
+        "blocked_reason": null
+      },
+      "gpt-6.1-sol": {
+        "committed_spend_usd": "1.798875",
+        "known_spend_usd": "1.798875",
+        "admissions_blocked": false,
+        "blocked_reason": null
+      }
+    }
+  },
+  "source_sha256": {
+    "scripts/judge_study/parallel.py": "84121b4962decaa03e0fe54bf6f1884ff30cf9df61eb6af18f40f321df72d172",
+    "scripts/judge_study/concurrent_budget.py": "e6726b6a0b19261c3f4250e1e4d0cfecaf3da835727dac90093eca47567c9131",
+    "scripts/judge_study/analyze.py": "c4c4d58da5d21c67fceac2cae20a7a4bb23c972eb93c9c2d30e5bcf955db9875",
+    "src/cvals/judge_calibration.py": "659b354b2fe69701c3d7998880123f1f2c4d9be8cf4e814ef4ed33b4038e30ff",
+    "src/cvals/judge_calibration_models.py": "cc4d2cdf26e9adb47863235bcbbcbcf4afee708f00e9c40ef5f1b477bd09ad62",
+    "src/cvals/judge_statistics.py": "b10bfd1a15b10e0bb34e46bc2bfb2f9698ebefd8e186ec8c7e1ec08d63a36eab"
+  },
+  "completed_prefix_count": 624,
+  "completed_prefix_sha256": "2ca257659a384d0821361204482bd95ad08d9d7dce7022dbcbe85897bb67ec1e",
+  "freeze": {
+    "sha256": "3e38faf92cc2f0daf738abfe89d888b734ded763422ec0ebe6a708e071b25a64",
+    "created_at": "2026-10-27T17:52:46.946112+00:00"
+  },
+  "publication_scope": "Summary of the private, pre-holdout amendment; completed response content remains private."
+}

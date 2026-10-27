@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "canonical_sha256": "8f87f9888934613b33753323ccb52171966cb6d5c34cbee5113a15cff62fd614",
+  "frozen_at": "2026-10-27T18:15:27.767766+00:00",
+  "hash_basis": "SHA-256 of canonical JSON; this is not the pretty-printed file byte hash.",
+  "base_plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+  "prior_operational_amendment_sha256": "3e38faf92cc2f0daf738abfe89d888b734ded763422ec0ebe6a708e071b25a64",
+  "provider_rejection": {
+    "request_id": "cc1180d53b70412b8fc472f0cceef52b",
+    "job_id": "021c503a876520cb9be48124d330aa3ef56ff04bf6610b8a524b59acd7337473",
+    "model": "gpt-6-luna",
+    "http_status": 400,
+    "error_type": "invalid_request_error",
+    "error_code": "invalid_prompt",
+    "reported_usage": null
+  },
+  "quarantine": {
+    "source_item_id": "mtbench-160",
+    "unattempted_jobs": 8,
+    "quarantined_job_ids_sha256": "a9b68244528157c2aa56e1e1e7d35cadb22619994cde12b16832118b3c158236",
+    "scope": "Every still-unattempted job for the source item, across configurations; no retries, rewriting or rerouting."
+  },
+  "bounded_financial_review": {
+    "billing_complete": false,
+    "retained_unknown_reservation_usd": "0.0036065",
+    "known_spend_upper_bound_at_freeze_usd": "4.5006455",
+    "committed_upper_bound_at_freeze_usd": "4.504252",
+    "basis": "The full frozen reservation remains charged; no zero charge or token usage is inferred. A new uncertainty blocks dispatch."
+  },
+  "unchanged_caps_usd": {
+    "user_total": "50",
+    "phase1": "30",
+    "per_model": {
+      "gpt-6-luna": "2",
+      "gpt-6.1-terra": "8",
+      "gpt-6.1-sol": "20"
+    }
+  },
+  "continuation": {
+    "previously_admitted_requests": 1289,
+    "allowed_untouched_unrelated_jobs": 1823,
+    "allowed_job_ids_sha256": "f48f72b66a0799490337ef51813a913632a9ea89e05a41dd558cfc00ee865d5c",
+    "original_planned_grid": 3120,
+    "expected_eventual_attempts": 3112,
+    "unchanged": [
+      "prompts",
+      "model configurations",
+      "prices",
+      "caps",
+      "original primary analysis",
+      "pre-holdout secondary analysis"
+    ]
+  },
+  "evidence_sha256": {
+    "rejected_request_file": "9d709c20d49c7f8347314ac0b7f1266d26e8cb46239a4cb856a7c1939dea6bc7",
+    "rejected_response_file": "ab84dcde6a0a1b598008e3172973b2e4ae27d203d89129e18c21074737c0a834",
+    "completed_result_prefix": "a09762d140e7034ad2923a07c32b13345b1d04a9bdc521a0d84c251e6d75e36e",
+    "completed_result_prefix_count": 1288,
+    "ledger_event_prefix": {
+      "count": 1315,
+      "sha256": "a52a88678bf62fe794b9a611dd919e84e7727d2c876b8c616dd058d1ba9be3f2"
+    }
+  },
+  "source_sha256": {
+    "scripts/judge_study/recovery.py": "cc078e698d3cd8b0cbfd998df94236762afc5a3bba3928914e20f677d8f7e2eb",
+    "scripts/judge_study/recovery_budget.py": "0db11c085cb24bce8a392d7d17015327540611743a37f835c0061c470f072f82",
+    "scripts/judge_study/analyze_recovered.py": "eee8d217602287a496f32c963fa89130918e26f241f71b38065e3f4aa6c992e7"
+  },
+  "analysis_deviation": "Original human grid stays incomplete. Any exclusion of the policy-quarantined question is an explicitly post hoc sensitivity, never a replacement confirmatory result. Execution cohort unchanged.",
+  "historical_reference_limits": [
+    "MT-Bench labels are historical public expert preferences, not present-day factual truth.",
+    "Prior model exposure is unknown; metadata blinding does not establish training-data blindness.",
+    "The archived execution cohort measures discrimination on selected discordant patches, not an agent pass rate."
+  ]
+}

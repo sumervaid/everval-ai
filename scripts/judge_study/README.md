@@ -153,3 +153,31 @@ uv run python -m scripts.judge_study.analyze --root .local/my-judge-study
 The aggregate file omits per-item scores and reviewer identifiers. Publication
 still requires reviewing its claims and confirming that each figure names the
 reference standard and independent family count.
+
+## Dated policy interruption and accounting review
+
+The live study received one HTTP 400 policy rejection without reported token
+usage. The rejected request was never retried or rewritten. Its entire
+$0.0036065 reservation remains charged against the original cap; no zero-cost
+billing claim is inferred. Every still-unattempted judgment of that source
+question is quarantined across all configurations.
+
+The dated recovery program is bound to that exact request, response digest,
+reservation, ledger event prefix, source files, and an immutable list of
+untouched unrelated jobs. It is not a general automatic retry mechanism. The
+original ledger row, request, response, and completed results remain unchanged.
+A new unknown request blocks continuation again.
+
+The original human cohort therefore remains incomplete. Original inference
+rules are retained, and any 63-question exclusion analysis is explicitly post
+hoc. The execution-reference cohort is unchanged. The aggregate report
+distinguishes an observed policy error, unattempted quarantined jobs, settled
+conservative charges, and the retained unknown-charge bound.
+
+An independent raw-response audit also found that two development records
+became invalid when the frozen research transport concatenated commentary and
+final-answer text. Their final-answer JSON was valid. This is a transport
+extraction limitation, not demonstrated model failure to produce final JSON.
+The original records remain unchanged. The live continuation preserves the
+frozen extraction behavior; any later parser sensitivity must be separately
+labeled.
