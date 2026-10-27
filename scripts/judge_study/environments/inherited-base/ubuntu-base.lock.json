@@ -1,0 +1,17 @@
+{
+  "arm64_manifest_digest": "sha256:a8fb2ba88181746111cbbe2969826d6546b71226785b196c93d2c3445a25000d",
+  "build_arg": "ubuntu@sha256:a8fb2ba88181746111cbbe2969826d6546b71226785b196c93d2c3445a25000d",
+  "compressed_layer_bytes": 27684607,
+  "config_digest": "sha256:5649198dfcca9dd6955ee455fdd6ba60734f28da600de2919a2f53da113a707c",
+  "index_digest": "sha256:e0f80c829509ef4df9e76bd8944eb7b8ec25cbb379b112a7f9448b2c77a77c9b",
+  "layers": [
+    {
+      "digest": "sha256:771eed73ee82c7916df197c0fd7ef3ac4eedcb9a6318b10d2652948c6c4ca08f",
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "size": 27684607
+    }
+  ],
+  "registry": "registry-1.docker.io/library/ubuntu",
+  "resolved_at": "2026-10-27T20:26:52.129807+00:00",
+  "tag": "jammy"
+}

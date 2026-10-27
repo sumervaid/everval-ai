@@ -1,0 +1,1862 @@
+{
+  "candidate_order": [
+    {
+      "image_id": "sha256:3b3d1b2594a319a7246990041c7128d5a5b911d489aec2290606474826a769da",
+      "instance_id": "pallets__flask-5014",
+      "repo": "pallets/flask"
+    },
+    {
+      "image_id": "sha256:2a196fa68219f2dd04f552ca6c653c5ef5e7134f6ca7e1b22374295532386a22",
+      "instance_id": "psf__requests-2931",
+      "repo": "psf/requests"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-7982",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8265",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13551",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:e84cc1e8e09b902d7db344beb461ad2549081fedf18fb9066ca000af034d369d",
+      "instance_id": "psf__requests-1142",
+      "repo": "psf/requests"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-5787",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9229",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-21847",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:e84cc1e8e09b902d7db344beb461ad2549081fedf18fb9066ca000af034d369d",
+      "instance_id": "psf__requests-1921",
+      "repo": "psf/requests"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-5840",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8721",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13480",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:2a196fa68219f2dd04f552ca6c653c5ef5e7134f6ca7e1b22374295532386a22",
+      "instance_id": "psf__requests-6028",
+      "repo": "psf/requests"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-7490",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:85860e802ed0d39a10c455b24cbd0baee76d708eb757834bb2e07c97c112d712",
+      "instance_id": "sphinx-doc__sphinx-11510",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-15349",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:e84cc1e8e09b902d7db344beb461ad2549081fedf18fb9066ca000af034d369d",
+      "instance_id": "psf__requests-1766",
+      "repo": "psf/requests"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-7571",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9591",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13852",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:2a196fa68219f2dd04f552ca6c653c5ef5e7134f6ca7e1b22374295532386a22",
+      "instance_id": "psf__requests-5414",
+      "repo": "psf/requests"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-7432",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9367",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-18189",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:49557e4787cfd83d91ed42709df46e09b7b489fb7d4b35a6197cf22b432d3eaf",
+      "instance_id": "psf__requests-2317",
+      "repo": "psf/requests"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-7324",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-7590",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13798",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:e84cc1e8e09b902d7db344beb461ad2549081fedf18fb9066ca000af034d369d",
+      "instance_id": "psf__requests-1724",
+      "repo": "psf/requests"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-10051",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:85860e802ed0d39a10c455b24cbd0baee76d708eb757834bb2e07c97c112d712",
+      "instance_id": "sphinx-doc__sphinx-11445",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-21596",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-10081",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9281",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-24661",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-5262",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9658",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13091",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-10356",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9320",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-23413",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-8399",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9461",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-20801",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-6197",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-7757",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-15017",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-7205",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-7748",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-12489",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-7521",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8475",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-18763",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-6202",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9673",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-22456",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-7236",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:85860e802ed0d39a10c455b24cbd0baee76d708eb757834bb2e07c97c112d712",
+      "instance_id": "sphinx-doc__sphinx-10614",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-15809",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-5631",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-10673",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13877",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-5809",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8269",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13372",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8551",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13878",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9258",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13031",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:47b979ef5ada6fe544194080d7733f9f75e576c57ab78c33754f99cb999429bc",
+      "instance_id": "sphinx-doc__sphinx-10435",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-11618",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9711",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-14531",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:47b979ef5ada6fe544194080d7733f9f75e576c57ab78c33754f99cb999429bc",
+      "instance_id": "sphinx-doc__sphinx-8638",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-24443",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:47b979ef5ada6fe544194080d7733f9f75e576c57ab78c33754f99cb999429bc",
+      "instance_id": "sphinx-doc__sphinx-10466",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-20428",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-7985",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-21930",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-7462",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-23950",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-8056",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-15976",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9602",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-20438",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9698",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-12481",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-10449",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-14976",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8595",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-19954",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:47b979ef5ada6fe544194080d7733f9f75e576c57ab78c33754f99cb999429bc",
+      "instance_id": "sphinx-doc__sphinx-7454",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-14248",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8621",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-23262",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:47b979ef5ada6fe544194080d7733f9f75e576c57ab78c33754f99cb999429bc",
+      "instance_id": "sphinx-doc__sphinx-10323",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-19637",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8120",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-17318",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8593",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-19783",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-8035",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-16766",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8548",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-17139",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-7910",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-16886",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-7889",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-19495",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8459",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-23824",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-9230",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-23534",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:47b979ef5ada6fe544194080d7733f9f75e576c57ab78c33754f99cb999429bc",
+      "instance_id": "sphinx-doc__sphinx-7440",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-16597",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-22714",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-14711",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-15345",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13647",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-18211",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-17630",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-24539",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13757",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-17655",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-22080",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-24213",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-16450",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-18199",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-20916",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-24562",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-18698",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-16792",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13974",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-24066",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-13615",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-21379",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-19346",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-20590",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-21612",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-20154",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-22914",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-12419",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-12096",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-15875",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-19040",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-15599",
+      "repo": "sympy/sympy"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12713",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12708",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14765",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13820",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-10914",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12965",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14238",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14404",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11163",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15554",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11885",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11276",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13516",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13933",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11206",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13344",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13346",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13417",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12155",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16116",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-9296",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12858",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15278",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12143",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15375",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15037",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13406",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14534",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11815",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15252",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15098",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12193",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13112",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11133",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11490",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12262",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11141",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14999",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15104",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13569",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15382",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12273",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12774",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15572",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14170",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14580",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12050",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11292",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16145",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-10973",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13028",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13807",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12754",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13658",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13786",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15368",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11999",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14915",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11555",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16429",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12741",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13109",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15863",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11790",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14053",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15525",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11095",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16136",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-10999",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11099",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14672",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14034",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15561",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-10554",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15957",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11299",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16032",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15022",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14493",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13128",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11179",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13023",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15161",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11880",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13964",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16333",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13158",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15103",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13363",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11951",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14771",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11433",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12406",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11532",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13279",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14089",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13590",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13670",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13809",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13513",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16263",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13401",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14007",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13212",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11603",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12125",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16255",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11239",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11333",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11740",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13343",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12276",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13410",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13121",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11066",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15629",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15987",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16315",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12304",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11087",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14725",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15128",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-10880",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11477",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15380",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15127",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14631",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15268",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15280",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11734",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12419",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11848",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12039",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14434",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15741",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11749",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15695",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15851",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13551",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14311",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13297",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15973",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14011",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13925",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13821",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14608",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15930",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13033",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13512",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15315",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12308",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11265",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14792",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13195",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11149",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15563",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13837",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11820",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12209",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11964",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16139",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15467",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11728",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13315",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13089",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14122",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15732",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13741",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11119",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11551",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14140",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14559",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16100",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14155",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14500",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15569",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15277",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15731",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11211",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13012",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14539",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12325",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15503",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14373",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15814",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14376",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15499",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14351",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11451",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15916",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13449",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14752",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13568",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13794",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-13810",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11400",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14349",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16256",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-16082",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14017",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-11138",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14315",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-12663",
+      "repo": "django/django"
+    },
+    {
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-14855",
+      "repo": "django/django"
+    }
+  ],
+  "historical_images_publicly_pullable": false,
+  "images": [
+    {
+      "architecture": "arm64",
+      "base_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4",
+      "image_id": "sha256:3b3d1b2594a319a7246990041c7128d5a5b911d489aec2290606474826a769da",
+      "instance_id": "pallets__flask-5063",
+      "repo": "pallets/flask",
+      "source_preparation_sha256": "68d3f8edd50339c8d2a54ab6f01aeba61f30ed018d888526b174d8df3528a317",
+      "version": "2.3"
+    },
+    {
+      "architecture": "arm64",
+      "base_commit": "36453b95b13079296776d11b09cab2567ea3e703",
+      "image_id": "sha256:2a196fa68219f2dd04f552ca6c653c5ef5e7134f6ca7e1b22374295532386a22",
+      "instance_id": "psf__requests-3362",
+      "repo": "psf/requests",
+      "source_preparation_sha256": "ee62385b2070f9639e4a37609afed3c4777e55988dd0019afc593c1df933d752",
+      "version": "2.10"
+    },
+    {
+      "architecture": "arm64",
+      "base_commit": "2f7415cfbc4b6ca62f9013f1abd27136f46b9653",
+      "image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+      "instance_id": "pytest-dev__pytest-11148",
+      "repo": "pytest-dev/pytest",
+      "source_preparation_sha256": "7e281335e099e3c6eae14d0b305024c3b3b001bf481e976c0227b32ba339c083",
+      "version": "8.0"
+    },
+    {
+      "architecture": "arm64",
+      "base_commit": "7ca279e33aebb60168d35e6be4ed059f4a68f2c1",
+      "image_id": "sha256:68520dcca36db18b444aecb3e15af27621794ff238a1e36f7d2b4ffced4a0001",
+      "instance_id": "sphinx-doc__sphinx-8801",
+      "repo": "sphinx-doc/sphinx",
+      "source_preparation_sha256": "7e281335e099e3c6eae14d0b305024c3b3b001bf481e976c0227b32ba339c083",
+      "version": "3.5"
+    },
+    {
+      "architecture": "arm64",
+      "base_commit": "a36caf5c74fe654cedc488e8a8a05fad388f8406",
+      "image_id": "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1",
+      "instance_id": "sympy__sympy-24661",
+      "repo": "sympy/sympy",
+      "source_preparation_sha256": "3b88633ab653f2328162327ae40c5bc9172969e7e3fbbe2c713a65b0e1260e39",
+      "version": "1.12"
+    },
+    {
+      "architecture": "arm64",
+      "base_commit": "fe693c492242ae532211e0c173324f09ca8cf227",
+      "image_id": "sha256:e84cc1e8e09b902d7db344beb461ad2549081fedf18fb9066ca000af034d369d",
+      "instance_id": "psf__requests-2148",
+      "repo": "psf/requests",
+      "source_preparation_sha256": "d9431d8865bbde8cf1653fe530118520b2c97347117caae746d605aa5a8ba42c",
+      "version": "2.3"
+    },
+    {
+      "architecture": "arm64",
+      "base_commit": "195e911f1dab04b8ddeacbe04b7d214aaf81bb0b",
+      "image_id": "sha256:dd51c701759b24545d926b8baa84cfb95be1354de07d804544acd0516b644944",
+      "instance_id": "sphinx-doc__sphinx-10451",
+      "repo": "sphinx-doc/sphinx",
+      "source_preparation_sha256": "7e281335e099e3c6eae14d0b305024c3b3b001bf481e976c0227b32ba339c083",
+      "version": "5.1"
+    },
+    {
+      "architecture": "arm64",
+      "base_commit": "71db08c05197545944949d5aa76cd340e7143627",
+      "image_id": "sha256:85860e802ed0d39a10c455b24cbd0baee76d708eb757834bb2e07c97c112d712",
+      "instance_id": "sphinx-doc__sphinx-11445",
+      "repo": "sphinx-doc/sphinx",
+      "source_preparation_sha256": "7e281335e099e3c6eae14d0b305024c3b3b001bf481e976c0227b32ba339c083",
+      "version": "7.1"
+    },
+    {
+      "architecture": "arm64",
+      "base_commit": "091991be0da19de9108dbe5e3752917fea3d7fdc",
+      "image_id": "sha256:49557e4787cfd83d91ed42709df46e09b7b489fb7d4b35a6197cf22b432d3eaf",
+      "instance_id": "psf__requests-2317",
+      "repo": "psf/requests",
+      "source_preparation_sha256": "e9ae06cee7c41652873d836cb6054fd54aaccc6f996fcd1ce65c55dcc4c453ee",
+      "version": "2.4"
+    },
+    {
+      "architecture": "arm64",
+      "base_commit": "7bdc11e87c7d86dcc2a087eccb7a7c129a473415",
+      "image_id": "sha256:47b979ef5ada6fe544194080d7733f9f75e576c57ab78c33754f99cb999429bc",
+      "instance_id": "sphinx-doc__sphinx-10325",
+      "repo": "sphinx-doc/sphinx",
+      "source_preparation_sha256": "7e281335e099e3c6eae14d0b305024c3b3b001bf481e976c0227b32ba339c083",
+      "version": "5.0"
+    },
+    {
+      "architecture": "arm64",
+      "base_commit": "93cedc82f29076c824d476354527af1150888e4f",
+      "image_id": "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+      "instance_id": "django__django-15731",
+      "repo": "django/django",
+      "source_preparation_sha256": "b58e4aee71489d7ddddf0f57aff3eadd880c69615c387c9be174ea76eb95de1e",
+      "version": "4.2"
+    }
+  ],
+  "selection_sha256": "e245f0ebff8bc7ea952c9780328e5d920b4c4f08e2e76735faf3e835acced6c4"
+}

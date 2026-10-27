@@ -53,6 +53,7 @@ Use [benchmark validation](benchmarks.md) to understand what qualifies for a rel
 - [Read the judge-calibration finding](benchmarks/judge-study-2026-10-27/results.md): a checklist raised estimated cost by 10.9% without a demonstrated human-agreement gain in the complete Terra comparison.
 - [Calibrate LLM judges](judge-calibration.md) against retained human votes or execution references.
 - [Statistical methods](judge-methods.md) explain agreement, reliability, paired uncertainty and prospective power.
+- [Fresh repository repair protocol](fresh-repair-methods.md) defines repeated admission controls, frozen task selection, bounded model requests and execution grading.
 - [Four measurement decisions](measurement-design.md) connect the implementation to its tradeoffs.
 - [Inspect interoperability](inspect.md) exports frozen samples with evaluator references kept separate.
 

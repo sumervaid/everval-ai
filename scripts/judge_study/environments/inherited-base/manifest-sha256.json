@@ -1,0 +1,12 @@
+{
+  ".dockerignore": "4a1b4337a6e72e85081e07aad0b0abe77bea0005b011f5ed3c76f1bdfe91793f",
+  "Dockerfile": "d197e5633947a7e704dba5d4d8bd3600f5a83210a0208fb28c9a090b8bceb372",
+  "README.md": "69ffd289f4dab484d2ff20357f75f4c0eb37aa19e2928e9a193db7a2ebe8da3f",
+  "conda-explicit.txt": "228632e5d7460fcb4798c894eb8ba22df4242afb95bbfda048e13c53c2173af3",
+  "conda-packages.lock.json": "170e65feebf48a422489f4cd032d7f88e6e8b60803f274f2877ba1750aa84b7f",
+  "fetch_locked.py": "33f09d98136e9dbba7ae605152d0b2b0ca325ebc4e7ab7a216f7513be0432a17",
+  "provenance.json": "c9be3ce4c57c31305fc5de35ab7c8d9d44847a15e81dbcf7315cb54351a87801",
+  "runtime-pip.txt": "902481c242e37cb90ed82e4668bec7ed05059d2e1dffe74cbf2f3d0d777b8ca2",
+  "ubuntu-base.lock.json": "36b266e77b25ef2d8884a3d5b8ea000078827054e0819bb5fdf1fe5094a48a69",
+  "wheels.lock.json": "610d3b42847c5bb11d88076ce3b5cef664c956d81528e6747d5e10a8318e38de"
+}

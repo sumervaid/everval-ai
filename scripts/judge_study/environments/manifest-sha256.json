@@ -1,0 +1,5 @@
+{
+  "django-sources.json": "ac0a3d15f23d5651faad62e22773b86f7ec3f5f18c57addf2f8ae74dc2681f78",
+  "django-wheels.lock.json": "351fa4cc6e89d230d3d4aa98591c9f40271db67667c65ce3f6c9688562b63b76",
+  "native-images.json": "551423ccc20e930d4d98025a09e855ebdb614a933290c3b2ab415e034508223e"
+}

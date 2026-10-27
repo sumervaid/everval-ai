@@ -1,0 +1,32 @@
+{
+  "byte_identical_historical_rebuild_claimed": false,
+  "historical_apt_packages_locked": false,
+  "historical_ubuntu_reference": "ubuntu:jammy",
+  "miniconda": {
+    "sha256": "decd447fb99dbd0fc5004481ec9bf8c04f9ba28b35a9292afe49ecefe400237f",
+    "url": "https://repo.anaconda.com/miniconda/Miniconda3-py311_23.11.0-2-Linux-aarch64.sh"
+  },
+  "original_runtime_image_id": "sha256:3da28ced01192a8bbbc8936afb7cd668e357de6ae4b9b5380ff7935f467af556",
+  "resolved_ubuntu_digest_retained": false,
+  "retained_record_sha256": {
+    "conda-explicit.txt": "228632e5d7460fcb4798c894eb8ba22df4242afb95bbfda048e13c53c2173af3",
+    "conda-package-records.json": "d99833311926975ccbf9c6ee5a49ae18cbd938785a755a79b45d5bc0076e2ce3",
+    "miniconda-sha256.txt": "87cfcc84ed753ae703454803504f977d931532b0fc067d89a0c9b907db034df1",
+    "offline-wheels.json": "73172f8560fffb2d51fe00f402b1e5c805b5c0f315afe76d419f44e5c04d365c",
+    "pip-freeze.txt": "8e44e4c902af69fc96313aea4de5cb69dc3bf26256e2a724db39ee35012729a4"
+  },
+  "runtime_recipe": "Derived Python3.9.20 ARM64 environment for a new controlled replication. Exact Conda artifacts and Python wheels are hash-checked; Ubuntu and apt must be recorded for the new run.",
+  "source_context_sha256": {
+    ".dockerignore": "e63fe5f99f48df0ee7edbe02a5939d41d4fe7945cba1ba11ab3d090d4861ef49",
+    "Dockerfile": "cc3787fd5cd25ae74dd04b9dfc699be37dd3ff6875645dccdb1829f632f48dd0",
+    "prepare-1.sh": "e9617a6ceb91974e661d846894886c7901fe3022ad371cc089959dc55ecc7322",
+    "prepare-2.sh": "21aeb0e0ed4b24b173687df5db81f72498bef9d4507a41b443b97eed1076f1f2",
+    "prepare-pip.sh": "110e403b73afdc8befaa441be310de8b39c03a0c52391d565fd3598797f895b3",
+    "prepare-wheelhouse.py": "5b68c8848895c653d4eeec392a58260678473585704acd326a7698e7f4616220"
+  },
+  "source_repository": "https://github.com/SWE-bench/swe-bench-tasks",
+  "source_revision": "3d07b464b7b311a0cbfb5ed5b2d8a3b96f84a33d",
+  "source_task": "pytest-dev__pytest-11148",
+  "subsequent_inherited_pytest_image_id": "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+  "validation": "Recipe and dependency locks prepared without starting a container. Rebuild and task controls remain required."
+}

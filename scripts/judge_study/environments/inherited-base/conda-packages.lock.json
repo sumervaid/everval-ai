@@ -1,0 +1,473 @@
+{
+  "artifacts": [
+    {
+      "build": "main",
+      "build_number": 0,
+      "depends": [],
+      "fn": "_libgcc_mutex-0.1-main.conda",
+      "license": "None",
+      "md5": "b272288d02db5520249ca7870c2287b4",
+      "name": "_libgcc_mutex",
+      "sha256": "41e43dedb2e5805d15b60d0e337f625c6308b49ec94e1c7a2b34a62257ab850f",
+      "size": 2491,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/_libgcc_mutex-0.1-main.conda",
+      "version": "0.1"
+    },
+    {
+      "build": "52_gnu",
+      "build_number": 52,
+      "depends": [],
+      "fn": "_openmp_mutex-5.1-52_gnu.conda",
+      "license": "BSD-3-Clause",
+      "md5": "f367f6af1c675137019bcded877b4a59",
+      "name": "_openmp_mutex",
+      "sha256": "a565f285cdcb14894ba4e8a081fcec0ce7a3b9636d3fe7be709c849438b08b79",
+      "size": 6626,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/_openmp_mutex-5.1-52_gnu.conda",
+      "version": "5.1"
+    },
+    {
+      "build": "hd43f75c_0",
+      "build_number": 0,
+      "depends": [],
+      "fn": "ca-certificates-2026.9.25-hd43f75c_0.conda",
+      "license": "MPL-2.0",
+      "md5": "de5c7ce484005c6e3b824eaec120c274",
+      "name": "ca-certificates",
+      "sha256": "6898101318ffeb2ccbc37b4fc83b0794186a65e3221e438e3d5a381b41f8d879",
+      "size": 109638,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/ca-certificates-2026.9.25-hd43f75c_0.conda",
+      "version": "2026.9.25"
+    },
+    {
+      "build": "h97084ae_3",
+      "build_number": 3,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0"
+      ],
+      "fn": "ld_impl_linux-aarch64-2.44-h97084ae_3.conda",
+      "license": "GPL-3.0-only",
+      "md5": "833bdaaca975deb8a858597241ecd5c9",
+      "name": "ld_impl_linux-aarch64",
+      "sha256": "81a10d3fe92406c81cc4f106ecb4e12f6e57ce02e5fdba53e69bb34a3f61e5c2",
+      "size": 783012,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/ld_impl_linux-aarch64-2.44-h97084ae_3.conda",
+      "version": "2.44"
+    },
+    {
+      "build": "ha74a3d0_3",
+      "build_number": 3,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "libgcc >=14",
+        "libstdcxx >=14"
+      ],
+      "fn": "libffi-3.4.8-ha74a3d0_3.conda",
+      "license": "MIT",
+      "md5": "91a41da5a66e99eb3f1f45c119a34a61",
+      "name": "libffi",
+      "sha256": "118d6666550d082f09d37390bb207a150a7d6518ebaa7d16a16731cbdc92bca1",
+      "size": 135174,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/libffi-3.4.8-ha74a3d0_3.conda",
+      "version": "3.4.8"
+    },
+    {
+      "build": "hc18542e_8",
+      "build_number": 8,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "_openmp_mutex * *_gnu"
+      ],
+      "fn": "libgcc-15.2.0-hc18542e_8.conda",
+      "license": "GPL-3.0-only WITH GCC-exception-3.1",
+      "md5": "d7b72fca6c8e51b78b9a278a48535717",
+      "name": "libgcc",
+      "sha256": "71fc8b5195cb0724371da87c77c45c0428ae6686f5735709315eb54e9948f64b",
+      "size": 511167,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/libgcc-15.2.0-hc18542e_8.conda",
+      "version": "15.2.0"
+    },
+    {
+      "build": "h51576c1_8",
+      "build_number": 8,
+      "depends": [
+        "libgcc 15.2.0 hc18542e_8",
+        "_libgcc_mutex * main"
+      ],
+      "fn": "libgcc-ng-15.2.0-h51576c1_8.conda",
+      "license": "GPL-3.0-only WITH GCC-exception-3.1",
+      "md5": "09df5fac4dec4376d90942c40dede152",
+      "name": "libgcc-ng",
+      "sha256": "fc466a301a5e41ca638920f241b0732c00bf503f466dc0504ea8fb8ecf5bc6e3",
+      "size": 28472,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/libgcc-ng-15.2.0-h51576c1_8.conda",
+      "version": "15.2.0"
+    },
+    {
+      "build": "h9538471_8",
+      "build_number": 8,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "libgcc 15.2.0 hc18542e_8"
+      ],
+      "fn": "libstdcxx-15.2.0-h9538471_8.conda",
+      "license": "GPL-3.0-only WITH GCC-exception-3.1",
+      "md5": "ad52ae62540e04578c90125eebafa228",
+      "name": "libstdcxx",
+      "sha256": "95b8d1cb433ee7351351e613e3e255967d517eb0eeaedec340818aa6aa90c6e4",
+      "size": 3830999,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/libstdcxx-15.2.0-h9538471_8.conda",
+      "version": "15.2.0"
+    },
+    {
+      "build": "hf66535e_0",
+      "build_number": 0,
+      "depends": [
+        "libgcc-ng >=11.2.0",
+        "pthread-stubs",
+        "xorg-libxau >=1.0.12,<2.0a0",
+        "xorg-libxdmcp >=1.1.5,<2.0a0"
+      ],
+      "fn": "libxcb-1.17.0-hf66535e_0.conda",
+      "license": "MIT",
+      "md5": "28e00a696fd74b7550b7d1b8698e10af",
+      "name": "libxcb",
+      "sha256": "9f4a115a48f07a881abfaa501948db678f63592246af9a6d5ee0609301802bd5",
+      "size": 443363,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/libxcb-1.17.0-hf66535e_0.conda",
+      "version": "1.17.0"
+    },
+    {
+      "build": "h27118de_0",
+      "build_number": 0,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "libgcc >=14"
+      ],
+      "fn": "libzlib-1.3.2-h27118de_0.conda",
+      "license": "Zlib",
+      "md5": "634f36980d17ae847e8663830b5de1bc",
+      "name": "libzlib",
+      "sha256": "2076b18233b7e63cc8ef005bc02f24952c5ee55e97ce38f92681a0016536cea8",
+      "size": 61374,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/libzlib-1.3.2-h27118de_0.conda",
+      "version": "1.3.2"
+    },
+    {
+      "build": "h47fb78d_0",
+      "build_number": 0,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "libgcc >=14",
+        "libstdcxx >=14"
+      ],
+      "fn": "ncurses-6.6-h47fb78d_0.conda",
+      "license": "MIT AND X11",
+      "md5": "42dcfd1704d066dc8b8dc81411604d0d",
+      "name": "ncurses",
+      "sha256": "6c448a6ab33fba7a72ce86956e783c8271819e15e1aec56ae532a944d66a49e8",
+      "size": 961942,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/ncurses-6.6-h47fb78d_0.conda",
+      "version": "6.6"
+    },
+    {
+      "build": "h39c9139_0",
+      "build_number": 0,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "ca-certificates",
+        "libgcc >=14"
+      ],
+      "fn": "openssl-3.5.9-h39c9139_0.conda",
+      "license": "Apache-2.0",
+      "md5": "2aa4038837dbc54e5faa49e0a4c14894",
+      "name": "openssl",
+      "sha256": "72625e0ee3ac5f80ce22dc62825d710960aabbc5534c49402e26f06806ac10fe",
+      "size": 6025624,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/openssl-3.5.9-h39c9139_0.conda",
+      "version": "3.5.9"
+    },
+    {
+      "build": "py39hd43f75c_0",
+      "build_number": 0,
+      "depends": [
+        "python >=3.9,<3.10.0a0",
+        "setuptools",
+        "wheel"
+      ],
+      "fn": "pip-24.2-py39hd43f75c_0.conda",
+      "license": "MIT",
+      "md5": "3f138bb4e9f2f02000c72e4412deac17",
+      "name": "pip",
+      "sha256": "65c3db5a522451254319d862ad02433ed1321eca1e44e19333e359baef1a9f06",
+      "size": 2324919,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/pip-24.2-py39hd43f75c_0.conda",
+      "version": "24.2"
+    },
+    {
+      "build": "h27118de_2",
+      "build_number": 2,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "libgcc >=14"
+      ],
+      "fn": "pthread-stubs-0.3-h27118de_2.conda",
+      "license": "MIT",
+      "md5": "43c680b38c08b7a6adade5fe6d418a8c",
+      "name": "pthread-stubs",
+      "sha256": "0c4c95b32b97a44fc38dc9433eae74590853a3bd22032d32c13949c5a7e6e897",
+      "size": 7486,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/pthread-stubs-0.3-h27118de_2.conda",
+      "version": "0.3"
+    },
+    {
+      "build": "h4bb2201_1",
+      "build_number": 1,
+      "depends": [
+        "ld_impl_linux-aarch64",
+        "libffi >=3.4,<3.5",
+        "libffi >=3.4,<4.0a0",
+        "libgcc-ng >=11.2.0",
+        "ncurses >=6.4,<7.0a0",
+        "openssl >=3.0.15,<4.0a0",
+        "readline >=8.1.2,<9.0a0",
+        "sqlite >=3.45.3,<4.0a0",
+        "tk >=8.6.14,<8.7.0a0",
+        "tzdata",
+        "xz >=5.4.6,<6.0a0",
+        "zlib >=1.2.13,<2.0.0a0",
+        "pip"
+      ],
+      "fn": "python-3.9.20-h4bb2201_1.conda",
+      "license": "PSF-2.0",
+      "md5": "cfd88b2c504a2c129696d66cf9dcbad9",
+      "name": "python",
+      "sha256": "cbd7780de905dffeb7bc76f142a016991121dfb3d8e0dd7c90b56b088b7fbee5",
+      "size": 25856552,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/python-3.9.20-h4bb2201_1.conda",
+      "version": "3.9.20"
+    },
+    {
+      "build": "h886d1d0_0",
+      "build_number": 0,
+      "depends": [
+        "libgcc-ng >=11.2.0",
+        "ncurses >=6.5,<7.0a0"
+      ],
+      "fn": "readline-8.3-h886d1d0_0.conda",
+      "license": "GPL-3.0-only",
+      "md5": "f04b3cb7ab28e886ceb012e4e9626e82",
+      "name": "readline",
+      "sha256": "3cc178114a9108f4d0c81b924a1ce4961733166335b4e09b7e1f88e4cc182ccf",
+      "size": 509455,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/readline-8.3-h886d1d0_0.conda",
+      "version": "8.3"
+    },
+    {
+      "build": "py39hd43f75c_0",
+      "build_number": 0,
+      "depends": [
+        "python >=3.9,<3.10.0a0"
+      ],
+      "fn": "setuptools-75.1.0-py39hd43f75c_0.conda",
+      "license": "MIT",
+      "md5": "b08b0085921425672e6f723f1349d84d",
+      "name": "setuptools",
+      "sha256": "30a2d5a9b772d7328505d5a9e5acb03d7a6342f791c359ebf4695247fdc25c47",
+      "size": 1646516,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/setuptools-75.1.0-py39hd43f75c_0.conda",
+      "version": "75.1.0"
+    },
+    {
+      "build": "h2b0225e_0",
+      "build_number": 0,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "libgcc >=14",
+        "libzlib >=1.3.2,<2.0a0",
+        "ncurses >=6.6,<7.0a0",
+        "readline >=8.3,<9.0a0",
+        "zlib >=1.3.2,<2.0a0"
+      ],
+      "fn": "sqlite-3.53.4-h2b0225e_0.conda",
+      "license": "blessing",
+      "md5": "81f2cfecea009b7ad20c6b96d58c10d3",
+      "name": "sqlite",
+      "sha256": "dd8e5989a20e13b60b13bf81d2b905df4e5095fa55268d031896313265427dbf",
+      "size": 1316356,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/sqlite-3.53.4-h2b0225e_0.conda",
+      "version": "3.53.4"
+    },
+    {
+      "build": "h987d8db_0",
+      "build_number": 0,
+      "depends": [
+        "libgcc-ng >=11.2.0",
+        "xorg-libx11 >=1.8.12,<2.0a0",
+        "zlib >=1.2.13,<2.0.0a0"
+      ],
+      "fn": "tk-8.6.15-h987d8db_0.conda",
+      "license": "TCL",
+      "md5": "6a7f42565108e00d27f68f4ae5751c53",
+      "name": "tk",
+      "sha256": "7e200ff8eda9a62b654a30c9edd742a28b023f326d4a18f6f2f4abe951b2c8ec",
+      "size": 3717438,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/tk-8.6.15-h987d8db_0.conda",
+      "version": "8.6.15"
+    },
+    {
+      "build": "he532380_0",
+      "build_number": 0,
+      "depends": [],
+      "fn": "tzdata-2026c-he532380_0.conda",
+      "license": "CC-PDDC OR BSD-3-Clause",
+      "md5": "448fc60cd3fb615bf69e242f8aa22914",
+      "name": "tzdata",
+      "sha256": "52adc4b0a9cce2ffb8ad319d54b7c940ae7961f7caf7ce6851eec4b3f542c368",
+      "size": 119652,
+      "subdir": "noarch",
+      "url": "https://repo.anaconda.com/pkgs/main/noarch/tzdata-2026c-he532380_0.conda",
+      "version": "2026c"
+    },
+    {
+      "build": "py39hd43f75c_0",
+      "build_number": 0,
+      "depends": [
+        "python >=3.9,<3.10.0a0"
+      ],
+      "fn": "wheel-0.44.0-py39hd43f75c_0.conda",
+      "license": "MIT",
+      "md5": "a3300365a814adc830ce57d7ab3b6b7f",
+      "name": "wheel",
+      "sha256": "94f7065b2bffb32dba434b0c8def5c2f5da0ae2cded2c3db3b39dcf23f139ea6",
+      "size": 113464,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/wheel-0.44.0-py39hd43f75c_0.conda",
+      "version": "0.44.0"
+    },
+    {
+      "build": "hf8334eb_0",
+      "build_number": 0,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "libgcc >=14",
+        "libxcb >=1.17.0,<2.0a0",
+        "xorg-xorgproto >=2024.1",
+        "xorg-xorgproto >=2025.1,<2026.0a0"
+      ],
+      "fn": "xorg-libx11-1.8.13-hf8334eb_0.conda",
+      "license": "MIT",
+      "md5": "cc1788f23148cb04eba290da5abe5c4b",
+      "name": "xorg-libx11",
+      "sha256": "c1639ce6feac300dea9bbe1cf07d2e256451f3c338caaf66269b024de2431d4d",
+      "size": 845839,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/xorg-libx11-1.8.13-hf8334eb_0.conda",
+      "version": "1.8.13"
+    },
+    {
+      "build": "hf66535e_0",
+      "build_number": 0,
+      "depends": [
+        "libgcc-ng >=11.2.0"
+      ],
+      "fn": "xorg-libxau-1.0.12-hf66535e_0.conda",
+      "license": "MIT",
+      "md5": "96f0df92ef31ad0aaf27b6b373e4f510",
+      "name": "xorg-libxau",
+      "sha256": "0da54142ef0bd137ad44c8927d6ed12f23f2f10a3797aecbceed8150d07be3c7",
+      "size": 14118,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/xorg-libxau-1.0.12-hf66535e_0.conda",
+      "version": "1.0.12"
+    },
+    {
+      "build": "hf66535e_0",
+      "build_number": 0,
+      "depends": [
+        "libgcc-ng >=11.2.0"
+      ],
+      "fn": "xorg-libxdmcp-1.1.5-hf66535e_0.conda",
+      "license": "MIT",
+      "md5": "5bfda69ee113cfc8e38e0214c078ef4e",
+      "name": "xorg-libxdmcp",
+      "sha256": "54db79084bdfe59f8d9ca7518f8b7441b6d00a6e68a33462ab000fda129fd08d",
+      "size": 19895,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/xorg-libxdmcp-1.1.5-hf66535e_0.conda",
+      "version": "1.1.5"
+    },
+    {
+      "build": "h27118de_0",
+      "build_number": 0,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "libgcc >=14"
+      ],
+      "fn": "xorg-xorgproto-2025.1-h27118de_0.conda",
+      "license": "MIT",
+      "md5": "70d7eadbc6b7615673ef61cde29f34ff",
+      "name": "xorg-xorgproto",
+      "sha256": "d3842a184f71b90be1ab964baf76fb696b2f69ade15f0832c76ef3345fad3817",
+      "size": 566388,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/xorg-xorgproto-2025.1-h27118de_0.conda",
+      "version": "2025.1"
+    },
+    {
+      "build": "h022054e_0",
+      "build_number": 0,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "libgcc >=14"
+      ],
+      "fn": "xz-5.8.4-h022054e_0.conda",
+      "license": "LGPL-2.1-or-later and GPL-2.0-or-later and 0BSD",
+      "md5": "49e1642c5e511a81f916591f70967361",
+      "name": "xz",
+      "sha256": "0bbf1cc0439c9c686d87f6ac1828e55ea1cfef20492e15568b8e6217bc3a00dd",
+      "size": 675789,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/xz-5.8.4-h022054e_0.conda",
+      "version": "5.8.4"
+    },
+    {
+      "build": "h27118de_0",
+      "build_number": 0,
+      "depends": [
+        "__glibc >=2.28,<3.0.a0",
+        "libgcc >=14",
+        "libzlib 1.3.2 h27118de_0"
+      ],
+      "fn": "zlib-1.3.2-h27118de_0.conda",
+      "license": "Zlib",
+      "md5": "54b0088230723730f56fecd1b728f376",
+      "name": "zlib",
+      "sha256": "6a7a54d02390a50766d641a7017bca7ef6a4ddd0d410b9c0143b2544b4dc25ad",
+      "size": 91292,
+      "subdir": "linux-aarch64",
+      "url": "https://repo.anaconda.com/pkgs/main/linux-aarch64/zlib-1.3.2-h27118de_0.conda",
+      "version": "1.3.2"
+    }
+  ],
+  "platform": "linux-aarch64"
+}

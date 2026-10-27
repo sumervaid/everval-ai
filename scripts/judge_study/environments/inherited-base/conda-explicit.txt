@@ -1,0 +1,31 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: linux-aarch64
+@EXPLICIT
+https://repo.anaconda.com/pkgs/main/linux-aarch64/_libgcc_mutex-0.1-main.conda#b272288d02db5520249ca7870c2287b4
+https://repo.anaconda.com/pkgs/main/linux-aarch64/_openmp_mutex-5.1-52_gnu.conda#f367f6af1c675137019bcded877b4a59
+https://repo.anaconda.com/pkgs/main/linux-aarch64/ca-certificates-2026.9.25-hd43f75c_0.conda#de5c7ce484005c6e3b824eaec120c274
+https://repo.anaconda.com/pkgs/main/linux-aarch64/ld_impl_linux-aarch64-2.44-h97084ae_3.conda#833bdaaca975deb8a858597241ecd5c9
+https://repo.anaconda.com/pkgs/main/noarch/tzdata-2026c-he532380_0.conda#448fc60cd3fb615bf69e242f8aa22914
+https://repo.anaconda.com/pkgs/main/linux-aarch64/libgcc-15.2.0-hc18542e_8.conda#d7b72fca6c8e51b78b9a278a48535717
+https://repo.anaconda.com/pkgs/main/linux-aarch64/libgcc-ng-15.2.0-h51576c1_8.conda#09df5fac4dec4376d90942c40dede152
+https://repo.anaconda.com/pkgs/main/linux-aarch64/libstdcxx-15.2.0-h9538471_8.conda#ad52ae62540e04578c90125eebafa228
+https://repo.anaconda.com/pkgs/main/linux-aarch64/libzlib-1.3.2-h27118de_0.conda#634f36980d17ae847e8663830b5de1bc
+https://repo.anaconda.com/pkgs/main/linux-aarch64/openssl-3.5.9-h39c9139_0.conda#2aa4038837dbc54e5faa49e0a4c14894
+https://repo.anaconda.com/pkgs/main/linux-aarch64/pthread-stubs-0.3-h27118de_2.conda#43c680b38c08b7a6adade5fe6d418a8c
+https://repo.anaconda.com/pkgs/main/linux-aarch64/xorg-xorgproto-2025.1-h27118de_0.conda#70d7eadbc6b7615673ef61cde29f34ff
+https://repo.anaconda.com/pkgs/main/linux-aarch64/xz-5.8.4-h022054e_0.conda#49e1642c5e511a81f916591f70967361
+https://repo.anaconda.com/pkgs/main/linux-aarch64/libffi-3.4.8-ha74a3d0_3.conda#91a41da5a66e99eb3f1f45c119a34a61
+https://repo.anaconda.com/pkgs/main/linux-aarch64/ncurses-6.6-h47fb78d_0.conda#42dcfd1704d066dc8b8dc81411604d0d
+https://repo.anaconda.com/pkgs/main/linux-aarch64/xorg-libxau-1.0.12-hf66535e_0.conda#96f0df92ef31ad0aaf27b6b373e4f510
+https://repo.anaconda.com/pkgs/main/linux-aarch64/xorg-libxdmcp-1.1.5-hf66535e_0.conda#5bfda69ee113cfc8e38e0214c078ef4e
+https://repo.anaconda.com/pkgs/main/linux-aarch64/zlib-1.3.2-h27118de_0.conda#54b0088230723730f56fecd1b728f376
+https://repo.anaconda.com/pkgs/main/linux-aarch64/libxcb-1.17.0-hf66535e_0.conda#28e00a696fd74b7550b7d1b8698e10af
+https://repo.anaconda.com/pkgs/main/linux-aarch64/readline-8.3-h886d1d0_0.conda#f04b3cb7ab28e886ceb012e4e9626e82
+https://repo.anaconda.com/pkgs/main/linux-aarch64/sqlite-3.53.4-h2b0225e_0.conda#81f2cfecea009b7ad20c6b96d58c10d3
+https://repo.anaconda.com/pkgs/main/linux-aarch64/xorg-libx11-1.8.13-hf8334eb_0.conda#cc1788f23148cb04eba290da5abe5c4b
+https://repo.anaconda.com/pkgs/main/linux-aarch64/tk-8.6.15-h987d8db_0.conda#6a7f42565108e00d27f68f4ae5751c53
+https://repo.anaconda.com/pkgs/main/linux-aarch64/python-3.9.20-h4bb2201_1.conda#cfd88b2c504a2c129696d66cf9dcbad9
+https://repo.anaconda.com/pkgs/main/linux-aarch64/setuptools-75.1.0-py39hd43f75c_0.conda#b08b0085921425672e6f723f1349d84d
+https://repo.anaconda.com/pkgs/main/linux-aarch64/wheel-0.44.0-py39hd43f75c_0.conda#a3300365a814adc830ce57d7ab3b6b7f
+https://repo.anaconda.com/pkgs/main/linux-aarch64/pip-24.2-py39hd43f75c_0.conda#3f138bb4e9f2f02000c72e4412deac17

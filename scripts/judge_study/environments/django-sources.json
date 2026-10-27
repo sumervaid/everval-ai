@@ -1,0 +1,1656 @@
+{
+  "base_commits": [
+    "003bb34b218adb23d1a7e67932a6ba9b3c4dcc81",
+    "004b4620f6f4ad87261e149898940f2dcd5757ef",
+    "00ea883ef56fb5e092cbe4a6f7ff2e7470886ac4",
+    "04ac9b45a34440fa447feb6ae934687aacbfc5f4",
+    "05457817647368be4b019314fcc655445a5b4c0c",
+    "06909fe084f87a65459a83bd69d7cdbe4fce9a7c",
+    "06fd4df41afb5aa1d681b853c3c08d8c688ca3a5",
+    "0773837e15bb632afffb6848a58c59a791008fa1",
+    "09914ccf688974e068941f55412b930729bafa06",
+    "0ab58c120939093fea90822f376e1866fc714d1f",
+    "0af9a5fc7d765aa05ea784e2c3237675f3bb4b49",
+    "0b31e024873681e187b574fe1c4afe5e48aeeecf",
+    "0c3981eb5094419fe200eb46c71b5376a2266166",
+    "0c42cdf0d2422f4c080e93594d5d15381d6e955e",
+    "14d026cccb144c6877294ba4cd4e03ebf0842498",
+    "156a2138db20abc89933121e4ff2ee2ce56a173a",
+    "179ee13eb37348cd87169a198aec18fedccc8668",
+    "187118203197801c6cb72dc8b06b714b23b6dd3d",
+    "18759b2209ff556aed7f20d83cbf23e3d234e41c",
+    "19e6efa50b603af325e7f62058364f278596758f",
+    "19fc6376ce67d01ca37a91ef2f55ef769f50513a",
+    "1f8382d34d54061eddc41df6994e20ee38c60907",
+    "21aa2a5e785eef1f47beb1c3760fdd7d8915ae09",
+    "21b1d239125f1228e579b1ce8d94d4d5feadd2a6",
+    "22a59c01c00cf9fbefaee0e8e67fab82bbaf1fd2",
+    "2480554dc4ada4ecf3f6a08e318735a2e50783f3",
+    "257f8495d6c93e30ab0f52af4c488d7344bcf112",
+    "27c09043da52ca1f02605bf28600bfd5ace95ae4",
+    "28d5262fa3315690395f04e3619ed554dbaf725b",
+    "29c126bb349526b5f1cd78facbe9f25906f18563",
+    "2a55431a5678af52f669ffe7dff3dd0bd21727f8",
+    "2c7846d992ca512d36a73f518205015c88ed088c",
+    "2d67222472f80f251607ae1b720527afceba06ad",
+    "2e0f04507b17362239ba49830d26fec504d46978",
+    "2f13c476abe4ba787b6cb71131818341911f43cc",
+    "30613d6a748fce18919ff8b0da166d9fda2ed9bc",
+    "30e123ed351317b7527f632b3b7dc4e81e850449",
+    "312049091288dbba2299de8d07ea3e3311ed7238",
+    "321ecb40f4da842926e1bc07e11df4aabe53ca4b",
+    "335c9c94acf263901fb023404408880245b0c4b4",
+    "350123f38c2b6217c38d70bfbd924a9ba3df1289",
+    "361bb8f786f112ee275be136795c0b1ecefff928",
+    "36300ef336e3f130a0dadc1143163ff3d23dc843",
+    "36bc47069ce071e80c8129500de3b8664d2058a7",
+    "36fa071d6ebd18a61c4d7f1b5c9d17106134bd44",
+    "37c5b8c07be104fd5288cd87f101e48cb7a40298",
+    "3fb7c12158a2402f0f80824f6778112071235803",
+    "415f50298f97fb17f841a9df38d995ccf347dfcc",
+    "429d089d0a8fbd400e0c010708df4f0d16218970",
+    "42e8cf47c7ee2db238bf91197ea398126c546741",
+    "437196da9a386bd4cc62b0ce3f2de4aba468613d",
+    "444b6da7cc229a58a2c476a52e45233001dc7073",
+    "447980e72ac01da1594dd3373a03ba40b7ee6f80",
+    "453967477e3ddae704cd739eac2449c0e13d464c",
+    "45814af6197cfd8f4dc72ee43b90ecde305a1d5a",
+    "466920f6d726eee90d5566e0a9948e92b33a122e",
+    "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+    "4884a87e022056eda10534c13d74e49b8cdda632",
+    "4b45b6c8e4d7c9701a332e80d3b1c84209dc36e2",
+    "4c1b401e8250f9f520b3c7dc369554477ce8b15a",
+    "4e8121e8e42a24acc3565851c9ef50ca8322b15c",
+    "537d422942b53bc0a2b6a51968f379c0de07793c",
+    "53d8646f799de7f92ab9defe9dc56c6125448102",
+    "5573a54d409bb98b5c5acdb308310bed02d392c2",
+    "55b68de643b5c2d5f0a8ea7587ab3b2966021ccc",
+    "571ab44e8a8936014c22e7eebe4948d9611fd7ce",
+    "580a4341cb0b4cbfc215a70afc004875a7e815f4",
+    "58c1acb1d6054dfec29d0f30b1033bae6ef62aec",
+    "59ab3fd0e9e606d7f0f7ca26609c06ee679ece97",
+    "5a68f024987e6d16c2626a31bf653a2edddea579",
+    "5a8e8f80bb82a867eab7e4d9d099f21d0a976d22",
+    "5b884d45ac5b76234eca614d90c83b347294c332",
+    "5d36a8266c7d5d1994d7a7eeb4016f80d9cb0401",
+    "5d9cf79baf07fc4aed7ad1b06990532a65378155",
+    "5e04e84d67da8163f365e9f5fcd169e2630e2873",
+    "5eb6a2b33d70b9889e1cafa12594ad6f80773d3a",
+    "60a7bd89860e504c0c33b02c78edcac87f6d1b5a",
+    "619f26d2895d121854b1bed1b535d42b722e2eba",
+    "63884829acd207404f2a5c3cc1d6b4cd0a822b70",
+    "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+    "652c68ffeebd510a6f59e1b56b3e007d07683ad8",
+    "6599608c4d0befdcb820ddccce55f183f247ae4f",
+    "67f9d076cfc1858b94f9ed6d1a5ce2327dcc8d0d",
+    "6866c91b638de5368c18713fa851bfe56253ea55",
+    "69331bb851c34f05bc77e9fc24020fe6908b9cd5",
+    "694cf458f16b8d340a3195244196980b2dec34fd",
+    "6991880109e35c879b71b7d9d9c154baeec12b89",
+    "6a5ef557f80a8eb6a758ebe99c8bb477ca47459e",
+    "6c86495bcee22eac19d7fb040b2988b830707cbd",
+    "6e9c5ee88fc948e05b4a7d9f82a8861ed2b0343d",
+    "6efc35b4fe3009666e56a60af0675d7d532bf4ff",
+    "71ae1ab0123582cc5bfe0f7d5f4cc19a9412f396",
+    "71e7c8e73712419626f1c2b6ec036e8559a2d667",
+    "7272e1963ffdf39c1d4fe225d5425a45dd095d11",
+    "755dbf39fcdc491fe9b588358303e259c7750be4",
+    "76e0151ea0e0f56dca66cee846a78b89346d2c4c",
+    "76e37513e22f4d9a01c7f15eee36fe44388e6670",
+    "770d3e6a4ce8e0a91a9e27156036c1985e74d4a3",
+    "78ad4b4b0201003792bfdbf1a7781cbc9ee03539",
+    "7991111af12056ec9a856f35935d273526338c1f",
+    "7af8f4127397279d19ef7c7899e93018274e2f9b",
+    "7d49ad76562e8c0597a0eb66046ab423b12888d8",
+    "7d5329852f19c6ae78c6f6f3d3e41835377bf295",
+    "7e6b537f5b92be152779fc492bb908d27fe7c52a",
+    "7f33c1e22dbc34a7afae7967783725b10f1f13b1",
+    "7f9e4524d6b23424cf44fbe1bf1f4e70f6bb066e",
+    "7fa1a93c6c8109010a6ff3f604fda83b604e0e97",
+    "8180ffba21bf10f4be905cb0d4890dc2bcff2788",
+    "838e432e3e5519c5383d12018e6c78f8ec7833c1",
+    "84322a29ce9b0940335f8ab3d60e55192bef1e50",
+    "84400d2e9db7c51fee4e9bb04c028f665b8e7624",
+    "84609b3205905097d7d3038d32e6101f012c0619",
+    "84633905273fc916e3d17883810d9969c03f73c2",
+    "859a87d873ce7152af73ab851653b4e1c3ffea4c",
+    "879cc3da6249e920b8d54518a0ae06de835d7373",
+    "884b4c27f506b3c29d58509fc83a35c30ea10d94",
+    "88e67a54b7ed0210c11523a337b498aadb2f5187",
+    "8954f255bbf5f4ee997fd6de62cb50fc9b5dd697",
+    "89d41cba392b759732ba9f1db4ff29ed47da6a56",
+    "89fc144dedc737a79929231438f035b1d4a993c9",
+    "8c0886b068ba4e224dd78104b93c9638b860b398",
+    "8c3bd0b708b488a1f6e8bd8cc6b96569904605be",
+    "8dd5877f58f84f2b11126afbd0813e24545919ed",
+    "903aaa35e5ceaa33bfc9b19b7f6da65ce5a91dd4",
+    "910ecd1b8df7678f45c3d507dde6bcb1faafa243",
+    "927c903f3cd25c817c21738328b53991c035b415",
+    "93cedc82f29076c824d476354527af1150888e4f",
+    "93d4c9ea1de24eb391cb2b3561b6703fd46374df",
+    "96e7ff5e9ff6362d9a886545869ce4496ca4b0fb",
+    "973fa566521037ac140dcece73fceae50ee522f1",
+    "98ad327864aed8df245fd19ea9d2743279e11643",
+    "999891bd80b3d02dd916731a7a239e1036174885",
+    "9a6e2df3a8f01ea761529bec48e5a8dc0ea9575b",
+    "9c92924cd5d164701e2514e1c2d6574126bd7cc2",
+    "9ffd4eae2ce7a7100c98f681e2b6ab818df384a4",
+    "a5308514fb4bc5086c9a16a8a24a945eeebb073c",
+    "a59de6e89e8dc1f3e71c9a5a5bbceb373ea5247e",
+    "a7038adbd02c916315b16939b835f021c2ee8880",
+    "a708f39ce67af174df90c5b5e50ad1976cec7cb8",
+    "a754b82dac511475b6276039471ccd17cc64aeb8",
+    "a7e7043c8746933dafce652507d3b821801cdc7d",
+    "b1a4b1f0bdf05adbd3dc4dde14228e68da54c1a3",
+    "b1d6b35e146aea83b171c1b921178bbaae2795ed",
+    "b4817d20b9e55df30be0b1b2ca8c8bb6d61aab07",
+    "b64db05b9cedd96905d637a2d824cbbf428e40e7",
+    "b79088306513d5ed76d31ac40ab3c15f858946ea",
+    "b7da588e883e12b8ac3bb8a486e654e30fc1c6c8",
+    "b93a0e34d9b9b99d41103782b7e7aeabf47517e3",
+    "ba726067604ce5a8ca3919edf653496722b433ab",
+    "bb64b99b78a579cb2f6178011a4cf9366e634438",
+    "bc04941bf811d1ea2c79fb7fc20457ed2c7e3410",
+    "beb7ddbcee03270e833b2f74927ccfc8027aa693",
+    "bef6f7584280f1cc80e5e2d80b7ad073a93d26ec",
+    "bf47c719719d0e190a99fa2e7f959d5bbb7caf8a",
+    "c2678e49759e5c4c329bff0eeca2886267005d21",
+    "c448e614c60cc97c6194c62052363f4f501e0953",
+    "c6350d594c359151ee17b0c4f354bb44f28ff69e",
+    "c84b91b7603e488f7171fdff8f08368ef3d6b856",
+    "cb383753c0e0eb52306e1024d32a782549c27e61",
+    "ce69e34bd646558bb44ea92cecfd98b345a0b3e0",
+    "d01709aae21de9cd2565b9c52f32732ea28a2d98",
+    "d06c5b358149c02a62da8a5469264d05f29ac659",
+    "d26b2424437dabeeca94d7900b37d2df4410da0c",
+    "d4df5e1b0b1c643fe0fc521add0236764ec8e92a",
+    "d559cb02da30f74debbb1fc3a46de0df134d2d80",
+    "d746f28949c009251a8741ba03d156964050717f",
+    "d79be3ed39b76d3e34431873eec16f6dd354ab17",
+    "d87bd29c4f8dfcdf3f4a4eb8340e6770a2416fe3",
+    "d89f976bddb49fb168334960acc8979c3de991fa",
+    "d90e34c61b27fba2527834806639eebbcfab9631",
+    "dab48b7482295956973879d15bfd4d3bb0718772",
+    "db1fc5cd3c5d36cdb5d0fe4404efd6623dd3e8fb",
+    "dd528cb2cefc0db8b91a7ff0a2bc87305b976597",
+    "ddb293685235fd09e932805771ae97f72e817181",
+    "de32fe83a2e4a20887972c69a0693b94eb25a88b",
+    "e02f67ef2d03d48128e7a118bf75f0418e24e8ac",
+    "e0442a628eb480eac6a7888aed5a86f83499e299",
+    "e065b293878b1e3ea56655aa9d33e87576cd77ff",
+    "e1d673c373a7d032060872b690a92fc95496612e",
+    "e245046bb6e8b32360aa48b8a41fb7050f0fc730",
+    "e28671187903e6aca2428374fdd504fca3032aee",
+    "e39e727ded673e74016b5d3658d23cbe20234d11",
+    "e4430f22c8e3d29ce5d9d0263fba57121938d06d",
+    "e64c1d8055a3e476122633da141f16b50f0c4a2d",
+    "e6588aa4e793b7f56f4cadbfa155b581e0efc59a",
+    "e7fd69d051eaa67cb17f172a39b57253e9cb831a",
+    "e8fcdaad5c428878d0a5d6ba820d957013f75595",
+    "e972620ada4f9ed7bc57f28e133e85c85b0a7b20",
+    "eb16c7260e573ec513d84cb586d96bdf508f3173",
+    "ec5aa2161d8015a3fe57dcbbfe14200cd18f0a16",
+    "ece18207cbb64dd89014e279ac636a6c9829828e",
+    "ede9fac75807fe5810df66280a60e7068cc97e4a",
+    "f0adf3b9b7a19cdee05368ff0c0c2d087f011180",
+    "f2051eb8a7febdaaa43bd33bf5a6108c5f428e59",
+    "f387d024fc75569d2a4a338bfda76cc2f328f627",
+    "f39634ff229887bf7790c069d0c411b38494ca38",
+    "f4e93919e4608cfc50849a1f764fd856e0917401",
+    "f618e033acd37d59b536d6e6126e6c5be18037f6",
+    "f83b44075dafa429d59e8755aa47e15577cc49f9",
+    "fa5e7e46d875d4143510944f19d79df7b1739bab",
+    "fbacaa58ffc5a62456ee68b90efa13957f761ce4",
+    "fbe82f82555bc25dccb476c749ca062f0b522be3",
+    "fc2b1cc926e34041953738e58fa6ad3053059b22",
+    "fe886eee36be8022f34cfe59aa61ff1c21fe01d9"
+  ],
+  "dataset_sha256": "030cfd7f2a704c4c0226e7f104c725a3b41230b1d3517f9c915ad7ea5be3fa25",
+  "depth": 2,
+  "environment_setup_commits": [
+    "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+    "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+    "419a78300f7cd27611196e1e464d50fd0385ff27",
+    "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+    "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+    "65dfb06a1ab56c238cc80f5e1c31f61210c4577d"
+  ],
+  "source_url": "https://github.com/django/django.git",
+  "tasks": [
+    {
+      "base_commit": "14d026cccb144c6877294ba4cd4e03ebf0842498",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-10554",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "838e432e3e5519c5383d12018e6c78f8ec7833c1",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-10880",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "e7fd69d051eaa67cb17f172a39b57253e9cb831a",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-10914",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "ddb293685235fd09e932805771ae97f72e817181",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-10973",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "36300ef336e3f130a0dadc1143163ff3d23dc843",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-10999",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "4b45b6c8e4d7c9701a332e80d3b1c84209dc36e2",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11066",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "8180ffba21bf10f4be905cb0d4890dc2bcff2788",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11087",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "7d49ad76562e8c0597a0eb66046ab423b12888d8",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11095",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "d26b2424437dabeeca94d7900b37d2df4410da0c",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11099",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "d4df5e1b0b1c643fe0fc521add0236764ec8e92a",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11119",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "879cc3da6249e920b8d54518a0ae06de835d7373",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11133",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "c84b91b7603e488f7171fdff8f08368ef3d6b856",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11138",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "5d9cf79baf07fc4aed7ad1b06990532a65378155",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-11141",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "e245046bb6e8b32360aa48b8a41fb7050f0fc730",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11149",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "e6588aa4e793b7f56f4cadbfa155b581e0efc59a",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11163",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "19fc6376ce67d01ca37a91ef2f55ef769f50513a",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11179",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "571ab44e8a8936014c22e7eebe4948d9611fd7ce",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11206",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "ba726067604ce5a8ca3919edf653496722b433ab",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11211",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "d87bd29c4f8dfcdf3f4a4eb8340e6770a2416fe3",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11239",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "21aa2a5e785eef1f47beb1c3760fdd7d8915ae09",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11265",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "28d5262fa3315690395f04e3619ed554dbaf725b",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11276",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "eb16c7260e573ec513d84cb586d96bdf508f3173",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11292",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "6866c91b638de5368c18713fa851bfe56253ea55",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11299",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "55b68de643b5c2d5f0a8ea7587ab3b2966021ccc",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11333",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "1f8382d34d54061eddc41df6994e20ee38c60907",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11400",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "21b1d239125f1228e579b1ce8d94d4d5feadd2a6",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11433",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "e065b293878b1e3ea56655aa9d33e87576cd77ff",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11451",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "e28671187903e6aca2428374fdd504fca3032aee",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11477",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "a7038adbd02c916315b16939b835f021c2ee8880",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11490",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "a5308514fb4bc5086c9a16a8a24a945eeebb073c",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11532",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "7991111af12056ec9a856f35935d273526338c1f",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11551",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "8dd5877f58f84f2b11126afbd0813e24545919ed",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11555",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "f618e033acd37d59b536d6e6126e6c5be18037f6",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11603",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "05457817647368be4b019314fcc655445a5b4c0c",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11728",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "999891bd80b3d02dd916731a7a239e1036174885",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11734",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "003bb34b218adb23d1a7e67932a6ba9b3c4dcc81",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11740",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "350123f38c2b6217c38d70bfbd924a9ba3df1289",
+      "environment_setup_commit": "419a78300f7cd27611196e1e464d50fd0385ff27",
+      "instance_id": "django__django-11749",
+      "repo": "django/django",
+      "version": "3.0"
+    },
+    {
+      "base_commit": "b1d6b35e146aea83b171c1b921178bbaae2795ed",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-11790",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "e02f67ef2d03d48128e7a118bf75f0418e24e8ac",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-11815",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "c2678e49759e5c4c329bff0eeca2886267005d21",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-11820",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "f0adf3b9b7a19cdee05368ff0c0c2d087f011180",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-11848",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "06909fe084f87a65459a83bd69d7cdbe4fce9a7c",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-11880",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "04ac9b45a34440fa447feb6ae934687aacbfc5f4",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-11885",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "312049091288dbba2299de8d07ea3e3311ed7238",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-11951",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "fc2b1cc926e34041953738e58fa6ad3053059b22",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-11964",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "84633905273fc916e3d17883810d9969c03f73c2",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-11999",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "58c1acb1d6054dfec29d0f30b1033bae6ef62aec",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12039",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "b93a0e34d9b9b99d41103782b7e7aeabf47517e3",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12050",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "89d41cba392b759732ba9f1db4ff29ed47da6a56",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12125",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "5573a54d409bb98b5c5acdb308310bed02d392c2",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12143",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "e8fcdaad5c428878d0a5d6ba820d957013f75595",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12155",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "3fb7c12158a2402f0f80824f6778112071235803",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12193",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "5a68f024987e6d16c2626a31bf653a2edddea579",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12209",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "69331bb851c34f05bc77e9fc24020fe6908b9cd5",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12262",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "927c903f3cd25c817c21738328b53991c035b415",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12273",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "53d8646f799de7f92ab9defe9dc56c6125448102",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12276",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "4c1b401e8250f9f520b3c7dc369554477ce8b15a",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12304",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "2e0f04507b17362239ba49830d26fec504d46978",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12308",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "29c126bb349526b5f1cd78facbe9f25906f18563",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12325",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "335c9c94acf263901fb023404408880245b0c4b4",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12406",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "7fa1a93c6c8109010a6ff3f604fda83b604e0e97",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12419",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "fa5e7e46d875d4143510944f19d79df7b1739bab",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12663",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "447980e72ac01da1594dd3373a03ba40b7ee6f80",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12708",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "5b884d45ac5b76234eca614d90c83b347294c332",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12713",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "537d422942b53bc0a2b6a51968f379c0de07793c",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12741",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "18759b2209ff556aed7f20d83cbf23e3d234e41c",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-12754",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "67f9d076cfc1858b94f9ed6d1a5ce2327dcc8d0d",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12774",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "f2051eb8a7febdaaa43bd33bf5a6108c5f428e59",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-12858",
+      "repo": "django/django",
+      "version": "3.1"
+    },
+    {
+      "base_commit": "437196da9a386bd4cc62b0ce3f2de4aba468613d",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-12965",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "22a59c01c00cf9fbefaee0e8e67fab82bbaf1fd2",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13012",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "f83b44075dafa429d59e8755aa47e15577cc49f9",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13023",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "78ad4b4b0201003792bfdbf1a7781cbc9ee03539",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13028",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "a59de6e89e8dc1f3e71c9a5a5bbceb373ea5247e",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13033",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "27c09043da52ca1f02605bf28600bfd5ace95ae4",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13089",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "fbe82f82555bc25dccb476c749ca062f0b522be3",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13109",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "09914ccf688974e068941f55412b930729bafa06",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13112",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "ec5aa2161d8015a3fe57dcbbfe14200cd18f0a16",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13121",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "2d67222472f80f251607ae1b720527afceba06ad",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13128",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "7af8f4127397279d19ef7c7899e93018274e2f9b",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13158",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "156a2138db20abc89933121e4ff2ee2ce56a173a",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13195",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "f4e93919e4608cfc50849a1f764fd856e0917401",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13212",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "6e9c5ee88fc948e05b4a7d9f82a8861ed2b0343d",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13279",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "8954f255bbf5f4ee997fd6de62cb50fc9b5dd697",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13297",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "36bc47069ce071e80c8129500de3b8664d2058a7",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13315",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "ece18207cbb64dd89014e279ac636a6c9829828e",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13343",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "e39e727ded673e74016b5d3658d23cbe20234d11",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13344",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "9c92924cd5d164701e2514e1c2d6574126bd7cc2",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13346",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "76e0151ea0e0f56dca66cee846a78b89346d2c4c",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13363",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "453967477e3ddae704cd739eac2449c0e13d464c",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13401",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "84609b3205905097d7d3038d32e6101f012c0619",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13406",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "580a4341cb0b4cbfc215a70afc004875a7e815f4",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13410",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "71ae1ab0123582cc5bfe0f7d5f4cc19a9412f396",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13417",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "2a55431a5678af52f669ffe7dff3dd0bd21727f8",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13449",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "b79088306513d5ed76d31ac40ab3c15f858946ea",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13512",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "6599608c4d0befdcb820ddccce55f183f247ae4f",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13513",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "b7da588e883e12b8ac3bb8a486e654e30fc1c6c8",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13516",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "7f9e4524d6b23424cf44fbe1bf1f4e70f6bb066e",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13551",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "ede9fac75807fe5810df66280a60e7068cc97e4a",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13568",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "257f8495d6c93e30ab0f52af4c488d7344bcf112",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13569",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "755dbf39fcdc491fe9b588358303e259c7750be4",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13590",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "0773837e15bb632afffb6848a58c59a791008fa1",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13658",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "c448e614c60cc97c6194c62052363f4f501e0953",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13670",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "d746f28949c009251a8741ba03d156964050717f",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13741",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "bb64b99b78a579cb2f6178011a4cf9366e634438",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13786",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "fe886eee36be8022f34cfe59aa61ff1c21fe01d9",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13794",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "89fc144dedc737a79929231438f035b1d4a993c9",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13807",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "bef6f7584280f1cc80e5e2d80b7ad073a93d26ec",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-13809",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "429d089d0a8fbd400e0c010708df4f0d16218970",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13810",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "98ad327864aed8df245fd19ea9d2743279e11643",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13820",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "e64c1d8055a3e476122633da141f16b50f0c4a2d",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13821",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "415f50298f97fb17f841a9df38d995ccf347dfcc",
+      "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+      "instance_id": "django__django-13837",
+      "repo": "django/django",
+      "version": "3.2"
+    },
+    {
+      "base_commit": "0c42cdf0d2422f4c080e93594d5d15381d6e955e",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-13925",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "42e8cf47c7ee2db238bf91197ea398126c546741",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-13933",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "f39634ff229887bf7790c069d0c411b38494ca38",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-13964",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "619f26d2895d121854b1bed1b535d42b722e2eba",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14007",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "e4430f22c8e3d29ce5d9d0263fba57121938d06d",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14011",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "466920f6d726eee90d5566e0a9948e92b33a122e",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14017",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "db1fc5cd3c5d36cdb5d0fe4404efd6623dd3e8fb",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14034",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "179ee13eb37348cd87169a198aec18fedccc8668",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14053",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "d01709aae21de9cd2565b9c52f32732ea28a2d98",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14089",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "bc04941bf811d1ea2c79fb7fc20457ed2c7e3410",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14122",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "45814af6197cfd8f4dc72ee43b90ecde305a1d5a",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14140",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "2f13c476abe4ba787b6cb71131818341911f43cc",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14155",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "6efc35b4fe3009666e56a60af0675d7d532bf4ff",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14170",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "30e123ed351317b7527f632b3b7dc4e81e850449",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14238",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "5a8e8f80bb82a867eab7e4d9d099f21d0a976d22",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14311",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "187118203197801c6cb72dc8b06b714b23b6dd3d",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14315",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "a708f39ce67af174df90c5b5e50ad1976cec7cb8",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14349",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "06fd4df41afb5aa1d681b853c3c08d8c688ca3a5",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14351",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "b1a4b1f0bdf05adbd3dc4dde14228e68da54c1a3",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14373",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "d06c5b358149c02a62da8a5469264d05f29ac659",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14376",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "de32fe83a2e4a20887972c69a0693b94eb25a88b",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14404",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "5e04e84d67da8163f365e9f5fcd169e2630e2873",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14434",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "7272e1963ffdf39c1d4fe225d5425a45dd095d11",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14493",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "8c3bd0b708b488a1f6e8bd8cc6b96569904605be",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14500",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "910ecd1b8df7678f45c3d507dde6bcb1faafa243",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14534",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "6a5ef557f80a8eb6a758ebe99c8bb477ca47459e",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14539",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "d79be3ed39b76d3e34431873eec16f6dd354ab17",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14559",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "36fa071d6ebd18a61c4d7f1b5c9d17106134bd44",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14580",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "7f33c1e22dbc34a7afae7967783725b10f1f13b1",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14608",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "84400d2e9db7c51fee4e9bb04c028f665b8e7624",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14631",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "00ea883ef56fb5e092cbe4a6f7ff2e7470886ac4",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14672",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "0af9a5fc7d765aa05ea784e2c3237675f3bb4b49",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-14725",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "b64db05b9cedd96905d637a2d824cbbf428e40e7",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14752",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "4e8121e8e42a24acc3565851c9ef50ca8322b15c",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14765",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "4884a87e022056eda10534c13d74e49b8cdda632",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-14771",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "004b4620f6f4ad87261e149898940f2dcd5757ef",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-14787",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "d89f976bddb49fb168334960acc8979c3de991fa",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14792",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+      "instance_id": "django__django-14855",
+      "repo": "django/django",
+      "version": "4.0"
+    },
+    {
+      "base_commit": "903aaa35e5ceaa33bfc9b19b7f6da65ce5a91dd4",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-14915",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "a754b82dac511475b6276039471ccd17cc64aeb8",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-14999",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "e1d673c373a7d032060872b690a92fc95496612e",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15022",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "dab48b7482295956973879d15bfd4d3bb0718772",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15037",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "2c7846d992ca512d36a73f518205015c88ed088c",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15098",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "dd528cb2cefc0db8b91a7ff0a2bc87305b976597",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15103",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "a7e7043c8746933dafce652507d3b821801cdc7d",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15104",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "9a6e2df3a8f01ea761529bec48e5a8dc0ea9575b",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15127",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "cb383753c0e0eb52306e1024d32a782549c27e61",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15128",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "96e7ff5e9ff6362d9a886545869ce4496ca4b0fb",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15161",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "361bb8f786f112ee275be136795c0b1ecefff928",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15252",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "0ab58c120939093fea90822f376e1866fc714d1f",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15268",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "30613d6a748fce18919ff8b0da166d9fda2ed9bc",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15277",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "0ab58c120939093fea90822f376e1866fc714d1f",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15278",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "973fa566521037ac140dcece73fceae50ee522f1",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15280",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "652c68ffeebd510a6f59e1b56b3e007d07683ad8",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15315",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "e972620ada4f9ed7bc57f28e133e85c85b0a7b20",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15368",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "beb7ddbcee03270e833b2f74927ccfc8027aa693",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15375",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "71e7c8e73712419626f1c2b6ec036e8559a2d667",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15380",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "770d3e6a4ce8e0a91a9e27156036c1985e74d4a3",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15382",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "e0442a628eb480eac6a7888aed5a86f83499e299",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15467",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "d90e34c61b27fba2527834806639eebbcfab9631",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15499",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "859a87d873ce7152af73ab851653b4e1c3ffea4c",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15503",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "fbacaa58ffc5a62456ee68b90efa13957f761ce4",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15525",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "59ab3fd0e9e606d7f0f7ca26609c06ee679ece97",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15554",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "6991880109e35c879b71b7d9d9c154baeec12b89",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15561",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "9ffd4eae2ce7a7100c98f681e2b6ab818df384a4",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15563",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "884b4c27f506b3c29d58509fc83a35c30ea10d94",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15569",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "0b31e024873681e187b574fe1c4afe5e48aeeecf",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15572",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "694cf458f16b8d340a3195244196980b2dec34fd",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15629",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "environment_setup_commit": "647480166bfe7532e8c471fef0146e3a17e6c0c9",
+      "instance_id": "django__django-15695",
+      "repo": "django/django",
+      "version": "4.1"
+    },
+    {
+      "base_commit": "93cedc82f29076c824d476354527af1150888e4f",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15731",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "ce69e34bd646558bb44ea92cecfd98b345a0b3e0",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15732",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "8c0886b068ba4e224dd78104b93c9638b860b398",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15741",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "5eb6a2b33d70b9889e1cafa12594ad6f80773d3a",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15814",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "b4817d20b9e55df30be0b1b2ca8c8bb6d61aab07",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15851",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "37c5b8c07be104fd5288cd87f101e48cb7a40298",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15863",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "88e67a54b7ed0210c11523a337b498aadb2f5187",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15916",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "63884829acd207404f2a5c3cc1d6b4cd0a822b70",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15930",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "f387d024fc75569d2a4a338bfda76cc2f328f627",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15957",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "2480554dc4ada4ecf3f6a08e318735a2e50783f3",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15973",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "7e6b537f5b92be152779fc492bb908d27fe7c52a",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-15987",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "0c3981eb5094419fe200eb46c71b5376a2266166",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16032",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "bf47c719719d0e190a99fa2e7f959d5bbb7caf8a",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16082",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "c6350d594c359151ee17b0c4f354bb44f28ff69e",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16100",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "5d36a8266c7d5d1994d7a7eeb4016f80d9cb0401",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16116",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "19e6efa50b603af325e7f62058364f278596758f",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16136",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "d559cb02da30f74debbb1fc3a46de0df134d2d80",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16139",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "93d4c9ea1de24eb391cb2b3561b6703fd46374df",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16145",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "444b6da7cc229a58a2c476a52e45233001dc7073",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16255",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "76e37513e22f4d9a01c7f15eee36fe44388e6670",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16256",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "321ecb40f4da842926e1bc07e11df4aabe53ca4b",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16263",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "7d5329852f19c6ae78c6f6f3d3e41835377bf295",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16315",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "60a7bd89860e504c0c33b02c78edcac87f6d1b5a",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16333",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "6c86495bcee22eac19d7fb040b2988b830707cbd",
+      "environment_setup_commit": "0fbdb9784da915fce5dcc1fe82bac9b4785749e5",
+      "instance_id": "django__django-16429",
+      "repo": "django/django",
+      "version": "4.2"
+    },
+    {
+      "base_commit": "84322a29ce9b0940335f8ab3d60e55192bef1e50",
+      "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+      "instance_id": "django__django-9296",
+      "repo": "django/django",
+      "version": "3.1"
+    }
+  ]
+}
