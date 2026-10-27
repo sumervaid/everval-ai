@@ -1,12 +1,14 @@
 # Everval AI — On-prem continuous benchmarking for AI models and agents
 
-![Everval AI — Know what improved. Know what it cost.](docs/assets/everval-launch.png)
-
 Decide whether a model, prompt, or agent change is ready to ship. Everval turns your work into repeatable benchmarks, compares quality, cost, and latency, and keeps checking as your system changes.
 
 For ML platform and evaluation engineers who need evidence on their own infrastructure: a terminal workbench, a shared CLI/API, and an optional review browser. Evaluate repository tasks, documents, structured data, and workflow simulations.
 
-[Try it](#try-it-without-a-key) · [One complete workflow](docs/worked-example.md) · [Deploy on-premises](docs/on-premises.md) · [Measured checkpoint study](docs/benchmarks/checkpoint-study-2026-10-22/results.md)
+[Watch the demos](docs/demos.md) · [Try it](#try-it-without-a-key) · [One complete workflow](docs/worked-example.md) · [Deploy on-premises](docs/on-premises.md) · [Measured checkpoint study](docs/benchmarks/checkpoint-study-2026-10-22/results.md)
+
+[![Everval in thirty seconds: terminal, chat, rankings, automation and review](docs/assets/demos/everval-tour.gif)](docs/demos.md)
+
+*Actual interfaces with fixture data. [Watch all ten workflows](docs/demos.md) · [Browse without animation](docs/demo-stills.md).*
 
 ## Try it without a key
 
@@ -24,9 +26,9 @@ Watch a passing reference, a deliberate regression, and a restored candidate run
 
 These are installation controls, not a model leaderboard. [Open the demo in tmux](docs/demo.md) or [connect your own repository](docs/guided-run.md).
 
-![Everval terminal comparing original reference and incomplete controls](docs/assets/terminal.png)
+![Everval terminal: runs, systems, command palette and audit evidence](docs/assets/demos/terminal-workbench.gif)
 
-*The actual terminal workbench. These results are original installation controls.*
+*The actual workbench with original controls. [Still image](docs/assets/demos/terminal-workbench.png) · [Full demo gallery](docs/demos.md).*
 
 ## Describe the benchmark in a conversation
 
@@ -38,7 +40,7 @@ Use names saved in your workspace. Everval asks for missing details, starts comp
 
 ## Judge first. Reveal later.
 
-Open **Double-blind** in the browser, or run \`uv run everval blind tui\` from the source checkout (**Ctrl+Y** in the workbench). Choose a completed two-model comparison, freeze a rubric, and assign at least two reviewers. Responses appear as randomized A/B pairs. All required judgments must be locked before the coordinator releases identities and results.
+Open **Double-blind** in the browser, or run `uv run everval blind tui` from the source checkout (**Ctrl+Y** in the workbench). Choose a completed two-model comparison, freeze a rubric, and assign at least two reviewers. Responses appear as randomized A/B pairs. All required judgments must be locked before the coordinator releases identities and results.
 
 This is **trusted-custodian reviewer and report-reader blinding**. Operators can inspect the workspace; hosted model providers still see prompts. Hardware-backed mutual confidentiality is a separate, unimplemented capability. All Everval application code can remain public while evaluation material stays private. [Workflow, guarantees and open-source boundaries →](docs/double-blind.md)
 

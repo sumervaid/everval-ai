@@ -4,6 +4,8 @@
 
 Everval helps a team answer a specific question: did a change make an agent better at the work that matters, within the available budget?
 
+Watch the [animated gallery](demos.md) or browse the [still-image version](demo-stills.md).
+
 For concrete owners and decisions, see [practical use cases](use-cases.md).
 
 The terminal workbench is the main interface. Use the CLI for scripts, the shared API for integrations, and the optional browser for authenticated reviews. All four use the same local records.
@@ -24,7 +26,7 @@ Open **Rankings** (**Ctrl+L** in the terminal) for a visual model-by-benchmark m
 
 Compare success rate, cost per passing attempt, provider time, and total attempt duration. Inspect the supported uncertainty estimate and task coverage before deciding that a difference matters.
 
-![Actual experiment view with original installation controls](assets/terminal.png)
+![Actual terminal workflow with original controls](assets/demos/terminal-workbench.gif)
 
 **Try it:** [Cost and latency](cost-latency.md) · [Decision policies](policies.md) · [Existing agent adapters](agent-adapters.md)
 
@@ -34,7 +36,7 @@ Autopilot can watch configured changes or intervals, reserve a cumulative budget
 
 The budget ledger separates observed spend, outstanding reservations, and projections. Unknown charges retain reservations and halt the affected automation. Estimates describe their pricing and workload assumptions.
 
-![Actual Autopilot view showing a paused installation-control policy](assets/autopilot.png)
+![Actual Autopilot setup, budgets and paused fixture policy](assets/demos/autopilot-budget.gif)
 
 **Try it:** [Autopilot](autopilot.md) · [Budget projections](budget-planning.md) · [Change-linked runs](change-evaluation.md)
 
@@ -44,7 +46,7 @@ Inspect failed attempts, reproduce supported pure-grader outcomes, and reduce st
 
 Compare saved model, prompt, or tool-budget candidates on development tasks. Reserve an unused holdout for a final check of the selected candidate. The result is a reviewable proposal; a study does not deploy a configuration.
 
-![Actual configuration proposal from an original installation-control study](assets/configuration-proposal.png)
+![Actual failure investigation and grader-quality workflow](assets/demos/failure-research.gif)
 
 **Try it:** [Research lab](research-loop.md) · [Failure investigation](diagnostics.md) · [Quality policies](policies.md)
 

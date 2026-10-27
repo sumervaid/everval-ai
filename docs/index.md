@@ -6,6 +6,8 @@ Use your own work to decide whether an agent change is worth shipping. Everval k
 
 ## Start here
 
+**Want to see it working?** Watch [ten workflow GIFs](demos.md), or browse [without animation](demo-stills.md).
+
 **Want to describe a recurring benchmark in plain language?** Open [Chat](chat.md): choose models, tasks, a schedule, reports, and spending limits in one conversation.
 
 **Prefer npm?** Use the [packaged CLI installation guide](npm.md), including disconnected setup and release verification.

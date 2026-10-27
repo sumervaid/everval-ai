@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-26",
+  "application_revision": "4670acedce6c1d745c60c861e4c376b53778e644",
+  "workflow_clips": 10,
+  "overview_clips": 1,
+  "captured_keyframes": 98,
+  "encoded_frames": 118,
+  "gif_bytes_total": 6570037,
+  "largest_gif_bytes": 1214968,
+  "media_checks": "All GIF frames decoded; expected frame pixels, dimensions and timing verified by the encoder; GIF hashes and PNG decoding rechecked.",
+  "browser_javascript_errors": 0,
+  "model_api_calls": 0,
+  "capture_servers_stopped": true,
+  "terminal_policy_paused": true,
+  "media": [
+    {
+      "name": "everval-tour",
+      "frames": 20,
+      "duration_ms": 30000,
+      "gif_bytes": 1214968,
+      "sha256": "23fa5f65a4d5895a6ff14a464b9380f721115b6142e600c347d9aa55af75172a"
+    },
+    {
+      "name": "terminal-workbench",
+      "frames": 8,
+      "duration_ms": 11900,
+      "gif_bytes": 665642,
+      "sha256": "dee8da804b2cda2b1ed8b5ececa38fb1f91a2b505435a8d9acba281edf1e1f69"
+    },
+    {
+      "name": "chat-and-reports",
+      "frames": 10,
+      "duration_ms": 13200,
+      "gif_bytes": 308591,
+      "sha256": "c0dd0517046c28a40a27655288eb196e200e6bd0cc9dd8596661dada3f4c022b"
+    },
+    {
+      "name": "repository-onboarding",
+      "frames": 9,
+      "duration_ms": 13400,
+      "gif_bytes": 621993,
+      "sha256": "e409c087ac3a82475004d56b43cc68bfa2b53aeeca291bbb63cc13d60d65a7fa"
+    },
+    {
+      "name": "tasks-and-comparisons",
+      "frames": 10,
+      "duration_ms": 15000,
+      "gif_bytes": 454888,
+      "sha256": "f66e3c5782183a4793f45cce2df64c1053cd828fb5fc2fe3740ed6b81696dfc5"
+    },
+    {
+      "name": "rankings",
+      "frames": 8,
+      "duration_ms": 13200,
+      "gif_bytes": 441905,
+      "sha256": "bbd99728d6e29c8e312aa19c09c2ee738d4e06becc84a2a18e09e618a22365db"
+    },
+    {
+      "name": "autopilot-budget",
+      "frames": 9,
+      "duration_ms": 13900,
+      "gif_bytes": 573038,
+      "sha256": "9f6eb7de49c99b2ceea1d07412123e131c2cfaddf07d4a05358f41dae985c4f5"
+    },
+    {
+      "name": "failure-research",
+      "frames": 10,
+      "duration_ms": 15100,
+      "gif_bytes": 950942,
+      "sha256": "f17082f016e338fd8387db4c7c250dde7bf2d01ddc336af24579aec9f90aa566"
+    },
+    {
+      "name": "production-cases",
+      "frames": 8,
+      "duration_ms": 12500,
+      "gif_bytes": 303338,
+      "sha256": "20f8e60496a7597f925afd11406e2308b14b62e240371ca136cfd4a1541f993e"
+    },
+    {
+      "name": "checkpoint-monitoring",
+      "frames": 12,
+      "duration_ms": 18600,
+      "gif_bytes": 440656,
+      "sha256": "45c459162c80edebb6f398ef735ba72210052f1f7d7292be919c3950db0cb1c2"
+    },
+    {
+      "name": "double-blind",
+      "frames": 14,
+      "duration_ms": 18300,
+      "gif_bytes": 594076,
+      "sha256": "6e77150317852d39cb70d9be59d42da5ca33bc1a02da662a1d8f8f6a420d99bc"
+    }
+  ],
+  "limits": [
+    "Edited pacing is not a latency measurement.",
+    "Original controls and synthetic checkpoint observations do not establish model quality.",
+    "Repository clip stops before isolated validation.",
+    "Scripted reviewer accounts are not an independent human study.",
+    "The local OS account label is redacted in a terminal audit view."
+  ]
+}

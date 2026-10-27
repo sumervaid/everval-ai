@@ -104,3 +104,9 @@ uv run everval chat --session CONVERSATION_ID --message "pause"
 For automation, `--message` returns the reply and conversation ID. Use `--no-worker` when another service owns execution. Include `draft only` to prepare without starting.
 
 The API provides `/api/conversations`, `/catalog`, `/{id}/messages`, and report downloads under the existing workspace permissions. Parsing runs locally with supported setup instructions; it is not a general-purpose assistant or a shell.
+
+## Watch the workflow
+
+![Actual benchmark chat, reports and paused recurring schedule](assets/demos/chat-and-reports.gif)
+
+Original installation controls; no model API calls. [Still image](assets/demos/chat-and-reports.png) · [All demos](demos.md).
