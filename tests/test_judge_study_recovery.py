@@ -31,6 +31,7 @@ def _stopped_study(tmp_path, monkeypatch):
                 "output": [
                     {
                         "type": "message",
+                        "role": "assistant",
                         "content": [
                             {
                                 "type": "output_text",

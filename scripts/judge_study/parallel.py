@@ -20,12 +20,15 @@ from typing import Any
 
 import httpx
 
+from cvals.review_queues import Rubric
 from scripts.benchmarks.budget import BudgetError
 from scripts.benchmarks.model import private_json
 from scripts.judge_study import driver
 from scripts.judge_study.concurrent_budget import ConcurrentLedger
+from scripts.judge_study.responses import judge_response, preserve_policy_stop
 
 AMENDED_SOURCES = [
+    "scripts/judge_study/responses.py",
     "scripts/judge_study/parallel.py",
     "scripts/judge_study/concurrent_budget.py",
     "scripts/judge_study/analyze.py",
@@ -113,12 +116,18 @@ def amendment(root: Path, *, create: bool = False) -> dict[str, Any]:
 
 
 def run(root: Path, partition: str) -> None:
+    if (root / "STOP").exists():
+        raise BudgetError("Shared study stop is active")
     plan = driver.load_plan(root)
     amendment(root)
     key = os.environ.get("OPENAI_API_KEY")
     if not key:
         raise ValueError("OPENAI_API_KEY is required")
     service = driver.JudgeCalibration(driver.Settings(root / "workspace"))
+    rubrics = {
+        cohort: Rubric.model_validate(driver.read(root / "approved" / (cohort + ".json"))["rubric"])
+        for cohort in plan["campaigns"]
+    }
     if partition == "holdout":
         for identifier in plan["campaigns"].values():
             if not service.get(identifier)["state"]["holdout_released"]:
@@ -196,9 +205,19 @@ def run(root: Path, partition: str) -> None:
                         raise ValueError("Provider response exceeded evidence bound")
                 http_status = response.status_code
             raw = json.loads(raw_bytes.decode().replace(key, "[REDACTED]"))
+            handling = judge_response(
+                {"http_status": http_status, "response": raw}, rubrics[job["cohort"]]
+            )
+            if handling.classification in ("provider_policy_rejection", "provider_refusal"):
+                stop.set()
+                preserve_policy_stop(root, handling, job)
             private_json(
                 output / (job["job_id"] + ".response.json"),
-                {"http_status": http_status, "response": raw},
+                {
+                    "http_status": http_status,
+                    "response": raw,
+                    "response_handling": handling.metadata(),
+                },
             )
             usage = raw.get("usage")
             if (
@@ -214,22 +233,10 @@ def run(root: Path, partition: str) -> None:
                 raise ValueError("Unpriced returned model or service tier")
             cost = ledger.settle(request_id, usage["input_tokens"], usage["output_tokens"])
             settled = True
-            texts = [
-                c["text"]
-                for message in raw.get("output", [])
-                if message.get("type") == "message"
-                for c in message.get("content", [])
-                if c.get("type") == "output_text" and isinstance(c.get("text"), str)
-            ]
-            error = (
-                None
-                if http_status == 200 and raw.get("status") == "completed" and texts
-                else "Provider response incomplete or unavailable"
-            )
             observation = {
                 "job_id": job["job_id"],
-                "response": "\n".join(texts) if texts and error is None else None,
-                "error": error,
+                "response": handling.text,
+                "error": handling.error,
                 "cost_usd": float(cost),
                 "reservation_usd": float(reserved),
                 "input_tokens": usage["input_tokens"],
@@ -244,6 +251,7 @@ def run(root: Path, partition: str) -> None:
                     "returned_model": raw["model"],
                     "cost_basis": plan["cost_basis"],
                     "provider_usage": usage,
+                    "response_handling": handling.metadata(),
                 },
             )
             with dispatch_lock:

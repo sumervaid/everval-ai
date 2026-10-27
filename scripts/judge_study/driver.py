@@ -24,8 +24,10 @@ import httpx
 from cvals.config import Settings
 from cvals.judge_calibration import JudgeCalibration, request_for
 from cvals.judge_calibration_models import CalibrationProtocol
+from cvals.review_queues import Rubric
 from scripts.benchmarks.budget import BudgetConfig, BudgetError, BudgetLedger
 from scripts.benchmarks.model import private_json
+from scripts.judge_study.responses import judge_response, preserve_policy_stop
 
 ROOT = Path(__file__).resolve().parents[2]
 ENDPOINT = "https://api.openai.com/v1/responses"
@@ -53,6 +55,12 @@ PROFILES = {
     },
 }
 SOURCES = [
+    "src/cvals/judge_calibration.py",
+    "src/cvals/judge_calibration_models.py",
+    "src/cvals/models.py",
+    "src/cvals/review_queues.py",
+    "src/cvals/judge_statistics.py",
+    "scripts/judge_study/responses.py",
     "scripts/judge_study/driver.py",
     "scripts/judge_study/prepare.py",
     "scripts/benchmarks/budget.py",
@@ -300,11 +308,17 @@ def collect(root: Path, plan: dict[str, Any], partition: str) -> None:
 
 
 def run(root: Path, *, partition: str, smoke: bool = False) -> None:
+    if (root / "STOP").exists():
+        raise BudgetError("Shared study stop is active")
     plan = load_plan(root)
     key = os.environ.get("OPENAI_API_KEY")
     if not key:
         raise ValueError("OPENAI_API_KEY must be supplied through the private environment")
     service = JudgeCalibration(Settings(root / "workspace"))
+    rubrics = {
+        cohort: Rubric.model_validate(read(root / "approved" / (cohort + ".json"))["rubric"])
+        for cohort in plan["campaigns"]
+    }
     if partition == "holdout":
         for identifier in plan["campaigns"].values():
             campaign = service.get(identifier)
@@ -378,9 +392,19 @@ def run(root: Path, *, partition: str, smoke: bool = False) -> None:
                                 raise ValueError("Provider response exceeded evidence bound")
                         http_status = response.status_code
                     raw = json.loads(raw_bytes.decode().replace(key, "[REDACTED]"))
+                    handling = judge_response(
+                        {"http_status": http_status, "response": raw}, rubrics[job["cohort"]]
+                    )
+                    if handling.classification in ("provider_policy_rejection", "provider_refusal"):
+                        stop.set()
+                        preserve_policy_stop(root, handling, job)
                     private_json(
                         output / (job["job_id"] + ".response.json"),
-                        {"http_status": http_status, "response": raw},
+                        {
+                            "http_status": http_status,
+                            "response": raw,
+                            "response_handling": handling.metadata(),
+                        },
                     )
                     usage = raw.get("usage")
                     if (
@@ -396,22 +420,10 @@ def run(root: Path, *, partition: str, smoke: bool = False) -> None:
                         raise ValueError("Unpriced returned model or service tier")
                     cost = ledger.settle(request_id, usage["input_tokens"], usage["output_tokens"])
                     settled = True
-                    texts = [
-                        c["text"]
-                        for message in raw.get("output", [])
-                        if message.get("type") == "message"
-                        for c in message.get("content", [])
-                        if c.get("type") == "output_text" and isinstance(c.get("text"), str)
-                    ]
-                    error = (
-                        None
-                        if http_status == 200 and raw.get("status") == "completed" and texts
-                        else "Provider response incomplete or unavailable"
-                    )
                     observation = {
                         "job_id": job["job_id"],
-                        "response": "\n".join(texts) if texts and error is None else None,
-                        "error": error,
+                        "response": handling.text,
+                        "error": handling.error,
                         "cost_usd": float(cost),
                         "reservation_usd": float(reserved),
                         "input_tokens": usage["input_tokens"],
@@ -426,6 +438,7 @@ def run(root: Path, *, partition: str, smoke: bool = False) -> None:
                             "returned_model": raw["model"],
                             "cost_basis": plan["cost_basis"],
                             "provider_usage": usage,
+                            "response_handling": handling.metadata(),
                         },
                     )
                     completed += 1

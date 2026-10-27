@@ -6,10 +6,10 @@ The 0.4 source passes ordinary checks and installation through both Python and n
 
 ## Committed-source validation
 
-[GitHub run 40567169930](https://github.com/sumervaid/everval-ai/actions/runs/40567169930) passed for source commit 1da135fae9a0eb84b571d7ef5dca75e6f034f081:
+[GitHub run 40574741153](https://github.com/sumervaid/everval-ai/actions/runs/40574741153) passed for source commit 7054efad67684199341c4c84e968ed491e5f6e8d:
 
-- 1,585 Python tests passed; 46 opt-in checks were skipped.
-- Ruff, formatting, strict typing across 107 source files, and 751 local documentation links passed.
+- 1,635 Python tests passed; 46 opt-in checks were skipped.
+- Ruff, formatting, strict typing across 107 source files, and 783 local documentation links passed.
 - Web type checks, component tests, production build, and npm launcher tests passed.
 - A separately installed wheel passed the original three-domain no-key demonstration.
 - The exact locally built npm tarball was installed in an isolated prefix. Setup, version reporting, calibrated-judge CLI help, and the same no-key demonstration passed.

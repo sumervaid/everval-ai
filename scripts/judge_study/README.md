@@ -33,6 +33,21 @@ The current judges did not generate the historical MT-Bench answers.
 Same-snapshot self-preference cannot be inferred from that cohort.
 Provider-family preference is not a valid substitute.
 
+## Original scores and future runs
+
+The published original study uses [historical revision 94e2960](https://github.com/sumervaid/everval-ai/tree/94e2960258a7ad658d082d628fbc258ea983461b), including its frozen phase-concatenating transport. Recompute those original scores from a separate historical checkout and the retained private evidence:
+
+~~~sh
+git worktree add --detach .local/original-judge-source 94e2960258a7ad658d082d628fbc258ea983461b
+cd .local/original-judge-source
+uv sync --frozen
+uv run python -m scripts.judge_study.analyze_flat --root /private/retained-study
+~~~
+
+The current transport selects a single explicit final-answer phase, or one unambiguous legacy message. It distinguishes invalid selected-final JSON, ambiguous phases, refusals, missing answers and incomplete responses. Every new freeze includes the strict helper's source hash. The dated continuation commands below describe the historical run; do not use changed transport sources with its frozen workspace.
+
+Raw responses and evaluator records remain in the private workspace. Public source revisions and request hashes support recreating the input cohort and auditing the aggregate. New hosted calls need their own freeze and budget; stochastic outputs and mutable model aliases need not reproduce the original observations.
+
 ## Reproduce on a trusted host
 
 The preparation program downloads public inputs but does not call models or

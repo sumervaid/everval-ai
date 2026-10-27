@@ -84,6 +84,7 @@ def test_completed_smoke_is_not_reissued(tmp_path, monkeypatch):
                 "output": [
                     {
                         "type": "message",
+                        "role": "assistant",
                         "content": [
                             {
                                 "type": "output_text",
@@ -227,6 +228,7 @@ def test_parallel_runner_limits_inflight_and_resumes_without_reissue(tmp_path, m
                 "output": [
                     {
                         "type": "message",
+                        "role": "assistant",
                         "content": [
                             {
                                 "type": "output_text",
