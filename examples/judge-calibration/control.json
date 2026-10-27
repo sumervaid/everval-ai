@@ -1,0 +1,132 @@
+{
+  "name": "Judge calibration installation controls",
+  "measurement_claim": "Verify label mapping, order diagnostics and evidence retention without model calls.",
+  "rubric": {
+    "name": "Arithmetic correctness",
+    "version": "1",
+    "instructions": "Prefer the response with the correct larger number.",
+    "dimensions": [
+      {
+        "id": "correctness",
+        "name": "Correctness",
+        "guidance": "One for a correct answer and zero otherwise."
+      }
+    ]
+  },
+  "judges": [
+    {
+      "id": "content-control",
+      "model": "fixture/content",
+      "revision": "1"
+    },
+    {
+      "id": "position-control",
+      "model": "fixture/position",
+      "revision": "1"
+    }
+  ],
+  "items": [
+    {
+      "item_id": "control-0",
+      "task_id": "control-task-0",
+      "family_id": "control-family-0",
+      "partition": "dev",
+      "task": {
+        "instruction": "Return the larger number from [0, 1] as answer.",
+        "inputs": {}
+      },
+      "responses": {
+        "A": {
+          "answer": 1
+        },
+        "B": {
+          "answer": 0
+        }
+      },
+      "reference": {
+        "source": "scripted",
+        "label": "A",
+        "provenance": "Original arithmetic installation control. No human participants.",
+        "reviewer_labels": []
+      }
+    },
+    {
+      "item_id": "control-1",
+      "task_id": "control-task-1",
+      "family_id": "control-family-1",
+      "partition": "dev",
+      "task": {
+        "instruction": "Return the larger number from [1, 2] as answer.",
+        "inputs": {}
+      },
+      "responses": {
+        "B": {
+          "answer": 2
+        },
+        "A": {
+          "answer": 1
+        }
+      },
+      "reference": {
+        "source": "scripted",
+        "label": "B",
+        "provenance": "Original arithmetic installation control. No human participants.",
+        "reviewer_labels": []
+      }
+    },
+    {
+      "item_id": "control-2",
+      "task_id": "control-task-2",
+      "family_id": "control-family-2",
+      "partition": "holdout",
+      "task": {
+        "instruction": "Return the larger number from [2, 3] as answer.",
+        "inputs": {}
+      },
+      "responses": {
+        "A": {
+          "answer": 3
+        },
+        "B": {
+          "answer": 2
+        }
+      },
+      "reference": {
+        "source": "scripted",
+        "label": "A",
+        "provenance": "Original arithmetic installation control. No human participants.",
+        "reviewer_labels": []
+      }
+    },
+    {
+      "item_id": "control-3",
+      "task_id": "control-task-3",
+      "family_id": "control-family-3",
+      "partition": "holdout",
+      "task": {
+        "instruction": "Return the larger number from [3, 4] as answer.",
+        "inputs": {}
+      },
+      "responses": {
+        "B": {
+          "answer": 4
+        },
+        "A": {
+          "answer": 3
+        }
+      },
+      "reference": {
+        "source": "scripted",
+        "label": "B",
+        "provenance": "Original arithmetic installation control. No human participants.",
+        "reviewer_labels": []
+      }
+    }
+  ],
+  "budget_usd": 0,
+  "repetitions": 2,
+  "planned_comparisons": 2,
+  "resamples": 5000,
+  "min_families": 2,
+  "primary_endpoint": "reference"
+}

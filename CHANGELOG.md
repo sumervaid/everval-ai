@@ -1,6 +1,16 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 — release candidate
+
+- Added frozen LLM-judge campaigns, independent-reference export, repeated order controls, human-vote agreement, kappa/alpha diagnostics, paired family uncertainty and prospective power planning.
+- Added Inspect dataset export with separate evaluator references and a pinned optional dependency.
+- Added the public Python namespace and module entry point: import everval and python -m everval. Existing cvals integrations remain compatible.
+- Fixed experiment harness identity to use the current package version consistently with frozen checkpoint protocols.
+- Kept public package imports lightweight and made version queries independent of optional application surfaces.
+- Enabled provider-free validation on pushes to main and pull requests.
+- Added focused measurement design and judge operator guides.
+
+
 
 - Simplified the project README around current-source installation and a compact continuous demo; added focused workflow viewing pages and small gallery previews.
 

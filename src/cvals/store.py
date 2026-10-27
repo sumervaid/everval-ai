@@ -10,6 +10,7 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from typing import TYPE_CHECKING, Any
 
+from cvals import __version__
 from cvals.models import (
     Collection,
     ExperimentCreate,
@@ -312,7 +313,7 @@ class Store:
             "systems": systems,
             "repetitions": request.repetitions,
             "budget_usd": request.budget_usd,
-            "harness_revision": "everval/0.3.1",
+            "harness_revision": f"everval/{__version__}",
             "grader_revision": "deterministic/1",
             "sandbox_image_requested": self.settings.sandbox_image,
             "protocol": "all scheduled trials; no automatic provider retries",

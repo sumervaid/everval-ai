@@ -1,14 +1,17 @@
-name: Manual validation
+name: Validation
 
 'on':
   workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main]
 
-# Deliberately manual: no billed hosted runs start on pushes or pull requests.
+# Public repository, standard runners; provider calls and sandbox benchmarks stay disabled.
 permissions:
   contents: read
 
 concurrency:
-  group: manual-validation-${{ github.ref }}
+  group: validation-${{ github.ref }}
   cancel-in-progress: true
 
 defaults:
@@ -47,7 +50,7 @@ jobs:
         run: |
           uv run --no-sync ruff check src tests scripts
           uv run --no-sync ruff format --check src tests scripts
-          uv run --no-sync mypy src/cvals
+          uv run --no-sync mypy src/cvals src/everval
           uv run --no-sync python scripts/check_docs.py
       - name: Run ordinary Python tests
         run: uv run --no-sync pytest
@@ -75,6 +78,8 @@ jobs:
           npm run typecheck
           npm test -- --run
           npm run build
+      - name: Verify npm launcher and terminal handoff
+        run: npm test --prefix npm
 
   package:
     name: Distribution and installed demo
@@ -118,6 +123,8 @@ jobs:
           assert len(wheels) == len(sources) == 1
           with zipfile.ZipFile(wheels[0]) as archive:
               names = set(archive.namelist())
+          assert "everval/__init__.py" in names
+          assert "everval/__main__.py" in names
           assert "cvals/static/index.html" in names
           assert "cvals/tui/workbench.tcss" in names
           assert any(name.endswith(".dist-info/licenses/LICENSE") for name in names)
@@ -148,10 +155,12 @@ jobs:
           unset PYTHONPATH
           export EVERVAL_DATA_DIR="$RUNNER_TEMP/everval-state"
           "$RUNNER_TEMP/everval-installed/bin/python" - <<'PY'
+          import everval
           import cvals
           from importlib.resources import files
 
-          assert "site-packages" in cvals.__file__
+          assert "site-packages" in everval.__file__
+          assert everval.__version__ == cvals.__version__
           assert files("cvals").joinpath("static/index.html").is_file()
           assert files("cvals").joinpath("tui/workbench.tcss").is_file()
           PY

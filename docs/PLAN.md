@@ -1,11 +1,12 @@
 # Delivery status
 
-Everval AI 0.3.1 is a terminal-first local evaluation product with a guided repository workflow, optional authenticated review browser, and shared CLI/API.
+Everval AI 0.4.0 source is a terminal-first local evaluation product with a guided repository workflow, optional authenticated review browser, and shared CLI/API.
 
 ## Implemented workflows
 
 | Area | Behavior |
 | --- | --- |
+| Judge calibration (current source) | Frozen judge campaigns, human-vote references, order/repeat controls, paired family analysis, prospective power, budgeted execution and Inspect export. |
 | Double-blind studies (current source) | Trusted-custodian review of completed outputs; two selected systems, reviewer-only accounts, frozen assignments/rubric, randomized response labels, complete-coverage lock, explicit reveal, and local HTML/JSON reports. |
 | Conversational setup (current source) | Terminal/browser chat, CLI and API; configured model/task selection, bounded recurring runs, cumulative caps including the initial run, and local reports. |
 | Terminal workbench | Fourteen views, command palette, responsive forms, resumable guided runs, health, evidence, recurring and change-linked evaluations. |

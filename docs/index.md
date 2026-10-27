@@ -48,6 +48,13 @@ Use [benchmark validation](benchmarks.md) to understand what qualifies for a rel
 | Can we lock blind judgments before revealing model identities? | [Double-blind studies and open-source boundaries](double-blind.md) |
 | How do people review answers independently? | [Assigned and blinded team review](team-review.md) |
 
+## Measure the measurement
+
+- [Calibrate LLM judges](judge-calibration.md) against retained human votes or execution references.
+- [Statistical methods](judge-methods.md) explain agreement, reliability, paired uncertainty and prospective power.
+- [Four measurement decisions](measurement-design.md) connect the implementation to its tradeoffs.
+- [Inspect interoperability](inspect.md) exports frozen samples with evaluator references kept separate.
+
 ## Keep checking as systems change
 
 - [Post-training checkpoint monitoring](post-training.md) connects a training trajectory to frozen evaluations, qualified measurements, regression investigations, and held-out mix studies. Read the [completed local checkpoint study](benchmarks/checkpoint-study-2026-10-22/results.md) and [reproduce its actual training and inference](../scripts/posttraining/SETUP.md).

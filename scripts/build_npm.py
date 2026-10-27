@@ -22,6 +22,8 @@ from email.parser import BytesParser
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from packaging.requirements import InvalidRequirement, Requirement
+
 ROOT = Path(__file__).resolve().parents[1]
 SHIPPING_SOURCES = ("bin/everval.mjs", "lib/launcher.mjs")
 PACKAGE_FILES = [*SHIPPING_SOURCES, "runtime/", "runtime.json", "README.md", "LICENSE", "NOTICE"]
@@ -87,7 +89,7 @@ def check_private(data: bytes, label: str) -> None:
 
 def tracked_sources(root: Path) -> list[str]:
     result = subprocess.run(
-        ["git", "ls-files", "-z", "--", "src/cvals"],
+        ["git", "ls-files", "-z", "--", "src/cvals", "src/everval"],
         cwd=root,
         check=False,
         capture_output=True,
@@ -103,7 +105,7 @@ def expected_package(root: Path) -> dict[str, bytes]:
     for name in tracked_sources(root):
         if name.endswith(".py") or name == "src/cvals/tui/workbench.tcss":
             relative = name.removeprefix("src/")
-            if not relative.startswith("cvals/") or "/tests/" in relative:
+            if not relative.startswith(("cvals/", "everval/")) or "/tests/" in relative:
                 raise BuildError("Unexpected tracked application path")
             expected[relative] = read_source(root, name)
     if "cvals/__init__.py" not in expected or "cvals/cli.py" not in expected:
@@ -140,13 +142,19 @@ def _normalized_distribution(value: str) -> str:
     return re.sub(r"[-_.]+", "-", value).lower()
 
 
-def _dependency(value: str) -> tuple[str, tuple[str, ...]]:
-    match = re.fullmatch(r"([A-Za-z0-9_.-]+)([^;@\[\]]*)", value)
-    if not match:
-        raise BuildError("Unsupported dependency syntax in application metadata")
+def _dependency(value: str) -> tuple[str, tuple[str, ...], str]:
+    try:
+        requirement = Requirement(value)
+    except InvalidRequirement as exc:
+        raise BuildError("Unsupported dependency syntax in application metadata") from exc
+    if requirement.url or requirement.extras:
+        raise BuildError(
+            "Direct URLs and dependency extras are unsupported in distribution metadata"
+        )
     return (
-        _normalized_distribution(match[1]),
-        tuple(sorted(part.strip() for part in match[2].split(",") if part.strip())),
+        _normalized_distribution(requirement.name),
+        tuple(sorted(str(specifier) for specifier in requirement.specifier)),
+        str(requirement.marker) if requirement.marker else "",
     )
 
 
@@ -165,6 +173,8 @@ def _check_metadata(
         "Requires-Python",
         "Requires-Dist",
         "Description-Content-Type",
+        "Provides-Extra",
+        "Project-URL",
     }
     if (
         set(metadata.keys()) - allowed
@@ -187,8 +197,22 @@ def _check_metadata(
             raise BuildError(f"Wheel metadata does not match pyproject.toml: {name}")
     if sorted(metadata.get_all("License-File", [])) != ["LICENSE", "NOTICE"]:
         raise BuildError("Wheel must preserve both license and notice files")
+    expected_urls = sorted(f"{name}, {url}" for name, url in project.get("urls", {}).items())
+    if sorted(metadata.get_all("Project-URL", [])) != expected_urls:
+        raise BuildError("Wheel project URLs do not match pyproject.toml")
+    extras = project.get("optional-dependencies", {})
+    if sorted(metadata.get_all("Provides-Extra", [])) != sorted(extras):
+        raise BuildError("Wheel optional dependencies do not match pyproject.toml")
+    dependencies = list(project["dependencies"])
+    for extra, requirements in extras.items():
+        for requirement in requirements:
+            if ";" in requirement:
+                base, marker = requirement.split(";", 1)
+                dependencies.append(f'{base}; ({marker.strip()}) and extra == "{extra}"')
+            else:
+                dependencies.append(f'{requirement}; extra == "{extra}"')
     if sorted(_dependency(value) for value in metadata.get_all("Requires-Dist", [])) != sorted(
-        _dependency(value) for value in project["dependencies"]
+        _dependency(value) for value in dependencies
     ):
         raise BuildError("Wheel dependencies do not match pyproject.toml")
     readme = project.get("readme", "README.md")

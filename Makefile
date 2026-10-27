@@ -17,7 +17,7 @@ npm-check:
 check: docs-check npm-check
 	uv run ruff check src tests scripts deploy npm/test
 	uv run ruff format --check src tests scripts deploy npm/test
-	uv run mypy src/cvals
+	uv run mypy src/cvals src/everval
 	cd web && npm run typecheck
 	cd web && npm test -- --run
 

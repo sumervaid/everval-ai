@@ -98,7 +98,7 @@ test("setup installs exact hashed dependencies, checks them, then publishes read
   }
   assert.ok(f.calls[3].args.includes("check"));
   assert.ok(f.calls[3].args.includes("--offline"));
-  assert.match(f.calls[4].args.at(-1), /cvals.__version__/);
+  assert.match(f.calls[4].args.at(-1), /everval.__version__/);
   for (const call of f.calls) {
     assert.equal(call.env.UV_NO_VERIFY_HASHES, undefined);
     assert.equal(call.env.UV_OVERRIDE, undefined);
@@ -233,7 +233,7 @@ test("application preserves exact arguments, working directory, provider environ
   const args = ["serve", "--name", "a; literal $(text)\nwith spaces", "--no-worker"];
   assert.equal((await main(args, f.options)).code, 19);
   const call = f.calls[0];
-  assert.deepEqual(call.args, ["-I", "-m", "cvals", ...args]);
+  assert.deepEqual(call.args, ["-I", "-m", "everval", ...args]);
   assert.match(call.command, /\/venv\/bin\/python$/);
   assert.equal(call.cwd, f.directory);
   assert.equal(call.env.PYTHONPATH, undefined);
@@ -244,7 +244,7 @@ test("application preserves exact arguments, working directory, provider environ
   assert.doesNotMatch(f.output.stdout + f.output.stderr, /test-canary/);
   f.calls.length = 0;
   await main(["help"], f.options);
-  assert.deepEqual(f.calls[0].args, ["-I", "-m", "cvals", "--help"]);
+  assert.deepEqual(f.calls[0].args, ["-I", "-m", "everval", "--help"]);
 });
 
 test("cache identity follows payload metadata and refuses relative configured paths", (t) => {

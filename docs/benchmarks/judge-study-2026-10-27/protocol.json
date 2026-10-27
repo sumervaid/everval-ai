@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "name": "Everval judge study 2026-10-27",
+  "user_total_cap_usd": "50",
+  "inference_allocation_usd": "30",
+  "unused_allocation_usd": "20",
+  "cost_basis": "Conservative upper bound: all input at 2.5x standard uncached input price, all output at standard price. This is not an invoice.",
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "profiles": {
+    "gpt-6-luna": {
+      "cap": "2",
+      "input": "0.25",
+      "output": "0.5",
+      "output_tokens": 768,
+      "reasoning": "none"
+    },
+    "gpt-6.1-terra": {
+      "cap": "8",
+      "input": "2.5",
+      "output": "5",
+      "output_tokens": 768,
+      "reasoning": "none"
+    },
+    "gpt-6.1-sol": {
+      "cap": "20",
+      "input": "5",
+      "output": "10",
+      "output_tokens": 1536,
+      "reasoning": "low"
+    }
+  },
+  "endpoint": "https://api.openai.com/v1/responses",
+  "automatic_retries": 0,
+  "protocol_sha256": {
+    "human": "118137a1097e9b24cbe98ab0511df2f7ebc64becb497908f54db26361ea3ef70",
+    "execution": "bf3ec2c56a411cf33bc544c880831c6629e046a14b3362bc743440ff7974dc28"
+  },
+  "cohorts": {
+    "human": {
+      "items": 80,
+      "development": 16,
+      "held_out": 64,
+      "families": 80,
+      "jobs": 1920
+    },
+    "execution": {
+      "items": 50,
+      "development": 10,
+      "held_out": 40,
+      "families": 50,
+      "jobs": 1200
+    }
+  },
+  "primary_endpoint": "Human-vote agreement, equal question and equal retained-reviewer weighting.",
+  "primary_contrasts": [
+    "luna:rubric-guided-minus-standard",
+    "terra:rubric-guided-minus-standard",
+    "sol:rubric-guided-minus-standard"
+  ],
+  "primary_familywise_alpha": 0.05,
+  "primary_contrast_alpha": 0.016666666666666666,
+  "selection": "All six judge configurations are predeclared for holdout; development is compatibility/estimation, not winner selection.",
+  "power": {
+    "human_primary": "Fractional paired question-level difference; normal-approximation sensitivity over predeclared paired SDs 0.10, 0.25, 0.50 at n=64 and alpha=.05/3. Exact McNemar does not apply to this endpoint.",
+    "execution_secondary": "40 held-out tasks; binary task-level comparisons require one prespecified paired decision; repeated observations do not increase independent sample size."
+  },
+  "source_sha256": {
+    "scripts/judge_study/driver.py": "56eb5e64691fc73c65aafdbe95e3467b37b9af6c5ea63e0a9bfbd6771c5a8411",
+    "scripts/judge_study/prepare.py": "75ac4e2e0fbb3cda81ede81a84ffc499261cda3e0647f71792ea4aaa0530abb0",
+    "scripts/benchmarks/budget.py": "ea0a0f31a1eb8f5b61167e1364b97c9c4f05eb3fa7a8027ce76f45d1dd047a13"
+  },
+  "freeze": {
+    "frozen_at": "2026-10-27T17:31:52.985648+00:00",
+    "plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+    "provider_calls_before_freeze": 0
+  },
+  "publication_scope": "Summary of a locally frozen pre-inference plan; raw requests and reference records remain private. This is not an externally registered preregistration.",
+  "frozen_jobs": 3120,
+  "hash_convention": "plan_sha256 and request_sha256 use SHA-256 over UTF-8 canonical JSON (sorted keys, compact separators, non-ASCII preserved). protocol_sha256 hashes the approved file bytes.",
+  "plan_file_sha256": "4c99e316f7772f7e4ad03e28cf2c61679e732d3369064f52f5ebdd629982bdae"
+}

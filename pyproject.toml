@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "everval-ai"
-version = "0.3.1"
-description = "A local workbench for evaluating agents on real work."
+version = "0.4.0"
+description = "Continuous benchmarking and calibrated model evaluation on your infrastructure."
 readme = "README.md"
 requires-python = ">=3.12"
 license = "Apache-2.0"
@@ -24,8 +24,17 @@ dependencies = [
   "packaging>=24,<27",
 ]
 
+[project.urls]
+Homepage = "https://github.com/sumervaid/everval-ai"
+Documentation = "https://github.com/sumervaid/everval-ai/blob/main/docs/index.md"
+Issues = "https://github.com/sumervaid/everval-ai/issues"
+Changelog = "https://github.com/sumervaid/everval-ai/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+inspect = ["inspect-ai==0.3.285"]
+
 [project.scripts]
-everval = "cvals.cli:app"
+everval = "everval.cli:main"
 cvals = "cvals.cli:app"
 
 [dependency-groups]
@@ -43,8 +52,12 @@ dev = [
 [tool.hatch.build]
 artifacts = ["src/cvals/static/**"]
 
+[tool.hatch.build.targets.sdist]
+only-include = ["src", "tests", "examples", "scripts", "deploy", "web", "npm", "docs", ".github", "pyproject.toml", "uv.lock", "README.md", "LICENSE", "NOTICE", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "SUPPORT.md", "Makefile", "AGENTS.md"]
+exclude = ["/docs/assets", "/.local", "/.state", "/.git"]
+
 [tool.hatch.build.targets.wheel]
-packages = ["src/cvals"]
+packages = ["src/cvals", "src/everval"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -62,4 +75,4 @@ ignore = ["E501"]
 [tool.mypy]
 python_version = "3.12"
 strict = true
-packages = ["cvals"]
+packages = ["cvals", "everval"]

@@ -2,6 +2,7 @@ import json
 
 from typer.testing import CliRunner
 
+from cvals import __version__
 from cvals.cli import app
 
 runner = CliRunner()
@@ -10,7 +11,7 @@ runner = CliRunner()
 def test_version():
     result = runner.invoke(app, ["--version"])
     assert result.exit_code == 0, result.output
-    assert "0.3.1" in result.output
+    assert result.output.strip() == __version__
 
 
 def test_init_and_fixture_workflow(tmp_path, monkeypatch):

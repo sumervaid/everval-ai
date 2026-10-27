@@ -5,18 +5,11 @@ Creating a release, publishing a package, deploying a service and making the
 repository public are separate maintainer decisions. None is performed by the
 validation workflow.
 
-## Validation without automatic hosted runs
+## Automatic validation
 
-[Manual validation](../.github/workflows/validation.yml) is triggered only by
-GitHub's **Run workflow** control. It has no push, pull-request, tag or scheduled
-trigger. Adding the file does not run hosted checks, establish a green CI history
-or change repository visibility. A maintainer must deliberately dispatch it on
-a reviewed revision. Hosted runs use GitHub runner minutes and store run logs
-there; review the repository's billing and retention settings before dispatching.
+[Validation](../.github/workflows/validation.yml) runs on pushes to main and pull requests, and supports GitHub's **Run workflow** control. Standard hosted runners run ordinary provider-free checks. The workflow receives no model credentials and does not publish packages, upload workspace artifacts, or launch paid benchmarks.
 
-During the current local-only maintenance session, run checks on the iMac and
-retain generated files there. Do not dispatch the hosted workflow as a substitute
-for that requirement. It is prepared for a later explicit maintainer choice.
+Local acceptance still runs on the maintainer's iMac. Hosted validation provides a separate check on the committed source; a configured workflow is not evidence of a passing run.
 
 The workflow separates three jobs:
 
@@ -29,7 +22,7 @@ The workflow separates three jobs:
 Docker, live GitHub checks, browser acceptance and paid provider evaluations are
 outside this workflow. Their explicit procedures and evidence requirements are
 in [release acceptance](release-acceptance.md). The default test run retains its
-opt-in skips; a green manual run does not imply those integrations ran.
+opt-in skips; a green run does not imply those integrations ran.
 
 Actions use full commit hashes, checkout does not retain credentials, and the
 token has only repository-content read access. Runs on the same ref cancel
@@ -39,7 +32,7 @@ are not configured. This follows GitHub's
 [least-privilege and action-pinning guidance](https://docs.github.com/en/actions/reference/security/secure-use)
 and [workflow controls](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax).
 
-The pinned uv 0.11.23 and Node 26.0.0 versions match the local release toolchain.
+The workflow pins uv 0.11.23 and Node 26.0.0. Local acceptance also checks the supported Node 22 toolchain.
 Action revisions were resolved from their official repositories on 2026-10-15:
 
 | Action | Reviewed release |
@@ -51,6 +44,14 @@ Action revisions were resolved from their official repositories on 2026-10-15:
 Pinning preserves a reviewed revision; it does not prove that dependencies,
 runner images or build tools are free of vulnerabilities. Review pins when
 upstream security fixes become available.
+
+## Upgrade the Python interface
+
+The 0.4 source uses the public everval namespace and supports python -m everval. The distribution name remains everval-ai. Existing cvals imports and the cvals command remain compatible; both namespaces use the same core classes and workspace format.
+
+New experiments record the current harness version. Historical snapshots keep their original identities. A frozen training protocol from an older harness cannot silently queue work under a changed harness; create a new run declaration after reviewing the upgrade. This preserves existing comparison identities without rewriting historical evidence.
+
+The 0.4 candidate artifacts must be distinguished from the published npm 0.3.1 package. A successful local build or GitHub push does not establish registry publication.
 
 ## Prepare a candidate locally
 
@@ -101,10 +102,7 @@ permissions, and updating both the hash and release comment. Do not copy a hash
 from an unrelated fork. Keep workflow changes reviewable independently from
 application changes.
 
-Automatic dependency PRs and automatic CI triggers are not enabled. A future
-maintainer can choose them after deciding update cadence, runner budgets and
-review ownership. Require reviews for workflow and dependency changes; do not
-give a validation job publishing credentials to simplify a later release step.
+Automatic dependency PRs are not enabled. Require reviews for workflow and dependency changes; do not give a validation job publishing credentials to simplify a later release step.
 
 ## Publish only after a separate decision
 

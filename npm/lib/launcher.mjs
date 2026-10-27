@@ -289,7 +289,7 @@ function installCommands(bundle, paths, setup, environment) {
       "--requirement", bundle.requirements, "--requirement", requirements]],
     [uv, [...shared, "pip", "check", "--python", paths.python, "--offline"]],
     [paths.python, ["-I", "-c",
-      "import cvals; assert cvals.__version__ == " + JSON.stringify(bundle.version)]],
+      "import everval; assert everval.__version__ == " + JSON.stringify(bundle.version)]],
   ];
 }
 
@@ -406,7 +406,7 @@ export async function main(args = process.argv.slice(2), options = {}) {
         "Runtime location: " + paths.directory);
     }
     const forwarded = args[0] === "help" ? ["--help", ...args.slice(1)] : args;
-    return await (options.exec ?? execApplication)(python, ["-I", "-m", "cvals", ...forwarded], {
+    return await (options.exec ?? execApplication)(python, ["-I", "-m", "everval", ...forwarded], {
       cwd, env: applicationEnvironment(environment),
     });
   } catch (error) {

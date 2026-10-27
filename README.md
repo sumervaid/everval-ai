@@ -59,6 +59,7 @@ everval demo
 | [Rankings and economics](docs/rankings.md) | Quality, cost, latency, coverage, and the evidence behind each comparison. |
 | [Recurring benchmarks](docs/chat.md) | Plain-language setup, schedules, spending limits, and local HTML/CSV/JSON/Markdown reports. |
 | [Failure investigation](docs/research-loop.md) | Saved failures, regrading, candidate comparisons, and reserved holdout decisions. |
+| [Calibrated LLM judges](docs/judge-calibration.md) | Human-vote agreement, paired rubric comparisons, order effects, repeatability and evaluator-only references. |
 | [Double-blind review](docs/double-blind.md) | Randomized response pairs, frozen rubrics, locked judgments, and explicit identity release. |
 | [Checkpoint monitoring](docs/post-training.md) | Training trajectories, paired comparisons, regression investigations, and evaluation qualification. |
 
@@ -81,6 +82,8 @@ SSO, tenant isolation, and distributed execution are outside this release. Doubl
 - [Release acceptance](docs/evidence/2026-10-15/README.md): installed-package, interface, accounting, and bounded API checks.
 - [Public repository pilot](docs/benchmarks/public-repositories-2026-10-15/results.md): completed attempts, exclusions, and unresolved accounting; no repair-quality improvement demonstrated.
 - [Checkpoint study](docs/benchmarks/checkpoint-study-2026-10-22/results.md): three local training runs, twelve checkpoints, and 3,072 responses on generated diagnostics.
+
+Read [four measurement decisions](docs/measurement-design.md) for the admission, comparison, grading and blinding tradeoffs, or [export a judge campaign to Inspect](docs/inspect.md).
 
 Each record includes methods and limitations. Installation controls and generated tasks do not establish representative customer performance. [Verification scope](docs/verification.md) · [Study reproduction](scripts/posttraining/SETUP.md).
 

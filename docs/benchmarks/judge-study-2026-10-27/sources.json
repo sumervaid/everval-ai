@@ -1,0 +1,1630 @@
+{
+  "human": {
+    "dataset": "lmsys/mt_bench_human_judgments",
+    "revision": "f7d2896d2cc5d80f8b55c2bbc722613555233c25",
+    "sha256": "4877bc46a40929f4082c3c79593700fb897b1d6c7f4c473032694a01322f5769",
+    "license": "CC-BY-4.0",
+    "source": "https://huggingface.co/datasets/lmsys/mt_bench_human_judgments/resolve/f7d2896d2cc5d80f8b55c2bbc722613555233c25/data/human-00000-of-00001-25f4910818759289.parquet",
+    "selection": [
+      {
+        "item_id": "mtbench-104",
+        "partition": "dev",
+        "pair_hash": "7825684adc56ef562146c0c0695890e6b918e2a2e29332f144600e5eab5925af",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-130",
+        "partition": "dev",
+        "pair_hash": "526ff01e5ee4ceac9057fa6abd2908b606652416c8ea05d3eca92cfff2397a56",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-116",
+        "partition": "dev",
+        "pair_hash": "0a118f7108e80de738395e850c3007f890181d9127198bf9ed429f7b27235f77",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-85",
+        "partition": "dev",
+        "pair_hash": "fda9e07d0d522f3ab7c8594fb5ea9396a894fdddbf1ff714317243d6d6dbdb7e",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-135",
+        "partition": "dev",
+        "pair_hash": "0fd2834fb56d9245538cbd62ab7bc06910279c31da3dbf363058db3e66091fb3",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-111",
+        "partition": "dev",
+        "pair_hash": "68554a7c95ff74c806fa78ebc19de9990f6403b1f731448c60ab08096ad3ac42",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-117",
+        "partition": "dev",
+        "pair_hash": "07814cce6ed858b2b2da5b2f732df99de9cfaf2f1920432a8107775f925190bf",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-128",
+        "partition": "dev",
+        "pair_hash": "d9be59074f1d25225c6a77ee53ad3abbfdeb9e1f36c7d1145429fc2e973bba88",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-145",
+        "partition": "dev",
+        "pair_hash": "7c413851455b4d430943a3bf417c756c8cd5f623ae2797c3e53ee3c76e173350",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-149",
+        "partition": "dev",
+        "pair_hash": "d1af9494abe2585c2a652cfe6a87bea289c7cc65f3a971858f9679d282fcf0ee",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-122",
+        "partition": "dev",
+        "pair_hash": "27e5d389283d8e5e4ea7844d02a145b5a740f3cd8bc331f4ce7f686403599cf1",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-81",
+        "partition": "dev",
+        "pair_hash": "adf681a69d9a5034c47eab6c0f82d4f5e5b7c9ee7f62dee421b3dd55eb995e80",
+        "reviewers": 4
+      },
+      {
+        "item_id": "mtbench-112",
+        "partition": "dev",
+        "pair_hash": "e4647097c662298bf5747aa01f2671cfc875f1463cdc9e69d595384904593b00",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-124",
+        "partition": "dev",
+        "pair_hash": "464d9db860f59ac98f8a7d20defd76e90a82ce76558a35198c0f5fb8af5ef377",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-141",
+        "partition": "dev",
+        "pair_hash": "8c1e005f89982f5e79866d5ea870fa1060b574ce4b94ffb794266e8de57dfb66",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-82",
+        "partition": "dev",
+        "pair_hash": "cc2107d32b62f074aff9dc4d0f6d58dc212a14466f1b3a1e8069ab007ae51adc",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-103",
+        "partition": "holdout",
+        "pair_hash": "9e9675cd142cd594994314c2b7428da21c5c8aa0a6edab916cc4ea2dc324b52f",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-154",
+        "partition": "holdout",
+        "pair_hash": "86887c7230f302d727cb7e38868f12937bffff17ddf57eb01df5b9fd2fc55b94",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-121",
+        "partition": "holdout",
+        "pair_hash": "9bd4e689c2c304fe5e26e7a7f90919017896e1a4a0430049c0e8a49ec1344555",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-100",
+        "partition": "holdout",
+        "pair_hash": "41bb7391fec54231be0d305e501d2707fc9c74f66ac50f8df4e908dbbefc1cff",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-108",
+        "partition": "holdout",
+        "pair_hash": "fdb226c4085f49cde724b16050b0405b9785570d4f9480ccefed2c5065c1d107",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-93",
+        "partition": "holdout",
+        "pair_hash": "daeda12e281d32da5c7bee75eba298ff6cdcd5ba167787376abf9c62f4ba1ca9",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-139",
+        "partition": "holdout",
+        "pair_hash": "c5084a651d7f64350c48821ae9f70f606e5ece4edefd47f3d5f5787d5ed110f6",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-102",
+        "partition": "holdout",
+        "pair_hash": "ddc082636b5d98a1d6a87011fc16ae91cd528c4ae7fd30e7eb6d76bae9670ece",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-119",
+        "partition": "holdout",
+        "pair_hash": "8946bf8d56804885f0bfd26e48e4b06e4ed24f3133e3a24673c36fd394b495e1",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-153",
+        "partition": "holdout",
+        "pair_hash": "0cad8cb4b85aca5014ce1c46139cc1a92b2efdaf79490416e3d63cde4bd65434",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-146",
+        "partition": "holdout",
+        "pair_hash": "e817dfb557c4bc9e79ecb71af7e635f3a872c3bcfe372b6139b5f46aadf1a135",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-131",
+        "partition": "holdout",
+        "pair_hash": "d5602a06f4b4610f65492197a268c756d4b580f6b8ec9364d618df5657aa2733",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-133",
+        "partition": "holdout",
+        "pair_hash": "00484b1dfb88ba9f616f8c1ffeeb9e34ee40f0c71e526b3b28bd0b3de60c5682",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-83",
+        "partition": "holdout",
+        "pair_hash": "bb7cbebf39c41cc60a561bfbbd78ea3c7b5db24f84d227c6f977853487280739",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-94",
+        "partition": "holdout",
+        "pair_hash": "6bbe8a94c5c1c6e0bc026edc452a14c59dd6f7d94ed1cb12c5569274bdb61f6e",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-105",
+        "partition": "holdout",
+        "pair_hash": "b73ab538e8d54cedbe36e8afa4deb8c6a549edf0bba99b2805754f7e8a874589",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-123",
+        "partition": "holdout",
+        "pair_hash": "bf59b21110d3496716b0d135e41cd3b01f51ebd64caa2e0c202a4d341c6f082c",
+        "reviewers": 4
+      },
+      {
+        "item_id": "mtbench-151",
+        "partition": "holdout",
+        "pair_hash": "c310b8e1647e9f88e349ae4504a22c19de1cbe892d3e7156f716b45ea699d8e0",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-140",
+        "partition": "holdout",
+        "pair_hash": "a4e3cea968a8d448c02ef35d95653c94635331d783bdfcb90dc3b0a5bec9dcb1",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-118",
+        "partition": "holdout",
+        "pair_hash": "3102983800a5e5b9ccce3567c8fbcbd08042aff82294af212534f5043c8b37fa",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-159",
+        "partition": "holdout",
+        "pair_hash": "5c99bc1a5a29df02bd785889a9f2294321e739b8827a15ad2c493aef3a7862ef",
+        "reviewers": 4
+      },
+      {
+        "item_id": "mtbench-134",
+        "partition": "holdout",
+        "pair_hash": "a164f9afc7bd6cdade66d09c5e05afa8d5dca5811b0ebd00fd75e517b6c0fdea",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-107",
+        "partition": "holdout",
+        "pair_hash": "a63092e883819c43d8809371561a1f42be73a0901b68c6ff1d57e04bfdf7a280",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-158",
+        "partition": "holdout",
+        "pair_hash": "2decff863f6ab6e984e3684206be7bba9077f17b049bdf70906eefd9450118af",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-127",
+        "partition": "holdout",
+        "pair_hash": "d97e044cf53cb361d328b498e319df41f7e06d2f4c4f4dade8ebac1a354e13b2",
+        "reviewers": 4
+      },
+      {
+        "item_id": "mtbench-138",
+        "partition": "holdout",
+        "pair_hash": "25f66a8156fe2abb25065127f4cea66631de9c4731ddc213bc4b91574285e4f1",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-125",
+        "partition": "holdout",
+        "pair_hash": "d73c33ad99c8e6d0c6adbd3f048577be58f84d4c3b0733c80b2021e54db1a4d3",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-160",
+        "partition": "holdout",
+        "pair_hash": "fd6ac42fa7569c2787b2175996d5bf17542edbd2d416ab9fdd03bf72640c9e40",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-106",
+        "partition": "holdout",
+        "pair_hash": "bb42e89964602180df55ffaa8ac6fbe1a94ff964c12e4d12630035be8732ee3a",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-152",
+        "partition": "holdout",
+        "pair_hash": "4c0625c59a0018b33d7e4753c948327b346c6e4b64951158b295f2df1b497842",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-115",
+        "partition": "holdout",
+        "pair_hash": "104f76098025ff96d74e17208031473dc414eb2f1dd4473428d9ba0c68dd13f6",
+        "reviewers": 6
+      },
+      {
+        "item_id": "mtbench-142",
+        "partition": "holdout",
+        "pair_hash": "5e61c4ec1777c039971795582ca2f7f1bd1f3967c3d53d4aa940ffd97e22bdf2",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-147",
+        "partition": "holdout",
+        "pair_hash": "127369c9d3502127b0e395f5f7a80061144149faf79b6f4df509d699dec8c2fc",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-136",
+        "partition": "holdout",
+        "pair_hash": "2b1cd32de29abb9b29c4553ad16f6cf90d624eb33f8dbf60358b6882bbd6d5eb",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-120",
+        "partition": "holdout",
+        "pair_hash": "7c0254b2a8ecb43789c2d1523c7701afba95ded6469a03677023c05f98e1108f",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-101",
+        "partition": "holdout",
+        "pair_hash": "29f95439fa69ccd530503afa231bdae246bba068bbcd79c90c53f86c18d17faa",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-92",
+        "partition": "holdout",
+        "pair_hash": "a653242087a6be4e253870736e0b53fd53684423cfa89c2da6cd71a0f106d787",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-97",
+        "partition": "holdout",
+        "pair_hash": "c7d8017b6063b17bebd027fe29c1ff2ce755d8b5ac3ceb6cd842e4e52935c32a",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-99",
+        "partition": "holdout",
+        "pair_hash": "3dab47e49bb4a044f4b7e939564af50024690931a2772d80e749218dc5acb0b3",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-155",
+        "partition": "holdout",
+        "pair_hash": "3e3d992a7ae66f5bd09bb058d226d3b23facf41206ac8fcdd0a5148dc307e447",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-148",
+        "partition": "holdout",
+        "pair_hash": "b17bc8940f7b2674e1f3ee183c3d28628acb2c1f0ebd69abfccb860ec8b757b1",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-132",
+        "partition": "holdout",
+        "pair_hash": "189d115d11dcc9c843582b4d614ceb4577d9d465bf71b772473e51c2fa424074",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-96",
+        "partition": "holdout",
+        "pair_hash": "b236a66d3259c29b355e363feccc30c166f9cae4e4cd152742b13a0e747ef3ff",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-95",
+        "partition": "holdout",
+        "pair_hash": "8fb19b5cff96af32799bf58c65ba8ffd68d77acbba94eb15b8d9809ad58110e0",
+        "reviewers": 4
+      },
+      {
+        "item_id": "mtbench-157",
+        "partition": "holdout",
+        "pair_hash": "9f51d857e3293842a641671cc224e1f5767c67dcb328f53a14ca2bab10b6610b",
+        "reviewers": 5
+      },
+      {
+        "item_id": "mtbench-109",
+        "partition": "holdout",
+        "pair_hash": "085770a4190922fc5652c7aef09f09ed55fceefc1839edbe692afbb379204a08",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-90",
+        "partition": "holdout",
+        "pair_hash": "0b812baf58617086fedfd248ad8307549972da88f0dd52026ee2fb0072d83538",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-87",
+        "partition": "holdout",
+        "pair_hash": "32233ce93f7a80d6bd71c89acaba524e1faaa5b109ca39d751495b926376116b",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-114",
+        "partition": "holdout",
+        "pair_hash": "99f09666f85a3733eed625fac70ae537bfcc57c89d8e54e628722e7f5fad8e10",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-88",
+        "partition": "holdout",
+        "pair_hash": "a8a6467e43a5a33786296b342d65eb7a0e22bf6f408b1b6fb3de3adf7ea0e13c",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-91",
+        "partition": "holdout",
+        "pair_hash": "fcce169535bae459db3c4d9ca8ac4654de1adb55016752fe8f27c388dfe61dfb",
+        "reviewers": 4
+      },
+      {
+        "item_id": "mtbench-84",
+        "partition": "holdout",
+        "pair_hash": "470c6b1dcd5c7ac0d015bfa2fa7345b3472fa0e0a07cc4da53308a456023f764",
+        "reviewers": 4
+      },
+      {
+        "item_id": "mtbench-110",
+        "partition": "holdout",
+        "pair_hash": "e96fa573767768aafa904dca18b02bddb28ce7f878f38268176727e7dc3b6172",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-143",
+        "partition": "holdout",
+        "pair_hash": "a2eb5ce6049185ddf42bb402654dfe99f5e33d4b85e6c9cf4d372b19d0f667c6",
+        "reviewers": 3
+      },
+      {
+        "item_id": "mtbench-129",
+        "partition": "holdout",
+        "pair_hash": "e32019b86b29fed865add7e99acaa39ece855fabe01c2b4431207308238190a4",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-113",
+        "partition": "holdout",
+        "pair_hash": "6724d676db087d54c3a59ee99c7321eda329735f0a2cd0cb5a9156d340590ae4",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-86",
+        "partition": "holdout",
+        "pair_hash": "70623d8d0e8c2f1ab6840d7edef0765be3b7d88f2529b0c2502420fbdc587064",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-144",
+        "partition": "holdout",
+        "pair_hash": "c3c81856e61d00fb380a71361ea3f34439b8811860956444e6b2baf9e0b70c97",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-150",
+        "partition": "holdout",
+        "pair_hash": "6eb6a2a7898c22334ebfeb7eecdbb6f93e65cb407e1e7a9c127cf97e92a2cf59",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-137",
+        "partition": "holdout",
+        "pair_hash": "8bb08c0209820192cf26da83be0079e986f7c69e42ccb14491131986b21016f2",
+        "reviewers": 4
+      },
+      {
+        "item_id": "mtbench-126",
+        "partition": "holdout",
+        "pair_hash": "a74f87288a51536f266fe4dc86706bf6b08d55982b0590d318cd424473c7a57f",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-89",
+        "partition": "holdout",
+        "pair_hash": "512947be62ca52eaa98bc510e68940d440ac2173d21ed3129dc15a495a745ad1",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-98",
+        "partition": "holdout",
+        "pair_hash": "85cab04c60eac6248378a4739ee8a1df1789be697a768431b76065ddff30cc47",
+        "reviewers": 2
+      },
+      {
+        "item_id": "mtbench-156",
+        "partition": "holdout",
+        "pair_hash": "4126620028a8a3d8367c27828ab594debac9d721939ddc9603b1202ab2e99472",
+        "reviewers": 3
+      }
+    ],
+    "sampling": "First turn; one content-consistent pair per question, at least two distinct reviewer identifiers, hash selection independent of vote outcomes."
+  },
+  "execution": {
+    "dataset": "princeton-nlp/SWE-bench_Verified",
+    "revision": "c104f840cc67f8b6eec6f759ebc8b2693d585d4a",
+    "dataset_sha256": "a45b1fe4e2f0c8390b2b2938ac83e92ed5979000856808f3679c07812e9e6dcd",
+    "experiments_revision": "40f164d5b8f1d249bf95a6df8b74b577fd8e519d",
+    "source": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified/resolve/c104f840cc67f8b6eec6f759ebc8b2693d585d4a/data/test-00000-of-00001.parquet",
+    "runs": {
+      "gpt-5.2-2025-12-11": "20251211_mini-v1.17.2_gpt-5.2-2025-12-11",
+      "gpt-5.1-2025-11-13": "20251120_mini-v1.15.0_gpt-5.1-2025-11-13",
+      "gpt-5-2025-08-07": "20250807_mini-v1.7.0_gpt-5"
+    },
+    "selected": [
+      {
+        "item_id": "swe-django__django-10097",
+        "partition": "dev",
+        "repository": "django/django",
+        "base_commit": "b9cf764be62e77b4777b3a75ec256f6209a57671",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "8df1e40f22c52bcd1117cb9896220957baaaba1cab56b511d3ab896d69d7df79",
+            "report_sha256": "db161ee9672d445f6ea5a74a52758f713e9898bbe8be69e898a326088efb7ea3",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-10097"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "139f6c9fda9ab250cfe3349f80112bc537112e1f47ce78898749fe33068b8251",
+            "report_sha256": "2e8500097d3ff729ad6255f5c9b5e757e410197c4c4259435bd40d44d06e59c1",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-10097"
+          }
+        ],
+        "fail_to_pass_count": 438,
+        "pass_to_pass_count": 1432
+      },
+      {
+        "item_id": "swe-sympy__sympy-24066",
+        "partition": "dev",
+        "repository": "sympy/sympy",
+        "base_commit": "514579c655bf22e2af14f0743376ae1d7befe345",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "0bb73a4179811fb1891774c7e53e38dad7d71651a054b4d4a52d947ec3c9b16e",
+            "report_sha256": "17c7126dc15f7415fef48ce19ed96ef5f543cf82c8d4a244e891ed0c58e34101",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sympy__sympy-24066"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "0aa2bb34e8b9ad105ce126fb068174a9c1442902befd468aa02036b18065b4a1",
+            "report_sha256": "2787640b9ed17fb2d5f63c4caf9e3639681b1135498b515678c3de7e6d201e89",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/sympy__sympy-24066"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 30
+      },
+      {
+        "item_id": "swe-django__django-16560",
+        "partition": "dev",
+        "repository": "django/django",
+        "base_commit": "51c9bb7cd16081133af4f0ab6d06572660309730",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "d7d6eca309ea141bfe06afd5e18512e0b5878a2310e000dc7f6a9acf9360589f",
+            "report_sha256": "039d49c56ce76fa75998b558ecff71f7d5fb11416ba0a60222c232d81d90aed0",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-16560"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "60ef1456252097a69c939131666fcc22ea460e2660eb997356a7a34fbd8d627b",
+            "report_sha256": "1bff90887512b1de9168b8261cc43cfc360e4c9a59937a50d6a0c484ef09b022",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-16560"
+          }
+        ],
+        "fail_to_pass_count": 8,
+        "pass_to_pass_count": 66
+      },
+      {
+        "item_id": "swe-django__django-16899",
+        "partition": "dev",
+        "repository": "django/django",
+        "base_commit": "d3d173425fc0a1107836da5b4567f1c88253191b",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "a3e14f3aa7b662ef17a60eb6f04d8d87c51c424d381e302a80f1fba28b547ee8",
+            "report_sha256": "78ebdfbb27135a54cab86a45decf4f83e39698f64f81cf79458153874c3769c0",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-16899"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "bd3d51eecc4e0ff0bb51dc0b8f5ac5826d4421d357ace69089ffddb40162b661",
+            "report_sha256": "be1dfbcd8173b4c161f208c05b314b80eb9dc3369b66fa1302331039d77cdddf",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-16899"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 54
+      },
+      {
+        "item_id": "swe-matplotlib__matplotlib-25332",
+        "partition": "dev",
+        "repository": "matplotlib/matplotlib",
+        "base_commit": "66ba515e671638971bd11a34cff12c107a437e0b",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "4e1286e23f41f89634ed270d67bffc3a30f86201574c598f9b77929f6470d7f9",
+            "report_sha256": "306d14bc72dafe748d32865a2b267637e07f754b5727ff8b31f0044625d54557",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/matplotlib__matplotlib-25332"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "f9c671cc7e4c69989ae742ebb879984f890f0b6fcab443fbaf2e8651a924fe0e",
+            "report_sha256": "60b8daeea4f696290da03c6722089a2ad7e075ec5c869668748a347a9d9ef74a",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/matplotlib__matplotlib-25332"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 181
+      },
+      {
+        "item_id": "swe-django__django-15973",
+        "partition": "dev",
+        "repository": "django/django",
+        "base_commit": "2480554dc4ada4ecf3f6a08e318735a2e50783f3",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "bba290a89348926a180b6b0e8b8394abfc5b9ef5be307ad6afe4b455e1754f10",
+            "report_sha256": "1b39ccb6a4fce3a4913a93c4c3057f4e9c65d7728b6464c852aa47d792c23ff5",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-15973"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "00314f5dfca97a6a2d740ef981af331c878d17f319effa98836e10c9f0388dcd",
+            "report_sha256": "47eb9fefde1735b3b96df7551a0c0cb1b43cac10839dde62ea463d7a243f94ad",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-15973"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 157
+      },
+      {
+        "item_id": "swe-django__django-11815",
+        "partition": "dev",
+        "repository": "django/django",
+        "base_commit": "e02f67ef2d03d48128e7a118bf75f0418e24e8ac",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "4192425e7983dbed88aa99e9d82062110d507753147520be5380db771d16398b",
+            "report_sha256": "0e4b8f29ce8cd9642958c70bd4d3bbaf4e88206d2c18bb9a5e87c54923787199",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-11815"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "b905ed23153e050e69fcd5c32921cb3a50c7802f11716109ef939206dabe5a68",
+            "report_sha256": "2c3eee901a80853b92505853706fa18fd2c2cc1b0e6652505600a39307e10c98",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-11815"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 44
+      },
+      {
+        "item_id": "swe-sphinx-doc__sphinx-10323",
+        "partition": "dev",
+        "repository": "sphinx-doc/sphinx",
+        "base_commit": "31eba1a76dd485dc633cae48227b46879eda5df4",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "bb56c2fcee426741cf03228d54cddf973290e85603d83dfc702f77259b4bca63",
+            "report_sha256": "8d65fe9ff3da3b94c1570765e3d63d77c6f38b3cda466ea7a79c88e7ca996df4",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/sphinx-doc__sphinx-10323"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "ec17ba9ec6187fb4c351a2b830bc9263515291db49a873af2ff8b2c391da5377",
+            "report_sha256": "a0fb89a53dbf6c8c8eb991f4980fedeafb770699a99a7718c01f4c7808dcc4f7",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sphinx-doc__sphinx-10323"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 40
+      },
+      {
+        "item_id": "swe-sympy__sympy-17655",
+        "partition": "dev",
+        "repository": "sympy/sympy",
+        "base_commit": "f5e965947af2410ded92cfad987aaf45262ea434",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "77ff276df1066518ff7fd2dbe5e9fa138a9a16f878d50186669f55224c202e2d",
+            "report_sha256": "6e82e6b2574d88de6b70aa80fb68a0681b0c07adf7b0e12bdf80a50123c77881",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sympy__sympy-17655"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "db98a410fb5425fb3e014e2d52bc08f0c8ae91d87f7e30fea604f8c784bd9813",
+            "report_sha256": "f293d2e8eae9bb91bcb268de15d91b50e04712ab796452c627a15b51de945d66",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/sympy__sympy-17655"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 9
+      },
+      {
+        "item_id": "swe-sympy__sympy-13877",
+        "partition": "dev",
+        "repository": "sympy/sympy",
+        "base_commit": "1659712001810f5fc563a443949f8e3bb38af4bd",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "9f2e62e8f63857d491dcb83f7f5470e9c891213668e176f5bb5eb8a77654a273",
+            "report_sha256": "126499325e37342b1973a3d19b890aadf395b5472dc16d4145c979fbdaa01412",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sympy__sympy-13877"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "37e5f0565e7a836bb55b27e455262c5217e5f542dcde90ee19db96391c8d2c6e",
+            "report_sha256": "39b02e71eeece2724e4d052b2d14f3406bc49f9723203bd62b7e8cb32bf504c1",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/sympy__sympy-13877"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 110
+      },
+      {
+        "item_id": "swe-django__django-12774",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "67f9d076cfc1858b94f9ed6d1a5ce2327dcc8d0d",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "a3e14f3aa7b662ef17a60eb6f04d8d87c51c424d381e302a80f1fba28b547ee8",
+            "report_sha256": "911efa0e31f3f4e0a329751b3cce271898a67c2ddb173c2b118a19c7f4352b45",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-12774"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "0b6bbcb2c823755703c5fc0a53c0108d99b97a06b0c664422f6915297fb93263",
+            "report_sha256": "0ebc12ddba8305762547b59fccee48b42610eaae85c95a476bdd4d5fdd031763",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-12774"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 41
+      },
+      {
+        "item_id": "swe-matplotlib__matplotlib-22719",
+        "partition": "holdout",
+        "repository": "matplotlib/matplotlib",
+        "base_commit": "a2a1b0a11b993fe5f8fab64b6161e99243a6393c",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "a3e14f3aa7b662ef17a60eb6f04d8d87c51c424d381e302a80f1fba28b547ee8",
+            "report_sha256": "3e26ecec5d0cdf54cecd22f966c29922a19cd75ebe31d2321fb6e2b80f6f75a5",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/matplotlib__matplotlib-22719"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "4f9c9a4a5e90a1de019eacd512f2888d116acc4b2f84a39789708cd564bb703d",
+            "report_sha256": "0db80b4ea7b39e139e6c6cdcbf5e66eb8e82bd230bd6c06583ecae17adbd6144",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/matplotlib__matplotlib-22719"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 68
+      },
+      {
+        "item_id": "swe-django__django-15916",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "88e67a54b7ed0210c11523a337b498aadb2f5187",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "34934aa28ba16da1826218b41961a34ab6c6102e157a4f8f4265733a0b75b66f",
+            "report_sha256": "fcd928826c1b0a93d310b1d82790e68673382439df5db637e3b45457fd0e4964",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-15916"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "1487588dea59f0911e8d1f349f6c583f471cf48d2b67391990666137c91f481f",
+            "report_sha256": "6bcdc5efba4a74090531149f3aa058a4470589f2391fdef3de343fb19058d206",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-15916"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 149
+      },
+      {
+        "item_id": "swe-sphinx-doc__sphinx-7440",
+        "partition": "holdout",
+        "repository": "sphinx-doc/sphinx",
+        "base_commit": "9bb204dcabe6ba0fc422bf4a45ad0c79c680d90b",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "580e6e6b0b75fd1e0b46d8413f8cb55729b6376018af56be20e5576c48bd7016",
+            "report_sha256": "7ddd4389e66d5d5b6fdd69fc554cc3b7c86f0180c130da4b5efeec22698bfdd4",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sphinx-doc__sphinx-7440"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "151c86ce6ad1eab9835eb6ecdb77b1c2d33474e5dd4788776371a6a4064e4fb5",
+            "report_sha256": "1d8549f6bcd3ea399aa065ee71dfaceee98bb64d1efb617413433f45b4c2c4b1",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/sphinx-doc__sphinx-7440"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 12
+      },
+      {
+        "item_id": "swe-django__django-13786",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "bb64b99b78a579cb2f6178011a4cf9366e634438",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "a3e14f3aa7b662ef17a60eb6f04d8d87c51c424d381e302a80f1fba28b547ee8",
+            "report_sha256": "0f4c47225814a9423de43c76f3a61471e63eb05ad03d479ffc9d35a8d16c5bea",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-13786"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "3c7dda23dcae50e37677fbe985f3ed16d9e3342fc54ec69cbd7526212e1409d3",
+            "report_sha256": "01be3ae1b576d19483a64061a6225017661d3eb062997cda33956b0d37b8b2c9",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-13786"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 33
+      },
+      {
+        "item_id": "swe-sphinx-doc__sphinx-9658",
+        "partition": "holdout",
+        "repository": "sphinx-doc/sphinx",
+        "base_commit": "232dbe41c5250eb7d559d40438c4743483e95f15",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "e69d19daa8edf7695290ab3da4f389e58450190ed8d6c2bc05bafa66f192a46a",
+            "report_sha256": "bdd49e73e4a9ab7278ac985d6821eff0d7cc7aa7c2c3ad094df62b54c1cc5cf1",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sphinx-doc__sphinx-9658"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "65e51199e036a82caa38922691f763960cd8d47cb2ab080370447c4c6f32b09a",
+            "report_sha256": "10c88be89cc39f46e3cc51ca9cdb05ea4e8591dbcee14ca8bb9a71d38f4aaa77",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/sphinx-doc__sphinx-9658"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 24
+      },
+      {
+        "item_id": "swe-pytest-dev__pytest-7490",
+        "partition": "holdout",
+        "repository": "pytest-dev/pytest",
+        "base_commit": "7f7a36478abe7dd1fa993b115d22606aa0e35e88",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "ef0bd8148eccbfb42983a1a3d2ae2bddf4e1ac5265e912f95a896985078c4582",
+            "report_sha256": "1a3194ca1709a072901add504d4a8496df89e8ee2b5c6677ad5f4333233d91c5",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/pytest-dev__pytest-7490"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "1837fe330be24fb8e28ec1b8d92828cb7206cfeec67c0f98b365c2c4358f525c",
+            "report_sha256": "76dcbd828b3d5284592ff329271c2576cd3c1c543a2a9c7a56c7e9118b218a9f",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/pytest-dev__pytest-7490"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 78
+      },
+      {
+        "item_id": "swe-matplotlib__matplotlib-20826",
+        "partition": "holdout",
+        "repository": "matplotlib/matplotlib",
+        "base_commit": "a0d2e399729d36499a1924e5ca5bc067c8396810",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "f13c38c05ac95092a22d6b7acac530931c0e127843b1886902b35eeb4e7f23bb",
+            "report_sha256": "3d8858f43761fa3d890564e0b50c9382e07bfe103c0e46d2877ea59f0b8a2a3e",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/matplotlib__matplotlib-20826"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "4108bb22e3523abe3b56a3d0b2bca72028c5022ccc9795fae8eaa88ea4957274",
+            "report_sha256": "458b2aa6cc9dc5e75fe27b743c2edf104f19168f7836870a564d650283dc714e",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/matplotlib__matplotlib-20826"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 673
+      },
+      {
+        "item_id": "swe-django__django-14053",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "179ee13eb37348cd87169a198aec18fedccc8668",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "54b2149d51766f2461f867fa99e07e362adfccadb270838fa473b4ab3a266593",
+            "report_sha256": "1b04d9fa2565a4130e6de8f066bef32705f53389c7b3d858fe41b7e91f370f12",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-14053"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "8028199d184dff0e8c4bfa541babd5949c07d10da9adbda72c89ff0a27d42bf2",
+            "report_sha256": "9c08783935692b87daf202dc69daf0dfc0c62dc98274efbcc657b33549bac7aa",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-14053"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 31
+      },
+      {
+        "item_id": "swe-django__django-13033",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "a59de6e89e8dc1f3e71c9a5a5bbceb373ea5247e",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "a3e14f3aa7b662ef17a60eb6f04d8d87c51c424d381e302a80f1fba28b547ee8",
+            "report_sha256": "e18ab2d5a2c9811caebb10ee920cc7b57f3b6f3d5d59edc3dcefb6c526f31e53",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-13033"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "785246bc1c32c94b175be936b446225373e02c861385e0ba6e5fb726f03f796f",
+            "report_sha256": "c6c2d6a90ed069b7aa5badabcff007915552e46319584d56d2415cc56dcf11ad",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-13033"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 26
+      },
+      {
+        "item_id": "swe-django__django-16642",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "fbe850106b2e4b85f838219cb9e1df95fba6c164",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "68f193d7107461beeecc1e2b1da1163a73f444188ca44c1cdb4e457765ed7925",
+            "report_sha256": "b1a96cf94e4b4cf40a69c3cc7b4cc40905a5880fc4490952ef828010a56fc7aa",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-16642"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "e078053a73029011a43d05448c2ccd47b9263197e46fcfa1dde889b16d93ae4e",
+            "report_sha256": "5c6eaf5760082e03aba6e6b9e45d58439b7f4a70e53f7ddc82fe108dc3916b3a",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-16642"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 21
+      },
+      {
+        "item_id": "swe-django__django-12325",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "29c126bb349526b5f1cd78facbe9f25906f18563",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "12865924efa4765e66c51001c5214960145572904ae58d66780a225beca2317a",
+            "report_sha256": "786604b04f7a46e89599f9998a3408a42133191778eb311edce34974298b44b8",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-12325"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "3dbede1a482287be1d945a4020f5142880ed1cfd0c2f7d49b962cb6c3e034dae",
+            "report_sha256": "9080c86ece5f74e30dbd15068f440e90a9b3ca0dd72809a1756a71fb7a070b5e",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-12325"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 201
+      },
+      {
+        "item_id": "swe-django__django-11333",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "55b68de643b5c2d5f0a8ea7587ab3b2966021ccc",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "9014eb586b65670207d67714a827730ed5aa9414a6c15229000937dd43ecb0d8",
+            "report_sha256": "f0ca44fce2bdaa9c598e707fe73daa719ec7b891dcea341c5baf08321af55bb4",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-11333"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "3e8c119f292c8e5468c26a3cb469f6e9f126cd955fff7e50a4926864124332f4",
+            "report_sha256": "046f772555d8cbb9cc727511263b5a8c36ede479df95eef3c3781064315b4476",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-11333"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 2
+      },
+      {
+        "item_id": "swe-scikit-learn__scikit-learn-14629",
+        "partition": "holdout",
+        "repository": "scikit-learn/scikit-learn",
+        "base_commit": "4aded39b5663d943f6a4809abacfa9cae3d7fb6a",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "6efcb2f1d32d0a0a436e7d4b7b846782670eba3eafbeef2d7026b668dc4c5b84",
+            "report_sha256": "349fbe1a42e696fd28957a48b8694875fdaef487c96378c9eb00d8b15be4a58a",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/scikit-learn__scikit-learn-14629"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "88f94bb22c1392ad80fec88094afffca2ff44174f7b46de62106ad7db8576df8",
+            "report_sha256": "f43c1ee03a26f9904dbcd896365cd98d641227f71d0bbbf32049e3fc35c24d3c",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/scikit-learn__scikit-learn-14629"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 26
+      },
+      {
+        "item_id": "swe-pylint-dev__pylint-7080",
+        "partition": "holdout",
+        "repository": "pylint-dev/pylint",
+        "base_commit": "3c5eca2ded3dd2b59ebaf23eb289453b5d2930f0",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "4fbb1e48b5075ce94118085cb1a3a9e6be03c1b8e8e84f10822789a733995c1c",
+            "report_sha256": "b53a49a5a5626f25896ba9f033b5056c07925a0eafa878527cef4ea46c1f6932",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/pylint-dev__pylint-7080"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "c79973de2f1fa48e1c2f0cebe890d29b8ae083fd9632e819dc3fe36cce0d4413",
+            "report_sha256": "41f54e7fdf717e05480bd6f8551ea7aa97ca30772a1a84e84a16bd85543d3409",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/pylint-dev__pylint-7080"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 120
+      },
+      {
+        "item_id": "swe-sympy__sympy-23413",
+        "partition": "holdout",
+        "repository": "sympy/sympy",
+        "base_commit": "10de1a18a0efac0b19b611e40c928250dda688bf",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "4433cd320e443f34aff6b77a73f66a3ac90535cf7c722c14727c40c751af6f6a",
+            "report_sha256": "c6518bbdcab4938047de644d42716f77adfc4df8e9c5378abd2a87bbb6edc521",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/sympy__sympy-23413"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "92057ad0bf1faecacd99856f0f9c782632cb36c3dd198a215363d1ac0d82d4b1",
+            "report_sha256": "97df2d6b633fc4dc6d8b3b84dbcaa3702ee328a99266442e4ac244a5208f15ce",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sympy__sympy-23413"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 2
+      },
+      {
+        "item_id": "swe-sympy__sympy-19495",
+        "partition": "holdout",
+        "repository": "sympy/sympy",
+        "base_commit": "25fbcce5b1a4c7e3956e6062930f4a44ce95a632",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "0efec2b5de28b9ace42b20df60f1831c75dd4789b77168c786855921fcc9f62c",
+            "report_sha256": "57366abd239f094148015aab44ab2a1e5fafe7d0ac8083522a6ff8a1def6571e",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/sympy__sympy-19495"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "9e55f0224d29dd62d95fdf185b505643733434730aab2702284dd9148e736b72",
+            "report_sha256": "e8620c4f93ba95a74064bc3bd0db4be1fa169d69beb08ee3c1d929bb4772c98e",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/sympy__sympy-19495"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 8
+      },
+      {
+        "item_id": "swe-sympy__sympy-20916",
+        "partition": "holdout",
+        "repository": "sympy/sympy",
+        "base_commit": "82298df6a51491bfaad0c6d1980e7e3ca808ae93",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "d0662c77505a945b3cc7a6ddbeb55317390954570cf1b7d6e767a33055a215cd",
+            "report_sha256": "4a926c85e3b06c0ffc7853a375c7d19f248ee9d49ca2c59fd26aecd7d2d31324",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sympy__sympy-20916"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "c5bae50aeb923e3fbb2ac28f5d4731bf1c97dccdc55b48c86bfde19324d424ae",
+            "report_sha256": "2ee0be2985d6c157cc24d99ce37ce0e34a716c549abafc5f1332999b9ec2e0e6",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/sympy__sympy-20916"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 1
+      },
+      {
+        "item_id": "swe-django__django-13401",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "453967477e3ddae704cd739eac2449c0e13d464c",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "8e7d4fcb331a7354dc927c4fa9a50f50e3e2cd95e46c4bc12e494c97ed391045",
+            "report_sha256": "2094cb2b06ef91da7eae76700ca85a6658a26c4f6ab310eca68abf79d9d5f103",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-13401"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "ad6db1260b183773b3ecdc4edd2667b0f5b7a4d5e560985a645a11f8ee7350cd",
+            "report_sha256": "2dfdf80cd25ff65ce6556d2a7e1b71e7e69fcd605380946733f06f69f922fd33",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-13401"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 32
+      },
+      {
+        "item_id": "swe-sympy__sympy-13551",
+        "partition": "holdout",
+        "repository": "sympy/sympy",
+        "base_commit": "9476425b9e34363c2d9ac38e9f04aa75ae54a775",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "3edcdb2564e47d074d86a05c064cce28ab1748c02f74d60b642faee3f663044b",
+            "report_sha256": "84701001ab176c30404733ea71363de332a37f4a14a7be1c7ea9c749376fe0c3",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/sympy__sympy-13551"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "3547e0736539f9fb6f65de4df813ed5a0a56d8528b56a42616bc386c95686e9e",
+            "report_sha256": "547dc3b5bd7fe7c0b5b4f4a85785ac5b1e266462a8a76b16c44759d5d05c65a2",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sympy__sympy-13551"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 17
+      },
+      {
+        "item_id": "swe-sympy__sympy-13031",
+        "partition": "holdout",
+        "repository": "sympy/sympy",
+        "base_commit": "2dfa7457f20ee187fbb09b5b6a1631da4458388c",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "0d1cba005c772e7c80dd3efcfc95c4d7428f1e5890f661008d0e85c4f87bb98d",
+            "report_sha256": "1b8719c4fad6b23acb6bd5add5cffc5077657fafdcc8e554ad88436628bdb0b9",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/sympy__sympy-13031"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "4feac0504f9275853220e73c12f309d287b32f29db1c4366df07300fd06394d1",
+            "report_sha256": "637e44c2cba27ca4024471a67642fcb1dfbf5bb31a0ed0093b8441a89474e13e",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/sympy__sympy-13031"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 9
+      },
+      {
+        "item_id": "swe-django__django-12304",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "4c1b401e8250f9f520b3c7dc369554477ce8b15a",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "11a72ee63bbadc976e03c87b09a895942e51fb9c576b1481e91f4c63610d8ec9",
+            "report_sha256": "9fc820ad23ddcf19933449365521bd785041d11d2082c8a3868bb76d21614769",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-12304"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "00f736b956c1946fb5668fa9f6f37fb6e8194760719ba501a815fc15e2cffb9c",
+            "report_sha256": "c43ae3ffa1fac4f8e9054422e80ea019fbf70dba60caa872d5b66f4b83962bde",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-12304"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 17
+      },
+      {
+        "item_id": "swe-django__django-14787",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "004b4620f6f4ad87261e149898940f2dcd5757ef",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "3c5da05c4dedc5a44f061b692857aaca4345327bf29977eb959c7a9da3890b16",
+            "report_sha256": "b6360a8620b882298054701aaff0e7101e89028a58cf2cada63336310052f845",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-14787"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "f411792f57145e2aafe65f79bb36ab73222c6513f066a41399d7a2a32dda60a8",
+            "report_sha256": "a9613f0d499bf5d9ebc9ae8e03fbf4226b89f7d204417c1f930840d046a7c56c",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-14787"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 20
+      },
+      {
+        "item_id": "swe-sympy__sympy-18698",
+        "partition": "holdout",
+        "repository": "sympy/sympy",
+        "base_commit": "3dff1b98a78f28c953ae2140b69356b8391e399c",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "e52ea71cc191473e785e2021cd9a5a7df8cbd1dfbf15be85c3cf94e1afd860b7",
+            "report_sha256": "878282e90c54faa52247d6fa6b73021334715db99cbe7adc434586feb0acb435",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/sympy__sympy-18698"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "e01edd7f385b32b32088004753502626035d57ffe86f740c0f1b073c74392b90",
+            "report_sha256": "db330aa99f65c181016fab40935e84bfc11ec7a5cc3dd052e8645773ac46d280",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/sympy__sympy-18698"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 147
+      },
+      {
+        "item_id": "swe-scikit-learn__scikit-learn-25102",
+        "partition": "holdout",
+        "repository": "scikit-learn/scikit-learn",
+        "base_commit": "f9a1cf072da9d7375d6c2163f68a6038b13b310f",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "54b01c6ce2dfcfa96c7bbe071153cdf252439988b624888aeea4a303ef103f80",
+            "report_sha256": "955db7095ca7fbcab4d8d1a1f27bcc6bef35d9c8019fa869de0e2ea0459e5d91",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/scikit-learn__scikit-learn-25102"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "b973c3f66f1391faaa4765fdf2c28cfc1fc2f951ce14699938b1a5b105f546ef",
+            "report_sha256": "f6046e1690b47a10c45fa4ea8b8e73d3bd5df9b7e460db29479d0c9618082cbf",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/scikit-learn__scikit-learn-25102"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 59
+      },
+      {
+        "item_id": "swe-django__django-15380",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "71e7c8e73712419626f1c2b6ec036e8559a2d667",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "044054e4b9f92ab0ba56acc2c958b142e09fc8fcaa0cd514a7938c36090022a0",
+            "report_sha256": "9b7063206de44ba04fc0424a4a00dfd341fdd7f96a49188445abd648836e9aa9",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-15380"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "96042f744676d2fb720281e0be81423d3ffa5d0d3979ae614e1a844ecbf94918",
+            "report_sha256": "cecd960a6f5d9eeed40d30f642164bede996d7be15bfabdf6a2f1c89bc64f076",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-15380"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 133
+      },
+      {
+        "item_id": "swe-sympy__sympy-17318",
+        "partition": "holdout",
+        "repository": "sympy/sympy",
+        "base_commit": "d4e0231b08147337745dcf601e62de7eefe2fb2d",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "9342f8e5349ff78ecc12487f0130d6bec5ddc1b1d7ddaa016775fb3967f41656",
+            "report_sha256": "243ad92eca19f75eb6959182425588d8c400f31d89c3c6adf8b5893f34013865",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sympy__sympy-17318"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "6c509723ddcaccf75878d29296e8ee74ce325e4b808f06a226e4e8cef4e02717",
+            "report_sha256": "fd11ba7ce8f38fa28b495556b3e93afacc6f0c10e77d6dd51acfae482e1cc5cd",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/sympy__sympy-17318"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 10
+      },
+      {
+        "item_id": "swe-django__django-11848",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "f0adf3b9b7a19cdee05368ff0c0c2d087f011180",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "11efe4468a621e449db403c8f74a6728de96f6122bcb71831698c55a0e794511",
+            "report_sha256": "0d19f7928577714483f4f9b2b3499821d36430c9a35471397ebbb0cace8efb81",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-11848"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "b079ff5c44bb81b28dccb35ab9b6c826e600393663ea92fa5879c50cee936311",
+            "report_sha256": "1af0b59c9be931886e58721b857b096735634031263276cd0a8e0a004b77e4dc",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-11848"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 43
+      },
+      {
+        "item_id": "swe-sympy__sympy-20801",
+        "partition": "holdout",
+        "repository": "sympy/sympy",
+        "base_commit": "e11d3fed782146eebbffdc9ced0364b223b84b6c",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "387273bbe9663bad20a6f5c24401f38728ae0b7cf78acc5dea90da5a69b6551f",
+            "report_sha256": "354aaf44892f8f2ef258beb54b2cdce089e0d82dd9cadff7c4386183cf33b247",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/sympy__sympy-20801"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "e94bb35202ebdff5321108cbf45162162de21d2db221bf70eb27fc19502212cc",
+            "report_sha256": "73a1c48c896eb8f2b6588a368be5f6058dfab9a8f5b45b4fd857ef5c00e4e044",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sympy__sympy-20801"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 96
+      },
+      {
+        "item_id": "swe-django__django-15022",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "e1d673c373a7d032060872b690a92fc95496612e",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "08df0497e67f14667eb3ec31dbd0a72a651b0ed8f3af24adf9a8af512fb789f2",
+            "report_sha256": "499ad6ab65a7e6fcc09079a5dad8535a74b1086feff1fb52bc88e4697244f864",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-15022"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "ee06128ae175ac3f6ef0d47d57e29cea0e3c0c74c8bd88fa38af8deb783f5e2b",
+            "report_sha256": "5bf20689a53ed2b10f4ab96e4a6c1223f20c367b4745b84139696f790b80cf30",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-15022"
+          }
+        ],
+        "fail_to_pass_count": 3,
+        "pass_to_pass_count": 56
+      },
+      {
+        "item_id": "swe-scikit-learn__scikit-learn-25931",
+        "partition": "holdout",
+        "repository": "scikit-learn/scikit-learn",
+        "base_commit": "e3d1f9ac39e4bf0f31430e779acc50fb05fe1b64",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "84cab808d2adc50f22a8796e6052f08350c59482d46917f42945ba8ca0f8b266",
+            "report_sha256": "a720fa1cfdd3b5304664a6de7da51703c7845b43f44e6ea32773703385706582",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/scikit-learn__scikit-learn-25931"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "7d3e907dcfe7517c494d1c89cb54f522c2ffac252834e7fec82a9090473cf7a8",
+            "report_sha256": "81401d8b04c7336776f0d881fb104ebc8a54778744c7cb7ebfbb564d92c11221",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/scikit-learn__scikit-learn-25931"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 21
+      },
+      {
+        "item_id": "swe-django__django-14539",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "6a5ef557f80a8eb6a758ebe99c8bb477ca47459e",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "2e3eef136ed8266f3d981119b571a00d385bb3b70e1184f88ccd97b6c41db669",
+            "report_sha256": "eb763e684aa6bfbb161338b912191acd9465950891795f71b78d3a3c3619d83b",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-14539"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "b1ae9f9aecb38cf4e71af9167b6c51e3793862c96f56bf9b398c13886f516081",
+            "report_sha256": "e9749eb9ce951855b4900579bfd8d978b856986da132024ac6acbc6c8cfc3528",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-14539"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 14
+      },
+      {
+        "item_id": "swe-astropy__astropy-13236",
+        "partition": "holdout",
+        "repository": "astropy/astropy",
+        "base_commit": "6ed769d58d89380ebaa1ef52b300691eefda8928",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "2a65a776ccffd61bcae04ddce899bad006c4957d3054293094e599f51467ce83",
+            "report_sha256": "e2a4bbf63689945e41d8bc9b4dc6a339201d7d3d3ff2c1ccccf0b97d1235ba9a",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/astropy__astropy-13236"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "7ac024d0027c7e3ecf3b58c812e0bd17ef8210f583004c07bd7443e6e569b04e",
+            "report_sha256": "d56a676e8395afa9034970ed0bb4beb9c0f2ff7349e05ea8810dbe08fdaf603c",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/astropy__astropy-13236"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 644
+      },
+      {
+        "item_id": "swe-django__django-11211",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "ba726067604ce5a8ca3919edf653496722b433ab",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "21890781ce94ef270d685d5e1b1878d62100c4713b24db2ec47c7c651394dcdf",
+            "report_sha256": "7786a8e32681e6e62575f1456feae05440d0f14c1dc616be2838319ff65d253f",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-11211"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "8426af6dca25a32cecf9872b16b3c4960c66fa236f815e88ca039cbf1c349908",
+            "report_sha256": "9d8c1a50ffbd959078f6ff844e402c971cb4272cc1387a3d4d6956c8af6cff6e",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-11211"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 76
+      },
+      {
+        "item_id": "swe-django__django-14771",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "4884a87e022056eda10534c13d74e49b8cdda632",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "8f7421153fb07814359ef178fb63e5ad4da6ba8d2fdadcc519dac43f4aa3a71e",
+            "report_sha256": "1e849592e131a646ae893f6f4aa58c70c7723cc4f0c3d700d764220d7d717957",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-14771"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "deb9fd664624462b94ebf6abdefa4a5fbe13670a02b116d12fe67fba5641a570",
+            "report_sha256": "378d3f0063cccffec12fcc8c70affb7d557be407c945a508ed64af43cad30215",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/django__django-14771"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 60
+      },
+      {
+        "item_id": "swe-django__django-13406",
+        "partition": "holdout",
+        "repository": "django/django",
+        "base_commit": "84609b3205905097d7d3038d32e6101f012c0619",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "e292ce3e1ef3d9db0f2054a374f40e5b6fc14f57e2420a4ae5c2eedebe5a212d",
+            "report_sha256": "766bf5347ed3cc9d837036b84fea0255fdd2efcdff359525ec3bfcc7dd46234f",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/django__django-13406"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "e44c27bbf9badb857c5c184249fca7e40077170681c153a1b3328fffeab14972",
+            "report_sha256": "677c2c6c003ffde7b78ce981cb2625fea014252ae5a5f527e57e0483c43129d8",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/django__django-13406"
+          }
+        ],
+        "fail_to_pass_count": 3,
+        "pass_to_pass_count": 32
+      },
+      {
+        "item_id": "swe-pytest-dev__pytest-6197",
+        "partition": "holdout",
+        "repository": "pytest-dev/pytest",
+        "base_commit": "e856638ba086fcf5bebf1bebea32d5cf78de87b4",
+        "records": [
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "6af2c2380ee1adc28f1275edc6d07c87da29eb0fcf1c76379bb1bbfac45ee31e",
+            "report_sha256": "467c286317516b71ba4efd21f51a087193b974ce07ed5effbaba0b1737d1b6ca",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/pytest-dev__pytest-6197"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "dd80e69fc0b844e39a67d5d9e34c71c9c1c1dbdb5adc0c552375838d43bdd683",
+            "report_sha256": "fa906dfbe320dad07f2c0651adc22101a84955729f00c57ab2f044500164c408",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/pytest-dev__pytest-6197"
+          }
+        ],
+        "fail_to_pass_count": 2,
+        "pass_to_pass_count": 145
+      },
+      {
+        "item_id": "swe-pydata__xarray-6599",
+        "partition": "holdout",
+        "repository": "pydata/xarray",
+        "base_commit": "6bb2b855498b5c68d7cca8cceb710365d58e6048",
+        "records": [
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "41937d28c165287427be5b22c81c0cd371941f2f522232f6a2bb18baaf0fe576",
+            "report_sha256": "3fbbaf4ca52ed13c1bdadb7fe930802e6639f809e8cbaa1c9ad59864d71c4226",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/pydata__xarray-6599"
+          },
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "91eb331e750f1c7ff320146953e2a06c240ff8d854c96de0799e4fa3718476bb",
+            "report_sha256": "3b23e1427c689fe836f1816a3ef347db6bb881e30f919df2e7e555050f0d51b9",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/pydata__xarray-6599"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 264
+      },
+      {
+        "item_id": "swe-pytest-dev__pytest-7324",
+        "partition": "holdout",
+        "repository": "pytest-dev/pytest",
+        "base_commit": "19ad5889353c7f5f2b65cc2acd346b7a9e95dfcd",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "2a566efa643ccb776c2d14d5dafcc63200a57ca2f00def57c4abfe86c31a8ebc",
+            "report_sha256": "1e78193e67a7432f70cd0fa423e24e56e8dc9321b4d73ddcbc44cdd2024910c5",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/pytest-dev__pytest-7324"
+          },
+          {
+            "model": "gpt-5.2-2025-12-11",
+            "patch_sha256": "a6e2a2b9992e118fe40e6295c7dba8c1dd74e7fdbe03ce76f5ca578d1defa3bd",
+            "report_sha256": "845a68a97239e58d7708bc846280ff440b95e381a93227be734206249222e9b1",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251211_mini-v1.17.2_gpt-5.2-2025-12-11/logs/pytest-dev__pytest-7324"
+          }
+        ],
+        "fail_to_pass_count": 3,
+        "pass_to_pass_count": 58
+      },
+      {
+        "item_id": "swe-sympy__sympy-19040",
+        "partition": "holdout",
+        "repository": "sympy/sympy",
+        "base_commit": "b9179e80d2daa1bb6cba1ffe35ca9e6612e115c9",
+        "records": [
+          {
+            "model": "gpt-5-2025-08-07",
+            "patch_sha256": "d638d29c9e5630b9b356f354c0f8d25c0081f803a9eb2d56cc5250d24b644164",
+            "report_sha256": "edc2123c9ad17447017999ac10d495371601ca510e38946131bf98fbcfff102c",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20250807_mini-v1.7.0_gpt-5/logs/sympy__sympy-19040"
+          },
+          {
+            "model": "gpt-5.1-2025-11-13",
+            "patch_sha256": "9b55b0fd2568afafc867e3bbe95d9cf881e256e38a20b37565f188e54df21425",
+            "report_sha256": "675f2036ff430efe53299ac29a64dd2e2919cdfe8e4d4c58ba06a590f3ff9b03",
+            "source": "https://swe-bench-submissions.s3.amazonaws.com/bash-only/20251120_mini-v1.15.0_gpt-5.1-2025-11-13/logs/sympy__sympy-19040"
+          }
+        ],
+        "fail_to_pass_count": 1,
+        "pass_to_pass_count": 148
+      }
+    ],
+    "excluded": [
+      {
+        "instance_id": "sphinx-doc__sphinx-8056",
+        "reason": "Public issue and patch pair exceed frozen 60 KB content bound"
+      },
+      {
+        "instance_id": "django__django-10973",
+        "reason": "Incomplete official required-test evidence or patch application"
+      },
+      {
+        "instance_id": "django__django-13964",
+        "reason": "Public issue and patch pair exceed frozen 60 KB content bound"
+      },
+      {
+        "instance_id": "django__django-13195",
+        "reason": "Empty recorded patch"
+      },
+      {
+        "instance_id": "psf__requests-1142",
+        "reason": "Public issue and patch pair exceed frozen 60 KB content bound"
+      }
+    ],
+    "eligible_discordant_tasks": 118,
+    "sampling": "Hash-ordered diagnostic disagreements among three recorded systems; official required-test coverage checked before deterministic first-50 admission; no judge outcomes used."
+  }
+}
