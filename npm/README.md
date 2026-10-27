@@ -7,7 +7,7 @@ repeatable evaluations. Compare quality, cost, and latency, then keep checking
 as your models, prompts, and code change.
 
 This package launches the complete Everval Python application: CLI, terminal
-workbench, tmux sessions, worker, API, and bundled browser interface.
+workbench, tmux sessions, worker, API, and bundled browser interface. Calibrated judge studies preserve human disagreements, measure order effects and repeatability, and export evaluator-only references to Inspect.
 
 ## Install
 

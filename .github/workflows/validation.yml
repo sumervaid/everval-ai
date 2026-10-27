@@ -178,3 +178,37 @@ jobs:
           assert [run["report"]["systems"][0]["pass_rate"] for run in result["runs"]] == [1, 0, 1]
           print("Installed three-domain demo passed; fixture controls only, zero provider calls.")
           PY
+
+      - name: Build and install the npm bundle in an isolated prefix
+        run: |
+          uv run --no-sync python scripts/build_npm.py \
+            --wheel "$RUNNER_TEMP/everval-dist/"*.whl \
+            --output "$RUNNER_TEMP/everval-npm-stage"
+          npm pack "$RUNNER_TEMP/everval-npm-stage" --ignore-scripts \
+            --pack-destination "$RUNNER_TEMP/everval-dist" --json \
+            > "$RUNNER_TEMP/everval-npm-pack.json"
+          npm install --prefix "$RUNNER_TEMP/everval-npm-installed" \
+            --ignore-scripts --no-audit --no-fund "$RUNNER_TEMP/everval-dist/"*.tgz
+      - name: Verify the installed npm launcher without provider calls
+        run: |
+          cd "$RUNNER_TEMP"
+          unset PYTHONPATH
+          export EVERVAL_NPM_RUNTIME_DIR="$RUNNER_TEMP/everval-npm-runtime"
+          export EVERVAL_DATA_DIR="$RUNNER_TEMP/everval-npm-state"
+          export EVERVAL_PYTHON="$RUNNER_TEMP/everval-installed/bin/python"
+          "$RUNNER_TEMP/everval-npm-installed/node_modules/.bin/everval" setup
+          "$RUNNER_TEMP/everval-npm-installed/node_modules/.bin/everval" --version
+          "$RUNNER_TEMP/everval-npm-installed/node_modules/.bin/everval" judges --help
+          "$RUNNER_TEMP/everval-npm-installed/node_modules/.bin/everval" demo \
+            --workspace "$RUNNER_TEMP/everval-npm-demo" --json > "$RUNNER_TEMP/everval-npm-demo.json"
+          "$RUNNER_TEMP/everval-installed/bin/python" - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          result = json.loads((Path(os.environ["RUNNER_TEMP"]) / "everval-npm-demo.json").read_text())
+          assert result["provider_calls"] == result["provider_cost_usd"] == 0
+          assert result["audit"]["valid"] and not result["sandbox"]
+          assert [run["report"]["systems"][0]["pass_rate"] for run in result["runs"]] == [1, 0, 1]
+          print("Installed npm setup, calibrated judge CLI and no-key demo verified.")
+          PY

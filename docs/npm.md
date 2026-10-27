@@ -19,7 +19,7 @@ everval demo
 ```
 
 For a release candidate supplied as a local tarball, replace the first command
-with `npm install --global /path/to/everval-ai-0.3.1.tgz`.
+with `npm install --global /path/to/everval-ai-0.4.0.tgz`. The 0.4 source adds calibrated judges, Inspect export and the public Python `everval` namespace. A local candidate is not a published registry release.
 
 npm installation runs no lifecycle scripts. The explicit setup command installs
 the bundled application and hash-locked Python dependencies into a private
@@ -125,7 +125,7 @@ npm run build --prefix web
 uv run python scripts/build_web.py
 uv build --wheel --out-dir dist
 uv run python scripts/build_npm.py \
-  --wheel dist/everval_ai-0.3.1-py3-none-any.whl \
+  --wheel dist/everval_ai-0.4.0-py3-none-any.whl \
   --output dist/npm-review
 npm pack ./dist/npm-review --ignore-scripts --pack-destination dist
 ```
@@ -145,7 +145,7 @@ For an authorized public release, use a fresh staging directory and
 
 ```sh
 uv run python scripts/build_npm.py \
-  --wheel dist/everval_ai-0.3.1-py3-none-any.whl \
+  --wheel dist/everval_ai-0.4.0-py3-none-any.whl \
   --output dist/npm-public --access public
 npm pack ./dist/npm-public --ignore-scripts --pack-destination dist
 ```
@@ -161,7 +161,7 @@ interactive terminal so npm can present its authentication flow, then publish
 the same accepted archive:
 
 ```sh
-npm publish ./dist/everval-ai-0.3.1.tgz --access public --ignore-scripts
+npm publish ./dist/everval-ai-0.4.0.tgz --access public --ignore-scripts
 ```
 
 npm can accept an upload before the version becomes installable while

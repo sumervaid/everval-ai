@@ -17,7 +17,7 @@ The workflow separates three jobs:
 | --- | --- |
 | Python and documentation | Locked dependencies, Ruff, formatting, strict types, local documentation links/anchors and ordinary tests. |
 | Web | Locked npm install, TypeScript, component tests and a production build. |
-| Distribution and installed demo | Wheel/source archives, bundled browser and terminal assets, LICENSE/NOTICE, absence of private/generated directories, clean installation using exported locked runtime dependencies, and all three no-key demo domains. |
+| Distribution and installed demo | Wheel/source archives, bundled browser and terminal assets, LICENSE/NOTICE, absence of private/generated directories, clean wheel installation using exported locked runtime dependencies, isolated npm tarball installation and setup, and all three no-key demo domains through both entry points. |
 
 Docker, live GitHub checks, browser acceptance and paid provider evaluations are
 outside this workflow. Their explicit procedures and evidence requirements are
