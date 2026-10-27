@@ -1,0 +1,129 @@
+{
+  "schema_version": "everval.full-cohort-bound-chart/v1",
+  "plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+  "analysis_role": "post_hoc_finite_cohort_identification_bounds",
+  "transport": "phase_aware_offline_regrade",
+  "frozen_scores_modified": false,
+  "items": 64,
+  "families": 64,
+  "judges": [
+    {
+      "judge_id": "luna-standard",
+      "model_id": "gpt-6-luna",
+      "arm": "standard",
+      "bounds": [
+        0.6436197916666667,
+        0.6436197916666667
+      ],
+      "scheduled": 256,
+      "unattempted": 0,
+      "status_counts": {
+        "abstained": 0,
+        "completed": 256,
+        "error": 0,
+        "invalid": 0,
+        "missing": 0
+      }
+    },
+    {
+      "judge_id": "luna-reference_context",
+      "model_id": "gpt-6-luna",
+      "arm": "reference_context",
+      "bounds": [
+        0.6322265625,
+        0.6322265625
+      ],
+      "scheduled": 256,
+      "unattempted": 0,
+      "status_counts": {
+        "abstained": 2,
+        "completed": 252,
+        "error": 2,
+        "invalid": 0,
+        "missing": 0
+      }
+    },
+    {
+      "judge_id": "terra-standard",
+      "model_id": "gpt-6.1-terra",
+      "arm": "standard",
+      "bounds": [
+        0.723046875,
+        0.723046875
+      ],
+      "scheduled": 256,
+      "unattempted": 0,
+      "status_counts": {
+        "abstained": 0,
+        "completed": 256,
+        "error": 0,
+        "invalid": 0,
+        "missing": 0
+      }
+    },
+    {
+      "judge_id": "terra-reference_context",
+      "model_id": "gpt-6.1-terra",
+      "arm": "reference_context",
+      "bounds": [
+        0.72109375,
+        0.72109375
+      ],
+      "scheduled": 256,
+      "unattempted": 0,
+      "status_counts": {
+        "abstained": 0,
+        "completed": 256,
+        "error": 0,
+        "invalid": 0,
+        "missing": 0
+      }
+    },
+    {
+      "judge_id": "sol-standard",
+      "model_id": "gpt-6.1-sol",
+      "arm": "standard",
+      "bounds": [
+        0.711328125,
+        0.726953125
+      ],
+      "scheduled": 256,
+      "unattempted": 4,
+      "status_counts": {
+        "abstained": 0,
+        "completed": 252,
+        "error": 0,
+        "invalid": 0,
+        "missing": 4
+      }
+    },
+    {
+      "judge_id": "sol-reference_context",
+      "model_id": "gpt-6.1-sol",
+      "arm": "reference_context",
+      "bounds": [
+        0.69765625,
+        0.71328125
+      ],
+      "scheduled": 256,
+      "unattempted": 4,
+      "status_counts": {
+        "abstained": 0,
+        "completed": 252,
+        "error": 0,
+        "invalid": 0,
+        "missing": 4
+      }
+    }
+  ],
+  "observed_panel_ceiling": 0.8408854166666666,
+  "method": "Observed attempted outcomes are fixed; invalid, abstained and error deliveries score zero. Each unattempted judgment ranges from zero to its question's maximum reference-vote share, with original scheduled denominators. Items are averaged within frozen families, then families receive equal weight.",
+  "interpretation": "Finite-cohort identification uncertainty, not a confidence interval, statistical-significance test, population claim or replacement for the frozen primary. Equal endpoints identify a fixed-cohort value only. No independence assumption or imputation is used.",
+  "no_midpoint_estimated": true,
+  "ceiling_interpretation": "Maximum categorical agreement with these retained historical votes, not a universal model capability ceiling.",
+  "source_phase_audit_sha256": "ad2efa3d187482cd0d9b9d49be61f99563be69689b5c0916249a585fe11c58cb",
+  "source_results_sha256": "61fd0431427d7c552aa1f7e0f080bc3ee8523aa366bc1a59dd1a80cd1ffdfcbd",
+  "publisher_sha256": "aed9e66ade506c1948d14bbc21fc8efa48c17bfc4a4557fdce28cb489aac9398",
+  "figure_dependency": "matplotlib==3.11.2",
+  "reproduction": "python -m scripts.judge_study.publish_bounds --render-only --input docs/benchmarks/judge-study-2026-10-27/full-cohort-phase-aware-bounds.json --output ./reproduced-figures"
+}

@@ -255,7 +255,9 @@ def _model_label(model_id: str) -> str:
 
 
 def _save(figure: Any, destination: Path, name: str) -> None:
-    figure.savefig(destination / (name + ".svg"), bbox_inches="tight", metadata={"Date": None})
+    svg = destination / (name + ".svg")
+    figure.savefig(svg, bbox_inches="tight", metadata={"Date": None})
+    svg.write_text("\n".join(line.rstrip(" \t") for line in svg.read_text().splitlines()) + "\n")
     figure.savefig(
         destination / (name + ".png"),
         bbox_inches="tight",
@@ -329,7 +331,7 @@ def render(result: dict[str, Any], destination: Path) -> list[str]:
         ),
     ):
         figure, axes = plt.subplots(1, 2, figsize=(13.2, 4.9))
-        figure.subplots_adjust(left=0.14, right=0.90, bottom=0.23, top=0.74, wspace=0.60)
+        figure.subplots_adjust(left=0.14, right=0.90, bottom=0.27, top=0.74, wspace=0.60)
         for axis, name in zip(axes, COHORTS, strict=True):
             cohort = result[field][name]
             models = list(dict.fromkeys(row["model_id"] for row in cohort["judges"]))
@@ -428,8 +430,8 @@ def render(result: dict[str, Any], destination: Path) -> list[str]:
             "Secondary endpoint: checklist minus base rubric",
         ),
     ):
-        figure, axes = plt.subplots(1, 2, figsize=(12.6, 4.6))
-        figure.subplots_adjust(left=0.14, right=0.94, bottom=0.24, top=0.74, wspace=0.55)
+        figure, axes = plt.subplots(1, 2, figsize=(12.6, 5.2))
+        figure.subplots_adjust(left=0.14, right=0.94, bottom=0.32, top=0.74, wspace=0.55)
         for axis, name in zip(axes, COHORTS, strict=True):
             cohort = result[field][name]
             judges = {row["judge_id"]: row for row in cohort["judges"]}
@@ -571,8 +573,9 @@ def main() -> None:
     result["figure_dependency"] = "matplotlib==3.11.2"
     result["publisher_sha256"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     result["publisher_revision"] = {
-        "supersedes_sha256": "b7f14d845b57e7f507ffda11f0e523fe6df3af9fb0d8bb4768885a94762d4f99",
-        "change": "Caption and interpretation metadata clarify complete-item conditioning; numerical analysis and cohort membership are unchanged.",
+        "supersedes_sha256": "6fa5209e57da9b48a16e0bcb04d85af19d51d57c50b0b40aef39b31024050600",
+        "original_frozen_publisher_sha256": "b7f14d845b57e7f507ffda11f0e523fe6df3af9fb0d8bb4768885a94762d4f99",
+        "change": "Captions and footer spacing clarify interpretation; generated SVG line-end whitespace is normalized. Numerical analysis, cohort membership and visual content are unchanged.",
     }
     result["reproduction"] = (
         "python scripts/judge_study/publish_results.py --render-only --input docs/benchmarks/judge-study-2026-10-27/results.json --output ./reproduced-figures"

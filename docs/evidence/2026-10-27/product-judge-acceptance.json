@@ -1,0 +1,41 @@
+{
+  "protocol_hash": "c675735ddd73a12f591fd996810fd37d0e758d649c55f61e681c7a82550b2606",
+  "budget_usd": 0.05,
+  "committed_usd": 0.0004795,
+  "known_cost_usd": 0.0004795,
+  "unknown_cost_judgments": 0,
+  "billing_uncertain": false,
+  "provider_calls_started": 4,
+  "finished_at": "2026-10-27T18:31:51.964936+00:00",
+  "reference_source": "scripted",
+  "scope": "Built-in CLI, Chat Completions transport, durable ledger and reports; no model quality inference.",
+  "statuses": {
+    "completed": 4
+  },
+  "holdout_controls_correct": 2,
+  "human_validity_claim": false,
+  "statistical_interval": null,
+  "protocol_source_hashes": {
+    "src/cvals/providers.py": "41abe23e8638fee9c3557dc45c4fc89305ca75a4d10700aeba582c3f7d275d84",
+    "src/cvals/judge_calibration.py": "659b354b2fe69701c3d7998880123f1f2c4d9be8cf4e814ef4ed33b4038e30ff",
+    "src/cvals/judge_calibration_models.py": "cc4d2cdf26e9adb47863235bcbbcbcf4afee708f00e9c40ef5f1b477bd09ad62"
+  },
+  "schema_version": 1,
+  "source_version": "0.4.0",
+  "source_commit": "795a9f2d4ecff9f2fe61e09c7832f4e0308459ef",
+  "model": "gpt-6-luna",
+  "transport": "OpenAI Chat Completions",
+  "planned_calls": 4,
+  "protocol_frozen_at": "2026-10-27T18:30:46.067436+00:00",
+  "cost_basis": "Reported token usage at 2.5x standard input and standard output rates; conservative estimate, not an invoice.",
+  "automatic_retries": 0,
+  "verified": [
+    "CLI protocol creation",
+    "Development dispatch",
+    "Explicit holdout release",
+    "Both response orders",
+    "Durable campaign spending ledger",
+    "JSON and HTML reports",
+    "Scripted-provenance uncertainty suppression"
+  ]
+}

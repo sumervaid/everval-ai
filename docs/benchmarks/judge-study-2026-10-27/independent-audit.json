@@ -1,0 +1,37 @@
+{
+  "source": "Retained raw responses; independent stdlib recomputation, no cvals imports",
+  "cohorts": {
+    "human": {
+      "items": 64,
+      "judge_configurations": 6,
+      "request_mapping": "PASS",
+      "primary_item_scores": "PASS",
+      "secondary_scores": "PASS",
+      "coverage": "PASS",
+      "three_paired_contrasts": "PASS",
+      "bootstrap_seeds_and_intervals": "PASS",
+      "order_repeat_estimates": "PASS"
+    },
+    "execution": {
+      "items": 40,
+      "judge_configurations": 6,
+      "request_mapping": "PASS",
+      "primary_item_scores": "PASS",
+      "secondary_scores": "PASS",
+      "coverage": "PASS",
+      "three_paired_contrasts": "PASS",
+      "bootstrap_seeds_and_intervals": "PASS",
+      "order_repeat_estimates": "PASS"
+    }
+  },
+  "calls_by_this_audit": 0,
+  "frozen_plan_protocol_and_request_hashes": "PASS",
+  "provider_model_and_token_evidence": "PASS",
+  "conservative_settled_cost_recomputed_usd": "13.33013900",
+  "unknown_request_count": 3,
+  "unknown_billing_reservations_usd": "0.01312325",
+  "missing_observation_count": 16,
+  "complete_frozen_grid": false,
+  "plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+  "auditor_sha256": "2b736dc4297cb08026410120fd739f842cbb794298c15ceaf9fb5bc825b94733"
+}

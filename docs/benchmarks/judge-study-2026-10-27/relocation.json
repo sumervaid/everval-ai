@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-10-27T19:28:46.474669+00:00",
+  "original_remains_stopped": true,
+  "single_dispatcher": true,
+  "relocation_provenance_sha256": "2ab747cbb54a03aa2fa40cbd22aaac8fc10c5ff9c6a2b5259ca42b0a0eb7a1af",
+  "sqlite_finalization_sha256": "8375f5cc7b54c1840d77d83f9c044738421e8f589e66e234463981fc1bd58a3f",
+  "flat_continuation_sha256": "504478cf72c312220108ed11901b1932f47d98adcda71fcc3cf7752c13d3bc9a",
+  "verification_seconds": 2.421312917023897,
+  "retained_requests": 2708,
+  "settled_requests": 2705,
+  "unknown_requests": 3,
+  "known_cost_usd": "9.70102825",
+  "retained_unknown_usd": "0.01312325",
+  "committed_cost_usd": "9.71415150",
+  "immutable_files": 8147,
+  "copied_bytes": 70651230,
+  "sqlite_backups": 4,
+  "analysis_unchanged": true,
+  "timing_caveat": "Recorded request durations include local I/O; no cross-storage latency inference is planned.",
+  "storage_change": "iMac external drive to iMac internal SSD; no data left the iMac."
+}

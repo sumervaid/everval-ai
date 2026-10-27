@@ -1,0 +1,2650 @@
+{
+  "schema_version": "everval.judge-study-public/v1",
+  "source_aggregate_sha256": "da9f3481325584415e1a4f45ea6be430ab5b44cfbdc74da003aa18b7b3532839",
+  "plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+  "planned_requests": 3120,
+  "missing_request_count": 16,
+  "complete_frozen_grid": false,
+  "original_primary": {
+    "human": {
+      "items": 64,
+      "families": 64,
+      "primary_endpoint": "human_votes",
+      "human_human_nominal_alpha": 0.5009939567430026,
+      "judges": [
+        {
+          "judge_id": "luna-reference_context",
+          "model_id": "gpt-6-luna",
+          "primary": {
+            "estimate": 0.6440789473684211,
+            "families": 57,
+            "observations": 57,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_human_vote_cohort",
+            "complete_cohort": false
+          },
+          "complete_items": 57,
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 256,
+            "valid": 248,
+            "statuses": {
+              "completed": 248,
+              "abstained": 2,
+              "invalid": 4,
+              "error": 2,
+              "missing": 0
+            }
+          },
+          "conditional_reference_agreement": 0.7135678391959799,
+          "reference_kappa": 0.5252981795354678,
+          "human_vote_kappa": 0.42881847149056096,
+          "conditional_pooled_human_vote_agreement": 0.6483516483516484,
+          "swap_inconsistency": {
+            "estimate": 0.2807017543859649,
+            "families": 57,
+            "observations": 57,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.15789473684210525,
+              0.41228070175438597
+            ],
+            "bounded_sensitivity_interval": [
+              0.06143985612428399,
+              0.4999636526476458
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": 0.07456140350877193,
+            "families": 57,
+            "observations": 57,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.03070175438596491,
+              0.17982456140350878
+            ],
+            "bounded_sensitivity_interval": [
+              -0.3639623930145899,
+              0.5130852000321338
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.15789473684210525,
+            "families": 57,
+            "observations": 57,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.07894736842105263,
+              0.24561403508771928
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.37715663510378616
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.12280701754385964,
+            "families": 57,
+            "observations": 57,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.017543859649122806,
+              0.24561403508771928
+            ],
+            "bounded_sensitivity_interval": [
+              -0.3157167789795022,
+              0.5613308140672215
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        },
+        {
+          "judge_id": "luna-standard",
+          "model_id": "gpt-6-luna",
+          "primary": {
+            "estimate": 0.6375,
+            "families": 62,
+            "observations": 62,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_human_vote_cohort",
+            "complete_cohort": false
+          },
+          "complete_items": 62,
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 256,
+            "valid": 254,
+            "statuses": {
+              "completed": 254,
+              "abstained": 0,
+              "invalid": 2,
+              "error": 0,
+              "missing": 0
+            }
+          },
+          "conditional_reference_agreement": 0.7128712871287128,
+          "reference_kappa": 0.515186625837954,
+          "human_vote_kappa": 0.39379783088407916,
+          "conditional_pooled_human_vote_agreement": 0.6344086021505376,
+          "swap_inconsistency": {
+            "estimate": 0.1935483870967742,
+            "families": 62,
+            "observations": 62,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.08870967741935484,
+              0.31451612903225806
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.4037832581212869
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": 0.11693548387096774,
+            "families": 62,
+            "observations": 62,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.020161290322580645,
+              0.23387096774193547
+            ],
+            "bounded_sensitivity_interval": [
+              -0.3035342581780576,
+              0.5374052259199931
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.10483870967741936,
+            "families": 62,
+            "observations": 62,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.04032258064516129,
+              0.18548387096774194
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.31507358070193203
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.08870967741935484,
+            "families": 62,
+            "observations": 62,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.016129032258064516,
+              0.1935483870967742
+            ],
+            "bounded_sensitivity_interval": [
+              -0.33176006462967056,
+              0.5091794194683802
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        },
+        {
+          "judge_id": "sol-reference_context",
+          "model_id": "gpt-6.1-sol",
+          "primary": {
+            "estimate": 0.7087301587301588,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_human_vote_cohort",
+            "complete_cohort": false
+          },
+          "complete_items": 63,
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 252,
+            "valid": 252,
+            "statuses": {
+              "completed": 252,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 4
+            }
+          },
+          "conditional_reference_agreement": 0.78,
+          "reference_kappa": 0.6159217877094971,
+          "human_vote_kappa": 0.5140204622963243,
+          "conditional_pooled_human_vote_agreement": 0.7067901234567902,
+          "swap_inconsistency": {
+            "estimate": 0.047619047619047616,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.1111111111111111
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.2561787136914645
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": -0.023809523809523808,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.07142857142857142,
+              0.007936507936507936
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4409288559543575,
+              0.39330980833530993
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.03968253968253968,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.0873015873015873
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.24824220575495654
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.007936507936507936,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.031746031746031744
+            ],
+            "bounded_sensitivity_interval": [
+              -0.40918282420832575,
+              0.4250558400813417
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        },
+        {
+          "judge_id": "sol-standard",
+          "model_id": "gpt-6.1-sol",
+          "primary": {
+            "estimate": 0.7226190476190476,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_human_vote_cohort",
+            "complete_cohort": false
+          },
+          "complete_items": 63,
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 252,
+            "valid": 252,
+            "statuses": {
+              "completed": 252,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 4
+            }
+          },
+          "conditional_reference_agreement": 0.79,
+          "reference_kappa": 0.6351633078526755,
+          "human_vote_kappa": 0.5297868290826038,
+          "conditional_pooled_human_vote_agreement": 0.7175925925925926,
+          "swap_inconsistency": {
+            "estimate": 0.05555555555555555,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.1349206349206349
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.2641152216279724
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": -0.03571428571428571,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.10714285714285714,
+              0.011904761904761904
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4528336178591194,
+              0.381405046430548
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.007936507936507936,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.03310185185185378
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.2164961740089248
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.047619047619047616,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.12698412698412698
+            ],
+            "bounded_sensitivity_interval": [
+              -0.3695002845257861,
+              0.4647383797638813
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        },
+        {
+          "judge_id": "terra-reference_context",
+          "model_id": "gpt-6.1-terra",
+          "primary": {
+            "estimate": 0.72109375,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.6013020833333333,
+              0.8286268446180557
+            ],
+            "bounded_sensitivity_interval": [
+              0.5141698712701412,
+              0.9280176287298587
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "complete_items": 64,
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 256,
+            "valid": 256,
+            "statuses": {
+              "completed": 256,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 0
+            }
+          },
+          "conditional_reference_agreement": 0.7941176470588235,
+          "reference_kappa": 0.643,
+          "human_vote_kappa": 0.5236131934032984,
+          "conditional_pooled_human_vote_agreement": 0.7164634146341463,
+          "swap_inconsistency": {
+            "estimate": 0.0625,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0078125,
+              0.140625
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.2694238787298588
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": 0.0,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.0546875,
+              0.05859375
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4138477574597176,
+              0.4138477574597176
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.0390625,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.0859375
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.2459863787298588
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.0234375,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.078125
+            ],
+            "bounded_sensitivity_interval": [
+              -0.3904102574597176,
+              0.4372852574597176
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        },
+        {
+          "judge_id": "terra-standard",
+          "model_id": "gpt-6.1-terra",
+          "primary": {
+            "estimate": 0.723046875,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.6067485894097222,
+              0.8320534939236112
+            ],
+            "bounded_sensitivity_interval": [
+              0.5161229962701412,
+              0.9299707537298587
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "complete_items": 64,
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 256,
+            "valid": 256,
+            "statuses": {
+              "completed": 256,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 0
+            }
+          },
+          "conditional_reference_agreement": 0.7892156862745098,
+          "reference_kappa": 0.6356537630835687,
+          "human_vote_kappa": 0.5248302074895632,
+          "conditional_pooled_human_vote_agreement": 0.7164634146341463,
+          "swap_inconsistency": {
+            "estimate": 0.0703125,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0078125,
+              0.15625
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.2772363787298588
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": -0.00390625,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.0703125,
+              0.0546875
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4177540074597176,
+              0.4099415074597176
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.046875,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.109375
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.2537988787298588
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.0234375,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.046875,
+              0.1015625
+            ],
+            "bounded_sensitivity_interval": [
+              -0.3904102574597176,
+              0.4372852574597176
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        }
+      ],
+      "paired_contrasts": [
+        {
+          "left": "luna-standard",
+          "right": "luna-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 64,
+          "matched_items": 55,
+          "missing_item_count": 9,
+          "complete_cohort": false,
+          "difference": {
+            "estimate": 0.00643939393939394,
+            "families": 55,
+            "observations": 55,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_or_nonempirical_paired_cohort"
+          }
+        },
+        {
+          "left": "terra-standard",
+          "right": "terra-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 64,
+          "matched_items": 64,
+          "missing_item_count": 0,
+          "complete_cohort": true,
+          "difference": {
+            "estimate": -0.001953125,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.021484375,
+              0.017578125
+            ],
+            "bounded_sensitivity_interval": [
+              -0.38874650260869037,
+              0.38484025260869037
+            ],
+            "undefined_reason": null
+          }
+        },
+        {
+          "left": "sol-standard",
+          "right": "sol-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 64,
+          "matched_items": 63,
+          "missing_item_count": 1,
+          "complete_cohort": false,
+          "difference": {
+            "estimate": -0.013888888888888888,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_or_nonempirical_paired_cohort"
+          }
+        }
+      ]
+    },
+    "execution": {
+      "items": 40,
+      "families": 40,
+      "primary_endpoint": "reference",
+      "human_human_nominal_alpha": null,
+      "judges": [
+        {
+          "judge_id": "luna-reference_context",
+          "model_id": "gpt-6-luna",
+          "primary": {
+            "estimate": 0.581081081081081,
+            "families": 37,
+            "observations": 37,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_frozen_cohort",
+            "complete_cohort": false
+          },
+          "complete_items": 37,
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 160,
+            "valid": 157,
+            "statuses": {
+              "completed": 157,
+              "abstained": 0,
+              "invalid": 1,
+              "error": 2,
+              "missing": 0
+            }
+          },
+          "conditional_reference_agreement": 0.5923566878980892,
+          "reference_kappa": 0.1972517376368138,
+          "human_vote_kappa": null,
+          "conditional_pooled_human_vote_agreement": null,
+          "swap_inconsistency": {
+            "estimate": 0.20270270270270271,
+            "families": 37,
+            "observations": 37,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0945945945945946,
+              0.32432432432432434
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.47484731160258553
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": 0.060810810810810814,
+            "families": 37,
+            "observations": 37,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.08108108108108109,
+              0.21061373873874037
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4834784069889548,
+              0.6051000286105764
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.17567567567567569,
+            "families": 37,
+            "observations": 37,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.08108108108108109,
+              0.28378378378378377
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.44782028457555845
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.02702702702702703,
+            "families": 37,
+            "observations": 37,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.11272522522523179
+            ],
+            "bounded_sensitivity_interval": [
+              -0.5172621907727386,
+              0.5713162448267926
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        },
+        {
+          "judge_id": "luna-standard",
+          "model_id": "gpt-6-luna",
+          "primary": {
+            "estimate": 0.6410256410256411,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_frozen_cohort",
+            "complete_cohort": false
+          },
+          "complete_items": 39,
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 160,
+            "valid": 159,
+            "statuses": {
+              "completed": 159,
+              "abstained": 0,
+              "invalid": 1,
+              "error": 0,
+              "missing": 0
+            }
+          },
+          "conditional_reference_agreement": 0.6352201257861635,
+          "reference_kappa": 0.2447174447174446,
+          "human_vote_kappa": null,
+          "conditional_pooled_human_vote_agreement": null,
+          "swap_inconsistency": {
+            "estimate": 0.28205128205128205,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.1282051282051282,
+              0.46153846153846156
+            ],
+            "bounded_sensitivity_interval": [
+              0.016976572617681818,
+              0.5471259914848823
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": 0.20512820512820512,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.038461538461538464,
+              0.38461538461538464
+            ],
+            "bounded_sensitivity_interval": [
+              -0.32502121373899534,
+              0.7352776239954055
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.1282051282051282,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.02564102564102564,
+              0.2564102564102564
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.3932798376387284
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.15384615384615385,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.02564102564102564,
+              0.3333333333333333
+            ],
+            "bounded_sensitivity_interval": [
+              -0.3763032650210466,
+              0.6839955727133543
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        },
+        {
+          "judge_id": "sol-reference_context",
+          "model_id": "gpt-6.1-sol",
+          "primary": {
+            "estimate": 0.782051282051282,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_frozen_cohort",
+            "complete_cohort": false
+          },
+          "complete_items": 39,
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 156,
+            "valid": 156,
+            "statuses": {
+              "completed": 156,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 4
+            }
+          },
+          "conditional_reference_agreement": 0.782051282051282,
+          "reference_kappa": 0.5835427135678393,
+          "human_vote_kappa": null,
+          "conditional_pooled_human_vote_agreement": null,
+          "swap_inconsistency": {
+            "estimate": 0.11538461538461539,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.02564102564102564,
+              0.24358974358974358
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.38045932481821565
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": 0.03205128205128205,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.057692307692307696,
+              0.14102564102564102
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4980981368159184,
+              0.5622007009184825
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.08974358974358974,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.01282051282051282,
+              0.20512820512820512
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.35481829917719
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.02564102564102564,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.08130341880341883,
+              0.15384615384615385
+            ],
+            "bounded_sensitivity_interval": [
+              -0.5045083932261748,
+              0.5557904445082261
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        },
+        {
+          "judge_id": "sol-standard",
+          "model_id": "gpt-6.1-sol",
+          "primary": {
+            "estimate": 0.7948717948717948,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_frozen_cohort",
+            "complete_cohort": false
+          },
+          "complete_items": 39,
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 156,
+            "valid": 156,
+            "statuses": {
+              "completed": 156,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 4
+            }
+          },
+          "conditional_reference_agreement": 0.7948717948717948,
+          "reference_kappa": 0.6000000000000001,
+          "human_vote_kappa": null,
+          "conditional_pooled_human_vote_agreement": null,
+          "swap_inconsistency": {
+            "estimate": 0.05128205128205128,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.14102564102564102
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.3163567607156515
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": 0.02564102564102564,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.038461538461538464,
+              0.1282051282051282
+            ],
+            "bounded_sensitivity_interval": [
+              -0.5045083932261748,
+              0.5557904445082261
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.02564102564102564,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.07692307692307693
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.2907157350746259
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.02564102564102564,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.10256410256410256
+            ],
+            "bounded_sensitivity_interval": [
+              -0.5045083932261748,
+              0.5557904445082261
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        },
+        {
+          "judge_id": "terra-reference_context",
+          "model_id": "gpt-6.1-terra",
+          "primary": {
+            "estimate": 0.725,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.55625,
+              0.875
+            ],
+            "bounded_sensitivity_interval": [
+              0.46325969637487063,
+              0.9867403036251293
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "complete_items": 40,
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 160,
+            "valid": 160,
+            "statuses": {
+              "completed": 160,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 0
+            }
+          },
+          "conditional_reference_agreement": 0.725,
+          "reference_kappa": 0.4517133956386292,
+          "human_vote_kappa": null,
+          "conditional_pooled_human_vote_agreement": null,
+          "swap_inconsistency": {
+            "estimate": 0.175,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.05,
+              0.325
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.43674030362512933
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": 0.0125,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.1375,
+              0.1625
+            ],
+            "bounded_sensitivity_interval": [
+              -0.5109806072502587,
+              0.5359806072502586
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.075,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0125,
+              0.1625
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.33674030362512936
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.1,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.2292708333333394
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4234806072502587,
+              0.6234806072502587
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        },
+        {
+          "judge_id": "terra-standard",
+          "model_id": "gpt-6.1-terra",
+          "primary": {
+            "estimate": 0.725,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.54375,
+              0.8875
+            ],
+            "bounded_sensitivity_interval": [
+              0.46325969637487063,
+              0.9867403036251293
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "complete_items": 40,
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 160,
+            "valid": 160,
+            "statuses": {
+              "completed": 160,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 0
+            }
+          },
+          "conditional_reference_agreement": 0.725,
+          "reference_kappa": 0.4517133956386292,
+          "human_vote_kappa": null,
+          "conditional_pooled_human_vote_agreement": null,
+          "swap_inconsistency": {
+            "estimate": 0.1,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0125,
+              0.2125
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.3617403036251293
+            ],
+            "undefined_reason": null
+          },
+          "directional_position_effect": {
+            "estimate": 0.0625,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.025,
+              0.175
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4609806072502587,
+              0.5859806072502587
+            ],
+            "undefined_reason": null
+          },
+          "same_order_disagreement": {
+            "estimate": 0.05,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.1146354166666697
+            ],
+            "bounded_sensitivity_interval": [
+              0.0,
+              0.31174030362512933
+            ],
+            "undefined_reason": null
+          },
+          "excess_swap_disagreement": {
+            "estimate": 0.05,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.0,
+              0.15
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4734806072502587,
+              0.5734806072502587
+            ],
+            "undefined_reason": null
+          },
+          "self_preference_eligible_items": 0
+        }
+      ],
+      "paired_contrasts": [
+        {
+          "left": "luna-standard",
+          "right": "luna-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 40,
+          "matched_items": 37,
+          "missing_item_count": 3,
+          "complete_cohort": false,
+          "difference": {
+            "estimate": -0.06756756756756757,
+            "families": 37,
+            "observations": 37,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_or_nonempirical_paired_cohort"
+          }
+        },
+        {
+          "left": "terra-standard",
+          "right": "terra-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 40,
+          "matched_items": 40,
+          "missing_item_count": 0,
+          "complete_cohort": true,
+          "difference": {
+            "estimate": 0.0,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.075,
+              0.09375
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4892592228452135,
+              0.4892592228452135
+            ],
+            "undefined_reason": null
+          }
+        },
+        {
+          "left": "sol-standard",
+          "right": "sol-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 40,
+          "matched_items": 39,
+          "missing_item_count": 1,
+          "complete_cohort": false,
+          "difference": {
+            "estimate": -0.01282051282051282,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_or_nonempirical_paired_cohort"
+          }
+        }
+      ]
+    }
+  },
+  "original_repository_sensitivity": {
+    "repository_count": 9,
+    "judge_scores": [
+      {
+        "judge_id": "luna-reference_context",
+        "metric": {
+          "estimate": 0.648011982570806,
+          "families": 9,
+          "observations": 37,
+          "alpha": 0.05,
+          "planned_comparisons": 6,
+          "comparison_alpha": 0.008333333333333333,
+          "resamples": 5000,
+          "seed": 27102026,
+          "min_families": 20,
+          "interval": null,
+          "bounded_sensitivity_interval": null,
+          "undefined_reason": "incomplete_frozen_cohort",
+          "complete_cohort": false
+        }
+      },
+      {
+        "judge_id": "luna-standard",
+        "metric": {
+          "estimate": 0.6537763253449528,
+          "families": 9,
+          "observations": 39,
+          "alpha": 0.05,
+          "planned_comparisons": 6,
+          "comparison_alpha": 0.008333333333333333,
+          "resamples": 5000,
+          "seed": 27102026,
+          "min_families": 20,
+          "interval": null,
+          "bounded_sensitivity_interval": null,
+          "undefined_reason": "incomplete_frozen_cohort",
+          "complete_cohort": false
+        }
+      },
+      {
+        "judge_id": "sol-reference_context",
+        "metric": {
+          "estimate": 0.7625272331154684,
+          "families": 9,
+          "observations": 39,
+          "alpha": 0.05,
+          "planned_comparisons": 6,
+          "comparison_alpha": 0.008333333333333333,
+          "resamples": 5000,
+          "seed": 27102026,
+          "min_families": 20,
+          "interval": null,
+          "bounded_sensitivity_interval": null,
+          "undefined_reason": "incomplete_frozen_cohort",
+          "complete_cohort": false
+        }
+      },
+      {
+        "judge_id": "sol-standard",
+        "metric": {
+          "estimate": 0.6978939724037763,
+          "families": 9,
+          "observations": 39,
+          "alpha": 0.05,
+          "planned_comparisons": 6,
+          "comparison_alpha": 0.008333333333333333,
+          "resamples": 5000,
+          "seed": 27102026,
+          "min_families": 20,
+          "interval": null,
+          "bounded_sensitivity_interval": null,
+          "undefined_reason": "incomplete_frozen_cohort",
+          "complete_cohort": false
+        }
+      },
+      {
+        "judge_id": "terra-reference_context",
+        "metric": {
+          "estimate": 0.7361111111111112,
+          "families": 9,
+          "observations": 40,
+          "alpha": 0.05,
+          "planned_comparisons": 6,
+          "comparison_alpha": 0.008333333333333333,
+          "resamples": 5000,
+          "seed": 27102026,
+          "min_families": 20,
+          "interval": null,
+          "bounded_sensitivity_interval": [
+            0.18431410116482105,
+            1.0
+          ],
+          "undefined_reason": "too_few_independent_families",
+          "complete_cohort": true
+        }
+      },
+      {
+        "judge_id": "terra-standard",
+        "metric": {
+          "estimate": 0.7608024691358025,
+          "families": 9,
+          "observations": 40,
+          "alpha": 0.05,
+          "planned_comparisons": 6,
+          "comparison_alpha": 0.008333333333333333,
+          "resamples": 5000,
+          "seed": 27102026,
+          "min_families": 20,
+          "interval": null,
+          "bounded_sensitivity_interval": [
+            0.2090054591895124,
+            1.0
+          ],
+          "undefined_reason": "too_few_independent_families",
+          "complete_cohort": true
+        }
+      }
+    ],
+    "paired_contrasts": [
+      {
+        "left": "luna-standard",
+        "right": "luna-reference_context",
+        "direction": "right_minus_left",
+        "expected_items": 40,
+        "matched_items": 37,
+        "missing_item_count": 3,
+        "complete_cohort": false,
+        "difference": {
+          "estimate": -0.02505446623093682,
+          "families": 9,
+          "observations": 37,
+          "alpha": 0.05,
+          "planned_comparisons": 3,
+          "comparison_alpha": 0.016666666666666666,
+          "resamples": 5000,
+          "seed": 27102026,
+          "min_families": 20,
+          "interval": null,
+          "bounded_sensitivity_interval": null,
+          "undefined_reason": "incomplete_or_nonempirical_paired_cohort"
+        }
+      },
+      {
+        "left": "terra-standard",
+        "right": "terra-reference_context",
+        "direction": "right_minus_left",
+        "expected_items": 40,
+        "matched_items": 40,
+        "missing_item_count": 0,
+        "complete_cohort": true,
+        "difference": {
+          "estimate": -0.024691358024691357,
+          "families": 9,
+          "observations": 40,
+          "alpha": 0.05,
+          "planned_comparisons": 3,
+          "comparison_alpha": 0.016666666666666666,
+          "resamples": 5000,
+          "seed": 27102026,
+          "min_families": 20,
+          "interval": null,
+          "bounded_sensitivity_interval": [
+            -1,
+            1
+          ],
+          "undefined_reason": "too_few_independent_families"
+        }
+      },
+      {
+        "left": "sol-standard",
+        "right": "sol-reference_context",
+        "direction": "right_minus_left",
+        "expected_items": 40,
+        "matched_items": 39,
+        "missing_item_count": 1,
+        "complete_cohort": false,
+        "difference": {
+          "estimate": 0.06463326071169209,
+          "families": 9,
+          "observations": 39,
+          "alpha": 0.05,
+          "planned_comparisons": 3,
+          "comparison_alpha": 0.016666666666666666,
+          "resamples": 5000,
+          "seed": 27102026,
+          "min_families": 20,
+          "interval": null,
+          "bounded_sensitivity_interval": null,
+          "undefined_reason": "incomplete_or_nonempirical_paired_cohort"
+        }
+      }
+    ],
+    "interpretation": "Equal repository weighting is a diagnostic sensitivity; too few independent repositories cannot support a population-of-repositories claim."
+  },
+  "secondary_delivered_agreement": {
+    "human": {
+      "items": 64,
+      "families": 64,
+      "judges": [
+        {
+          "judge_id": "luna-standard",
+          "model_id": "gpt-6-luna",
+          "primary": {
+            "estimate": 0.637109375,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.5268229166666667,
+              0.7440993923611112
+            ],
+            "bounded_sensitivity_interval": [
+              0.4301854962701412,
+              0.8440332537298587
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 256,
+            "valid": 254,
+            "statuses": {
+              "completed": 254,
+              "abstained": 0,
+              "invalid": 2,
+              "error": 0,
+              "missing": 0
+            }
+          }
+        },
+        {
+          "judge_id": "luna-reference_context",
+          "model_id": "gpt-6-luna",
+          "primary": {
+            "estimate": 0.6205078125,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.5131065538194445,
+              0.7240234375
+            ],
+            "bounded_sensitivity_interval": [
+              0.4135839337701412,
+              0.8274316912298587
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 256,
+            "valid": 248,
+            "statuses": {
+              "completed": 248,
+              "abstained": 2,
+              "invalid": 4,
+              "error": 2,
+              "missing": 0
+            }
+          }
+        },
+        {
+          "judge_id": "terra-standard",
+          "model_id": "gpt-6.1-terra",
+          "primary": {
+            "estimate": 0.723046875,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.6067485894097222,
+              0.8320534939236112
+            ],
+            "bounded_sensitivity_interval": [
+              0.5161229962701412,
+              0.9299707537298587
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 256,
+            "valid": 256,
+            "statuses": {
+              "completed": 256,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 0
+            }
+          }
+        },
+        {
+          "judge_id": "terra-reference_context",
+          "model_id": "gpt-6.1-terra",
+          "primary": {
+            "estimate": 0.72109375,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.6013020833333333,
+              0.8286268446180557
+            ],
+            "bounded_sensitivity_interval": [
+              0.5141698712701412,
+              0.9280176287298587
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 256,
+            "valid": 256,
+            "statuses": {
+              "completed": 256,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 0
+            }
+          }
+        },
+        {
+          "judge_id": "sol-standard",
+          "model_id": "gpt-6.1-sol",
+          "primary": {
+            "estimate": 0.7226190476190476,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "missing_or_unattempted_scheduled_judgments",
+            "complete_cohort": false
+          },
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 252,
+            "valid": 252,
+            "statuses": {
+              "completed": 252,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 4
+            }
+          }
+        },
+        {
+          "judge_id": "sol-reference_context",
+          "model_id": "gpt-6.1-sol",
+          "primary": {
+            "estimate": 0.7087301587301588,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "missing_or_unattempted_scheduled_judgments",
+            "complete_cohort": false
+          },
+          "coverage": {
+            "scheduled": 256,
+            "attempted": 252,
+            "valid": 252,
+            "statuses": {
+              "completed": 252,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 4
+            }
+          }
+        }
+      ],
+      "paired_contrasts": [
+        {
+          "left": "luna-standard",
+          "right": "luna-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 64,
+          "matched_items": 64,
+          "missing_item_count": 0,
+          "complete_cohort": true,
+          "difference": {
+            "estimate": -0.0166015625,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.080078125,
+              0.04221462673611143
+            ],
+            "bounded_sensitivity_interval": [
+              -0.40339494010869037,
+              0.37019181510869037
+            ],
+            "undefined_reason": null
+          }
+        },
+        {
+          "left": "terra-standard",
+          "right": "terra-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 64,
+          "matched_items": 64,
+          "missing_item_count": 0,
+          "complete_cohort": true,
+          "difference": {
+            "estimate": -0.001953125,
+            "families": 64,
+            "observations": 64,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.021484375,
+              0.017578125
+            ],
+            "bounded_sensitivity_interval": [
+              -0.38874650260869037,
+              0.38484025260869037
+            ],
+            "undefined_reason": null
+          }
+        },
+        {
+          "left": "sol-standard",
+          "right": "sol-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 64,
+          "matched_items": 63,
+          "missing_item_count": 1,
+          "complete_cohort": false,
+          "difference": {
+            "estimate": -0.013888888888888888,
+            "families": 63,
+            "observations": 63,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_or_nonempirical_paired_cohort"
+          }
+        }
+      ],
+      "repository_sensitivity": null
+    },
+    "execution": {
+      "items": 40,
+      "families": 40,
+      "judges": [
+        {
+          "judge_id": "luna-standard",
+          "model_id": "gpt-6-luna",
+          "primary": {
+            "estimate": 0.63125,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.46875,
+              0.7875
+            ],
+            "bounded_sensitivity_interval": [
+              0.36950969637487063,
+              0.8929903036251293
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 160,
+            "valid": 159,
+            "statuses": {
+              "completed": 159,
+              "abstained": 0,
+              "invalid": 1,
+              "error": 0,
+              "missing": 0
+            }
+          }
+        },
+        {
+          "judge_id": "luna-reference_context",
+          "model_id": "gpt-6-luna",
+          "primary": {
+            "estimate": 0.58125,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.4125,
+              0.75625
+            ],
+            "bounded_sensitivity_interval": [
+              0.3195096963748707,
+              0.8429903036251294
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 160,
+            "valid": 157,
+            "statuses": {
+              "completed": 157,
+              "abstained": 0,
+              "invalid": 1,
+              "error": 2,
+              "missing": 0
+            }
+          }
+        },
+        {
+          "judge_id": "terra-standard",
+          "model_id": "gpt-6.1-terra",
+          "primary": {
+            "estimate": 0.725,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.54375,
+              0.8875
+            ],
+            "bounded_sensitivity_interval": [
+              0.46325969637487063,
+              0.9867403036251293
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 160,
+            "valid": 160,
+            "statuses": {
+              "completed": 160,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 0
+            }
+          }
+        },
+        {
+          "judge_id": "terra-reference_context",
+          "model_id": "gpt-6.1-terra",
+          "primary": {
+            "estimate": 0.725,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              0.55625,
+              0.875
+            ],
+            "bounded_sensitivity_interval": [
+              0.46325969637487063,
+              0.9867403036251293
+            ],
+            "undefined_reason": null,
+            "complete_cohort": true
+          },
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 160,
+            "valid": 160,
+            "statuses": {
+              "completed": 160,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 0
+            }
+          }
+        },
+        {
+          "judge_id": "sol-standard",
+          "model_id": "gpt-6.1-sol",
+          "primary": {
+            "estimate": 0.7948717948717948,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "missing_or_unattempted_scheduled_judgments",
+            "complete_cohort": false
+          },
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 156,
+            "valid": 156,
+            "statuses": {
+              "completed": 156,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 4
+            }
+          }
+        },
+        {
+          "judge_id": "sol-reference_context",
+          "model_id": "gpt-6.1-sol",
+          "primary": {
+            "estimate": 0.782051282051282,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 6,
+            "comparison_alpha": 0.008333333333333333,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "missing_or_unattempted_scheduled_judgments",
+            "complete_cohort": false
+          },
+          "coverage": {
+            "scheduled": 160,
+            "attempted": 156,
+            "valid": 156,
+            "statuses": {
+              "completed": 156,
+              "abstained": 0,
+              "invalid": 0,
+              "error": 0,
+              "missing": 4
+            }
+          }
+        }
+      ],
+      "paired_contrasts": [
+        {
+          "left": "luna-standard",
+          "right": "luna-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 40,
+          "matched_items": 40,
+          "missing_item_count": 0,
+          "complete_cohort": true,
+          "difference": {
+            "estimate": -0.05,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.15625,
+              0.04375
+            ],
+            "bounded_sensitivity_interval": [
+              -0.5392592228452135,
+              0.4392592228452135
+            ],
+            "undefined_reason": null
+          }
+        },
+        {
+          "left": "terra-standard",
+          "right": "terra-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 40,
+          "matched_items": 40,
+          "missing_item_count": 0,
+          "complete_cohort": true,
+          "difference": {
+            "estimate": 0.0,
+            "families": 40,
+            "observations": 40,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": [
+              -0.075,
+              0.09375
+            ],
+            "bounded_sensitivity_interval": [
+              -0.4892592228452135,
+              0.4892592228452135
+            ],
+            "undefined_reason": null
+          }
+        },
+        {
+          "left": "sol-standard",
+          "right": "sol-reference_context",
+          "direction": "right_minus_left",
+          "expected_items": 40,
+          "matched_items": 39,
+          "missing_item_count": 1,
+          "complete_cohort": false,
+          "difference": {
+            "estimate": -0.01282051282051282,
+            "families": 39,
+            "observations": 39,
+            "alpha": 0.05,
+            "planned_comparisons": 3,
+            "comparison_alpha": 0.016666666666666666,
+            "resamples": 5000,
+            "seed": 27102026,
+            "min_families": 20,
+            "interval": null,
+            "bounded_sensitivity_interval": null,
+            "undefined_reason": "incomplete_or_nonempirical_paired_cohort"
+          }
+        }
+      ],
+      "repository_sensitivity": {
+        "repository_count": 9,
+        "judge_scores": [
+          {
+            "judge_id": "luna-standard",
+            "metric": {
+              "estimate": 0.6512345679012346,
+              "families": 9,
+              "observations": 40,
+              "alpha": 0.05,
+              "planned_comparisons": 6,
+              "comparison_alpha": 0.008333333333333333,
+              "resamples": 5000,
+              "seed": 27102026,
+              "min_families": 20,
+              "interval": null,
+              "bounded_sensitivity_interval": [
+                0.09943755795494447,
+                1.0
+              ],
+              "undefined_reason": "too_few_independent_families",
+              "complete_cohort": true
+            }
+          },
+          {
+            "judge_id": "luna-reference_context",
+            "metric": {
+              "estimate": 0.6373456790123457,
+              "families": 9,
+              "observations": 40,
+              "alpha": 0.05,
+              "planned_comparisons": 6,
+              "comparison_alpha": 0.008333333333333333,
+              "resamples": 5000,
+              "seed": 27102026,
+              "min_families": 20,
+              "interval": null,
+              "bounded_sensitivity_interval": [
+                0.08554866906605563,
+                1.0
+              ],
+              "undefined_reason": "too_few_independent_families",
+              "complete_cohort": true
+            }
+          },
+          {
+            "judge_id": "terra-standard",
+            "metric": {
+              "estimate": 0.7608024691358025,
+              "families": 9,
+              "observations": 40,
+              "alpha": 0.05,
+              "planned_comparisons": 6,
+              "comparison_alpha": 0.008333333333333333,
+              "resamples": 5000,
+              "seed": 27102026,
+              "min_families": 20,
+              "interval": null,
+              "bounded_sensitivity_interval": [
+                0.2090054591895124,
+                1.0
+              ],
+              "undefined_reason": "too_few_independent_families",
+              "complete_cohort": true
+            }
+          },
+          {
+            "judge_id": "terra-reference_context",
+            "metric": {
+              "estimate": 0.7361111111111112,
+              "families": 9,
+              "observations": 40,
+              "alpha": 0.05,
+              "planned_comparisons": 6,
+              "comparison_alpha": 0.008333333333333333,
+              "resamples": 5000,
+              "seed": 27102026,
+              "min_families": 20,
+              "interval": null,
+              "bounded_sensitivity_interval": [
+                0.18431410116482105,
+                1.0
+              ],
+              "undefined_reason": "too_few_independent_families",
+              "complete_cohort": true
+            }
+          },
+          {
+            "judge_id": "sol-standard",
+            "metric": {
+              "estimate": 0.6978939724037763,
+              "families": 9,
+              "observations": 39,
+              "alpha": 0.05,
+              "planned_comparisons": 6,
+              "comparison_alpha": 0.008333333333333333,
+              "resamples": 5000,
+              "seed": 27102026,
+              "min_families": 20,
+              "interval": null,
+              "bounded_sensitivity_interval": null,
+              "undefined_reason": "incomplete_frozen_cohort",
+              "complete_cohort": false
+            }
+          },
+          {
+            "judge_id": "sol-reference_context",
+            "metric": {
+              "estimate": 0.7625272331154684,
+              "families": 9,
+              "observations": 39,
+              "alpha": 0.05,
+              "planned_comparisons": 6,
+              "comparison_alpha": 0.008333333333333333,
+              "resamples": 5000,
+              "seed": 27102026,
+              "min_families": 20,
+              "interval": null,
+              "bounded_sensitivity_interval": null,
+              "undefined_reason": "incomplete_frozen_cohort",
+              "complete_cohort": false
+            }
+          }
+        ],
+        "paired_contrasts": [
+          {
+            "left": "luna-standard",
+            "right": "luna-reference_context",
+            "direction": "right_minus_left",
+            "expected_items": 40,
+            "matched_items": 40,
+            "missing_item_count": 0,
+            "complete_cohort": true,
+            "difference": {
+              "estimate": -0.013888888888888886,
+              "families": 9,
+              "observations": 40,
+              "alpha": 0.05,
+              "planned_comparisons": 3,
+              "comparison_alpha": 0.016666666666666666,
+              "resamples": 5000,
+              "seed": 27102026,
+              "min_families": 20,
+              "interval": null,
+              "bounded_sensitivity_interval": [
+                -1,
+                1
+              ],
+              "undefined_reason": "too_few_independent_families"
+            }
+          },
+          {
+            "left": "terra-standard",
+            "right": "terra-reference_context",
+            "direction": "right_minus_left",
+            "expected_items": 40,
+            "matched_items": 40,
+            "missing_item_count": 0,
+            "complete_cohort": true,
+            "difference": {
+              "estimate": -0.024691358024691357,
+              "families": 9,
+              "observations": 40,
+              "alpha": 0.05,
+              "planned_comparisons": 3,
+              "comparison_alpha": 0.016666666666666666,
+              "resamples": 5000,
+              "seed": 27102026,
+              "min_families": 20,
+              "interval": null,
+              "bounded_sensitivity_interval": [
+                -1,
+                1
+              ],
+              "undefined_reason": "too_few_independent_families"
+            }
+          },
+          {
+            "left": "sol-standard",
+            "right": "sol-reference_context",
+            "direction": "right_minus_left",
+            "expected_items": 40,
+            "matched_items": 39,
+            "missing_item_count": 1,
+            "complete_cohort": false,
+            "difference": {
+              "estimate": 0.06463326071169209,
+              "families": 9,
+              "observations": 39,
+              "alpha": 0.05,
+              "planned_comparisons": 3,
+              "comparison_alpha": 0.016666666666666666,
+              "resamples": 5000,
+              "seed": 27102026,
+              "min_families": 20,
+              "interval": null,
+              "bounded_sensitivity_interval": null,
+              "undefined_reason": "incomplete_or_nonempirical_paired_cohort"
+            }
+          }
+        ],
+        "interpretation": "Equal repository weighting is a diagnostic sensitivity; too few independent repositories cannot support a population-of-repositories claim."
+      }
+    }
+  },
+  "human_panel": {
+    "items": 64,
+    "observed_votes": 164,
+    "divided_panels": 23,
+    "observed_panel_vote_agreement_upper_bound": 0.8408854166666666,
+    "human_human_nominal_alpha": 0.5009939567430026,
+    "interpretation": "Empirical bound against these fixed historical panels, not a universal model capability ceiling."
+  },
+  "cost_upper_bound": {
+    "settled_usd": "13.330139",
+    "committed_usd": "13.34326225",
+    "requests": 3104,
+    "unknown_requests": 3,
+    "inference_cap_usd": 30,
+    "total_user_cap_usd": 50,
+    "basis": "Conservative usage-based upper bound: input at 2.5 times standard uncached price, output at standard price. Not a verified invoice."
+  },
+  "interpretation": {
+    "original_primary": "Frozen human-vote agreement; incomplete valid grids retain descriptive complete-item estimates without a full-cohort interval. Archived execution is a separate diagnostic endpoint.",
+    "secondary": "Added after development and frozen before holdout. Attempted invalid, abstained and error outcomes score zero. Complete grids use all scheduled judgments; with unattempted cells, points condition on fully attempted items and full-cohort intervals are withheld. Original primary remains unchanged.",
+    "multiplicity": "Three paired contrasts receive alpha .05/3 within each declared family. Individual-configuration intervals and diagnostics are exploratory. Primary and secondary families do not have joint error control.",
+    "archived_execution": "Agreement with archived published test outcomes on selected discordant patches; no new agent repair success claim.",
+    "order": "Swap inconsistency is compared with same-order repeat disagreement; neither alone establishes causal position bias."
+  },
+  "artifacts": [
+    "judge-original-primary.svg",
+    "judge-original-primary.png",
+    "judge-delivered-agreement.svg",
+    "judge-delivered-agreement.png",
+    "judge-original-effects.svg",
+    "judge-original-effects.png",
+    "judge-delivered-effects.svg",
+    "judge-delivered-effects.png",
+    "judge-order-diagnostics.svg",
+    "judge-order-diagnostics.png"
+  ],
+  "figure_dependency": "matplotlib==3.11.2",
+  "publisher_sha256": "2db917a92b4f8916e25fe4f90952db806496cb21a18070a9ac82871f5bdf4e5e",
+  "publisher_revision": {
+    "supersedes_sha256": "6fa5209e57da9b48a16e0bcb04d85af19d51d57c50b0b40aef39b31024050600",
+    "original_frozen_publisher_sha256": "b7f14d845b57e7f507ffda11f0e523fe6df3af9fb0d8bb4768885a94762d4f99",
+    "change": "Captions and footer spacing clarify interpretation; generated SVG line-end whitespace is normalized. Numerical analysis, cohort membership and visual content are unchanged."
+  },
+  "reproduction": "python scripts/judge_study/publish_results.py --render-only --input docs/benchmarks/judge-study-2026-10-27/results.json --output ./reproduced-figures"
+}

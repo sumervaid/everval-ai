@@ -1,0 +1,323 @@
+{
+  "schema_version": "everval.posthoc-phase-attribution/v1",
+  "analysis_role": "post_hoc_descriptive_transport_attribution",
+  "plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+  "source_sha256": "4c3d544e4661749baa0d6cb259437d697b4059c36948726512a8e9e1cfd1c9fe",
+  "selector_sha256": "6882b442ed63a591473db752925a1b4219807b7700ee839569a7626705bb7692",
+  "normalizer_sha256": "659b354b2fe69701c3d7998880123f1f2c4d9be8cf4e814ef4ed33b4038e30ff",
+  "retained_source_set_sha256": "fa57cc5d66b00a621c85a8b780493048b9327969783f91be291bb535b93a77f4",
+  "provider_calls": 0,
+  "frozen_scores_modified": false,
+  "groups": [
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "luna-reference_context",
+      "scheduled": 40,
+      "attributions": {
+        "unchanged_completed": 40
+      },
+      "selected_statuses": {
+        "completed": 40
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "luna-standard",
+      "scheduled": 40,
+      "attributions": {
+        "unchanged_completed": 40
+      },
+      "selected_statuses": {
+        "completed": 40
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "sol-reference_context",
+      "scheduled": 40,
+      "attributions": {
+        "unchanged_completed": 40
+      },
+      "selected_statuses": {
+        "completed": 40
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "sol-standard",
+      "scheduled": 40,
+      "attributions": {
+        "unchanged_completed": 40
+      },
+      "selected_statuses": {
+        "completed": 40
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "terra-reference_context",
+      "scheduled": 40,
+      "attributions": {
+        "unchanged_completed": 40
+      },
+      "selected_statuses": {
+        "completed": 40
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "terra-standard",
+      "scheduled": 40,
+      "attributions": {
+        "unchanged_completed": 40
+      },
+      "selected_statuses": {
+        "completed": 40
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "luna-reference_context",
+      "scheduled": 160,
+      "attributions": {
+        "unchanged_completed": 157,
+        "provider_error": 2,
+        "transport_phase_concatenation_recovered": 1
+      },
+      "selected_statuses": {
+        "completed": 158,
+        "error": 2
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "luna-standard",
+      "scheduled": 160,
+      "attributions": {
+        "unchanged_completed": 159,
+        "transport_phase_concatenation_recovered": 1
+      },
+      "selected_statuses": {
+        "completed": 160
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "sol-reference_context",
+      "scheduled": 160,
+      "attributions": {
+        "unchanged_completed": 156,
+        "unattempted": 4
+      },
+      "selected_statuses": {
+        "completed": 156,
+        "missing": 4
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "sol-standard",
+      "scheduled": 160,
+      "attributions": {
+        "unchanged_completed": 156,
+        "unattempted": 4
+      },
+      "selected_statuses": {
+        "completed": 156,
+        "missing": 4
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "terra-reference_context",
+      "scheduled": 160,
+      "attributions": {
+        "unchanged_completed": 160
+      },
+      "selected_statuses": {
+        "completed": 160
+      }
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "terra-standard",
+      "scheduled": 160,
+      "attributions": {
+        "unchanged_completed": 160
+      },
+      "selected_statuses": {
+        "completed": 160
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "luna-reference_context",
+      "scheduled": 64,
+      "attributions": {
+        "unchanged_completed": 62,
+        "transport_phase_concatenation_recovered": 2
+      },
+      "selected_statuses": {
+        "completed": 64
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "luna-standard",
+      "scheduled": 64,
+      "attributions": {
+        "unchanged_completed": 64
+      },
+      "selected_statuses": {
+        "completed": 64
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "sol-reference_context",
+      "scheduled": 64,
+      "attributions": {
+        "unchanged_completed": 64
+      },
+      "selected_statuses": {
+        "completed": 64
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "sol-standard",
+      "scheduled": 64,
+      "attributions": {
+        "unchanged_completed": 64
+      },
+      "selected_statuses": {
+        "completed": 64
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "terra-reference_context",
+      "scheduled": 64,
+      "attributions": {
+        "unchanged_abstained": 3,
+        "unchanged_completed": 61
+      },
+      "selected_statuses": {
+        "abstained": 3,
+        "completed": 61
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "terra-standard",
+      "scheduled": 64,
+      "attributions": {
+        "unchanged_completed": 64
+      },
+      "selected_statuses": {
+        "completed": 64
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "luna-reference_context",
+      "scheduled": 256,
+      "attributions": {
+        "unchanged_completed": 248,
+        "transport_phase_concatenation_recovered": 4,
+        "provider_error": 2,
+        "unchanged_abstained": 2
+      },
+      "selected_statuses": {
+        "completed": 252,
+        "error": 2,
+        "abstained": 2
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "luna-standard",
+      "scheduled": 256,
+      "attributions": {
+        "unchanged_completed": 254,
+        "transport_phase_concatenation_recovered": 2
+      },
+      "selected_statuses": {
+        "completed": 256
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "sol-reference_context",
+      "scheduled": 256,
+      "attributions": {
+        "unchanged_completed": 252,
+        "unattempted": 4
+      },
+      "selected_statuses": {
+        "completed": 252,
+        "missing": 4
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "sol-standard",
+      "scheduled": 256,
+      "attributions": {
+        "unchanged_completed": 252,
+        "unattempted": 4
+      },
+      "selected_statuses": {
+        "completed": 252,
+        "missing": 4
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "terra-reference_context",
+      "scheduled": 256,
+      "attributions": {
+        "unchanged_completed": 256
+      },
+      "selected_statuses": {
+        "completed": 256
+      }
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "terra-standard",
+      "scheduled": 256,
+      "attributions": {
+        "unchanged_completed": 256
+      },
+      "selected_statuses": {
+        "completed": 256
+      }
+    }
+  ],
+  "interpretation": "Recovered concatenations are transport phase-selection failures. Invalid selected final judgments fail the frozen judgment contract, not necessarily the provider JSON schema. Ambiguous phases, refusals and missing provider evidence are not attributed to model schema noncompliance. All unattempted slots remain missing; original scores and endpoints are unchanged."
+}

@@ -1,0 +1,1134 @@
+{
+  "schema_version": "everval.posthoc-phase-audit/v1",
+  "analysis_role": "post_hoc_offline_transport_sensitivity",
+  "plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+  "auditor_sha256": "6882b442ed63a591473db752925a1b4219807b7700ee839569a7626705bb7692",
+  "normalizer_source_sha256": "659b354b2fe69701c3d7998880123f1f2c4d9be8cf4e814ef4ed33b4038e30ff",
+  "bounds_source_sha256": "18ffd0bfec0c56cc21329272962801be038d942b0b76c39982505e26ec1c7f7f",
+  "retained_source_set_sha256": "fa57cc5d66b00a621c85a8b780493048b9327969783f91be291bb535b93a77f4",
+  "official_phase_documentation": "https://developers.openai.com/api/docs/guides/reasoning#phase-parameter",
+  "provider_calls": 0,
+  "frozen_scores_modified": false,
+  "groups": [
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "luna-reference_context",
+      "model_id": "gpt-6-luna",
+      "scheduled": 40,
+      "retained_observations": 40,
+      "original_statuses": {
+        "completed": 40
+      },
+      "phase_aware_statuses": {
+        "completed": 40
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 40
+      },
+      "status_transitions": {
+        "completed->completed": 40
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "luna-standard",
+      "model_id": "gpt-6-luna",
+      "scheduled": 40,
+      "retained_observations": 40,
+      "original_statuses": {
+        "completed": 40
+      },
+      "phase_aware_statuses": {
+        "completed": 40
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 40
+      },
+      "status_transitions": {
+        "completed->completed": 40
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "sol-reference_context",
+      "model_id": "gpt-6.1-sol",
+      "scheduled": 40,
+      "retained_observations": 40,
+      "original_statuses": {
+        "completed": 40
+      },
+      "phase_aware_statuses": {
+        "completed": 40
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 40
+      },
+      "status_transitions": {
+        "completed->completed": 40
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "sol-standard",
+      "model_id": "gpt-6.1-sol",
+      "scheduled": 40,
+      "retained_observations": 40,
+      "original_statuses": {
+        "completed": 40
+      },
+      "phase_aware_statuses": {
+        "completed": 40
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 40
+      },
+      "status_transitions": {
+        "completed->completed": 40
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "terra-reference_context",
+      "model_id": "gpt-6.1-terra",
+      "scheduled": 40,
+      "retained_observations": 40,
+      "original_statuses": {
+        "completed": 40
+      },
+      "phase_aware_statuses": {
+        "completed": 40
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 40
+      },
+      "status_transitions": {
+        "completed->completed": 40
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "dev",
+      "judge_id": "terra-standard",
+      "model_id": "gpt-6.1-terra",
+      "scheduled": 40,
+      "retained_observations": 40,
+      "original_statuses": {
+        "completed": 40
+      },
+      "phase_aware_statuses": {
+        "completed": 40
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 40
+      },
+      "status_transitions": {
+        "completed->completed": 40
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "luna-reference_context",
+      "model_id": "gpt-6-luna",
+      "scheduled": 160,
+      "retained_observations": 160,
+      "original_statuses": {
+        "completed": 157,
+        "error": 2,
+        "invalid": 1
+      },
+      "phase_aware_statuses": {
+        "completed": 158,
+        "error": 2
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 158,
+        "provider_evidence_missing_no_regrade": 1,
+        "retained_provider_error_unchanged": 1
+      },
+      "status_transitions": {
+        "completed->completed": 157,
+        "error->error": 2,
+        "invalid->completed": 1
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "luna-standard",
+      "model_id": "gpt-6-luna",
+      "scheduled": 160,
+      "retained_observations": 160,
+      "original_statuses": {
+        "completed": 159,
+        "invalid": 1
+      },
+      "phase_aware_statuses": {
+        "completed": 160
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 160
+      },
+      "status_transitions": {
+        "completed->completed": 159,
+        "invalid->completed": 1
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "sol-reference_context",
+      "model_id": "gpt-6.1-sol",
+      "scheduled": 160,
+      "retained_observations": 156,
+      "original_statuses": {
+        "completed": 156,
+        "missing": 4
+      },
+      "phase_aware_statuses": {
+        "completed": 156,
+        "missing": 4
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 156,
+        "no_retained_observation": 4
+      },
+      "status_transitions": {
+        "completed->completed": 156,
+        "missing->missing": 4
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "sol-standard",
+      "model_id": "gpt-6.1-sol",
+      "scheduled": 160,
+      "retained_observations": 156,
+      "original_statuses": {
+        "completed": 156,
+        "missing": 4
+      },
+      "phase_aware_statuses": {
+        "completed": 156,
+        "missing": 4
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 156,
+        "no_retained_observation": 4
+      },
+      "status_transitions": {
+        "completed->completed": 156,
+        "missing->missing": 4
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "terra-reference_context",
+      "model_id": "gpt-6.1-terra",
+      "scheduled": 160,
+      "retained_observations": 160,
+      "original_statuses": {
+        "completed": 160
+      },
+      "phase_aware_statuses": {
+        "completed": 160
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 160
+      },
+      "status_transitions": {
+        "completed->completed": 160
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "execution",
+      "partition": "holdout",
+      "judge_id": "terra-standard",
+      "model_id": "gpt-6.1-terra",
+      "scheduled": 160,
+      "retained_observations": 160,
+      "original_statuses": {
+        "completed": 160
+      },
+      "phase_aware_statuses": {
+        "completed": 160
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 160
+      },
+      "status_transitions": {
+        "completed->completed": 160
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "luna-reference_context",
+      "model_id": "gpt-6-luna",
+      "scheduled": 64,
+      "retained_observations": 64,
+      "original_statuses": {
+        "completed": 62,
+        "invalid": 2
+      },
+      "phase_aware_statuses": {
+        "completed": 64
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 64
+      },
+      "status_transitions": {
+        "completed->completed": 62,
+        "invalid->completed": 2
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "luna-standard",
+      "model_id": "gpt-6-luna",
+      "scheduled": 64,
+      "retained_observations": 64,
+      "original_statuses": {
+        "completed": 64
+      },
+      "phase_aware_statuses": {
+        "completed": 64
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 64
+      },
+      "status_transitions": {
+        "completed->completed": 64
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "sol-reference_context",
+      "model_id": "gpt-6.1-sol",
+      "scheduled": 64,
+      "retained_observations": 64,
+      "original_statuses": {
+        "completed": 64
+      },
+      "phase_aware_statuses": {
+        "completed": 64
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 64
+      },
+      "status_transitions": {
+        "completed->completed": 64
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "sol-standard",
+      "model_id": "gpt-6.1-sol",
+      "scheduled": 64,
+      "retained_observations": 64,
+      "original_statuses": {
+        "completed": 64
+      },
+      "phase_aware_statuses": {
+        "completed": 64
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 64
+      },
+      "status_transitions": {
+        "completed->completed": 64
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "terra-reference_context",
+      "model_id": "gpt-6.1-terra",
+      "scheduled": 64,
+      "retained_observations": 64,
+      "original_statuses": {
+        "abstained": 3,
+        "completed": 61
+      },
+      "phase_aware_statuses": {
+        "abstained": 3,
+        "completed": 61
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 64
+      },
+      "status_transitions": {
+        "abstained->abstained": 3,
+        "completed->completed": 61
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "dev",
+      "judge_id": "terra-standard",
+      "model_id": "gpt-6.1-terra",
+      "scheduled": 64,
+      "retained_observations": 64,
+      "original_statuses": {
+        "completed": 64
+      },
+      "phase_aware_statuses": {
+        "completed": 64
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 64
+      },
+      "status_transitions": {
+        "completed->completed": 64
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "luna-reference_context",
+      "model_id": "gpt-6-luna",
+      "scheduled": 256,
+      "retained_observations": 256,
+      "original_statuses": {
+        "completed": 248,
+        "invalid": 4,
+        "error": 2,
+        "abstained": 2
+      },
+      "phase_aware_statuses": {
+        "completed": 252,
+        "error": 2,
+        "abstained": 2
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 254,
+        "retained_provider_error_unchanged": 2
+      },
+      "status_transitions": {
+        "completed->completed": 248,
+        "invalid->completed": 4,
+        "error->error": 2,
+        "abstained->abstained": 2
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "luna-standard",
+      "model_id": "gpt-6-luna",
+      "scheduled": 256,
+      "retained_observations": 256,
+      "original_statuses": {
+        "completed": 254,
+        "invalid": 2
+      },
+      "phase_aware_statuses": {
+        "completed": 256
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 256
+      },
+      "status_transitions": {
+        "completed->completed": 254,
+        "invalid->completed": 2
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "sol-reference_context",
+      "model_id": "gpt-6.1-sol",
+      "scheduled": 256,
+      "retained_observations": 252,
+      "original_statuses": {
+        "completed": 252,
+        "missing": 4
+      },
+      "phase_aware_statuses": {
+        "completed": 252,
+        "missing": 4
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 252,
+        "no_retained_observation": 4
+      },
+      "status_transitions": {
+        "completed->completed": 252,
+        "missing->missing": 4
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "sol-standard",
+      "model_id": "gpt-6.1-sol",
+      "scheduled": 256,
+      "retained_observations": 252,
+      "original_statuses": {
+        "completed": 252,
+        "missing": 4
+      },
+      "phase_aware_statuses": {
+        "completed": 252,
+        "missing": 4
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 252,
+        "no_retained_observation": 4
+      },
+      "status_transitions": {
+        "completed->completed": 252,
+        "missing->missing": 4
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "terra-reference_context",
+      "model_id": "gpt-6.1-terra",
+      "scheduled": 256,
+      "retained_observations": 256,
+      "original_statuses": {
+        "completed": 256
+      },
+      "phase_aware_statuses": {
+        "completed": 256
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 256
+      },
+      "status_transitions": {
+        "completed->completed": 256
+      },
+      "valid_decision_changes": 0
+    },
+    {
+      "cohort": "human",
+      "partition": "holdout",
+      "judge_id": "terra-standard",
+      "model_id": "gpt-6.1-terra",
+      "scheduled": 256,
+      "retained_observations": 256,
+      "original_statuses": {
+        "completed": 256
+      },
+      "phase_aware_statuses": {
+        "completed": 256
+      },
+      "selection_reasons": {
+        "explicit_final_answer": 256
+      },
+      "status_transitions": {
+        "completed->completed": 256
+      },
+      "valid_decision_changes": 0
+    }
+  ],
+  "heldout_identification_bounds": {
+    "human": {
+      "frozen": {
+        "analysis_role": "post_hoc_descriptive_identification_sensitivity",
+        "partition": "holdout",
+        "items": 64,
+        "families": 64,
+        "endpoint": "human_votes",
+        "judges": [
+          {
+            "judge_id": "luna-standard",
+            "model_id": "gpt-6-luna",
+            "identification_bounds": [
+              0.637109375,
+              0.637109375
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 254,
+              "error": 0,
+              "invalid": 2,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "luna-reference_context",
+            "model_id": "gpt-6-luna",
+            "identification_bounds": [
+              0.6205078125,
+              0.6205078125
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 2,
+              "completed": 248,
+              "error": 2,
+              "invalid": 4,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "terra-standard",
+            "model_id": "gpt-6.1-terra",
+            "identification_bounds": [
+              0.723046875,
+              0.723046875
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 256,
+              "error": 0,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "terra-reference_context",
+            "model_id": "gpt-6.1-terra",
+            "identification_bounds": [
+              0.72109375,
+              0.72109375
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 256,
+              "error": 0,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "sol-standard",
+            "model_id": "gpt-6.1-sol",
+            "identification_bounds": [
+              0.711328125,
+              0.726953125
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 4,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 252,
+              "error": 0,
+              "invalid": 0,
+              "missing": 4
+            }
+          },
+          {
+            "judge_id": "sol-reference_context",
+            "model_id": "gpt-6.1-sol",
+            "identification_bounds": [
+              0.69765625,
+              0.71328125
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 4,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 252,
+              "error": 0,
+              "invalid": 0,
+              "missing": 4
+            }
+          }
+        ],
+        "paired_contrasts": [
+          {
+            "left": "luna-standard",
+            "right": "luna-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              -0.0166015625,
+              -0.0166015625
+            ]
+          },
+          {
+            "left": "terra-standard",
+            "right": "terra-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              -0.001953125,
+              -0.001953125
+            ]
+          },
+          {
+            "left": "sol-standard",
+            "right": "sol-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              -0.029296875,
+              0.001953125
+            ]
+          }
+        ],
+        "method": "Observed attempted outcomes are fixed; invalid, abstained and error deliveries score zero. Each unattempted judgment ranges from zero to its question's maximum reference-vote share, with original scheduled denominators. Items are averaged within frozen families, then families receive equal weight.",
+        "interpretation": "Finite-cohort identification uncertainty, not a confidence interval, statistical-significance test, population claim or replacement for the frozen primary. Equal endpoints identify a fixed-cohort value only. No independence assumption or imputation is used."
+      },
+      "phase_aware": {
+        "analysis_role": "post_hoc_descriptive_identification_sensitivity",
+        "partition": "holdout",
+        "items": 64,
+        "families": 64,
+        "endpoint": "human_votes",
+        "judges": [
+          {
+            "judge_id": "luna-standard",
+            "model_id": "gpt-6-luna",
+            "identification_bounds": [
+              0.6436197916666667,
+              0.6436197916666667
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 256,
+              "error": 0,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "luna-reference_context",
+            "model_id": "gpt-6-luna",
+            "identification_bounds": [
+              0.6322265625,
+              0.6322265625
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 2,
+              "completed": 252,
+              "error": 2,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "terra-standard",
+            "model_id": "gpt-6.1-terra",
+            "identification_bounds": [
+              0.723046875,
+              0.723046875
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 256,
+              "error": 0,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "terra-reference_context",
+            "model_id": "gpt-6.1-terra",
+            "identification_bounds": [
+              0.72109375,
+              0.72109375
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 256,
+              "error": 0,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "sol-standard",
+            "model_id": "gpt-6.1-sol",
+            "identification_bounds": [
+              0.711328125,
+              0.726953125
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 4,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 252,
+              "error": 0,
+              "invalid": 0,
+              "missing": 4
+            }
+          },
+          {
+            "judge_id": "sol-reference_context",
+            "model_id": "gpt-6.1-sol",
+            "identification_bounds": [
+              0.69765625,
+              0.71328125
+            ],
+            "scheduled_judgments": 256,
+            "unattempted_judgments": 4,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 252,
+              "error": 0,
+              "invalid": 0,
+              "missing": 4
+            }
+          }
+        ],
+        "paired_contrasts": [
+          {
+            "left": "luna-standard",
+            "right": "luna-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              -0.01139322916666674,
+              -0.01139322916666674
+            ]
+          },
+          {
+            "left": "terra-standard",
+            "right": "terra-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              -0.001953125,
+              -0.001953125
+            ]
+          },
+          {
+            "left": "sol-standard",
+            "right": "sol-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              -0.029296875,
+              0.001953125
+            ]
+          }
+        ],
+        "method": "Observed attempted outcomes are fixed; invalid, abstained and error deliveries score zero. Each unattempted judgment ranges from zero to its question's maximum reference-vote share, with original scheduled denominators. Items are averaged within frozen families, then families receive equal weight.",
+        "interpretation": "Finite-cohort identification uncertainty, not a confidence interval, statistical-significance test, population claim or replacement for the frozen primary. Equal endpoints identify a fixed-cohort value only. No independence assumption or imputation is used."
+      }
+    },
+    "execution": {
+      "frozen": {
+        "analysis_role": "post_hoc_descriptive_identification_sensitivity",
+        "partition": "holdout",
+        "items": 40,
+        "families": 40,
+        "endpoint": "reference",
+        "judges": [
+          {
+            "judge_id": "luna-standard",
+            "model_id": "gpt-6-luna",
+            "identification_bounds": [
+              0.63125,
+              0.63125
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 159,
+              "error": 0,
+              "invalid": 1,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "luna-reference_context",
+            "model_id": "gpt-6-luna",
+            "identification_bounds": [
+              0.58125,
+              0.58125
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 157,
+              "error": 2,
+              "invalid": 1,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "terra-standard",
+            "model_id": "gpt-6.1-terra",
+            "identification_bounds": [
+              0.725,
+              0.725
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 160,
+              "error": 0,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "terra-reference_context",
+            "model_id": "gpt-6.1-terra",
+            "identification_bounds": [
+              0.725,
+              0.725
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 160,
+              "error": 0,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "sol-standard",
+            "model_id": "gpt-6.1-sol",
+            "identification_bounds": [
+              0.775,
+              0.8
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 4,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 156,
+              "error": 0,
+              "invalid": 0,
+              "missing": 4
+            }
+          },
+          {
+            "judge_id": "sol-reference_context",
+            "model_id": "gpt-6.1-sol",
+            "identification_bounds": [
+              0.7625,
+              0.7875
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 4,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 156,
+              "error": 0,
+              "invalid": 0,
+              "missing": 4
+            }
+          }
+        ],
+        "paired_contrasts": [
+          {
+            "left": "luna-standard",
+            "right": "luna-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              -0.04999999999999993,
+              -0.04999999999999993
+            ]
+          },
+          {
+            "left": "terra-standard",
+            "right": "terra-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "left": "sol-standard",
+            "right": "sol-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              -0.03750000000000009,
+              0.012499999999999956
+            ]
+          }
+        ],
+        "method": "Observed attempted outcomes are fixed; invalid, abstained and error deliveries score zero. Each unattempted judgment ranges from zero to its question's maximum reference-vote share, with original scheduled denominators. Items are averaged within frozen families, then families receive equal weight.",
+        "interpretation": "Finite-cohort identification uncertainty, not a confidence interval, statistical-significance test, population claim or replacement for the frozen primary. Equal endpoints identify a fixed-cohort value only. No independence assumption or imputation is used."
+      },
+      "phase_aware": {
+        "analysis_role": "post_hoc_descriptive_identification_sensitivity",
+        "partition": "holdout",
+        "items": 40,
+        "families": 40,
+        "endpoint": "reference",
+        "judges": [
+          {
+            "judge_id": "luna-standard",
+            "model_id": "gpt-6-luna",
+            "identification_bounds": [
+              0.63125,
+              0.63125
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 160,
+              "error": 0,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "luna-reference_context",
+            "model_id": "gpt-6-luna",
+            "identification_bounds": [
+              0.58125,
+              0.58125
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 158,
+              "error": 2,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "terra-standard",
+            "model_id": "gpt-6.1-terra",
+            "identification_bounds": [
+              0.725,
+              0.725
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 160,
+              "error": 0,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "terra-reference_context",
+            "model_id": "gpt-6.1-terra",
+            "identification_bounds": [
+              0.725,
+              0.725
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 0,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 160,
+              "error": 0,
+              "invalid": 0,
+              "missing": 0
+            }
+          },
+          {
+            "judge_id": "sol-standard",
+            "model_id": "gpt-6.1-sol",
+            "identification_bounds": [
+              0.775,
+              0.8
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 4,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 156,
+              "error": 0,
+              "invalid": 0,
+              "missing": 4
+            }
+          },
+          {
+            "judge_id": "sol-reference_context",
+            "model_id": "gpt-6.1-sol",
+            "identification_bounds": [
+              0.7625,
+              0.7875
+            ],
+            "scheduled_judgments": 160,
+            "unattempted_judgments": 4,
+            "status_counts": {
+              "abstained": 0,
+              "completed": 156,
+              "error": 0,
+              "invalid": 0,
+              "missing": 4
+            }
+          }
+        ],
+        "paired_contrasts": [
+          {
+            "left": "luna-standard",
+            "right": "luna-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              -0.04999999999999993,
+              -0.04999999999999993
+            ]
+          },
+          {
+            "left": "terra-standard",
+            "right": "terra-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "left": "sol-standard",
+            "right": "sol-reference_context",
+            "direction": "right_minus_left",
+            "identification_bounds": [
+              -0.03750000000000009,
+              0.012499999999999956
+            ]
+          }
+        ],
+        "method": "Observed attempted outcomes are fixed; invalid, abstained and error deliveries score zero. Each unattempted judgment ranges from zero to its question's maximum reference-vote share, with original scheduled denominators. Items are averaged within frozen families, then families receive equal weight.",
+        "interpretation": "Finite-cohort identification uncertainty, not a confidence interval, statistical-significance test, population claim or replacement for the frozen primary. Equal endpoints identify a fixed-cohort value only. No independence assumption or imputation is used."
+      }
+    }
+  },
+  "interpretation": "Strict phase metadata selection regrades retained outputs offline only. Original frozen scores remain authoritative for the declared study. Changes caused by commentary concatenation are transport limitations, not demonstrated final-answer schema failures. Identification bounds preserve all scheduled outcomes and are not confidence intervals or population claims."
+}

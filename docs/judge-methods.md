@@ -52,7 +52,7 @@ Every item is presented in both A/B and B/A order. The service maps preferences 
 - **Repeated-order disagreement** measures variation between repetitions with the same display order.
 - **Excess swap disagreement** compares swapping with that repeated-order noise. Without repeated calls, this diagnostic is unavailable; a swap change alone does not establish position bias.
 
-The self-preference diagnostic requires an exact judge-model identity and provenance for both response generators. It compares preference for the judge's own output against the reference's preference for that same output. Equal-model pairs are ineligible. Matching a provider name or guessing an alias does not establish an exact-model match. The result is a descriptive association conditioned on fallible references, not a causal claim of favoritism.
+The self-preference diagnostic requires an exact judge-model identity and provenance for both response generators. It compares preference for the judge's own output against the reference's preference for that same output. Equal-model pairs are ineligible. Matching a provider name or guessing an alias does not establish an exact-model match. Matching returned API model identifiers still does not attest identical serving weights; describe that boundary when only aliases are available. The result is a descriptive association conditioned on fallible references, not a causal claim of favoritism.
 
 These controls address documented [position and self-enhancement issues](https://arxiv.org/abs/2306.05685) and [self-recognition effects](https://arxiv.org/abs/2404.13076).
 

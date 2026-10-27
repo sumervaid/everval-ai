@@ -1,0 +1,19 @@
+{
+  "inspect_version": "0.3.285",
+  "dataset_type": "MemoryDataset",
+  "samples": 8,
+  "manifest": {
+    "schema_version": "everval.inspect/v1",
+    "protocol_hash": "ab02e08cd22c211c9fd6889a23cbc15d15da57dc03ac489dd9c8bb6fc696104e",
+    "judge_id": "content-control",
+    "partition": "dev",
+    "samples": 8,
+    "labeled_samples": 8,
+    "files": {
+      "samples.jsonl": "47aca67ec24c0a09c5d3264c880fad6b75e9c7ceaaefa08a94e7f2f4aaab0525",
+      "references.jsonl": "8fb5b02037bd7da62c6c8baa1c93e20c1032d5a303119e4f49a7a1f03c2a6fcf"
+    },
+    "boundary": "Only samples.jsonl may enter a solver environment; references.jsonl stays with the evaluator."
+  },
+  "paid_calls": 0
+}

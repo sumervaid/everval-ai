@@ -1,4 +1,8 @@
-# Version 0.3.1 verification
+# Verification history
+
+For the current 0.4 source candidate, see [calibrated-judge and distribution acceptance](evidence/2026-10-27/README.md): committed-source CI, isolated Python and npm installation, a live product-transport probe, and actual Inspect compatibility. Registry publication is recorded separately from source validation.
+
+## Version 0.3.1 verification
 
 For the later unreleased Rankings and on-premises changes, see the separate [2026-10-16 feature verification](evidence/2026-10-16/README.md).
 

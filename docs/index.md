@@ -50,6 +50,7 @@ Use [benchmark validation](benchmarks.md) to understand what qualifies for a rel
 
 ## Measure the measurement
 
+- [Read the judge-calibration finding](benchmarks/judge-study-2026-10-27/results.md): a checklist raised estimated cost by 10.9% without a demonstrated human-agreement gain in the complete Terra comparison.
 - [Calibrate LLM judges](judge-calibration.md) against retained human votes or execution references.
 - [Statistical methods](judge-methods.md) explain agreement, reliability, paired uncertainty and prospective power.
 - [Four measurement decisions](measurement-design.md) connect the implementation to its tradeoffs.
@@ -74,7 +75,7 @@ The supported deployment is one local workspace with a dedicated worker. Read [o
 
 [Architecture](ARCHITECTURE.md) · [Interface contracts](INTERFACES.md) · [Evaluation methodology](METHODOLOGY.md) · [Current scope](PLAN.md) · [Roadmap](../ROADMAP.md) · [Contributing](../CONTRIBUTING.md)
 
-[Verification record](verification.md) · [Release acceptance procedure](release-acceptance.md) · [Dated evidence](evidence/2026-10-15/README.md) · [Changelog](../CHANGELOG.md)
+[Verification record](verification.md) · [Release acceptance procedure](release-acceptance.md) · [Current source acceptance](evidence/2026-10-27/README.md) · [Changelog](../CHANGELOG.md)
 
 The bundled examples are original installation controls. The dated acceptance record covers single-turn API trials on original tasks; it did not evaluate autonomous public-repository repairs or establish representative customer performance.
 

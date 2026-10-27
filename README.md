@@ -1,14 +1,20 @@
 # Everval AI — On-prem continuous benchmarking for AI models and agents
 
-Turn your own work into repeatable evaluations. Compare models, prompts, and agents; inspect quality, cost, and latency; keep checking as your system changes.
+[![Validation](https://github.com/sumervaid/everval-ai/actions/workflows/validation.yml/badge.svg)](https://github.com/sumervaid/everval-ai/actions/workflows/validation.yml)
+
+[Research finding](docs/benchmarks/judge-study-2026-10-27/results.md) · [Quickstart](#try-it-without-a-key) · [Product demos](docs/demos.md) · [Documentation](docs/index.md) · [On-prem deployment](docs/on-premises.md)
+
+**A checklist increased estimated judge cost by 10.9% without a demonstrated gain in human agreement.**
+
+In the complete GPT-6.1 Terra holdout comparison, agreement with historical human votes was **72.30% with the standard rubric and 72.11% with the checklist**. The paired change was −0.20 percentage points, with a multiplicity-adjusted interval of −2.15 to +1.76 points. Conservative usage-based cost rose from $0.625 to $0.693 across 256 judgments per arm. The unit of analysis is the 64 held-out questions.
+
+[![Agreement with human votes across three model judges, preserving the full 64-question cohort](docs/benchmarks/judge-study-2026-10-27/judge-full-cohort-bounds.svg)](docs/benchmarks/judge-study-2026-10-27/results.md)
+
+*The chart uses original frozen scores. Its ranges cover unattempted judgments; they are not confidence intervals. [Read the study](docs/benchmarks/judge-study-2026-10-27/results.md) for the planned comparisons, human-vote provenance, judgments checked against archived test reports, and the separate audit of ten transport-parser failures.*
+
+Everval turns your own work into repeatable evaluations. Compare models, prompts, and agents; inspect quality, cost, and latency; keep checking as your system changes.
 
 Built for evaluation engineers and ML platform teams, with a terminal workbench, shared CLI/API, and optional review browser. Tasks and evidence stay in your workspace.
-
-[Quickstart](#try-it-without-a-key) · [Product demos](docs/demos.md) · [Documentation](docs/index.md) · [On-prem deployment](docs/on-premises.md)
-
-[![Everval: create a recurring benchmark, inspect results, and compare rankings](docs/assets/demos/recordings/everval-tour.gif)](docs/demos.md)
-
-*One continuous session using installation controls. [Watch the full-resolution video](docs/assets/demos/recordings/everval-tour.mp4) · [Explore all workflows](docs/demos.md).*
 
 ## Try it without a key
 
@@ -52,6 +58,10 @@ everval demo
 
 ## What you can do
 
+[![Everval: create a recurring benchmark, inspect results, and compare rankings](docs/assets/demos/recordings/everval-tour.gif)](docs/demos.md)
+
+*One continuous session using installation controls. [Watch the full-resolution video](docs/assets/demos/recordings/everval-tour.mp4) · [Explore all workflows](docs/demos.md).*
+
 | Workflow | What Everval records |
 | --- | --- |
 | [Repository benchmarks](docs/guided-run.md) | Reviewed tasks, fail-before/pass-after controls, hidden checks, and frozen benchmark releases. |
@@ -79,6 +89,7 @@ SSO, tenant isolation, and distributed execution are outside this release. Doubl
 
 ## Inspect the evidence
 
+- [Calibrated-judge and distribution acceptance](docs/evidence/2026-10-27/README.md): live product judge calls, actual Inspect compatibility, and installed Python/npm checks.
 - [Release acceptance](docs/evidence/2026-10-15/README.md): installed-package, interface, accounting, and bounded API checks.
 - [Public repository pilot](docs/benchmarks/public-repositories-2026-10-15/results.md): completed attempts, exclusions, and unresolved accounting; no repair-quality improvement demonstrated.
 - [Checkpoint study](docs/benchmarks/checkpoint-study-2026-10-22/results.md): three local training runs, twelve checkpoints, and 3,072 responses on generated diagnostics.
