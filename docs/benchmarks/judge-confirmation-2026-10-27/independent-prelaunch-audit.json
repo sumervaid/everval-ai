@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "source_sha256": {
+    "scripts/judge_study/confirmatory_analysis.py": "fa23a59e3265903cdd2d92e0adca7222c573bea8c96dea134f971146d43b9972",
+    "scripts/judge_study/confirmatory_run.py": "b8dfd4fb2810929b4e3deadb7868200ebaca9dde4aff6d526164e2be7bafafe9",
+    "src/cvals/judge_calibration.py": "659b354b2fe69701c3d7998880123f1f2c4d9be8cf4e814ef4ed33b4038e30ff",
+    "scripts/benchmarks/budget.py": "ea0a0f31a1eb8f5b61167e1364b97c9c4f05eb3fa7a8027ce76f45d1dd047a13",
+    "scripts/judge_study/concurrent_budget.py": "e6726b6a0b19261c3f4250e1e4d0cfecaf3da835727dac90093eca47567c9131"
+  },
+  "source_unchanged_during_audit": true,
+  "checks": {
+    "independent_numpy_family_weighting": true,
+    "independent_scipy_paired_t_bounds": true,
+    "canonical_mapping_mismatch_rejected": true,
+    "missing_job_blocks_adoption": true,
+    "hierarchy_blocks_second_claim_after_first_cost_failure": true,
+    "mutated_reference_votes_provenance_and_generator_metadata_do_not_change_requests": true
+  },
+  "scheduled_fixture_calls": 720,
+  "independent_fixture_families": 120,
+  "not_model_results": true
+}

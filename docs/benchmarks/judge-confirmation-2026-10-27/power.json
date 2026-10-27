@@ -1,0 +1,34 @@
+{
+  "method": "Normal approximation for a paired family mean, assuming sufficient discordant families; sensitivity, not guaranteed power",
+  "families": 1000,
+  "margin": 0.01,
+  "alpha_one_sided": 0.05,
+  "assumed_true_difference": 0,
+  "assumptions": [
+    {
+      "assumed_family_difference_sd": 0.05,
+      "power_at_true_zero_difference": 0.9999985635369352,
+      "families_for_80_percent_power": 155
+    },
+    {
+      "assumed_family_difference_sd": 0.1,
+      "power_at_true_zero_difference": 0.9354201700477403,
+      "families_for_80_percent_power": 619
+    },
+    {
+      "assumed_family_difference_sd": 0.15,
+      "power_at_true_zero_difference": 0.6784366076287957,
+      "families_for_80_percent_power": 1392
+    },
+    {
+      "assumed_family_difference_sd": 0.2,
+      "power_at_true_zero_difference": 0.4745986612454449,
+      "families_for_80_percent_power": 2474
+    },
+    {
+      "assumed_family_difference_sd": 0.25,
+      "power_at_true_zero_difference": 0.3519940258168499,
+      "families_for_80_percent_power": 3865
+    }
+  ]
+}

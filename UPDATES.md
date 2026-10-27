@@ -6,6 +6,13 @@ Dated notes on shipped work, measured findings and release status. Updates are a
 
 ## 2026-10-27
 
+### Larger judge confirmation — registered
+
+Prepared a fresh **1,000-family, 6,000-judgment** test using **2,957 retained human votes**. The [protocol](docs/benchmarks/judge-confirmation-2026-10-27/protocol.md) fixes a one-percentage-point quality-loss tolerance, cost tests, comparison order and failure handling before inference. It compares Terra's standard/checklist rubrics and a Sol baseline through the complete calibration workflow.
+
+Preflight passed **78 tests** plus independent statistical, label-isolation and accounting audits. Expected new API cost is about **$24.23**; the cumulative **$50** ceiling includes all **$15.142929** previously accounted. Results and final spending will be added when the fixed run ends. [Study record](docs/benchmarks/judge-confirmation-2026-10-27/README.md).
+
+
 ### ~10% lower estimated judging cost
 
 In the 64-question GPT-6.1 Terra comparison, the standard rubric cost **9.8% less** than the checklist rubric: **$0.624685 versus $0.692560** across 256 judgments per arm. Observed agreement with historical human votes was **72.30% versus 72.11%**. The quality difference was not statistically established.

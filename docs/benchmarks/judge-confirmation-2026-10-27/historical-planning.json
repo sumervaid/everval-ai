@@ -1,0 +1,29 @@
+{
+  "purpose": "Exploratory prior-cohort planning only, not confirmation evidence",
+  "historical_plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+  "slices": [
+    {
+      "repetition": 0,
+      "families": 64,
+      "nonzero_differences": 3,
+      "paired_sd": 0.07715167498104596,
+      "support_counts": {
+        "0.0": 61,
+        "0.25": 2,
+        "-0.5": 1
+      }
+    },
+    {
+      "repetition": 1,
+      "families": 64,
+      "nonzero_differences": 3,
+      "paired_sd": 0.0944090590807256,
+      "support_counts": {
+        "0.0": 61,
+        "-0.5": 1,
+        "0.25": 1,
+        "0.5": 1
+      }
+    }
+  ]
+}

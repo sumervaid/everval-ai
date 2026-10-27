@@ -1,0 +1,127 @@
+{
+  "families": 1000,
+  "jobs": 6000,
+  "tokenizer": "tiktoken==0.12.0/o200k_base;regex==2025.11.3",
+  "assumptions": [
+    "Full JSON request tokenization plus512framing tokens percall is an approximate forecast, not exact provider input counting.",
+    "Historical human-holdout output counts include reported reasoning tokens. Fresh HelpSteer3 complexity may change output distributions.",
+    "Service tier default,explicit caching without breakpoints, no cache writes/reads expected. Runtime stops on unexpected cache accounting.",
+    "Historical opening includes all prior reservations. Fixed new allocations sum34.80; no calls occur during forecast.",
+    "The full frozenN is retained if a strict per-request admission cap stops execution; incomplete study cannot establish non-inferiority."
+  ],
+  "profiles": {
+    "gpt-6.1-terra": {
+      "allocation_usd": "16.00",
+      "input_rate_per_million": "1",
+      "output_rate_per_million": "5",
+      "max_output_tokens": 768,
+      "reasoning": "none"
+    },
+    "gpt-6.1-sol": {
+      "allocation_usd": "18.80",
+      "input_rate_per_million": "2",
+      "output_rate_per_million": "10",
+      "max_output_tokens": 1536,
+      "reasoning": "low"
+    }
+  },
+  "historical_output_tokens": {
+    "terra-standard": {
+      "observations": 256,
+      "mean": 69.2265625,
+      "p50": 68.5,
+      "p90": 89,
+      "p95": 94,
+      "max": 126,
+      "reasoning_token_records": 256,
+      "mean_reasoning_tokens": 0
+    },
+    "terra-checklist": {
+      "observations": 256,
+      "mean": 72.14453125,
+      "p50": 71.0,
+      "p90": 89,
+      "p95": 95,
+      "max": 124,
+      "reasoning_token_records": 256,
+      "mean_reasoning_tokens": 0
+    },
+    "sol-standard": {
+      "observations": 252,
+      "mean": 109.59126984126983,
+      "p50": 102.0,
+      "p90": 153,
+      "p95": 181,
+      "max": 406,
+      "reasoning_token_records": 252,
+      "mean_reasoning_tokens": 13.932539682539682
+    }
+  },
+  "arms": {
+    "sol-standard": {
+      "calls": 2000,
+      "model": "gpt-6.1-sol",
+      "sum_estimated_input_tokens": 5099997,
+      "mean_estimated_input_tokens": 2549.9985
+    },
+    "terra-standard": {
+      "calls": 2000,
+      "model": "gpt-6.1-terra",
+      "sum_estimated_input_tokens": 5100089,
+      "mean_estimated_input_tokens": 2550.0445
+    },
+    "terra-checklist": {
+      "calls": 2000,
+      "model": "gpt-6.1-terra",
+      "sum_estimated_input_tokens": 5327947,
+      "mean_estimated_input_tokens": 2663.9735
+    }
+  },
+  "scenarios": {
+    "mean": {
+      "new_usd": "24.2335663343253966",
+      "cumulative_usd": "39.3764953343253966",
+      "models": {
+        "gpt-6.1-sol": "12.3918193968253966",
+        "gpt-6.1-terra": "11.8417469375"
+      },
+      "fits_allocations": true
+    },
+    "p90": {
+      "new_usd": "25.468030",
+      "cumulative_usd": "40.61095900",
+      "models": {
+        "gpt-6.1-sol": "13.259994",
+        "gpt-6.1-terra": "12.208036"
+      },
+      "fits_allocations": true
+    },
+    "p95": {
+      "new_usd": "26.138030",
+      "cumulative_usd": "41.28095900",
+      "models": {
+        "gpt-6.1-sol": "13.819994",
+        "gpt-6.1-terra": "12.318036"
+      },
+      "fits_allocations": true
+    },
+    "max": {
+      "new_usd": "31.248030",
+      "cumulative_usd": "46.39095900",
+      "models": {
+        "gpt-6.1-sol": "18.319994",
+        "gpt-6.1-terra": "12.928036"
+      },
+      "fits_allocations": true
+    },
+    "configured_ceiling": {
+      "new_usd": "66.708030",
+      "cumulative_usd": "81.85095900",
+      "models": {
+        "gpt-6.1-sol": "40.919994",
+        "gpt-6.1-terra": "25.788036"
+      },
+      "fits_allocations": false
+    }
+  }
+}

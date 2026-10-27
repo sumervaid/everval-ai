@@ -1,0 +1,102 @@
+{
+  "bootstrap_resamples": 2000,
+  "families": 1000,
+  "interpretation": "Monte Carlo validation under explicitly specified independent bounded distributions. The boundary scenarios measure false adoption under the NI null; equal_quality measures power. This does not establish universal confidence coverage. Simulation resamples may differ from the frozen production-analysis count and are reported explicitly.",
+  "scenarios": [
+    {
+      "conjunction_lower_bound_coverage": 0.97,
+      "estimable_intervals": 400,
+      "gate_pass_rate_monte_carlo_95_interval": [
+        0.01724302096514305,
+        0.05169853570909566
+      ],
+      "probabilities": [
+        0.06,
+        0.9,
+        0.04
+      ],
+      "quality_gate_pass_rate": 0.03,
+      "quality_gate_passes": 12,
+      "replicates": 400,
+      "scenario": "null_boundary_balanced",
+      "true_difference": -0.009999999999999998,
+      "undefined_intervals_counted_as_pass": false,
+      "values": [
+        -0.5,
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "conjunction_lower_bound_coverage": 0.9425,
+      "estimable_intervals": 400,
+      "gate_pass_rate_monte_carlo_95_interval": [
+        0.038617542757733075,
+        0.08480083772811933
+      ],
+      "probabilities": [
+        0.01,
+        0.99
+      ],
+      "quality_gate_pass_rate": 0.0575,
+      "quality_gate_passes": 23,
+      "replicates": 400,
+      "scenario": "null_boundary_rare_loss",
+      "true_difference": -0.01,
+      "undefined_intervals_counted_as_pass": false,
+      "values": [
+        -1.0,
+        0.0
+      ]
+    },
+    {
+      "conjunction_lower_bound_coverage": 0.945,
+      "estimable_intervals": 400,
+      "gate_pass_rate_monte_carlo_95_interval": [
+        0.0,
+        0.009512294334296501
+      ],
+      "probabilities": [
+        0.07,
+        0.9,
+        0.03
+      ],
+      "quality_gate_pass_rate": 0.0,
+      "quality_gate_passes": 0,
+      "replicates": 400,
+      "scenario": "inferior_two_points",
+      "true_difference": -0.020000000000000004,
+      "undefined_intervals_counted_as_pass": false,
+      "values": [
+        -0.5,
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "conjunction_lower_bound_coverage": 0.9325,
+      "estimable_intervals": 400,
+      "gate_pass_rate_monte_carlo_95_interval": [
+        0.625058301372569,
+        0.7166599570820986
+      ],
+      "probabilities": [
+        0.05,
+        0.9,
+        0.05
+      ],
+      "quality_gate_pass_rate": 0.6725,
+      "quality_gate_passes": 269,
+      "replicates": 400,
+      "scenario": "equal_quality",
+      "true_difference": 0.0,
+      "undefined_intervals_counted_as_pass": false,
+      "values": [
+        -0.5,
+        0.0,
+        0.5
+      ]
+    }
+  ],
+  "seed": 27102028
+}
