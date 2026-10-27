@@ -41,9 +41,9 @@ Replace the example paths with the generated manifests. The browser script print
 find .local/continuous -name manifest.json
 ~~~
 
-Pass every desired manifest together to produce the complete public media index. The default destination is docs/assets/demos/continuous/; --output selects another directory. The hero is captured as its own complete user journey; it is never assembled from other clips.
+Pass every desired manifest together to produce the complete public media index. The default destination is docs/assets/demos/recordings/; --output selects another directory. The hero is captured as its own complete user journey; it is never assembled from other clips.
 
-GIFs use 20 frames per second at 1120×700, with mild compression-noise reduction and color quantization. MP4s preserve the native 1280×800 recording at 25 frames per second. Neither format changes playback speed.
+GIFs use 20 frames per second at 960×600 with a 64-color palette. Bounded temporal stabilization suppresses recording noise: a previous pixel is retained only when every channel differs from the current recorded pixel by at most 6/255 before palette quantization. Larger changes update immediately. The frame timeline stays intact. MP4s preserve the native 1280×800 recording at 25 frames per second. Neither format changes playback speed.
 
 The encoder verifies source resolution and frame rate, uninterrupted segment timing, GIF frame cadence, changing frames, PNG decoding and MP4 duration. Private source-video hashes and segment offsets are retained in the public metadata for inspection; raw recordings, credentials and workspaces remain outside Git.
 

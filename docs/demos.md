@@ -1,131 +1,28 @@
-# See Everval in motion
+# Product demos
 
-[Project](../README.md) · [Install from source](quickstart.md#install-from-source) · [Still images](demo-stills.md)
+[Project](../README.md) · [Quickstart](quickstart.md#install-from-source) · [Documentation](index.md)
 
-Continuous recordings of the actual browser and terminal. Watch pointer movement, typed text, scrolling, live navigation and results. Each recording follows one session without internal cuts. Full-resolution MP4s accompany the GIFs.
+## A complete benchmark workflow
 
-All runs use original installation controls or explicitly synthetic data. The recordings demonstrate product workflows; they do not measure model quality or latency. Current-source features include functionality added after npm 0.3.1.
+Type a request, run the comparison, inspect results and open the benchmark matrix. This is one continuous session using original installation controls.
 
-## One request, one complete session
+![Create a recurring benchmark and inspect its results](assets/demos/recordings/everval-tour.gif)
 
-![Continuous session from a typed benchmark request through results and rankings](assets/demos/continuous/everval-tour.gif)
+**46 seconds.** [Open animation](assets/demos/recordings/everval-tour.gif) · [Full-resolution video](assets/demos/recordings/everval-tour.mp4) · [Still image](assets/demos/recordings/everval-tour.png)
 
-[Full-resolution MP4](assets/demos/continuous/everval-tour.mp4) · [Still image](assets/demos/continuous/everval-tour.png)
+## Explore each workflow
 
-## Explore the workflows
+**Click a preview to watch its animation on GitHub.** Each viewing page loads one continuous recording.
 
-[Terminal workbench](#terminal-workbench) · [Benchmark chat](#chat-and-reports) · [Repository onboarding](#repository-onboarding) · [Tasks and comparisons](#tasks-and-comparisons) · [Rankings, cost and latency](#rankings) · [Continuous checks and budgets](#autopilot-budget) · [Failure investigation](#failure-research) · [Production cases and team review](#production-cases) · [Checkpoint monitoring](#checkpoint-monitoring) · [Double-blind review](#double-blind)
+| | |
+| --- | --- |
+| [![Terminal workbench](assets/demos/previews/terminal-workbench.jpg)](demos/terminal-workbench.md)<br>**[Terminal workbench · Watch 16s](demos/terminal-workbench.md)**<br>Search the command palette, switch views and inspect saved experiment evidence. | [![Benchmark chat](assets/demos/previews/chat-and-reports.jpg)](demos/chat-and-reports.md)<br>**[Benchmark chat · Watch 32s](demos/chat-and-reports.md)**<br>Type a recurring request, start a fixture run, open reports and pause future runs. |
+| [![Connect a repository](assets/demos/previews/repository-onboarding.jpg)](demos/repository-onboarding.md)<br>**[Connect a repository · Watch 23s](demos/repository-onboarding.md)**<br>Connect an original local Git repository and discover candidate work. | [![Tasks and comparisons](assets/demos/previews/tasks-and-comparisons.jpg)](demos/tasks-and-comparisons.md)<br>**[Tasks and comparisons · Watch 47s](demos/tasks-and-comparisons.md)**<br>Write a task contract, validate its controls and inspect both comparison outcomes. |
+| [![Rankings, cost and latency](assets/demos/previews/rankings.jpg)](demos/rankings.md)<br>**[Rankings, cost and latency · Watch 30s](demos/rankings.md)**<br>Switch metrics, filter configurations and open the evidence behind the matrix. | [![Continuous checks and budgets](assets/demos/previews/autopilot-budget.jpg)](demos/autopilot-budget.md)<br>**[Continuous checks and budgets · Watch 16s](demos/autopilot-budget.md)**<br>Inspect a bounded policy, spending commitments and retained observations. |
+| [![Investigate failures](assets/demos/previews/failure-research.jpg)](demos/failure-research.md)<br>**[Investigate failures · Watch 27s](demos/failure-research.md)**<br>Open failed attempts, inspect evidence and review grader-quality records. | [![Production cases and team review](assets/demos/previews/production-cases.jpg)](demos/production-cases.md)<br>**[Production cases and team review · Watch 34s](demos/production-cases.md)**<br>Review a staged incident, enter expected behavior and publish a validated collection. |
+| [![Checkpoint monitoring](assets/demos/previews/checkpoint-monitoring.jpg)](demos/checkpoint-monitoring.md)<br>**[Checkpoint monitoring · Watch 39s](demos/checkpoint-monitoring.md)**<br>Inspect checkpoint trajectories, domain coverage and investigation records. | [![Double-blind coordinator](assets/demos/previews/double-blind.jpg)](demos/double-blind.md)<br>**[Double-blind coordinator · Watch 35s](demos/double-blind.md)**<br>Lock completed judgments, enter a release reason and reveal the report. |
+| [![Anonymous reviewer](assets/demos/previews/blind-reviewer.jpg)](demos/blind-reviewer.md)<br>**[Anonymous reviewer · Watch 27s](demos/blind-reviewer.md)**<br>Read responses without model names, score them and submit a judgment. | [Install current source](quickstart.md#install-from-source)<br>Try the workflows with your own tasks. |
 
-<a id="terminal-workbench"></a>
+The recordings show the actual browser and terminal, with pointer movement, typing, scrolling and live navigation. They use original controls or explicitly synthetic data and make no model API calls. Featured workflows require the current source checkout; npm 0.3.1 predates several of them.
 
-## Terminal workbench
-
-A real terminal process responds to typed command-palette searches, navigation and selection changes.
-
-![Terminal workbench: continuous recording](assets/demos/continuous/terminal-workbench.gif)
-
-[Full-resolution MP4](assets/demos/continuous/terminal-workbench.mp4) · [Still image](assets/demos/continuous/terminal-workbench.png) · [Workflow guide](terminal.md)
-
-<a id="chat-and-reports"></a>
-
-## Benchmark chat
-
-Type a recurring benchmark request, start the real fixture run, inspect its reports and pause future runs.
-
-![Benchmark chat: continuous recording](assets/demos/continuous/chat-and-reports.gif)
-
-[Full-resolution MP4](assets/demos/continuous/chat-and-reports.mp4) · [Still image](assets/demos/continuous/chat-and-reports.png) · [Workflow guide](chat.md)
-
-<a id="repository-onboarding"></a>
-
-## Repository onboarding
-
-Type through connection and discovery for an original local Git repository. Review and isolated validation remain pending; this is not a completed repository benchmark.
-
-![Repository onboarding: continuous recording](assets/demos/continuous/repository-onboarding.gif)
-
-[Full-resolution MP4](assets/demos/continuous/repository-onboarding.mp4) · [Still image](assets/demos/continuous/repository-onboarding.png) · [Workflow guide](guided-run.md)
-
-<a id="tasks-and-comparisons"></a>
-
-## Tasks and comparisons
-
-Type a task contract, keep evaluator checks separate, validate controls and inspect both comparison outcomes.
-
-![Tasks and comparisons: continuous recording](assets/demos/continuous/tasks-and-comparisons.gif)
-
-[Full-resolution MP4](assets/demos/continuous/tasks-and-comparisons.mp4) · [Still image](assets/demos/continuous/tasks-and-comparisons.png) · [Workflow guide](scenarios.md)
-
-<a id="rankings"></a>
-
-## Rankings, cost and latency
-
-Move through the benchmark matrix, switch metrics, filter configurations and inspect the underlying evidence. Free controls do not establish real model cost or latency.
-
-![Rankings, cost and latency: continuous recording](assets/demos/continuous/rankings.gif)
-
-[Full-resolution MP4](assets/demos/continuous/rankings.mp4) · [Still image](assets/demos/continuous/rankings.png) · [Workflow guide](rankings.md)
-
-<a id="autopilot-budget"></a>
-
-## Continuous checks and budgets
-
-Use the terminal to inspect a bounded policy, spending commitments and its retained observations. The recorded policy is left paused.
-
-![Continuous checks and budgets: continuous recording](assets/demos/continuous/autopilot-budget.gif)
-
-[Full-resolution MP4](assets/demos/continuous/autopilot-budget.mp4) · [Still image](assets/demos/continuous/autopilot-budget.png) · [Workflow guide](autopilot.md)
-
-<a id="failure-research"></a>
-
-## Failure investigation
-
-Navigate failed attempts and saved evidence through the actual terminal, then inspect investigation and grader-quality records.
-
-![Failure investigation: continuous recording](assets/demos/continuous/failure-research.gif)
-
-[Full-resolution MP4](assets/demos/continuous/failure-research.mp4) · [Still image](assets/demos/continuous/failure-research.png) · [Workflow guide](research-loop.md)
-
-<a id="production-cases"></a>
-
-## Production cases and team review
-
-An approver inspects an incident previously staged by another identity, types expected behavior, validates the control and publishes a collection.
-
-![Production cases and team review: continuous recording](assets/demos/continuous/production-cases.gif)
-
-[Full-resolution MP4](assets/demos/continuous/production-cases.mp4) · [Still image](assets/demos/continuous/production-cases.png) · [Workflow guide](production-cases.md)
-
-<a id="checkpoint-monitoring"></a>
-
-## Checkpoint monitoring
-
-Move through checkpoint trajectories, domain selection, coverage, investigations and qualification records. These are explicitly synthetic controls.
-
-![Checkpoint monitoring: continuous recording](assets/demos/continuous/checkpoint-monitoring.gif)
-
-[Full-resolution MP4](assets/demos/continuous/checkpoint-monitoring.mp4) · [Still image](assets/demos/continuous/checkpoint-monitoring.png) · [Workflow guide](post-training.md)
-
-<a id="double-blind"></a>
-
-## Double-blind review
-
-The coordinator begins with completed reviews, locks the judgments, types a release reason, reveals identities and opens the report. This is trusted-custodian review.
-
-![Double-blind review: continuous recording](assets/demos/continuous/double-blind.gif)
-
-[Full-resolution MP4](assets/demos/continuous/double-blind.mp4) · [Still image](assets/demos/continuous/double-blind.png) · [Workflow guide](double-blind.md)
-
-### The reviewer's session
-
-A separate continuous recording follows an anonymous reviewer through the responses, scores, rationale and submission. It is recorded independently from the coordinator's session; these are scripted demonstration accounts.
-
-![Continuous anonymous review and judgment submission](assets/demos/continuous/blind-reviewer.gif)
-
-[Full-resolution MP4](assets/demos/continuous/blind-reviewer.mp4) · [Still image](assets/demos/continuous/blind-reviewer.png)
-
-## Capture and verification
-
-The browser captures are recorded at 25 frames per second. Terminal captures stream a real PTY into a local terminal renderer. The published GIFs and MP4s preserve continuous recorded motion; only the beginning and end are trimmed. No model API calls are made, and raw workspaces and credentials stay private.
-
-[Capture recipes](../scripts/demos/README.md) · [Media metadata](assets/demos/continuous/manifest.json) · [Verification](evidence/2026-10-26-motion/README.md).
+[Still-image gallery](demo-stills.md) · [Capture recipes](../scripts/demos/README.md) · [Verification](evidence/2026-10-26-motion/README.md).

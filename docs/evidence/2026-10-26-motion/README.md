@@ -19,7 +19,9 @@ The browser was recorded at 1280×800 and 25 frames per second. Terminal capture
 | autopilot-budget | 15.75s | 315 |
 | failure-research | 27.25s | 545 |
 
-GIFs use 1120×700 at 20 frames per second, mild compression-noise reduction and 128-color quantization. MP4s retain the native dimensions and frame rate. Neither export changes playback speed, assembles screenshots or inserts internal cuts.
+GIFs use 960×600 at 20 frames per second and a 64-color palette. Temporal noise suppression retains a previous pixel only when each channel differs from the recorded pixel by at most 6/255 before palette quantization. Larger changes update immediately. MP4s retain the native dimensions and frame rate. Neither export changes playback speed, assembles screenshots or inserts internal cuts.
+
+The October 27 presentation update reduces the hero from 12.89 MB to 2.99 MB and total GIF storage from 130.09 MB to 31.80 MB. The README loads one animation. The gallery loads that animation plus 240 KB of previews; individual workflow pages each load one recording. Source segments, frame counts, durations, MP4s and PNG previews are unchanged.
 
 ## Verification
 
@@ -29,7 +31,7 @@ GIFs use 1120×700 at 20 frames per second, mild compression-noise reduction and
 - Recorded zero browser JavaScript errors and zero model API calls. Capture-owned servers, browser contexts and terminal processes were closed. The demonstration's autopilot policy was left paused.
 - Checked capture and encoder lint/formatting, local documentation links and Git whitespace.
 
-[Machine-readable checks](summary.json) · [Media manifest](../../assets/demos/continuous/manifest.json) · [Capture recipes](../../../scripts/demos/README.md)
+[Machine-readable checks](summary.json) · [Media manifest](../../assets/demos/recordings/manifest.json) · [Capture recipes](../../../scripts/demos/README.md)
 
 ## Scope
 

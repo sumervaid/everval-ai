@@ -26,7 +26,7 @@ Open **Rankings** (**Ctrl+L** in the terminal) for a visual model-by-benchmark m
 
 Compare success rate, cost per passing attempt, provider time, and total attempt duration. Inspect the supported uncertainty estimate and task coverage before deciding that a difference matters.
 
-![Actual terminal workflow with original controls](assets/demos/continuous/terminal-workbench.gif)
+![Actual terminal workflow with original controls](assets/demos/recordings/terminal-workbench.gif)
 
 **Try it:** [Cost and latency](cost-latency.md) · [Decision policies](policies.md) · [Existing agent adapters](agent-adapters.md)
 
@@ -36,7 +36,7 @@ Autopilot can watch configured changes or intervals, reserve a cumulative budget
 
 The budget ledger separates observed spend, outstanding reservations, and projections. Unknown charges retain reservations and halt the affected automation. Estimates describe their pricing and workload assumptions.
 
-![Actual Autopilot setup, budgets and paused fixture policy](assets/demos/continuous/autopilot-budget.gif)
+![Actual Autopilot setup, budgets and paused fixture policy](assets/demos/recordings/autopilot-budget.gif)
 
 **Try it:** [Autopilot](autopilot.md) · [Budget projections](budget-planning.md) · [Change-linked runs](change-evaluation.md)
 
@@ -46,7 +46,7 @@ Inspect failed attempts, reproduce supported pure-grader outcomes, and reduce st
 
 Compare saved model, prompt, or tool-budget candidates on development tasks. Reserve an unused holdout for a final check of the selected candidate. The result is a reviewable proposal; a study does not deploy a configuration.
 
-![Actual failure investigation and grader-quality workflow](assets/demos/continuous/failure-research.gif)
+![Actual failure investigation and grader-quality workflow](assets/demos/recordings/failure-research.gif)
 
 **Try it:** [Research lab](research-loop.md) · [Failure investigation](diagnostics.md) · [Quality policies](policies.md)
 

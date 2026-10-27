@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Simplified the project README around current-source installation and a compact continuous demo; added focused workflow viewing pages and small gallery previews.
+
 - Replaced the keyframe demo slideshows with continuous browser and live-terminal recordings, smooth pointer movement and typing, full-resolution MP4s, and updated capture scripts.
 
 - Added dedicated trusted-custodian double-blind studies in the terminal, browser, CLI and API: freeze two systems and independent reviewer assignments, lock complete judgments, and explicitly reveal local HTML/JSON reports. Existing summary and mutation routes respect study seals.
