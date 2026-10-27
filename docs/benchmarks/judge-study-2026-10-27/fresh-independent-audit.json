@@ -1,0 +1,36 @@
+{
+  "accounting": {
+    "gpt-6-luna": {
+      "attempted": 50,
+      "committed_usd": "0.05168275",
+      "settled_usd": "0.05168275",
+      "unknown_reserve_usd": "0"
+    },
+    "gpt-6.1-sol": {
+      "attempted": 50,
+      "committed_usd": "1.009465",
+      "settled_usd": "1.009465",
+      "unknown_reserve_usd": "0"
+    },
+    "gpt-6.1-terra": {
+      "attempted": 50,
+      "committed_usd": "0.4936525",
+      "settled_usd": "0.4936525",
+      "unknown_reserve_usd": "0"
+    }
+  },
+  "all_category_and_interval_comparisons_match": true,
+  "analysis_protocol_sha256": "e606e7f0eb2915df67094bbf0d94eb29be17ebac69db0c93cd49ca23ba1a1c5f",
+  "audit_source_sha256": "69fd7b14494006777637ccf1abcffbf937ea13be4fd3fdbeae7590ef1e952c24",
+  "categories": {
+    "invalid_or_absent_submission": 134,
+    "unknown_execution": 1,
+    "verified_resolved": 8,
+    "verified_unresolved": 7
+  },
+  "committed_total_usd": "1.55480025",
+  "generated_grade_logs_reparsed": 16,
+  "inference_sha256": "720489341a49e683606983283afbeb9a83fc56d00a489d43839b11f9d1dcd537",
+  "planned_outcomes_independently_recomputed": 150,
+  "status": "passed"
+}

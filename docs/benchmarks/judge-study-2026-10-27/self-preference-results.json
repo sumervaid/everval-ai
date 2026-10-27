@@ -1,0 +1,1829 @@
+{
+  "coverage": {
+    "comparable_generator_pairs": 14,
+    "explicit_empty_patches": 40,
+    "families_with_at_least_one_comparable_pair": 6,
+    "nonempty_patches": 20,
+    "nonempty_patches_by_generator": {
+      "gpt-6-luna": 10,
+      "gpt-6.1-sol": 4,
+      "gpt-6.1-terra": 6
+    },
+    "ready_and_attempted_judgments": 84,
+    "scheduled_judgments": 360,
+    "selected_task_families": 20,
+    "source_patch_outputs": 60,
+    "task_families_by_nonempty_patch_count": {
+      "0": 10,
+      "1": 4,
+      "2": 2,
+      "3": 4
+    },
+    "unavailability_reason": "At least one explicit empty patch in the fixed generator pair; no task replacement.",
+    "unavailable_judgments": 276
+  },
+  "frozen_analysis": {
+    "accounting": {
+      "committed_upper_bound_usd": "0.244387",
+      "requests": 84,
+      "settled_upper_bound_usd": "0.244387",
+      "unknown_requests": 0
+    },
+    "analysis_role": "Prospective descriptive follow-up; no causal self-bias or model leaderboard claim.",
+    "attempted_jobs": 84,
+    "by_model": {
+      "gpt-6-luna": {
+        "all": {
+          "complete_matched_grid": false,
+          "complete_matched_task_families": 4,
+          "eligible_generator_pairs": 40,
+          "eligible_task_families": 20,
+          "matched_cells": 20,
+          "observed_matched_task_families": 6,
+          "own_attempted": 20,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.3958333333333333,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 10,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.6666666666666666,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 10,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_statuses": {
+            "completed": 20,
+            "unattempted": 60
+          },
+          "own_valid": 20,
+          "scheduled_matched_cells": 80,
+          "selected_task_families": 20,
+          "third_attempted": 20,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.2708333333333333,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 10,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "third_statuses": {
+            "completed": 20,
+            "unattempted": 60
+          },
+          "third_valid": 20
+        },
+        "any execution grade unknown": {
+          "complete_matched_grid": false,
+          "complete_matched_task_families": 4,
+          "eligible_generator_pairs": 40,
+          "eligible_task_families": 20,
+          "matched_cells": 20,
+          "observed_matched_task_families": 6,
+          "own_attempted": 20,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.3958333333333333,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 10,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.6666666666666666,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 10,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_statuses": {
+            "completed": 20,
+            "unattempted": 60
+          },
+          "own_valid": 20,
+          "scheduled_matched_cells": 80,
+          "selected_task_families": 20,
+          "third_attempted": 20,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.2708333333333333,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 10,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "third_statuses": {
+            "completed": 20,
+            "unattempted": 60
+          },
+          "third_valid": 20
+        },
+        "both resolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 0,
+          "eligible_generator_pairs": 0,
+          "eligible_task_families": 0,
+          "matched_cells": 0,
+          "observed_matched_task_families": 0,
+          "own_attempted": 0,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_statuses": {},
+          "own_valid": 0,
+          "scheduled_matched_cells": 0,
+          "selected_task_families": 20,
+          "third_attempted": 0,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "third_statuses": {},
+          "third_valid": 0
+        },
+        "both unresolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 0,
+          "eligible_generator_pairs": 0,
+          "eligible_task_families": 0,
+          "matched_cells": 0,
+          "observed_matched_task_families": 0,
+          "own_attempted": 0,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_statuses": {},
+          "own_valid": 0,
+          "scheduled_matched_cells": 0,
+          "selected_task_families": 20,
+          "third_attempted": 0,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "third_statuses": {},
+          "third_valid": 0
+        },
+        "only other resolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 0,
+          "eligible_generator_pairs": 0,
+          "eligible_task_families": 0,
+          "matched_cells": 0,
+          "observed_matched_task_families": 0,
+          "own_attempted": 0,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_statuses": {},
+          "own_valid": 0,
+          "scheduled_matched_cells": 0,
+          "selected_task_families": 20,
+          "third_attempted": 0,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "third_statuses": {},
+          "third_valid": 0
+        },
+        "only own resolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 0,
+          "eligible_generator_pairs": 0,
+          "eligible_task_families": 0,
+          "matched_cells": 0,
+          "observed_matched_task_families": 0,
+          "own_attempted": 0,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_statuses": {},
+          "own_valid": 0,
+          "scheduled_matched_cells": 0,
+          "selected_task_families": 20,
+          "third_attempted": 0,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "third_statuses": {},
+          "third_valid": 0
+        }
+      },
+      "gpt-6.1-sol": {
+        "all": {
+          "complete_matched_grid": false,
+          "complete_matched_task_families": 4,
+          "eligible_generator_pairs": 40,
+          "eligible_task_families": 20,
+          "matched_cells": 16,
+          "observed_matched_task_families": 4,
+          "own_attempted": 16,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": -0.25,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 4,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 8,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.625,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 4,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 8,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_statuses": {
+            "completed": 16,
+            "unattempted": 64
+          },
+          "own_valid": 16,
+          "scheduled_matched_cells": 80,
+          "selected_task_families": 20,
+          "third_attempted": 16,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.875,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 4,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 8,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "third_statuses": {
+            "completed": 16,
+            "unattempted": 64
+          },
+          "third_valid": 16
+        },
+        "any execution grade unknown": {
+          "complete_matched_grid": false,
+          "complete_matched_task_families": 4,
+          "eligible_generator_pairs": 38,
+          "eligible_task_families": 20,
+          "matched_cells": 12,
+          "observed_matched_task_families": 4,
+          "own_attempted": 12,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": -0.0625,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 4,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 6,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.875,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 4,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 6,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_statuses": {
+            "completed": 12,
+            "unattempted": 64
+          },
+          "own_valid": 12,
+          "scheduled_matched_cells": 76,
+          "selected_task_families": 20,
+          "third_attempted": 12,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.9375,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 4,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 6,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "third_statuses": {
+            "completed": 12,
+            "unattempted": 64
+          },
+          "third_valid": 12
+        },
+        "both resolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 1,
+          "eligible_generator_pairs": 1,
+          "eligible_task_families": 1,
+          "matched_cells": 2,
+          "observed_matched_task_families": 1,
+          "own_attempted": 2,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              -1,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": -1.0,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              0,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.0,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "own_statuses": {
+            "completed": 2
+          },
+          "own_valid": 2,
+          "scheduled_matched_cells": 2,
+          "selected_task_families": 20,
+          "third_attempted": 2,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              0,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 1.0,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "third_statuses": {
+            "completed": 2
+          },
+          "third_valid": 2
+        },
+        "both unresolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 0,
+          "eligible_generator_pairs": 0,
+          "eligible_task_families": 0,
+          "matched_cells": 0,
+          "observed_matched_task_families": 0,
+          "own_attempted": 0,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_statuses": {},
+          "own_valid": 0,
+          "scheduled_matched_cells": 0,
+          "selected_task_families": 20,
+          "third_attempted": 0,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "third_statuses": {},
+          "third_valid": 0
+        },
+        "only other resolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 1,
+          "eligible_generator_pairs": 1,
+          "eligible_task_families": 1,
+          "matched_cells": 2,
+          "observed_matched_task_families": 1,
+          "own_attempted": 2,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              -1,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": -0.5,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              0,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.0,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "own_statuses": {
+            "completed": 2
+          },
+          "own_valid": 2,
+          "scheduled_matched_cells": 2,
+          "selected_task_families": 20,
+          "third_attempted": 2,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              0,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.5,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "third_statuses": {
+            "completed": 2
+          },
+          "third_valid": 2
+        },
+        "only own resolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 0,
+          "eligible_generator_pairs": 0,
+          "eligible_task_families": 0,
+          "matched_cells": 0,
+          "observed_matched_task_families": 0,
+          "own_attempted": 0,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_statuses": {},
+          "own_valid": 0,
+          "scheduled_matched_cells": 0,
+          "selected_task_families": 20,
+          "third_attempted": 0,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "third_statuses": {},
+          "third_valid": 0
+        }
+      },
+      "gpt-6.1-terra": {
+        "all": {
+          "complete_matched_grid": false,
+          "complete_matched_task_families": 4,
+          "eligible_generator_pairs": 40,
+          "eligible_task_families": 20,
+          "matched_cells": 20,
+          "observed_matched_task_families": 6,
+          "own_attempted": 20,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.1875,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 10,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.6666666666666666,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 10,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_statuses": {
+            "completed": 20,
+            "unattempted": 60
+          },
+          "own_valid": 20,
+          "scheduled_matched_cells": 80,
+          "selected_task_families": 20,
+          "third_attempted": 20,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.4791666666666667,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 10,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "third_statuses": {
+            "completed": 20,
+            "unattempted": 60
+          },
+          "third_valid": 20
+        },
+        "any execution grade unknown": {
+          "complete_matched_grid": false,
+          "complete_matched_task_families": 4,
+          "eligible_generator_pairs": 38,
+          "eligible_task_families": 20,
+          "matched_cells": 16,
+          "observed_matched_task_families": 6,
+          "own_attempted": 16,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.0625,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 8,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.6666666666666666,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 8,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "own_statuses": {
+            "completed": 16,
+            "unattempted": 60
+          },
+          "own_valid": 16,
+          "scheduled_matched_cells": 76,
+          "selected_task_families": 20,
+          "third_attempted": 16,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.6041666666666666,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 6,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 8,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "incomplete_matched_family_grid"
+          },
+          "third_statuses": {
+            "completed": 16,
+            "unattempted": 60
+          },
+          "third_valid": 16
+        },
+        "both resolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 1,
+          "eligible_generator_pairs": 1,
+          "eligible_task_families": 1,
+          "matched_cells": 2,
+          "observed_matched_task_families": 1,
+          "own_attempted": 2,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              -1,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 1.0,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              0,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 1.0,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "own_statuses": {
+            "completed": 2
+          },
+          "own_valid": 2,
+          "scheduled_matched_cells": 2,
+          "selected_task_families": 20,
+          "third_attempted": 2,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              0,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.0,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "third_statuses": {
+            "completed": 2
+          },
+          "third_valid": 2
+        },
+        "both unresolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 0,
+          "eligible_generator_pairs": 0,
+          "eligible_task_families": 0,
+          "matched_cells": 0,
+          "observed_matched_task_families": 0,
+          "own_attempted": 0,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_statuses": {},
+          "own_valid": 0,
+          "scheduled_matched_cells": 0,
+          "selected_task_families": 20,
+          "third_attempted": 0,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "third_statuses": {},
+          "third_valid": 0
+        },
+        "only other resolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 0,
+          "eligible_generator_pairs": 0,
+          "eligible_task_families": 0,
+          "matched_cells": 0,
+          "observed_matched_task_families": 0,
+          "own_attempted": 0,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "own_statuses": {},
+          "own_valid": 0,
+          "scheduled_matched_cells": 0,
+          "selected_task_families": 20,
+          "third_attempted": 0,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": null,
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": null,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 0,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 0,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "no_observed_families"
+          },
+          "third_statuses": {},
+          "third_valid": 0
+        },
+        "only own resolved": {
+          "complete_matched_grid": true,
+          "complete_matched_task_families": 1,
+          "eligible_generator_pairs": 1,
+          "eligible_task_families": 1,
+          "matched_cells": 2,
+          "observed_matched_task_families": 1,
+          "own_attempted": 2,
+          "own_minus_third": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              -1,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.5,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "own_preference": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              0,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 1.0,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "own_statuses": {
+            "completed": 2
+          },
+          "own_valid": 2,
+          "scheduled_matched_cells": 2,
+          "selected_task_families": 20,
+          "third_attempted": 2,
+          "third_model_preference_for_same_patch": {
+            "alpha": 0.05,
+            "assumptions": [
+              "Family assignments and analysis parameters were frozen before results.",
+              "Family means are independent and represent the declared sampling population.",
+              "Bootstrap coverage is approximate and does not correct selection bias.",
+              "The comparison allocation must include every confirmatory statistic inspected."
+            ],
+            "bounded_sensitivity_interval": [
+              0,
+              1
+            ],
+            "comparison_alpha": 0.05,
+            "estimand": "Equal-weight family mean of within-family item means.",
+            "estimate": 0.5,
+            "estimate_scope": "Observed matched orders, then equally weighted pairs within task, then equally weighted tasks.",
+            "families": 1,
+            "interval": null,
+            "method": "family_percentile_bootstrap",
+            "min_families": 20,
+            "observations": 1,
+            "planned_comparisons": 1,
+            "resamples": 5000,
+            "role": "Exploratory descriptive interval; no simultaneous coverage or causal self-bias claim.",
+            "seed": 17,
+            "undefined_reason": "too_few_independent_families"
+          },
+          "third_statuses": {
+            "completed": 2
+          },
+          "third_valid": 2
+        }
+      }
+    },
+    "dispatch_sha256": "82cb8555ec83205334665955635dbc668057756e67412643f8dfa2f19b0c1b00",
+    "identity_claim": "Same returned API identifier only; serving weight snapshots are not attested.",
+    "limitations": [
+      "Patch quality and generation style confound own-output preference; this is not causal self-recognition or self-bias.",
+      "Execution strata are benchmark outcomes, not human preference labels.",
+      "Judges inspect full issues and patches without source execution or hidden checks.",
+      "The small fixed task sample does not estimate a population of repositories.",
+      "Model aliases may route to changing serving weights."
+    ],
+    "models": [
+      "gpt-6-luna",
+      "gpt-6.1-terra",
+      "gpt-6.1-sol"
+    ],
+    "observed_statuses": {
+      "completed": 84,
+      "unattempted": 276
+    },
+    "planned_jobs": 360,
+    "prepared_sha256": "a0f87ab7d6de672d7280663e624ff65238faa1c6763d2aa459a6351241843c24",
+    "private_evidence_digest": "ef2f65c41533408ff5fb2b07d62e81bf14ae0c995c87e19ab0fcfbd067eb627c",
+    "schema_version": 1,
+    "selected_task_families": 20,
+    "uncertainty": {
+      "alpha": 0.05,
+      "bounds": {
+        "paired_difference": [
+          -1,
+          1
+        ],
+        "preference": [
+          0,
+          1
+        ]
+      },
+      "confidence_level": 0.95,
+      "coverage_rule": "No bootstrap interval for an incomplete matched family grid. Report selected, eligible, attempted, valid and matched task counts for every estimand and stratum.",
+      "degenerate_rule": "Withhold bootstrap intervals for constant family means, zero-width bootstrap quantiles, fewer than20 families or insufficient tail resamples. A separately labelled bounded sensitivity may be shown under declared independent-family assumptions; never substitute it silently for a bootstrap interval.",
+      "method": "Existing family_mean_interval task-cluster percentile bootstrap",
+      "min_families": 20,
+      "planned_comparisons": 1,
+      "resamples": 5000,
+      "role": "All own-identifier, third-judge and execution-stratum intervals are exploratory; no significance or simultaneous-coverage claim.",
+      "seed": 17,
+      "stratum_rule": "Twenty selected tasks do not imply twenty eligible tasks in a stratum. Each stratum independently requires at least20 observed task families."
+    }
+  },
+  "interpretation": [
+    "All84 available judgments completed once; all276 unavailable scheduled cells remain visible.",
+    "Overall matched subsets contain6 task families for Luna,6 for Terra and4 for Sol; these are not a common-cohort ranking.",
+    "The comparator is the judge model that generated neither patch, not neutral ground truth or an independent human label.",
+    "All54 bootstrap confidence intervals are withheld. Twelve predeclared small-stratum Hoeffding sensitivity ranges remain separately labelled and conditional on independence; they do not establish self-bias.",
+    "Patch quality, style, selected tasks and unattested serving weights prevent a causal self-preference claim."
+  ],
+  "provenance": {
+    "authorization_sha256": "763e94e1c461977aa20412485e993161c44baefe3dd1212eccfe304682c42934",
+    "code_revision": "f306e5448772d0ba3636f4abfa4e21732a506422",
+    "dispatch_sha256": "82cb8555ec83205334665955635dbc668057756e67412643f8dfa2f19b0c1b00",
+    "fresh_inference_sha256": "720489341a49e683606983283afbeb9a83fc56d00a489d43839b11f9d1dcd537",
+    "frozen_aggregate_file_sha256": "232a518bdf3cd77d7a26ee35d3910a671ec63a5b7aef2c68f74d188f427630bf",
+    "independent_final_audit_file_sha256": "800c5168ebfa0814668a8058c48db78031e17d8f1301e46264b4cf16e7746e9b",
+    "independent_final_audit_source_sha256": "50cfd7c4e6be735d3dc05733d36b45df7aa886a6f96d2ed1fdfa8f362b084e5d",
+    "independent_manifest_review_file_sha256": "156d15a1b7c73b97ca6b9216b7c0e5c128106bf9d1e295e116a57ae75fc1df17",
+    "prepared_sha256": "a0f87ab7d6de672d7280663e624ff65238faa1c6763d2aa459a6351241843c24",
+    "raw_evidence_public": false,
+    "selection_sha256": "6b7f2e50939c589076f2cbcb5ba2e17a6c97553cf2874b6325bae79cf98d4474",
+    "source_files_sha256": {
+      "scripts/benchmarks/budget.py": "ea0a0f31a1eb8f5b61167e1364b97c9c4f05eb3fa7a8027ce76f45d1dd047a13",
+      "scripts/judge_study/analyze_self_preference.py": "b421a16f2a3771a8ac40b63e0d6b642206ed54469f416867ca7c8bb483eae142",
+      "scripts/judge_study/responses.py": "12a3b7fa3f6c6326cf53b1aa0ee079b990ca67423e0799e7f54c9f1016a8fef7",
+      "scripts/judge_study/self_preference_plan.py": "16a3a2ad0dabb9c0cb870cf0a0881be217648910d9b95702c4c806754f67e8ac",
+      "scripts/judge_study/self_preference_run.py": "29cdffd60f8780e56fa8db137cc47ce46899f9503ecd56f42a65477800169a96",
+      "src/cvals/judge_calibration.py": "659b354b2fe69701c3d7998880123f1f2c4d9be8cf4e814ef4ed33b4038e30ff",
+      "src/cvals/judge_calibration_models.py": "cc4d2cdf26e9adb47863235bcbbcbcf4afee708f00e9c40ef5f1b477bd09ad62",
+      "src/cvals/judge_statistics.py": "b10bfd1a15b10e0bb34e46bc2bfb2f9698ebefd8e186ec8c7e1ec08d63a36eab",
+      "src/cvals/models.py": "37b656eaacc043d9c71eab9fa4c95773a3c64ed8db8fbdb88b817d0726039335",
+      "src/cvals/review_queues.py": "0db75186edc8d196cc5aed702815c5869b5571a4e69e7f4ab828c07e454d1cb4"
+    }
+  },
+  "schema_version": 1,
+  "spending": {
+    "basis": "Reported usage at frozen conservative configured rates: 2.5 times standard input rates and standard output rates.",
+    "by_judge": {
+      "gpt-6-luna": {
+        "conservative_cost_usd": "0.00773200",
+        "input_tokens": 26108,
+        "maximum_ready_grid_reservation_usd": "0.09145950",
+        "model_cap_usd": ".45",
+        "output_tokens": 2410,
+        "requests": 28
+      },
+      "gpt-6.1-sol": {
+        "conservative_cost_usd": "0.163420",
+        "input_tokens": 26108,
+        "maximum_ready_grid_reservation_usd": "2.116050",
+        "model_cap_usd": "5.00",
+        "output_tokens": 3288,
+        "requests": 28
+      },
+      "gpt-6.1-terra": {
+        "conservative_cost_usd": "0.0732350",
+        "input_tokens": 26108,
+        "maximum_ready_grid_reservation_usd": "0.9148050",
+        "model_cap_usd": "2.50",
+        "output_tokens": 1593,
+        "requests": 28
+      }
+    },
+    "conservative_total_usd": "0.244387",
+    "followup_cap_usd": "7.95",
+    "invoice_verified": false,
+    "maximum_ready_grid_reservation_usd": "3.12231450",
+    "unknown_requests": 0
+  },
+  "study": "Prospective same-returned-identifier patch preference follow-up"
+}

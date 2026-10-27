@@ -12,6 +12,8 @@ In the complete GPT-6.1 Terra holdout comparison, agreement with historical huma
 
 *The chart uses original frozen scores. Its ranges cover unattempted judgments; they are not confidence intervals. [Read the study](docs/benchmarks/judge-study-2026-10-27/results.md) for the planned comparisons, human-vote provenance, judgments checked against archived test reports, and the separate audit of ten transport-parser failures.*
 
+**Fresh repository study:** on 50 admitted tasks, the constrained one-shot setup produced 110 explicit empty patches and 24 rejected patches across 150 attempts. Only 16 submissions reached test execution. [See the audited repair results and failure breakdown](docs/benchmarks/judge-study-2026-10-27/fresh-results.md).
+
 Everval turns your own work into repeatable evaluations. Compare models, prompts, and agents; inspect quality, cost, and latency; keep checking as your system changes.
 
 Built for evaluation engineers and ML platform teams, with a terminal workbench, shared CLI/API, and optional review browser. Tasks and evidence stay in your workspace.

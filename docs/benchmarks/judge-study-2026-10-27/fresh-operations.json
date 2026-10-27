@@ -1,0 +1,123 @@
+{
+  "all_provider_responses_completed_and_valid_patch_json": true,
+  "all_provider_responses_completed_basis": "Every retained provider envelope status is completed; every strict final-message validation is valid_patch_json.",
+  "cost_basis": "Reported usage at configured conservative rates:2.5 times standard input rates and standard output rates; not an invoice.",
+  "empty_patches_total": 110,
+  "executed_patches_total": 16,
+  "generation_budget_cap_usd": "12",
+  "grading_operation_record_sha256": "707e68907717b9bb6d6549fb7cac9394ec8afb97cade7f8b63d57157a7269103",
+  "inference_sha256": "720489341a49e683606983283afbeb9a83fc56d00a489d43839b11f9d1dcd537",
+  "interpretation": "Empty and invalid submissions are observed end-to-end failures under the frozen protocol. Empty output alone does not identify its cause. These are constrained one-shot outcomes, not tool-using coding-agent scores.",
+  "invalid_nonempty_patches_total": 24,
+  "known_conservative_cost_usd": "1.55480025",
+  "model_operations": {
+    "gpt-6-luna": {
+      "empty_patch_submissions": 29,
+      "frozen_outcome_categories": {
+        "invalid_or_absent_submission": 47,
+        "verified_resolved": 1,
+        "verified_unresolved": 2
+      },
+      "grade_status_counts": {
+        "graded": 3,
+        "invalid_patch": 18,
+        "no_patch": 29
+      },
+      "input_tokens": 191783,
+      "known_conservative_cost_usd": "0.05168275",
+      "nonempty_patch_submissions": 21,
+      "output_tokens": 7474,
+      "planned_tasks": 50,
+      "request_wall_seconds": {
+        "maximum": 11.31368487502914,
+        "median": 2.3684133545611985,
+        "minimum": 0.8864146668929607
+      },
+      "retained_result_hashes_sha256": "9aa510a59b997a9aebeeb0e0eab158825d06e3a67e798687ec1eb9e227a2bb8b",
+      "settled_requests": 50
+    },
+    "gpt-6.1-sol": {
+      "empty_patch_submissions": 42,
+      "frozen_outcome_categories": {
+        "invalid_or_absent_submission": 42,
+        "unknown_execution": 1,
+        "verified_resolved": 4,
+        "verified_unresolved": 3
+      },
+      "grade_status_counts": {
+        "graded": 8,
+        "no_patch": 42
+      },
+      "input_tokens": 191783,
+      "known_conservative_cost_usd": "1.009465",
+      "nonempty_patch_submissions": 8,
+      "output_tokens": 5055,
+      "planned_tasks": 50,
+      "request_wall_seconds": {
+        "maximum": 12.846644083037972,
+        "median": 2.58055641700048,
+        "minimum": 1.614300874993205
+      },
+      "retained_result_hashes_sha256": "3df3e4d9d2cd6d0a6c0ba43b228247fd7f1f099d1ca6d97ee4139c4dcddb3034",
+      "settled_requests": 50
+    },
+    "gpt-6.1-terra": {
+      "empty_patch_submissions": 39,
+      "frozen_outcome_categories": {
+        "invalid_or_absent_submission": 45,
+        "verified_resolved": 3,
+        "verified_unresolved": 2
+      },
+      "grade_status_counts": {
+        "graded": 5,
+        "invalid_patch": 6,
+        "no_patch": 39
+      },
+      "input_tokens": 191783,
+      "known_conservative_cost_usd": "0.4936525",
+      "nonempty_patch_submissions": 11,
+      "output_tokens": 2839,
+      "planned_tasks": 50,
+      "request_wall_seconds": {
+        "maximum": 5.926767874974757,
+        "median": 1.3384959999821149,
+        "minimum": 0.9812321669887751
+      },
+      "retained_result_hashes_sha256": "b2853c0cdb03e3c083237413bb1ba8bcef94ec92a567075fc5aaa535025e7b3a",
+      "settled_requests": 50
+    }
+  },
+  "pending_requests": 0,
+  "phase1_plus_product_accounted_usd": "13.34374175",
+  "phase1_product_plus_fresh_accounted_usd": "14.89854200",
+  "schema_version": 1,
+  "session_recovery": {
+    "completed_requests_before_recovery": 102,
+    "grading_workers_restarted": false,
+    "interpretation": "The controller server restart ended the dispatcher between settled requests. The frozen dispatcher revalidated and skipped102 completed requests before admitting the remaining48; active grading workers continued. Per-request wall times do not include the between-request pause, and the campaign duration should not be interpreted as isolated provider throughput.",
+    "pending_or_uncertain_requests_at_recovery": 0,
+    "retained_record_sha256": "0df5d207ba4b1bfc4126718edcf6e49c4836fdfb2a84021e9ccadf05bbfb2835",
+    "retries": 0,
+    "source_changes": false,
+    "untouched_requests_after_recovery": 48
+  },
+  "settled_requests": 150,
+  "single_frozen_unknown_execution": {
+    "cleanup_complete": true,
+    "interpretation": "The frozen analyzer requires PASSED/FAILED outcomes for every required test; ERROR remains unknown in the primary analysis. The execution-layer unresolved summary is not substituted.",
+    "missing_required_tests": 0,
+    "model": "gpt-6.1-sol",
+    "required_test_status_counts": {
+      "ERROR": 1,
+      "PASSED": 14
+    },
+    "setup_error_signals": [],
+    "task_id": "sympy__sympy-15017",
+    "test_suite_exit_code": 1
+  },
+  "source_analysis_sha256": "6075ad4dc168700665e3340458b3c415938a50642f57a3bf0ecba2b347fbd3f1",
+  "timing_scope": "Request wall time starts after reservation and includes local request/response persistence, network/provider time and ledger settlement; two local grading workers may overlap. It does not isolate provider latency.",
+  "total_campaign_accounting_scope": "Phase1 includes its retained unknown reservations. The stated subtotal excludes the separate subsequent self-preference study and is not an invoice reconciliation.",
+  "total_campaign_budget_cap_usd": "50",
+  "uncertain_requests": 0
+}

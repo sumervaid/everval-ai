@@ -1,0 +1,53 @@
+{
+  "figure_counts": [
+    {
+      "empty": 29,
+      "model": "gpt-6-luna",
+      "rejected": 18,
+      "unknown": 0,
+      "unresolved": 2,
+      "verified": 1
+    },
+    {
+      "empty": 39,
+      "model": "gpt-6.1-terra",
+      "rejected": 6,
+      "unknown": 0,
+      "unresolved": 2,
+      "verified": 3
+    },
+    {
+      "empty": 42,
+      "model": "gpt-6.1-sol",
+      "rejected": 0,
+      "unknown": 1,
+      "unresolved": 3,
+      "verified": 4
+    }
+  ],
+  "figures": {
+    "fresh-repair-delivery.png": {
+      "bytes": 111859,
+      "sha256": "77026f7c1c1d36b735a5ab83f9edd07e34accc6e7f56f13c0dcb005a816b77ab"
+    },
+    "fresh-repair-delivery.svg": {
+      "bytes": 13785,
+      "sha256": "062829099779f96f8df4b288d94881f77b1c1db8d66a25cc71bcf3866b5d6e33"
+    }
+  },
+  "frozen_analysis_source_revision": "f306e5448772d0ba3636f4abfa4e21732a506422",
+  "matplotlib_version": "3.11.2",
+  "power_record_scope_note": "The retained prospective planning text mentions five planned repository clusters. The actual frozen cohort has four. Its independent-pair sensitivity calculation does not adjust for clustering.",
+  "publisher_sha256": "e0b239f35834f4b4af830b4e8b3a3a356d7357dbc97c36a9643c60aae825f4e0",
+  "reproduction_command": "uv run --no-project --python 3.12 --with matplotlib==3.11.2 python scripts/judge_study/publish_fresh.py --directory docs/benchmarks/judge-study-2026-10-27",
+  "schema_version": 1,
+  "scope": "Descriptive rendering of the unchanged frozen counts; no regrading, new model calls or inferential changes.",
+  "source_files_sha256": {
+    "fresh-admission-audit.json": "c4232da3fcd1f1c5aaa8e16250c604afdf5f72e416ea6881219702bc36cf0566",
+    "fresh-independent-audit.json": "3596b041eca05104d999d9943ad7b0d59d20f938d22ed8d9412386e4352b2b24",
+    "fresh-operations.json": "9f606e351f505bf9a507db4ee0ab82ca5a54c2e6f7c2f1e2e283582351269517",
+    "fresh-output-attribution.json": "6ddb3592454e02c00da0c8bc46fc5245f5ad12977d693b1766702ae9a58feaef",
+    "fresh-power.json": "450dad49fa7f3c9e54841d68bef312e4201291420760fcbe0a929396b3e50553",
+    "fresh-results.json": "6075ad4dc168700665e3340458b3c415938a50642f57a3bf0ecba2b347fbd3f1"
+  }
+}

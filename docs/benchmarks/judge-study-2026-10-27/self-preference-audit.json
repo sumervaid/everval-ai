@@ -1,0 +1,52 @@
+{
+  "accounting_usd": {
+    "gpt-6-luna": "0.00773200",
+    "gpt-6.1-sol": "0.163420",
+    "gpt-6.1-terra": "0.0732350"
+  },
+  "audit_source_sha256": "50cfd7c4e6be735d3dc05733d36b45df7aa886a6f96d2ed1fdfa8f362b084e5d",
+  "bootstrap_intervals_withheld": 54,
+  "committed_total_usd": "0.24438700",
+  "conditional_bounded_sensitivity_ranges_retained": 12,
+  "dispatch_sha256": "82cb8555ec83205334665955635dbc668057756e67412643f8dfa2f19b0c1b00",
+  "interpretation": "Conditional descriptive results only. All bootstrap intervals are withheld; any fully observed small-stratum Hoeffding ranges retain their independent-family assumptions.",
+  "model_stratum_metric_summaries_independently_recomputed": 54,
+  "observed_statuses": {
+    "completed": 84,
+    "unattempted": 276
+  },
+  "outcome_grid_cells_verified": 360,
+  "overall_descriptive_estimates": {
+    "gpt-6-luna": {
+      "matched_cells": 20,
+      "observed_matched_task_families": 6,
+      "own_attempted": 20,
+      "own_minus_third": 0.3958333333333333,
+      "own_preference": 0.6666666666666666,
+      "third_attempted": 20,
+      "third_model_preference_for_same_patch": 0.2708333333333333
+    },
+    "gpt-6.1-sol": {
+      "matched_cells": 16,
+      "observed_matched_task_families": 4,
+      "own_attempted": 16,
+      "own_minus_third": -0.25,
+      "own_preference": 0.625,
+      "third_attempted": 16,
+      "third_model_preference_for_same_patch": 0.875
+    },
+    "gpt-6.1-terra": {
+      "matched_cells": 20,
+      "observed_matched_task_families": 6,
+      "own_attempted": 20,
+      "own_minus_third": 0.1875,
+      "own_preference": 0.6666666666666666,
+      "third_attempted": 20,
+      "third_model_preference_for_same_patch": 0.4791666666666667
+    }
+  },
+  "prepared_sha256": "a0f87ab7d6de672d7280663e624ff65238faa1c6763d2aa459a6351241843c24",
+  "provider_responses_independently_parsed": 84,
+  "schema_version": 1,
+  "status": "passed"
+}

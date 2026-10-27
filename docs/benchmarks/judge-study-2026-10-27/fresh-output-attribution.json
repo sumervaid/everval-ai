@@ -1,0 +1,149 @@
+{
+  "audit_source_sha256": "c0c1d880e3195f86235aea07900daa4bb5afd99206b9d6e3e10878cf4e2a5204",
+  "audited_at": "2026-10-27T20:48:37.178127+00:00",
+  "counts": {
+    "gpt-6-luna": {
+      "completed_empty_patch": 29,
+      "completed_nonempty_patch": 21,
+      "phase_messages:1": 37,
+      "phase_messages:2": 13,
+      "raw_status:completed": 50,
+      "retained_responses": 50
+    },
+    "gpt-6.1-sol": {
+      "completed_empty_patch": 42,
+      "completed_nonempty_patch": 8,
+      "phase_messages:1": 50,
+      "raw_status:completed": 50,
+      "retained_responses": 50
+    },
+    "gpt-6.1-terra": {
+      "completed_empty_patch": 39,
+      "completed_nonempty_patch": 11,
+      "phase_messages:1": 50,
+      "raw_status:completed": 50,
+      "retained_responses": 50
+    }
+  },
+  "frozen_outcomes_changed": false,
+  "grade_status_and_policy_counts": {
+    "gpt-6-luna": {
+      "policy:no_file_changes": 8,
+      "policy:unparseable_patch": 10,
+      "status:graded": 3,
+      "status:invalid_patch": 18,
+      "status:no_patch": 29
+    },
+    "gpt-6.1-sol": {
+      "status:graded": 8,
+      "status:no_patch": 42
+    },
+    "gpt-6.1-terra": {
+      "policy:unparseable_patch": 6,
+      "status:graded": 5,
+      "status:invalid_patch": 6,
+      "status:no_patch": 39
+    }
+  },
+  "inference_sha256": "720489341a49e683606983283afbeb9a83fc56d00a489d43839b11f9d1dcd537",
+  "interpretation": [
+    "An explicit empty patch is a valid response allowed by the frozen prompt; it is an end-to-end non-resolution, not an observed executed repair failure.",
+    "Empty output alone does not identify why the model abstained or establish that the supplied context was insufficient.",
+    "This diagnostic checks provider status, strict final-phase JSON, schema, retained patch identity and grade rejection metadata. It does not regrade submissions or rerun models.",
+    "Invalid patch rejection codes are separate from executed failing tests. Broad model coding capability cannot be inferred from this constrained one-shot configuration."
+  ],
+  "output_tokens": {
+    "gpt-6-luna": {
+      "completed_empty_patch": {
+        "count": 29,
+        "max": 748,
+        "median": 12,
+        "min": 12
+      },
+      "completed_nonempty_patch": {
+        "count": 21,
+        "max": 693,
+        "median": 153,
+        "min": 53
+      }
+    },
+    "gpt-6.1-sol": {
+      "completed_empty_patch": {
+        "count": 42,
+        "max": 281,
+        "median": 30.5,
+        "min": 12
+      },
+      "completed_nonempty_patch": {
+        "count": 8,
+        "max": 569,
+        "median": 397.5,
+        "min": 159
+      }
+    },
+    "gpt-6.1-terra": {
+      "completed_empty_patch": {
+        "count": 39,
+        "max": 12,
+        "median": 12,
+        "min": 12
+      },
+      "completed_nonempty_patch": {
+        "count": 11,
+        "max": 381,
+        "median": 218,
+        "min": 120
+      }
+    }
+  },
+  "planned_requests": 150,
+  "provider_calls_added": 0,
+  "reasoning_tokens": {
+    "gpt-6-luna": {
+      "completed_empty_patch": {
+        "count": 29,
+        "max": 0,
+        "median": 0,
+        "min": 0
+      },
+      "completed_nonempty_patch": {
+        "count": 21,
+        "max": 0,
+        "median": 0,
+        "min": 0
+      }
+    },
+    "gpt-6.1-sol": {
+      "completed_empty_patch": {
+        "count": 42,
+        "max": 267,
+        "median": 16.5,
+        "min": 0
+      },
+      "completed_nonempty_patch": {
+        "count": 8,
+        "max": 244,
+        "median": 124.0,
+        "min": 0
+      }
+    },
+    "gpt-6.1-terra": {
+      "completed_empty_patch": {
+        "count": 39,
+        "max": 0,
+        "median": 0,
+        "min": 0
+      },
+      "completed_nonempty_patch": {
+        "count": 11,
+        "max": 0,
+        "median": 0,
+        "min": 0
+      }
+    }
+  },
+  "records_identity_sha256": "17be8eda7c90b6d3c1ec82d4bc0288b546f19a3905b6a58c9855b5111aba3966",
+  "retained_responses": 150,
+  "schema_version": 1,
+  "stage": "separate_post_hoc_output_attribution"
+}

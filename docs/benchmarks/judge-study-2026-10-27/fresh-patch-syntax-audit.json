@@ -1,0 +1,33 @@
+{
+  "audit_source_sha256": "9f2e7a65d99e1077e173c061399f0b32f8fb349881f4edcb67bd348575a2dfed",
+  "audited_at": "2026-10-27T20:57:41.607662+00:00",
+  "command": [
+    "git",
+    "apply",
+    "--numstat",
+    "--"
+  ],
+  "counts": {
+    "git_syntax_rejection": 24
+  },
+  "frozen_outcomes_changed": false,
+  "git_version": "git version 2.50.1 (Apple Git-155)",
+  "grader_rejection_classes": {
+    "no_file_changes": 8,
+    "unparseable_patch": 16
+  },
+  "inference_sha256": "720489341a49e683606983283afbeb9a83fc56d00a489d43839b11f9d1dcd537",
+  "interpretation": "All 24 rejected submissions also failed Git's patch parser. This is a syntax check, not a test of repair correctness, applicability to a specific base, or a regrade.",
+  "models": {
+    "gpt-6-luna": 18,
+    "gpt-6.1-terra": 6
+  },
+  "patches_applied": 0,
+  "patches_checked": 24,
+  "private_full_audit_file_sha256": "23d9709ee14fb9c778facb0cecf878ab7141b8b8afafbeffde2dd708634d0e55",
+  "private_records_identity_sha256": "41923a8b84fe395b58e95905c0f00d52e0866d3295d6ffef9fa3581384f7abad",
+  "provider_calls_added": 0,
+  "repository_code_executed": false,
+  "schema_version": 1,
+  "stdin_source": "Exact retained generated patch, with SHA-256 verified against its grading record."
+}

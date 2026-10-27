@@ -1,0 +1,48 @@
+{
+  "additional_provider_calls_planned": false,
+  "authorized_total_cap_usd": "50.00",
+  "basis": "Configured conservative token rates and full retained reservations for the three earlier unknown-billing requests; this is not an invoice reconciliation. Hardware and electricity costs are unmeasured.",
+  "conservative_accounted_total_usd": "15.14292900",
+  "invoice_reconciled": false,
+  "modal_spend_usd": "0",
+  "phases": [
+    {
+      "cap_usd": "30.00",
+      "evidence": "results.json",
+      "phase": "Historical human-reference and archived-patch judging",
+      "provider_requests": 3104,
+      "reported_usage_cost_usd": "13.33013900",
+      "retained_unknown_reservations_usd": "0.01312325"
+    },
+    {
+      "cap_usd": "0.05",
+      "evidence": "../../evidence/2026-10-27/product-judge-acceptance.json",
+      "phase": "Product transport acceptance",
+      "provider_requests": 4,
+      "reported_usage_cost_usd": "0.00047950",
+      "retained_unknown_reservations_usd": "0"
+    },
+    {
+      "cap_usd": "12.00",
+      "evidence": "fresh-operations.json",
+      "phase": "Fresh repository repairs",
+      "provider_requests": 150,
+      "reported_usage_cost_usd": "1.55480025",
+      "retained_unknown_reservations_usd": "0"
+    },
+    {
+      "cap_usd": "7.95",
+      "evidence": "self-preference-results.json",
+      "phase": "Same-identifier preference follow-up",
+      "provider_requests": 84,
+      "reported_usage_cost_usd": "0.24438700",
+      "retained_unknown_reservations_usd": "0"
+    }
+  ],
+  "provider_requests": 3342,
+  "reported_usage_cost_usd": "15.12980575",
+  "retained_unknown_reservations_usd": "0.01312325",
+  "schema_version": 1,
+  "uncommitted_budget_usd": "34.85707100",
+  "unknown_billing_requests": 3
+}
