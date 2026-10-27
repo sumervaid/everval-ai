@@ -6,10 +6,10 @@ The 0.4 source passes ordinary checks and installation through both Python and n
 
 ## Committed-source validation
 
-[GitHub run 40577026342](https://github.com/sumervaid/everval-ai/actions/runs/40577026342) passed for source commit 52f61bc67dafd98a313ab0a66e599144b66a826b:
+[GitHub run 40578809777](https://github.com/sumervaid/everval-ai/actions/runs/40578809777) passed for source commit f306e5448772d0ba3636f4abfa4e21732a506422:
 
-- 1,732 Python tests passed; 46 opt-in checks were skipped.
-- Ruff, formatting, strict typing across 107 source files, and 783 local documentation links passed.
+- 1,817 Python tests passed; 46 opt-in checks were skipped.
+- Ruff, formatting, strict typing across 107 source files, and 797 local documentation links passed.
 - Web type checks, component tests, production build, and npm launcher tests passed.
 - A separately installed wheel passed the original three-domain no-key demonstration.
 - The exact locally built npm tarball was installed in an isolated prefix. Setup, version reporting, calibrated-judge CLI help, and the same no-key demonstration passed.
@@ -27,6 +27,12 @@ The conservative configured-rate cost was **$0.0004795**, within a separate **$0
 ## Inspect compatibility
 
 The optional adapter was verified with the actual Inspect 0.3.285 package in a separate environment. Eight exported control samples loaded as a MemoryDataset, with targets retained as evaluator fields and public inputs kept separate. This check made no model calls. The [compatibility record](inspect-compatibility.json) retains the export hashes and protocol identity.
+
+## Accepted local distributions
+
+The exact 0.4.0 wheel, source archive and public npm tarball were built on the iMac from commit f306e5448772d0ba3636f4abfa4e21732a506422. The [distribution acceptance record](distribution-acceptance.json) contains their SHA-256 hashes, byte counts and toolchain versions.
+
+A fresh Python environment installed the wheel with the exported, hash-checked runtime lock. A separate npm prefix installed the exact tarball and completed explicit setup. Both entry points passed the three-domain no-key demonstration, and the npm entry point exposed the calibrated-judge commands. These checks made zero provider calls. The accepted archives remain local and have not been published to a registry.
 
 ## Release boundary
 

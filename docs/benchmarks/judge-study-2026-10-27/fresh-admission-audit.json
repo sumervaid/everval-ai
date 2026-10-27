@@ -1,0 +1,84 @@
+{
+  "all_requests_at_token_ceiling_usd": {
+    "gpt-6-luna": "0.32540925",
+    "gpt-6.1-sol": "6.508185",
+    "gpt-6.1-terra": "3.2544675"
+  },
+  "audit_method": "Independent replay of frozen admission rules, public request construction and financial bounds; retained execution logs reparsed using the pinned official SWE-bench parser.",
+  "audit_source_sha256": "53a8b89eb3a6814c2c173fc43db273f72fd69d08ea3ef5d020a19e43343201e8",
+  "candidate_reference_policy_proof_sha256": "2af14c0605bad57debee557010e391c833c2886d40d44ca30e349efec99a0c4c",
+  "completed_ordered_prefix_candidates": 157,
+  "control_cycles_reparsed": 150,
+  "control_execution_logs_reparsed": 300,
+  "cost_basis": "Configured conservative rates: 2.5 times standard input rates and standard output rates; an upper-bound estimate, not an invoice.",
+  "frozen_manifests_sha256": {
+    "admission-prefix.json": "261e7ad02ba6f6926c36e1f00cb0849bd9c2e4cbd54e3e9da4a5667d787cf67b",
+    "analysis-freeze.json": "e606e7f0eb2915df67094bbf0d94eb29be17ebac69db0c93cd49ca23ba1a1c5f",
+    "dispatch-freeze.json": "05ad7a6cd339f4dfe8fe6a6c6801a20501d6bf846636cb6958ea7ee24a0bb492",
+    "inference.json": "720489341a49e683606983283afbeb9a83fc56d00a489d43839b11f9d1dcd537",
+    "selection.json": "5424ae339131f928c4d99934881329138af4e09eb5080d84639747b90c5eea04"
+  },
+  "generation_budget_cap_usd": "12",
+  "immutable_local_image_ids": [
+    "sha256:3b3d1b2594a319a7246990041c7128d5a5b911d489aec2290606474826a769da",
+    "sha256:41eda88bbadc1812c41725f220e3696819741b7022975baa34b6e14fe6126bcc",
+    "sha256:6de5d3463e3990e6635b83eb1345b1d2231e9c89939c6acef34b7a04e880581f",
+    "sha256:a8597955ac51cd619c0c2ef8ee2dfc9fb79b3322abe5ea6677547472f67905d1"
+  ],
+  "ledger_attempt_counts_before_generation": {
+    "gpt-6-luna": 0,
+    "gpt-6.1-sol": 0,
+    "gpt-6.1-terra": 0
+  },
+  "ledger_request_counts_before_generation": {
+    "gpt-6-luna": 0,
+    "gpt-6.1-sol": 0,
+    "gpt-6.1-terra": 0
+  },
+  "planned_generation_requests": 150,
+  "private_full_audit_file_sha256": "cad01874c7f2f1920cd34aec7f496bf5fdd373ded7d0e80c7bb95a619ce550d6",
+  "repositories": {
+    "django/django": 2,
+    "pallets/flask": 1,
+    "pytest-dev/pytest": 12,
+    "sympy/sympy": 35
+  },
+  "schema_version": 1,
+  "scope": "Admission and prospective protocol verification only. Repair outcomes require the separate completed generation and grading report. The selected cohort is concentrated in SymPy and pytest.",
+  "selected20_audit": {
+    "fresh_inference_sha256": "720489341a49e683606983283afbeb9a83fc56d00a489d43839b11f9d1dcd537",
+    "generation_artifacts_and_all_ledger_requests_attempts_observed_zero_before_clearance": true,
+    "planned_self_judgments": 360,
+    "repositories": {
+      "pallets/flask": 1,
+      "pytest-dev/pytest": 5,
+      "sympy/sympy": 14
+    },
+    "selected_task_families": 20,
+    "selection_rule_independently_recomputed": true,
+    "selection_sha256": "6b7f2e50939c589076f2cbcb5ba2e17a6c97553cf2874b6325bae79cf98d4474",
+    "selection_source_and_task_hashes_verified": true
+  },
+  "selected_tasks": 50,
+  "source_files_sha256": {
+    "scripts/benchmarks/budget.py": "ea0a0f31a1eb8f5b61167e1364b97c9c4f05eb3fa7a8027ce76f45d1dd047a13",
+    "scripts/benchmarks/executor.py": "56c86df3c7e6d4970ffac83e6c3af590f5cdc2aad321a0d1a7b1026da2eae487",
+    "scripts/judge_study/fresh_analysis.py": "b17357c442386b562b326f9fcb3147ee0f7923b57b10a51f7570a212c2f89791",
+    "scripts/judge_study/fresh_dispatch.py": "2ea67b171f118040ab4448cc8e6b4e49b1eeb113db22a37dd5cfcbcab0ab031c",
+    "scripts/judge_study/fresh_identity.py": "daebfa7666d6d8196182abcaf6c77b7f63688812f540eb06880135c92290232c",
+    "scripts/judge_study/fresh_repositories.py": "4d2cb891c21a1597fbe41362eb19c86db64a8bbd0b7170ef77d8d3d86e295f5f"
+  },
+  "stage": "before_fresh_model_generation",
+  "status": "passed",
+  "total_at_token_ceiling_usd": "10.08806175",
+  "verified_at": "2026-10-27T20:34:23.384806+00:00",
+  "verified_boundaries": [
+    "Every selected task has three complete base/reference cycles with unchanged required test labels, observed FTP/PTP outcomes and outer suite exits.",
+    "Test identities agree across all six executions under the frozen identity policy; raw test statuses remain unchanged.",
+    "Exact source, reference-patch, image and evaluation-script identities match the frozen evidence.",
+    "Reused executions match original result, artifact, control and selection hashes.",
+    "The first 50 admissions follow a complete 157-candidate prefix.",
+    "All 150 requests contain the public issue and starting-source excerpts; private tests and reference fixes are absent.",
+    "Every reference patch in the pool of 351 candidates satisfies the same allowed-edit policy used for generated patches."
+  ]
+}

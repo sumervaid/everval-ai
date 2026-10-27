@@ -1,0 +1,47 @@
+{
+  "artifacts": {
+    "everval-ai-0.4.0.tgz": {
+      "sha256": "36b8deb90d732a7640ee7d11c1f63202ef8c6eb930ac70334f3ca8c8be67472c",
+      "size_bytes": 565849
+    },
+    "everval_ai-0.4.0-py3-none-any.whl": {
+      "sha256": "9169685dfdb8cb89ee3cf1fc34d6477a155e7c7d0833dc97ba60dd187bbf0189",
+      "size_bytes": 546059
+    },
+    "everval_ai-0.4.0.tar.gz": {
+      "sha256": "147124922c80467d18ba31dae2d169c0ccc94d0739f1f74f23f1283411a5b813",
+      "size_bytes": 2993849
+    }
+  },
+  "completed_at": "2026-10-27T20:32:45.865732+00:00",
+  "npm_demo": {
+    "audit_valid": true,
+    "pass_rates": [
+      1,
+      0,
+      1
+    ],
+    "provider_calls": 0,
+    "provider_cost_usd": 0
+  },
+  "provider_calls": 0,
+  "registry_published": false,
+  "schema_version": 1,
+  "source_commit": "f306e5448772d0ba3636f4abfa4e21732a506422",
+  "toolchain": {
+    "node": "v22.23.3",
+    "npm": "10.9.9",
+    "python": "Python 3.12.14",
+    "uv": "uv 0.11.23 (3cdf50e09 2026-06-19 aarch64-apple-darwin)"
+  },
+  "wheel_demo": {
+    "audit_valid": true,
+    "pass_rates": [
+      1,
+      0,
+      1
+    ],
+    "provider_calls": 0,
+    "provider_cost_usd": 0
+  }
+}

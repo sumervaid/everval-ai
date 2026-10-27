@@ -4,6 +4,8 @@ This protocol measures whether a model can produce a correct patch from a public
 
 The [control runner](../scripts/judge_study/fresh_repositories.py) and [dispatch adapter](../scripts/judge_study/fresh_dispatch.py) separate task admission, model requests and execution grading. Human-judge calibration and archived patch discrimination are separate studies.
 
+The [completed admission audit](benchmarks/judge-study-2026-10-27/fresh-admission-audit.json) independently checked 50 selected tasks, all 300 control logs and all 150 planned public requests before generation. It establishes admission and protocol integrity; repair outcomes require the separate generation and grading results.
+
 ## Admit tasks before calling models
 
 The source is [SWE-bench Verified](https://huggingface.co/datasets/SWE-bench/SWE-bench_Verified/tree/78f471bf655a3137b2e8a75af1501690ec009ec3), pinned to revision `78f471bf655a3137b2e8a75af1501690ec009ec3`. Its parquet SHA-256 is `030cfd7f2a704c4c0226e7f104c725a3b41230b1d3517f9c915ad7ea5be3fa25`. The task base commits, issues and reference patches match the older source revision used for the archived study; evaluation scripts and required-test labels follow the enriched revision.
