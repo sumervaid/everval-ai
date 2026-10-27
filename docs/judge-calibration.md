@@ -101,7 +101,7 @@ Each exported job has a stable job_id, presented order, zero-based repetition an
 ]
 ~~~
 
-The allowed preferences are A, B, tie and abstain, referring to the displayed order. Everval converts them back to canonical response identities. Optional scores must cover both responses and every frozen rubric dimension with numbers between zero and one. Malformed JSON, invalid contracts, errors, abstentions and absent outputs remain distinct records.
+The allowed preferences are A, B, tie and abstain, referring to the displayed order. Everval converts them back to canonical response identities. Optional scores must cover both responses and every frozen rubric dimension with numbers between zero and one. Malformed JSON, invalid contracts, errors, abstentions and absent outputs remain distinct records. JSON with repeated keys is rejected before an import can persist observations. A live provider completion with repeated keys retains known usage and an explicit error.
 
 ~~~sh
 uv run everval judges import CAMPAIGN_ID /private/study/dev-observations.json

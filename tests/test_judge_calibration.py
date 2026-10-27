@@ -535,3 +535,24 @@ def test_guided_judge_requires_meaningful_frozen_public_evidence(context):
     value["items"][0]["reference_context"] = context
     with pytest.raises(ValueError, match="public evidence"):
         CalibrationProtocol.model_validate(value)
+
+
+def test_cli_import_rejects_duplicate_preference_before_persisting(study, tmp_path):
+    from cvals.cli import app
+
+    service, identifier = study
+    job = service.export_requests(identifier)["jobs"][0]["job_id"]
+    path = tmp_path / "ambiguous-observation.json"
+    path.write_text(
+        '[{"job_id":'
+        + json.dumps(job)
+        + ',"response":{"preference":"A","preference":"B","rationale":"Ambiguous"},'
+        '"cost_usd":0}]'
+    )
+    result = CliRunner().invoke(
+        app,
+        ["judges", "import", identifier, str(path)],
+        env={"EVERVAL_DATA_DIR": str(service.settings.data_dir)},
+    )
+    assert result.exit_code != 0 and "repeated object keys" in result.output
+    assert service.get(identifier)["imported_judgments"] == 0

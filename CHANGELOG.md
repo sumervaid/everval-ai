@@ -9,8 +9,8 @@
 - Kept public package imports lightweight and made version queries independent of optional application surfaces.
 - Enabled provider-free validation on pushes to main and pull requests.
 - Added focused measurement design and judge operator guides.
-
-
+- Reject ambiguous duplicate JSON keys in provider responses and judge imports; retain valid reported usage when only the completion is invalid.
+- Verified the built npm tarball through isolated installation, setup and the no-key demo in CI, with separate live judge and actual Inspect compatibility records.
 
 - Simplified the project README around current-source installation and a compact continuous demo; added focused workflow viewing pages and small gallery previews.
 
@@ -57,7 +57,6 @@ See the [release acceptance procedure](docs/release-acceptance.md), [verificatio
 - Added explicit configuration variants and constrained optimization studies with a reserved single-use holdout and reviewable proposals.
 - Added versioned data-only community packs, independent review, control validation, three no-key examples and local evidence exports.
 - Added budget projections and Autopilot/Research lab terminal views, CLI commands and role-scoped API routes.
-
 
 ## 0.2.0 — 2026-10-14
 

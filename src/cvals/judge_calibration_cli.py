@@ -19,10 +19,19 @@ judges_app = typer.Typer(
 )
 
 
+def _unique_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("Input JSON contains repeated object keys")
+        result[key] = value
+    return result
+
+
 def _read(path: Path) -> Any:
     if path.stat().st_size > 64 * 1024 * 1024:
         raise ValueError("Calibration input exceeds 64 MiB")
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(), object_pairs_hook=_unique_keys)
 
 
 def _summary(value: dict[str, Any]) -> dict[str, Any]:

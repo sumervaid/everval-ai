@@ -563,3 +563,73 @@ def test_external_errors_preserve_reported_cost(store, settings):
     assert result["trials"][0]["cost_usd"] == 0.125
     assert result["trials"][0]["duration_ms"] == 30000
     assert result["report"]["systems"][0]["cost_per_pass"] is None
+
+
+@pytest.mark.parametrize(
+    "content",
+    [
+        '{"preference":"A","preference":"B","rationale":"Ambiguous decision"}',
+        '{"scores":{"correct":1,"correct":0}}',
+    ],
+)
+def test_http_adapter_rejects_duplicate_content_keys_but_keeps_usage(
+    scenario, settings, monkeypatch, content
+):
+    real_client = httpx.Client
+
+    def handler(request):
+        return httpx.Response(
+            200,
+            json={
+                "choices": [{"message": {"content": content}, "finish_reason": "stop"}],
+                "usage": {"prompt_tokens": 10, "completion_tokens": 5},
+            },
+        )
+
+    monkeypatch.setattr(
+        "cvals.providers.httpx.Client",
+        lambda **kwargs: real_client(transport=httpx.MockTransport(handler), **kwargs),
+    )
+    system = System(
+        name="Local",
+        kind="http",
+        model="example",
+        base_url="http://127.0.0.1:9000/v1",
+        input_cost_per_million=2,
+        output_cost_per_million=4,
+    )
+    result = submit(scenario, system, settings, 1)
+    assert result.output is None and result.error
+    assert result.input_tokens == 10 and result.output_tokens == 5
+    assert result.cost_usd == pytest.approx(0.00004)
+
+
+def test_http_adapter_does_not_choose_between_conflicting_usage_objects(
+    scenario, settings, monkeypatch
+):
+    real_client = httpx.Client
+    envelope = (
+        '{"choices":[{"message":{"content":"{\\"total\\":5}"},"finish_reason":"stop"}],'
+        '"usage":{"prompt_tokens":1000,"completion_tokens":500},'
+        '"usage":{"prompt_tokens":1,"completion_tokens":1}}'
+    )
+
+    def handler(request):
+        return httpx.Response(200, content=envelope.encode())
+
+    monkeypatch.setattr(
+        "cvals.providers.httpx.Client",
+        lambda **kwargs: real_client(transport=httpx.MockTransport(handler), **kwargs),
+    )
+    system = System(
+        name="Local",
+        kind="http",
+        model="example",
+        base_url="http://127.0.0.1:9000/v1",
+        input_cost_per_million=2,
+        output_cost_per_million=4,
+    )
+    result = submit(scenario, system, settings, 1)
+    assert result.output is None and result.error
+    assert result.cost_usd is None
+    assert result.input_tokens is None and result.output_tokens is None
