@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+from click import unstyle
 from typer.testing import CliRunner
 
 from cvals.cli import app
@@ -50,12 +52,14 @@ def workspace(tmp_path: Path, monkeypatch) -> Store:
     return store
 
 
-def test_chat_help_describes_session_and_no_worker_controls():
-    result = runner.invoke(app, ["chat", "--help"])
+@pytest.mark.parametrize("color", [False, True])
+def test_chat_help_describes_session_and_no_worker_controls(color):
+    result = runner.invoke(app, ["chat", "--help"], color=color)
     assert result.exit_code == 0, result.output
-    assert "plain language" in result.output
-    assert "--message" in result.output and "--session" in result.output
-    assert "--no-worker" in result.output
+    visible = unstyle(result.output)
+    assert "plain language" in visible
+    assert "--message" in visible and "--session" in visible
+    assert "--no-worker" in visible
 
 
 def test_chat_cli_queues_controls_and_worker_writes_requested_reports(tmp_path, monkeypatch):
