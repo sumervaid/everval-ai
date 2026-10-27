@@ -1,6 +1,6 @@
 # Everval AI documentation
 
-[Project overview](../README.md) · [Product tour](product-tour.md) · [First session](quickstart.md) · [Verification](verification.md)
+[Project overview](../README.md) · [Product tour](product-tour.md) · [First session](quickstart.md) · [Verification](verification.md) · [Daily updates](../UPDATES.md)
 
 Use your own work to decide whether an agent change is worth shipping. Everval keeps the tasks, execution evidence, grading, cost and latency together in a local workspace.
 
@@ -50,7 +50,7 @@ Use [benchmark validation](benchmarks.md) to understand what qualifies for a rel
 
 ## Measure the measurement
 
-- [Read the judge-calibration finding](benchmarks/judge-study-2026-10-27/results.md): a checklist raised estimated cost by 10.9% without a demonstrated human-agreement gain in the complete Terra comparison.
+- [Read the judge-calibration finding](benchmarks/judge-study-2026-10-27/results.md): the standard rubric had 9.8% lower estimated judging cost in the 64-question Terra comparison, with observed human agreement of 72.30% versus 72.11%.
 - [Calibrate LLM judges](judge-calibration.md) against retained human votes or execution references.
 - [Statistical methods](judge-methods.md) explain agreement, reliability, paired uncertainty and prospective power.
 - [Read the 50-task repository study](benchmarks/judge-study-2026-10-27/fresh-results.md): explicit abstentions and rejected patches dominated the constrained one-shot workflow.

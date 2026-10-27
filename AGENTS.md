@@ -31,3 +31,9 @@ Implement a shared evaluation core with a terminal workbench, tmux session, CLI,
 Run the smallest meaningful checks for the change. Regression tests should establish behavior, especially task validity, data isolation, experiment accounting, and job recovery. Documentation-only edits need document/link review and Git whitespace checks, not invented application tests.
 
 Report what changed, evidence of verification, and remaining limitations. Position the product around Everval's implemented capabilities and its extensions to established evaluation practices. Keep product claims consistent with retained verification and supported deployment boundaries.
+
+## Daily updates
+
+Record substantive shipped changes, completed research and release events in [UPDATES.md](UPDATES.md), under the actual work date with newest dates first. Update the existing entry when more work ships on the same day. Include the concrete change or finding, evidence links, relevant verification and any remaining release or interpretation limits.
+
+Keep estimates distinct from invoice charges, observed comparisons distinct from proven improvements, and source publication distinct from package publication. Link to frozen research records without rewriting them. Do not invent activity for days without changes or include private workspace data.

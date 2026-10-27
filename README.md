@@ -2,21 +2,24 @@
 
 [![Validation](https://github.com/sumervaid/everval-ai/actions/workflows/validation.yml/badge.svg)](https://github.com/sumervaid/everval-ai/actions/workflows/validation.yml)
 
-[Research finding](docs/benchmarks/judge-study-2026-10-27/results.md) · [Quickstart](#try-it-without-a-key) · [Product demos](docs/demos.md) · [Documentation](docs/index.md) · [On-prem deployment](docs/on-premises.md)
+[Quickstart](#try-it-without-a-key) · [Daily updates](UPDATES.md) · [All demos](docs/demos.md) · [Research finding](#inspect-the-evidence) · [On-prem deployment](docs/on-premises.md)
 
-**A checklist increased estimated judge cost by 10.9% without a demonstrated gain in human agreement.**
+**~10% lower estimated judging cost in a 64-question study.**
 
-In the complete GPT-6.1 Terra holdout comparison, agreement with historical human votes was **72.30% with the standard rubric and 72.11% with the checklist**. The paired change was −0.20 percentage points, with a multiplicity-adjusted interval of −2.15 to +1.76 points. Conservative usage-based cost rose from $0.625 to $0.693 across 256 judgments per arm. The unit of analysis is the 64 held-out questions.
+Everval measured **9.8% lower estimated cost** for GPT-6.1 Terra's standard rubric versus its checklist rubric, with **72.30% versus 72.11% observed agreement with human votes**. The quality difference was not statistically established. [Read the study](docs/benchmarks/judge-study-2026-10-27/results.md).
 
-[![Agreement with human votes across three model judges, preserving the full 64-question cohort](docs/benchmarks/judge-study-2026-10-27/judge-full-cohort-bounds.svg)](docs/benchmarks/judge-study-2026-10-27/results.md)
+Turn your own work into repeatable evaluations. Compare models, prompts and agents; track quality, cost and latency; keep checking as your system changes.
 
-*The chart uses original frozen scores. Its ranges cover unattempted judgments; they are not confidence intervals. [Read the study](docs/benchmarks/judge-study-2026-10-27/results.md) for the planned comparisons, human-vote provenance, judgments checked against archived test reports, and the separate audit of ten transport-parser failures.*
+[![Everval in action: type a recurring benchmark request, inspect results and compare rankings](docs/assets/demos/recordings/everval-tour.gif)](docs/demos.md)
 
-**Fresh repository study:** on 50 admitted tasks, the constrained one-shot setup produced 110 explicit empty patches and 24 rejected patches across 150 attempts. Only 16 submissions reached test execution. [See the audited repair results and failure breakdown](docs/benchmarks/judge-study-2026-10-27/fresh-results.md).
+*One continuous 46-second workflow. [Watch the full-resolution video](docs/assets/demos/recordings/everval-tour.mp4) · [Try it locally](#try-it-without-a-key).*
 
-Everval turns your own work into repeatable evaluations. Compare models, prompts, and agents; inspect quality, cost, and latency; keep checking as your system changes.
+| Terminal workbench · 16s | Anonymous review · 27s |
+| --- | --- |
+| [<img src="docs/assets/demos/recordings/terminal-workbench.gif" width="400" alt="Continuous terminal recording: search commands, switch views and inspect experiment evidence">](docs/demos/terminal-workbench.md) | [<img src="docs/assets/demos/recordings/blind-reviewer.gif" width="400" alt="Continuous blind-review recording: read anonymous answers, score them and submit a judgment">](docs/demos/blind-reviewer.md) |
+| Navigate the workbench and inspect saved evidence. | Review answers before model identities are revealed. |
 
-Built for evaluation engineers and ML platform teams, with a terminal workbench, shared CLI/API, and optional review browser. Tasks and evidence stay in your workspace.
+*These looping recordings show the actual interfaces using original demo data and a scripted reviewer account. They are separate from the research study above. [Explore all workflows](docs/demos.md) · [Browse still images](docs/demo-stills.md).*
 
 ## Try it without a key
 
@@ -60,10 +63,6 @@ everval demo
 
 ## What you can do
 
-[![Everval: create a recurring benchmark, inspect results, and compare rankings](docs/assets/demos/recordings/everval-tour.gif)](docs/demos.md)
-
-*One continuous session using installation controls. [Watch the full-resolution video](docs/assets/demos/recordings/everval-tour.mp4) · [Explore all workflows](docs/demos.md).*
-
 | Workflow | What Everval records |
 | --- | --- |
 | [Repository benchmarks](docs/guided-run.md) | Reviewed tasks, fail-before/pass-after controls, hidden checks, and frozen benchmark releases. |
@@ -90,6 +89,16 @@ Workspaces default to `~/.local/share/everval`; set `EVERVAL_DATA_DIR` to choose
 SSO, tenant isolation, and distributed execution are outside this release. Double-blind review trusts workspace operators and does not conceal prompts from hosted providers. See [operating boundaries](docs/operations.md), [current scope](docs/PLAN.md), and [security](SECURITY.md).
 
 ## Inspect the evidence
+
+Read the [daily updates](UPDATES.md) for dated changes, findings, verification and release status.
+
+The headline comes from a complete 64-question GPT-6.1 Terra comparison: the standard rubric cost **$0.624685** versus **$0.692560** for the checklist across **256 judgments per arm**, a **9.8% reduction in estimated cost**. Agreement with historical human votes was **72.30% versus 72.11%**. The original checklist-minus-standard change was −0.20 percentage points, with a multiplicity-adjusted interval of −2.15 to +1.76 points. These are conservative usage-based estimates for the tested configurations.
+
+[![Agreement with human votes across three model judges, preserving the full 64-question cohort](docs/benchmarks/judge-study-2026-10-27/judge-full-cohort-bounds.svg)](docs/benchmarks/judge-study-2026-10-27/results.md)
+
+*The chart uses original frozen scores. Its ranges cover unattempted judgments; they are not confidence intervals. [Read the study](docs/benchmarks/judge-study-2026-10-27/results.md) for the planned comparisons, human-vote provenance, judgments checked against archived test reports, and the separate audit of ten transport-parser failures.*
+
+**Fresh repository study:** on 50 admitted tasks, the constrained one-shot setup produced 110 explicit empty patches and 24 rejected patches across 150 attempts. Only 16 submissions reached test execution. [See the audited repair results and failure breakdown](docs/benchmarks/judge-study-2026-10-27/fresh-results.md).
 
 - [Calibrated-judge and distribution acceptance](docs/evidence/2026-10-27/README.md): live product judge calls, actual Inspect compatibility, and installed Python/npm checks.
 - [Release acceptance](docs/evidence/2026-10-15/README.md): installed-package, interface, accounting, and bounded API checks.
