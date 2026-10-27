@@ -1,0 +1,207 @@
+{
+  "date": "2026-10-26",
+  "application_revision": "599b7a33544bcf8a00e2aac39c99009dea53cb19",
+  "capture_method": "Uninterrupted browser and actual PTY recordings",
+  "captures": 12,
+  "model_api_calls": 0,
+  "browser_javascript_errors": 0,
+  "owned_capture_processes_stopped": true,
+  "autopilot_left_paused": true,
+  "editing": "Beginning/end trims only; no internal cuts or playback speed changes",
+  "gif_encoding": "1120\u00d7700 at 20 fps, mild compression-noise reduction and 128-color quantization",
+  "video_encoding": "Native 1280\u00d7800 at 25 fps, H.264, unchanged playback speed",
+  "checks": [
+    {
+      "name": "everval-tour",
+      "gif_frames": 924,
+      "gif_duration_ms": 46200,
+      "frame_delays_ms": {
+        "50": 924
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 46.2,
+      "hashes_verified": true
+    },
+    {
+      "name": "chat-and-reports",
+      "gif_frames": 637,
+      "gif_duration_ms": 31850,
+      "frame_delays_ms": {
+        "50": 637
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 31.84,
+      "hashes_verified": true
+    },
+    {
+      "name": "rankings",
+      "gif_frames": 599,
+      "gif_duration_ms": 29950,
+      "frame_delays_ms": {
+        "50": 599
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 29.96,
+      "hashes_verified": true
+    },
+    {
+      "name": "tasks-and-comparisons",
+      "gif_frames": 940,
+      "gif_duration_ms": 47000,
+      "frame_delays_ms": {
+        "50": 940
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 46.96,
+      "hashes_verified": true
+    },
+    {
+      "name": "production-cases",
+      "gif_frames": 681,
+      "gif_duration_ms": 34050,
+      "frame_delays_ms": {
+        "50": 681
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 34.04,
+      "hashes_verified": true
+    },
+    {
+      "name": "checkpoint-monitoring",
+      "gif_frames": 787,
+      "gif_duration_ms": 39350,
+      "frame_delays_ms": {
+        "50": 787
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 39.36,
+      "hashes_verified": true
+    },
+    {
+      "name": "double-blind",
+      "gif_frames": 701,
+      "gif_duration_ms": 35050,
+      "frame_delays_ms": {
+        "50": 701
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 35.04,
+      "hashes_verified": true
+    },
+    {
+      "name": "blind-reviewer",
+      "gif_frames": 540,
+      "gif_duration_ms": 27000,
+      "frame_delays_ms": {
+        "50": 540
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 27.0,
+      "hashes_verified": true
+    },
+    {
+      "name": "terminal-workbench",
+      "gif_frames": 321,
+      "gif_duration_ms": 16050,
+      "frame_delays_ms": {
+        "50": 321
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 16.04,
+      "hashes_verified": true
+    },
+    {
+      "name": "repository-onboarding",
+      "gif_frames": 452,
+      "gif_duration_ms": 22600,
+      "frame_delays_ms": {
+        "50": 452
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 22.64,
+      "hashes_verified": true
+    },
+    {
+      "name": "autopilot-budget",
+      "gif_frames": 315,
+      "gif_duration_ms": 15750,
+      "frame_delays_ms": {
+        "50": 315
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 15.76,
+      "hashes_verified": true
+    },
+    {
+      "name": "failure-research",
+      "gif_frames": 545,
+      "gif_duration_ms": 27250,
+      "frame_delays_ms": {
+        "50": 545
+      },
+      "loop": 0,
+      "mp4_fps": 25.0,
+      "mp4_dimensions": [
+        1280,
+        800
+      ],
+      "mp4_duration_s": 27.24,
+      "hashes_verified": true
+    }
+  ]
+}

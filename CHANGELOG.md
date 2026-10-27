@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Added ten captioned GIF walkthroughs of the actual terminal and browser, a thirty-second tour, still-image alternatives, and reproducible fixture-only capture scripts.
+- Replaced the keyframe demo slideshows with continuous browser and live-terminal recordings, smooth pointer movement and typing, full-resolution MP4s, and updated capture scripts.
 
 - Added dedicated trusted-custodian double-blind studies in the terminal, browser, CLI and API: freeze two systems and independent reviewer assignments, lock complete judgments, and explicitly reveal local HTML/JSON reports. Existing summary and mutation routes respect study seals.
 - Unsupported blind/confidential requests in benchmark chat now stay blocked until routed to the study workflow or explicitly changed to standard unblinded evaluation. Hardware-backed confidential execution remains unavailable.

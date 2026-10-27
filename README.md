@@ -6,9 +6,9 @@ For ML platform and evaluation engineers who need evidence on their own infrastr
 
 [Watch the demos](docs/demos.md) · [Try it](#try-it-without-a-key) · [One complete workflow](docs/worked-example.md) · [Deploy on-premises](docs/on-premises.md) · [Measured checkpoint study](docs/benchmarks/checkpoint-study-2026-10-22/results.md)
 
-[![Everval in thirty seconds: terminal, chat, rankings, automation and review](docs/assets/demos/everval-tour.gif)](docs/demos.md)
+[![One continuous Everval session: a typed request, results and benchmark rankings](docs/assets/demos/continuous/everval-tour.gif)](docs/demos.md)
 
-*Actual interfaces with fixture data. [Watch all ten workflows](docs/demos.md) · [Browse without animation](docs/demo-stills.md).*
+*One uninterrupted session with fixture data. [Full-resolution video](docs/assets/demos/continuous/everval-tour.mp4) · [More workflows](docs/demos.md) · [Still previews](docs/demo-stills.md).*
 
 ## Try it without a key
 
@@ -26,9 +26,9 @@ Watch a passing reference, a deliberate regression, and a restored candidate run
 
 These are installation controls, not a model leaderboard. [Open the demo in tmux](docs/demo.md) or [connect your own repository](docs/guided-run.md).
 
-![Everval terminal: runs, systems, command palette and audit evidence](docs/assets/demos/terminal-workbench.gif)
+![Everval terminal: runs, systems, command palette and audit evidence](docs/assets/demos/continuous/terminal-workbench.gif)
 
-*The actual workbench with original controls. [Still image](docs/assets/demos/terminal-workbench.png) · [Full demo gallery](docs/demos.md).*
+*The actual workbench with original controls. [Still image](docs/assets/demos/continuous/terminal-workbench.png) · [Full demo gallery](docs/demos.md).*
 
 ## Describe the benchmark in a conversation
 

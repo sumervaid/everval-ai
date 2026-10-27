@@ -1,11 +1,10 @@
-"""Record the real study interfaces with isolated, provider-free installation controls.
+"""Record uninterrupted study workflows with live pointer, typing and scrolling.
 
-Run after building the optional browser interface:
-    python scripts/demos/capture_studies.py --output .local/demo-captures/studies
+Run after building the browser:
+    python scripts/demos/capture_studies.py --output .local/continuous-studies
 
-The output contains private temporary workspaces and frame manifests. Publish only
-reviewed images/manifests, never the runtime directories. Chrome and the development
-Playwright dependency must already be installed.
+Each clip is a native 25 fps browser recording. Source videos, credentials and
+fixture workspaces remain private. Segment times are offsets in the source WebM.
 """
 
 from __future__ import annotations
@@ -21,50 +20,20 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
+from motion import Motion
 from playwright.sync_api import Browser, Page, expect, sync_playwright
 
+from cvals.blind_studies import BlindStudies, StudyRequest
 from cvals.config import Settings
 from cvals.engine import Engine
 from cvals.identity import IdentityStore
 from cvals.models import Check, Collection, ExperimentCreate, Scenario
-from cvals.review_queues import Dimension, ReviewQueues, Rubric
+from cvals.review_queues import Dimension, Judgment, ReviewQueues, Rubric
 from cvals.store import Store
 from cvals.training_demo import run_training_demo
 
 VIEWPORT = {"width": 1280, "height": 800}
 ROOT = Path(__file__).resolve().parents[2]
-
-
-class Clip:
-    def __init__(self, output: Path, name: str, title: str, note: str, poster_frame: int = 0):
-        self.directory = output / name
-        self.directory.mkdir(parents=True)
-        self.manifest: dict[str, Any] = {
-            "name": name,
-            "title": title,
-            "fixture_note": note,
-            "poster_frame": poster_frame,
-            **VIEWPORT,
-            "frames": [],
-        }
-
-    def frame(self, page: Page, caption: str, duration: int = 1200) -> None:
-        page.wait_for_timeout(140)
-        name = f"{len(self.manifest['frames']) + 1:02d}.png"
-        page.screenshot(
-            path=str(self.directory / name),
-            full_page=False,
-            animations="disabled",
-        )
-        self.manifest["frames"].append({"file": name, "duration_ms": duration, "caption": caption})
-
-    def save(self) -> dict[str, Any]:
-        (self.directory / "manifest.json").write_text(json.dumps(self.manifest, indent=2) + "\n")
-        return {
-            "name": self.manifest["name"],
-            "frames": len(self.manifest["frames"]),
-            "duration_ms": sum(frame["duration_ms"] for frame in self.manifest["frames"]),
-        }
 
 
 @contextmanager
@@ -108,31 +77,92 @@ def local_server(workspace: Path, output: Path):
                 process.wait(timeout=5)
 
 
-def sign_in(browser: Browser, url: str, token: str, route: str, errors: list[str]) -> Page:
-    context = browser.new_context(viewport=VIEWPORT, accept_downloads=True)
-    page = context.new_page()
-    page.on("pageerror", lambda error: errors.append(str(error)))
-    page.goto(url + "/#" + route, wait_until="networkidle")
-    page.get_by_label("Access token", exact=True).fill(token)
-    page.get_by_role("button", name="Connect to workspace", exact=True).click()
-    expect(page.get_by_role("dialog", name="Unlock your workspace")).not_to_be_visible()
-    expect(page.locator(".connection-dot.connected")).to_be_visible()
-    return page
+class Recording:
+    def __init__(
+        self,
+        browser: Browser,
+        output: Path,
+        name: str,
+        title: str,
+        note: str,
+        errors: list[str],
+        url: str,
+        route: str,
+        token: str | None = None,
+    ):
+        self.browser = browser
+        self.directory = output / name
+        self.directory.mkdir()
+        self.context = browser.new_context(
+            viewport=VIEWPORT,
+            record_video_dir=self.directory,
+            record_video_size=VIEWPORT,
+            accept_downloads=True,
+            reduced_motion="no-preference",
+        )
+        if token:
+            # Authentication is loaded before navigation; no token is shown.
+            self.context.add_init_script(
+                "if(location.origin === "
+                + json.dumps(url)
+                + "){sessionStorage.setItem('custom-vals-session-token',"
+                + json.dumps(token)
+                + ");}"
+            )
+        self.clock = time.monotonic()
+        self.page: Page = self.context.new_page()
+        self.page.on("pageerror", lambda error: errors.append(str(error)))
+        self.motion = Motion(self.page)
+        self.page.goto(url + "/#" + route, wait_until="networkidle")
+        expect(self.page.locator(".connection-dot.connected")).to_be_visible()
+        self.motion.install()
+        self.value: dict[str, Any] = {
+            "name": name,
+            "title": title,
+            "fixture_note": note,
+            **VIEWPORT,
+            "fps": 25,
+            "continuous": True,
+            "video": "source.webm",
+            "capture": "Native continuous browser recording; no keyframe reconstruction.",
+        }
+
+    def begin(self) -> None:
+        self.motion.pause(250)
+        self.value["start_s"] = round(time.monotonic() - self.clock, 3)
+
+    def poster(self) -> None:
+        self.value["poster_s"] = round(time.monotonic() - self.clock, 3)
+
+    def finish(self) -> dict[str, Any]:
+        self.value["end_s"] = round(time.monotonic() - self.clock, 3)
+        self.value.setdefault("poster_s", self.value["start_s"] + 1)
+        video = self.page.video
+        assert video is not None
+        self.context.close()
+        source = Path(video.path())
+        source = source.replace(self.directory / "source.webm")
+        probe = self.browser.new_page()
+        try:
+            probe.goto(source.resolve().as_uri(), wait_until="load")
+            probe.wait_for_function(
+                "document.querySelector('video') && Number.isFinite(document.querySelector('video').duration)"
+            )
+            duration = float(probe.locator("video").evaluate("(video) => video.duration"))
+        finally:
+            probe.close()
+        # Chromium starts its video clock after page creation. Align markers
+        # with the flushed source duration rather than extending beyond EOF.
+        offset = self.value["end_s"] - duration
+        for field in ("start_s", "poster_s"):
+            self.value[field] = round(max(0, self.value[field] - offset), 3)
+        self.value["end_s"] = round(duration, 3)
+        self.value["capture_clock_offset_s"] = round(offset, 3)
+        (self.directory / "manifest.json").write_text(json.dumps(self.value, indent=2) + "\n")
+        return self.value
 
 
-def show(page: Page, heading: str) -> None:
-    target = page.get_by_role("heading", name=heading, exact=True)
-    expect(target).to_be_visible()
-    target.evaluate(
-        "(element) => { element.scrollIntoView({block: 'start'}); window.scrollBy(0, -104); }"
-    )
-    page.wait_for_timeout(120)
-
-
-def blind_study(browser: Browser, output: Path, errors: list[str]) -> dict[str, Any]:
-    directory = output / "blind-runtime"
-    directory.mkdir(mode=0o700)
-    settings = Settings(directory / "workspace")
+def seed_blind(settings: Settings) -> dict[str, Any]:
     identities = IdentityStore(settings)
     admin = identities.bootstrap("Study coordinator")
     actor = admin["user"]["id"]
@@ -166,7 +196,8 @@ def blind_study(browser: Browser, output: Path, errors: list[str]) -> dict[str, 
         )
     )
     Engine(store, settings).run_experiment(experiment["id"])
-    rubric = ReviewQueues(settings).create_rubric(
+    queues = ReviewQueues(settings)
+    rubric = queues.create_rubric(
         Rubric(
             name="Task correctness",
             version="1",
@@ -181,110 +212,172 @@ def blind_study(browser: Browser, output: Path, errors: list[str]) -> dict[str, 
         ),
         actor,
     )
-    clip = Clip(
-        output,
-        "double-blind",
-        "Judge first. Reveal later.",
-        "Original fixture outputs and scripted reviewers. Trusted-custodian blinding; not confidential hardware or a model-quality study.",
-        poster_frame=11,
+    study = BlindStudies(settings).create(
+        StudyRequest(
+            name="Invoice review · fixture control",
+            experiment_id=experiment["id"],
+            rubric_id=rubric["id"],
+            system_ids=["fixture-reference", "fixture-incomplete"],
+            reviewer_ids=[user["id"] for user in reviewers],
+        ),
+        actor,
     )
+    return {
+        "admin": admin,
+        "tokens": tokens,
+        "study": study,
+        "identities": identities,
+        "queues": queues,
+    }
+
+
+def record_reviewer(
+    browser: Browser, output: Path, errors: list[str], url: str, fixture: dict[str, Any]
+) -> dict[str, Any]:
+    identities, queues = fixture["identities"], fixture["queues"]
+    who = identities.authenticate(fixture["tokens"][0]["token"])
+    assert who is not None
+    assignment = queues.assigned(who)[0]
+    item = queues.item(assignment["id"], who)
+    correct = next(
+        label
+        for label, response in item["responses"].items()
+        if response["output"].get("total") == 5
+    )
+    recording = Recording(
+        browser,
+        output,
+        "blind-reviewer",
+        "Review without model names",
+        "Original fixture outputs and a scripted reviewer account; not an independent human study.",
+        errors,
+        url,
+        "/reviews/items/" + assignment["id"],
+        fixture["tokens"][0]["token"],
+    )
+    page, motion = recording.page, recording.motion
+    expect(page.get_by_role("heading", name="Invoice total", exact=True)).to_be_visible()
+    assert "Reference fixture" not in page.locator("main").inner_text()
+    recording.begin()
+    motion.pause(1300)
+    motion.move(page.get_by_role("heading", name="Response A", exact=True))
+    motion.pause(900)
+    motion.move(page.get_by_role("heading", name="Response B", exact=True))
+    motion.pause(900)
+    motion.show(page.get_by_role("heading", name="Task correctness", exact=True))
+    motion.pause(650)
+    for label in ("A", "B"):
+        selector = page.get_by_label("Response " + label + " · Correctness", exact=True)
+        motion.click(selector)
+        selector.select_option("1" if label == correct else "0")
+        page.keyboard.press("Escape")
+        motion.pause(600)
+    preference = page.get_by_label("Which response better satisfies the task?", exact=True)
+    motion.click(preference)
+    preference.select_option(correct)
+    page.keyboard.press("Escape")
+    disposition = page.get_by_label("Overall judgment", exact=True)
+    motion.click(disposition)
+    disposition.select_option("acceptable")
+    page.keyboard.press("Escape")
+    motion.type(
+        page.get_by_label("Explain your judgment", exact=True),
+        "The response returns the correct total. Scripted fixture review.",
+        delay=35,
+    )
+    recording.poster()
+    motion.pause(1000)
+    motion.click(page.get_by_role("button", name="Record judgment", exact=True))
+    expect(page.get_by_text("Review recorded.", exact=False)).to_be_visible()
+    motion.pause(1700)
+    motion.scroll_to(0)
+    motion.pause(1800)
+    return recording.finish()
+
+
+def blind_study(browser: Browser, output: Path, errors: list[str]) -> list[dict[str, Any]]:
+    directory = output / "blind-runtime"
+    directory.mkdir(mode=0o700)
+    settings = Settings(directory / "workspace")
+    fixture = seed_blind(settings)
     with local_server(settings.data_dir, directory) as url:
-        coordinator = sign_in(browser, url, admin["token"], "/blind", errors)
-        clip.frame(coordinator, "Start a dedicated double-blind study")
-        coordinator.get_by_role("link", name="New study", exact=True).click()
-        expect(coordinator.get_by_label("Study name", exact=True)).to_be_visible()
-        clip.frame(coordinator, "Set the rules before judging", 1000)
-        coordinator.get_by_label("Study name", exact=True).fill("Invoice review · fixture control")
-        coordinator.get_by_label("Completed experiment", exact=True).select_option(experiment["id"])
-        coordinator.get_by_label("Reference fixture · control", exact=True).check()
-        coordinator.get_by_label("Empty submission · control", exact=True).check()
-        coordinator.get_by_label("Scoring rubric", exact=True).select_option(rubric["id"])
-        for person in reviewers:
-            coordinator.get_by_label(person["name"], exact=True).check()
-        coordinator.get_by_role(
-            "button", name="Freeze and assign study", exact=True
-        ).scroll_into_view_if_needed()
-        clip.frame(coordinator, "Freeze the pair, rubric and independent assignments")
-        coordinator.get_by_role("button", name="Freeze and assign study", exact=True).click()
-        expect(
-            coordinator.get_by_role("heading", name="Judgments come first", exact=True)
-        ).to_be_visible()
-        coordinator.evaluate("window.scrollTo(0, 0)")
-        clip.frame(coordinator, "Model identities and results stay sealed", 1400)
-        reviewer_pages = []
-        for number, token in enumerate(tokens):
-            page = sign_in(browser, url, token["token"], "/reviews", errors)
-            reviewer_pages.append(page)
-            if number == 0:
-                clip.frame(page, "Each reviewer receives their own assignment", 1000)
-            page.locator("a.review-inbox-row").filter(has_text="Invoice total").click()
-            expect(page.get_by_role("heading", name="Invoice total", exact=True)).to_be_visible()
-            assert "Reference fixture" not in page.locator("main").inner_text()
-            if number == 0:
-                clip.frame(page, "Compare anonymous responses against the same task", 1500)
-            preference = None
-            for label in ("A", "B"):
-                panel = page.locator("section.panel").filter(
-                    has=page.get_by_role("heading", name="Response " + label, exact=True)
-                )
-                correct = "total" in panel.inner_text().lower()
-                page.get_by_label("Response " + label + " · Correctness", exact=True).select_option(
-                    "1" if correct else "0"
-                )
-                if correct:
-                    preference = label
-            assert preference is not None
-            page.get_by_label(
-                "Which response better satisfies the task?", exact=True
-            ).select_option(preference)
-            page.get_by_label("Overall judgment", exact=True).select_option("acceptable")
-            page.get_by_label("Explain your judgment", exact=True).fill(
-                "The answer returns the correct total. Scripted fixture review."
-            )
-            if number == 0:
-                show(page, "Task correctness")
-                clip.frame(page, "Score the answers and retain a reason", 1400)
-            page.get_by_role("button", name="Record judgment", exact=True).click()
-            expect(page.get_by_text("Review recorded.", exact=False)).to_be_visible()
-            if number == 0:
-                clip.frame(page, "Record judgments without seeing other reviewers' scores", 1000)
-        coordinator.get_by_role("button", name="Refresh", exact=True).click()
-        expect(
-            coordinator.get_by_role("button", name="Lock completed judgments", exact=True)
-        ).to_be_enabled()
-        coordinator.evaluate("window.scrollTo(0, 0)")
-        clip.frame(coordinator, "All required judgments are complete", 1300)
-        coordinator.get_by_role("button", name="Lock completed judgments", exact=True).click()
-        expect(
-            coordinator.get_by_role("heading", name="Judgments are locked", exact=True)
-        ).to_be_visible()
-        coordinator.evaluate("window.scrollTo(0, 0)")
-        clip.frame(coordinator, "Lock the evidence before revealing identities", 1400)
-        coordinator.get_by_label("Reason for revealing results", exact=True).fill(
-            "All scripted fixture reviews are complete and locked."
+        reviewer = record_reviewer(browser, output, errors, url, fixture)
+        # The second independent account submits a real service judgment before
+        # the coordinator recording begins; no outcomes are fabricated.
+        identities, queues = fixture["identities"], fixture["queues"]
+        who = identities.authenticate(fixture["tokens"][1]["token"])
+        assert who is not None
+        assignment = queues.assigned(who)[0]
+        item = queues.item(assignment["id"], who)
+        preferred = next(
+            label
+            for label, response in item["responses"].items()
+            if response["output"].get("total") == 5
         )
-        show(coordinator, "Judgments are locked")
-        clip.frame(coordinator, "Release is a separate, recorded decision", 1000)
-        coordinator.get_by_role("button", name="Reveal identities and results", exact=True).click()
+        queues.judge(
+            assignment["id"],
+            who,
+            Judgment(
+                scores={label: {"quality": float(label == preferred)} for label in ("A", "B")},
+                preference=preferred,
+                disposition="acceptable",
+                rationale="The response gives the correct total. Scripted second-account review.",
+            ),
+        )
+        recording = Recording(
+            browser,
+            output,
+            "double-blind",
+            "Lock judgments. Then reveal results.",
+            "Uninterrupted coordinator workflow over completed scripted fixture reviews. Trusted custodian; no hardware confidentiality or model-quality claim.",
+            errors,
+            url,
+            "/blind/" + fixture["study"]["id"],
+            fixture["admin"]["token"],
+        )
+        page, motion = recording.page, recording.motion
+        lock = page.get_by_role("button", name="Lock completed judgments", exact=True)
+        expect(lock).to_be_enabled()
+        recording.begin()
+        motion.pause(1600)
+        motion.move(page.get_by_role("heading", name="Review coverage", exact=True))
+        motion.pause(800)
+        motion.move(page.get_by_role("heading", name="Study phase", exact=True))
+        motion.pause(800)
+        motion.show(lock)
+        motion.pause(900)
+        motion.click(lock)
+        expect(page.get_by_role("heading", name="Judgments are locked", exact=True)).to_be_visible()
+        motion.pause(1500)
+        reason = page.get_by_label("Reason for revealing results", exact=True)
+        motion.type(reason, "All scripted reviews are complete and locked.", delay=45)
+        motion.pause(700)
+        reveal = page.get_by_role("button", name="Reveal identities and results", exact=True)
+        motion.click(reveal)
         expect(
-            coordinator.get_by_role("heading", name="Released study report", exact=True)
+            page.get_by_role("heading", name="Released study report", exact=True)
         ).to_be_visible()
-        coordinator.evaluate("window.scrollTo(0, 0)")
-        clip.frame(coordinator, "Reveal the named results", 1400)
-        show(coordinator, "Released study report")
-        clip.frame(coordinator, "Inspect preferences and export local evidence", 1800)
-        with coordinator.expect_download() as download:
-            coordinator.get_by_role("button", name="HTML report", exact=True).click()
-        report_file = directory / "released-report.html"
-        download.value.save_as(report_file)
-        report = browser.new_page(viewport=VIEWPORT)
-        report.on("pageerror", lambda error: errors.append(str(error)))
-        report.goto(report_file.resolve().as_uri(), wait_until="load")
-        clip.frame(report, "Share a self-contained HTML report", 1700)
-        for page in [coordinator, *reviewer_pages]:
-            page.context.close()
-        report.close()
-    return clip.save()
+        motion.scroll_to(0)
+        motion.pause(1600)
+        recording.poster()
+        motion.show(page.get_by_role("heading", name="Released study report", exact=True))
+        motion.pause(1200)
+        motion.show(page.get_by_role("heading", name="Recorded preferences", exact=True))
+        motion.pause(1900)
+        details = page.get_by_text("Frozen protocol and released evidence", exact=True)
+        motion.click(details)
+        motion.pause(1400)
+        motion.click(details)
+        motion.show(page.get_by_role("button", name="HTML report", exact=True))
+        motion.pause(600)
+        with page.expect_download() as download:
+            motion.click(page.get_by_role("button", name="HTML report", exact=True))
+        download.value.save_as(directory / "released-report.html")
+        motion.pause(1300)
+        motion.scroll_to(0)
+        motion.pause(1500)
+        coordinator = recording.finish()
+    return [coordinator, reviewer]
 
 
 def checkpoint_study(browser: Browser, output: Path, errors: list[str]) -> dict[str, Any]:
@@ -293,47 +386,59 @@ def checkpoint_study(browser: Browser, output: Path, errors: list[str]) -> dict[
     workspace = directory / "workspace"
     result = run_training_demo(Settings(directory / "unused"), workspace=workspace)
     assert result["model_calls"] == result["provider_spend_usd"] == 0
-    clip = Clip(
-        output,
-        "checkpoint-monitoring",
-        "Follow quality as training changes.",
-        "Synthetic installation controls, including invented mix observations. No model training, inference, human calibration or real checkpoint performance.",
-        poster_frame=1,
-    )
     with local_server(workspace, directory) as url:
-        page = browser.new_page(viewport=VIEWPORT)
-        page.on("pageerror", lambda error: errors.append(str(error)))
-        page.goto(url + "/#/training", wait_until="networkidle")
-        expect(
-            page.get_by_role("heading", name="Checkpoint trajectory", exact=True)
-        ).to_be_visible()
-        clip.frame(page, "Monitor one frozen training protocol", 1400)
-        show(page, "Checkpoint trajectory")
-        clip.frame(page, "Follow checkpoint quality with explicit provenance", 1800)
-        page.get_by_role("button", name="Step 10", exact=True).click()
-        clip.frame(page, "Select a checkpoint without hiding uncertainty", 1400)
-        page.get_by_label("Evaluation domain", exact=True).select_option("documents")
-        clip.frame(page, "Switch domains on the same training trajectory", 1400)
-        show(page, "Evaluation coverage")
-        clip.frame(page, "Keep coverage, errors and cost alongside each score", 1600)
-        page.get_by_role("button", name="Inspect step 10", exact=True).click()
-        show(page, "Checkpoint evidence · step 10")
-        clip.frame(page, "Inspect the frozen execution identity and evidence", 1500)
-        show(page, "Regression decisions")
-        clip.frame(page, "Review paired decisions and practical thresholds", 1600)
-        show(page, "Investigations")
-        clip.frame(page, "Connect a surprising result to a retained investigation", 1700)
-        show(page, "Evaluation qualifications")
-        clip.frame(page, "See measurement gaps before trusting a number", 1700)
-        show(page, "Evaluation mix studies")
-        clip.frame(page, "Select an evaluation mix within a declared budget", 1400)
-        show(page, "Held-out mix validation")
-        clip.frame(page, "Validate the selected mix on held-out controls", 1500)
-        show(page, "Frozen evaluation protocol")
-        page.get_by_text("Inspect frozen protocol", exact=True).click()
-        clip.frame(page, "Keep the measurement policy inspectable", 1600)
-        page.close()
-    return clip.save()
+        recording = Recording(
+            browser,
+            output,
+            "checkpoint-monitoring",
+            "Follow a training run continuously",
+            "Synthetic installation controls, including invented mix observations; no actual training or model-quality claim.",
+            errors,
+            url,
+            "/training",
+        )
+        page, motion = recording.page, recording.motion
+        trajectory = page.get_by_role("heading", name="Checkpoint trajectory", exact=True)
+        expect(trajectory).to_be_visible()
+        recording.begin()
+        motion.pause(1400)
+        motion.scroll_to(
+            trajectory.evaluate(
+                "(element) => window.scrollY + element.getBoundingClientRect().top - 120"
+            )
+        )
+        motion.pause(1200)
+        recording.poster()
+        motion.click(page.get_by_role("button", name="Step 10", exact=True))
+        motion.pause(1100)
+        domain = page.get_by_label("Evaluation domain", exact=True)
+        motion.click(domain)
+        domain.select_option("documents")
+        page.keyboard.press("Escape")
+        motion.pause(1300)
+        motion.show(page.get_by_role("heading", name="Evaluation coverage", exact=True))
+        motion.pause(1400)
+        motion.click(page.get_by_role("button", name="Inspect step 10", exact=True))
+        motion.show(page.get_by_role("heading", name="Checkpoint evidence · step 10", exact=True))
+        motion.pause(1400)
+        motion.show(page.get_by_role("heading", name="Regression decisions", exact=True))
+        motion.pause(1200)
+        motion.show(page.get_by_role("heading", name="Investigations", exact=True))
+        motion.pause(1400)
+        motion.show(page.get_by_role("heading", name="Evaluation qualifications", exact=True))
+        motion.pause(1600)
+        motion.show(page.get_by_role("heading", name="Evaluation mix studies", exact=True))
+        motion.pause(1500)
+        motion.click(page.get_by_text("Inspect evaluation mix studies record 1", exact=True))
+        motion.pause(1700)
+        motion.click(page.get_by_text("Inspect evaluation mix studies record 1", exact=True))
+        motion.show(page.get_by_role("heading", name="Frozen evaluation protocol", exact=True))
+        motion.click(page.get_by_text("Inspect frozen protocol", exact=True))
+        motion.pause(1700)
+        motion.click(page.get_by_text("Inspect frozen protocol", exact=True))
+        motion.scroll_to(0)
+        motion.pause(1600)
+        return recording.finish()
 
 
 def main() -> None:
@@ -354,22 +459,31 @@ def main() -> None:
             args=["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
         )
         try:
-            clips = [
-                blind_study(browser, output, errors),
-                checkpoint_study(browser, output, errors),
-            ]
+            blind, reviewer = blind_study(browser, output, errors)
+            training = checkpoint_study(browser, output, errors)
         finally:
             browser.close()
     if errors:
         raise RuntimeError("The browser emitted JavaScript errors.")
     summary = {
-        "clips": clips,
+        "clips": [blind, training],
+        "additional_recordings": [reviewer],
         "model_api_calls": 0,
         "javascript_errors": errors,
         "servers_stopped": True,
     }
     (output / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
-    print(json.dumps(summary, indent=2))
+    print(
+        json.dumps(
+            {
+                "clips": len(summary["clips"]),
+                "additional_recordings": 1,
+                "model_api_calls": 0,
+                "javascript_errors": errors,
+                "servers_stopped": True,
+            }
+        )
+    )
 
 
 if __name__ == "__main__":

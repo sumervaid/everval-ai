@@ -1,85 +1,85 @@
 # Everval without animation
 
-[Animated gallery](demos.md) · [Project](../README.md) · [Install from source](quickstart.md#install-from-source)
+[Continuous recordings](demos.md) · [Project](../README.md)
 
-Still frames from the same workflows. These are original installation controls and synthetic demonstrations, not model-quality evidence.
+Still previews from the continuous recordings. Results use original controls and synthetic data.
 
 ## Terminal workbench
 
-Move through completed runs, systems, the command palette, audit records and saved schedules.
+A real terminal process responds to typed command-palette searches, navigation and selection changes.
 
-![Terminal workbench: actual interface still](assets/demos/terminal-workbench.png)
+![Terminal workbench: recorded still preview](assets/demos/continuous/terminal-workbench.png)
 
-[Workflow guide](terminal.md) · [Watch the clip](demos.md#terminal-workbench)
+[Watch the recording](demos.md#terminal-workbench) · [Workflow guide](terminal.md)
 
 ## Benchmark chat
 
-Describe models, tasks, an interval and reports. Start a comparison, inspect local reports and pause future runs.
+Type a recurring benchmark request, start the real fixture run, inspect its reports and pause future runs.
 
-![Benchmark chat: actual interface still](assets/demos/chat-and-reports.png)
+![Benchmark chat: recorded still preview](assets/demos/continuous/chat-and-reports.png)
 
-[Workflow guide](chat.md) · [Watch the clip](demos.md#chat-and-reports)
+[Watch the recording](demos.md#chat-and-reports) · [Workflow guide](chat.md)
 
 ## Repository onboarding
 
-Connect an original Git repository, discover work, inspect admission decisions and open the resumable guide. This clip stops before isolated validation; it does not show a validated repository benchmark.
+Type through connection and discovery for an original local Git repository. Review and isolated validation remain pending; this is not a completed repository benchmark.
 
-![Repository onboarding: actual interface still](assets/demos/repository-onboarding.png)
+![Repository onboarding: recorded still preview](assets/demos/continuous/repository-onboarding.png)
 
-[Workflow guide](guided-run.md) · [Watch the clip](demos.md#repository-onboarding)
+[Watch the recording](demos.md#repository-onboarding) · [Workflow guide](guided-run.md)
 
 ## Tasks and comparisons
 
-Create a task with public instructions and separate evaluator checks, validate original controls and compare attempts.
+Type a task contract, keep evaluator checks separate, validate controls and inspect both comparison outcomes.
 
-![Tasks and comparisons: actual interface still](assets/demos/tasks-and-comparisons.png)
+![Tasks and comparisons: recorded still preview](assets/demos/continuous/tasks-and-comparisons.png)
 
-[Workflow guide](scenarios.md) · [Watch the clip](demos.md#tasks-and-comparisons)
+[Watch the recording](demos.md#tasks-and-comparisons) · [Workflow guide](scenarios.md)
 
 ## Rankings, cost and latency
 
-Switch quality, cost per success and latency across frozen benchmarks, then inspect evidence. These free controls do not demonstrate real provider pricing or model latency.
+Move through the benchmark matrix, switch metrics, filter configurations and inspect the underlying evidence. Free controls do not establish real model cost or latency.
 
-![Rankings, cost and latency: actual interface still](assets/demos/rankings.png)
+![Rankings, cost and latency: recorded still preview](assets/demos/continuous/rankings.png)
 
-[Workflow guide](rankings.md) · [Watch the clip](demos.md#rankings)
+[Watch the recording](demos.md#rankings) · [Workflow guide](rankings.md)
 
 ## Continuous checks and budgets
 
-Configure screening and full-run budgets, inspect cumulative commitments, review triggers and pause a policy. The recorded policy is left paused.
+Use the terminal to inspect a bounded policy, spending commitments and its retained observations. The recorded policy is left paused.
 
-![Continuous checks and budgets: actual interface still](assets/demos/autopilot-budget.png)
+![Continuous checks and budgets: recorded still preview](assets/demos/continuous/autopilot-budget.png)
 
-[Workflow guide](autopilot.md) · [Watch the clip](demos.md#autopilot-budget)
+[Watch the recording](demos.md#autopilot-budget) · [Workflow guide](autopilot.md)
 
-## Failure investigation and research
+## Failure investigation
 
-Inspect a failed attempt, regrade saved output, retain an investigation and inspect structural grader-quality signals without additional inference.
+Navigate failed attempts and saved evidence through the actual terminal, then inspect investigation and grader-quality records.
 
-![Failure investigation and research: actual interface still](assets/demos/failure-research.png)
+![Failure investigation: recorded still preview](assets/demos/continuous/failure-research.png)
 
-[Workflow guide](research-loop.md) · [Watch the clip](demos.md#failure-research)
+[Watch the recording](demos.md#failure-research) · [Workflow guide](research-loop.md)
 
 ## Production cases and team review
 
-Stage an original example incident, inspect redaction, obtain approval from a separate identity and publish a reviewed collection.
+An approver inspects an incident previously staged by another identity, types expected behavior, validates the control and publishes a collection.
 
-![Production cases and team review: actual interface still](assets/demos/production-cases.png)
+![Production cases and team review: recorded still preview](assets/demos/continuous/production-cases.png)
 
-[Workflow guide](production-cases.md) · [Watch the clip](demos.md#production-cases)
+[Watch the recording](demos.md#production-cases) · [Workflow guide](production-cases.md)
 
 ## Checkpoint monitoring
 
-Explore trajectories, coverage, paired decisions, investigations, qualification gaps and held-out evaluation mixes. All checkpoint and mix observations here are synthetic installation controls.
+Move through checkpoint trajectories, domain selection, coverage, investigations and qualification records. These are explicitly synthetic controls.
 
-![Checkpoint monitoring: actual interface still](assets/demos/checkpoint-monitoring.png)
+![Checkpoint monitoring: recorded still preview](assets/demos/continuous/checkpoint-monitoring.png)
 
-[Workflow guide](post-training.md) · [Watch the clip](demos.md#checkpoint-monitoring)
+[Watch the recording](demos.md#checkpoint-monitoring) · [Workflow guide](post-training.md)
 
 ## Double-blind review
 
-Freeze a pair and rubric, collect anonymous judgments, lock evidence, reveal identities and export a report. This is trusted-custodian review, not hardware-backed confidentiality.
+The coordinator begins with completed reviews, locks the judgments, types a release reason, reveals identities and opens the report. This is trusted-custodian review.
 
-![Double-blind review: actual interface still](assets/demos/double-blind.png)
+![Double-blind review: recorded still preview](assets/demos/continuous/double-blind.png)
 
-[Workflow guide](double-blind.md) · [Watch the clip](demos.md#double-blind)
+[Watch the recording](demos.md#double-blind) · [Workflow guide](double-blind.md)

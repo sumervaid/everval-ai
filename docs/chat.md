@@ -107,6 +107,6 @@ The API provides `/api/conversations`, `/catalog`, `/{id}/messages`, and report 
 
 ## Watch the workflow
 
-![Actual benchmark chat, reports and paused recurring schedule](assets/demos/chat-and-reports.gif)
+![Actual benchmark chat, reports and paused recurring schedule](assets/demos/continuous/chat-and-reports.gif)
 
-Original installation controls; no model API calls. [Still image](assets/demos/chat-and-reports.png) · [All demos](demos.md).
+Original installation controls; no model API calls. [Still image](assets/demos/continuous/chat-and-reports.png) · [All demos](demos.md).

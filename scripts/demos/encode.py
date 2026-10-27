@@ -1,7 +1,7 @@
-"""Compose actual UI captures into compact, captioned GitHub walkthroughs.
+"""Export one continuous recording as a smooth GIF, MP4 and still preview.
 
-Requires Pillow 12.0.0. Raw frames stay outside Git. Export only GIFs,
-still images, and public media metadata.
+Trim only the beginning/end. Never concatenate workflows, assemble screenshots,
+interpolate stills, insert caption cards or change playback speed.
 """
 
 from __future__ import annotations
@@ -9,249 +9,205 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import shutil
+import math
 import subprocess
 import tempfile
+from contextlib import closing
 from pathlib import Path
 from typing import Any
 
-from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageOps
+import imageio_ffmpeg
+from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[2]
-PAPER, INK, MUTED, ACCENT, FRAME = "#eff2ec", "#263b30", "#657469", "#3b7158", "#d6dfd1"
-WIDTH, MARGIN, SCREEN_TOP, SCREEN_HEIGHT, HEIGHT = 1120, 20, 82, 675, 856
+FPS, WIDTH = 20, 1120
 
 
-def font(size: int, bold: bool = False) -> Any:
-    candidates = [
-        Path("/System/Library/Fonts/Supplemental") / ("Arial Bold.ttf" if bold else "Arial.ttf"),
-        Path("/usr/share/fonts/truetype/dejavu")
-        / ("DejaVuSans-Bold.ttf" if bold else "DejaVuSans.ttf"),
-        Path("/usr/share/fonts/truetype/liberation2")
-        / ("LiberationSans-Bold.ttf" if bold else "LiberationSans-Regular.ttf"),
-    ]
-    for candidate in candidates:
-        if candidate.is_file():
-            return ImageFont.truetype(str(candidate), size)
-    return ImageFont.load_default(size=size)
-
-
-def wrap(draw: ImageDraw.ImageDraw, text: str, face: Any, width: int) -> list[str]:
-    lines: list[str] = []
-    current = ""
-    for word in text.split():
-        next_line = f"{current} {word}".strip()
-        if current and draw.textlength(next_line, font=face) > width:
-            lines.append(current)
-            current = word
-        else:
-            current = next_line
-    if current:
-        lines.append(current)
-    return lines
-
-
-def compose(source: Image.Image, title: str, caption: str, index: int, count: int) -> Image.Image:
-    canvas = Image.new("RGB", (WIDTH, HEIGHT), PAPER)
-    draw = ImageDraw.Draw(canvas)
-    draw.rounded_rectangle((MARGIN, 21, MARGIN + 40, 61), radius=9, fill=INK)
-    draw.text((MARGIN + 11, 27), "V", font=font(26, True), fill="#edf2e9")
-    draw.text((74, 18), "EVERVAL  /  PRODUCT WALKTHROUGH", font=font(10, True), fill=MUTED)
-    title_font = font(25, True)
-    if draw.textlength(title, font=title_font) > 770:
-        raise ValueError("Clip title is too long for the title area")
-    draw.text((74, 34), title, font=title_font, fill=INK)
-    draw.rounded_rectangle((WIDTH - 182, 28, WIDTH - MARGIN, 55), radius=13, fill="#dfe8da")
-    draw.text((WIDTH - 170, 36), "LOCAL FIXTURE DEMO", font=font(10, True), fill=ACCENT)
-    screen_box = (MARGIN, SCREEN_TOP, WIDTH - MARGIN, SCREEN_TOP + SCREEN_HEIGHT)
-    draw.rounded_rectangle(
-        (MARGIN - 1, SCREEN_TOP - 1, WIDTH - MARGIN + 1, SCREEN_TOP + SCREEN_HEIGHT + 2),
-        radius=10,
-        fill=FRAME,
+def run(ffmpeg: str, *arguments: str) -> None:
+    result = subprocess.run(
+        [ffmpeg, "-hide_banner", "-loglevel", "error", "-y", *arguments],
+        capture_output=True,
+        text=True,
     )
-    screen = Image.new("RGB", (WIDTH - MARGIN * 2, SCREEN_HEIGHT), "#f8faf5")
-    fitted = ImageOps.contain(source.convert("RGB"), screen.size, Image.Resampling.LANCZOS)
-    screen.paste(fitted, ((screen.width - fitted.width) // 2, (screen.height - fitted.height) // 2))
-    mask = Image.new("L", screen.size)
-    ImageDraw.Draw(mask).rounded_rectangle((0, 0, screen.width, screen.height), radius=9, fill=255)
-    canvas.paste(screen, screen_box[:2], mask)
-    caption_font = font(19)
-    lines = wrap(draw, caption, caption_font, WIDTH - 155)
-    if len(lines) > 2:
-        raise ValueError("Caption exceeds two lines: " + caption)
-    for line_index, line in enumerate(lines):
-        draw.text((MARGIN + 2, 774 + line_index * 23), line, font=caption_font, fill=INK)
-    draw.text((WIDTH - 83, 779), f"{index + 1:02d} / {count:02d}", font=font(13, True), fill=MUTED)
-    draw.text(
-        (MARGIN + 2, 829),
-        "Actual interface · edited pacing · fixture results",
-        font=font(11),
-        fill=MUTED,
-    )
-    track_left, track_right = 420, WIDTH - MARGIN
-    draw.rounded_rectangle((track_left, 832, track_right, 835), radius=2, fill=FRAME)
-    draw.rounded_rectangle(
-        (track_left, 832, track_left + (track_right - track_left) * (index + 1) / count, 835),
-        radius=2,
-        fill=ACCENT,
-    )
-    return canvas
+    if result.returncode:
+        raise RuntimeError("Video export failed: " + result.stderr[-2000:])
 
 
-def load_manifest(path: Path, value: dict[str, Any] | None = None) -> dict[str, Any]:
-    if value is None:
-        value = json.loads(path.read_text())
+def load(path: Path) -> dict[str, Any]:
+    value = json.loads(path.read_text())
+    if value.get("continuous") is not True or "frames" in value:
+        raise ValueError("Only uninterrupted video captures are accepted")
     name = value.get("name", "")
     if not name or any(c not in "abcdefghijklmnopqrstuvwxyz0123456789-" for c in name):
         raise ValueError("Use a lowercase, hyphenated clip name")
-    frames = value.get("frames", [])
-    if not 2 <= len(frames) <= 60:
-        raise ValueError("Each walkthrough needs 2–60 frames")
+    video = (path.parent / value["video"]).resolve()
+    if not video.is_relative_to(path.parent.resolve()) or not video.is_file():
+        raise ValueError("Source video must be inside its private capture directory")
     if not value.get("fixture_note"):
-        raise ValueError("Declare the capture's fixture and interpretation limits")
-    for frame in frames:
-        source = (path.parent / frame["file"]).resolve()
-        if not source.is_relative_to(path.parent.resolve()) or not source.is_file():
-            raise ValueError("Frame must be a file inside its capture directory")
-        if not 100 <= frame["duration_ms"] <= 8000:
-            raise ValueError("Frame duration must be between 100 and 8000 milliseconds")
-    if sum(frame["duration_ms"] for frame in frames) > 90000:
-        raise ValueError("Keep each walkthrough under 90 seconds")
+        raise ValueError("Declare the source and interpretation limits")
+    start, end = float(value["start_s"]), float(value["end_s"])
+    if not 0 <= start < end or not 3 <= end - start <= 180:
+        raise ValueError("Choose one continuous segment between 3 and 180 seconds")
     return value
 
 
-def encode(
-    path: Path, out: Path, colors: int = 192, value: dict[str, Any] | None = None
-) -> dict[str, Any]:
-    manifest = load_manifest(path, value)
-    frames, durations = [], []
-    for index, entry in enumerate(manifest["frames"]):
-        with Image.open(path.parent / entry["file"]) as source:
-            frames.append(
-                compose(source, manifest["title"], entry["caption"], index, len(manifest["frames"]))
-            )
-        durations.append(entry["duration_ms"])
-    # Shared colors keep stationary pixels stable and permit differential frames.
-    thumb_size = (280, 214)
-    atlas = Image.new("RGB", (thumb_size[0] * len(frames), thumb_size[1]))
-    for index, frame in enumerate(frames):
-        atlas.paste(frame.resize(thumb_size, Image.Resampling.LANCZOS), (index * thumb_size[0], 0))
-    palette = atlas.quantize(colors=colors, method=Image.Quantize.MEDIANCUT)
-    quantized = [frame.quantize(palette=palette, dither=Image.Dither.NONE) for frame in frames]
-    out.mkdir(parents=True, exist_ok=True)
-    destination = out / (manifest["name"] + ".gif")
-    quantized[0].save(
-        destination,
-        save_all=True,
-        append_images=quantized[1:],
-        duration=durations,
-        loop=0,
-        optimize=True,
-        disposal=1,
-    )
-    poster_index = min(int(manifest.get("poster_frame", len(frames) - 1)), len(frames) - 1)
-    poster = out / (manifest["name"] + ".png")
-    frames[poster_index].save(poster, optimize=True)
-    with Image.open(destination) as check:
-        if not check.is_animated or check.n_frames != len(frames) or check.size != (WIDTH, HEIGHT):
-            raise ValueError("Encoded animation failed its frame/dimension check")
-        observed_duration = 0
-        for index in range(check.n_frames):
-            check.seek(index)
-            observed_duration += check.info["duration"]
-            if ImageChops.difference(
-                check.convert("RGB"), quantized[index].convert("RGB")
-            ).getbbox():
-                raise ValueError("Decoded animation differs from the expected frame")
-        if abs(observed_duration - sum(durations)) > len(frames) * 10:
-            raise ValueError("Encoded frame timing differs from requested pacing")
-    if destination.stat().st_size > 5_000_000:
-        raise ValueError("GIF exceeds 5 MB; shorten or reduce its visual scope")
-    return {
-        "name": manifest["name"],
-        "title": manifest["title"],
-        "fixture_note": manifest["fixture_note"],
-        "gif": destination.name,
-        "poster": poster.name,
-        "width": WIDTH,
-        "height": HEIGHT,
-        "frames": len(frames),
-        "duration_ms": observed_duration,
-        "bytes": destination.stat().st_size,
-        "sha256": hashlib.sha256(destination.read_bytes()).hexdigest(),
-        "captions": [entry["caption"] for entry in manifest["frames"]],
-        "redactions": manifest.get("redactions", []),
-    }
+def probe(video: Path) -> dict[str, Any]:
+    with closing(imageio_ffmpeg.read_frames(str(video))) as reader:
+        return next(reader)
 
 
-def tour(specs: list[tuple[Path, dict[str, Any]]], out: Path) -> dict[str, Any]:
+def encode(path: Path, output: Path) -> dict[str, Any]:
+    value = load(path)
+    source = (path.parent / value["video"]).resolve()
+    source_info = probe(source)
+    if source_info["fps"] < 20 or source_info["source_size"][0] < WIDTH:
+        raise ValueError("Record at full viewport resolution and at least 20 fps")
+    start = float(value["start_s"])
+    end = min(float(value["end_s"]), float(source_info["duration"]))
+    if float(value["end_s"]) - end > 0.75 or end <= start:
+        raise ValueError("Segment timing exceeds the recorded video")
+    duration = end - start
+    ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+    output.mkdir(parents=True, exist_ok=True)
+    gif = output / (value["name"] + ".gif")
+    mp4 = output / (value["name"] + ".mp4")
+    poster = output / (value["name"] + ".png")
+    sampling = f"fps={FPS},scale={WIDTH}:-2:flags=lanczos,hqdn3d=1.2:1.2:6:6"
+    source_args = ("-ss", f"{start:.3f}", "-t", f"{duration:.3f}", "-i", str(source))
     private = ROOT / ".local"
     private.mkdir(exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="everval-tour-", dir=private) as temporary:
-        directory = Path(temporary)
-        manifest: dict[str, Any] = {
-            "name": "everval-tour",
-            "title": "From a question to a decision.",
-            "fixture_note": "Edited tour of actual interfaces using installation controls. Repository validation remains pending; checkpoint observations are synthetic.",
-            "frames": [],
-            "redactions": sorted(
-                {note for _, clip in specs for note in clip.get("redactions", [])}
-            ),
-        }
-        for path, clip in specs:
-            poster = min(
-                int(clip.get("poster_frame", len(clip["frames"]) - 1)), len(clip["frames"]) - 1
-            )
-            for index in (0, poster):
-                entry = clip["frames"][index]
-                name = f"{len(manifest['frames']):02d}.png"
-                shutil.copyfile(path.parent / entry["file"], directory / name)
-                manifest["frames"].append(
-                    {
-                        "file": name,
-                        "duration_ms": 1500,
-                        "caption": entry["caption"],
-                    }
-                )
-            if clip["name"] == "rankings":
-                manifest["poster_frame"] = len(manifest["frames"]) - 1
-        manifest_path = directory / "manifest.json"
-        manifest_path.write_text(json.dumps(manifest))
-        return encode(manifest_path, out)
+    with tempfile.TemporaryDirectory(prefix="continuous-palette-", dir=private) as temporary:
+        palette = Path(temporary) / "palette.png"
+        run(
+            ffmpeg,
+            *source_args,
+            "-vf",
+            sampling + ",palettegen=max_colors=128:stats_mode=diff",
+            "-frames:v",
+            "1",
+            str(palette),
+        )
+        run(
+            ffmpeg,
+            *source_args,
+            "-i",
+            str(palette),
+            "-filter_complex",
+            f"[0:v]{sampling}[screen];[screen][1:v]paletteuse=dither=none:diff_mode=rectangle",
+            "-loop",
+            "0",
+            "-gifflags",
+            "+transdiff",
+            str(gif),
+        )
+    run(
+        ffmpeg,
+        *source_args,
+        "-an",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "medium",
+        "-crf",
+        "19",
+        "-pix_fmt",
+        "yuv420p",
+        "-movflags",
+        "+faststart",
+        str(mp4),
+    )
+    poster_time = max(start, min(float(value.get("poster_s", end - 0.5)), end - 0.1))
+    run(
+        ffmpeg,
+        "-ss",
+        f"{poster_time:.3f}",
+        "-i",
+        str(source),
+        "-frames:v",
+        "1",
+        "-vf",
+        f"scale={WIDTH}:-2:flags=lanczos",
+        str(poster),
+    )
+    with Image.open(gif) as animation:
+        count, dimensions = animation.n_frames, animation.size
+        elapsed_ms, changed = 0, 0
+        previous = None
+        for index in range(count):
+            animation.seek(index)
+            current = animation.convert("RGB")
+            if previous is not None and ImageChops.difference(previous, current).getbbox():
+                changed += 1
+            previous = current
+            elapsed_ms += animation.info.get("duration", 0)
+        if count < math.floor(duration * FPS) - 3 or abs(elapsed_ms / 1000 - duration) > 0.2:
+            raise ValueError("GIF does not preserve continuous frame cadence")
+        if changed < 40:
+            raise ValueError("Too few changing frames to demonstrate interaction")
+        if animation.info.get("loop") != 0:
+            raise ValueError("GIF loop metadata is missing")
+    with Image.open(poster) as still:
+        still.verify()
+    encoded_video = probe(mp4)
+    if abs(encoded_video["duration"] - duration) > 0.2:
+        raise ValueError("Video export changed the recorded duration")
+    return {
+        "name": value["name"],
+        "title": value["title"],
+        "fixture_note": value["fixture_note"],
+        "continuous": True,
+        "source_fps": source_info["fps"],
+        "gif_fps": FPS,
+        "width": dimensions[0],
+        "height": dimensions[1],
+        "frames": count,
+        "changing_frames": changed,
+        "duration_ms": elapsed_ms,
+        "gif": gif.name,
+        "video": mp4.name,
+        "poster": poster.name,
+        "bytes": gif.stat().st_size,
+        "video_bytes": mp4.stat().st_size,
+        "sha256": hashlib.sha256(gif.read_bytes()).hexdigest(),
+        "video_sha256": hashlib.sha256(mp4.read_bytes()).hexdigest(),
+        "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+        "source_segment": {"start_s": start, "end_s": end},
+        "marks": value.get("marks", []),
+        "redactions": value.get("redactions", []),
+    }
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("manifests", nargs="+", type=Path)
-    parser.add_argument("--output", type=Path, default=ROOT / "docs/assets/demos")
-    parser.add_argument(
-        "--tour", action="store_true", help="Also compose a short tour from all clips."
-    )
+    parser.add_argument("--output", type=Path, default=ROOT / "docs/assets/demos/continuous")
     args = parser.parse_args()
-    specs = []
-    for path in args.manifests:
-        value = json.loads(path.read_text())
-        for clip in value.get("clips", [value]):
-            specs.append((path, load_manifest(path, clip)))
-    if len({value["name"] for _, value in specs}) != len(specs):
+    names = [load(path)["name"] for path in args.manifests]
+    if len(names) != len(set(names)):
         raise ValueError("Clip names must be unique")
-    clips = [encode(path, args.output, value=value) for path, value in specs]
-    if args.tour:
-        clips.insert(0, tour(specs, args.output))
-    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+    clips = []
+    for path in args.manifests:
+        clip = encode(path, args.output)
+        clips.append(clip)
+        print(
+            f"{clip['name']}: {clip['frames']} frames at {FPS} fps, "
+            f"{clip['duration_ms'] / 1000:.2f}s, GIF {clip['bytes'] / 1_000_000:.2f} MB, "
+            f"video {clip['video_bytes'] / 1_000_000:.2f} MB",
+            flush=True,
+        )
     metadata = {
-        "application_revision": revision,
-        "source": "Actual UI captures from isolated fixture workspaces",
-        "pacing": "Edited for readability; not a latency measurement",
-        "capture_policy": "Original installation controls; no paid model calls are required.",
-        "encoder": "Pillow 12.0.0",
+        "application_revision": subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+        ).strip(),
+        "capture": "Continuous actual browser recordings and a live terminal PTY",
+        "editing": "Beginning/end trims only; no internal cuts, screenshot assembly or speed changes",
+        "gif_fps": FPS,
+        "gif_encoding": "1120 pixels wide at 20 fps, mild compression-noise reduction and 128-color quantization",
+        "video_encoding": "Source dimensions and frame rate, H.264, unchanged playback speed",
+        "encoder": "FFmpeg via imageio-ffmpeg 0.6.0; Pillow 12.0.0 verification",
         "clips": clips,
     }
     (args.output / "manifest.json").write_text(json.dumps(metadata, indent=2) + "\n")
-    for clip in clips:
-        print(
-            f"{clip['name']}: {clip['frames']} frames, {clip['duration_ms'] / 1000:.1f}s, {clip['bytes'] / 1_000_000:.2f} MB"
-        )
 
 
 if __name__ == "__main__":

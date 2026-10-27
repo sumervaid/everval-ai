@@ -1,5 +1,7 @@
 # Product GIF verification — 2026-10-26
 
+**Superseded:** this record describes the earlier keyframe animations, retained in [revision 599b7a3](https://github.com/sumervaid/everval-ai/tree/599b7a33544bcf8a00e2aac39c99009dea53cb19). They have been replaced by [continuous recordings](../2026-10-26-motion/README.md).
+
 Ten actual workflow captures were recorded on the maintainer's iMac using isolated fixture workspaces. A thirty-second overview reuses selected frames from those clips. The captures do not run models or change the real evaluation workspace.
 
 | Clip | Frames | Duration | GIF size |
@@ -29,7 +31,7 @@ The eleven GIFs total **6.57 MB**. Every workflow GIF is under 1 MB. Each has a 
 - Autopilot was left paused. No model API calls were made.
 - Capture/encoder lint, formatting, local documentation links and whitespace checks passed.
 
-The terminal audit view replaces the local OS account label with operator; no evidence or outcome is altered. Raw workspaces, credentials, SVG intermediates and logs remain outside Git. The application revision is retained in the [media manifest](../../assets/demos/manifest.json).
+The terminal audit view replaces the local OS account label with operator; no evidence or outcome is altered. Raw workspaces, credentials, SVG intermediates and logs remain outside Git. The application revision is retained in the [media manifest](https://github.com/sumervaid/everval-ai/blob/599b7a33544bcf8a00e2aac39c99009dea53cb19/docs/assets/demos/manifest.json).
 
 ## Interpretation
 

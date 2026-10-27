@@ -20,9 +20,9 @@ Your support team is considering a new model configuration. Both configurations 
 
 This helps a team discover whether people prefer the proposed deployment before a model's name influences their assessment. It does not turn a small or selected task set into a general model ranking. Human judgments remain separate from automated test scores.
 
-![Actual blind study from anonymous review through lock and reveal](assets/demos/double-blind.gif)
+![Actual blind study from anonymous review through lock and reveal](assets/demos/continuous/double-blind.gif)
 
-*Actual browser interface with original installation controls and scripted judgments. [Still image](assets/demos/double-blind.png). [Executed checks and limitations](evidence/2026-10-26-double-blind/README.md).*
+*Actual browser interface with original installation controls and scripted judgments. [Still image](assets/demos/continuous/double-blind.png). [Executed checks and limitations](evidence/2026-10-26-double-blind/README.md).*
 
 ## Start in the browser
 

@@ -1,53 +1,53 @@
-# Record the product walkthroughs
+# Record continuous product demos
 
-These scripts drive the actual terminal and browser interfaces in isolated workspaces, using original installation controls and synthetic checkpoint data. They do not call model providers or use the maintainer's evaluation workspace.
+These scripts record the actual application at 25 frames per second. Browser inputs include pointer motion, clicks, sequential typing and smooth scrolling. Terminal recordings stream a real Everval process from a PTY into a local terminal renderer.
 
-The repository clip reads an original temporary Git history and stops before isolated validation. Training observations are synthetic. Terminal audit captures replace the local OS account name with **operator**; this redaction is retained in media metadata.
+Each clip is one uninterrupted recording. The encoder trims its beginning and end, then exports a GIF, full-resolution MP4 and still preview. It does not assemble screenshots, insert caption cards, concatenate scenes, interpolate motion or change playback speed.
 
 ## Capture
 
-Use the [source development setup](../../docs/quickstart.md#install-from-source), locked development dependencies, and an installed Google Chrome. Browser capture uses Playwright's chrome channel. Terminal rendering uses a local font and blocks network requests.
+Use the [source development setup](../../docs/quickstart.md#install-from-source), its locked development dependencies, and an installed Google Chrome. Browser viewport and recording size are both 1280×800. Authentication is injected before visible navigation; credentials are never typed into recorded forms.
 
 ~~~sh
 npm ci --prefix web
 npm run build --prefix web
 uv run --no-sync python scripts/build_web.py
+uv run --no-sync python -m playwright install ffmpeg
 
-uv run --no-sync python scripts/demos/capture_terminal.py --output .local/demo-captures/terminal
-uv run --no-sync python scripts/demos/capture_browser.py --output .local/demo-captures/browser
-uv run --no-sync python scripts/demos/capture_studies.py --output .local/demo-captures/studies
+uv run --no-sync python scripts/demos/capture_browser.py --output .local/continuous/browser
+uv run --no-sync python scripts/demos/capture_studies.py --output .local/continuous/studies
+uv run --no-sync python scripts/demos/capture_terminal.py --output .local/continuous/terminal
 ~~~
 
-Choose new output directories. Browser capture prints its new capture directory. Scripts close owned applications and servers. Keep workspaces, raw logs, credentials, SVG intermediates and capture manifests outside Git.
+Choose new private output directories. The terminal renderer uses a pinned xterm.js package in a private cache; its first setup may download the package. It streams actual terminal output locally rather than converting terminal screenshots into frames.
+
+The recordings use isolated workspaces, original controls and synthetic training observations. They make no model API calls. The repository demonstration stops before isolated validation. Study reviewers are scripted accounts, not a human-preference study. Capture scripts close their owned servers, browser contexts and terminal processes.
 
 ## Encode
-
-Install the image encoder separately:
 
 ~~~sh
 uv venv --python 3.12 .local/demo-media
 uv pip install --python .local/demo-media/bin/python -r scripts/demos/requirements.txt
+
+.local/demo-media/bin/python scripts/demos/encode.py \
+  CAPTURE_DIRECTORY/everval-tour/manifest.json \
+  CAPTURE_DIRECTORY/chat-and-reports/manifest.json \
+  CAPTURE_DIRECTORY/rankings/manifest.json
 ~~~
 
-Replace CAPTURE_DIRECTORY with the path printed by browser capture:
+Replace the example paths with the generated manifests. The browser script prints its capture directory below the chosen output directory; its manifests live inside that directory. Studies and terminal manifests live directly below their chosen output directories. Locate them with:
 
 ~~~sh
-.local/demo-media/bin/python scripts/demos/encode.py \
-  .local/demo-captures/terminal/manifest.json \
-  CAPTURE_DIRECTORY/chat-and-reports/manifest.json \
-  CAPTURE_DIRECTORY/rankings/manifest.json \
-  CAPTURE_DIRECTORY/tasks-and-comparisons/manifest.json \
-  CAPTURE_DIRECTORY/production-cases/manifest.json \
-  .local/demo-captures/studies/double-blind/manifest.json \
-  .local/demo-captures/studies/checkpoint-monitoring/manifest.json \
-  --tour
+find .local/continuous -name manifest.json
 ~~~
 
-Output is GIFs, PNG stills and public metadata in docs/assets/demos/. The --output option selects another destination. The --tour option adds a thirty-second overview for ten workflows.
+Pass every desired manifest together to produce the complete public media index. The default destination is docs/assets/demos/continuous/; --output selects another directory. The hero is captured as its own complete user journey; it is never assembled from other clips.
 
-Captions and pauses are edited for readability, not latency measurements. A shared palette reduces size and color flicker. The encoder decodes every GIF again and compares every frame, checking dimensions, frame counts, timing, and a 5 MB per-file limit. PNG stills provide a non-animated alternative.
+GIFs use 20 frames per second at 1120×700, with mild compression-noise reduction and color quantization. MP4s preserve the native 1280×800 recording at 25 frames per second. Neither format changes playback speed.
 
-Review all recordings for private text, outputs, names, accounts, paths and diagnostic content. Inspect encoded frames and [gallery limitations](../../docs/demos.md), then run:
+The encoder verifies source resolution and frame rate, uninterrupted segment timing, GIF frame cadence, changing frames, PNG decoding and MP4 duration. Private source-video hashes and segment offsets are retained in the public metadata for inspection; raw recordings, credentials and workspaces remain outside Git.
+
+Review actual playback before publishing. Inspect typing and scroll motion, early and late frames, fixture labels, account names, output content and paths. Keep timing claims limited to the recording; these demonstrations are not model-latency measurements.
 
 ~~~sh
 uv run --no-sync ruff check scripts/demos
@@ -56,4 +56,4 @@ uv run --no-sync python scripts/check_docs.py
 git diff --check
 ~~~
 
-Never publish failed captures, private runtime material, or fabricated successful validation states.
+[Continuous gallery](../../docs/demos.md) · [Still images](../../docs/demo-stills.md)
