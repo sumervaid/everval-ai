@@ -131,7 +131,8 @@ changing its missingness rule. Before any held-out calls, a separate secondary
 endpoint was specified: average agreement over every scheduled order and
 repetition, with an observed abstention, invalid response, or delivery error
 counting as zero delivered agreement. Unattempted or missing calls still block
-inferential intervals. This measures successful delivery of a useful judgment;
+complete-cohort inferential intervals. Descriptive points then use complete items
+and must be labeled as such; the full scheduled grid stays in coverage accounting. This measures successful delivery of a useful judgment;
 it is not agreement conditional on a valid answer.
 
 Coverage and original-primary results remain visible. The three secondary
@@ -156,7 +157,7 @@ reference standard and independent family count.
 
 ## Dated policy interruption and accounting review
 
-The live study received one HTTP 400 policy rejection without reported token
+The live study first received an HTTP 400 policy rejection without reported token
 usage. The rejected request was never retried or rewritten. Its entire
 $0.0036065 reservation remains charged against the original cap; no zero-cost
 billing claim is inferred. Every still-unattempted judgment of that source
@@ -170,7 +171,7 @@ A new unknown request blocks continuation again.
 
 The original human cohort therefore remains incomplete. Original inference
 rules are retained, and any 63-question exclusion analysis is explicitly post
-hoc. The execution-reference cohort is unchanged. The aggregate report
+hoc. At that first interruption, the execution-reference cohort was unchanged. The aggregate report
 distinguishes an observed policy error, unattempted quarantined jobs, settled
 conservative charges, and the retained unknown-charge bound.
 
@@ -181,3 +182,23 @@ extraction limitation, not demonstrated model failure to produce final JSON.
 The original records remain unchanged. The live continuation preserves the
 frozen extraction behavior; any later parser sensitivity must be separately
 labeled.
+
+## Later interruptions and preserved denominators
+
+A connection failure and a second policy rejection stopped dispatch again. Each
+kept its full original reservation, and no failed request was retried. The
+second policy-rejected source item was also excluded from the separate fresh
+repair and same-identifier studies before those calls. Across the three
+events, $0.01312325 remains reserved for unknown usage.
+
+The [dated methods and continuation manifests](../../docs/benchmarks/judge-study-2026-10-27/methodology.md)
+retain the exact request hashes, freezes and narrowly allowed jobs. The final
+flat continuation permits only 396 untouched, unrelated jobs. It keeps the
+original 64 human questions and 40 execution-reference tasks, with 16
+unattempted quarantined cells. No complete-case analysis silently replaces
+those denominators.
+
+A verified working copy on the iMac's internal SSD avoids repeated external-drive
+I/O. The original evidence remains intact and stopped; only one dispatcher may
+own the resumed ledger. This storage change does not alter prompts, costs,
+eligibility or analysis. Unknown usage on any new request stops admissions again.

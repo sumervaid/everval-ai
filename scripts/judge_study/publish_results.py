@@ -229,7 +229,7 @@ def summarize(source: dict[str, Any], source_sha256: str) -> dict[str, Any]:
         },
         "interpretation": {
             "original_primary": "Frozen human-vote agreement; incomplete valid grids retain descriptive complete-item estimates without a full-cohort interval. Archived execution is a separate diagnostic endpoint.",
-            "secondary": "Added after development and frozen before holdout. Attempted invalid, abstained and error outcomes score zero; unattempted outcomes block inference. Original primary remains unchanged.",
+            "secondary": "Added after development and frozen before holdout. Attempted invalid, abstained and error outcomes score zero. Complete grids use all scheduled judgments; with unattempted cells, points condition on fully attempted items and full-cohort intervals are withheld. Original primary remains unchanged.",
             "multiplicity": "Three paired contrasts receive alpha .05/3 within each declared family. Individual-configuration intervals and diagnostics are exploratory. Primary and secondary families do not have joint error control.",
             "archived_execution": "Agreement with archived published test outcomes on selected discordant patches; no new agent repair success claim.",
             "order": "Swap inconsistency is compared with same-order repeat disagreement; neither alone establishes causal position bias.",
@@ -325,7 +325,7 @@ def render(result: dict[str, Any], destination: Path) -> list[str]:
         (
             "secondary_delivered_agreement",
             "judge-delivered-agreement",
-            "Secondary endpoint: agreement delivered per scheduled judgment",
+            "Secondary endpoint: delivered agreement on fully attempted items",
         ),
     ):
         figure, axes = plt.subplots(1, 2, figsize=(13.2, 4.9))
@@ -403,7 +403,7 @@ def render(result: dict[str, Any], destination: Path) -> list[str]:
         note = (
             "Open marker: interval unavailable. Complete-item estimates may use different subsets; this is not a full-cohort ranking."
             if field == "original_primary"
-            else "Secondary endpoint frozen after development, before holdout. Invalid / abstained / error = 0; unattempted blocks inference."
+            else "Fully attempted items only; invalid / abstained / error = 0. Open marker: full-cohort interval unavailable."
         )
         figure.text(0.14, 0.105, note, fontsize=8, color="#667085")
         figure.text(
@@ -484,7 +484,7 @@ def render(result: dict[str, Any], destination: Path) -> list[str]:
         figure.text(
             0.14,
             0.09,
-            "Human primary and amended secondary have separate error-control families; repository effects remain diagnostic.",
+            "Incomplete grids: descriptive complete-item points only. Primary and secondary families have separate error control.",
             fontsize=8,
             color="#667085",
         )
@@ -570,6 +570,10 @@ def main() -> None:
     result["artifacts"] = artifacts
     result["figure_dependency"] = "matplotlib==3.11.2"
     result["publisher_sha256"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    result["publisher_revision"] = {
+        "supersedes_sha256": "b7f14d845b57e7f507ffda11f0e523fe6df3af9fb0d8bb4768885a94762d4f99",
+        "change": "Caption and interpretation metadata clarify complete-item conditioning; numerical analysis and cohort membership are unchanged.",
+    }
     result["reproduction"] = (
         "python scripts/judge_study/publish_results.py --render-only --input docs/benchmarks/judge-study-2026-10-27/results.json --output ./reproduced-figures"
     )

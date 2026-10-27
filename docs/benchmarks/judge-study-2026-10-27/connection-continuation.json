@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "study": "Everval judge calibration, 2026-10-27",
+  "kind": "second bounded financial continuation",
+  "created_at": "2026-10-27T18:40:47.827204+00:00",
+  "manifest_sha256": "18e3cbad6de0ad5d8b835d76abe0c78463915ed116f82bd9ad36e624ef09851b",
+  "base_plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+  "prior_policy_continuation_sha256": "8f87f9888934613b33753323ccb52171966cb6d5c34cbee5113a15cff62fd614",
+  "historical_source_commit": "795a9f2d4ecff9f2fe61e09c7832f4e0308459ef",
+  "failure": {
+    "request_id": "c46a5fd2f7234fdab85fe3f96504d675",
+    "job_id": "0b69ccae3b87b4fab964238d23defc7bdb9b5e251121318a1f5e20f9631aec8c",
+    "request_sha256": "91c80b3011d37fd7d0dc116fc687536ee2fbfbd54481d51c72f8d4c628b60362",
+    "type": "ConnectError",
+    "model": "gpt-6-luna",
+    "observed_provider_response": false,
+    "input_token_ceiling": 19118,
+    "output_token_ceiling": 768,
+    "retained_full_reservation_usd": "0.0051635",
+    "state": "uncertain",
+    "retried": false
+  },
+  "prior_policy_quarantine": {
+    "item_id": "mtbench-160",
+    "unattempted_jobs": 8
+  },
+  "allowed_untouched_jobs": 462,
+  "allowed_job_list_sha256": "4e815d8caafbc08dab94a99384425d8c5a796b95430d25fa1a343d5be1107899",
+  "retained_request_count": 2650,
+  "retained_evidence_count": 2651,
+  "retained_evidence_manifest_sha256": "3e947a43de25ef3c2251447b3c0b6568761d503aefd9835d3d539a8516239e73",
+  "failure_event_sha256": "6e8240da21d1d880d672df417980ca4dee06b35cb084928df325598e62fdebc2",
+  "request_file_sha256": "c0e3741ee4bed53ddd0445cbbe5a99886d2d189d14b8bf21c6b67088c2884271",
+  "event_prefix": {
+    "count": 2645,
+    "sha256": "6b9a7907f1182318c7e37c8ac915b041407a33e50d1085b4871e810585c92448"
+  },
+  "source_sha256": {
+    "scripts/judge_study/connection_recovery.py": "427b761b235ba52d40b595d0809cb159b754a425fe6ef2454d2a3972d9c452e8",
+    "scripts/judge_study/connection_budget.py": "925456f83c5e100296c010bb3291d77fa371934e80410f90b103a50b60dc95c8",
+    "scripts/judge_study/analyze_connections.py": "b09fb01afa2e46efed2ebe1b6b5555226fbbd321cf46151c6a4b87f2a4b7988b"
+  },
+  "derived_observation_sha256": "05522a92a645eeb7e62740372164fe11eed1efa6fa0f754824dd34c6d6f33c62",
+  "caps_usd": {
+    "phase1": 30,
+    "all_new_study_work": 50,
+    "phase1_models": {
+      "gpt-6-luna": 2,
+      "gpt-6.1-terra": 8,
+      "gpt-6.1-sol": 20
+    }
+  },
+  "conservative_cost_before_continuation_usd": {
+    "settled": "9.32205075",
+    "committed": "9.33082075",
+    "unknown_reservations": "0.00877"
+  },
+  "billing_complete": false,
+  "decision": "Retain both complete unknown reservations; never retry either started failure. Continue only the remaining untouched subset of the existing policy-reviewed authority.",
+  "analysis_deviation": "The additional connection failure remains an observed error. Original sampling, prompts, prices, caps, policy quarantine and inference rules are unchanged.",
+  "unchanged": [
+    "sampling",
+    "prompts",
+    "prices",
+    "caps",
+    "policy quarantine",
+    "inference rules",
+    "original failure records"
+  ]
+}

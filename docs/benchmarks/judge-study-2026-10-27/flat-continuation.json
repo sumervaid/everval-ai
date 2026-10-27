@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "kind": "flat exact exception continuation",
+  "created_at": "2026-10-27T19:13:17.750123+00:00",
+  "manifest_sha256": "504478cf72c312220108ed11901b1932f47d98adcda71fcc3cf7752c13d3bc9a",
+  "base_plan_sha256": "354f1fe44958d822e5b9ddd07fcfff0bde37be80c81ee647bb6ec58c6f4e219d",
+  "historical_manifest_sha256": {
+    "operational-amendment": "3e38faf92cc2f0daf738abfe89d888b734ded763422ec0ebe6a708e071b25a64",
+    "policy-continuation": "8f87f9888934613b33753323ccb52171966cb6d5c34cbee5113a15cff62fd614",
+    "connection-continuation": "18e3cbad6de0ad5d8b835d76abe0c78463915ed116f82bd9ad36e624ef09851b"
+  },
+  "historical_source_commit": "795a9f2d4ecff9f2fe61e09c7832f4e0308459ef",
+  "decision": "Retain all three unknown reservations and original attempts; quarantine both rejected source items; dispatch only the frozen untouched unrelated subset. Every new uncertainty stops new dispatch.",
+  "analysis_deviation": "Original64-question human and40-task execution cohorts remain unchanged; quarantined missing cells suppress complete-cohort inference. No failure is retried, rewritten or routed to another model.",
+  "reviewed_exceptions": [
+    {
+      "model": "gpt-6-luna",
+      "kind": "policy_rejection",
+      "request_id": "cc1180d53b70412b8fc472f0cceef52b",
+      "job_id": "021c503a876520cb9be48124d330aa3ef56ff04bf6610b8a524b59acd7337473",
+      "request_sha256": "f5305f9aaa371aa6b073be9c55aea6dc0c4477a761f942170925cf3f81d622ba",
+      "retained_reservation_usd": "0.0036065",
+      "reason": "ValueError",
+      "input_token_ceiling": 12890,
+      "output_token_ceiling": 768,
+      "decision_sha256": "8f87f9888934613b33753323ccb52171966cb6d5c34cbee5113a15cff62fd614",
+      "evidence_sha256": "ab84dcde6a0a1b598008e3172973b2e4ae27d203d89129e18c21074737c0a834",
+      "retried": false
+    },
+    {
+      "model": "gpt-6-luna",
+      "kind": "connection_failure",
+      "request_id": "c46a5fd2f7234fdab85fe3f96504d675",
+      "job_id": "0b69ccae3b87b4fab964238d23defc7bdb9b5e251121318a1f5e20f9631aec8c",
+      "request_sha256": "91c80b3011d37fd7d0dc116fc687536ee2fbfbd54481d51c72f8d4c628b60362",
+      "retained_reservation_usd": "0.0051635",
+      "reason": "ConnectError",
+      "input_token_ceiling": 19118,
+      "output_token_ceiling": 768,
+      "decision_sha256": "18e3cbad6de0ad5d8b835d76abe0c78463915ed116f82bd9ad36e624ef09851b",
+      "evidence_sha256": "6e8240da21d1d880d672df417980ca4dee06b35cb084928df325598e62fdebc2",
+      "retried": false
+    },
+    {
+      "model": "gpt-6-luna",
+      "kind": "policy_rejection",
+      "request_id": "434767f9672d424c8c54fe0d95da3ed6",
+      "job_id": "1495e2699a01d54e81ee59f5eaaeda023637f33be3d5de3884913924e945b577",
+      "request_sha256": "211352c5b364f717e37ede1c68515d2362d4a31530bf67afbc8e455d0e82fb48",
+      "retained_reservation_usd": "0.00435325",
+      "reason": "ValueError",
+      "input_token_ceiling": 15877,
+      "output_token_ceiling": 768,
+      "decision_sha256": "504478cf72c312220108ed11901b1932f47d98adcda71fcc3cf7752c13d3bc9a",
+      "evidence_sha256": "ab84dcde6a0a1b598008e3172973b2e4ae27d203d89129e18c21074737c0a834",
+      "retried": false
+    }
+  ],
+  "quarantined_source_items": [
+    "mtbench-160",
+    "swe-django__django-14787"
+  ],
+  "quarantined_unattempted_jobs": 16,
+  "newly_quarantined_jobs": 8,
+  "allowed_untouched_jobs": 396,
+  "allowed_job_list_sha256": "043ec9879bda9916f43b4fd403fea348ad51ee9cd243d049bff2411daed04f89",
+  "retained_request_count": 2708,
+  "evidence_manifest_sha256": "aa3552f0414e7a5f3114158d9e78065f2f04eb3e9db64228815b6cf8c08f4dd3",
+  "evidence_files": 2714,
+  "source_sha256": {
+    "scripts/judge_study/flat_recovery.py": "03b250d24dbe19c20e0c25b1e0cc7a0b41fc94c8253b75805fbcc212357ab4a2",
+    "scripts/judge_study/flat_budget.py": "e26a81f379bee9da19fa5f0a21dadf7c41def7236d24a95c1740a247a8a8cb57",
+    "scripts/judge_study/analyze_flat.py": "18f6207c24245cae98b0717329c708515d91a4fad4f1dfc9a64c9e74d3153b6a"
+  },
+  "original_contexts_sha256": "48e1db213dadb10600240bbf996d2c154b1549c6873b6e595547321ef72b7262",
+  "event_prefix": {
+    "count": 2736,
+    "sha256": "dae6176ee59d66c7cd3f0f365e901b749d2d76731fc8ce083c9b87f103cddb8e"
+  },
+  "verification": "Historical manifest links are checked once; evidence hashes are merged and every retained file is verified in one pass. Frozen prompts, scoring and historical events are unchanged.",
+  "cost_before_usd": {
+    "settled": "9.70102825",
+    "committed": "9.7141515",
+    "unknown_reservations": "0.01312325"
+  },
+  "caps_usd": {
+    "phase1": 30,
+    "all_new_study_work": 50,
+    "models": {
+      "gpt-6-luna": 2,
+      "gpt-6.1-terra": 8,
+      "gpt-6.1-sol": 20
+    }
+  },
+  "billing_complete": false
+}
