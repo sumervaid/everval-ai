@@ -83,4 +83,3 @@ Freeze a pair and rubric, collect anonymous judgments, lock evidence, reveal ide
 ![Double-blind review: actual interface still](assets/demos/double-blind.png)
 
 [Workflow guide](double-blind.md) · [Watch the clip](demos.md#double-blind)
-
