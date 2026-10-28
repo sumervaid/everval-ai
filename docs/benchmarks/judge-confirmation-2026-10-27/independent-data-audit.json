@@ -1,0 +1,334 @@
+{
+  "arms": [
+    {
+      "arm": "terra-standard",
+      "cache_zero_calls": 2000,
+      "calls": 2000,
+      "delivered_agreement": 0.727,
+      "estimated_cost_usd": "4.489838",
+      "families": 1000,
+      "request_elapsed_latency_ms": {
+        "maximum": 70402.64058299363,
+        "minimum": 1372.139499988407,
+        "p50": 2002.2072704741731,
+        "p90": 2666.0826871986505,
+        "p95": 4644.052670628298,
+        "quantile_method": "linear interpolation over (N-1)*p; request elapsed time, not token generation latency"
+      },
+      "returned_model_ids": [
+        "gpt-6.1-terra"
+      ],
+      "statuses": {
+        "abstained": 8,
+        "completed": 1992
+      },
+      "tokens": {
+        "input_tokens": 3697513,
+        "output_tokens": 158465,
+        "reasoning_tokens": 0,
+        "total_tokens": 3855978
+      }
+    },
+    {
+      "arm": "terra-checklist",
+      "cache_zero_calls": 2000,
+      "calls": 2000,
+      "delivered_agreement": 0.7234166666666667,
+      "estimated_cost_usd": "4.719575",
+      "families": 1000,
+      "request_elapsed_latency_ms": {
+        "maximum": 81206.67883299757,
+        "minimum": 1307.8982499428093,
+        "p50": 2025.3642920288257,
+        "p90": 2661.189724633005,
+        "p95": 3662.367071415064,
+        "quantile_method": "linear interpolation over (N-1)*p; request elapsed time, not token generation latency"
+      },
+      "returned_model_ids": [
+        "gpt-6.1-terra"
+      ],
+      "statuses": {
+        "abstained": 18,
+        "completed": 1982
+      },
+      "tokens": {
+        "input_tokens": 3897590,
+        "output_tokens": 164397,
+        "reasoning_tokens": 0,
+        "total_tokens": 4061987
+      }
+    },
+    {
+      "arm": "sol-standard",
+      "cache_zero_calls": 2000,
+      "calls": 2000,
+      "delivered_agreement": 0.7115,
+      "estimated_cost_usd": "9.778616",
+      "families": 1000,
+      "request_elapsed_latency_ms": {
+        "maximum": 79284.53545796219,
+        "minimum": 1756.1888750642538,
+        "p50": 3968.7118125148118,
+        "p90": 6581.888074660676,
+        "p95": 8702.490929508345,
+        "quantile_method": "linear interpolation over (N-1)*p; request elapsed time, not token generation latency"
+      },
+      "returned_model_ids": [
+        "gpt-6.1-sol"
+      ],
+      "statuses": {
+        "abstained": 4,
+        "completed": 1996
+      },
+      "tokens": {
+        "input_tokens": 3697683,
+        "output_tokens": 238325,
+        "reasoning_tokens": 23165,
+        "total_tokens": 3936008
+      }
+    }
+  ],
+  "audit": "independent_full_grid_data_and_accounting",
+  "audited_at_utc": "2026-10-28T16:40:24.488978+00:00",
+  "budget": {
+    "cap_usd": "50.00",
+    "cumulative_estimated_cost_usd": "34.13095800",
+    "new_estimated_cost_usd": "18.988029",
+    "prior_estimated_cost_usd": "15.14292900",
+    "remaining_usd": "15.86904200"
+  },
+  "checks": {
+    "admission_below_model_cap": 6000,
+    "all_ledger_requests_settled": 2,
+    "all_new_cost_totals_reconciled": 1,
+    "arm_costs_reproduced": 3,
+    "budget_status_model_totals_reconciled": 2,
+    "checklist_contains_public_guidance": 1,
+    "checklist_guidance_identical_across_all_items": 1,
+    "complete_two_order_three_arm_grid": 1,
+    "configuration_matches_frozen_plan": 1,
+    "conservative_input_bounds_recomputed": 6000,
+    "cumulative_cost_below_fifty_dollars": 1,
+    "equal_family_equal_order_agreement_reproduced": 3,
+    "estimated_saving_fraction_reproduced": 2,
+    "event_and_row_spend_reconciliation": 2,
+    "event_attempt_hash": 6000,
+    "event_campaign_hash": 2,
+    "event_sequences_increasing": 18002,
+    "exact_decimal_reservation": 6000,
+    "exact_decimal_uncached_cost": 6000,
+    "exact_twenty_four_thousand_evidence_files": 1,
+    "explicit_cache_mode_without_breakpoints": 6000,
+    "family_rank_recomputed": 1939,
+    "final_answer_text_only": 6000,
+    "finite_nonnegative_elapsed_latency": 6000,
+    "fixed_allocations_below_global_cap": 1,
+    "freeze_before_calls": 1,
+    "frozen_first_thousand_families": 1,
+    "frozen_plan_canonical_hash": 1,
+    "frozen_source_and_evidence_hash": 121,
+    "full_unmodified_candidate_responses": 1000,
+    "full_unmodified_context": 1000,
+    "independent_canonical_order_normalization": 6000,
+    "independent_final_judgment_schema": 6000,
+    "inflight_limit": 2,
+    "label_independent_family_order": 1,
+    "ledger_config_hash": 2,
+    "ledger_event_counts": 2,
+    "ledger_exact_frozen_model_coverage": 2,
+    "ledger_frozen_plan_binding": 2,
+    "ledger_model_allocation": 2,
+    "ledger_rate_matches_frozen_config": 4,
+    "ledger_sqlite_integrity": 2,
+    "no_automatic_retries_frozen": 1,
+    "normalized_family_hash": 1000,
+    "observation_costs_match": 6000,
+    "observation_selected_final_text": 6000,
+    "one_attempt_per_job": 2,
+    "one_explicit_final_answer": 6000,
+    "one_reserve_and_settlement_per_request": 2,
+    "one_thousand_unique_items": 1,
+    "only_task_rubric_reordered_candidates_and_public_checklist_visible": 6000,
+    "output_cap_preserved": 6000,
+    "pair_rank_recomputed": 1939,
+    "paired_cost_mean_reproduced": 2,
+    "paired_quality_mean_reproduced": 2,
+    "primary_holdout_family_identity": 1,
+    "product_campaign_protocol_matches_frozen_protocol": 1,
+    "product_import_receipt_full_grid": 1,
+    "product_imported_job_identity_matches": 6000,
+    "product_imported_judgment_matches": 6000,
+    "product_imported_status_matches": 6000,
+    "product_imported_usage_cost_latency_matches": 6000,
+    "product_store_exact_six_thousand_jobs": 1,
+    "product_store_sqlite_integrity": 1,
+    "provider_completed_without_transport_error": 6000,
+    "public_system_prompt_only": 6000,
+    "published_coverage_reproduced": 1,
+    "raw_response_matches_success_envelope": 6000,
+    "raw_usage_matches_result": 6000,
+    "reasoning_setting_preserved": 6000,
+    "reasoning_tokens_within_output": 6000,
+    "request_field_whitelist": 6000,
+    "request_identity_match": 6000,
+    "request_payload_and_hash_match": 6000,
+    "request_sent_after_freeze": 6000,
+    "reserve_event_cost": 6000,
+    "reserve_input_ceiling": 6000,
+    "reserve_output_ceiling": 6000,
+    "reserve_request_hash": 6000,
+    "reserve_unique_owned_attempt": 6000,
+    "response_phase_classification": 6000,
+    "result_job_identity": 6000,
+    "result_settled": 6000,
+    "returned_model_matches_frozen_request": 6000,
+    "settlement_event_matches_row": 6000,
+    "settlement_follows_reservation": 6000,
+    "single_ledger_campaign": 2,
+    "six_thousand_unique_frozen_jobs": 1,
+    "source_canonical_row_hash": 1000,
+    "source_card_hash": 1,
+    "source_domain_language": 1000,
+    "source_individual_vote_sign_mapping": 1000,
+    "source_original_line_hash": 1000,
+    "source_release_hash": 1,
+    "source_release_row_count": 1,
+    "source_retained_vote_count": 1000,
+    "standard_service_tier": 6000,
+    "status_counts_reproduced": 3,
+    "storage_disabled": 6000,
+    "strict_judgment_response_contract": 6000,
+    "task_has_no_reference_metadata": 6000,
+    "three_frozen_arms": 1,
+    "token_counts_match_ledger_and_observation": 6000,
+    "total_tokens_equal_input_plus_output": 6000,
+    "two_message_provider_contract": 6000,
+    "two_order_inconsistency_reproduced": 3,
+    "unique_family_ids": 1,
+    "unique_ledger_request_ids": 2,
+    "unique_normalized_first_user_families": 1,
+    "unique_provider_response_request_ids": 6000,
+    "usage_within_reserved_bounds": 6000,
+    "valid_integer_token_counts": 6000,
+    "visible_scenario_field_whitelist": 6000,
+    "visible_scenario_identity": 6000,
+    "zero_cache_read_and_write_tokens": 6000
+  },
+  "comparisons": [
+    {
+      "baseline": "terra-checklist",
+      "candidate": "terra-standard",
+      "estimated_saving_fraction": 0.04867747625580693,
+      "id": "A",
+      "mean_two_order_family_cost_difference_usd": "-0.000229737",
+      "quality_difference": 0.0035833333333333333
+    },
+    {
+      "baseline": "sol-standard",
+      "candidate": "terra-standard",
+      "estimated_saving_fraction": 0.5408513842858744,
+      "id": "B",
+      "mean_two_order_family_cost_difference_usd": "-0.005288778",
+      "quality_difference": 0.0155
+    }
+  ],
+  "counts": {
+    "duplicate_jobs": 0,
+    "frozen_source_and_evidence_files": 121,
+    "ledger_events": 18002,
+    "missing_jobs": 0,
+    "pending_requests": 0,
+    "provider_unique_request_ids": 6000,
+    "provider_unique_response_ids": 6000,
+    "raw_response_files": 6000,
+    "request_files": 6000,
+    "response_envelopes": 6000,
+    "result_files": 6000,
+    "uncertain_requests": 0,
+    "zero_cache_read_and_write_calls": 6000
+  },
+  "dispatch_window_utc": {
+    "first_sent": "2026-10-27T23:49:28.843219+00:00",
+    "last_sent": "2026-10-28T01:21:56.556056+00:00"
+  },
+  "evidence_chain_method": "Frozen dispatch order; for each job, request.json, response.json, result.json, raw; SHA256 over UTF-8(filename + NUL + file SHA256 + newline).",
+  "frozen_inputs_modified": false,
+  "hashes": {
+    "approved_protocol_sha256": "05bc7aa7a2bf187455053b4e164e85996efb6541af159df1312dcfae85798550",
+    "audit_script_sha256": "2a004651c78d7fe252c0c06ed9b86aa471bd6d42061189071d0bcd68c9c646df",
+    "budget_status_json_sha256": "1df84158147d5dec4a0c28045a0ace8e42ad25529768e00cc03b76e170c4ffed",
+    "eligible_manifest_sha256": "7cf62580e71622ad0bde5ce5634b13cbf7dd0379cc4cb27274ca32126ada7514",
+    "frozen_plan_canonical_sha256": "a0bf6807e9ff64f9c4ba47c4de114ec834edd1f41f7fbd6a9aefcf69e5ffd92a",
+    "plan_file_sha256": "b055af3bc914dafa9013efacca7ab9582220288b59991c30a530f4669e33a179",
+    "provider_evidence_chain_sha256": "5db4123c5f1183460b32e0644855cda544683893778d0d15775a89b97e9ac365",
+    "results_json_sha256": "07a2da7ecac70344d183d9c792f2f7a55e698d454fb89f70492d712a47d2d9f8",
+    "source_card_sha256": "d5d46db58e8374937ea284b33b1583a4a465b232bf74b941745d80e3c35fd8ae",
+    "source_release_sha256": "cd0d8b6efd7869a44c1b5ff91701232062555829b3c838abfd770d7dab6c7861"
+  },
+  "ledger": {
+    "gpt-6.1-sol": {
+      "allocation_usd": "18.80",
+      "event_counts": {
+        "attempt_registered": 2000,
+        "campaign_created": 1,
+        "request_reserved": 2000,
+        "request_settled": 2000
+      },
+      "max_pending_requests": 4,
+      "peak_committed_usd": "10.263016",
+      "requests": 2000,
+      "settled_cost_usd": "9.778616"
+    },
+    "gpt-6.1-terra": {
+      "allocation_usd": "16.00",
+      "event_counts": {
+        "attempt_registered": 4000,
+        "campaign_created": 1,
+        "request_reserved": 4000,
+        "request_settled": 4000
+      },
+      "max_pending_requests": 4,
+      "peak_committed_usd": "9.336733",
+      "requests": 4000,
+      "settled_cost_usd": "9.209413"
+    }
+  },
+  "limitations": [
+    "Estimated costs use retained provider token usage and frozen uncached Standard API rates; provider billing invoices, account discounts, taxes and unrelated account spending were not independently audited.",
+    "This is a public historical preference-data study, not customer deployment validation; training-data contamination and clues to identity inside natural response content cannot be ruled out.",
+    "Retained human votes are curated release annotations and not independent new reviewers; three votes are not three independent task families.",
+    "Elapsed latency is descriptive and includes transport and service variation under the frozen bounded concurrent runner; it is not a randomized latency comparison.",
+    "This audit verifies data and accounting and reproduces point estimates; confirmatory uncertainty intervals and adoption gates receive a separate statistical audit."
+  ],
+  "methods": [
+    "Independently checked all source-row hashes, full conversations, response strings and retained vote sign mappings for the selected 1,000 families.",
+    "Recomputed every request hash and checked visible input against an exact task/rubric/reordered-response/public-checklist whitelist; references, human justifications, annotator identities, generator identity metadata and dataset strata were absent from judge input fields.",
+    "Parsed every raw response independently, selected its explicit final-answer phase, validated judgment JSON, mapped displayed preferences to canonical candidate order and reproduced equal-family/equal-order human-vote agreement.",
+    "Opened both SQLite databases in read-only mode; replayed reserve/settle events and independently recomputed every reservation and actual estimated cost with Decimal arithmetic.",
+    "Reconciled the complete 6,000-call grid, all request/response/result files, unique provider identifiers, raw usage including cache fields, ledger totals, aggregate results, import receipt and all 6,000 imported product-store judgments."
+  ],
+  "provider_calls_made_by_audit": 0,
+  "provider_statuses": {
+    "completed": 6000
+  },
+  "schema_version": 1,
+  "selected_response_phases": {
+    "explicit_final_answer": 6000
+  },
+  "status": "passed",
+  "study": {
+    "arms": 3,
+    "calls": 6000,
+    "domains": {
+      "code": 205,
+      "general": 474,
+      "multilingual": 202,
+      "stem": 119
+    },
+    "eligible_families": 1939,
+    "families": 1000,
+    "orders_per_family_arm": 2,
+    "retained_human_votes": 2957,
+    "source_rows": 2017
+  }
+}

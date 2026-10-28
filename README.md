@@ -4,9 +4,9 @@
 
 [Quickstart](#try-it-without-a-key) · [Daily updates](UPDATES.md) · [All demos](docs/demos.md) · [Research finding](#inspect-the-evidence) · [On-prem deployment](docs/on-premises.md)
 
-**~10% lower estimated judging cost in a 64-question study.**
+**54.1% lower estimated judging cost, qualified on 1,000 human-rated comparisons.**
 
-Everval measured **9.8% lower estimated cost** for GPT-6.1 Terra's standard rubric versus its checklist rubric, with **72.30% versus 72.11% observed agreement with human votes**. The quality difference was not statistically established. [Read the study](docs/benchmarks/judge-study-2026-10-27/results.md).
+Everval qualified GPT-6.1 Terra's standard rubric against GPT-6.1 Sol: **72.70% versus 71.15% agreement with retained human votes**, at **54.1% lower estimated cost**. It passed the preregistered cost and quality checks, using a **one-percentage-point quality-loss limit**. [Read the completed study](docs/benchmarks/judge-confirmation-2026-10-27/results.md).
 
 Turn your own work into repeatable evaluations. Compare models, prompts and agents; track quality, cost and latency; keep checking as your system changes.
 
@@ -92,11 +92,17 @@ SSO, tenant isolation, and distributed execution are outside this release. Doubl
 
 Read the [daily updates](UPDATES.md) for dated changes, findings, verification and release status.
 
-The headline comes from a complete 64-question GPT-6.1 Terra comparison: the standard rubric cost **$0.624685** versus **$0.692560** for the checklist across **256 judgments per arm**, a **9.8% reduction in estimated cost**. Agreement with historical human votes was **72.30% versus 72.11%**. The original checklist-minus-standard change was −0.20 percentage points, with a multiplicity-adjusted interval of −2.15 to +1.76 points. These are conservative usage-based estimates for the tested configurations.
+A preregistered study completed **6,000 judgments across 1,000 conversation families**, using **2,957 retained human votes**. Terra's standard rubric cost **$4.489838** versus **$9.778616** for Sol across 2,000 judgments per configuration: **54.1% lower estimated cost**, with observed agreement of **72.70% versus 71.15%**.
 
-[![Agreement with human votes across three model judges, preserving the full 64-question cohort](docs/benchmarks/judge-study-2026-10-27/judge-full-cohort-bounds.svg)](docs/benchmarks/judge-study-2026-10-27/results.md)
+The preceding same-model comparison also passed: Terra standard cost **4.87% less** than its checklist rubric. Both ordered comparisons met the predeclared cost test and one-point quality-loss limit under both paired bootstrap and Student t methods. This qualifies specific configurations on this cohort; it does not prove identical quality or universal model superiority.
 
-*The chart uses original frozen scores. Its ranges cover unattempted judgments; they are not confidence intervals. [Read the study](docs/benchmarks/judge-study-2026-10-27/results.md) for the planned comparisons, human-vote provenance, judgments checked against archived test reports, and the separate audit of ten transport-parser failures.*
+[![Three judge configurations: estimated cost per 2,000 judgments and agreement with retained human votes](docs/benchmarks/judge-confirmation-2026-10-27/cost-quality.svg)](docs/benchmarks/judge-confirmation-2026-10-27/results.md)
+
+The full new calibration cost **$18.99**, with **$34.13 cumulatively accounted against the $50 cap**. At the measured usage, its API-only cost is projected to pay back after **3,591 future two-order comparisons** against Sol. Prices are frozen token-based estimates; customer ROI, engineering and human-label collection costs are not measured.
+
+[Results and limitations](docs/benchmarks/judge-confirmation-2026-10-27/results.md) · [Preregistered protocol](docs/benchmarks/judge-confirmation-2026-10-27/protocol.md) · [Reproduce the statistics without paid calls](docs/benchmarks/judge-confirmation-2026-10-27/results.md#evidence-and-reproduction) · [Independent audit](docs/benchmarks/judge-confirmation-2026-10-27/independent-statistical-audit.json)
+
+The earlier [64-question pilot](docs/benchmarks/judge-study-2026-10-27/results.md) found 9.8% lower estimated rubric cost but did not establish a quality difference. Its original results remain available; the larger confirmation uses a different dataset and uncached requests.
 
 **Fresh repository study:** on 50 admitted tasks, the constrained one-shot setup produced 110 explicit empty patches and 24 rejected patches across 150 attempts. Only 16 submissions reached test execution. [See the audited repair results and failure breakdown](docs/benchmarks/judge-study-2026-10-27/fresh-results.md).
 

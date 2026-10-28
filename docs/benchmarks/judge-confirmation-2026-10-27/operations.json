@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "study": "Judge cost and quality confirmation, 2026-10-27",
+  "source_audit": "independent-data-audit.json",
+  "source_audit_sha256": "115b97af1d1d2a5eed3b999c02e2a20287e2175f287213351fdb2c6922ccce09",
+  "configured_concurrency": 4,
+  "dispatch_window_utc": {
+    "first_sent": "2026-10-27T23:49:28.843219+00:00",
+    "last_sent": "2026-10-28T01:21:56.556056+00:00"
+  },
+  "arms": [
+    {
+      "arm": "terra-standard",
+      "cache_zero_calls": 2000,
+      "calls": 2000,
+      "delivered_agreement": 0.727,
+      "estimated_cost_usd": "4.489838",
+      "families": 1000,
+      "request_elapsed_latency_ms": {
+        "maximum": 70402.64058299363,
+        "minimum": 1372.139499988407,
+        "p50": 2002.2072704741731,
+        "p90": 2666.0826871986505,
+        "p95": 4644.052670628298,
+        "quantile_method": "linear interpolation over (N-1)*p; request elapsed time, not token generation latency"
+      },
+      "returned_model_ids": [
+        "gpt-6.1-terra"
+      ],
+      "statuses": {
+        "abstained": 8,
+        "completed": 1992
+      },
+      "tokens": {
+        "input_tokens": 3697513,
+        "output_tokens": 158465,
+        "reasoning_tokens": 0,
+        "total_tokens": 3855978
+      }
+    },
+    {
+      "arm": "terra-checklist",
+      "cache_zero_calls": 2000,
+      "calls": 2000,
+      "delivered_agreement": 0.7234166666666667,
+      "estimated_cost_usd": "4.719575",
+      "families": 1000,
+      "request_elapsed_latency_ms": {
+        "maximum": 81206.67883299757,
+        "minimum": 1307.8982499428093,
+        "p50": 2025.3642920288257,
+        "p90": 2661.189724633005,
+        "p95": 3662.367071415064,
+        "quantile_method": "linear interpolation over (N-1)*p; request elapsed time, not token generation latency"
+      },
+      "returned_model_ids": [
+        "gpt-6.1-terra"
+      ],
+      "statuses": {
+        "abstained": 18,
+        "completed": 1982
+      },
+      "tokens": {
+        "input_tokens": 3897590,
+        "output_tokens": 164397,
+        "reasoning_tokens": 0,
+        "total_tokens": 4061987
+      }
+    },
+    {
+      "arm": "sol-standard",
+      "cache_zero_calls": 2000,
+      "calls": 2000,
+      "delivered_agreement": 0.7115,
+      "estimated_cost_usd": "9.778616",
+      "families": 1000,
+      "request_elapsed_latency_ms": {
+        "maximum": 79284.53545796219,
+        "minimum": 1756.1888750642538,
+        "p50": 3968.7118125148118,
+        "p90": 6581.888074660676,
+        "p95": 8702.490929508345,
+        "quantile_method": "linear interpolation over (N-1)*p; request elapsed time, not token generation latency"
+      },
+      "returned_model_ids": [
+        "gpt-6.1-sol"
+      ],
+      "statuses": {
+        "abstained": 4,
+        "completed": 1996
+      },
+      "tokens": {
+        "input_tokens": 3697683,
+        "output_tokens": 238325,
+        "reasoning_tokens": 23165,
+        "total_tokens": 3936008
+      }
+    }
+  ],
+  "budget": {
+    "cap_usd": "50.00",
+    "cumulative_estimated_cost_usd": "34.13095800",
+    "new_estimated_cost_usd": "18.988029",
+    "prior_estimated_cost_usd": "15.14292900",
+    "remaining_usd": "15.86904200"
+  },
+  "provider_statuses": {
+    "completed": 6000
+  },
+  "zero_cache_read_and_write_calls": 6000,
+  "interpretation": "Latency is descriptive elapsed request time under concurrent dispatch, not an inferential latency or service-level claim. Reasoning tokens are included in output tokens; they are not charged twice. Costs use reported token usage and frozen rates, not invoices."
+}

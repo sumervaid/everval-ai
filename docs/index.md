@@ -50,7 +50,8 @@ Use [benchmark validation](benchmarks.md) to understand what qualifies for a rel
 
 ## Measure the measurement
 
-- [Read the judge-calibration finding](benchmarks/judge-study-2026-10-27/results.md): the standard rubric had 9.8% lower estimated judging cost in the 64-question Terra comparison, with observed human agreement of 72.30% versus 72.11%.
+- [Read the preregistered judge confirmation](benchmarks/judge-confirmation-2026-10-27/results.md): 54.1% lower estimated cost versus Sol, with both cost and the one-point quality-loss checks passing on 1,000 families and all 6,000 judgments.
+- [Inspect the earlier 64-question pilot](benchmarks/judge-study-2026-10-27/results.md): its original 9.8% rubric saving and quality uncertainty remain available.
 - [Calibrate LLM judges](judge-calibration.md) against retained human votes or execution references.
 - [Statistical methods](judge-methods.md) explain agreement, reliability, paired uncertainty and prospective power.
 - [Read the 50-task repository study](benchmarks/judge-study-2026-10-27/fresh-results.md): explicit abstentions and rejected patches dominated the constrained one-shot workflow.

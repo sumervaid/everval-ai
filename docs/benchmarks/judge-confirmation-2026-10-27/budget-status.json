@@ -1,0 +1,38 @@
+{
+  "ceiling_usd": "50",
+  "cumulative_committed_usd": "34.13095800",
+  "failures": [],
+  "models": {
+    "gpt-6.1-sol": {
+      "allocation_usd": "18.80",
+      "committed_request_cost_usd": "9.778616",
+      "known_request_cost_usd": "9.778616",
+      "outstanding_reservations_usd": "0",
+      "pending_requests": 0,
+      "requests": 2000,
+      "reserved_ceiling_usd": "0",
+      "settled_cost_usd": "9.778616",
+      "uncertain_requests": 0,
+      "unsettled_known_lower_bound_usd": "0"
+    },
+    "gpt-6.1-terra": {
+      "allocation_usd": "16.00",
+      "committed_request_cost_usd": "9.209413",
+      "known_request_cost_usd": "9.209413",
+      "outstanding_reservations_usd": "0",
+      "pending_requests": 0,
+      "requests": 4000,
+      "reserved_ceiling_usd": "0",
+      "settled_cost_usd": "9.209413",
+      "uncertain_requests": 0,
+      "unsettled_known_lower_bound_usd": "0"
+    }
+  },
+  "new_committed_usd": "18.988029",
+  "opening_spend_usd": "15.14292900",
+  "planned_calls": 6000,
+  "provider_requests": 6000,
+  "recorded_at": "2026-10-28T01:22:00.435150+00:00",
+  "retained_results": 6000,
+  "stopped": false
+}

@@ -1,0 +1,350 @@
+{
+  "arms": [
+    {
+      "arm": "terra-standard",
+      "complete_families": 1000,
+      "delivered_agreement": 0.727,
+      "families": 1000,
+      "full_cohort_agreement_bounds": [
+        0.727,
+        0.727
+      ],
+      "order_diagnostic": {
+        "canonical_swap_disagreements": 92,
+        "first_position_effect": 0.03112449799196787,
+        "interpretation": "Descriptive; no same-order repeats to isolate stochastic variation.",
+        "swap_inconsistency": 0.09246231155778895,
+        "valid_two_order_families": 995
+      },
+      "primary_cost_lower_usd": "4.489838",
+      "primary_cost_upper_usd": "4.489838",
+      "primary_scheduled_calls": 2000,
+      "primary_statuses": {
+        "abstained": 8,
+        "completed": 1992
+      }
+    },
+    {
+      "arm": "terra-checklist",
+      "complete_families": 1000,
+      "delivered_agreement": 0.7234166666666666,
+      "families": 1000,
+      "full_cohort_agreement_bounds": [
+        0.7234166666666666,
+        0.7234166666666666
+      ],
+      "order_diagnostic": {
+        "canonical_swap_disagreements": 98,
+        "first_position_effect": 0.029263370332996974,
+        "interpretation": "Descriptive; no same-order repeats to isolate stochastic variation.",
+        "swap_inconsistency": 0.09908998988877654,
+        "valid_two_order_families": 989
+      },
+      "primary_cost_lower_usd": "4.719575",
+      "primary_cost_upper_usd": "4.719575",
+      "primary_scheduled_calls": 2000,
+      "primary_statuses": {
+        "abstained": 18,
+        "completed": 1982
+      }
+    },
+    {
+      "arm": "sol-standard",
+      "complete_families": 1000,
+      "delivered_agreement": 0.7115,
+      "families": 1000,
+      "full_cohort_agreement_bounds": [
+        0.7115,
+        0.7115
+      ],
+      "order_diagnostic": {
+        "canonical_swap_disagreements": 63,
+        "first_position_effect": 0.005511022044088177,
+        "interpretation": "Descriptive; no same-order repeats to isolate stochastic variation.",
+        "swap_inconsistency": 0.06318956870611836,
+        "valid_two_order_families": 997
+      },
+      "primary_cost_lower_usd": "9.778616",
+      "primary_cost_upper_usd": "9.778616",
+      "primary_scheduled_calls": 2000,
+      "primary_statuses": {
+        "abstained": 4,
+        "completed": 1996
+      }
+    }
+  ],
+  "calibration_cost_upper_usd": "18.988029",
+  "comparisons": [
+    {
+      "baseline": "terra-checklist",
+      "baseline_primary_cost_lower_usd": "4.719575",
+      "calibration_cost_upper_usd": "18.988029",
+      "candidate": "terra-standard",
+      "candidate_primary_cost_upper_usd": "4.489838",
+      "confirmatory_eligible": true,
+      "cost_difference_candidate_upper_minus_baseline_lower": {
+        "alpha_one_sided": 0.05,
+        "bootstrap_lower": -0.000234205,
+        "bootstrap_upper": -0.00022528799999999997,
+        "estimate": -0.00022973699999999999,
+        "families": 1000,
+        "resamples": 20000,
+        "seed": 27102027,
+        "standard_deviation": 8.560197152243942e-05,
+        "t_lower": -0.00023419370553283493,
+        "t_upper": -0.00022528029446716505,
+        "undefined_reason": null
+      },
+      "cost_gate_passed": true,
+      "decision": "adopt",
+      "domains": {
+        "code": {
+          "complete_families": 205,
+          "difference": 0.01951219512195122,
+          "families": 205,
+          "interpretation": "Descriptive subgroup estimate; not a subgroup non-inferiority claim."
+        },
+        "general": {
+          "complete_families": 474,
+          "difference": -0.002109704641350211,
+          "families": 474,
+          "interpretation": "Descriptive subgroup estimate; not a subgroup non-inferiority claim."
+        },
+        "multilingual": {
+          "complete_families": 202,
+          "difference": 0.0012376237623762379,
+          "families": 202,
+          "interpretation": "Descriptive subgroup estimate; not a subgroup non-inferiority claim."
+        },
+        "stem": {
+          "complete_families": 119,
+          "difference": 0.002801120448179272,
+          "families": 119,
+          "interpretation": "Descriptive subgroup estimate; not a subgroup non-inferiority claim."
+        }
+      },
+      "estimated_saving_fraction_lower_accounting": 0.04867747625580693,
+      "id": "A",
+      "noninferiority_margin": 0.01,
+      "payback_evaluated_questions": 82652,
+      "payback_provider_judgments": 165304,
+      "primary_calls_per_evaluated_question": 2,
+      "quality_difference_candidate_minus_baseline": {
+        "alpha_one_sided": 0.05,
+        "bootstrap_lower": -0.00575,
+        "bootstrap_upper": 0.012916666666666668,
+        "estimate": 0.0035833333333333333,
+        "families": 1000,
+        "minimum_discordant_families": 20,
+        "negative_family_differences": 53,
+        "nonzero_family_differences": 106,
+        "positive_family_differences": 53,
+        "resamples": 20000,
+        "seed": 27102027,
+        "standard_deviation": 0.18081334103884858,
+        "t_lower": -0.005830372952706684,
+        "t_upper": 0.01299703961937335,
+        "undefined_reason": null
+      },
+      "quality_gate_passed": true,
+      "reason": "quality_and_cost_gates_passed",
+      "saving_per_evaluated_question_usd": "0.000229737",
+      "sequence_position": 1
+    },
+    {
+      "baseline": "sol-standard",
+      "baseline_primary_cost_lower_usd": "9.778616",
+      "calibration_cost_upper_usd": "18.988029",
+      "candidate": "terra-standard",
+      "candidate_primary_cost_upper_usd": "4.489838",
+      "confirmatory_eligible": true,
+      "cost_difference_candidate_upper_minus_baseline_lower": {
+        "alpha_one_sided": 0.05,
+        "bootstrap_lower": -0.00540985955,
+        "bootstrap_upper": -0.0051686384,
+        "estimate": -0.005288778,
+        "families": 1000,
+        "resamples": 20000,
+        "seed": 27102027,
+        "standard_deviation": 0.0023358504442737796,
+        "t_lower": -0.005410389656994851,
+        "t_upper": -0.005167166343005149,
+        "undefined_reason": null
+      },
+      "cost_gate_passed": true,
+      "decision": "adopt",
+      "domains": {
+        "code": {
+          "complete_families": 205,
+          "difference": 0.03414634146341464,
+          "families": 205,
+          "interpretation": "Descriptive subgroup estimate; not a subgroup non-inferiority claim."
+        },
+        "general": {
+          "complete_families": 474,
+          "difference": 0.007032348804500704,
+          "families": 474,
+          "interpretation": "Descriptive subgroup estimate; not a subgroup non-inferiority claim."
+        },
+        "multilingual": {
+          "complete_families": 202,
+          "difference": 0.0033003300330033,
+          "families": 202,
+          "interpretation": "Descriptive subgroup estimate; not a subgroup non-inferiority claim."
+        },
+        "stem": {
+          "complete_families": 119,
+          "difference": 0.037815126050420166,
+          "families": 119,
+          "interpretation": "Descriptive subgroup estimate; not a subgroup non-inferiority claim."
+        }
+      },
+      "estimated_saving_fraction_lower_accounting": 0.5408513842858744,
+      "id": "B",
+      "noninferiority_margin": 0.01,
+      "payback_evaluated_questions": 3591,
+      "payback_provider_judgments": 7182,
+      "primary_calls_per_evaluated_question": 2,
+      "quality_difference_candidate_minus_baseline": {
+        "alpha_one_sided": 0.05,
+        "bootstrap_lower": 0.0031666666666666714,
+        "bootstrap_upper": 0.027833333333333335,
+        "estimate": 0.0155,
+        "families": 1000,
+        "minimum_discordant_families": 20,
+        "negative_family_differences": 58,
+        "nonzero_family_differences": 135,
+        "positive_family_differences": 77,
+        "resamples": 20000,
+        "seed": 27102027,
+        "standard_deviation": 0.2331134265704685,
+        "t_lower": 0.0033633881965863498,
+        "t_upper": 0.02763661180341365,
+        "undefined_reason": null
+      },
+      "quality_gate_passed": true,
+      "reason": "quality_and_cost_gates_passed",
+      "saving_per_evaluated_question_usd": "0.005288778",
+      "sequence_position": 2
+    }
+  ],
+  "complete_frozen_grid": true,
+  "cost_lower_usd": "18.988029",
+  "cost_upper_usd": "18.988029",
+  "endpoint": "Delivered individual-human-vote agreement; equal question-family weight.",
+  "families": 1000,
+  "independence_unit": "Frozen prompt family; orders and calls do not increase N.",
+  "interpretation": "Adoption requires both paired-bootstrap and Student-t one-sided bounds to pass the predeclared quality and cost thresholds, in fixed sequence. Intervals are approximate under independent sampled families. Non-inferiority within the stated margin is not exact equivalence, objective correctness or population-wide proof. Costs are configured-rate estimates, not invoice charges. Payback excludes engineering, hardware, electricity and historical human-label collection costs.",
+  "power_sensitivity": {
+    "alpha_one_sided": 0.05,
+    "assumed_true_difference": 0,
+    "assumptions": [
+      {
+        "assumed_family_difference_sd": 0.05,
+        "families_for_80_percent_power": 155,
+        "power_at_true_zero_difference": 0.9999985635369352
+      },
+      {
+        "assumed_family_difference_sd": 0.1,
+        "families_for_80_percent_power": 619,
+        "power_at_true_zero_difference": 0.9354201700477403
+      },
+      {
+        "assumed_family_difference_sd": 0.15,
+        "families_for_80_percent_power": 1392,
+        "power_at_true_zero_difference": 0.6784366076287957
+      },
+      {
+        "assumed_family_difference_sd": 0.2,
+        "families_for_80_percent_power": 2474,
+        "power_at_true_zero_difference": 0.4745986612454449
+      },
+      {
+        "assumed_family_difference_sd": 0.25,
+        "families_for_80_percent_power": 3865,
+        "power_at_true_zero_difference": 0.3519940258168499
+      }
+    ],
+    "families": 1000,
+    "margin": 0.01,
+    "method": "Normal approximation for a paired family mean, assuming sufficient discordant families; sensitivity, not guaranteed power"
+  },
+  "provenance": {
+    "accounting": {
+      "ceiling_usd": "50",
+      "cumulative_committed_usd": "34.13095800",
+      "models": {
+        "gpt-6.1-sol": {
+          "allocation_usd": "18.80",
+          "committed_request_cost_usd": "9.778616",
+          "known_request_cost_usd": "9.778616",
+          "outstanding_reservations_usd": "0",
+          "pending_requests": 0,
+          "requests": 2000,
+          "reserved_ceiling_usd": "0",
+          "settled_cost_usd": "9.778616",
+          "uncertain_requests": 0,
+          "unsettled_known_lower_bound_usd": "0"
+        },
+        "gpt-6.1-terra": {
+          "allocation_usd": "16.00",
+          "committed_request_cost_usd": "9.209413",
+          "known_request_cost_usd": "9.209413",
+          "outstanding_reservations_usd": "0",
+          "pending_requests": 0,
+          "requests": 4000,
+          "reserved_ceiling_usd": "0",
+          "settled_cost_usd": "9.209413",
+          "uncertain_requests": 0,
+          "unsettled_known_lower_bound_usd": "0"
+        }
+      },
+      "new_committed_usd": "18.988029",
+      "opening_spend_usd": "15.14292900",
+      "provider_requests": 6000
+    },
+    "analysis_source_sha256": "fa23a59e3265903cdd2d92e0adca7222c573bea8c96dea134f971146d43b9972",
+    "model_configurations": {
+      "gpt-6.1-sol": {
+        "allocation_usd": "18.80",
+        "input_rate_per_million": "2",
+        "max_output_tokens": 1536,
+        "output_rate_per_million": "10",
+        "reasoning": "low"
+      },
+      "gpt-6.1-terra": {
+        "allocation_usd": "16.00",
+        "input_rate_per_million": "1",
+        "max_output_tokens": 768,
+        "output_rate_per_million": "5",
+        "reasoning": "none"
+      }
+    },
+    "plan_sha256": "a0bf6807e9ff64f9c4ba47c4de114ec834edd1f41f7fbd6a9aefcf69e5ffd92a",
+    "protocol_sha256": "05bc7aa7a2bf187455053b4e164e85996efb6541af159df1312dcfae85798550",
+    "results_manifest_sha256": "f4b1767a6a25c0d68a85765c491aa6f760b8c27d4d1fe5901df9887018351cda"
+  },
+  "scheduled_calls": 6000,
+  "schema_version": 1,
+  "settings": {
+    "alpha": 0.05,
+    "contrasts": [
+      {
+        "baseline": "terra-checklist",
+        "candidate": "terra-standard",
+        "id": "A"
+      },
+      {
+        "baseline": "sol-standard",
+        "candidate": "terra-standard",
+        "id": "B"
+      }
+    ],
+    "margin": 0.01,
+    "min_discordant_families": 20,
+    "min_families": 30,
+    "resamples": 20000,
+    "seed": 27102027
+  },
+  "unattempted_calls": 0
+}

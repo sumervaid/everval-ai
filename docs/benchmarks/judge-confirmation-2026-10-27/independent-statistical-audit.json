@@ -1,0 +1,161 @@
+{
+  "arms": [
+    {
+      "agreement_fraction_exact": "727/1000",
+      "arm": "terra-standard",
+      "canonical_swap_disagreements": 92,
+      "cost_usd": "4.489838",
+      "delivered_agreement": 0.727,
+      "statuses": {
+        "abstained": 8,
+        "completed": 1992
+      },
+      "valid_two_order_families": 995
+    },
+    {
+      "agreement_fraction_exact": "8681/12000",
+      "arm": "terra-checklist",
+      "canonical_swap_disagreements": 98,
+      "cost_usd": "4.719575",
+      "delivered_agreement": 0.7234166666666667,
+      "statuses": {
+        "abstained": 18,
+        "completed": 1982
+      },
+      "valid_two_order_families": 989
+    },
+    {
+      "agreement_fraction_exact": "1423/2000",
+      "arm": "sol-standard",
+      "canonical_swap_disagreements": 63,
+      "cost_usd": "9.778616",
+      "delivered_agreement": 0.7115,
+      "statuses": {
+        "abstained": 4,
+        "completed": 1996
+      },
+      "valid_two_order_families": 997
+    }
+  ],
+  "audit_scope": "Independent post-run statistical and economic reproduction",
+  "audit_script_sha256": "826cade41a5a73fa43ec51132fad6afb03e1e6400aecabae721973c7307707d1",
+  "calibration_cost_usd": "18.988029",
+  "comparisons": [
+    {
+      "baseline": "terra-checklist",
+      "candidate": "terra-standard",
+      "cost_difference_per_two_order_question_usd": -0.000229737,
+      "cost_one_sided_t_bounds": [
+        -0.00023419370553283699,
+        -0.00022528029446716304
+      ],
+      "cost_seeded_bootstrap_bounds": [
+        -0.000234205,
+        -0.00022528799999999997
+      ],
+      "decision": "adopt",
+      "id": "A",
+      "independent_numpy_bootstrap_sensitivity": {
+        "cost_bounds": [
+          -0.000234161,
+          -0.000225287
+        ],
+        "generator": "NumPy PCG64",
+        "quality_bounds": [
+          -0.00575,
+          0.013
+        ],
+        "resamples": 20000,
+        "seed": 20261028
+      },
+      "negative_families": 53,
+      "nonzero_families": 106,
+      "payback_provider_judgments": 165304,
+      "payback_two_order_questions": 82652,
+      "positive_families": 53,
+      "quality_difference": 0.003583333333333333,
+      "quality_one_sided_t_bounds": [
+        -0.0058303729527109955,
+        0.01299703961937766
+      ],
+      "quality_seeded_bootstrap_bounds": [
+        -0.00575,
+        0.012916666666666668
+      ],
+      "saving_fraction": 0.04867747625580693
+    },
+    {
+      "baseline": "sol-standard",
+      "candidate": "terra-standard",
+      "cost_difference_per_two_order_question_usd": -0.005288778000000001,
+      "cost_one_sided_t_bounds": [
+        -0.005410389656994907,
+        -0.005167166343005095
+      ],
+      "cost_seeded_bootstrap_bounds": [
+        -0.00540985955,
+        -0.0051686384
+      ],
+      "decision": "adopt",
+      "id": "B",
+      "independent_numpy_bootstrap_sensitivity": {
+        "cost_bounds": [
+          -0.0054101203499999995,
+          -0.005165628849999999
+        ],
+        "generator": "NumPy PCG64",
+        "quality_bounds": [
+          0.0033333333333333327,
+          0.02783333333333333
+        ],
+        "resamples": 20000,
+        "seed": 20261029
+      },
+      "negative_families": 58,
+      "nonzero_families": 135,
+      "payback_provider_judgments": 7182,
+      "payback_two_order_questions": 3591,
+      "positive_families": 77,
+      "quality_difference": 0.0155,
+      "quality_one_sided_t_bounds": [
+        0.0033633881965807935,
+        0.027636611803419205
+      ],
+      "quality_seeded_bootstrap_bounds": [
+        0.0031666666666666714,
+        0.027833333333333335
+      ],
+      "saving_fraction": 0.5408513842858744
+    }
+  ],
+  "complete_grid": true,
+  "cumulative_accounted_cost_usd": "34.13095800",
+  "frozen_analysis_modified": false,
+  "frozen_analysis_source_sha256": "fa23a59e3265903cdd2d92e0adca7222c573bea8c96dea134f971146d43b9972",
+  "frozen_protocol_markdown_sha256": "8c5aed6d3ddee6c4f117965d18f412e752cc0f9802f9362729f71f2aa3b73e7f",
+  "independent_families": 1000,
+  "interpretation": {
+    "headline": "Everval qualified a judging configuration with 54.1% lower estimated cost on 1,000 human-rated comparisons.",
+    "interval_label": "Each reported endpoint is a one-sided 95% bound. Do not label the lower/upper pair as a two-sided 95% interval.",
+    "limits": [
+      "Historical curated human preferences are a fallible reference, not objective correctness.",
+      "Model configurations have different reasoning and output budgets; this is not a causal model-size experiment.",
+      "Pooled non-inferiority does not prove non-inferiority separately in each domain.",
+      "Inference assumes sampled prompt families sufficiently independent and representative of the stated corpus.",
+      "Public benchmark training contamination and hosted weight identity remain unverified.",
+      "Costs use frozen token rates, not invoices; payback is a same-mix projection excluding engineering, hardware and annotation costs."
+    ],
+    "primary_claim": "Both predeclared cost and 1-percentage-point non-inferiority adoption gates passed in their frozen sequence.",
+    "superiority": "A separate superiority hypothesis was not a prespecified primary objective. The planned B lower bounds nevertheless exceed zero, supplying additional inferential evidence of higher delivered human-vote agreement on this cohort. Report that as supporting evidence, not a universal model-superiority claim.",
+    "supporting_sentence": "The candidate passed the predeclared 1-point quality-loss limit; observed agreement was 72.70% versus 71.15%, a 1.55-point difference."
+  },
+  "no_provider_calls": true,
+  "numpy_version": "2.3.3",
+  "plan_sha256": "a0bf6807e9ff64f9c4ba47c4de114ec834edd1f41f7fbd6a9aefcf69e5ffd92a",
+  "results_sha256": "07a2da7ecac70344d183d9c792f2f7a55e698d454fb89f70492d712a47d2d9f8",
+  "retained_human_votes": 2957,
+  "scheduled_and_observed_calls": 6000,
+  "scipy_student_t_critical_df999_one_sided_95": 1.646380345427535,
+  "scipy_version": "1.16.2",
+  "status": "passed"
+}

@@ -4,6 +4,30 @@
 
 Dated notes on shipped work, measured findings and release status. Updates are added on days with substantive changes, newest first; each entry links to its evidence. Versioned release notes remain in the changelog.
 
+## 2026-10-28
+
+### 54.1% lower estimated judging cost — qualified on 1,000 families
+
+Published the completed, preregistered judge confirmation: **6,000 of 6,000 judgments**, **1,000 conversation families**, and **2,957 retained historical human votes**. Terra's standard rubric cost **54.1% less than Sol's standard rubric**, with **72.70% versus 71.15% observed human-vote agreement**. Both prescribed confidence methods passed the cost test and the one-percentage-point quality-loss limit.
+
+The original standard-versus-checklist comparison also passed, with **4.87% lower estimated cost** and **72.70% versus 72.34% agreement**. The pilot's 9.8% saving remains a separate historical result. The new result qualifies the tested configuration under the declared tolerance; it does not establish exact quality equivalence, universal superiority or customer ROI.
+
+[Full results and chart](docs/benchmarks/judge-confirmation-2026-10-27/results.md) · [Unchanged preregistered protocol](docs/benchmarks/judge-confirmation-2026-10-27/protocol.md) · [Frozen analysis](docs/benchmarks/judge-confirmation-2026-10-27/results.json)
+
+### Evidence and reproducibility
+
+- Independent audits reconciled all 6,000 requests and reproduced vote/order weighting, paired bootstrap and Student t bounds, cost totals, comparison ordering and break-even arithmetic. [Data audit](docs/benchmarks/judge-confirmation-2026-10-27/independent-data-audit.json) · [Statistical audit](docs/benchmarks/judge-confirmation-2026-10-27/independent-statistical-audit.json).
+- Added derived [family measurements](docs/benchmarks/judge-confirmation-2026-10-27/family-metrics.json) and a [statistical reproduction command](scripts/judge_study/reproduce_confirmation.py), so the decision can be checked without another paid run. Raw conversations, human references and provider responses remain private.
+- Verification: **21 new reproduction tests passed**; the full public-data reproduction matched the original statistics with site packages disabled and the API key unset. Formatting and local documentation links passed, and the chart was visually reviewed.
+- Updated the README finding and decision chart while retaining the continuous product recordings. Costs are estimates from reported tokens; all configurations, abstentions, order inconsistencies and descriptive domain results remain visible.
+- Completed the detached run and analysis on the maintainer's remote workspace. Model calls finished October 27 at 9:22 p.m. Eastern; the saved analysis finished at 9:38 p.m. Review and publication followed on October 28.
+
+### Budget
+
+**$18.988029 for the new run; $34.130958 cumulatively accounted against the $50 ceiling.** All 6,000 new requests settled, with no new pending or uncertain obligations. The earlier balance still includes $0.01312325 for three older unknown-billing requests. No further model calls were needed for the audits or publication. [Final run accounting](docs/benchmarks/judge-confirmation-2026-10-27/budget-status.json).
+
+The 0.4 source publication and registry package status remain separate. This update publishes research evidence and documentation; it does not claim a new npm or PyPI release.
+
 ## 2026-10-27
 
 ### Larger judge confirmation — registered
