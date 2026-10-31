@@ -8,6 +8,8 @@
 
 Everval qualified GPT-6.1 Terra's standard rubric against GPT-6.1 Sol: **72.70% versus 71.15% agreement with retained human votes**, at **54.1% lower estimated cost**. It passed the preregistered cost and quality checks, using a **one-percentage-point quality-loss limit**. [Read the completed study](docs/benchmarks/judge-confirmation-2026-10-27/results.md).
 
+> **Projected API savings:** About **$5,400 per $10,000 spent on comparable AI judging**, or **$54,000 per year on a $100,000 annual judging API budget**. **These are illustrative projections, not measured or realized customer savings.** They apply the study's 54.1% estimated cost reduction and assume switching from Sol standard to Terra standard with the same workload mix and frozen prices. Deployment, calibration and other operating costs are excluded.
+
 Turn your own work into repeatable evaluations. Compare models, prompts and agents; track quality, cost and latency; keep checking as your system changes.
 
 [![Everval in action: type a recurring benchmark request, inspect results and compare rankings](docs/assets/demos/recordings/everval-tour.gif)](docs/demos.md)

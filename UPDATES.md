@@ -4,6 +4,16 @@
 
 Dated notes on shipped work, measured findings and release status. Updates are added on days with substantive changes, newest first; each entry links to its evidence. Versioned release notes remain in the changelog.
 
+## 2026-10-31
+
+### Projected judging API savings, with explicit assumptions
+
+Added an illustrative savings callout beside the [README finding](README.md): approximately **$5,400 per $10,000 in comparable baseline judging API spend**, or **$54,000 per year on a $100,000 annual baseline**. These are projections from the [study's frozen cost totals](docs/benchmarks/judge-confirmation-2026-10-27/results.json), **not measured or realized customer savings**.
+
+The callout assumes switching from Sol standard to Terra standard with the same workload mix and frozen prices as the study, and excludes deployment, calibration and other operating costs. It links the business example to the completed research without claiming customer ROI.
+
+Verification: checked the projections against the frozen cost totals; all 903 local links across 115 Markdown files and Git whitespace checks passed. No additional model calls were made.
+
 ## 2026-10-28
 
 ### 54.1% lower estimated judging cost — qualified on 1,000 families
